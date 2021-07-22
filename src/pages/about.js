@@ -3,7 +3,7 @@ import { /*Link,*/ graphql } from "gatsby"
 
 const AboutPage = () => {
 	return (
-		<p>jfagp</p>
+		<p className="txt">jfagp</p>
 	)
 }
 
