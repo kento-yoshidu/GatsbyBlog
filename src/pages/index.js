@@ -6,6 +6,10 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 
 const BlogIndex = ({ data, location }) => {
+  return (
+    <p>Hello Gatsby!</p>
+  )
+  /*
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const posts = data.allMarkdownRemark.nodes
 
@@ -61,6 +65,7 @@ const BlogIndex = ({ data, location }) => {
       </ol>
     </Layout>
   )
+  */
 }
 
 export default BlogIndex
