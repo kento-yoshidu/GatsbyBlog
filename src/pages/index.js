@@ -7,10 +7,12 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 */
 
+import * as Styles from "./index.module.scss";
+
 const BlogIndex = ({ data, location }) => {
   return (
     <>
-      <p>Hello Gatsby!</p>
+    <p className={Styles.txt}>Hello</p>
 
       <hr />
 
