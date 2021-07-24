@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `鳥にぬ生まれることができなかった人へ`,
+    title: `鳥に生まれることができなかった人へ`,
     author: {
       name: `Kento Yoshizu`,
       //summary: `who lives and works in San Francisco building useful things.`,
