@@ -1,6 +1,7 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 
+import Header from "../components/header"
 import Seo from "../components/seo"
 
 import * as Styles from "./post.module.scss"
@@ -12,6 +13,9 @@ const BlogPostTemplate = ({ data, location }) => {
 
   return (
     <div>
+      <Header
+      />
+
       <article
         className="blog-post"
         itemScope
