@@ -1,12 +1,20 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 
+import Header from "../components/header"
+
 import * as Styles from "./index.module.scss";
 
 const BlogIndex = ({ data, location }) => {
+  console.log(location)
   return (
     <>
-    <p className={Styles.txt}>Hello</p>
+      <Header
+        isTopPage={ true }
+        pathname={ location.pathname }
+      />
+
+      <p className={Styles.txt}>Hello</p>
 
       <hr />
 
