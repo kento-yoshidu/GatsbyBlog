@@ -1,4 +1,15 @@
-/* CSS Custom Properties Definitions */
+html {
+  color: #444;
+  font-size: 62.5%;
+  font-family:
+    'Hiragino Kaku Gothic Pro',
+    'ヒラギノ角ゴ Pro W3',
+    'メイリオ',
+    Meiryo,
+    'ＭＳ Ｐゴシック',
+    sans-serif;
+}
+/* CSS Custom Properties Definitions 
 
 :root {
   --maxWidth-none: "none";
@@ -45,7 +56,7 @@
   --lineHeight-tight: 1.1;
   --lineHeight-normal: 1.5;
   --lineHeight-relaxed: 1.625;
-  /* 1.200 Minor Third Type Scale */
+  /* 1.200 Minor Third Type Scale 
   --fontSize-0: 0.833rem;
   --fontSize-1: 1rem;
   --fontSize-2: 1.2rem;
@@ -62,7 +73,7 @@
   --color-accent: #d1dce5;
 }
 
-/* HTML elements */
+/* HTML elements 
 
 *,
 :after,
@@ -93,7 +104,7 @@ hr {
   border: 0;
 }
 
-/* Heading */
+/* Heading 
 
 h1,
 h2,
@@ -157,7 +168,7 @@ h6 > a {
   color: inherit;
 }
 
-/* Prose */
+/* Prose 
 
 p {
   line-height: var(--lineHeight-relaxed);
@@ -227,7 +238,7 @@ table thead tr th {
   border-bottom: 1px solid var(--color-accent);
 }
 
-/* Link */
+/* Link 
 
 a {
   color: var(--color-primary);
@@ -238,7 +249,7 @@ a:focus {
   text-decoration: none;
 }
 
-/* Custom classes */
+/* Custom classes 
 
 .global-wrapper {
   margin: var(--spacing-0) auto;
@@ -319,7 +330,7 @@ a:focus {
   margin-bottom: var(--spacing-8);
 }
 
-/* Media queries */
+/* Media queries 
 
 @media (max-width: 42rem) {
   blockquote {
@@ -331,3 +342,5 @@ a:focus {
     list-style-position: inside;
   }
 }
+
+*/
