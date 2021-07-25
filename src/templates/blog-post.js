@@ -4,7 +4,7 @@ import { Link, graphql } from "gatsby"
 import Header from "../components/header"
 import Seo from "../components/seo"
 
-import * as Styles from "./post.module.scss"
+import * as Styles from "../styles/post.module.scss"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
@@ -14,6 +14,7 @@ const BlogPostTemplate = ({ data, location }) => {
   return (
     <div>
       <Header
+        pathname={location.pathname}
       />
 
       <div className="all-wrapper">

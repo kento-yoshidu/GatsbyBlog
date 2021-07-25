@@ -1,0 +1,50 @@
+@import "../variables";
+
+.header {
+	margin-top: 10vh;
+	text-align: center;
+
+	.headerTitle {
+		margin-bottom: 5vh;
+		font-size: 2.5rem;
+		font-weight: 100;
+		letter-spacing: 2px;
+
+		a {
+			color: #444;
+			&:hover {
+				color: $main-color;
+			}
+		}
+	}
+
+	.pageTitle {
+    font-size: 3.8rem;
+    font-weight: 500;
+    letter-spacing: 7px;
+    background: linear-gradient(90deg, $main-color2 40%, $sub-color 55%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255,255,255,0.0);
+    color: $main-color;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header {
+    margin-top: 8vh;
+    .headerTitle {
+      font-size: 1.8rem;
+      line-height: 1.5;
+      letter-spacing: 1px;
+      margin-bottom: 3vh;
+    }
+
+    .pageTitle {
+      font-size: 2rem;
+      line-height: 1.3;
+      width: 70%;
+      margin: 0 auto;
+      letter-spacing: 2px;
+    }
+  }
+}

@@ -1,10 +1,9 @@
 import * as React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
+import * as Styles from "../styles/header.module.scss"
 
-const Header = ({ pageTitle, isTopPage, pathname }) => {
-	console.log(pathname)
-
+const Header = ({ pageTitle, pathname }) => {
 	const { site } = useStaticQuery (
 		graphql`
 			query {
@@ -20,19 +19,23 @@ const Header = ({ pageTitle, isTopPage, pathname }) => {
 
 	if (pathname === '/') {
 		siteTitle = (
-			<h1>{ site.siteMetadata.title }</h1>
+			<h1 className={Styles.headerTitle}>{ site.siteMetadata.title }</h1>
 		)
 	} else {
 		siteTitle = (
-      <h1>
+      <h1 className={Styles.headerTitle}>
         <Link to="/">{ site.siteMetadata.title }</Link>
       </h1>
 		)
 	}
 
 	return (
-		<header>
+		<header className={Styles.header}>
 			{ siteTitle }
+
+			<h2 className={Styles.pageTitle}>
+				{ pageTitle }
+			</h2>
 		</header>
 	)
 }
