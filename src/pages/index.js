@@ -3,8 +3,6 @@ import { Link, graphql } from "gatsby"
 
 import Header from "../components/header"
 
-import * as Styles from "./index.module.scss";
-
 const BlogIndex = ({ data, location }) => {
   console.log(location)
   return (
@@ -14,7 +12,7 @@ const BlogIndex = ({ data, location }) => {
         pathname={ location.pathname }
       />
 
-      <p className={Styles.txt}>Hello</p>
+      <h1>hogehoge</h1>
 
       <hr />
 
