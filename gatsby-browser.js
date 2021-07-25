@@ -1,4 +1,5 @@
 import "./src/global.scss"
+import "prismjs/themes/prism-tomorrow.css"
 
 /*
 // custom typefaces
