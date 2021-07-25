@@ -1,3 +1,5 @@
+@import "./variables";
+
 * {
   box-sizing: border-box;
 }
@@ -68,7 +70,6 @@ html {
   padding: 0;
   overflow: initial;
   float: left;
-  //min-width: 100%; なにこれ?
 }
 
 .gatsby-highlight pre[class*="language-"].line-numbers {
@@ -83,16 +84,16 @@ html {
 }
 
 .gatsby-code-title {
-  //background: $main-color2;
+  background: $main-color2;
   color: #ddd;
   margin-top: 35px;
   margin-bottom: -0.65em;
-  padding: 1.5rem 1.8rem 2rem;
+  padding: 1.5rem 1.8rem 2.5rem;
   font-size: 1.6rem;
   line-height: 0.2;
   font-family: SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
   font-weight: 400;
-  border-radius: 3px 3px 0 0;
+  border-radius: 2px 2px 0 0;
   display: table;
 }
 
