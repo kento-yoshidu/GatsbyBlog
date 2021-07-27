@@ -2,11 +2,11 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Header from "../components/header"
+import PageInfo from "../components/pageInfo"
 
-const ArticleList = ({ data, pageContext}) => {
+const ArticleList = ({ data, pageContext }) => {
 	const postData = data.postData;
 
-  console.log()
 
   return (
 	<>
@@ -15,6 +15,12 @@ const ArticleList = ({ data, pageContext}) => {
 			pageTitle="記事一覧"
 			isTopPage={true}
 		/>
+
+    <PageInfo
+      currentPage={pageContext.currentPage}
+      postCount={pageContext.postCount}
+      pageCount={pageContext.pageCount}
+    />
 
       <section className="post-list">
         {postData.nodes.map(post => {
