@@ -8,7 +8,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const blogPost = path.resolve(`./src/templates/blog-post.js`)
 
   // Get all markdown blog posts sorted by date
-  const result = await graphql(
+  const queryResult = await graphql(
     `
       {
         allMarkdownRemark(
@@ -22,10 +22,20 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+
+        allArticles: allMarkdownRemark {
+          nodes {
+            id
+            fields {
+              slug
+            }
+          }
+        }
       }
     `
   )
 
+  /*
   if (result.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
@@ -33,8 +43,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     )
     return
   }
+  */
 
-  const posts = result.data.allMarkdownRemark.nodes
+  const posts = queryResult.data.allMarkdownRemark.nodes
 
   // Create blog posts pages
   // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
@@ -56,6 +67,37 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       })
     })
   }
+
+  // --------------------------------------------------
+  // 記事一覧の表示
+
+  const allArticle = queryResult.data.allArticles
+
+  console.log(allArticle)
+
+  // 記事合計数
+  const postCount = allArticle.nodes.length;
+
+  // 何ページ生成することになるかの計算
+  const pageCount = Math.ceil(postCount / 6)
+
+  Array.from({ length: pageCount }).forEach((_, i) => {
+    createPage({
+      path: i === 0 ? "/page/1/" : `/page/${i + 1}/`,
+      component: path.resolve("./src/templates/pages.js"),
+      context: {
+        postCount: postCount,
+        pageCount: pageCount,
+        totalPageCount: pageCount,
+        skip: 6 * i,
+        limit: 6,
+        // 現在のページ番号
+        currentPage: i + 1,
+        isFirst: i + 1 === 1,
+        isLast: i + 1 === pageCount,
+      }
+    })
+  })
 }
 
 exports.onCreateNode = ({ node, actions, getNode }) => {

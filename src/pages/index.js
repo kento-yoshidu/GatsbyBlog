@@ -4,7 +4,7 @@ import { Link, graphql } from "gatsby"
 import Header from "../components/header"
 
 const BlogIndex = ({ data, location }) => {
-  console.log(location)
+  console.log(data)
   return (
     <>
       <Header
