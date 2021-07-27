@@ -2,6 +2,7 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 
 import Header from "../components/header"
+import PageInfo from "../components/pageInfo"
 import Seo from "../components/seo"
 
 import * as Styles from "../styles/post.module.scss"
