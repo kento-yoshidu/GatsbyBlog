@@ -11,14 +11,15 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const queryResult = await graphql(
     `
       {
-        allMarkdownRemark(
-          sort: { fields: [frontmatter___date], order: ASC }
-          limit: 1000
+        allArticleByGroup: allMarkdownRemark(
+          sort: { fields: [frontmatter___postdate]}
         ) {
-          nodes {
-            id
-            fields {
-              slug
+          group(field: frontmatter___seriesSlug) {
+            nodes {
+              id
+              fields {
+                slug
+              }
             }
           }
         }
@@ -35,48 +36,42 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     `
   )
 
-  /*
-  if (result.errors) {
+  if (queryResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
       result.errors
     )
     return
   }
-  */
 
-  const posts = queryResult.data.allMarkdownRemark.nodes
+  const allArticlesByGroup = queryResult.data.allArticleByGroup.group
 
-  // Create blog posts pages
-  // But only if there's at least one markdown file found at "content/blog" (defined in gatsby-config.js)
-  // `context` is available in the template as a prop and as a variable in GraphQL
+  allArticlesByGroup.forEach((group) => {
 
-  if (posts.length > 0) {
-    posts.forEach((post, index) => {
-      const previousPostId = index === 0 ? null : posts[index - 1].id
-      const nextPostId = index === posts.length - 1 ? null : posts[index + 1].id
+    group.nodes.forEach((node, index) => {
+
+      const previousPostId = index === 0 ? null : group.nodes[index - 1].id
+      const nextPostId = index === group.nodes.length - 1 ? null : group.nodes[index + 1].id
 
       createPage({
-        path: post.fields.slug,
-        component: blogPost,
+        path: node.fields.slug,
+        component: path.resolve("./src/templates/blog-post.js"),
         context: {
-          id: post.id,
+          id: node.id,
           previousPostId,
           nextPostId,
         },
       })
     })
-  }
+  })
 
   // --------------------------------------------------
   // 記事一覧の表示
 
-  const allArticle = queryResult.data.allArticles
-
-  console.log(allArticle)
+  const allArticles = queryResult.data.allArticles
 
   // 記事合計数
-  const postCount = allArticle.nodes.length;
+  const postCount = allArticles.nodes.length;
 
   // 何ページ生成することになるかの計算
   const pageCount = Math.ceil(postCount / 6)
