@@ -69,31 +69,34 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // 記事一覧の表示
 
   const allArticles = queryResult.data.allArticles
+  console.log(allArticles)
 
-  // 記事合計数
-  const postCount = allArticles.nodes.length;
+  allArticles.nodes.forEach(_ => {
+    // 記事合計数
+    const postCount = allArticles.nodes.length;
 
-  // 何ページ生成することになるかの計算
-  const pageCount = Math.ceil(postCount / 6)
+    // 何ページ生成することになるかの計算
+    const pageCount = Math.ceil(postCount / 6)
 
-  Array.from({ length: pageCount }).forEach((_, i) => {
-    createPage({
-      path: i === 0 ? "/page/1/" : `/page/${i + 1}/`,
-      component: path.resolve("./src/templates/pages.js"),
-      context: {
-        postCount: postCount,
-        pageCount: pageCount,
-        totalPageCount: pageCount,
-        skip: 6 * i,
-        limit: 6,
-        // 現在のページ番号
-        currentPage: i + 1,
-        isFirst: i + 1 === 1,
-        isLast: i + 1 === pageCount,
-      }
+    Array.from({ length: pageCount }).forEach((_, i) => {
+      createPage({
+        path: i === 0 ? "/page/1/" : `/page/${i + 1}/`,
+        component: path.resolve("./src/templates/pages.js"),
+        context: {
+          postCount: postCount,
+          pageCount: pageCount,
+          totalPageCount: pageCount,
+          skip: 6 * i,
+          limit: 6,
+          // 現在のページ番号
+          currentPage: i + 1,
+          isFirst: i + 1 === 1,
+          isLast: i + 1 === pageCount,
+        }
+      })
     })
-  })
-}
+  }
+  )}
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
