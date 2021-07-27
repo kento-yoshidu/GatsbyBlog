@@ -16,25 +16,25 @@ const ArticleList = ({ data, pageContext}) => {
 			isTopPage={true}
 		/>
 
-        <section className="post-list">
-          {postData.nodes.map(post => {
-            const title = post.frontmatter.title || post.fields.slug
+      <section className="post-list">
+        {postData.nodes.map(post => {
+          const title = post.frontmatter.title || post.fields.slug
 
-            return (
-              <div key={post.id}
-                className="post-item"
-                itemScope
-                itemType="http://schema.org/Article"
-              >
-                <p className="post-title">
-                  <Link to={post.fields.slug} itemProp="url">
-                    <span itemProp="headline">{title}</span>
-                  </Link>
-                </p>
-              </div>
-            )
-          })}
-        </section>
+          return (
+            <div key={post.id}
+              className="post-item"
+              itemScope
+              itemType="http://schema.org/Article"
+            >
+              <p className="post-title">
+                <Link to={post.fields.slug} itemProp="url">
+                  <span itemProp="headline">{title}</span>
+                </Link>
+              </p>
+            </div>
+          )
+        })}
+      </section>
     </>
 
   )
