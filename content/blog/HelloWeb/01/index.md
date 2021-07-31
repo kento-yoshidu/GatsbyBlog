@@ -1,7 +1,7 @@
 ---
 title: "#1 初めてのHTML & CSS"
-postdate: "2021-04-09"
-updatedate: "2021-06-24"
+postdate: "2021-07-30"
+updatedate: "2021-07-30"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: 
