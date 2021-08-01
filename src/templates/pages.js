@@ -6,6 +6,18 @@ import PageInfo from "../components/pageInfo"
 
 import * as Styles from "../styles/pages.module.scss"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {  faFolder,
+          faClock,
+          faUndo,
+          faTags,
+        } from "@fortawesome/free-solid-svg-icons"
+
+import "@fortawesome/fontawesome-svg-core/styles.css"
+import { config } from "@fortawesome/fontawesome-svg-core"
+config.autoAddCss = false
+
+
 const ArticleList = ({ data, pageContext }) => {
 	const postData = data.postData;
 
@@ -41,18 +53,19 @@ const ArticleList = ({ data, pageContext }) => {
 
                 <div className="post-info">
                   <div className="date">
-                    <p className="postdate">{post.frontmatter.postdate}</p>
-                    <p className="update">{post.frontmatter.updatedate}</p>
+                    <p className="postdate"><FontAwesomeIcon icon={faClock} />{post.frontmatter.postdate}</p>
+                    <p className="update"><FontAwesomeIcon icon={faUndo} />{post.frontmatter.updatedate}</p>
                   </div>
 
                   <p className="series">
-                    シリーズ
+                    <FontAwesomeIcon icon={faFolder} /> シリーズ
                     <Link to={`/series/${post.frontmatter.seriesSlug}/page/1/`}>
                       { post.frontmatter.seriesName }
                     </Link>
                   </p>
 
                   <p className="tag">
+                    <FontAwesomeIcon icon={faTags} /> <span>タグ</span>
                     {post.frontmatter.tags.map((tag) => (
                       <Link
                         to={`/tag/${tag}/page/1/`}

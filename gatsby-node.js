@@ -69,7 +69,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   // 記事一覧の表示
 
   const allArticles = queryResult.data.allArticles
-  console.log(allArticles)
 
   allArticles.nodes.forEach(_ => {
     // 記事合計数
