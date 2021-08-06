@@ -1,7 +1,7 @@
 ---
 title: "#1 初めてのHTML & CSS"
 postdate: "2021-07-30"
-updatedate: "2021-07-30"
+updatedate: "2021-08-06"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: 
@@ -51,7 +51,7 @@ HTMLとCSSを用いますが、これらの言語の仕様を説明すること�
 
 使用するWEBブラウザはGoogle Chrome（以下、Chrome）を想定しています。
 
-特に、（大変心苦しいですが😅）Internet Explorerは対象外とします。Internet Explorerを使用した場合、「あれ？ここに書いてある通りにならないぞ？」といった事が100%発生します。（2021年現在、特に個人のPCでIEを使用している人はそうそういないと思いますが…）
+特に（大変心苦しいですが😅）、Internet Explorer（以下、IE）は対象外とします。IEを使用した場合、「あれ？ここに書いてある通りにならないぞ？」といった事が100%発生します（2021年現在、特に個人のPCでIEを使用している人はそうそういないと思いますが…）。
 
 そしてこれはChrome以外のブラウザを使用しても、場合によっては起こりえます。ですので、この講座で学習する時はChromeを使用してあげてください。
 
@@ -99,7 +99,8 @@ VSCodeのインストール方法は以下を参照してください。
 
 - \#1 初めてのHTML&CSS（本ページ）
 - [#2 初めてのHTML&CSS](/HelloWeb/02)
+<!--
 - [#3 CSSでスタイリングする](/HelloWeb/03)
 - [#4 HTMLの基本①（DOCTYPE宣言とhtml要素、head要素）](/HelloWeb/04)
 - [#5 HTMLの基本②（h要素とp要素）](/HelloWeb/05/)
-
+-->
