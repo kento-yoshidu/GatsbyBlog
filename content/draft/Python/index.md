@@ -87,3 +87,89 @@ print(f'{age:<08}')
 ```
 
 
+## for-else
+
+```python
+numbers = [2, 4, 11]
+
+for number in numbers:
+	if number % 2 == 1:
+		print(number)
+		break
+
+else:
+	print('hogehoge')
+```
+
+elseブロックは、「breakでループを抜けられなかった」場合に実行されます。
+
+
+## heapq(ヒープキュー)
+
+```python
+import heapq
+
+numbers = [6, 2, 3, 7, 1, 4, 5]
+
+# numbersから最大値を3つ取得する
+print(heapq.nlargest(3, numbers))
+#=> [7, 6, 5]
+
+# numbersから最小値を3つ取得する
+print(heapq.nsmallest(3, numbers))
+#=> [1, 2, 3]
+```
+
+[heapq --- ヒープキューアルゴリズム &#8212; Python 3.9.4 ドキュメント](https://docs.python.org/ja/3/library/heapq.html)
+
+
+## *でリストの値を渡す
+
+```python
+def hoge(*arg):
+	print(arg)
+
+hoge(*[1,2,3])
+#=> (1, 2, 3)
+```
+
+こんな風に、最初と最後だけを取り除いて取得することも可能。
+
+```python
+_, *hoge, _ = [1,2,3,4,5,6,7]
+
+print(hoge)
+```
+
+## リスト内包表記
+
+```python
+numbers = [2,3,4]
+
+new_numbers = [num * num for num in numbers]
+
+print(new_numbers)
+```
+
+## Enum 列挙型
+
+複数の定数を一つにまとめておくことができる。定数名には`name`、値には`value`でアクセスできる。
+
+```python
+from enum import Enum
+
+class Hoge(Enum):
+	OK = 1
+
+print(Hoge.OK.name)
+#=> OK
+print(Hoge.OK.value)
+#=> 1
+
+print(Hoge.NG.name)
+#=> NG
+print(Hoge.NG.value)
+#=> -1
+```
+
+
