@@ -41,6 +41,24 @@ $sub-color: #bf80ff;
     text-indent: .8rem;
   }
 
+  ol {
+    padding: 10px 20px;
+    li {
+      font-size: 1.8rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 10px 20px;
+    li {
+      font-size: 1.8rem;
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+  }
+
   blockquote {
     position: relative;
     width: 90%;
@@ -93,6 +111,13 @@ $sub-color: #bf80ff;
       font-size: 1.5rem;
       line-height: 1.7;
       margin-bottom: 10px;
+    }
+
+    ul {
+      padding: 5px 15px;
+      li {
+        font-size: 1.4rem;
+      }
     }
 	}	
 
