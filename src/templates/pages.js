@@ -41,30 +41,30 @@ const ArticleList = ({ data, pageContext }) => {
 
             return (
               <div key={post.id}
-                className="post-item"
+                className={Styles.postItem}
                 itemScope
                 itemType="http://schema.org/Article"
               >
-                <p className="post-title">
+                <p className={Styles.postTitle}>
                   <Link to={post.fields.slug} itemProp="url">
                     <span itemProp="headline">{ title }</span>
                   </Link>
                 </p>
 
-                <div className="post-info">
-                  <div className="date">
-                    <p className="postdate"><FontAwesomeIcon icon={faClock} />{post.frontmatter.postdate}</p>
-                    <p className="update"><FontAwesomeIcon icon={faUndo} />{post.frontmatter.updatedate}</p>
+                <div className={Styles.postInfo}>
+                  <div className={Styles.date}>
+                    <p className={Styles.post}><FontAwesomeIcon icon={faClock} />{post.frontmatter.postdate}</p>
+                    <p className={Styles.update}><FontAwesomeIcon icon={faUndo} />{post.frontmatter.updatedate}</p>
                   </div>
 
-                  <p className="series">
+                  <p className={Styles.series}>
                     <FontAwesomeIcon icon={faFolder} /> シリーズ
                     <Link to={`/series/${post.frontmatter.seriesSlug}/page/1/`}>
                       { post.frontmatter.seriesName }
                     </Link>
                   </p>
 
-                  <p className="tag">
+                  <p className={Styles.tags}>
                     <FontAwesomeIcon icon={faTags} /> <span>タグ</span>
                     {post.frontmatter.tags.map((tag) => (
                       <Link

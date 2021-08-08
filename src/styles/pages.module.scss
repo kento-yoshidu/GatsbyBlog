@@ -1,4 +1,80 @@
+@import "../variables";
+
 .postList {
-	width: 50%;
+  list-style: none;
 	border: 1px solid red;
+
+	.postItem {
+    display: block;
+    padding: 30px 50px 30px 40px;
+    width: 75%;
+    border-bottom: 1px solid #bbb;
+    text-decoration: none;
+
+		&:first-of-type {
+      border-top: 1px solid #bbb;
+    }
+
+    &:hover {
+      background-color: rgba(200,200,200, .3);
+    }
+
+		.postTitle {
+      margin-bottom: 10px;
+
+      a {
+        color: #444;
+        font-size: 3rem;
+        font-weight: 500;
+        line-height: 1.5;
+
+        &:hover {
+          color: $main-color;
+        }
+      }
+    }
+
+		.postInfo {
+      .date {
+        display: flex;
+        margin-bottom: 20px;
+				.post,
+        .update {
+          font-size: 1.65rem;
+          padding: 3px 7px 3px 0px;
+          margin-right: 20px;
+          text-decoration: none;
+        }
+        svg {
+          margin-right: 5px;
+        }
+			}
+			.series,
+      .tags {
+        font-size: 1.7rem;
+        padding: 3px 7px 3px 0px;
+        margin-bottom: 5px;
+        text-decoration: none;
+
+				span {
+          margin-right: 10px;
+        }
+				a {
+          color: #444;
+          margin-right: 9px;
+          line-height: 1.5;
+          &:hover {
+            color: $main-color;
+          }
+        }
+			}
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+  .postList {
+    width: 100%;
+    margin: 0 auto;
+	}
 }
