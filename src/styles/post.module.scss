@@ -81,6 +81,17 @@ $sub-color: #bf80ff;
       font-size: 6rem;
     }
   }
+
+  aside {
+    padding: 18px 30px;
+    margin-bottom: 20px;
+    width: 90%;
+    border-radius: 3px;
+    background-color: rgba($main-color2, 0.15);
+    font-size: 1.6rem;
+    line-height: 1.6;
+    box-shadow: 0 0 1.5px 1.5px rgba($main-color2, 0.2);
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -118,6 +129,11 @@ $sub-color: #bf80ff;
       li {
         font-size: 1.4rem;
       }
+    }
+    aside {
+      padding: 10px 15px;
+      width: 88%;
+      font-size: 1.4rem;
     }
 	}	
 
