@@ -1,7 +1,7 @@
 ---
 title: "#3 CSSでスタイリングする"
-postdate: "2021-08-13"
-updatedate: "2021-08-13"
+postdate: "2021-08-08"
+updatedate: "2021-08-08"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: 
@@ -186,6 +186,7 @@ p {
 どのような色を指定できるかは、以下のサイトを参考にしてください。
 
 [WEB色見本 原色大辞典 - HTMLカラーコード](https://www.colordic.org/)
+</aside>
 
 `font-size`には文字の大きさを指定する数字が値として入ります。大きさにも様々な指定方法がありますが、ここではpx（ピクセル）を指定します。
 
