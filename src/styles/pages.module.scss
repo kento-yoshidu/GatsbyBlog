@@ -1,13 +1,14 @@
 @import "../variables";
 
 .postList {
+  width: 60%;
   list-style: none;
-	border: 1px solid red;
 
 	.postItem {
     display: block;
     padding: 30px 50px 30px 40px;
     width: 75%;
+    margin: 0 auto;
     border-bottom: 1px solid #bbb;
     text-decoration: none;
 

@@ -24,7 +24,7 @@ const Header = ({ pageTitle, pathname }) => {
 	} else {
 		siteTitle = (
       <h1 className={Styles.headerTitle}>
-        <Link to="/">{ site.siteMetadata.title }</Link>
+        <Link to="/page/1/">{ site.siteMetadata.title }</Link>
       </h1>
 		)
 	}

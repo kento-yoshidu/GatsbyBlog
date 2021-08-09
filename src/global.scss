@@ -19,6 +19,24 @@ html {
 }
 
 .wrapper {
+  animation: fadeIn .5s ease 0s 1 normal;
+
+  @media only screen and (max-width: 620px) {
+    margin: 0 16px
+  }
+
+  @keyframes fadeIn {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+  }
+
+  @-webkit-keyframes fadeIn {
+    0% { opacity: 0 }
+    100% { opacity: 1 }
+  }
+}
+
+.wrapper {
   border: 1px solid red;
   display: flex;
   justify-content: center;
