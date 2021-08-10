@@ -2,7 +2,8 @@ import * as React from "react"
 import { Link, graphql } from "gatsby"
 
 import Header from "../components/header"
-import PageInfo from "../components/pageInfo"
+//import PageInfo from "../components/pageInfo"
+import PostInfo from "../components/postInfo"
 import Seo from "../components/seo"
 
 import * as Styles from "../styles/post.module.scss"
@@ -16,6 +17,10 @@ const BlogPostTemplate = ({ data, location }) => {
     <div>
       <Header
         pathname={location.pathname}
+      />
+
+      <PostInfo
+        postTitle={data.markdownRemark.frontmatter.title}
       />
 
       <div className="all-wrapper">
