@@ -20,7 +20,12 @@ const BlogPostTemplate = ({ data, location }) => {
       />
 
       <PostInfo
-        postTitle={data.markdownRemark.frontmatter.title}
+        postTitle={post.frontmatter.title}
+        seriesSlug={data.markdownRemark.frontmatter.seriesSlug}
+        seriesName={data.markdownRemark.frontmatter.seriesName}
+        postdate={data.markdownRemark.frontmatter.postdate}
+        updatedate={post.frontmatter.updatedate}
+        tags={post.frontmatter.tags}
       />
 
       <div className="all-wrapper">
@@ -62,7 +67,12 @@ export const pageQuery = graphql`
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
+        postdate
+        updatedate
         description
+        seriesSlug
+        seriesName
+        tags,
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {

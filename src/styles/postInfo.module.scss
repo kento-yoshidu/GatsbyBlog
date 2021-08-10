@@ -1,0 +1,61 @@
+@import "../scss/variables";
+
+.postInfo {
+	margin-top: 100px;
+  margin-left: 15vw;
+  width: 50%;
+
+	.series {
+    font-size: 1.8rem;
+    svg {
+      margin-right: 10px;
+    }
+    a {
+      &:hover {
+        color: $main-color;
+      }
+    }
+  }
+
+	.postTitle {
+		display: inline-block;
+    background: linear-gradient(90deg, $main-color, $sub-color);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: rgba(255,255,255,0.0);
+    margin-bottom: 20px;
+    font-size: 3.3rem;
+    font-weight: 100;
+    letter-spacing: 1px;
+    line-height: 1.5;
+		margin-top: 0;
+	}
+
+	.dateInfo {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.7rem;
+		margin-bottom: 0;
+    p {
+      margin-right: 30px;
+			margin-bottom: 0;
+      svg {
+        margin-right: 7px;
+      }
+    }
+  }
+
+	.tags {
+    display: flex;
+    //flex-wrap: wrap;
+		align-items: center;
+    flex-direction: row;
+    font-size: 1.8rem;
+		margin-top: 0;
+    svg {
+			margin-right: 10px;
+    }
+    p {
+      margin-right: 20px;
+    }
+  }
+}
