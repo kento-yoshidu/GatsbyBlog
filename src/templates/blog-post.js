@@ -19,7 +19,7 @@ const BlogPostTemplate = ({ data, location }) => {
       />
 
       <div className="all-wrapper">
-        <div className="wrapper">
+        <div className="LoadAnimation">
           <main
             dangerouslySetInnerHTML={{ __html: post.html }}
             itemProp="articleBody"

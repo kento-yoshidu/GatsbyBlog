@@ -34,7 +34,7 @@ const ArticleList = ({ data, pageContext }) => {
         pageCount={pageContext.pageCount}
       />
 
-      <div className="wrapper">
+      <div className="LoadAnimation">
         <section className={Styles.postList}>
           {postData.nodes.map((post) => {
             const title = post.frontmatter.title || post.fields.slug
