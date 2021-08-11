@@ -1,5 +1,10 @@
 @import "./variables";
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 html {
   color: #444;
   font-size: 62.5%;
