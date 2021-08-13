@@ -58,7 +58,7 @@ const ArticleList = ({ data, pageContext }) => {
                   </div>
 
                   <p className={Styles.series}>
-                    <FontAwesomeIcon icon={faFolder} /> シリーズ
+                    <FontAwesomeIcon icon={faFolder} /> <span>シリーズ</span>
                     <Link to={`/series/${post.frontmatter.seriesSlug}/page/1/`}>
                       { post.frontmatter.seriesName }
                     </Link>
