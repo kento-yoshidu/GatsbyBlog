@@ -189,3 +189,68 @@ $sub-color: #bf80ff;
 		display: none;
 	}	
 }
+
+.beforeAndAfter {
+  width: 50%;
+  margin-left: 15vw;
+  padding-bottom: 50px;
+
+  .before,
+  .after {
+    display: block;
+    border: 2px solid #bbb;
+    border-radius: 3px;
+    padding: 15px 19px 5px;
+
+    &:hover {
+      color: inherit;
+    }
+
+    h2 {
+      font-size: 2rem;
+      letter-spacing: 1px;
+      color: #666;
+      border-bottom: 3px dotted $main-color;
+      padding-bottom: 7px;
+      margin-bottom: 15px;
+    }
+
+    .title {
+      line-height: 1.5;
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    &:hover {
+      background: rgba(240,240,240,.5)
+    }
+  }
+
+  .before {
+    margin-bottom: 30px;
+  }
+}
+
+@media screen and (Max-width: 768px) {
+  .beforeAndAfter {
+    width: 90%;
+    margin: 0 auto;
+    padding-bottom: 30px;
+
+    .before,
+    .after {
+      padding: 10px 15px;
+
+      h2 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+      }
+      .title {
+        font-size: 1.5rem;
+      }
+    }
+    .before {
+      margin-bottom: 15px;
+    }
+  }
+}

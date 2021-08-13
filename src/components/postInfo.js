@@ -33,7 +33,7 @@ const PostInfo = ({
 	})
 
 	return (
-		<div class={Styles.postInfo}>
+		<div className={Styles.postInfo}>
 
 			<p className={Styles.series}>
 				<FontAwesomeIcon icon={ faFolder } />

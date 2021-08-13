@@ -28,21 +28,43 @@ const BlogPostTemplate = ({ data, location }) => {
         tags={post.frontmatter.tags}
       />
 
-      <div className="all-wrapper">
-        <div className="LoadAnimation">
-          <main
-            dangerouslySetInnerHTML={{ __html: post.html }}
-            itemProp="articleBody"
-            className={`${Styles.blogPost} main`}
-          />
+      <div className="LoadAnimation">
+        <main
+          dangerouslySetInnerHTML={{ __html: post.html }}
+          itemProp="articleBody"
+          className={`${Styles.blogPost} main`}
+        />
 
-          <div className={Styles.tableOfContent}>
-            目次
-          </div>
-        </div>  
+        <div className={Styles.tableOfContent}>
+          目次
+        </div>
+      </div>  
 
-        <div>前後</div>
-      </div>
+      <nav className={Styles.beforeAndAfter}>
+        {previous && (
+          <Link
+            to={previous.fields.slug} rel="prev"
+            className={Styles.before}
+          >
+            <h2>← 前の記事</h2>
+            <p className={Styles.title}>
+              {previous.frontmatter.title}
+            </p>
+          </Link>
+        )}
+
+        {next && (
+          <Link
+            to={next.fields.slug}
+            className={Styles.after}
+          >
+            <h2>後の記事 →</h2>
+            <p className={Styles.title}>
+              {next.frontmatter.title}
+            </p>
+          </Link>
+        )}
+      </nav>
     </div>
   )
 }
