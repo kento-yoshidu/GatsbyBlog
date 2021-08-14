@@ -75,7 +75,44 @@
 
 @media screen and (max-width: 768px) {
   .postList {
-    width: 100%;
+    width: 90%;
     margin: 0 auto;
+    .postItem {
+      margin-bottom: 20px;
+      width: 90%;
+      padding: 8px 15px;
+      .postTitle {
+        a {
+          font-size: 2rem;
+        }
+      }
+
+      .info {
+        flex-direction: column;
+        margin: 0;
+
+        .date {
+          .post,
+          .update {
+            font-size: 1.35rem;
+            padding: 0;
+            margin-bottom: 5px;
+          }
+        }
+
+        .series,
+        .tags {
+          span {
+            margin-right: 10px;
+          }
+          font-size: 1.35rem;
+          padding: 0;
+          margin-bottom: 5px;
+          a {
+            margin: 0 5px;
+          }
+        }
+      }
+    }
 	}
 }
