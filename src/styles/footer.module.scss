@@ -1,0 +1,96 @@
+@import "../scss/variables";
+
+.footer {
+  background: #444;
+  color: #ccc;
+  padding-top: 50px;
+  padding-bottom: 50px;
+	line-height: 1.5;
+
+  a {
+    color: #ccc;
+    &:hover {
+      color: $main-color;
+    }
+  }
+
+  hgroup {
+    width: 50%;
+    margin: 0 auto 20px;
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 100;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+  }
+
+  .link {
+    width: 50%;
+    margin: 0 auto 20px;
+  }
+
+  .externalLink {
+    svg {
+      font-size: 3rem;
+    }
+  }
+
+  .internalLink,
+  .metaLink {
+    display: flex;
+    flex-wrap: wrap;
+    a {
+      margin-right: 25px;
+      margin-bottom: 5px;
+      font-size: 1.5rem;
+      svg {
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .copyright {
+    margin-top: 50px;
+    font-size: 2rem;
+    text-align: center;
+  }
+}
+
+
+@media screen and (max-width: 768px) {
+  .footer {
+    hgroup {
+      width: 90%;
+
+      h1 {
+        font-size: 1.7rem;
+        letter-spacing: 1px;
+        text-align: center;
+      }
+      h2 {
+        font-size: 1.3rem;
+        text-align: center;
+      }
+    }
+
+    .link {
+      width: 80%;
+    }
+    .externalLink {
+      text-align: center;
+    }
+
+    .internalLink,
+    .metaLink {
+      a {
+        font-size: 1.2rem;
+        margin-right: 15px;
+      }
+    }
+    .copyright {
+      margin-top: 30px;
+      font-size: 1.5rem;
+    }
+  }
+}
