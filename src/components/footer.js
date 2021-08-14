@@ -37,12 +37,9 @@ const Footer = () => {
             { site.siteMetadata.title}
           </Link>
         </h1>
-        <h2>
-          Powered By <Link to={"https://www.gatsbyjs.com/"} target="_blink">Gatsby</Link>
-        </h2>
       </hgroup>
 
-      <div className={Styles.link, Styles.externalLink}>
+      <div className={`${Styles.link} ${Styles.externalLink}`}>
         <Link
           to={"https://github.com/kento-yoshidu/GatsbyBlog"}
           target="_blink"
@@ -51,7 +48,7 @@ const Footer = () => {
         </Link>
       </div>
 
-      <div className={Styles.link, Styles.internalLink}>
+      <div className={`${Styles.link} ${Styles.internalLink}`}>
         <Link
           to={"/series/"}
           target="_blink"
@@ -68,7 +65,7 @@ const Footer = () => {
         </Link>
       </div>
 
-      <div className={Styles.link, Styles.metaLink}>
+      <div className={`${Styles.link} ${Styles.metaLink}`}>
         <Link
           to={"/about/"}
           target="_blink"
