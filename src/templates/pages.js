@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
+import Footer from "../components/footer"
 
 import * as Styles from "../styles/pages.module.scss"
 
@@ -79,6 +80,8 @@ const ArticleList = ({ data, pageContext }) => {
           })}
         </section>
       </div>
+
+      <Footer />
     </>
   )
 }
