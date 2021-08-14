@@ -23,11 +23,6 @@
       letter-spacing: 2px;
       margin-bottom: 15px;
     }
-    h2 {
-      font-size: 1.8rem;
-      font-weight: 100;
-      letter-spacing: 1px;
-    }
   }
 
   .link {
@@ -43,7 +38,6 @@
 
   .internalLink,
   .metaLink {
-		border: 1px solid red;
     display: flex;
     flex-wrap: wrap;
     a {
