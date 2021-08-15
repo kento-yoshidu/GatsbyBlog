@@ -1,7 +1,9 @@
-.seriesMain {
+.seriesMain,
+.tagsMain {
 	width: 50vw;
 	margin: 70px auto 100px;
-	.seriesList {
+	.seriesList,
+	.tagList {
 		display: flex;
 		list-style: none;
 		justify-content: flex-start;
@@ -22,12 +24,19 @@
 			}
 		}
 	}
+	.tagList {
+		.listItem {
+			margin-right: 5px;
+		}
+	}
 }
 
 @media screen and (max-width: 768px) {
-	.seriesMain {
-		width: 90vw;
-		.seriesList {
+	.seriesMain,
+	.tagsMain {
+		width: 88vw;
+		.seriesList,
+		.tagList {
 			.listItem {
 				margin-right: 8px;
 				margin-bottom: 12px;
