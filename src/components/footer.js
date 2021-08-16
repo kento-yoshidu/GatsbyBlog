@@ -41,7 +41,7 @@ const Footer = () => {
 
       <div className={`${Styles.link} ${Styles.externalLink}`}>
         <Link
-          to={"https://github.com/kento-yoshidu/GatsbyBlog"}
+          to={"https://github.com/kento-yoshidu/Gatsby3Blog"}
           target="_blink"
         >
           <FontAwesomeIcon icon={faGithubSquare} />
