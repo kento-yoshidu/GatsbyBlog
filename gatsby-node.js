@@ -32,6 +32,19 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+
+        # カテゴリごとに記事収集
+        postsBySeries: allMarkdownRemark {
+          group(field: frontmatter___seriesSlug) {
+            fieldValue
+            nodes {
+              id
+              frontmatter {
+                seriesName
+              }
+            }
+          }
+        }
       }
     `
   )
@@ -94,8 +107,44 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       })
     })
-  }
-)}
+  })
+
+  // --------------------------------------------------
+  // カテゴリごとの記事一覧
+
+  const postsBySeries = queryResult.data.postsBySeries.group
+
+  postsBySeries.forEach(series => {
+    const seriesSlug = series.fieldValue
+    const seriesName = series.nodes[0].frontmatter.seriesName
+
+    // カテゴリごとの記事合計数
+    const postCount = series.nodes.length;
+
+    // 何ページ生成することになるかの計算
+    const pageCount = Math.ceil(postCount / 6)
+
+    Array.from({ length: pageCount }).forEach((_, i) => {
+      createPage({
+        path: 1 === 0 ? `/series/${series.fieldValue}/page/1/` : `/series/${series.fieldValue}/page/${i + 1}/`,
+        component: path.resolve("./src/templates/series.js"),
+        context: {
+          postCount: postCount,
+          pageCount: pageCount,
+          totalPageCount: pageCount,
+          skip: 6 * i,
+          limit: 6,
+          // 現在のページ番号
+          currentPage: i + 1,
+          isFirst: i + 1 === 1,
+          isLast: i + 1 === pageCount,
+          seriesName: seriesName,
+          seriesSlug: seriesSlug,
+        }
+      })
+    })
+  })
+}
 
 exports.onCreateNode = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
