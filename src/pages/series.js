@@ -2,7 +2,7 @@ import React from "react"
 import { Link, graphql } from "gatsby"
 
 import Header from "../components/header"
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import Footer from "../components/footer"
 
 import * as Styles from "../styles/series.module.scss"
@@ -13,7 +13,7 @@ const Series = ({ data }) => {
 
   return (
     <div>
-      <SEO
+      <Seo
         title="シリーズ一覧"
       />
 
