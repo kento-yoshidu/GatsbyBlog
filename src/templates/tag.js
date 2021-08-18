@@ -6,39 +6,39 @@ import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import Footer from "../components/footer"
 
-const Series = ({ data, pageContext }) => {
+const Tag = ({ data, pageContext }) => {
 	const postData = data.allMarkdownRemark
 
 	return (
 		<>
 			<Header
-				pageTitle={`${pageContext.seriesName}シリーズの記事`}
+				pageTitle={`${pageContext.tag} タグの記事`}
 			/>
 
-      <PageInfo
-        currentPage={pageContext.currentPage}
-        postCount={pageContext.postCount}
-        pageCount={pageContext.pageCount}
-      />
+			<PageInfo
+				currentPage={pageContext.currentPage}
+				postCount={pageContext.postCount}
+				pageCount={pageContext.pageCount}
+			/>
 
-      <PostList
-        postData={postData}
-      />
+			<PostList
+				postData={postData}
+			/>
 
 			<Footer />
 		</>
 	)
 }
 
-export default Series
+export default Tag
 
 export const pageQuery = graphql`
   query(
-    $seriesSlug: String!,
+    $tag: String!,
     $limit: Int!,
     $skip: Int!
   ) {
-    allMarkdownRemark (
+    allMarkdownRemark(
       sort: {
         fields: [frontmatter___postdate],
         order: DESC
@@ -47,8 +47,8 @@ export const pageQuery = graphql`
       skip: $skip
       filter: {
         frontmatter: {
-          seriesSlug: {
-            eq: $seriesSlug
+          tags: {
+            in: [$tag]
           }
         }
       }
