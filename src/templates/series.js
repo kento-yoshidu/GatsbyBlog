@@ -34,7 +34,7 @@ export default Series
 
 export const pageQuery = graphql`
   query(
-    $seriesSlug: String,
+    $seriesSlug: String!,
     $limit: Int!,
     $skip: Int!
   ) {
