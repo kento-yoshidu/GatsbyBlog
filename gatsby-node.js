@@ -45,6 +45,16 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
             }
           }
         }
+
+        # タグごとに記事収集
+        postsByTag: allMarkdownRemark {
+          group(field: frontmatter___tags) {
+            fieldValue
+            nodes {
+              id
+            }
+          }
+        }
       }
     `
   )
@@ -143,6 +153,37 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         }
       })
     })
+  })
+
+  // --------------------------------------------------
+  // タグごとの記事一覧
+
+  const postsByTag = queryResult.data.postsByTag.group
+
+  postsByTag.forEach(tag => {
+    // タグごとの記事合計数
+    const postCount = tag.nodes.length;
+
+    // 何ページ生成することになるかの計算
+    const pageCount = Math.ceil(postCount / 6);
+
+    Array.from({ length: pageCount }).forEach((_, i) => {
+      createPage({
+        path: 1 === 0 ? `/tag/${tag.fieldValue}/page/1/` : `/tag/${tag.fieldValue}/page/${i + 1}/`,
+        component: path.resolve(`./src/templates/tag.js`),
+        context: {
+          postCount: postCount,
+          pageCount: pageCount,
+          skip: 6 * i,
+          limit: 6,
+          currentPage: i + 1,
+          isFirst: i + 1 === 1,
+          isLast: i + 1 === pageCount,
+          tag: tag.fieldValue,
+        }
+      })
+    })
+
   })
 }
 
