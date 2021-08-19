@@ -6,14 +6,16 @@ import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import Footer from "../components/footer"
 
-const ArticleList = ({ data, pageContext }) => {
+const ArticleList = ({ data, pageContext, location }) => {
 	const postData = data.postData;
+
+  console.log(location.pathname)
 
   return (
     <>
       <Header
         pageTitle="記事一覧"
-        isTopPage={true}
+        pathname={location.pathname}
       />
 
       <PageInfo
