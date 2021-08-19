@@ -3,6 +3,7 @@ import { graphql, Link } from "gatsby"
 
 import Header from "../components/header"
 import Seo from "../components/seo"
+import Footer from "../components/footer"
 
 import * as Styles from "../styles/404.module.scss"
 
@@ -18,10 +19,12 @@ const NotFoundPage = ({ data, location }) => {
       />
 
       <main className={Styles.main}>
-          <h3>ページが見つかりません。</h3>
-          <p>ページが削除された、もしくは移動した可能性があります。<Link to={`/`}>トップページ</Link>に戻り、改めてお探しください。</p>
-          <p>また、<Link to={`/categories/`}>カテゴリ一覧ページ</Link>や<Link to={`/tags/`}>タグ一覧ページ</Link>も用意してあります。こちらからの方が探しやすいかもしれません。</p>
+        <h2>ページが見つかりません。</h2>
+        <p>ページが削除された、もしくは移動した可能性があります。<Link to={`/page/1/`}>トップページ</Link>に戻り、改めてお探しください。</p>
+        <p>また、<Link to={`/series/`}>カテゴリ一覧ページ</Link>や<Link to={`/tags/`}>タグ一覧ページ</Link>も用意してあります。こちらからの方が探しやすいかもしれません。</p>
       </main>
+
+      <Footer />
 
     </>
   )
