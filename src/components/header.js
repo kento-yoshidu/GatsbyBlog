@@ -17,7 +17,7 @@ const Header = ({ pageTitle, pathname }) => {
 
 	let siteTitle
 
-	if (pathname === '/') {
+	if (pathname === '/page/1/') {
 		siteTitle = (
 			<h1 className={Styles.headerTitle}>{ site.siteMetadata.title }</h1>
 		)
