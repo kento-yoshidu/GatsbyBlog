@@ -2,8 +2,27 @@
 	width: 50%;
 	margin: 100px auto;
 
-	h3 {
+	h2 {
+		margin-bottom: 50px;
 		font-size: 3rem;
 		text-align: center;
+	}
+	p {
+		margin-bottom: 10px;
+		font-size: 1.6rem;
+		letter-spacing: 0.5px;
+		text-indent: .8rem;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.main {
+		width: 90%;
+		margin: 50px auto;
+
+		h2 {
+			margin-bottom: 30px;
+			font-size: 2.5rem;
+		}
 	}
 }
