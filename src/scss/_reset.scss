@@ -1,0 +1,43 @@
+html, body, div, span, h1, h2, h3, p, blockquote,
+pre, code, small, strong, b, i, dl, dt, dd, ol, ul,
+li, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, footer, header, menu, nav, section {
+  margin:0; padding:0; border:0;
+  outline:0;
+  vertical-align:baseline;
+  background:transparent;
+}
+body {
+  line-height:1;
+}
+article,aside,
+footer,header,nav,section {
+  display:block;
+}
+blockquote, q {
+    quotes:none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
