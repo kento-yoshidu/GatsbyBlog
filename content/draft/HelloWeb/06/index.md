@@ -1,7 +1,7 @@
 ---
-title: "#5 HTMLの基本②（h要素、p要素）"
-postdate: "2021-06-18"
-updatedate: "2021-06-18"
+title: "#5 HTMLの基本③（h要素、p要素）"
+postdate: "2021-08-27"
+updatedate: "2021-08-27"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: 
