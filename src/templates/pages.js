@@ -4,12 +4,11 @@ import { graphql } from "gatsby"
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
+import Pagination from "../components/pagination"
 import Footer from "../components/footer"
 
 const ArticleList = ({ data, pageContext, location }) => {
 	const postData = data.postData;
-
-  console.log(location.pathname)
 
   return (
     <>
@@ -26,6 +25,12 @@ const ArticleList = ({ data, pageContext, location }) => {
 
       <PostList
         postData={postData}
+      />
+
+      <Pagination
+        isFirst={pageContext.isFirst}
+        isLast={pageContext.isLast}
+        currentPage={pageContext.currentPage}
       />
 
       <Footer />
