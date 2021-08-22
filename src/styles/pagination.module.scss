@@ -1,0 +1,50 @@
+@import "../scss/variables";
+
+.pagination {
+  position: relative;
+  width: 50%;
+  margin: 100px auto 80px;
+  min-height: 1px;
+
+	.prev,
+  .next {
+		position: absolute;
+		top: 50%;
+		transform: translateY(-50%);
+    display: inline-block;
+    padding: 5px 20px;
+    border: 2px solid $main-color;
+    border-radius: 50px;
+    transition: .3s;
+    text-decoration: none;
+		svg {
+			color: $main-color;
+			font-size: 1.6rem;
+		}
+		span {
+			font-size: 1.6rem;
+			font-weight: 900;
+			color: $main-color;
+		}
+			&:hover {
+			background: $main-color;
+			svg,
+			span {
+				color: #fff;
+			}
+		}
+	}
+	.prev {
+    left: 0;
+    svg {
+      margin-right: 8px;
+    }
+  }
+
+  .next {
+    right: 0;
+    svg {
+      margin-left: 8px;
+    }
+  }
+}
