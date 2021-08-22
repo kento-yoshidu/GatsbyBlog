@@ -1,6 +1,8 @@
 import React from "react"
 import { Link } from "gatsby"
 
+import * as Styles from "../styles/pagination.module.scss"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
           faChevronCircleLeft,
@@ -23,7 +25,7 @@ const Pagination = ({
 		<div>
 			{!isFirst && (
 				<Link
-					className="prev"
+					className={Styles.prev}
 					to={
 						currentPage === 2
 							? `/page/1/`
@@ -38,10 +40,10 @@ const Pagination = ({
 		</div>
 	
 	nextButton =
-		<div className="preButton">
+		<div>
 			{!isLast && (
 				<Link
-					className="next"
+					className={Styles.next}
 					to={`/page/${currentPage + 1}`}
 				>
 					<span>Next</span>
@@ -52,7 +54,7 @@ const Pagination = ({
 		</div>
 
 	return (
-		<div className="pagination">
+		<div className={Styles.pagination}>
 			{ prevButton }
 			{ nextButton }
 		</div>
