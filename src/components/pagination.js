@@ -16,7 +16,8 @@ const Pagination = ({
 	isLast,
 	currentPage
 }) => {
-	let prevButton
+	let prevButton,
+			nextButton
 
 	prevButton = 
 		<div>
@@ -35,10 +36,25 @@ const Pagination = ({
 				</Link>
 			)}
 		</div>
+	
+	nextButton =
+		<div className="preButton">
+			{!isLast && (
+				<Link
+					className="next"
+					to={`/page/${currentPage + 1}`}
+				>
+					<span>Next</span>
+          <FontAwesomeIcon icon={faChevronCircleRight} />
+				</Link>
+			)}
+
+		</div>
 
 	return (
 		<div className="pagination">
 			{ prevButton }
+			{ nextButton }
 		</div>
 	)
 
