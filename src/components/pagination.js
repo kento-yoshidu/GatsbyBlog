@@ -16,10 +16,16 @@ config.autoAddCss = false
 const Pagination = ({
 	isFirst,
 	isLast,
-	currentPage
+	currentPage,
+	pageCount,
+	tag,
+	series
 }) => {
 	let prevButton,
-			nextButton
+			nextButton,
+			nationLinks
+
+			console.log(tag)
 
 	prevButton = 
 		<div>
@@ -50,12 +56,39 @@ const Pagination = ({
           <FontAwesomeIcon icon={faChevronCircleRight} />
 				</Link>
 			)}
+		</div>
 
+	nationLinks =
+		<div className={Styles.nationLinks}>
+			{Array.from({ length: pageCount }, (_, i) => {
+				return (
+					<div className={Styles.items}>
+						{i + 1 === currentPage
+							? <p className={Styles.text}>{ i + 1 }</p>
+							: <p className={Styles.link}>
+								{
+									!tag && !series &&
+									<Link to={`/page/${i + 1}/`}>
+										{i + 1}
+									</Link>
+								}
+								{
+									tag && !series &&
+									<Link to={`${tag}/page/${i + 1}/`}>
+										{i + 1}
+									</Link>
+								}
+								</p>
+						}
+					</div>
+				)
+			})}
 		</div>
 
 	return (
 		<div className={Styles.pagination}>
 			{ prevButton }
+			{ nationLinks }
 			{ nextButton }
 		</div>
 	)

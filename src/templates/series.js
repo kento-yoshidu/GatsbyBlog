@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
+import Pagination from "../components/pagination"
 import Footer from "../components/footer"
 
 const Series = ({ data, pageContext }) => {
@@ -23,6 +24,12 @@ const Series = ({ data, pageContext }) => {
 
       <PostList
         postData={postData}
+      />
+
+
+      <Pagination
+        isFirst={pageContext.isFirst}
+        isLast={pageContext.isLast}
       />
 
 			<Footer />

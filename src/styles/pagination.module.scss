@@ -47,4 +47,39 @@
       margin-left: 8px;
     }
   }
+
+	.nationLinks {
+		display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    .items {
+      list-style: none;
+      margin: 0 10px;
+
+      .text {
+        padding: 1rem 1.35rem;
+        background-color: $main-color;
+        color: #fff;
+      }
+      .link {
+        a {
+          display: block;
+          padding: 1rem 1.35rem;
+          background-color: #888;
+          color: #fff;
+          text-decoration: none;
+        }
+        &:hover {
+          a {
+            background-color: $main-color;
+          }
+        }
+      }
+    }
+  }
 }
