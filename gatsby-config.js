@@ -46,6 +46,15 @@ module.exports = {
           },
           `gatsby-remark-code-titles`,
           {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              offsetY: `30`,
+              icon: false,
+              className: `custom-class`,
+              maintainCase: true,
+            },
+          },
+          {
             resolve: `gatsby-remark-prismjs`,
             options: {
               showLineNumbers: true,
