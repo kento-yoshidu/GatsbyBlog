@@ -33,8 +33,8 @@ const Footer = () => {
     <footer className={Styles.footer}>
       <hgroup>
         <h1>
-          <Link to={ site.siteMetadata.siteUrl }>
-            { site.siteMetadata.title}
+          <Link to="/page/1/">
+            { site.siteMetadata.title }
           </Link>
         </h1>
       </hgroup>

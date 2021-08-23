@@ -6,7 +6,7 @@ module.exports = {
       //summary: `who lives and works in San Francisco building useful things.`,
     },
     //description: `A starter blog demonstrating what Gatsby can do.`,
-    //siteUrl: `https://gatsbystarterblogsource.gatsbyjs.io/`,
+    siteUrl: `https://blog.toriwatari.work/page/1/`,
     social: {
       //twitter: `kylemathews`,
     },
@@ -45,6 +45,15 @@ module.exports = {
             },
           },
           `gatsby-remark-code-titles`,
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              offsetY: `30`,
+              icon: false,
+              className: `custom-class`,
+              maintainCase: false,
+            },
+          },
           {
             resolve: `gatsby-remark-prismjs`,
             options: {

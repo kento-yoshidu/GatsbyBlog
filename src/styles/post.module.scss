@@ -176,17 +176,6 @@
 
 }
 
-.tableOfContent {
-	width: 30%;
-	border: 1px solid $main-color;
-}
-
-@media screen and (max-width: 768px) {
-	.tableOfContent {
-		display: none;
-	}	
-}
-
 .beforeAndAfter {
   width: 50%;
   margin-top: 80px;

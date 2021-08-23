@@ -13,7 +13,7 @@ const Series = ({ data, pageContext }) => {
 	return (
 		<>
 			<Header
-				pageTitle={`${pageContext.seriesName}シリーズの記事`}
+				pageTitle={`${pageContext.seriesName} シリーズの記事`}
 			/>
 
       <PageInfo
