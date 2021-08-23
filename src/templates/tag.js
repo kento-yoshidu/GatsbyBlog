@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
+import Pagination from "../components/pagination"
 import Footer from "../components/footer"
 
 const Tag = ({ data, pageContext }) => {
@@ -24,6 +25,12 @@ const Tag = ({ data, pageContext }) => {
 			<PostList
 				postData={postData}
 			/>
+
+      <Pagination
+        isFirst={pageContext.isFirst}
+        isLast={pageContext.isLast}
+        tag={pageContext.tag}
+      />
 
 			<Footer />
 		</>
