@@ -3,7 +3,6 @@ module.exports = {
     title: `鳥に生まれることができなかった人へ`,
     author: {
       name: `Kento Yoshizu`,
-      //summary: `who lives and works in San Francisco building useful things.`,
     },
     //description: `A starter blog demonstrating what Gatsby can do.`,
     siteUrl: `https://blog.toriwatari.work/page/1/`,
@@ -133,7 +132,8 @@ module.exports = {
         start_url: `/page/1/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
-        display: `minimal-ui`,
+        display: `browser`,
+        //display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
