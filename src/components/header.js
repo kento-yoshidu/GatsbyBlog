@@ -19,12 +19,12 @@ const Header = ({ pageTitle, pathname }) => {
 
 	if (pathname === '/page/1/') {
 		siteTitle = (
-			<h1 className={Styles.headerTitle}>{ site.siteMetadata.title }</h1>
+			<h1 className={Styles.headerTitle}>{site.siteMetadata.title}</h1>
 		)
 	} else {
 		siteTitle = (
       <h1 className={Styles.headerTitle}>
-        <Link to="/page/1/">{ site.siteMetadata.title }</Link>
+        <Link to="/page/1/">{site.siteMetadata.title}</Link>
       </h1>
 		)
 	}
