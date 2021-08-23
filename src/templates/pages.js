@@ -31,6 +31,8 @@ const ArticleList = ({ data, pageContext, location }) => {
         isFirst={pageContext.isFirst}
         isLast={pageContext.isLast}
         currentPage={pageContext.currentPage}
+        pageCount={pageContext.pageCount}
+        tag={pageContext.tag}
       />
 
       <Footer />
