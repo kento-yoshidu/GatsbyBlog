@@ -1,0 +1,26 @@
+@import "../scss/variables";
+
+.tableOfContent {
+	width: 30%;
+	margin-top: 80px;
+	ul {
+		list-style: none;
+		position: -webkit-sticky;
+    position: sticky;
+    top: 9vh;
+		li {
+      font-size: 1.7rem;
+      margin-bottom: 14px;
+      p {
+        margin-bottom: 14px;
+      }
+		}
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.tableOfContent {
+		display: none;
+	}	
+}
+

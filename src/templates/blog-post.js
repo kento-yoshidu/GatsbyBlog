@@ -8,11 +8,15 @@ import Footer from "../components/footer"
 import Seo from "../components/seo"
 
 import * as Styles from "../styles/post.module.scss"
+import * as TableStyles from "../styles/tableOfContent.module.scss"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
   const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
+  const { tableOfContents } = data.markdownRemark;
+
+  console.log(tableOfContents)
 
   return (
     <div>
@@ -36,9 +40,10 @@ const BlogPostTemplate = ({ data, location }) => {
           className={`${Styles.blogPost} main`}
         />
 
-        <div className={Styles.tableOfContent}>
-          目次
-        </div>
+        <div
+          className={TableStyles.tableOfContent}
+          dangerouslySetInnerHTML={{ __html: tableOfContents }}
+        />
       </div>  
 
       <nav className={Styles.beforeAndAfter}>
@@ -89,6 +94,7 @@ export const pageQuery = graphql`
       id
       excerpt(pruneLength: 160)
       html
+      tableOfContents
       frontmatter {
         title
         date(formatString: "MMMM DD, YYYY")
