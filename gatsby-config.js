@@ -132,8 +132,7 @@ module.exports = {
         start_url: `/page/1/`,
         background_color: `#ffffff`,
         theme_color: `#663399`,
-        display: `browser`,
-        //display: `minimal-ui`,
+        display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
