@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import Seo from "../components/seo"
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
@@ -12,6 +13,10 @@ const Series = ({ data, pageContext }) => {
 
 	return (
 		<>
+      <Seo
+        title={`${pageContext.seriesName}シリーズの記事`}
+      />
+
 			<Header
 				pageTitle={`${pageContext.seriesName} シリーズの記事`}
 			/>

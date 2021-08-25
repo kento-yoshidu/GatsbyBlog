@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import Seo from "../components/seo"
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
@@ -12,6 +13,10 @@ const Tag = ({ data, pageContext }) => {
 
 	return (
 		<>
+      <Seo
+        title={`${pageContext.tag}タグの記事`}
+      />
+
 			<Header
 				pageTitle={`${pageContext.tag} タグの記事`}
 			/>
