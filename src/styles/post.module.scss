@@ -4,7 +4,6 @@
   width: 50%;
 	margin-left: 14vw;
   margin-right: 5vw;
-
 	h1,
   h2,
   h3 {
@@ -29,7 +28,6 @@
     font-size: 2.8rem;
     margin: 30px 0 20px;
   }
-
   p {
     margin-bottom: 15px;
     font-size: 1.75rem;
@@ -37,7 +35,6 @@
     line-height: 1.65;
     text-indent: .8rem;
   }
-
   ol {
     padding: 10px 20px;
     li {
@@ -55,7 +52,6 @@
       margin-bottom: 10px;
     }
   }
-
   blockquote {
     position: relative;
     width: 90%;
@@ -78,7 +74,6 @@
       font-size: 6rem;
     }
   }
-
   table {
     margin: 40px 0;
     tr {
@@ -100,7 +95,6 @@
       }
     }
   }
-
   aside {
     padding: 18px 30px;
     margin-bottom: 20px;
@@ -116,7 +110,7 @@
 @media screen and (max-width: 768px) {
 	.blogPost {
 		width: 90%;
-		margin: 0 auto;
+		margin: 0 auto 50px;
 
 		h1 {
       width: 100%;
@@ -222,7 +216,7 @@
   .beforeAndAfter {
     width: 90%;
     margin: 0 auto;
-    padding-bottom: 30px;
+    padding-bottom: 20px;
 
     .before,
     .after {
