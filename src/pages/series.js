@@ -12,7 +12,7 @@ const Series = ({ data }) => {
   const categories = data.allMarkdownRemark.group
 
   return (
-    <div>
+    <>
       <Seo
         title="シリーズ一覧"
       />
@@ -39,7 +39,7 @@ const Series = ({ data }) => {
       </main>
 
       <Footer />
-    </div>
+    </>
   )
 }
 
