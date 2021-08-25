@@ -1,7 +1,7 @@
 ---
 title: "Gatsbyでブログを始めました"
 postdate: "2021-07-24"
-updatedate: "2021-08-14"
+updatedate: "2021-08-25"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "静的サイトジェネレータのGatsbyを使用してブログを立ち上げました。その経緯と使ってみた所感を記したいと思います。"
@@ -19,6 +19,12 @@ tags: ["日記", "Gatsby"]
 実は以前にもGatsbyでブログを作成していましたが、新しいバージョンであるGatsby3がリリースされたこと、TypeScript対応が出来ていなかったことなどがあり、一から作り直すことにしました。まだ、TypeScript対応は完全には出来ていませんが、近いうちに仕上げるつもりです。
 
 このページでは、当ブログの機能やこだわりポイントを書きなぐっています。「Gatsbyってどんなことができるの❓」「使ってみたいけど何か難しそう…:confused:」など、Gatsbyでのブログ作成を考えている方の参考になれば幸いです。
+
+<aside>
+
+ネットを見てると「Gatsby」「Gtasby.js」「GatsbyJS」とか色々な言い方がされてますが、どれが正しいんでしょうか。[公式サイト](https://www.gatsbyjs.com/)を見る限りシンプルに「Gatsby」と表記されてますので、このブログでもそれに従うことにしています。
+
+</aside>
 
 ## Point1 マークダウンでの記事作成
 
@@ -106,7 +112,7 @@ Gatsbyを選んだそもそもの理由が「クエリ言語にGraphQLを採用�
 ---
 title: "Gatsbyでブログを始めました"
 postdate: "2021-07-24"
-updatedate: "2021-08-14"
+updatedate: "2021-08-25"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "静的サイトジェネレータのGatsbyを使用してブログを立ち上げました。"
@@ -116,7 +122,7 @@ tags: ["日記", "Gatsby"]
 
 `gatsby-node.js`を使用し、ビルド時に「GraphQLでマークダウンファイルの情報（frontmatter）を取得、それらを同じシリーズの記事ごとに集約、それらをリスト化したページを作成」、というようなことをやってくれています。
 
-また、[こちら](https://blog.toriwatari.work/series/JavaScriptAdvance/page/1/)のページでは「JavaScript中級者を目指す」というシリーズの記事一覧をリストアップしています。
+また、[こちら](/series/HelloWeb/page/1/)のページでは「初めてのHTML & CSS」というシリーズの記事一覧をリストアップしています。
 
 これもGraphQLを使用し、「同じシリーズの記事一覧を取得、記事数だけループで表示させる」ということをやっています。
 
@@ -161,18 +167,3 @@ PWAに対応しています。
 特に難しいことはしていませんが、以下が構成図です。
 
 ![](./images/image10.png)
-
-
-## 余談
-
-ネットを見てると「Gatsby」「Gtasby.js」「GatsbyJS」とか色々ないい方されてますが、どれが正しいんでしょうか。[公式サイト](https://www.gatsbyjs.com/)を見る限りシンプルに「Gatsby」と表記されてますので、このブログでもそれに従うことにしています。
-
-## これから
-
-- TypeScript対応
-- Gatsby3へのバージョンアップ
-- CircleCIでのテスト
-
-しかし、1から作り直した方がいいような、、、
-
-
