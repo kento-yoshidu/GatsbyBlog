@@ -3,18 +3,16 @@
 .footer {
   background: #444;
   color: #ccc;
-  margin-top: 100px;
-  padding-top: 50px;
-  padding-bottom: 50px;
+  margin-top: 70px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 	line-height: 1.5;
-
   a {
     color: #ccc;
     &:hover {
       color: $main-color;
     }
   }
-
   hgroup {
     width: 50%;
     margin: 0 auto 20px;
@@ -25,18 +23,15 @@
       margin-bottom: 15px;
     }
   }
-
   .link {
     width: 50%;
     margin: 0 auto 20px;
   }
-
   .externalLink {
     svg {
       font-size: 3rem;
     }
   }
-
   .internalLink,
   .metaLink {
     display: flex;
@@ -50,20 +45,19 @@
       }
     }
   }
-
   .copyright {
-    margin-top: 50px;
-    font-size: 2rem;
+    margin-top: 30px;
+    font-size: 1.7rem;
+    letter-spacing: .5px;
     text-align: center;
   }
 }
 
-
 @media screen and (max-width: 768px) {
   .footer {
+    margin-top: 30px;
     hgroup {
       width: 90%;
-
       h1 {
         font-size: 1.7rem;
         letter-spacing: 1px;
@@ -74,14 +68,12 @@
         text-align: center;
       }
     }
-
     .link {
       width: 80%;
     }
     .externalLink {
       text-align: center;
     }
-
     .internalLink,
     .metaLink {
       a {
