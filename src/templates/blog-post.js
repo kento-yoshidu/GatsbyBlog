@@ -1,25 +1,28 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 
+import Seo from "../components/seo"
 import Header from "../components/header"
-//import PageInfo from "../components/pageInfo"
 import PostInfo from "../components/postInfo"
 import Footer from "../components/footer"
-import Seo from "../components/seo"
 
 import * as Styles from "../styles/post.module.scss"
 import * as TableStyles from "../styles/tableOfContent.module.scss"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
-  const siteTitle = data.site.siteMetadata?.title || `Title`
+  //const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
   const { tableOfContents } = data.markdownRemark;
 
   console.log(tableOfContents)
 
   return (
-    <div>
+    <>
+      <Seo
+        title={post.frontmatter.title}
+      />
+
       <Header
         pathname={location.pathname}
       />
@@ -73,7 +76,7 @@ const BlogPostTemplate = ({ data, location }) => {
       </nav>
 
       <Footer />
-    </div>
+    </>
   )
 }
 

@@ -1,6 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
+import Seo from "../components/seo"
 import Header from "../components/header"
 import Footer from "../components/footer"
 
@@ -12,6 +13,10 @@ const Tags = ({ data }) => {
 
 	return (
 		<>
+      <Seo
+        title="タグ一覧"
+      />
+
 			<Header
 				pageTitle="タグ一覧"
 			/>

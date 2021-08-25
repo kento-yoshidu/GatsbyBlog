@@ -7,12 +7,14 @@ import Footer from "../components/footer"
 
 import * as Styles from "../styles/404.module.scss"
 
-const NotFoundPage = ({ data, location }) => {
-  const siteTitle = data.site.siteMetadata.title
+const NotFoundPage = () => {
+  //const siteTitle = data.site.siteMetadata.title
 
   return (
     <>
-      <Seo title="404: Not Found" />
+      <Seo
+        title="404 : Not Found"
+      />
 
       <Header
         pageTitle="404 Page Not Found"
