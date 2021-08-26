@@ -25,8 +25,6 @@ const Pagination = ({
 			nextButton,
 			nationLinks
 
-			console.log(tag)
-
 	prevButton = 
 		<div>
 			{!isFirst && (
