@@ -1,0 +1,48 @@
+.mobilePagination {
+  display: flex;
+  position: relative;
+  width: 100%;
+  justify-content: space-around;
+  font-size: 2.5rem;
+  font-weight: 100;
+  margin: 50px 0 80px;
+
+  .topButton,
+  .lastButton,
+  .prevButton,
+  .nextButton {
+    width: 20%;
+    position: absolute;
+    border: 1px solid #aaa;
+    border-radius: 2px;
+    text-align: center;;
+    background-color: #ddd;
+    padding: 8px 0;
+
+    svg {
+      color: #888;
+    }
+  }
+
+  .topButton {
+    left: 2.2%;
+  }
+
+  .prevButton {
+    left: 27%;
+  }
+
+  .nextButton {
+    right: 27%;
+  }
+
+  .lastButton {
+    right: 2.2%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .mobilePagination {
+    display: none;
+  }
+}
