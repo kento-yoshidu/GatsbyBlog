@@ -6,6 +6,7 @@ import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import Pagination from "../components/pagination"
+import MobilePagination from "../components/mobilePagination"
 import Footer from "../components/footer"
 
 const ArticleList = ({ data, pageContext, location }) => {
@@ -37,7 +38,14 @@ const ArticleList = ({ data, pageContext, location }) => {
         isLast={pageContext.isLast}
         currentPage={pageContext.currentPage}
         pageCount={pageContext.pageCount}
-        tag={pageContext.tag}
+        //tag={pageContext.tag}
+      />
+
+      <MobilePagination
+        isFirst={pageContext.isFirst}
+        isLast={pageContext.isLast}
+        currentPage={pageContext.currentPage}
+        pageCount={pageContext.pageCount}
       />
 
       <Footer />
