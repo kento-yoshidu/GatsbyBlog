@@ -1,5 +1,7 @@
-import React, { useDebugValue } from "react"
+import React /*, { useDebugValue }*/ from "react"
 import { Link } from "gatsby"
+
+import * as Styles from "../styles/mobilePagination.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -29,16 +31,16 @@ const MobilePagination = ({
 		topButton =
 			<Link
 				to={`/page/1/`}
-				className="topButton"
+				className={Styles.topButton}
 			>
 				<FontAwesomeIcon icon={faAngleDoubleLeft} />
 			</Link>
 
 		prevButton =
 		<Link
-			className="prev-button"
+			className={Styles.prevButton}
 			to={`/page/${currentPage - 1}/`}
-			rel = "prev"
+			rel="prev"
 		>
 			<FontAwesomeIcon icon={faAngleLeft} />
 		</Link>
@@ -46,22 +48,22 @@ const MobilePagination = ({
 		lastButton =
 			<Link
 				to={`/page/${pageCount}/`}
-				className="topButton"
+				className={Styles.lastButton}
 			>
 				<FontAwesomeIcon icon={faAngleDoubleRight} />
 			</Link>
 
 		nextButton =
       <Link
-        className="next-button"
         to={`/page/${currentPage + 1}/`}
+        className={Styles.nextButton}
       >
         <FontAwesomeIcon icon={faAngleRight} />
       </Link>
 	}
 
 	return (
-		<div>
+		<div className={Styles.mobilePagination}>
 			{ topButton }
 			{ prevButton }
 			{ nextButton }
