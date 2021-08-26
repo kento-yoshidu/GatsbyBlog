@@ -1,7 +1,7 @@
 import React /*, { useDebugValue }*/ from "react"
 import { Link } from "gatsby"
 
-import * as Styles from "../styles/MobilePagination.module.scss"
+import * as Styles from "../styles/mobilePagination.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
