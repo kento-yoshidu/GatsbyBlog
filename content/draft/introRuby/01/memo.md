@@ -237,7 +237,7 @@ https://qiita.com/HEP/items/1cafc0c9559b1b29cced
 
 `&&`、`||`、`!`と同じ意味だが、それぞれの間で優先順位がないため、式は左から順番に評価される。
 
-## if文
+## if式
 
 ```ruby
 num = 3
@@ -252,7 +252,7 @@ end
 #=> Fizz
 ```
 
-if文は**最後に評価された値**が戻り値として返ってくる。それを変数に代入することも可能。
+if式は**最後に評価された値**が戻り値として返ってくる。それを変数に代入することも可能。
 
 ```ruby
 result =
@@ -367,6 +367,121 @@ nums = [2, 4, 6]
 count_evens(nums)
 #=> 3
 ```
+
+# メソッドの名前
+
+名前が`?`で終わるメソッドは真偽値を返す。
+
+```ruby
+puts ''.empty?
+#=> true
+```
+
+`!`で終わるメソッドは、破壊的なメソッドである場合が多い（必ずしもそうではない）。また、`!`が付いていないからと言って破壊的なメソッドではないかと言うとそうでもない。
+
+`upcase!`メソッドは呼び出したオブジェクトの文字列を大文字にして返す。この時、呼び出されたオブジェクト（つまり`low`）も大文字になる。
+
+```ruby
+low = "aaa"
+
+up = low.upcase!
+
+puts up
+#=> AAA
+
+puts low
+#=> AAA
+```
+
+なお、非破壊的な`upcase`メソッドも用意されている。
+
+```ruby
+low = "aaa"
+
+up = low.upcase
+
+puts up
+#=> AAA
+
+puts low
+#=> aaa
+```
+
+なお、自分で作るメソッドの名前の末尾に`?`や`!`を付けることができる。
+
+```ruby
+def myUpcase!(str)
+  str.upcase
+end
+
+puts myUpcase!('Hello')
+#=> HELLO
+```
+
+## 式と文
+
+値を返せば式、返さなければ文、とひとまず考える。
+
+https://qiita.com/raccy/items/89a1fc77337cb9df8928
+
+http://ichitcltk.hustle.ne.jp/gudon2/index.php?pageType=file&id=word_expression_statement.md
+
+
+## 擬似変数
+
+```ruby
+puts self
+#=> main
+
+puts __FILE__
+#=> script.ruby
+
+puts __LINE__
+#=> 7
+
+puts __ENCODING__
+#=> UTF-8
+```
+
+## 参照
+
+変数にはオブジェクトへの参照が格納されている。`object_id`メソッドで参照先を確認できる。
+
+```ruby
+a = "myObj"
+b = a
+
+puts a.object_id
+#=> 400
+puts b.object_id
+#=> 400
+
+a = "newObj"
+
+puts a.object_id
+#=> 420
+
+puts b.object_id
+#=> 400
+```
+
+https://magazine.rubyist.net/articles/0032/0032-CallByValueAndCallByReference.html
+
+https://gam0022.net/blog/2013/02/09/ruby-variable/
+
+
+## requireでライブラリの読み込み
+
+```ruby
+require 'date'
+
+puts Date.today
+#=> 2021-08-26
+```
+
+`require`は一回だけ読み込める。`load`ならその縛りはない。
+
+自分自身からの相対パスを指定する場合は、`require_relative`を使う（普通はスクリプトを実行しているディレクトリが起点になる）。
 
 ## map,select,reduceの使い方
 
