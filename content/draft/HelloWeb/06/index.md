@@ -1,5 +1,5 @@
 ---
-title: "#5 HTMLの基本③（h要素、p要素）"
+title: "#6 HTMLの基本③（h要素、p要素）"
 postdate: "2021-08-27"
 updatedate: "2021-08-27"
 seriesName: "初めてのHTML & CSS"
@@ -204,6 +204,18 @@ p要素はブロック要素、次のページで紹介するa要素はインラ
 ```
 
 ![](images/image09.png)
+
+br要素は結構使い方が難しいと個人的に思っています。私はあまり使いません。例えば住所を載せる時なんかは、br要素を使うと区切ることができて読みやすくなるんじゃないかなと思います。
+
+```html
+<p> 〒530-0001<br>
+    大阪府大阪市北区<br>
+    梅田99丁目99-99<br>
+    〇〇××ビル 8階
+<p>
+```
+
+![](images/image10.png)
 
 [&lt;br&gt;: 改行要素 | MDN](https://developer.mozilla.org/ja/docs/Web/HTML/Element/br)
 
