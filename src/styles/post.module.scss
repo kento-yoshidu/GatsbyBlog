@@ -96,14 +96,33 @@
     }
   }
   aside {
-    padding: 18px 30px;
+    position: relative;
+    padding: 18px 30px 18px 60px ;
     margin-bottom: 20px;
-    width: 90%;
+    width: 80%;
     border-radius: 3px;
     background-color: rgba($main-color2, 0.15);
-    font-size: 1.6rem;
-    line-height: 1.6;
     box-shadow: 0 0 1.5px 1.5px rgba($main-color2, 0.2);
+    p {
+      margin: 0;
+      font-size: 1.6rem;
+      line-height: 1.6;
+    }
+    &::before {
+      content: "💡";
+      top: 50%;
+      font-size: 2rem;
+      line-height: 1.6;
+      transform: translateY(-50%);
+      position: absolute;
+      z-index: 1;
+      margin-left: -50px;
+      background-color: rgba($main-color2, .4);
+      border-radius: 100%;
+      height: 3.5rem;
+      width: 3.5rem;
+      text-align: center;
+    }
   }
 }
 
@@ -160,14 +179,21 @@
         }
       }
     }
-
     aside {
-      padding: 10px 15px;
-      width: 88%;
-      font-size: 1.4rem;
+      padding: 10px 15px 10px 50px;
+      width: 80%;
+      p {
+        font-size: 1.3rem;
+        line-height: 1.5;
+      }
+      &::before {
+        font-size: 1.5rem;
+        height: 2.5rem;
+        width: 2.5rem;
+        margin-left: -40px;
+      }
     }
 	}	
-
 }
 
 .beforeAndAfter {
