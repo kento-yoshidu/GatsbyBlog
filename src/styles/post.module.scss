@@ -54,24 +54,28 @@
   }
   blockquote {
     position: relative;
-    width: 90%;
+    width: 80%;
+    padding: 18px 30px 18px 60px;
     margin-top: 12px;
     margin-left: 1rem;
-    margin-bottom: 12px;
-    padding: 2% 2% 1% 6%;
+    margin-bottom: 20px;
     background-color: #eee;
     border-radius: 3px;
     box-shadow: 0 0 1.5px 1.5px #ddd;
     color: #666;
+    p {
+      margin: 0;
+      font-size: 1.6rem;
+      line-height: 1.6;
+    }
     &::before {
       position: absolute;
-      line-height: 30px;
-      text-align: center;
-      top: 25%;
-      left: 1rem;
+      top: 50%;
+      transform: translateY(-40%);
       content: "❝";
-      color: #999;
       font-size: 6rem;
+      color: #999;
+      margin-left: -50px;
     }
   }
   table {
@@ -97,7 +101,7 @@
   }
   aside {
     position: relative;
-    padding: 18px 30px 18px 60px ;
+    padding: 18px 30px 18px 60px;
     margin-bottom: 20px;
     width: 80%;
     border-radius: 3px;
@@ -162,12 +166,25 @@
         font-size: 1.4rem;
       }
     }
+    blockquote {
+      padding: 10px 12px;
+      width: 80%;
+      border-left: 6px solid #bbb;
+      border-radius: 0;
+      p {
+        font-size: 1.3rem;
+        line-height: 1.5;
+      }
+      &::before {
+        display: none;
+      }
+    }
     table {
       display: block;
       overflow-x: scroll;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
-      margin: 30px auto;
+      margin: 25px auto;
       tr {
         th {
           padding: 5px 8px;
@@ -193,6 +210,7 @@
         margin-left: -40px;
       }
     }
+    
 	}	
 }
 

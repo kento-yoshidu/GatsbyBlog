@@ -5,7 +5,7 @@ updatedate: "2021-08-25"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "静的サイトジェネレータのGatsbyを使用してブログを立ち上げました。その経緯と使ってみた所感を記したいと思います。"
-tags: ["日記", "Gatsby"]
+tags: ["Gatsby"]
 ---
 
 # Gatsbyでブログを作り直しました
