@@ -115,3 +115,14 @@ html {
     font-size: 1.4rem;
   }
 }
+
+.warn {
+  padding: 18px 30px;
+  margin-bottom: 20px;
+  width: 90%;
+  border-radius: 3px;
+  background-color: rgba($warn, 0.2);
+  font-size: 1.6rem;
+  line-height: 1.6;
+  box-shadow: 0 0 1.5px 1.5px rgba($warn, 0.25);
+}
