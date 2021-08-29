@@ -10,7 +10,6 @@ tags: ["AWS", "AWS SAA", "S3"]
 
 ## ストレージクラス
 
-
 |クラス|
 |---|
 |S3 Standard|
@@ -38,6 +37,9 @@ IAは**Infrequent Access**のことで、低頻度なアクセスの意味を持
 
 https://dev.classmethod.jp/articles/3minutes-s3-versioning-lifecycle/
 
+## プロトコル
+
+SFTPを利用してファイルを転送する。
 ## 暗号化方式
 
 サーバー側（S3上）で暗号化する方法と、クライアント側で暗号化してからS3に送る方法がある。
