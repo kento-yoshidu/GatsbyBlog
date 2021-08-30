@@ -11,11 +11,13 @@ import Footer from "../components/footer"
 
 const ArticleList = ({ data, pageContext, location }) => {
 	const postData = data.postData;
+  console.log(location)
 
   return (
     <>
       <Seo
         title="記事一覧"
+        pagepath={location.pathname}
       />
 
       <Header

@@ -11,16 +11,14 @@ import * as TableStyles from "../styles/tableOfContent.module.scss"
 
 const BlogPostTemplate = ({ data, location }) => {
   const post = data.markdownRemark
-  //const siteTitle = data.site.siteMetadata?.title || `Title`
   const { previous, next } = data
   const { tableOfContents } = data.markdownRemark;
-
-  console.log(tableOfContents)
 
   return (
     <>
       <Seo
         title={post.frontmatter.title}
+        pagepath={location.pathname}
       />
 
       <Header

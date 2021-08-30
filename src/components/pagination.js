@@ -60,7 +60,10 @@ const Pagination = ({
 		<div className={Styles.nationLinks}>
 			{Array.from({ length: pageCount }, (_, i) => {
 				return (
-					<div className={Styles.items}>
+					<div
+						className={Styles.items}
+						key={`page_${i}`}
+					>
 						{i + 1 === currentPage
 							? <p className={Styles.text}>{ i + 1 }</p>
 							: <p className={Styles.link}>
