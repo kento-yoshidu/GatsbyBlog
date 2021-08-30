@@ -8,13 +8,16 @@ import PostList from "../components/postList"
 import Pagination from "../components/pagination"
 import Footer from "../components/footer"
 
-const Tag = ({ data, pageContext }) => {
+const Tag = ({ data, location, pageContext }) => {
 	const postData = data.allMarkdownRemark
+
+  console.log(location.pathname)
 
 	return (
 		<>
       <Seo
         title={`${pageContext.tag}タグの記事`}
+        pagepath={location.pathname}
       />
 
 			<Header

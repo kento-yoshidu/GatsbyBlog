@@ -144,7 +144,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
           totalPageCount: pageCount,
           skip: 6 * i,
           limit: 6,
-          // 現在のページ番号
           currentPage: i + 1,
           isFirst: i + 1 === 1,
           isLast: i + 1 === pageCount,
