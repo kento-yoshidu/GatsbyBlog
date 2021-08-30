@@ -1,11 +1,14 @@
 module.exports = {
   siteMetadata: {
     title: `鳥に生まれることができなかった人へ`,
+    description: `ITと趣味`,
+    lang: `ja`,
+    siteUrl: `https://blog.toriwatari.work/page/1/`,
+    locale: `ja_JP`,
     author: {
       name: `Kento Yoshizu`,
     },
     //description: `A starter blog demonstrating what Gatsby can do.`,
-    siteUrl: `https://blog.toriwatari.work/page/1/`,
     social: {
       //twitter: `kylemathews`,
     },

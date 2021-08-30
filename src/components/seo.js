@@ -3,68 +3,49 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const Seo = ({ description, lang, meta, title }) => {
+const Seo = (props) => {
   const { site } = useStaticQuery(
     graphql`
       query {
         site {
           siteMetadata {
             title
+            lang
             description
-            social {
-              twitter
-            }
+            siteUrl
+            locale
           }
         }
       }
     `
   )
 
-  const metaDescription = description || site.siteMetadata.description
-  const defaultTitle = site.siteMetadata?.title
+  const title = props.title
+    ? `${props.title} | ${site.siteMetadata.title}`
+    : site.siteMetadata.title
+
+  const description = props.description || site.siteMetadata.description
+
+  const url = props.pagepath
+      ? `${site.siteMetadata.siteUrl}${props.pagepath}`
+      : site.siteMetadata.siteUrl
 
   return (
-    <Helmet
-      htmlAttributes={{
-        lang,
-      }}
-      title={title}
-      titleTemplate={defaultTitle ? `%s | ${defaultTitle}` : null}
-      meta={[
-        {
-          name: `description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:title`,
-          content: title,
-        },
-        {
-          property: `og:description`,
-          content: metaDescription,
-        },
-        {
-          property: `og:type`,
-          content: `website`,
-        },
-        {
-          name: `twitter:card`,
-          content: `summary`,
-        },
-        {
-          name: `twitter:creator`,
-          content: site.siteMetadata?.social?.twitter || ``,
-        },
-        {
-          name: `twitter:title`,
-          content: title,
-        },
-        {
-          name: `twitter:description`,
-          content: metaDescription,
-        },
-      ].concat(meta)}
-    />
+    <Helmet>
+      <html lang={site.siteMetadata.lang} />
+      <title>{title}</title>
+      <meta name="description" content={description} />
+
+      <link rel="canonical" href={url} />
+
+      <meta property="og:site_name" content={site.siteMetadata.title} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={url} />
+      <meta property="og:type" content="website" />
+      <meta property="og:locale" content={site.siteMetadata.locale} />
+
+    </Helmet>
   )
 }
 
