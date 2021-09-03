@@ -1,7 +1,7 @@
 ---
 title: "JamstackなWebサイトを構築してみた①"
 postdate: "2021-08-06"
-updatedate: "2021-08-06"
+updatedate: "2021-09-03"
 seriesName: "JamstackなWebサイトを構築してみた"
 seriesSlug: "Jamstack"
 description: "いわゆるJamstackなサイトを作成してみて、Jamstackについての諸々が何となく分かってきたので知見を記載します。"
@@ -18,22 +18,25 @@ tags: ["Jamstack", "HeadlessCMS", "静的サイトジェネレータ"]
 
 「Jamstackって何？」という具体的な説明は後回しにするとして、私がこれまでに作成したJamstackなサイトについて列挙します。基本的にメインとなるページ＋ブログ記事ページという構成になっています。
 
-ブログ記事をマークダウンやvueファイルで管理しているものもありますので、厳密にはJamstackではないものも含まれていますが大目に見てください。
-
 <aside>
+
 上から3番目以降はサンプル（お試し）で作成しており、内容やブログ記事を定期的に更新とかしているわけではありません。
+
 </aside>
 
 <aside>
+
 どんなテーマのサイトを作るか10個考える方が辛い。
+
 </aside>
 
-|サイト名|SSG|HeadlessCMS|ホスティング|
+|サイト名|SSG|コンテンツ管理|ホスティング|
 |-------|---|-----------|-------|
-|鳥に生まれることができなかった人へ<br>（このサイト）|Gatsby|(マークダウン)|AWS Amplify|
-|[CSS Animation & Tips](https://cssanimation.toriwatari.work/)|Nuxt.js|(vueファイル)|AWS Amplify|
+|鳥に生まれることができなかった人へ<br>（このサイト）|Gatsby|マークダウン|AWS Amplify|
+|[CSS Animation & Tips](https://cssanimation.toriwatari.work/)|Nuxt.js|vueファイル|AWS Amplify|
 |[NuxtDentalClinic](https://nuxtdentalclinic.netlify.app/)|Nuxt.js|microCMS|Netlify|
 |[GatsbyCafe](https://gatsbycafesite.netlify.app/)|Gatsby|Contentfull|Netlify|
+|作成中|Gatsby|microCMS|未定|
 |作成中|Next.js|microCMS|未定|
 |作成中|Gridsome|graphCMS|未定|
 
@@ -42,7 +45,7 @@ tags: ["Jamstack", "HeadlessCMS", "静的サイトジェネレータ"]
 Jamstackは概ね以下のような技術で構成されています。
 
  - ✨ SSG（静的サイトジェネレータ）
- - ✨ HeadlessCMS
+ - ✨ HeadlessCMSもしくはテキストファイル
  - ✨ ホスティングサービス(CDN)
 
 Jamstackを触ってみて感じたのは、「それぞれのレイヤーの技術が**疎結合になっている**なぁ」ということです。自分が見識のある技術を、ある程度自由に組み合わせられるという事です。以下、3つの構成要素について、それぞれどんな選択肢があるのかを紹介したいと思います。
@@ -51,7 +54,7 @@ Jamstackを触ってみて感じたのは、「それぞれのレイヤーの技
 
 SSGにはとても多くの種類があります。[こちら](https://jamstack.org/generators/)のサイトでSSGがまとめられています。めちゃくちゃ多いですが、フロントエンドよりの技術のためか**JavaScriptベース**のSSGが多いですね。
 
-これまでに私は**Gatsby**、**Nuxt.js**、**Gridsome**を使用してWebサイトを作成しました。後はVue.jsベースの**VuePress**、Reactベースの**Next.js**、**Docusaurus**も試してみて形にしたいですね。
+これまでに私は**Gatsby**、**Next.js**、**Nuxt.js**、**Gridsome**を使用してWebサイトを作成しました。後はVue.jsベースの**VuePress**、Reactベースの**Docusaurus**も試してみて形にしたいですね。
 
 今のところ、お気に入りはGatsbyです。このブログもGatsby製です。次点でGridsomeです。両者ともGraphQLでデータを取得できるのでいい感じです。
 
@@ -65,7 +68,7 @@ HeadlessCMSを使いこなすというのは私にとって中々難しく、利
 
 [microCMSブログ（チュートリアル）](https://blog.microcms.io/category/tutorial/page/1)
 
-HeadlessCMSとCMSの違い、それぞれのメリットデメリットは後ほど紹介したいと思います。
+HeadlessCMSとCMSの違い、それぞれのメリットデメリットは次回以降の記事で紹介したいと思います。
 
 ### ホスティングサービスには何がある？
 

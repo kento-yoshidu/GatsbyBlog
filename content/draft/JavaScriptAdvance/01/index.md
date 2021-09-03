@@ -14,22 +14,22 @@ tags: ["JavaScript"]
 
 とりあえずJavaScriptを書いて動かすことを最優先にしていたので、**JavaScriptの言語仕様**についてはほとんど触れていませんでしたが、今回はその言語仕様を理解することが目標です。具体的にこんなアプリを作る、といった目標はありません。ただひたすらにJavaScriptの仕様を学んでいくだけです。人によっては退屈な内容に思えるかもしれません。
 
-学習することはJavaScriptについてのほぼ全てで（そうしたいという目標）、目次は以下の通りです（随時更新します。）。
+学習することはJavaScriptについてのほぼ全てで（そうしたいという目標）、目次は以下の通りです（随時更新します）。
 
 - \#1 JavaScript中級者を目指そう（本ページ）
 
-- #### 前半
+- ### 前半
 
-- [#2 JavaScriptの歴史](http://blog.toriwatari.work/JavaScriptAdvance/02/)
+- [#2 JavaScriptの歴史](/JavaScriptAdvance/02/)
 - [#3 Node.jsのインストール](http://blog.toriwatari.work/JavaScriptAdvance/03/)
 - [#4 JavaScriptの基本的な書き方](http://blog.toriwatari.work/JavaScriptAdvance/04/)
 - [#5 JavaScriptのデータ型(1)](http://blog.toriwatari.work/JavaScriptAdvance/05/)
 - [#6 JavaScriptのデータ型(2)]
-- [#7 演算子①]
-- [#8 プリミティブ値とオブジェクト]
-- [#9 変数]
-- [# 関数]
-- [#x 演算子②]
+- [#7 プリミティブ値とオブジェクト]
+- [#8 演算子①]
+- [#9 演算子②]
+- [#10 変数]
+- [#11 関数]
 - [#12 Numberオブジェクト]
 - [#13 Stringオブジェクト]
 - [#14 if/else文]
@@ -40,13 +40,13 @@ tags: ["JavaScript"]
 - [#x iterator]
 - [#x generator]
 
-- #### 後半
+- ### 後半
 
 - [#x DOM]
 
 ---
 
-- [コラム#1 【ECMAScript】この構文って使える？](http://blog.toriwatari.work/JavaScriptAdvance/column01/)
+- [コラム#1 【ECMAScript】この構文って使える？](http://blog.toriwatari.work/JavaScriptAdvance/column/01/)
 
 - [#コラム this完全攻略]
 - [#コラム オブジェクト処理大全]
@@ -60,7 +60,7 @@ tags: ["JavaScript"]
 JavaScriptを学習することで、様々なフレームワークやランタイムに発展することができます。
 
 - フロントエンドフレームワークであるAngular、React、Vue.js、Svelte
-- サーバサイドランタイムであればNode.jsやDeno
+- サーバーサイドランタイムであればNode.jsやDeno
 - 静的型付け言語のTypeScript
 - モバイルアプリを作るならreact Native
 - デスクトップアプリならelectron
@@ -75,11 +75,17 @@ JavaScriptを学習することで、様々なフレームワークやランタ�
 
 - TypeScript（AltJSの代表とも言えるTypeScriptですが、このコンテンツでは学習しません）
 
-- 各種JavaScriptフレームワーク（React、Vue.jsなどのフレームワークについては学習しません）
+- 各種JavaScriptフレームワーク（React、Vue.js、EXPRESSなどのフレームワークについては学習しません）
 
 ## 参考にした書籍、サイト
 
-このブログを書くにあたり参考にした書籍やWebサイトを紹介しておきます。書籍に関してはお勧め度を⭐️で表しています。
+このシリーズを書くにあたり参考にした書籍やWebサイトを紹介しておきます。書籍に関してはお勧め度を⭐️で表しています。
+
+<aside>
+
+一部、Amazonへのリンクを貼っていますが、アフィリエイトリンクではありません。クリックしても筆者に収益が発生することはありません。
+
+</aside>
 
 ### JavaScript リファレンス - JavaScript | MDN（Webサイト）
 
@@ -103,7 +109,7 @@ JavaScriptともコアともいえる、ECMAScriptの公式リファレンスで
 
 個人的に一番お勧めの本です。JavaScriptの基礎や他の言語の経験があった方がいいと思いますが、本格的な書籍の中ではとっつきやすいと思います。
 
-実はWebサイトも存在しており、どうやら同じ内容のものを無料で読めるようですが、素晴らしい本なので購入したいですね。
+実はWebサイトも存在しており、どうやら最新の内容のものを無料で読めるようですが、素晴らしい本なので購入したいですね。
 
 [JavaScript Primer(Webサイト)](https://jsprimer.net/)
 
@@ -115,9 +121,7 @@ JavaScriptともコアともいえる、ECMAScriptの公式リファレンスで
 
 お勧め度：⭐⭐️⭐️⭐️
 
-いわゆるサイ本の7版（英語）です。英語は苦手ですが、文章は平易なのでそんなに苦労せず読めました。ES2020まで対応しています。
-
-ページ数はなんと687ページにわたり詳しさは言わずもがなですが、価格が少し高いのがネックです（2021年1月時点で、Amazonで6,500円くらい）。
+いわゆるサイ本の7版（英語）です。英語は苦手ですが、文章は平易なのでそんなに苦労せず読めました。ES2020まで対応しています。ページ数はなんと687ページにわたり詳しさは言わずもがなですが、価格が少し高いのがネックです（2021年1月時点で、Amazonで6,500円くらい）。
 
 早く日本語版が出てほしいですね。日本語版がでたら️⭐5です、多分。️
 
