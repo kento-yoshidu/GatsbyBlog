@@ -13,10 +13,10 @@
   .nextButton {
     width: 20%;
     position: absolute;
-    border: 1px solid #aaa;
+    border: 1px solid #bbb;
     border-radius: 2px;
-    text-align: center;;
-    background-color: #ddd;
+    text-align: center;
+    background-image: linear-gradient(to bottom, #eee, #ddd);
     padding: 8px 0;
 
     svg {
