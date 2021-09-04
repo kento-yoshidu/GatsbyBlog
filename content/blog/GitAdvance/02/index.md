@@ -658,7 +658,7 @@ CommitDate: Fri Mar 6 16:27:08 2020 +0900
     create index.html
 ```
 
-長くなりましたので今回は以上です。次回は後編ということで、
+長くなりましたので今回は以上です。
 
 ## 参考 AuthorとCommiterの違い
 
