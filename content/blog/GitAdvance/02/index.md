@@ -1,7 +1,7 @@
 ---
-title: "#1 git logでコミット履歴を見る(前編)"
+title: "#2 git logでコミット履歴を見る(前編)"
 postdate: "2021-09-04"
-updatedate: "2021-09-04"
+updatedate: "2021-09-03"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git log のオプションは多岐にわたります。入門書に載っている基本的で有名なものからちょっとマニアックなものまで、できるだけ例を踏まえて紹介します。"
@@ -665,14 +665,14 @@ CommitDate: Fri Mar 6 16:27:08 2020 +0900
 私は
 
 - Author ： 当該ファイルを最初にコミットした人、オリジナルのコードを書いた人
-- Commiter ： コミットした人
+- Committer ： コミットした人
 
 とイメージしています。
 
 `git commit --amend`でコミットを修正した場合、以下のようになります。
 
 - Author ： 変更されない
-- Commiter ： amendしたユーザに変更される
+- Committer ： amendしたユーザに変更される
 
 `git log`は多くの場面でAuthorしか出力しませんが、`--pretty=fuller`オプションを渡すことでCommitterも確認することができます。
 
