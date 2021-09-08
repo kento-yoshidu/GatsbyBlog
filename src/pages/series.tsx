@@ -1,8 +1,8 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
-import Header from "../components/header"
 import Seo from "../components/seo"
+import Header from "../components/header"
 import Footer from "../components/footer"
 
 const Styles = require('../styles/series.module.scss');

@@ -1,15 +1,13 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 
-import Header from "../components/header"
 import Seo from "../components/seo"
+import Header from "../components/header"
 import Footer from "../components/footer"
 
 import * as Styles from "../styles/404.module.scss"
 
 const NotFoundPage = () => {
-  //const siteTitle = data.site.siteMetadata.title
-
   return (
     <>
       <Seo

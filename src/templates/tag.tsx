@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { graphql } from "gatsby"
 
 import Seo from "../components/seo"
@@ -8,10 +8,14 @@ import PostList from "../components/postList"
 import Pagination from "../components/pagination"
 import Footer from "../components/footer"
 
-const Tag = ({ data, location, pageContext }) => {
-	const postData = data.allMarkdownRemark
+type Props = {
+  data: Object,
+  location: string,
+  pageContext: Object
+}
 
-  console.log(location.pathname)
+const Tag: React.VFC<Props> = ({ data, location, pageContext }) => {
+	const postData = data.allMarkdownRemark
 
 	return (
 		<>
