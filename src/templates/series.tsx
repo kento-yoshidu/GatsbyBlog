@@ -1,4 +1,4 @@
-import React from "react"
+import * as React from "react"
 import { graphql } from "gatsby"
 
 import Seo from "../components/seo"
@@ -8,7 +8,12 @@ import PostList from "../components/postList"
 import Pagination from "../components/pagination"
 import Footer from "../components/footer"
 
-const Series = ({ data, pageContext }) => {
+type Props = {
+  data: Object,
+  pageContext: Object
+}
+
+const Series: React.VFC<Props> = ({ data, pageContext }) => {
 	const postData = data.allMarkdownRemark
 
 	return (
