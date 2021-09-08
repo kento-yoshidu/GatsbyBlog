@@ -1,8 +1,6 @@
 import * as React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-//import * as Styles from "../styles/header.module.scss"
-
 const Styles = require('../styles/header.module.scss')
 
 type Props = {
