@@ -78,7 +78,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
       createPage({
         path: node.fields.slug,
-        component: path.resolve("./src/templates/blog-post.js"),
+        component: path.resolve("./src/templates/blog-post.tsx"),
         context: {
           id: node.id,
           previousPostId,
@@ -137,7 +137,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
         path: 1 === 0 ? `/series/${series.fieldValue}/page/1/` : `/series/${series.fieldValue}/page/${i + 1}/`,
-        component: path.resolve("./src/templates/series.js"),
+        component: path.resolve("./src/templates/series.tsx"),
         context: {
           postCount: postCount,
           pageCount: pageCount,
@@ -169,7 +169,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
         path: 1 === 0 ? `/tag/${tag.fieldValue}/page/1/` : `/tag/${tag.fieldValue}/page/${i + 1}/`,
-        component: path.resolve(`./src/templates/tag.js`),
+        component: path.resolve(`./src/templates/tag.tsx`),
         context: {
           postCount: postCount,
           pageCount: pageCount,
