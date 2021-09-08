@@ -169,7 +169,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
         path: 1 === 0 ? `/tag/${tag.fieldValue}/page/1/` : `/tag/${tag.fieldValue}/page/${i + 1}/`,
-        component: path.resolve(`./src/templates/tag.js`),
+        component: path.resolve(`./src/templates/tag.tsx`),
         context: {
           postCount: postCount,
           pageCount: pageCount,
