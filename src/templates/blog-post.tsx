@@ -6,10 +6,15 @@ import Header from "../components/header"
 import PostInfo from "../components/postInfo"
 import Footer from "../components/footer"
 
-import * as Styles from "../styles/post.module.scss"
-import * as TableStyles from "../styles/tableOfContent.module.scss"
+const Styles = require("../styles/post.module.scss")
+const TableStyles = require("../styles/tableOfContent.module.scss")
 
-const BlogPostTemplate = ({ data, location }) => {
+type Props = {
+  data: Object,
+  location: string
+}
+
+const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
   const post = data.markdownRemark
   const { previous, next } = data
   const { tableOfContents } = data.markdownRemark;
