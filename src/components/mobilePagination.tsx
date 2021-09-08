@@ -1,7 +1,7 @@
-import React /*, { useDebugValue }*/ from "react"
+import * as React /*, { useDebugValue }*/ from "react"
 import { Link } from "gatsby"
 
-import * as Styles from "../styles/mobilePagination.module.scss"
+const Styles = require("../styles/mobilePagination.module.scss")
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -15,7 +15,14 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-const MobilePagination = ({
+type Props = {
+	isFirst: boolean,
+	isLast: boolean,
+	currentPage: number,
+	pageCount: number
+}
+
+const MobilePagination: React.VFC<Props> = ({
 	isFirst,
 	isLast,
 	currentPage,

@@ -54,6 +54,7 @@ const Seo: React.VFC<Props> = (props) => {
   )
 }
 
+/*
 Seo.defaultProps = {
   lang: `en`,
   meta: [],
@@ -66,5 +67,6 @@ Seo.propTypes = {
   meta: PropTypes.arrayOf(PropTypes.object),
   title: PropTypes.string.isRequired,
 }
+*/
 
 export default Seo

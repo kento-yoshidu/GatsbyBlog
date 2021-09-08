@@ -1,8 +1,14 @@
-import React from "react"
+import * as React from "react"
 
-import * as Styles from "../styles/pageinfo.module.scss"
+const Styles = require("../styles/pageinfo.module.scss")
 
-const PageInfo = ({ currentPage, postCount, pageCount }) => {
+type Props = {
+  currentPage: number,
+  postCount: number,
+  pageCount: number
+}
+
+const PageInfo: React.VFC<Props> = ({ currentPage, postCount, pageCount }) => {
 	return (
     <div className={Styles.countInfo}>
       <p className={Styles.page}>全 <span>{postCount}</span> 件の記事</p>
