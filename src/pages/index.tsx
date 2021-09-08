@@ -1,17 +1,45 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
-import Test from "../components/test"
-//import Header from "../components/header"
+import Header from "../components/header"
 
-const BlogIndex = () => {
+type Props = {
+  data: Object,
+  location: Object
+}
+
+const BlogIndex: React.VFC<Props> = ({ data, location }) => {
+  
   return (
     <>
-      <Test
-        message="hogehoge"
+      <Header
+        pageTitle="Top Page"
       />
     </>
   )
 }
 
 export default BlogIndex
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      nodes {
+        excerpt
+        fields {
+          slug
+        }
+        frontmatter {
+          date(formatString: "MMMM DD, YYYY")
+          title
+          description
+        }
+      }
+    }
+  }
+`
