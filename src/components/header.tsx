@@ -1,9 +1,16 @@
 import * as React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import * as Styles from "../styles/header.module.scss"
+//import * as Styles from "../styles/header.module.scss"
 
-const Header = ({ pageTitle, pathname }) => {
+const Styles = require('../styles/header.module.scss')
+
+type Props = {
+	pageTitle: string,
+	pathname?: string
+}
+
+const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
 	const { site } = useStaticQuery (
 		graphql`
 			query {

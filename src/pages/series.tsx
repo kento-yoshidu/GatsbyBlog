@@ -5,7 +5,7 @@ import Header from "../components/header"
 import Seo from "../components/seo"
 import Footer from "../components/footer"
 
-import * as Styles from "../styles/series.module.scss"
+const Styles = require('../styles/series.module.scss');
 
 const Series = ({ data }) => {
 
@@ -18,15 +18,13 @@ const Series = ({ data }) => {
       />
 
       <Header
-        headerTitle="鳥に生まれることができなかった人へ"
         pageTitle="シリーズ一覧"
-        isArticle={ true }
       />
 
 
       <main className={`${Styles.seriesMain} LoadAnimation`}>
         <ul className={Styles.seriesList}>
-          { categories.map(category => {
+          { categories.map((category: any) => {
             return (
               <li className={Styles.listItem}>
                 <Link to={`/series/${category.nodes[0].frontmatter.seriesSlug}/page/1/`}>
