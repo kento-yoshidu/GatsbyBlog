@@ -1,7 +1,7 @@
-import React from "react"
+import * as React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import * as Styles from "../styles/footer.module.scss"
+const Styles = require("../styles/footer.module.scss")
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
@@ -11,7 +11,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-const Footer = () => {
+const Footer: React.VFC = () => {
 
   const { site } = useStaticQuery(
     graphql`

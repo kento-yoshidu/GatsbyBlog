@@ -3,7 +3,12 @@ import PropTypes from "prop-types"
 import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
-const Seo = (props) => {
+type Props = {
+  title: string,
+  pagepath: string
+}
+
+const Seo: React.VFC<Props> = (props) => {
   const { site } = useStaticQuery(
     graphql`
       query {
