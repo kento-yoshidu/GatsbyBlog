@@ -1,7 +1,7 @@
-import React from "react"
+import * as React from "react"
 import { Link } from "gatsby"
 
-import * as Styles from "../styles/pages.module.scss"
+const Styles = require("../styles/pages.module.scss")
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faFolder,
@@ -14,7 +14,11 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-const PostList = ({postData}) => (
+type Props = {
+	postData: object
+}
+
+const PostList: React.VFC<Props> = ({postData}) => (
 	<div className="LoadAnimation">
 		<section className={Styles.postList}>
 			{postData.nodes.map((post) => {
