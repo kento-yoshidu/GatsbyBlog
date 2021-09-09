@@ -1,17 +1,24 @@
-import React from "react"
+import * as React from "react"
 import { graphql, Link } from "gatsby"
 
 import Seo from "../components/seo"
 import Header from "../components/header"
 import Footer from "../components/footer"
 
-import * as Styles from "../styles/404.module.scss"
+const Styles = require("../styles/404.module.scss")
 
-const NotFoundPage = () => {
+type Props = {
+  location: {
+    pathname: string
+  }
+}
+
+const NotFoundPage: React.VFC<Props> = ({ location }) => {
   return (
     <>
       <Seo
-        title="404 : Not Found"
+        title="Page Not Found"
+        pagepath={location.pathname}
       />
 
       <Header

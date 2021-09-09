@@ -1,13 +1,20 @@
-import React from "react"
+import * as React from "react"
 import { Link, graphql } from "gatsby"
 
 import Seo from "../components/seo"
 import Header from "../components/header"
 import Footer from "../components/footer"
 
-import * as Styles from "../styles/series.module.scss"
+const Styles = require("../styles/series.module.scss")
 
-const Tags = ({ data }) => {
+type Props= {
+  data: object,
+  location: {
+    pathname: string
+  }
+}
+
+const Tags: React.VFC<Props> = ({ data, location }) => {
 
 	const tags = data.allMarkdownRemark.group
 
@@ -15,6 +22,7 @@ const Tags = ({ data }) => {
 		<>
       <Seo
         title="タグ一覧"
+        pagepath={location.pathname}
       />
 
 			<Header
