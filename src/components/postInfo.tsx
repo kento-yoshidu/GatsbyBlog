@@ -1,7 +1,7 @@
-import React from "react"
+import * as React from "react"
 import { Link } from "gatsby"
 
-import * as Styles from "../styles/postInfo.module.scss"
+const Styles = require("../styles/postInfo.module.scss")
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faUndo ,faFolder, faTags } from "@fortawesome/free-solid-svg-icons"
@@ -10,7 +10,16 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-const PostInfo = ({
+type Props = {
+	postTitle: string,
+	seriesSlug: string,
+	seriesName: string,
+	postdate: string,
+	updatedate: string,
+	tags?: string
+}
+
+const PostInfo: React.VFC<Props> = ({
 		postTitle,
 		seriesSlug,
 		seriesName,
@@ -19,7 +28,7 @@ const PostInfo = ({
 		tags
 	}) => {
 
-	const tag = tags.map(tag => {
+	const tag = tags?.map(tag => {
 		return (
 			<p key={`tag${tag}`}>
 				<Link

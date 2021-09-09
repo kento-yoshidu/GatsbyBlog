@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import * as Styles from "../styles/pagination.module.scss"
+const Styles = require("../styles/pagination.module.scss")
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,7 +13,16 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-const Pagination = ({
+type Props = {
+	isFirst: number,
+	isLast: number,
+	currentPage: number,
+	pageCount: number,
+	tag?: string,
+	series?: string
+}
+
+const Pagination: React.VFC<Props> = ({
 	isFirst,
 	isLast,
 	currentPage,
