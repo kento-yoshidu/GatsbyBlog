@@ -1,17 +1,26 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
+import Seo from "../components/Seo"
 import Header from "../components/header"
 
 type Props = {
   data: GatsbyTypes.IndexPageQuery,
-  location: Object
+  location: {
+    pathname: string
+  }
 }
 
 const BlogIndex: React.VFC<Props> = ({ data, location }) => {
-  
+  const pagepath = location.pathname  
+
   return (
     <>
+      <Seo
+        title="HOME"
+        pagepath={pagepath}
+      />
+
       <Header
         pageTitle="Top Page"
       />

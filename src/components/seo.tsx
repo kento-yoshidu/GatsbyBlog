@@ -4,8 +4,9 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 type Props = {
-  title?: string,
-  pagepath: string
+  title?: string
+  pagepath?: string
+  description?: string
 }
 
 const Seo: React.VFC<Props> = (props) => {
