@@ -15,7 +15,13 @@ import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
 type Props = {
-	postData: object
+	postData: {
+		allMarkdownRemark: {
+			nodes: {
+				id: string,
+			}
+		}
+	}
 }
 
 const PostList: React.VFC<Props> = ({postData}) => (

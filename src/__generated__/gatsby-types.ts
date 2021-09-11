@@ -3732,37 +3732,37 @@ type BlogPostBySlugQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe
     & { readonly frontmatter: Maybe<Pick<Frontmatter, 'title' | 'date' | 'postdate' | 'updatedate' | 'description' | 'seriesSlug' | 'seriesName' | 'tags'>> }
   )>, readonly previous: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }>, readonly next: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }> };
 
-type cProductGatsbyBlogsrctemplatespagesTsx1607371947QueryVariables = Exact<{
+type PagesQueryVariables = Exact<{
   limit: Scalars['Int'];
   skip: Scalars['Int'];
 }>;
 
 
-type cProductGatsbyBlogsrctemplatespagesTsx1607371947Query = { readonly siteData: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }>, readonly postData: { readonly nodes: ReadonlyArray<(
+type PagesQuery = { readonly siteData: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }>, readonly postData: { readonly nodes: ReadonlyArray<(
       Pick<MarkdownRemark, 'id' | 'excerpt'>
       & { readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'updatedate' | 'seriesName' | 'seriesSlug' | 'title' | 'tags'>> }
     )> } };
 
-type cProductGatsbyBlogsrctemplatesseriesTsx2881239820QueryVariables = Exact<{
+type SeriesQueryVariables = Exact<{
   seriesSlug: Scalars['String'];
   limit: Scalars['Int'];
   skip: Scalars['Int'];
 }>;
 
 
-type cProductGatsbyBlogsrctemplatesseriesTsx2881239820Query = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<(
+type SeriesQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<(
       Pick<MarkdownRemark, 'id'>
       & { readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'updatedate' | 'seriesName' | 'seriesSlug' | 'title' | 'tags'>> }
     )> } };
 
-type cProductGatsbyBlogsrctemplatestagTsx797529596QueryVariables = Exact<{
+type TagQueryVariables = Exact<{
   tag: Scalars['String'];
   limit: Scalars['Int'];
   skip: Scalars['Int'];
 }>;
 
 
-type cProductGatsbyBlogsrctemplatestagTsx797529596Query = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<(
+type TagQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<(
       Pick<MarkdownRemark, 'id'>
       & { readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'updatedate' | 'seriesName' | 'seriesSlug' | 'title' | 'tags'>> }
     )> } };
@@ -3772,25 +3772,20 @@ type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
-type cProductGatsbyBlogsrcpages404Tsx3159585216QueryVariables = Exact<{ [key: string]: never; }>;
+type IndexPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type cProductGatsbyBlogsrcpages404Tsx3159585216Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
-
-type cProductGatsbyBlogsrcpagesindexTsx2239478271QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type cProductGatsbyBlogsrcpagesindexTsx2239478271Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<(
+type IndexPageQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<(
       Pick<MarkdownRemark, 'excerpt'>
       & { readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'date' | 'title' | 'description'>> }
     )> } };
 
-type cProductGatsbyBlogsrcpagesseriesTsx1951588401QueryVariables = Exact<{
+type SeriesPagesQueryVariables = Exact<{
   series: Maybe<Scalars['String']>;
 }>;
 
 
-type cProductGatsbyBlogsrcpagesseriesTsx1951588401Query = { readonly allMarkdownRemark: (
+type SeriesPagesQuery = { readonly allMarkdownRemark: (
     Pick<MarkdownRemarkConnection, 'totalCount'>
     & { readonly group: ReadonlyArray<(
       Pick<MarkdownRemarkGroupConnection, 'fieldValue' | 'totalCount'>
@@ -3798,20 +3793,15 @@ type cProductGatsbyBlogsrcpagesseriesTsx1951588401Query = { readonly allMarkdown
     )> }
   ) };
 
-type cProductGatsbyBlogsrcpagestagsTsx229003789QueryVariables = Exact<{
+type TagsPageQueryVariables = Exact<{
   tag: Maybe<Scalars['String']>;
 }>;
 
 
-type cProductGatsbyBlogsrcpagestagsTsx229003789Query = { readonly allMarkdownRemark: { readonly group: ReadonlyArray<(
+type TagsPageQuery = { readonly allMarkdownRemark: { readonly group: ReadonlyArray<(
       Pick<MarkdownRemarkGroupConnection, 'fieldValue' | 'totalCount'>
       & { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<Pick<Frontmatter, 'tags'>> }> }
     )> } };
-
-type cProductGatsbyBlogsrcpagesusingTypescriptTsx2907560070QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type cProductGatsbyBlogsrcpagesusingTypescriptTsx2907560070Query = { readonly site: Maybe<Pick<Site, 'buildTime'>> };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -4,7 +4,7 @@ import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 type Props = {
-  title: string,
+  title?: string,
   pagepath: string
 }
 

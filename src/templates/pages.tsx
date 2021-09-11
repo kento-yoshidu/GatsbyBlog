@@ -9,9 +9,25 @@ import Pagination from "../components/pagination"
 import MobilePagination from "../components/mobilePagination"
 import Footer from "../components/footer"
 
-const ArticleList = ({ data, pageContext, location }) => {
+type Props = {
+  data: GatsbyTypes.PagesQuery,
+  pageContext: {
+    postCount: number,
+    pageCount: number,
+    totalPageCount: number,
+    skip: number,
+    limit: number,
+    currentPage: number,
+    isFirst: boolean,
+    isLast: boolean
+  },
+  location: {
+    pathname: string
+  }
+}
+
+const ArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
 	const postData = data.postData;
-  console.log(location)
 
   return (
     <>
@@ -58,7 +74,7 @@ const ArticleList = ({ data, pageContext, location }) => {
 export default ArticleList
 
 export const pageQuery = graphql`
-  query(
+  query Pages(
     $limit: Int!,
     $skip: Int!
     ) {

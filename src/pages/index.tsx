@@ -4,7 +4,7 @@ import { graphql } from "gatsby"
 import Header from "../components/header"
 
 type Props = {
-  data: Object,
+  data: GatsbyTypes.IndexPageQuery,
   location: Object
 }
 
@@ -22,7 +22,7 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
 export default BlogIndex
 
 export const pageQuery = graphql`
-  query {
+  query IndexPage {
     site {
       siteMetadata {
         title

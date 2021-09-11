@@ -10,29 +10,32 @@ const Styles = require("../styles/post.module.scss")
 const TableStyles = require("../styles/tableOfContent.module.scss")
 
 type Props = {
-  data: Object,
-  location: string
+  data: GatsbyTypes.BlogPostBySlugQuery
+  location: {
+    pathname: string
+  }
 }
 
 const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
   const post = data.markdownRemark
   const { previous, next } = data
-  const { tableOfContents } = data.markdownRemark;
+  const tableOfContents = data.markdownRemark?.tableOfContents
 
   return (
     <>
       <Seo
-        title={post.frontmatter.title}
+        title={post?.frontmatter?.title}
         pagepath={location.pathname}
       />
 
       <Header
+        pageTitle={post?.frontmatter?.title}
         pathname={location.pathname}
       />
 
       <PostInfo
-        postTitle={post.frontmatter.title}
-        seriesSlug={data.markdownRemark.frontmatter.seriesSlug}
+        postTitle={post?.frontmatter?.title}
+        seriesSlug={data.markdownRemark?.frontmatter?.seriesSlug}
         seriesName={data.markdownRemark.frontmatter.seriesName}
         postdate={data.markdownRemark.frontmatter.postdate}
         updatedate={post.frontmatter.updatedate}
