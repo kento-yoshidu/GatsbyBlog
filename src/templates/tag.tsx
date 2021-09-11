@@ -9,9 +9,20 @@ import Pagination from "../components/pagination"
 import Footer from "../components/footer"
 
 type Props = {
-  data: Object,
-  location: string,
-  pageContext: Object
+  data: GatsbyTypes.TagQuery
+  pageContext: {
+    postCount: number,
+    pageCount: number,
+    skip: number,
+    limit: number,
+    currentPage: number,
+    isFirst: boolean,
+    isLast: boolean,
+    tag: string,
+  }
+  location: {
+    pathname: string
+  }
 }
 
 const Tag: React.VFC<Props> = ({ data, location, pageContext }) => {
@@ -39,6 +50,8 @@ const Tag: React.VFC<Props> = ({ data, location, pageContext }) => {
 			/>
 
       <Pagination
+        currentPage={pageContext.currentPage}
+        pageCount={pageContext.pageCount}
         isFirst={pageContext.isFirst}
         isLast={pageContext.isLast}
         tag={pageContext.tag}
@@ -52,7 +65,7 @@ const Tag: React.VFC<Props> = ({ data, location, pageContext }) => {
 export default Tag
 
 export const pageQuery = graphql`
-  query(
+  query Tag(
     $tag: String!,
     $limit: Int!,
     $skip: Int!

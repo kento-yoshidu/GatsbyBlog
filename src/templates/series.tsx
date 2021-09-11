@@ -9,17 +9,32 @@ import Pagination from "../components/pagination"
 import Footer from "../components/footer"
 
 type Props = {
-  data: Object,
-  pageContext: Object
+  data: GatsbyTypes.SeriesQuery,
+  pageContext: {
+    postCount: number,
+    pageCount: number,
+    totalPageCount: number,
+    skip: number,
+    limit: number,
+    currentPage: number,
+    isFirst: boolean,
+    isLast: boolean,
+    seriesName: string,
+    seriesSlug: string
+  },
+  location: {
+    pathname: string
+  }
 }
 
-const Series: React.VFC<Props> = ({ data, pageContext }) => {
+const Series: React.VFC<Props> = ({ data, pageContext, location }) => {
 	const postData = data.allMarkdownRemark
 
 	return (
 		<>
       <Seo
         title={`${pageContext.seriesName}シリーズの記事`}
+        pagepath={location.pathname}
       />
 
 			<Header
@@ -36,8 +51,9 @@ const Series: React.VFC<Props> = ({ data, pageContext }) => {
         postData={postData}
       />
 
-
       <Pagination
+        currentPage={pageContext.currentPage}
+        pageCount={pageContext.pageCount}
         isFirst={pageContext.isFirst}
         isLast={pageContext.isLast}
       />
@@ -50,7 +66,7 @@ const Series: React.VFC<Props> = ({ data, pageContext }) => {
 export default Series
 
 export const pageQuery = graphql`
-  query(
+  query Series(
     $seriesSlug: String!,
     $limit: Int!,
     $skip: Int!

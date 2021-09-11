@@ -38,13 +38,3 @@ const NotFoundPage: React.VFC<Props> = ({ location }) => {
 }
 
 export default NotFoundPage
-
-export const pageQuery = graphql`
-  query {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-  }
-`

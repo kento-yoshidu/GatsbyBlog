@@ -8,7 +8,7 @@ import Footer from "../components/footer"
 const Styles = require("../styles/series.module.scss")
 
 type Props= {
-  data: object,
+  data: GatsbyTypes.TagsPageQuery
   location: {
     pathname: string
   }
@@ -51,7 +51,7 @@ const Tags: React.VFC<Props> = ({ data, location }) => {
 export default Tags
 
 export const pageQuery = graphql`
-  query ($tag: String) {
+  query TagsPage($tag: String) {
     allMarkdownRemark(filter: {frontmatter: {tags: {eq: $tag}}}) {
       group(field: frontmatter___tags, limit: 1) {
         nodes {

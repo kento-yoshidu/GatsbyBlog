@@ -7,7 +7,11 @@ import Footer from "../components/footer"
 
 const Styles = require('../styles/series.module.scss');
 
-const Series = ({ data }) => {
+type Props = {
+  data: GatsbyTypes.SeriesPagesQuery
+}
+
+const Series: React.VFC<Props> = ({ data }) => {
 
   const categories = data.allMarkdownRemark.group
 
@@ -44,7 +48,7 @@ const Series = ({ data }) => {
 export default Series
 
 export const pageQuery = graphql`
-  query ($series: String) {
+  query SeriesPages($series: String) {
     allMarkdownRemark(
       filter: {
         frontmatter: {

@@ -10,11 +10,12 @@ type Props = {
 }
 
 const AboutPage: React.VFC<Props> = ({ location }) => {
+	const pagepath=location.pathname
 	return (
 		<>
 			<Seo
 				title="アバウトページ"
-				pagepath={location.pathname}
+				pagepath={pagepath}
 			/>
 
 			<Header
