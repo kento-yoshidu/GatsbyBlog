@@ -1,7 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
-import Seo from "../components/Seo"
+import Seo from "../components/seo"
 import Header from "../components/header"
 
 type Props = {
