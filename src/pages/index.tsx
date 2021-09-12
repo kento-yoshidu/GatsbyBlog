@@ -17,7 +17,6 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
   return (
     <>
       <Seo
-        title="HOME"
         pagepath={pagepath}
       />
 
