@@ -14,11 +14,13 @@ type Props = {
 }
 
 const NotFoundPage: React.VFC<Props> = ({ location }) => {
+  const pagepath=location.pathname
+
   return (
     <>
       <Seo
         title="Page Not Found"
-        pagepath={location.pathname}
+        pagepath={pagepath}
       />
 
       <Header

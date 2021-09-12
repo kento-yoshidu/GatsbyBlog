@@ -11,11 +11,12 @@ import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
 type Props = {
-	postTitle: string,
-	seriesSlug: string,
-	seriesName: string,
-	postdate: string,
-	updatedate: string,
+	postTitle: string
+	seriesSlug: string
+	seriesName: string
+	postdate: string
+	updatedate: string
+	series?: string
 	tags?: string
 }
 

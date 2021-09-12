@@ -1,7 +1,7 @@
 ---
 title: "#2 HTMLでページを作ってみる"
 postdate: "2021-08-06"
-updatedate: "2021-08-20"
+updatedate: "2021-09-12"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: 
@@ -50,7 +50,7 @@ CSSは**Cascading Style Sheets**のことで、Webサイトの**デザイン**�
 
 それではhtmlファイルを作成し、好きな文字をWebページに表示させてみましょう。
 
-まずは作業フォルダーを作成します。任意の場所に「workspace」という名前のフォルダーを作成、その中に「HTML&CSS」フォルダーを作成します。このフォルダの中で作業を行うことにしましょう。
+まずは作業フォルダーを作成します。任意の場所に「workspace」という名前のフォルダーを作成、その中に「HTML&CSS」フォルダーを作成します。このフォルダーの中で作業を行うことにしましょう。
 
 HTML&CSSフォルダーの中に`index.html`ファイルを作成します。ファイル名の`index`は変更可能ですが、慣習的に`index`が用いられていますのでそう命名することをお勧めします。拡張子である`html`は変更不可です。
 
