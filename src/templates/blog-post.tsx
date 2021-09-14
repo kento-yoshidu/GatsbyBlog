@@ -35,15 +35,15 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
       <PostInfo
         postTitle={post?.frontmatter?.title}
         seriesSlug={data.markdownRemark?.frontmatter?.seriesSlug}
-        seriesName={data.markdownRemark.frontmatter.seriesName}
-        postdate={data.markdownRemark.frontmatter.postdate}
-        updatedate={post.frontmatter.updatedate}
-        tags={post.frontmatter.tags}
+        seriesName={data.markdownRemark?.frontmatter?.seriesName}
+        postdate={data.markdownRemark?.frontmatter?.postdate}
+        updatedate={post?.frontmatter?.updatedate}
+        tags={post?.frontmatter?.tags}
       />
 
       <div className="LoadAnimation">
         <main
-          dangerouslySetInnerHTML={{ __html: post.html }}
+          dangerouslySetInnerHTML={{ __html: post?.html }}
           itemProp="articleBody"
           className={`${Styles.blogPost} main`}
         />
@@ -57,24 +57,24 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
       <nav className={Styles.beforeAndAfter}>
         {previous && (
           <Link
-            to={previous.fields.slug} rel="prev"
+            to={previous?.fields?.slug} rel="prev"
             className={Styles.before}
           >
             <h2>← 前の記事</h2>
             <p className={Styles.title}>
-              {previous.frontmatter.title}
+              {previous?.frontmatter?.title}
             </p>
           </Link>
         )}
 
         {next && (
           <Link
-            to={next.fields.slug}
+            to={next?.fields?.slug}
             className={Styles.after}
           >
             <h2>後の記事 →</h2>
             <p className={Styles.title}>
-              {next.frontmatter.title}
+              {next?.frontmatter?.title}
             </p>
           </Link>
         )}

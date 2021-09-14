@@ -36,7 +36,7 @@ tags: ["Jamstack", "HeadlessCMS", "静的サイトジェネレータ"]
 |[CSS Animation & Tips](https://cssanimation.toriwatari.work/)|Nuxt.js|vueファイル|AWS Amplify|
 |[NuxtDentalClinic](https://nuxtdentalclinic.netlify.app/)|Nuxt.js|microCMS|Netlify|
 |[GatsbyCafe](https://gatsbycafesite.netlify.app/)|Gatsby|Contentfull|Netlify|
-|作成中|Gatsby|microCMS|未定|
+|作成中|Gatsby|microCMS|Vercel|
 |作成中|Next.js|microCMS|未定|
 |作成中|Gridsome|graphCMS|未定|
 

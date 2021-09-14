@@ -3,7 +3,7 @@ title: "#3 git logでコミット履歴を見る(後編)"
 postdate: "2021-09-12"
 updatedate: "2021-09-12"
 seriesName: "Git中級者を目指す"
-seriesSlug: GitAdvance
+seriesSlug: "GitAdvance"
 description: "git logのコマンドを紹介した前回、`git log --oneline --all --graph`の組み合わせが便利ですよーとお話ししました。"
 tags: ["git"]
 ---

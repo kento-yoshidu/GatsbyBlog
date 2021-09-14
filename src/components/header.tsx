@@ -31,8 +31,8 @@ const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
 
 			{pageTitle &&
 				<h2 className={Styles.pageTitle}>
-				{ pageTitle }
-			</h2>
+					{ pageTitle }
+				</h2>
 			}
 		</header>
 	)
