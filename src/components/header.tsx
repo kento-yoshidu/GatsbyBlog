@@ -20,28 +20,19 @@ const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
 			}`
 	)
 
-	let siteTitle
-
-	if (pathname === '/page/1/') {
-		siteTitle = (
-			<h1 className={Styles.headerTitle}>{site.siteMetadata.title}</h1>
-		)
-	} else {
-		siteTitle = (
-      <h1 className={Styles.headerTitle}>
-        <Link to="/page/1/">{site.siteMetadata.title}</Link>
-      </h1>
-		)
-	}
-
 	return (
 		<header className={Styles.header}>
-			{ siteTitle }
+			<h1 className={Styles.headerTitle}>
+				{pathname === `/page/1/`
+					? <>{site.siteMetadata.title}</>
+					: <Link to="/page/1/">{site.siteMetadata.title}</Link>
+				}
+			</h1>
 
 			{pageTitle &&
 				<h2 className={Styles.pageTitle}>
-					{ pageTitle }
-				</h2>
+				{ pageTitle }
+			</h2>
 			}
 		</header>
 	)
