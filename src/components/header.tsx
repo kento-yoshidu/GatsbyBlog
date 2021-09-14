@@ -4,7 +4,7 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 const Styles = require('../styles/header.module.scss')
 
 type Props = {
-	pageTitle: string,
+	pageTitle?: string,
 	pathname?: string
 }
 
@@ -38,9 +38,11 @@ const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
 		<header className={Styles.header}>
 			{ siteTitle }
 
-			<h2 className={Styles.pageTitle}>
-				{ pageTitle }
-			</h2>
+			{pageTitle &&
+				<h2 className={Styles.pageTitle}>
+					{ pageTitle }
+				</h2>
+			}
 		</header>
 	)
 }
