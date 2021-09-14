@@ -29,7 +29,6 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
       />
 
       <Header
-        pageTitle={post?.frontmatter?.title}
         pathname={location.pathname}
       />
 
