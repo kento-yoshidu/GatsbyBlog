@@ -5,7 +5,7 @@ updatedate: "2021-09-17"
 seriesName: "JamstackなWebサイトを構築してみた"
 seriesSlug: "Jamstack"
 description: "いわゆるJamstackなサイトを作成してみて、Jamstackについての諸々が何となく分かってきたので知見を記載します。"
-tags: ["Jamstack", "HeadlessCMS", "静的サイトジェネレータ"]
+tags: ["Jamstack", "HeadlessCMS", "SSG"]
 ---
 
 # JamstackなWebサイトを沢山作ってみる
