@@ -1,7 +1,7 @@
 ---
 title: "JamstackなWebサイトを構築してみた①"
 postdate: "2021-08-06"
-updatedate: "2021-09-03"
+updatedate: "2021-09-17"
 seriesName: "JamstackなWebサイトを構築してみた"
 seriesSlug: "Jamstack"
 description: "いわゆるJamstackなサイトを作成してみて、Jamstackについての諸々が何となく分かってきたので知見を記載します。"
@@ -39,6 +39,21 @@ tags: ["Jamstack", "HeadlessCMS", "静的サイトジェネレータ"]
 |作成中|Gatsby|microCMS|Vercel|
 |作成中|Next.js|microCMS|未定|
 |作成中|Gridsome|graphCMS|未定|
+|作成中|Eleventy|microCMS|未定|
+
+## その他の技術的なところ
+
+基本的にはTypeScriptでの型付けが前提になっています（Nuxt.jsだと上手く使いこなせていない感がありますが）。
+
+Reactベースであれば関数コンポーネント、Vue.jsベースであればCompositionAPIでコンポーネントを書いています。
+
+また、以下の要素もサイトによっては取り入れています。
+
+- Tailwind CSS
+- Storybook
+- Headless UI
+
+各種技術の組み合わせでとても苦労することが多く（例えば、Gatsby＋TypeScript＋SCSS＋CSS ModulesでStrorybookが上手く動かなかったり）、どういう手順で環境を作っていけばいいのかを検証する実験台にもしています。
 
 ## Jamstackの構成要素
 
@@ -72,7 +87,7 @@ HeadlessCMSとCMSの違い、それぞれのメリットデメリットは次回
 
 ### ホスティングサービスには何がある？
 
-AWSの中では、私はAWS Amplifyを主に利用しています。CloudFront + S3という構成もいいですね。
+私はAWS Amplifyをホスティングによく利用しています。AWSでいうならCloudFront + S3という構成もいいですね。
 
 ホスティングサービスで言うとNetlifyが一番有名なんじゃないかと思います。無料枠でも以下のようなサービスを受けられます（2021年6月現在）。
 
