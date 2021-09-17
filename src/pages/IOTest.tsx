@@ -9,6 +9,7 @@ const options = {
 
 const Test: React.VFC = () => {
 
+	/*
 	// 今回の交差を監視する要素
 	const boxes = document.querySelectorAll(".box");
 
@@ -26,7 +27,7 @@ const Test: React.VFC = () => {
 
 	/**
 	 * 交差したときに呼び出す関数
-	 */
+	 *
 	function doWhenIntersect(entries) {
 		// 交差検知をしたもののなかで、isIntersectingがtrueのDOMを色を変える関数に渡す
 		entries.forEach(entry => {
@@ -40,7 +41,7 @@ const Test: React.VFC = () => {
 	/**
 	 * 目次の色を変える関数
 	 * @param element
-	 */
+	 *
 	function activateIndex(element) {
 		// すでにアクティブになっている目次を選択
 		const currentActiveIndex = document.querySelector("#indexList .active");
@@ -52,6 +53,7 @@ const Test: React.VFC = () => {
 		const newActiveIndex = document.querySelector(`a[href='#${element.id}']`);
 		newActiveIndex.classList.add("active");
 	}
+	*/
 
 	return (
 		<>
