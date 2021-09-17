@@ -8,12 +8,19 @@
 		position: -webkit-sticky;
     position: sticky;
     top: 9vh;
+		padding-left: 15px;
 		li {
       font-size: 1.7rem;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
       p {
         margin-bottom: 14px;
       }
+			a {
+				color: #444;
+				&:hover {
+					color: $main-color;
+				}
+			}
 		}
 	}
 }
