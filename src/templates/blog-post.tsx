@@ -21,6 +21,8 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
   const { previous, next } = data
   const tableOfContents = data.markdownRemark?.tableOfContents
 
+
+
   return (
     <>
       <Seo
