@@ -14,45 +14,47 @@ type Props= {
   }
 }
 
-const Tags: React.VFC<Props> = ({ data, location }) => {
+const Tags: React.VFC<Props> = ({ data, location }) => (
+  <>
+    <Seo
+      title="タグ一覧"
+      pagepath={location.pathname}
+    />
 
-	const tags = data.allMarkdownRemark.group
+    <Header
+      pageTitle="タグ一覧"
+    />
 
-	return (
-		<>
-      <Seo
-        title="タグ一覧"
-        pagepath={location.pathname}
-      />
+    <main className={`${Styles.tagsMain} LoadAnimation`}>
+      <ul className={Styles.tagList}>
+        {data.allMarkdownRemark.group.map(tag => (
+          <li
+            className={Styles.listItem}
+            key={tag.fieldValue}
+          >
+            <Link to={`/tag/${tag.fieldValue}/page/1/`}>
+              { tag.fieldValue }({ tag.totalCount })
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </main>
 
-			<Header
-				pageTitle="タグ一覧"
-			/>
-
-			<main className={`${Styles.tagsMain} LoadAnimation`}>
-				<ul className={Styles.tagList}>
-          {tags.map(tag => {
-            return (
-              <li className={Styles.listItem}>
-                <Link to={`/tag/${tag.fieldValue}/page/1/`}>
-                  { tag.fieldValue }({ tag.totalCount })
-                </Link>
-              </li>
-            )
-          })}
-        </ul>
-			</main>
-
-			<Footer />
-		</>
-	)
-}
+    <Footer />
+  </>
+)
 
 export default Tags
 
 export const pageQuery = graphql`
   query TagsPage($tag: String) {
-    allMarkdownRemark(filter: {frontmatter: {tags: {eq: $tag}}}) {
+    allMarkdownRemark(
+      filter: {
+        frontmatter: {
+          tags: {eq: $tag}
+        }
+      }
+    ) {
       group(field: frontmatter___tags, limit: 1) {
         nodes {
           frontmatter {
