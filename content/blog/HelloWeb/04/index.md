@@ -1,7 +1,7 @@
 ---
 title: "#4 HTMLの基本① (基本的な書き方)"
 postdate: "2021-08-20"
-updatedate: "2021-09-24
+updatedate: "2021-09-24"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: 
