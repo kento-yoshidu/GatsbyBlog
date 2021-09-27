@@ -34,7 +34,40 @@ const MobilePagination: React.VFC<Props> = ({
 			prevButton,
 			nextButton
 
-	if(!isFirst) {
+	if (!isFirst && !isLast) {
+		topButton =
+			<Link
+				to={`/page/1/`}
+				className={Styles.topButton}
+			>
+				<FontAwesomeIcon icon={faAngleDoubleLeft} />
+			</Link>
+
+		prevButton =
+		<Link
+			className={Styles.prevButton}
+			to={`/page/${currentPage - 1}/`}
+			rel="prev"
+		>
+			<FontAwesomeIcon icon={faAngleLeft} />
+		</Link>
+		
+		lastButton =
+			<Link
+				to={`/page/${pageCount}/`}
+				className={Styles.lastButton}
+			>
+				<FontAwesomeIcon icon={faAngleDoubleRight} />
+			</Link>
+
+		nextButton =
+      <Link
+        to={`/page/${currentPage + 1}/`}
+        className={Styles.nextButton}
+      >
+        <FontAwesomeIcon icon={faAngleRight} />
+      </Link>
+	} else if(!isFirst) {
 		topButton =
 			<Link
 				to={`/page/1/`}
