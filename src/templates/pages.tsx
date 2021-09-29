@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 
+import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
@@ -30,7 +31,7 @@ const ArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
 	const postData = data.postData;
 
   return (
-    <>
+    <Layout>
       <Seo
         title="記事一覧"
         pagepath={location.pathname}
@@ -67,7 +68,7 @@ const ArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
       />
 
       <Footer />
-    </>
+    </Layout>
   )
 }
 
