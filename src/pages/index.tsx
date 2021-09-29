@@ -1,6 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
+import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 
@@ -15,7 +16,7 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
   const pagepath = location.pathname  
 
   return (
-    <>
+    <Layout>
       <Seo
         pagepath={pagepath}
       />
@@ -23,7 +24,7 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
       <Header
         pageTitle="Top Page"
       />
-    </>
+    </Layout>
   )
 }
 

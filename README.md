@@ -10,19 +10,14 @@
 
 ## 🌐 WebSite
 
- https://blog.toriwatari.work/page/1/
+ [Webサイト](https://blog.toriwatari.work/page/1/)
 
+## ⚙️ 構成要素
 
-## 構成要素
-
-- Gatsby v3
-
-- Markdown file
-
-- TypeScript
-
-- SCSS
-
-- CSS Modules
-
-- AWS Amplify
+- 🐬 Gatsby v3
+- 🐋 Markdown file
+- 🐠 TypeScript
+- 🦐 SCSS
+- 🐟 CSS Modules
+- 🐡 Headless UI
+- 🦞 AWS Amplify
