@@ -1,9 +1,9 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 
+import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
-import Footer from "../components/footer"
 
 const Styles = require('../styles/series.module.scss');
 
@@ -15,7 +15,7 @@ type Props = {
 }
 
 const Series: React.VFC<Props> = ({ data, location }) => (
-  <>
+  <Layout>
     <Seo
       title="シリーズ一覧"
       pagepath={location.pathname}
@@ -42,9 +42,7 @@ const Series: React.VFC<Props> = ({ data, location }) => (
         )}
       </ul>
     </main>
-
-    <Footer />
-  </>
+  </Layout>
 )
 
 export default Series

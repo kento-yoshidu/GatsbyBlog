@@ -1,12 +1,12 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
+import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import Pagination from "../components/pagination"
-import Footer from "../components/footer"
 
 type Props = {
   data: GatsbyTypes.TagQuery
@@ -29,7 +29,7 @@ const Tag: React.VFC<Props> = ({ data, location, pageContext }) => {
 	const postData = data.allMarkdownRemark
 
 	return (
-		<>
+		<Layout>
       <Seo
         title={`${pageContext.tag}タグの記事`}
         pagepath={location.pathname}
@@ -56,9 +56,7 @@ const Tag: React.VFC<Props> = ({ data, location, pageContext }) => {
         isLast={pageContext.isLast}
         tag={pageContext.tag}
       />
-
-			<Footer />
-		</>
+		</Layout>
 	)
 }
 

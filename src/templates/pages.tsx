@@ -66,8 +66,6 @@ const ArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
         currentPage={pageContext.currentPage}
         pageCount={pageContext.pageCount}
       />
-
-      <Footer />
     </Layout>
   )
 }

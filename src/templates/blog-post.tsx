@@ -1,10 +1,10 @@
 import * as React from "react"
 import { Link, graphql } from "gatsby"
 
+import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 import PostInfo from "../components/postInfo"
-import Footer from "../components/footer"
 
 const Styles = require("../styles/post.module.scss")
 const TableStyles = require("../styles/tableOfContent.module.scss")
@@ -21,10 +21,8 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
   const { previous, next } = data
   const tableOfContents = data.markdownRemark?.tableOfContents
 
-
-
   return (
-    <>
+    <Layout>
       <Seo
         title={post?.frontmatter?.title}
         pagepath={location.pathname}
@@ -81,9 +79,7 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
           </Link>
         )}
       </nav>
-
-      <Footer />
-    </>
+    </Layout>
   )
 }
 

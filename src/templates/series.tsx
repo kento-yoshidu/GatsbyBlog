@@ -1,6 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
 
+import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
@@ -31,7 +32,7 @@ const Series: React.VFC<Props> = ({ data, pageContext, location }) => {
 	const postData = data.allMarkdownRemark
 
 	return (
-		<>
+		<Layout>
       <Seo
         title={`${pageContext.seriesName}シリーズの記事`}
         pagepath={location.pathname}
@@ -57,9 +58,7 @@ const Series: React.VFC<Props> = ({ data, pageContext, location }) => {
         isFirst={pageContext.isFirst}
         isLast={pageContext.isLast}
       />
-
-			<Footer />
-		</>
+		</Layout>
 	)
 }
 
