@@ -1,5 +1,6 @@
 import * as React from "react"
 
+import Layout from "../components/layout"
 import Header from "../components/header"
 import Seo from "../components/seo"
 
@@ -13,7 +14,7 @@ const AboutPage: React.VFC<Props> = ({ location }) => {
 	const pagepath=location.pathname
 
 	return (
-		<>
+		<Layout>
 			<Seo
 				title="アバウトページ"
 				pagepath={pagepath}
@@ -23,7 +24,7 @@ const AboutPage: React.VFC<Props> = ({ location }) => {
 				pageTitle="アバウトページ"
 			/>
 			<p className="txt">jfagp</p>
-		</>
+		</Layout>
 	)
 }
 
