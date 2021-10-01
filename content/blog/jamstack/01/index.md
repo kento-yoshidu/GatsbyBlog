@@ -1,7 +1,7 @@
 ---
 title: "JamstackなWebサイトを構築してみた①"
 postdate: "2021-08-06"
-updatedate: "2021-09-17"
+updatedate: "2021-10-01"
 seriesName: "JamstackなWebサイトを構築してみた"
 seriesSlug: "Jamstack"
 description: "いわゆるJamstackなサイトを作成してみて、Jamstackについての諸々が何となく分かってきたので知見を記載します。"
@@ -26,34 +26,21 @@ tags: ["Jamstack", "HeadlessCMS", "SSG"]
 
 <aside>
 
-どんなテーマのサイトを作るか10個考える方が辛い。
+どんなテーマ、デザインのサイトを作るか10個考える方が辛い😱
 
 </aside>
 
-|サイト名|SSG|コンテンツ管理|ホスティング|
-|-------|---|-----------|-------|
-|鳥に生まれることができなかった人へ<br>（このサイト）|Gatsby|マークダウン|AWS Amplify|
-|[CSS Animation & Tips](https://cssanimation.toriwatari.work/)|Nuxt.js|vueファイル|AWS Amplify|
-|[NuxtDentalClinic](https://nuxtdentalclinic.netlify.app/)|Nuxt.js|microCMS|Netlify|
-|[GatsbyCafe](https://gatsbycafesite.netlify.app/)|Gatsby|Contentfull|Netlify|
-|作成中|Gatsby|microCMS|Vercel|
-|作成中|Next.js|microCMS|未定|
-|作成中|Gridsome|graphCMS|未定|
-|作成中|Eleventy|microCMS|未定|
+|No|サイト名|SSG|コンテンツ管理|ホスティング|
+|---|---|---|---|---|
+|1|鳥に生まれることができなかった人へ<br>（このサイト）|Gatsby|マークダウンファイル|AWS Amplify|
+|2|[CSS Animation & Tips](https://cssanimation.toriwatari.work/)|Nuxt.js|Vueファイル|AWS Amplify|
+|3|[NuxtDentalClinic](https://nuxtdentalclinic.netlify.app/)|Nuxt.js|microCMS|Netlify|
+|4|[GatsbyCafe](https://gatsbycafesite.netlify.app/)|Gatsby|Contentfull|Netlify|
+|5|作成中|Gatsby|microCMS|Vercel|
+|6|作成中|Next.js|microCMS|未定|
+|7|作成中|Gridsome|graphCMS|未定|
+|8|作成中|Eleventy|microCMS|未定|
 
-## その他の技術的なところ
-
-基本的にはTypeScriptでの型付けが前提になっています（Vue.jsベースのフレームワークだと上手く使いこなせていない感がありますが）。
-
-Reactベースであれば関数コンポーネント、Vue.jsベースであればCompositionAPIでコンポーネントを書いています。
-
-また、以下の要素もサイトによっては取り入れています。
-
-- Tailwind CSS
-- Storybook
-- Headless UI
-
-各種技術の組み合わせでとても苦労することが多く（例えば、Gatsby＋TypeScript＋SCSS＋CSS ModulesでStrorybookが上手く動かなかったり）、どういう手順で環境を作っていけばいいのかを検証する実験台にもしています。
 
 ## Jamstackの構成要素
 
@@ -67,7 +54,7 @@ Jamstackを触ってみて感じたのは、「それぞれのレイヤーの技
 
 ### SSGには何がある？
 
-SSGにはとても多くの種類があります。[こちら](https://jamstack.org/generators/)のサイトでSSGがまとめられています。めちゃくちゃ多いですが、フロントエンドよりの技術のためか**JavaScriptベース**のSSGが多いですね。
+SSGにはとても多くの種類があります。[こちら](https://jamstack.org/generators/)のサイトでSSGがまとめられています。めちゃくちゃ多いですが、フロントエンド寄りの技術のためか**JavaScriptベース**のSSGが多いですね。
 
 これまでに私は**Gatsby**、**Next.js**、**Nuxt.js**、**Gridsome**を使用してWebサイトを作成しました。後はVue.jsベースの**VuePress**、Reactベースの**Docusaurus**も試してみて形にしたいですね。
 
@@ -75,7 +62,7 @@ SSGにはとても多くの種類があります。[こちら](https://jamstack.
 
 ### HeadlessCMSには何がある？
 
-HeadlessCMSも数多くありますが、microCMS、Contentful、graphCMS、NetlifyCMSなどが挙げられます。
+HeadlessCMSも[数多くあります](https://jamstack.org/headless-cms/)が、microCMS、Contentful、graphCMS、NetlifyCMSなどが挙げられます。
 
 HeadlessCMSを使いこなすというのは私にとって中々難しく、利用し始めて間もないこともあり、それぞれのサービスの違いなどを上げられるほど知見がありません。「こんなHeadlessCMSがありますよー」という紹介くらいに留まると思います。
 
@@ -87,9 +74,7 @@ HeadlessCMSとCMSの違い、それぞれのメリットデメリットは次回
 
 ### ホスティングサービスには何がある？
 
-私はAWS Amplifyをホスティングによく利用しています。AWSでいうならCloudFront + S3という構成もいいですね。
-
-ホスティングサービスで言うとNetlifyが一番有名なんじゃないかと思います。無料枠でも以下のようなサービスを受けられます（2021年6月現在）。
+ホスティングサービスの中でNetlifyが一番有名なんじゃないかと思います。無料枠でも以下のようなサービスを受けられます（2021年6月現在）。
 
 - 🌠 SSGによるビルドとCDNによるWebサイト公開
 - 🌠 GitHubとの連携、自動ビルド
@@ -97,15 +82,55 @@ HeadlessCMSとCMSの違い、それぞれのメリットデメリットは次回
 - 🌠 月100GBのデータ通信
 - 🌠 ビルド時間は300分/月
 
-※正確なことは[Netlifyのページ](https://www.netlify.com/pricing/)を参照ください。
+<aside>
 
-[**Cloudflare Pages**](https://pages.cloudflare.com/)、[**Gatsby Cloud**](https://www.gatsbyjs.com/products/cloud/)
+正確なことは[Netlifyのページ](https://www.netlify.com/pricing/)を参照ください。
+
+</aside>
+
+## その他採用した技術
+
+Jamstackと直接関係があるわけではありませんが、以下のような要素を組み合わせています。
+
+各種技術の組み合わせでとても苦労することが多く（例えば、Gatsby＋TypeScript＋SCSS＋CSS ModulesでStrorybookが上手く動かなかったり）、どういう手順で環境を作っていけばいいのかを検証する実験台にもしています。
+
+### TypeScript
+
+基本的にはTypeScriptでの型付けが前提になっています（Vue.jsベースのフレームワークだと上手く使いこなせていない感がありますが。やっぱReactがいい）。
+
+### GraphQLクライアント
+
+一部のサイトではHeadless CMSからデータを取得する際、GraphQLクライアントとして、Apollo ClientやRaleyなどのライブラリーを使用しています。Gatsby、GridsomeにはGraphQLクライアントが組み込まれていますが、他のSSGにはない（はず）なので、GraphQLでクエリーを投げたい禁断症状に襲われた際はこれらのライブラリーを使用しています。
+
+### Storybook
+
+**Storybook**はUIコンポ－ネントを管理できるツールです。コンポーネントのUIをカタログのように簡単に参照できます。
+
+作っているのは普通のWebサイト（？）でありWebアプリではなく、コンポーネントの数も少なければ状態変化も少ないので、導入するメリットはそんなに大きくはないかなーと使いながら思っていますが、環境構築の練習にもなるかと思い積極的に取り入れています（案の定、その環境構築で苦労していますが）。
+
+[Storybook公式サイト](https://storybook.js.org/)
+
+### Tailwind CSS
+
+Tailwind CSSはユーティリティクラスをまとめたライブラリのようなものです。少し前からやたら注目されていますね。
+
+Tailwindはどちらかと言うと好きではないですし、使いこなせる領域にはまだまだ至っていませんが、いくつかのサイトに取り入れています。環境構築、各種カスタマイズの学習コストが高い気がします。
+
+[Tailwind CSS公式サイト](https://tailwindcss.com/)
+
+### Headless UI
+
+いわゆるCSSフレームワークという物があまり好きではなく（勉強したが挫折した）、生CSSを書きたい私にとって**Headless UI**はぴったりでした。
+
+Tailwindとの親和性が高いですが、もちろん必須というわけではなく、「SCSS ＋ CSS Modules」などの構成でも問題なく動きます。
+
+[Headless UI公式サイト](https://headlessui.dev/)
 
 ## 感想
 
-まだ作成途中ですが、感想として「英語できないとダメだな。。。🤦‍♂️」と感じました。
+一番の感想は「英語できないとダメだな。。。🤦‍♂️」でした。
 
-WordPressなんかと比べて圧倒的に情報量が少なく、公式サイトはもちろん、何か躓くと海外ブログやGitHubのissueも漁らなければならず、英語よわよわな筆者としては結構苦労しています。特にgraphCMSはほとんど日本語の情報がないんじゃないでしょうか。
+WordPressなんかと比べて圧倒的に情報量が少なく、公式サイトはもちろん、何か躓くと海外ブログやGitHubのissueも漁らなければならず、英語よわよわな私は結構苦労しています。特にgraphCMSはほとんど日本語の情報がないんじゃないでしょうか。
 
 これからは逃げずに英語勉強します😭。
 
