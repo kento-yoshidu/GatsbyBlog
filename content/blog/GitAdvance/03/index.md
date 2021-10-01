@@ -1,236 +1,201 @@
 ---
-title: "#3 git logでコミット履歴を見る(後編)"
-postdate: "2021-09-12"
-updatedate: "2021-09-12"
+title: "#3 git logでコミット履歴を見る(中編)"
+postdate: "2021-10-01"
+updatedate: "2021-10-01"
 seriesName: "Git中級者を目指す"
-seriesSlug: GitAdvance
-description: "git logのコマンドを紹介した前回、`git log --oneline --all --graph`の組み合わせが便利ですよーとお話ししました。"
+seriesSlug: "GitAdvance"
+description: ""
 tags: ["git"]
 ---
 
-# 複数ブランチを考慮したgit log
 
-前回はgit logの基本的なオプションを紹介しましたが、今回はもっと掘り下げてより高度なオプションを紹介したいと思います。
 
-前回までは、いわば、ある一つのブランチの中で完結するようなオプションを紹介しました。しかし、複数のブランチが切られている時（というかそれが当たり前ですが）、git logと打ってどの範囲のログが出力されるか、正確にわかっていますか？ 「あのブランチだけのログが見たいのに、違うブランチのログも出力される。。。」といったことはありませんか？「雰囲気でHEAD~とか打ってるけど詳しい意味は分かってない。。。」といったことはありませんか？
+## `--since`で日付以降のコミット、`--until`で日付以前のコミット
 
-たまーに出てくるチルダ(~)やキャレット(^)ですが、どのような意味を持っているかわかっていますか？
+以下のようなコミット履歴があるとします。2017年から2020年まで、各年の1月1日にコミットを行っており、計4回のコミット履歴があります。
 
-私もわかっていなかったので改めて確認したいと思います。
+```shell:title=console
+$ git log --format=fuller
 
-## その前に参考記事
+commit 13a83c31fc4558b811ae2c0dbb373a60d2359c77 (HEAD -> main)
+Author:     potsunen <potsunen@potsunen.com>
+Date: Fri Jan 10 00:00:00 2020 +0900
 
-この記事を読むためには、ブランチとHEADという概念をある程度わかっている必要があります。「ブランチって何？」「HEADって何？」を確認しておきたい方は以下の良記事を読むことをお勧めします。
+    2020 commit
 
-[GitのHEADとは何者なのか](https://qiita.com/ymzkjpx/items/00ff664da60c37458aaa)
+commit 0fb21bf1e009cd3edb4036bc167db0cb93c1c98b
+Author:     potsunen <potsunen@potsunen.com>
+Date: Tue Jan 1 00:00:00 2019 +0900
 
+    2019 commit
 
-## 2つのブランチを対象にログを出力する
+commit 41ece2df6ad958e89ae9ba91e08d82c3d476ec9d
+Author:     potsunen <potsunen@potsunen.com>
+Date: Mon Jan 1 00:00:00 2018 +0900
 
-このセクションではダブルドット構文（`..`）とトリプルドット構文（`...`）の使用方法を説明します。
+    2018 commit
 
-<aside>
+commit d4657a563990338265ed5af1ff90f8e971546560
+Author:     potsunen <potsunen@potsunen.com>
+Date: Sun Jan 1 00:00:00 2017 +0900
 
-ダブルドット構文とトリプルドット構文という言葉は公式リファレンスの日本語版ページから引用してます。
+    2017 commit
+```
 
-[こちら](https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E3%81%95%E3%81%BE%E3%81%96%E3%81%BE%E3%81%AA%E3%83%84%E3%83%BC%E3%83%AB-%E3%83%AA%E3%83%93%E3%82%B8%E3%83%A7%E3%83%B3%E3%81%AE%E9%81%B8%E6%8A%9E)
-
-</aside>
-
-これらの構文は2つの引数（便宜上、引数と呼びます）をとります。
-
-`..`は、どちらか一方からのみ辿れるコミットを出力します。結果は引数の渡し順によって変わります。
-
-`...`は、どちらか一方から辿れるコミットを出力します。こちらの結果は引数の渡し順によって変わりません。
-
-また、どちらも2つのブランチ間で重複しているコミットを除く動きをします。
-
-前提として、リポジトリは以下の状態であるとします。
-
-![](./images/image01.png)
-
-master、develop、fixという3つのブランチがあります。8はdevelopにfixをマージしたマージコミットです。現在HEADはdevelopを指しています。
-
-### コミット履歴を再現する
-
-手を動かして動作検証したいという方もいらっしゃると思うので、コミット履歴を再現するスクリプトを以下に掲載します。適当なフォルダを作成し、`git init`した上で、シェルスクリプトを実行してください。
-
-<details>
-  <summary>スクリプトを見る</summary>
-
-  ```shell
-git init
-
-git commit -m "(master)1" --allow-empty
-
-git checkout -b develop
-
-git commit -m "(develop)4" --allow-empty
-
-git checkout -b fix master
-
-git commit -m "(fix)6" --allow-empty
-
-git checkout master
-
-git commit -m "(master)2" --allow-empty
-git commit -m "(master)3" --allow-empty
-
-git checkout develop
-
-git commit -m "(develop)5" --allow-empty
-
-git checkout fix
-
-git commit -m "(fix)7" --allow-empty
-
-git checkout develop
-
-git merge --no-ff -m "(merged)8" fix
-  ```
-</details>
-
-## git log master
-
-まずは`git log ブランチ名`と入力したときの出力を確認しておきます。最初はmasterブランチです。
-
-masterブランチである`3`から矢印で辿れる、`3,2,1`が対象です。
-
-![](./images/image02.png)
-
-## git log develop (git log HEAD)
-
-developブランチである`8`から辿れる、`8,7,6,5,4,1`が対象です。現在はHEADがdevelopブランチを指しているので、`git log HEAD`としても同じ出力結果です。
-
-![](./images/image03.png)
-
-## git log fix
-
-fixブランチである`7`から辿れる、`7,6,1`が対象です。
-
-![](./images/image04.png)
-
-## git log develop..master
-
-では、`..`の動作を確認します。
-
-言語化するとしたら「developになくて、masterにだけあるもの」 でしょうか 。`3,2`が出力されます。
-
-mainからは`3,2,1`が辿れますが、`1`はdevelopからも辿れるので対象外です。
-
-![](./images/image05.png)
-
-## git log master..develop
-
-上記の逆です。読み方は「masterになくて、developにだけあるもの」です。
-
-developから`8,7,6,5,4,1`が辿れますが、`1`はmainからも辿れるので対象外です。
-
-![](./images/image06.png)
-
-### git log master..fix
-
-読み方は「masterになくて、fixにだけあるもの」です。
-
-fixから`7,6,1`が辿れますが、`1`はmainからも辿れるので対象外です。
-
-![](./images/image07.png)
-
-
-### git log fix..develop
-
-読み方は「fixになくて、developにあるもの」です。
-
-developから`8,7,6,5,4,1`が辿れますが、`7,6,1`はfixからも辿れるので対象外です。
-
-![](./images/image08.png)
-
-### git log develop..fix
-
-読み方は「developになくて、fixにだけあるもの」。
-
-fixから7,6,1が辿れますが、これらは全てdevelopからも辿れるのでコミットは出力されません。
-
-![](./images/image09.png)
-
-### git log main...develop (git log develop...main)
-
-ここからは`...`の使用方法です。
-
-`...`は、**どちらか一方からだけ辿れるもの**を出力します。どちらからも辿れるものは対象外です。
-
-上記のコマンドで言うと、読み方は「mainかdevelopのどちらか一方にあるもの」です。
-
-masterとdevelopから全てのコミットを辿れますが、`1`はmainとdevelopの両方から辿れるので対象外です。
-
-![](./images/image10.png)
-
-なお、`...`を使用する場合、どのような順番でブランチを指定しても結果は同じです。
-
-### git log develop...fix (git log fix...develop)
-
-読み方は「developとfixのどちらか一方にあるもの」です。
-
-7,6,1はdevelopからもfixからも辿れるので対象外です。
-
-![](./images/image11.png)
-
-### `^` と `--not`で除外する
-
-これまでと似たようなことが`^`や`--not`を付けることで実現できます。こちらの方が直感的に分かりやすいかも知れません。
-
-`^ブランチ名`や`--not ブランチ名`とすることで、そのブランチから辿れるコミットを除外することができます。いくつか例を置いておきますので、よかったら検証してみてください。
-
-
-
-## チルダとキャレット
-
-### git log develop~
-
-チルダを付与することで親のコミットを取得できます。
-
-この場合、git log develop~はgit log 5と同義と言えます。
-
-![](./images/image12.png)
-
-### git log develop~~ (git log develop~2)
-
-チルダを複数つけることで、更に親を辿っていくことができます。また、~~は~2に置き換えることができます。
-
-![](./images/image13.png)
-
-### git log develop^
-
-![](./images/image14.png)
-
-## git logではないけれど
-
-以上、git logに関係するオプションを紹介しましたが、git logではないもののコミットログに関係するコマンドをいくつか紹介したいと思います。
-
-### git shortlogでユーザごとのコミット履歴を取得する
-
-`git shortlog`で各コミットをコミットを行ったユーザごとに分類して表示します。 以下の例だと、alien👽さんが1コミット、potsunenさんが5コミット行ったことが分かります。コミット数でマウントをとりたいときに便利です。
+`--sinse="<date>"`とすることで任意の日付以降にコミットされたコミットのみ出力できます。以下の例だと、2018年1月1日以降を表します。
 
 ```shell
-$ git shortlog
+$ git log --since="2018-01-01:00:00:00" --oneline
+13a83c3 (HEAD -> main) 2020 commit
+0fb21bf 2019 commit
+41ece2d 2018 commit
+```
 
-alien (1):
-      edit style.scss
+日付のフォーマットですが色々なものに対応しているようです。
 
-potsunen (5):
-      initial commit
-      first commit
-      second commit
-      third commit
-      create style.scss
+```shell:title=console
+# YYYY-MM-DD
+$ git log --since="2018-01-01"
+
+# YYYY/MM/DD
+$ git log --since="2018/01/01"
+
+# YYYY MM DD
+$ git log --since="2018 01 01"
+
+# DD/MM/YYYY
+$ git log --since="01/01/2018"
+
+# UNIXタイムスタンプ
+$ git log --since="1514732400"
+
+# 10週間前
+$ git log --since="10 week age"
+
+# 先月
+$ git log --since="last month"
+```
+
+なお、フォーマットの一部のみ指定した場合の動作ですが、指定していない箇所は現在の日時で補完されるようです。
+以下の例では、YYYYに当たる`2019`のみ指定していますが動作します。ただ、2019年1月1日のコミットは表示されません。予想ですが、実行した日付の3月3日とその時間で絞り込みされることになると想像しました。
+
+```shell:title=console
+$ git log --since="2019" # YYYYのみ
+commit 13a83c31fc4558b811ae2c0dbb373a60d2359c77 (HEAD -> main)
+Author: potsunen <potsunen@potsunen.com>
+Date:   Fri Jan 10 00:00:00 2020 +0900
+
+    2020 commit
+
+ # 今日は2020/03/03なので、
+ # --since="2019/03/03(+その時の時間)"とみなされる?
+```
+
+検証したところ上記のようになっていると推察したのですが自信はありません。
+
+`--until`は`--since`の逆、任意の日付以前にコミットされたコミットのみ出力します。
+
+```shell:title=console
+$ git log --until="2018-01-01:00:00:00" --oneline
+
+# 2018年1月1日以前
+41ece2d 2018 commit
+d4657a5 2017 commit
+```
+
+また、`--since`と`--until`を組み合わせることで「〇〇日以降、〇〇日以前」という風に日時を絞り込めます。
+
+```shell:title=console
+$ git log --since="2017-06-30" --until="2018-06-29" --oneline
+
+41ece2d 2018 commit
+```
+
+## `--relative-date`で日付を相対表示する
+
+通常、コミットの日時情報はYYYY-MM-DDといった風に絶対表示されますが、`--relative-date`オプションを渡すことで「〇か月前」「〇時間前」といった現在の日時に対する相対的な形式で出力することが可能です。
+
+```shell:title=console
+$ git log --relative-date --abbrev-commit
+
+commit 1527aea (HEAD -> main)
+Author: potsunen <potsunen@potsunen.com>
+Date:   3 minutes ago  # 3分前
+
+    4th-commit
+
+commit 0acb905
+Author: potsunen <potsunen@potsunen.com>
+Date:   6 days ago     # 6日前
+
+    3rd commit
+
+commit 77e12e9
+Author: potsunen <potsunen@potsunen.com>
+Date:   5 months ago   # 5か月前
+
+    2nd commit
+```
+
+## マージ関係
+
+`--merges`でマージコミットのみ、`--no-merges`でマージコミットを除外してログを出力します。
+
+```shell:title=console
+$ git log --graph --all --oneline
+
+*   ba08362 (HEAD -> develop, main) Merge branch 'develop'
+|\
+| * fa906d1 dev commit
+* | be5f689 main commit
+|/
+* 4f4d558 initial commit
+
+# マージコミットのみ
+$ git log --merges --oneline
+ba08362 (HEAD -> develop, main) Merge branch 'develop'
+
+# マージコミットを除外
+$ git log --no-merges --oneline
+
+be5f689 main commit
+fa906d1 dev commit
+4f4d558 initial commit
+```
+
+### -oを付けた時
+
+## AuthorやCommitterで絞る
+
+これはそのまま、`--author="〇〇"`、`--committer="〇〇"`の形で記述できます。
+
+```shell:title=console
+$ git log --author="alien"
+
+commit 9061b6e9231fac0baf0b8967773e26b66517e6ca
+Author: alien <alien@andromeda.space> # Author
+Date:   Fri Mar 6 16:25:04 2020 +0900
+
+    私は宇宙人だ
+
+# Committerを確認する場合は、fullerオプションを付けてください。
+$ git log --committer="potsunen" --format="fuller"
+
+commit c85203de19d282266cdcfe73f800a66a49486e66 (HEAD -> main)
+Author:     potsunen <potsunen@potsunen.com>
+AuthorDate: Fri Mar 6 16:27:08 2020 +0900
+Commit:     potsunen <potsunen@potsunen.com> # Committer
+CommitDate: Fri Mar 6 16:27:08 2020 +0900
+
+    create index.html
 ```
 
 ## 感想
 
-各種動作検証するのにめっちゃ疲れた。あと、日本語って難しい。。。
+オプションはかなりの種類がありますね。前編と中編で結構な数のオプションを紹介しましたが、これでも全体の一部に過ぎません。
 
-## 参考
+他のオプションも色々試したのですが、上手く動かなかったり、そもそも意味が分からないような物もありました（私の理解度の問題かもしれませんが）。
 
-- https://qiita.com/tearoom6/items/791f8a8b4ba39944e2f3
-- https://yanor.net/wiki/?Git/git%20log/%E6%9D%A1%E4%BB%B6%E6%8C%87%E5%AE%9A%E3%81%97%E3%81%A6%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E3%82%92%E7%B5%9E%E3%82%8A%E8%BE%BC%E3%82%80
-- https://git-scm.com/docs/git-log
+まだ後編が残っていますのでぜひ読んでみてください。
+
+# 参考
