@@ -11,6 +11,7 @@
       margin-right: 10px;
     }
     a {
+      color: #444;
       &:hover {
         color: $main-color;
       }
@@ -55,6 +56,13 @@
     }
     p {
       margin-right: 20px;
+      a {
+        color: #444;
+        &:hover {
+          color: $main-color;
+        }
+        color: #444;
+      }
     }
   }
 }
