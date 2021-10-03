@@ -49,7 +49,7 @@ cce92e8 Initial Commit
 
 ※abbrev → abbreviated → 省略された の意。
 
-## `--all`と`--graph`で他ブランチも含め、グラフィカルに出力する
+## `--all`と`--graph`で全ブランチをグラフィカルに出力する
 
 developブランチを切っていてmainブランチにいるとします。おおよそこんなイメージです。
 
@@ -532,7 +532,7 @@ a81b18d Create index.html
 
 長くなりましたので今回は以上です。中編に続きます。
 
-## 参考 AuthorとCommitterの違い
+## 参考 AuthorとCommitterの違い🤔
 
 私は
 

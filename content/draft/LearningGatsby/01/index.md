@@ -16,7 +16,7 @@ tags: ["Gatsby", "SSG"]
 
 ## 前提
 
-Gatsbyのことは全く分かっていなくてもOKだと思います。
+Gatsbyのことは全く分かっていなくてもOKです。GatsbyはReactベースですが、Reactの知識がなくてもまぁ結構雰囲気でいじれます。
 
 - Node.jsがインストールされていること
 - npm、またはyarn使用方法をある程度理解していること
@@ -27,7 +27,7 @@ Gatsbyのことは全く分かっていなくてもOKだと思います。
 ## 記事一覧
 
 - #1 はじめに
-- #2 Gatsby-cliを使う
+- #2 Gatsbyでサイトを立ち上げてみる
 - #3 NetlifyでWebサイトを公開する
 
 HeadlessCMSとの連携

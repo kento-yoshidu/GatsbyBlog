@@ -8,6 +8,12 @@
   Gatsbyでブログを作成しました
 </h1>
 
+<p align="center">
+  <a href="https://blog/toriwatari.work/page/1/">
+    <img alt="image" src="./src/images/image.png" width="240" />
+  </a>
+</p>
+
 ## 🌐 WebSite
 
  [Webサイト](https://blog.toriwatari.work/page/1/)

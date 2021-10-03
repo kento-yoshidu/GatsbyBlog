@@ -7,10 +7,11 @@ seriesSlug: "GitAdvance"
 description: ""
 tags: ["git"]
 ---
+# git logの基本的なオプション（続き）
 
+前回の記事でもかなりの数のオプションを紹介しましたが、まだまだ続きます。
 
-
-## `--since`で日付以降のコミット、`--until`で日付以前のコミット
+## `--since`と`--until`で日付で絞る
 
 以下のようなコミット履歴があるとします。2017年から2020年まで、各年の1月1日にコミットを行っており、計4回のコミット履歴があります。
 
@@ -18,25 +19,25 @@ tags: ["git"]
 $ git log --format=fuller
 
 commit 13a83c31fc4558b811ae2c0dbb373a60d2359c77 (HEAD -> main)
-Author:     potsunen <potsunen@potsunen.com>
+Author:     toriwatari <toriwatari@toriwatari.com>
 Date: Fri Jan 10 00:00:00 2020 +0900
 
     2020 commit
 
 commit 0fb21bf1e009cd3edb4036bc167db0cb93c1c98b
-Author:     potsunen <potsunen@potsunen.com>
+Author:     toriwatari <toriwatari@toriwatari.com>
 Date: Tue Jan 1 00:00:00 2019 +0900
 
     2019 commit
 
 commit 41ece2df6ad958e89ae9ba91e08d82c3d476ec9d
-Author:     potsunen <potsunen@potsunen.com>
+Author:     toriwatari <toriwatari@toriwatari.com>
 Date: Mon Jan 1 00:00:00 2018 +0900
 
     2018 commit
 
 commit d4657a563990338265ed5af1ff90f8e971546560
-Author:     potsunen <potsunen@potsunen.com>
+Author:     toriwatari <toriwatari@toriwatari.com>
 Date: Sun Jan 1 00:00:00 2017 +0900
 
     2017 commit
@@ -82,7 +83,7 @@ $ git log --since="last month"
 ```shell:title=console
 $ git log --since="2019" # YYYYのみ
 commit 13a83c31fc4558b811ae2c0dbb373a60d2359c77 (HEAD -> main)
-Author: potsunen <potsunen@potsunen.com>
+Author: toriwatari <toriwatari@toriwatari.com>
 Date:   Fri Jan 10 00:00:00 2020 +0900
 
     2020 commit
@@ -119,19 +120,19 @@ $ git log --since="2017-06-30" --until="2018-06-29" --oneline
 $ git log --relative-date --abbrev-commit
 
 commit 1527aea (HEAD -> main)
-Author: potsunen <potsunen@potsunen.com>
+Author: toriwatari <toriwatari@toriwatari.com>
 Date:   3 minutes ago  # 3分前
 
     4th-commit
 
 commit 0acb905
-Author: potsunen <potsunen@potsunen.com>
+Author: toriwatari <toriwatari@toriwatari.com>
 Date:   6 days ago     # 6日前
 
     3rd commit
 
 commit 77e12e9
-Author: potsunen <potsunen@potsunen.com>
+Author: toriwatari <toriwatari@toriwatari.com>
 Date:   5 months ago   # 5か月前
 
     2nd commit
@@ -179,12 +180,12 @@ Date:   Fri Mar 6 16:25:04 2020 +0900
     私は宇宙人だ
 
 # Committerを確認する場合は、fullerオプションを付けてください。
-$ git log --committer="potsunen" --format="fuller"
+$ git log --committer="toriwatari" --format="fuller"
 
 commit c85203de19d282266cdcfe73f800a66a49486e66 (HEAD -> main)
-Author:     potsunen <potsunen@potsunen.com>
+Author:     toriwatari <toriwatari@toriwatari.com>
 AuthorDate: Fri Mar 6 16:27:08 2020 +0900
-Commit:     potsunen <potsunen@potsunen.com> # Committer
+Commit:     toriwatari <toriwatari@toriwatari.com> # Committer
 CommitDate: Fri Mar 6 16:27:08 2020 +0900
 
     create index.html
