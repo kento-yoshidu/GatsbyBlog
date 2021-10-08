@@ -1,9 +1,12 @@
 import * as React from "react"
 import { graphql } from "gatsby"
+import { StaticImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
+
+const Styles = require("../styles/index.module.scss")
 
 type Props = {
   data: GatsbyTypes.IndexPageQuery,
@@ -24,6 +27,16 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
       <Header
         pageTitle="Top Page"
       />
+
+      <main>
+        <div className={Styles.image}>
+          <StaticImage
+            layout="fullWidth"
+            alt="hoge"
+            src="../../static/gatsby.svg"
+          />
+        </div>
+      </main>
     </Layout>
   )
 }

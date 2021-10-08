@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 
-import * as Styles from "../styles/IOTest.module.scss"
+//import * as Styles from "../styles/IOTest.module.scss"
 
 const options = {
 	rootMargin: "10px",

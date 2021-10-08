@@ -1,0 +1,10 @@
+.image {
+  margin: 50px auto;
+  width: 50%;
+}
+
+@media screen and (max-width: 768px) {
+  .image {
+    width: 80%;
+  }	
+}
