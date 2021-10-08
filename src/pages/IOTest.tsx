@@ -1,6 +1,6 @@
 import React, { useEffect } from "react"
 
-import * as Styles from "../styles/IOTest.module.scss"
+//import * as Styles from "../styles/IOTest.module.scss"
 
 const options = {
 	rootMargin: "10px",
@@ -57,6 +57,7 @@ const Test: React.VFC = () => {
 
 	return (
 		<>
+			{/*
 			<aside className={Styles.indexWrapper}>
 				<h1>目次</h1>
 				<ol id="indexList" className={`${Styles.index} index`}>
@@ -91,6 +92,8 @@ const Test: React.VFC = () => {
 					eee
 				</div>
 			</main>
+			*/}
+			<p>iotest</p>
 		</>
 	)
 }
