@@ -47,6 +47,8 @@
   },
   "devDependencies": {
     "@types/react-helmet": "^6.1.2",
+    "esbuild": "^0.13.4",
+    "esbuild-register": "^3.0.0",
     "prettier": "2.3.2"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
