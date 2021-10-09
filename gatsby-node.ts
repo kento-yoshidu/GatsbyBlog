@@ -60,7 +60,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
   if (queryResult.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
-      result.errors
+      queryResult.errors
     )
     return
   }
@@ -133,7 +133,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
-        path: 1 === 0 ? `/series/${series.fieldValue}/page/1/` : `/series/${series.fieldValue}/page/${i + 1}/`,
+        path: i === 0 ? `/series/${series.fieldValue}/page/1/` : `/series/${series.fieldValue}/page/${i + 1}/`,
         component: path.resolve("./src/templates/series.tsx"),
         context: {
           postCount: postCount,
@@ -165,7 +165,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
-        path: 1 === 0 ? `/tag/${tag.fieldValue}/page/1/` : `/tag/${tag.fieldValue}/page/${i + 1}/`,
+        path: i === 0 ? `/tag/${tag.fieldValue}/page/1/` : `/tag/${tag.fieldValue}/page/${i + 1}/`,
         component: path.resolve(`./src/templates/tag.tsx`),
         context: {
           postCount: postCount,
