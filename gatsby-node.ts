@@ -1,7 +1,9 @@
-const path = require(`path`)
+import type { GatsbyNode } from "gatsby"
+import path, { resolve } from "path"
+
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
+const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   const queryResult = await graphql(
@@ -180,7 +182,8 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   })
 }
 
-exports.onCreateNode = ({ node, actions, getNode }) => {
+
+const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
   if (node.internal.type === `MarkdownRemark`) {
@@ -193,6 +196,8 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     })
   }
 }
+
+export { createPages, onCreateNode }
 
 exports.createSchemaCustomization = ({ actions }) => {
   const { createTypes } = actions
