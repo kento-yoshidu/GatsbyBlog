@@ -2,8 +2,8 @@
 title: "2020年 買ってよかった本"
 postdate: "2021-10-11"
 updatedate: "2021-10-11"
-categoryName: "GoodBookToBuy"
-categorySlug: "xx年 買ってよかった本"
+categoryName: "xx年 買ってよかった本"
+categorySlug: "GoodBookToBuy"
 tags: ["書籍", "Vim", "ネットワーク", "Jamstack", "Gatsby"]
 ---
 
