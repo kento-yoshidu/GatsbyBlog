@@ -1,7 +1,7 @@
 ---
 title: "#2 git logでコミット履歴を見る(前編)"
 postdate: "2021-09-04"
-updatedate: "2021-10-01"
+updatedate: "2021-10-11"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git log のオプションは多岐にわたります。入門書に載っている基本的で有名なものからちょっとマニアックなものまで、できるだけ例を踏まえて紹介します。"
@@ -10,7 +10,7 @@ tags: ["git"]
 
 # git logの基本的なオプション
 
-`git log`コマンドを使用することでコミットの履歴を辿ることができます。オプションは数多くありますが、このページでは簡単なものを中心に紹介します。できるだけ例を踏まえて紹介しますので、よければ実際にコマンドを打ち込みながら読んでみてください。
+`git log`コマンドを使用することでコミットの履歴を辿ることができます。オプションは数多くありますが、これから数回に分けてオプションを紹介していきます。できるだけ例を踏まえて紹介しますので、よければ実際にコマンドを打ち込みながら読んでみてください。
 
 対象はgitの入門書を読み終えた方を想定して書きました。~~自分が全然わかっていなかったこともあり~~ だからと言っては何ですが、記述が冗長になっていたりやたら丁寧だったりするかもしれませんが、ご了承ください。
 
@@ -208,7 +208,7 @@ $ git commit -m "Rename index.html"
 
 $ git log -p --oneline -1
 
-cb039c3 (HEAD -> main) Rename index.html to index.ejs
+cb039c3 (HEAD -> main) Rename index.html
 diff --git a/index.html b/index.ejs
 similarity index 100%
 rename from index.html # ～から
@@ -280,7 +280,7 @@ d7e6535 (HEAD -> main) Delete index.ejs   # ファイル削除
  index.ejs | 2 --                         # 削除されたファイルに2行記載があった
  1 file changed, 2 deletions(-)           # 変更の要約
 
-cb039c3 Rename index.html to index.ejs              # ファイル名変更
+cb039c3 Rename index.html                           # ファイル名変更
  index.html => index.ejs | 0                        # 新旧ファイル名
  1 file changed, 0 insertions(+), 0 deletions(-)
 
@@ -313,7 +313,7 @@ $ git log --name-status --oneline
 d7e6535 (HEAD -> main) Delete index.ejs
 D       index.ejs
 
-cb039c3 Rename index.html to index.ejs
+cb039c3 Rename index.html
 R100    index.html      index.ejs
 
 360e27d 2nd Edit index.html
@@ -342,7 +342,7 @@ $ git log --name-only --oneline
 d7e6535 (HEAD -> main) Delete index.ejs
 index.ejs
 
-cb039c3 Rename index.html to index.ejs
+cb039c3 Rename index.html
 index.ejs
 
 360e27d 2nd Edit index.html
@@ -358,174 +358,24 @@ fd4955b Create index.html
 index.html
 ```
 
-## `-- <path>`で特定のファイルの履歴を確認する
+## `--reverse`で日付の古いものから出力する
 
-任意のファイルに変更があったコミットのみ出力する場合には、`-- <ファイル名 もしくは パス>`と記述します。`--stat`や`-p`と組み合わせることも可能です。
+`--reverse`を付与すれば日付の古いコミットから順に表示されるようになります。
 
-```shell:title=console
-$ git log --oneline -- index.ejs
-# index.ejsのみ
-d7e6535 (HEAD -> main) Delete index.ejs
+```shell
+$ git log --reverse --oneline
 
-cb039c3 Rename index.html to index.ejs
-
-# style.cssのみ
-$ git log --oneline -- style.css
-
-4aefdf3 Create style.css
-```
-
-なお、パスの前に`--`を付与していますが、これは`git log`に「渡しているのはファイル名だよ」と伝える意味を持っています。
-
-### あれ？index.htmlが引っかからないけど。。。
-
-今回は途中で`index.html`から`index.ejs`にファイル名を変更しています。`-- index.ejs`で検索しても、`index.html`が対象のコミットは出力されません。
-
-![キャプチャ](./images/image02.png)
-
-そういう時は`--follow`オプションを付けてください。変更前のindex.htmlも検索してくれます。
-
-なお、引数の順番は注意が必要です。`--follow -- ファイル名`としなければ旧ファイルが検索されませんでした（git version 2.22.0）。
-
-```shell:title=console
-$ git log --oneline --follow -- index.ejs
-
-d7e6535 (HEAD -> main) Delete index.ejs
-
-cb039c3 Rename index.html to index.ejs
-
-360e27d 2nd Edit index.html
+fd4955b Create index.html
 
 be1bf08 Edit index.html
 
-fd4955b Create index.html
-```
-
-![キャプチャ](./images/image03.png)
-
-### パスの前に`--`を付けるのはどんな時？
-
-ファイルやパス記述してコミット履歴を絞るには`--`を付与すると説明しました。「じゃあ付けなかったらどうなるの？」と思うのが人情です。
-
-いくつか検証してみます。
-
-現在、`index.ejs`は削除されていますが、ここで`--`をつけずにindex.ejsを指定するとエラーになってしまいます。
-
-```shell
-# -- なしで実行
-$ git log --oneline index.ejs
-
-fatal: ambiguous argument 'index.ejs': unknown revision or path not in the working tree.
-Use '--' to separate paths from revisions, like this:
-'git <command> [<revision>...] -- [<file>...]'
-```
-
-`ambiguous argument`、つまり「曖昧な引数」というメッセージが出力され、ご丁寧に「ファイル名の前に`--`をつけてね」というアドバイスまでくれています。
-
-ワーキングツリーに存在している`style.css`であれば`--`なしでも検索できます。
-
-```shell
-$ git log --oneline style.css
-
 4aefdf3 Create style.css
-```
 
-次に、**ファイル名と同じブランチが切られている場合**について検証します。
+360e27d 2nd Edit index.html
 
-今、ワーキングツリーには`style.css`がありますから、`style.css`という名前のブランチを切ります。特にコミットはしなくてOKです。
-
-```shell:title=console
-$  git checkout -b style.css
-```
-
-ここで`--`を渡さないで
-
-```shell:title=console
-
-$ git checkout main
-
-$ git log --stat --oneline develop
-
-fatal: ambiguous argument 'develop': both revision and filename
-Use '--' to separate paths from revisions, like this:
-'git <command> [<revision>...] -- [<file>...]'
-```
-
-またしても`ambiguous argument`、「曖昧な引数」のため致命的なエラーが発生しています。「`style.css`ファイルもあるし`style.css`ブランチもあるけど、どっちのこと言ってるの？」と言われています。
-
-`-- style.css`とすることでエラーなく出力されることも確認しておきます。
-
-```shell:title=console
-$ git log --oneline -- style.css
-
-4aefdf3 Create style.css
-```
-
-まとめると、
-
-- 基本的には`--`なしでもパスで履歴を絞れる
-- ただし、削除してワーキングツリーにないファイルで絞る場合には`--`を付与する
-- 万が一ファイル名とブランチ名が被っている場合にも`--`を付与する
-
-と考えていいと思います。
-
-なお、私は常に`--`を付与している派です。
-
-## `--diff-filtre`で変更内容でコミットを絞る
-
-`--diff-filter`オプションを付けることで、「ファイルが削除されたコミットだけ」「リネームされたコミットだけ」という風にコミットを出力することができます。
-
-`--diff-filter=D`という風に指定してみます。`D`は`Deleted`のことです。つまり、ファイルが削除されたコミットのみが出力されます。
-
-```shell
-$ git log --oneline --diff-filter=D
+cb039c3 Rename index.html
 
 d7e6535 (HEAD -> main) Delete index.ejs
-```
-
-`D`以外にも、以下のような値が渡せます。
-
-|値|コミットの内容|
-|---|---|
-|A(Added)|追加|
-|M(Modify)|変更|
-|R(Renamed)|リネーム|
-|C(Copied)|ファイルコピー|
-|T(Type?)|タイプが変更（シンボリックリンクへの変更など）|
-
-```shell
-# ファイルを新しく追加したコミットのみ
-$ git log --oneline --diff-filter=A
-4aefdf3 Create style.css
-fd4955b Create index.html
-
-# ファイルの内容を変更したコミットのみ
-$ git log --oneline --diff-filter=M
-360e27d 2nd Edit index.html
-be1bf08 Edit index.html
-
-# ファイルをリネームしたコミットのみ
-$ git log --oneline --diff-filter=R
-ae45f13 Rename index.html
-
-# ファイルをコピーしたコミットのみ（今回の例では該当なし）
-$ git log --oneline --diff-filter=C
-```
-
-そして、小文字にすることで意味を反転させることができます。つまり`--diff-filter=d`すると、削除があったコミット**以外**が出力されます。
-
-```shell
-$ git log --oneline --diff-filter=d
-
-ae45f13 Rename index.html
-
-1edf947 2nd Edit index.html
-
-5a3abbc Create style.css
-
-dc38817 Edit index.html
-
-a81b18d Create index.html
 ```
 
 ## まとめ
