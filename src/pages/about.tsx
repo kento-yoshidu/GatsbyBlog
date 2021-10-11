@@ -6,6 +6,13 @@ import Seo from "../components/seo"
 
 const Styles = require("../styles/404.module.scss")
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUndo } from "@fortawesome/free-solid-svg-icons"
+
+import "@fortawesome/fontawesome-svg-core/styles.css"
+import { config } from "@fortawesome/fontawesome-svg-core"
+config.autoAddCss = false
+
 type Props = {
 	location: {
 		pathname: string
@@ -26,6 +33,12 @@ const AboutPage: React.VFC<Props> = ({ location }) => {
 				pageTitle="このブログについて"
 			/>
 
+      <div className={Styles.dateInfo}>
+        <FontAwesomeIcon icon={faUndo} />
+        更新日時
+        <time>2021.10.11</time>
+      </div>
+
 			<main className={Styles.main}>
 				<section>
           <h2>このブログは何なのか</h2>
@@ -43,7 +56,7 @@ const AboutPage: React.VFC<Props> = ({ location }) => {
           <h2>このブログのモットー</h2>
           <h3>⚙️ 最小構成</h3>
           <p>技術を説明するにあたり、その環境はできる限りの最小構成を目指します。</p>
-          <p>「Node.jsからMongoDBへの接続方法を紹介します」という解説ページがあったとして、「MongoDBはDockerで用意します」だとDockerがわからない人はその時点で躓きますよね<span className="emoji">🙀</span>。</p>
+          <p>「Node.jsからMongoDBへの接続方法を紹介します」という解説ページがあったとして、「MongoDBはDockerで用意します」だとDockerがわからない人はその時点で躓きますよね🙀。</p>
           <p>私自身そういうことに多く遭遇したので、私はできるだけシンプルな環境で「とにかく一つのことだけに集中して理解する」場を作りたいです。その結果、記事数が多くなったり1ページの分量が長くなったりするかもしれませんが、メリットや分かりやすさの向上も大きいと思っています。</p>
 
           <h3>👞 スモールステップでハンズオン</h3>
