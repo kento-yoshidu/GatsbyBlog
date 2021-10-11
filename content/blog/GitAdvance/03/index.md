@@ -1,15 +1,249 @@
 ---
 title: "#3 git logでコミット履歴を見る(中編)"
 postdate: "2021-10-01"
-updatedate: "2021-10-01"
+updatedate: "2021-10-11"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: ""
 tags: ["git"]
 ---
-# git logの基本的なオプション（続き）
 
-前回の記事でもかなりの数のオプションを紹介しましたが、まだまだ続きます。
+# git logの基本的なオプション（中編）
+
+前回の記事でも中々の数の`git log`のオプションを紹介しましたが、まだまだ続きます。
+
+前回はコミットについて「どういった内容を出力するか」を選択するようなオプションを紹介しました。今回は「どのコミットを出力するか」という、コミットを絞るようなオプションを紹介します。例えば、「2020年のコミットだけを出力する」「`index.html`を変更したコミットだけを出力する」といった具合です。
+
+## リポジトリの再現
+
+前回作成したリポジトリを引き続き使用します。以下のスクリプトを実行することで、リポジトリを再現することができます。
+
+<details>
+  <summary>スクリプトを見る</summary>
+</details>
+
+## `-n <number>`でコミット数を絞る
+
+例えば`-n 1`なら1コミット、`-n 10`なら10コミット出力されます。もしくは、`-10`のように`-`に続けて数値を打っても構いません。
+
+とりあえず直近のコミットを確認したい時、`git log`と打って何百とコミットが出力されるとうっとうしいので、エイリアスで最初からコミット数上限を指定しています。
+
+```
+
+## `--grep`でコミットメッセージで検索する
+
+`--grep="任意の文字"`とすることで、コミットメッセージによってコミットを検索することができます。
+
+```shell
+$ git log --oneline --grep="Rename"
+
+cb039c3 (HEAD -> main) Rename index.html
+```
+
+なお、`--grep`のみで検索すると、case sensitive、つまり、アルファベットの大文字小文字が区別されます。`--grep="rename"`とすると出力されません。
+
+```shell
+$ git log --oneline --grep="rename"
+```
+
+この場合、`-i`（`--regexp-ignore-case`のショートハンド）を付与すると、大文字小文字区別なく出力されます。
+
+```shell
+$ git log --oneline -i --grep="Rename"
+
+cb039c3 (HEAD -> main) Rename index.html
+```
+
+### ORとAND
+
+`--grep`を複数使用した場合、**OR**でコミットが検索されます。以下の例だと、`Rename`もしくは`Create`が含まれているコミットが出力されます。
+
+```shell
+# ID修正
+$ git log --oneline --grep="Rename" --grep="Create"
+ae45f13 Rename index.html
+5a3abbc Create style.css
+a81b18d Create index.html
+```
+
+これを**AND**にしたい場合、`--all-match`を付与します。以下の例だと、`Create`と`html`が両方含まれているコミットが出力されます。
+
+```shell
+# ID修正
+$ git log --oneline --all-match --grep="Create" --grep="html"
+a81b18d Create index.html
+```
+
+## `-- <path>`で特定のファイルの履歴を確認する
+
+任意のファイルに変更があったコミットのみ出力する場合には、`-- <ファイル名 もしくは パス>`と記述します。`--stat`や`-p`と組み合わせることも可能です。
+
+```shell:title=console
+# index.ejsのみ
+$ git log --oneline -- index.ejs
+d7e6535 (HEAD -> main) Delete index.ejs
+
+cb039c3 Rename index.html
+
+# style.cssのみ
+$ git log --oneline -- style.css
+
+4aefdf3 Create style.css
+```
+
+なお、パスの前に`--`を付与していますが、これは`git log`に「渡しているのはファイル名だよ」と伝える意味を持っています。
+
+### あれ？index.htmlが引っかからないけど。。。
+
+今回は途中で`index.html`から`index.ejs`にファイル名を変更しています。`-- index.ejs`で検索しても、`index.html`が対象のコミットは出力されません。
+
+![キャプチャ](./images/image02.png)
+
+そういう時は`--follow`オプションを付けてください。変更前のindex.htmlも検索してくれます。
+
+なお、引数の順番は注意が必要です。`--follow -- ファイル名`としなければ旧ファイルが検索されませんでした（git version 2.22.0）。
+
+```shell:title=console
+$ git log --oneline --follow -- index.ejs
+
+d7e6535 (HEAD -> main) Delete index.ejs
+
+cb039c3 Rename index.html
+
+360e27d 2nd Edit index.html
+
+be1bf08 Edit index.html
+
+fd4955b Create index.html
+```
+
+![キャプチャ](./images/image03.png)
+
+### パスの前に`--`を付けるのはどんな時？
+
+ファイルやパス記述してコミット履歴を絞るには`--`を付与すると説明しました。「じゃあ付けなかったらどうなるの？」と思うのが人情です。
+
+いくつか検証してみます。
+
+現在、`index.ejs`は削除されていますが、ここで`--`をつけずにindex.ejsを指定するとエラーになってしまいます。
+
+```shell
+# -- なしで実行
+$ git log --oneline index.ejs
+
+fatal: ambiguous argument 'index.ejs': unknown revision or path not in the working tree.
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+```
+
+`ambiguous argument`、つまり「曖昧な引数」というメッセージが出力され、ご丁寧に「ファイル名の前に`--`をつけてね」というアドバイスまでくれています。
+
+ワーキングツリーに存在している`style.css`であれば`--`なしでも検索できます。
+
+```shell
+$ git log --oneline style.css
+
+4aefdf3 Create style.css
+```
+
+次に、**ファイル名と同じブランチが切られている場合**について検証します。
+
+今、ワーキングツリーには`style.css`がありますから、`style.css`という名前のブランチを切ります。特にコミットはしなくてOKです。
+
+```shell:title=console
+$  git checkout -b style.css
+```
+
+ここで`--`を渡さないで
+
+```shell:title=console
+
+$ git checkout main
+
+$ git log --stat --oneline develop
+
+fatal: ambiguous argument 'develop': both revision and filename
+Use '--' to separate paths from revisions, like this:
+'git <command> [<revision>...] -- [<file>...]'
+```
+
+またしても`ambiguous argument`、「曖昧な引数」のため致命的なエラーが発生しています。「`style.css`ファイルもあるし`style.css`ブランチもあるけど、どっちのこと言ってるの？」と言われています。
+
+`-- style.css`とすることでエラーなく出力されることも確認しておきます。
+
+```shell:title=console
+$ git log --oneline -- style.css
+
+4aefdf3 Create style.css
+```
+
+まとめると、
+
+- 基本的には`--`なしでもパスで履歴を絞れる
+- ただし、削除してワーキングツリーにないファイルで絞る場合には`--`を付与する
+- 万が一ファイル名とブランチ名が被っている場合にも`--`を付与する
+
+と考えていいと思います。
+
+なお、私は常に`--`を付与している派です。
+
+## `--diff-filter`で変更内容でコミットを絞る
+
+`--diff-filter`オプションを付けることで、「ファイルが削除されたコミットだけ」「リネームされたコミットだけ」という風にコミットを出力することができます。
+
+`--diff-filter=D`という風に指定してみます。`D`は`Deleted`のことです。つまり、ファイルが削除されたコミットのみが出力されます。
+
+```shell
+$ git log --oneline --diff-filter=D
+
+d7e6535 (HEAD -> main) Delete index.ejs
+```
+
+`D`以外にも、以下のような値が渡せます。
+
+|値|コミットの内容|
+|---|---|
+|A(Added)|追加|
+|M(Modify)|変更|
+|R(Renamed)|リネーム|
+|C(Copied)|ファイルコピー|
+|T(Type?)|タイプが変更（シンボリックリンクへの変更など）|
+
+```shell
+# ファイルを新しく追加したコミットのみ
+$ git log --oneline --diff-filter=A
+4aefdf3 Create style.css
+fd4955b Create index.html
+
+# ファイルの内容を変更したコミットのみ
+$ git log --oneline --diff-filter=M
+360e27d 2nd Edit index.html
+be1bf08 Edit index.html
+
+# ファイルをリネームしたコミットのみ
+$ git log --oneline --diff-filter=R
+ae45f13 Rename index.html
+
+# ファイルをコピーしたコミットのみ（今回の例では該当なし）
+$ git log --oneline --diff-filter=C
+```
+
+そして、小文字にすることで意味を反転させることができます。つまり、`--diff-filter=d`とすると、削除があったコミット**以外**が出力されます。
+
+```shell
+$ git log --oneline --diff-filter=d
+
+ae45f13 Rename index.html
+
+1edf947 2nd Edit index.html
+
+5a3abbc Create style.css
+
+dc38817 Edit index.html
+
+a81b18d Create index.html
+```
+
 
 ## `--since`と`--until`で日付で絞る
 
@@ -200,3 +434,5 @@ CommitDate: Fri Mar 6 16:27:08 2020 +0900
 まだ後編が残っていますのでぜひ読んでみてください。
 
 # 参考
+
+[git の履歴を柔軟に検索する | Solutionware開発ブログ](https://solutionware.jp/blog/2021/01/29/git-%E3%81%AE%E5%B1%A5%E6%AD%B4%E3%82%92%E6%9F%94%E8%BB%9F%E3%81%AB%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B/)
