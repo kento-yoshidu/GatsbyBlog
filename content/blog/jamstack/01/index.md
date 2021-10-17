@@ -1,7 +1,7 @@
 ---
 title: "JamstackなWebサイトを構築してみた①"
 postdate: "2021-08-06"
-updatedate: "2021-10-01"
+updatedate: "2021-10-17"
 seriesName: "JamstackなWebサイトを構築してみた"
 seriesSlug: "Jamstack"
 description: "いわゆるJamstackなサイトを作成してみて、Jamstackについての諸々が何となく分かってきたので知見を記載します。"
@@ -100,7 +100,9 @@ Jamstackと直接関係があるわけではありませんが、以下のよう
 
 ### GraphQLクライアント
 
-一部のサイトではHeadless CMSからデータを取得する際、GraphQLクライアントとして、Apollo ClientやRaleyなどのライブラリーを使用しています。Gatsby、GridsomeにはGraphQLクライアントが組み込まれていますが、他のSSGにはない（はず）なので、GraphQLでクエリーを投げたい禁断症状に襲われた際はこれらのライブラリーを使用しています。
+一部のサイトではHeadless CMSからデータを取得する際、各種GraphQLクライアントライブラリーを使用しています。今回試したSSGの中で、GatsbyとGridsomeにはGraphQLクライアントが組み込まれていますが、他のSSGには組み込まれていなかった（はず）ので、GraphQLでクエリーを投げたい禁断症状に襲われた際はこれらのライブラリーを使用しています。
+
+- graphql-request（NextJS）
 
 ### Storybook
 
