@@ -149,11 +149,13 @@ console.log(-10.5);
 //=> -10.5
 ```
 
-しかし、先頭に`0`を付けてはいけません。`0`を付けると8進数とみなされます。8進数についてはこの後解説します。
+しかし、先頭に`0`を付けてはいけません。`0`を付けると8進数とみなされ、strictモードではエラーが発生します。8進数についてはこの後解説します。
 
 ```javascript
-console.log(0100)
-//=> 64 ???
+"use strict"
+
+console.log(077)
+//=>SyntaxError: Octal literals are not allowed in strict mode.
 ```
 
 <aside>
@@ -247,9 +249,12 @@ console.log(0o8)
 //=> SyntaxError: Invalid or unexpected token
 ```
 
-ES5までは先頭に`0`を付与して8進数リテラルを表現していたようですが、非常に分かりにくいですね。
+ES5までは先頭に`0`を付与して8進数リテラルを表現していたようですが、非常に分かりにくいですね。ただ、前述しましたが、現在はstrictモード配下ではこの記述方法はエラーになります。
 
 ```javascript
+// "use starict";
+// strictモードの記述をコメントアウト
+
 // これでも8進数
 console.log(011)
 //=> 9
@@ -290,13 +295,21 @@ console.log(314e-2);
 
 [ビットで表す数字の世界～浮動小数点編～ - 半導体事業 - マクニカ](https://www.macnica.co.jp/business/semiconductor/articles/intel/133327/)
 
+## 数値型で正確に扱える最大の数値
+
+何度か言及していますが、数値型は倍精度浮動小数であるため、2^53-1（2の53乗マイナス1）よりも大きい数値を用いて計算した場合、正確に答えを求められない場合があります。
+
+
 ### NaN
 
-次は、ちょっと分かりにくいですが、**数字ではない**ことを表すNaNリテラルです。計算できないものを計算しようとしたときなどに現れます。
+次は、ちょっと分かりにくいですが、**数字ではない**ことを表すNaNです。数字を表しませんが、数値型です。計算できないものを計算しようとしたときなどに現れます。`NaN`というリテラルも用意されています。`typeof`で`number`が返ってくることから、数値型であることが分かります。
 
-例を示した方がわかりやすいですね。数値と文字列の割り算を考えます。
+```javascript
+console.log(NaN);
+//=> NaN
+```
 
-例えば数値型の2を文字列型の2で割った時には1が返ってきます（JavaScriptが気を効かせて文字列を数値に変換した上で計算してくれています。）。ですが、`test`など数値に変換しようのない文字列で割ると`NaN`が返ってきます。
+例えば数値型の2を文字列型の2で割った時には1が返ってきます（JavaScriptが気を効かせて文字列を数値に変換した上で計算してくれています）。ですが、`test`など数値に変換しようのない文字列で割ると`NaN`が返ってきます。
 
 ```javascript
 console.log(2 / "2");
@@ -304,6 +317,33 @@ console.log(2 / "2");
 
 console.log(2 / "test");
 //=> NaN
+```
+
+`NaN`は、自分自身を含む、どんなものとも一致しない（つまり、等価演算子でtrueが返ってこない）という性質を持っています。
+
+```javascript
+console.log(NaN === NaN)
+//=> false
+
+console.log(NaN == NaN)
+//=> false
+
+console.log(NaN === 1)
+//=> false
+
+console.log(NaN === true)
+//=> false
+
+console.log(NaN === false)
+//=> false
+```
+
+```javascript
+console.log(Number.isNaN(NaN));
+//=> true
+
+console.log(Number.isNaN(1 - 'string'));
+//=> true
 ```
 
 ### Infinity
@@ -334,22 +374,32 @@ console.log(num / 10);
 //=> 100000000 # 1億
 ```
 
-また、正の整数リテラルだけではなく、負の数、小数点数、後に紹介するBigIntにも適用可能です。
+また、正の整数リテラルだけではなく、負の数、小数点数、そして後に紹介するBigInt型にも適用可能です。
 
 ```javascript
 // 2進数
 const numBin = 0b1100_0000 + '.' + 0b1010_1000;
 
-console.log(num)
+console.log(numBin);
 //=> 192.168
 
 // 16進数
-const numHex = 0xFF_
+const numHex = 0xFF_FF;
+
+console.log(numHex);
+//=> 65535
+
+const numBig = 111_111_111_111_111_111_111n
+
+console.log(numBig)
+//=> 111111111111111111111n
 ```
 
-
-参考 : [Numlic Separatorのプロポーザル](https://github.com/tc39/proposal-numeric-separator)
 
 ## 参考
 
 [【JavaScript】0011は3じゃない！？2進数、8進数、16進数を表現する数値リテラルについて(知らない人向け) - Qiita](https://qiita.com/isoken26/items/a4fe52cc6015dbf4efed)
+
+[tc39/proposal-numeric-separator: A proposal to add numeric literal separators in JavaScript.](https://github.com/tc39/proposal-numeric-separator)
+
+[JavaScript クイズ解説: NaN === NaN の結果はどうなる？](http://nmi.jp/2021-09-09-NaN)

@@ -1,26 +1,30 @@
 ---
-title: "Iterator"
-postdate: "2021-01-01"
-updatedate: "2021-01-01"
+title: "イテレーター"
+postdate: "2099-01-01"
+updatedate: "2099-01-01"
 categoryName: "JavaScript中級者を目指す"
 categorySlug: "JavaScriptAdvance"
 description: ""
 tags: ["JavaScript", "Iterator"]
 ---
 
-# IterableとIterator
+# イテレーターとジェネレーター
 
-Iterator（イテレーター）とは、「値を一つずつ取り出すことのできるオブジェクト」です。iterateは「繰り返す」「反復する」という動詞ですから、何となく意味は分かりますね。
+今回と次回にわたって、イテレーターとジェネレーターについて解説します。
 
-Iteratorは`next`メソッドを持っており、これを呼ぶたびにIteratorから値が一つずつ順番に返ってきます。
+イテレーターとは、「値を一つずつ取り出すことのできるオブジェクト」です。iterateは「繰り返す」「反復する」という動詞ですから、何となく意味は分かりますね。
 
-ややこしいのは、IteratorとIterableという2つの似たようなものが存在するという事です。まずはiteratorの例を見て、Iteratorが何かという事を考えたいと思います。
+イテレーターはただ一つ`next`メソッドを持っており（ES2021現在）、これを呼ぶたびにイテレーターから値が一つずつ順番に返ってきます。
 
-## Iteratorを使ってみる
+イテレーターを作成するには2種類の作成方法があります。
 
-Iteratorには2種類の作成方法があります。1つ目にGenerator関数を使用する方法、もう一つはIteratorを作成してくれるメソッドを使用する方法です。
+1つ目がイテレーターを作成してくれるメソッドを使用する方法、そしてもう一つがジェネレーター関数を作成し使用する方法です。このように、イテレーターとジェネレーターは紐づいています。ジェネレーター関数については、次の記事で解説します。
 
-後者の方法として`Array.prototype.values`メソッドを使用します。このメソッドは配列をIteratorとして返してくれます。
+<!--ややこしいのは、IteratorとIterableという2つの似たようなものが存在するという事です。まずはiteratorの例を見て、Iteratorが何かという事を考えたいと思います。-->
+
+## イテレーターを使ってみる
+
+何はともあれ、まずはイテレーターを作成してみます。今回は、ビルドインメソッドとして用意されている`Array.prototype.values`を使用します。このメソッドは配列をイテレーターとして返してくれます。
 
 > values() メソッドは、配列の各インデックスの値を含む新しい Array Iterator オブジェクトを返します。
 
@@ -33,11 +37,11 @@ console.log(iterator);
 //=> Object [Array Iterator] {}
 ```
 
-出力してみると`Object [Array Iterator] {}`と出てくるので何だかIteratorっぽいですね。
+出力してみると`Object [Array Iterator] {}`と出てくるので何だかイテレーターっぽいですね。
 
 先ほど、
 
-> iteratorは`next`メソッドを持っており、これを呼ぶたびにイテレーターから値が一つずつ順番に返ってきます。
+> iteratorはただ一つ`next`メソッドを持っており（ES2021現在）、これを呼ぶたびにイテレーターから値が一つずつ順番に返ってきます。
 
 と説明しましたが、これが本当かどうかを検証してみたいと思います。
 
@@ -61,29 +65,38 @@ console.log(iterator.next());
 
 `next()`を呼び出すことで`value`プロパティの値が`1`→`2`→`3`と変化していっており、値を順番に取り出せていることがわかります。
 
-また、4回目の呼び出しの結果は、`value`がundefinedで`done`が`ture`にあっていることも分かります。
+また、4回目の呼び出しの結果は、`value`がundefinedで`done`が`ture`になっていることを覚えておいてください。
 
-## Iteratorの定義
+## イテレーターの定義
 
-では改めて、Iteratorの定義を考えてみたいと思います。
+では改めて、イテレーターの定義を考えてみたいと思います。
 
 1. `next()`を持つオブジェクトである
 2. `next()`を使用することで、自身が持つ値を順番に取り出すことができる
 3. `next()`の戻り値はオブジェクトであり、`value`プロパティと`done`プロパティを持つ
-4. 自身が持つ値は`value`プロパティに格納される
+4. イテレーターが持つ値は`value`プロパティに格納される
 5. 値を全て取り出し終えていない時は`done`プロパティの値はfalseであり、取り出し終えた状態だと`true`である
 
-以上の5つが満たされていればIteratorであると言えます。
+以上の5つが満たされていればイテレーターであると言えます。
 
 上記サンプルコードの`iterator`オブジェクトはこれが全て当てはまっていることが分かります。
 
-なお、`next()`の戻り値であるオブジェクトは、特に**Iteratorリザルト**と呼ばれることがあります。
+なお、`next()`の戻り値であるオブジェクトは、特に**イテレーターリザルト**と呼ばれることがあります。
 
 ## Iteratorを反復処理する
 
 `for-of`にはiterableを渡します。iteratorではありません。
 
 
+## イテラブルなオブジェクト
+
+[Symbol.iterator]() メソッドが実装されている事。メソッドを呼ぶことで新しいイテレーターオブジェクトが返ります。
+
+
+イテラブルなオブジェクトは以下のような方法で処理できます。
+
+- for-of文
+- スプレッド演算子
 
 
 ## `for-of`文
@@ -170,6 +183,8 @@ for (const key of iterableObj) {
 
 [Array.prototype.values() - JavaScript | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/values)
 
+[反復可能なオブジェクト](https://ja.javascript.info/iterable)
+
 https://scleapt.com/javascript_iterator/
 
 [JavaScriptのIteratorとGeneratorを使って反復処理を書く](https://sbfl.net/blog/2016/08/17/javascript-iterator-generator/)
@@ -177,3 +192,13 @@ https://scleapt.com/javascript_iterator/
 https://blog.logrocket.com/javascript-iterators-and-generators-a-complete-guide/#:~:text=With%20the%20introduction%20of%20ES6,object%20that%20follows%20the%20specification.
 
 https://www.javadrive.jp/javascript/start/index1.html
+
+[JavaScriptのイテレータが持つメソッドをそろそろ知っておきたい人が読む記事 - Qiita](https://qiita.com/uhyo/items/cc68e66e4008a66f3d94)
+
+[tc39/proposal-iterator-helpers: Methods for working with iterators in ECMAScript](https://github.com/tc39/proposal-iterator-helpers)
+
+[JavaScript の イテレータ を極める！ - Qiita](https://qiita.com/kura07/items/cf168a7ea20e8c2554c6)
+
+[【javascript】イテラブル - Qiita](https://qiita.com/oouaioi/items/d00fe83800ba613a0de7)
+
+[JavaScriptプログラミング講座【Iterator について】](https://hakuhin.jp/js/iterator.html)

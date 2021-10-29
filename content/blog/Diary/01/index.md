@@ -1,7 +1,7 @@
 ---
 title: "Gatsbyでブログを始めました"
 postdate: "2021-07-24"
-updatedate: "2021-10-01"
+updatedate: "2021-10-29"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "静的サイトジェネレーターのGatsbyを使用してブログを立ち上げました。その経緯と使ってみた所感を記したいと思います。"
@@ -177,8 +177,3 @@ PWAに対応しています。
 まだまだGatsbyを使いこなすという域には達せていませんが、個人的にはまぁまぁ満足いく仕上がりになっているので、このブログをいじり倒すのはこれくらいにしようかと思っています（完璧を追い求めるといつまで経っても終わりませんし）。
 
 このブログには問い合わせフォームがないので、AWS lambda＋AWS SES辺りで実装しようかと思っています。優先度は低いですが。
-
-
-https://qiita.com/Takepepe/items/144209f860fbe4d5e9bb
-
-https://miyauchi.dev/ja/
