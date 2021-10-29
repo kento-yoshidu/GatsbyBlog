@@ -201,6 +201,79 @@ console.log(obj.greeting);
 //=> true
 ```
 
+## 分割代入
+
+分割代入を使用すれば、オブジェクトの各プロパティをそれぞれ別個の変数に入れる作業が簡略化できます。
+
+あるオブジェクトのプロパティにアクセスする際、`オブジェクト.プロパティ`と記入するより、各プロパティの値を別個の変数に入れた方が記述も短くなり、取り回しがしやすくなります。
+
+```javascript
+const data1 = {
+	id: 1,
+	name: 'kento',
+};
+
+const id = data1.id;
+const name = data1.name;
+
+console.log(id); //=> 1
+console.log(name); //=> kento
+```
+
+ES2015で追加された**分割代入**を使えば、各プロパティを別個の変数に代入するという作業が、短く記述できます。
+
+何だか変な形ですが、左オペランドで`{}`の中に変数名を記述します。この時、用意する変数名はオブジェクトのプロパティ名と同じにします。右オペランドにはオブジェクトを記述します。
+
+結果、変数`id`には`data1`オブジェクトの`id`プロパティの値が代入され、変数`name`には`data1`オブジェクトの`name`プロパティの値が代入されます。
+
+```javascript
+const data1 = {
+	id: 1,
+	name: 'kento',
+};
+
+// 分割代入 変数idとnameを定義
+const { id, name } = data1;
+
+console.log(id); //=> 1
+console.log(name); //=> kento
+```
+
+代入する変数の名前は、必ずしもオブジェクトのプロパティ名と一致させる必要はありません。`myId`と`myName`という変数に代入したいのであれば、以下のように記述します。
+
+```javascript
+const data1 = {
+	id: 1,
+	name: 'kento',
+};
+
+const {
+	id: myId,
+	name: myName
+} = data1;
+
+console.log(myId); //=> 1
+console.log(myName); //=> kento
+```
+
+分割代入で`オブジェクトのプロパティ名:変数名`という形式ですね（記述が直感的ではなく、私はあまり使いませんが、、、）。
+
+また、デフォルト引数と組み合わせることもできます。以下の例では、`id`にデフォルト引数`2`を設定しています。
+
+```javascript
+const data1 = {
+	name: 'takashi',
+};
+
+const {
+	id = 2,
+	name
+} = data1;
+
+console.log(id); //=> 2
+console.log(name); //=> takashi
+```
+
 ## Objectが頂点にある
 
 ```javascript
@@ -208,7 +281,7 @@ console.log(Object.prototype.toString);
 //=> [Function: toString]
 ```
 
-プロトタイプメソッド ＝ prototypeオブジェクトに組み込まれている
+プロトタイプメソッド ＝ prototypeオブジェクトに組み込まれているメソッド
 
 `obj`は`Object.prototype`がもつプロパティを継承しています。よって、`toString()`を使用できます。
 

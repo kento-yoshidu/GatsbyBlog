@@ -1,7 +1,7 @@
 ---
 title: "#1 JavaScript中級者を目指そう"
-postdate: "2021-04-09"
-updatedate: "2020-07-02"
+postdate: "2099-01-01"
+updatedate: "2099-01-01"
 seriesName: "JavaScript中級者を目指す"
 seriesSlug: "JavaScriptAdvance"
 description: 
@@ -12,7 +12,7 @@ tags: ["JavaScript"]
 
 入門JavaScriptのシリーズでは「WebページでJavaScriptを動作させる」「JavaScriptで簡単なアプリを作る」ことを目標としていました。
 
-とりあえずJavaScriptを書いて動かすことを最優先にしていたので、**JavaScriptの言語仕様**についてはほとんど触れていませんでしたが、今回はその言語仕様を理解することが目標です。具体的にこんなアプリを作る、といった目標はありません。ただひたすらにJavaScriptの仕様を学んでいくだけです。人によっては退屈な内容に思えるかもしれません。
+とりあえずJavaScriptを書いて動かすことを最優先にしていたので、**JavaScriptの言語仕様**についてはほとんど触れていませんでしたが、今回はその言語仕様を理解することが目標です。「具体的にこんなアプリを作る」といった目標はありません。ただひたすらにJavaScriptの仕様を学んでいくだけです。人によっては退屈な内容に思えるかもしれません。
 
 学習することはJavaScriptについてのほぼ全てで（そうしたいという目標）、目次は以下の通りです（随時更新します）。
 
@@ -23,17 +23,20 @@ tags: ["JavaScript"]
 - [#2 JavaScriptの歴史](/JavaScriptAdvance/02/)
 - [#3 Node.jsのインストール](http://blog.toriwatari.work/JavaScriptAdvance/03/)
 - [#4 JavaScriptの基本的な書き方](http://blog.toriwatari.work/JavaScriptAdvance/04/)
-- [#5 JavaScriptのデータ型(1)](http://blog.toriwatari.work/JavaScriptAdvance/05/)
-- [#6 JavaScriptのデータ型(2)]
-- [#7 プリミティブ値とオブジェクト]
-- [#8 演算子①]
-- [#9 演算子②]
-- [#10 変数]
-- [#11 関数]
-- [#12 Numberオブジェクト]
-- [#13 Stringオブジェクト]
-- [#14 if/else文]
-- [#15 for文とwhile文]
+- [#5 変数]
+- [#6 数値型](http://blog.toriwatari.work/JavaScriptAdvance/05/)
+- [#7 JavaScriptのデータ型(2)]
+- [#8 オブジェクト]
+- [#9 配列]
+- [#9 プリミティブとオブジェクト]
+- [#10 演算子①]
+- [#11 演算子②]
+- [#12 関数]
+- [#11 分割代入]
+- [#13 Numberオブジェクト]
+- [#14 Stringオブジェクト]
+- [#15 if/else文]
+- [#16 for文とwhile文]
 - [#x 非同期処理（コールバック関数）]
 - [#x 非同期処理（Promise）]
 - [#x 非同期処理（async/await）]
@@ -107,7 +110,7 @@ JavaScriptともコアともいえる、ECMAScriptの公式リファレンスで
 
 お勧め度：⭐⭐️⭐⭐️⭐️
 
-個人的に一番お勧めの本です。JavaScriptの基礎や他の言語の経験があった方がいいと思いますが、本格的な書籍の中ではとっつきやすいと思います。
+個人的に一番お勧めの本です。JavaScriptの基礎や他の言語の経験があった方がいいと思いますが、本格的な書籍の中ではとっつきやすいと思います。2~3札目にお勧めです。
 
 実はWebサイトも存在しており、どうやら最新の内容のものを無料で読めるようですが、素晴らしい本なので購入したいですね。
 
@@ -123,7 +126,9 @@ JavaScriptともコアともいえる、ECMAScriptの公式リファレンスで
 
 いわゆるサイ本の7版（英語）です。英語は苦手ですが、文章は平易なのでそんなに苦労せず読めました。ES2020まで対応しています。ページ数はなんと687ページにわたり詳しさは言わずもがなですが、価格が少し高いのがネックです（2021年1月時点で、Amazonで6,500円くらい）。
 
-早く日本語版が出てほしいですね。日本語版がでたら️⭐5です、多分。️
+~早く日本語版が出てほしいですね。日本語版がでたら️⭐5です、多分。️~
+
+2021年12月に日本語版が出るみたいですね。
 
 ### 改訂新版JavaScript本格入門 ～モダンスタイルによる基礎から現場での応用まで
 
@@ -149,15 +154,11 @@ JavaScriptともコアともいえる、ECMAScriptの公式リファレンスで
 
 入門と題してありますが、JavaScriptを触ったことがない初心者がいきなりこれを読むと挫折します。変数の説明の前にBabelの説明から始まりますから。
 
-
-
 ### 現代の JavaScript チュートリアル(サイト)
 
 ### https://jsprimer.net/
 
-
-
-
 # 参考
 
 [JavaScript ベスト・オブ・ザ・イヤー 2020](https://risingstars.js.org/2020/ja)
+

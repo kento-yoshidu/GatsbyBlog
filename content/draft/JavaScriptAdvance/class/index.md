@@ -1,13 +1,22 @@
 ---
-title: "class構文"
-postdate: "2021-07-16"
-updatedate: "2021-07-16"
-categoryName: "JavaScript中級者を目指す"
-categorySlug: "JavaScriptAdvance"
-description: "JavaScriptの持つデータ型について解説します。長くなってしまうので前後2つの記事に分けて解説します。"
-tags: ["JavaScript", "class"]
-draft: true
+title: "クラス"
+postdate: "2099-01-01"
+updatedate: "2099-01-01"
+seriesName: "JavaScript中級者を目指す"
+seriesSlug: "JavaScriptAdvance"
+description: 
+tags: ["JavaScript"]
 ---
 
-静的メソッドの`this`はクラス自身を参照する。
+```javascript
+class Point {
+	constructor(x, y) {
+		this.x = x;
+		this.y = y;
+	}
+}
 
+const myPoint = new Point(10, 20);
+
+console.log(myPoint); //=> true
+```
