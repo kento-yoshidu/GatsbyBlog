@@ -12,19 +12,6 @@ const TableStyles = require("../styles/tableOfContent.module.scss")
 import "prismjs/themes/prism-tomorrow.css"
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
-/*
-// custom typefaces
-import "typeface-montserrat"
-import "typeface-merriweather"
-// normalize CSS across browsers
-import "./src/normalize.css"
-// custom CSS styles
-
-// Highlighting for code blocks
-import "prismjs/themes/prism.css"
-
-*/
-
 type Props = {
   data: GatsbyTypes.BlogPostBySlugQuery
   location: {
@@ -88,7 +75,7 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
             to={next?.fields?.slug}
             className={Styles.after}
           >
-            <h2>後の記事 →</h2>
+            <h2>次の記事 →</h2>
             <p className={Styles.title}>
               {next?.frontmatter?.title}
             </p>

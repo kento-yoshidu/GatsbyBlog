@@ -14,6 +14,16 @@
 	}
 }
 
+@media screen and (max-width: 768px) {
+	.dateInfo {
+    margin-top: 20px;
+    font-size: 1.3rem;
+    time {
+      margin-left: 15px;
+    }
+  }	
+}
+
 .main {
 	width: 50%;
 	margin: 50px auto 100px;
@@ -59,7 +69,7 @@
 @media screen and (max-width: 768px) {
 	.main {
 		width: 90%;
-		margin: 50px auto;
+		margin: 30px auto 50px;
 
 		h2 {
 			margin-bottom: 30px;
