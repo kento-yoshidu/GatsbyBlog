@@ -3,15 +3,17 @@
 .tableOfContent {
 	width: 30%;
 	margin-top: 80px;
+	margin-right: 30px;
 	ul {
-		list-style: none;
 		position: -webkit-sticky;
     position: sticky;
     top: 9vh;
 		padding-left: 15px;
+		list-style: none;
 		li {
-      font-size: 1.7rem;
       margin-bottom: 16px;
+      font-size: 1.7rem;
+			line-height: 1.6;
       p {
         margin-bottom: 14px;
       }

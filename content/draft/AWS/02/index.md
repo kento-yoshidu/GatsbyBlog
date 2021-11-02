@@ -75,18 +75,41 @@ VPCがVPC外のリソースと通信するにはVPCエンドポイントを経�
 
 ### セキュリティグループ
 
-以下、SG。インスタンスへのアクセスの制御を行う。デフォルトでは全ての通信が拒否されるため、自分で穴を開ける必要がある。
+以下、SG。**EC2インスタンスのアクセス制御**を行う。デフォルトでは**全ての通信が拒否される**ため、自分で穴を開ける必要がある。許可のみを設定（拒否設定はできない）。
 
-ステートフル。つまり、インバウンドを許可すればアウトバウンドも許可されることになる。
+ルールはステートフル。つまり、インバウンドを許可すればアウトバウンドも許可される。
 
 ### ネットワークACL
 
-SGがインスタンスへのアタッチだったのに対し、ネットワークACLは**サブネット**にアタッチする。
+SGがEC2インスタンスへのアタッチだったのに対し、ネットワークACLは**サブネット**にアタッチする。デフォルトのでは全ての通信を許可する。自分で作ったときは全て拒否。
 
 一つのネットワークACLは**複数のサブネットに適用可能**。ただし、一つのサブネットには一つのネットワークACLしか関連付けできない。
 
 VPCを作成した際、自動的にネットワークACLが作成される。以下、これをデフォルトのネットワークACLと呼ぶ。
 
+ステートレス。双方向通信したいならインバウンド/アウトバウンドの両方を許可する必要がある。また、アウトバウンドにはエフェラメルポートを許可すること。
+
+![](./images/エフェラメル.png)
+
+## Direct Connect
+
+オンプレミスとの接続は、VPNを使うか専用線接続（Direct Connect）を使うか。
+
+**Direct Connect ロケーション**に自社の機器を設置し、**Direct Connect デバイス**と接続、
+
+
+## Direct Connect Gateway
+
+リージョン間での通信が可能。
+
+## VPC Peering
+
+VPC間での接続を可能にする。
+## VPCエンドポイント
+
+グローバルIPアドレスを持つAWSサービスに対して、VPCからアクセスするための出口。
+
+## 
 
 
 https://aws.amazon.com/jp/about-aws/global-infrastructure/
@@ -94,3 +117,5 @@ https://aws.amazon.com/jp/about-aws/global-infrastructure/
 https://business.ntt-east.co.jp/content/cloudsolution/column-54.html
 
 https://dev.classmethod.jp/articles/vpc-endpoint-gateway-type/
+
+https://blog.serverworks.co.jp/2021/04/05/100639
