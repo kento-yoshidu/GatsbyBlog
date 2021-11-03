@@ -1,38 +1,80 @@
 ---
 title: "#3 git logでコミット履歴を見る(中編)"
 postdate: "2021-10-01"
-updatedate: "2021-10-11"
+updatedate: "2021-11-03"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: ""
 tags: ["git"]
 ---
 
-# git logの基本的なオプション（中編）
+# git logのオプション（中編）
 
 前回の記事でも中々の数の`git log`のオプションを紹介しましたが、まだまだ続きます。
 
-前回はコミットについて「どういった内容を出力するか」を選択するようなオプションを紹介しました。今回は「どのコミットを出力するか」という、コミットを絞るようなオプションを紹介します。例えば、「2020年のコミットだけを出力する」「`index.html`を変更したコミットだけを出力する」といった具合です。
+前回はコミットについて「どういった内容を出力するか」を選択するようなオプションを紹介しました。対して今回は、「どのコミットを出力するか」という、コミットを絞るようなオプションを紹介します。例えば、「2020年のコミットだけを出力する」「`index.html`を変更したコミットだけを出力する」といった具合です。
 
 ## リポジトリの再現
 
-前回作成したリポジトリを引き続き使用します。以下のスクリプトを実行することで、リポジトリを再現することができます。
+前回作成したリポジトリを引き続き使用します。以下の内容を実行することで、リポジトリを再現することができます。
 
 <details>
-  <summary>スクリプトを見る</summary>
+<summary>スクリプトを見る</summary>
+
+```shell
+  # index.htmlを作成 
+  touch index.html
+  git add .
+  git commit -m "Create index.html"
+
+  # index.htmlを編集
+  echo -e "aaa\nbbb\nccc" >> index.html
+  git add .
+  git commit -m "Edit index.html"
+
+  # style.cssを作成
+  touch style.css
+  git add .
+  git commit -m "Create style.css"
+
+  # index.htmlを編集
+  echo -e "aaaaaa\nbbb" > index.html
+  git add .
+  git commit -m "2nd Edit index.html"
+
+  # index.htmlをejsファイルに変更
+  git mv index.html index.ejs
+  git commit -m "Rename index.html"
+
+  # index.ejsを削除
+  git rm index.ejs
+  git commit -m "Remove index.ejs"
+```
 </details>
 
 ## `-n <number>`でコミット数を絞る
 
 例えば`-n 1`なら1コミット、`-n 10`なら10コミット出力されます。もしくは、`-10`のように`-`に続けて数値を打っても構いません。
 
-とりあえず直近のコミットを確認したい時、`git log`と打って何百とコミットが出力されるとうっとうしいので、エイリアスで最初からコミット数上限を指定しています。
-
+```console
+$ git log -n 2 --oneline
+8359ebb (HEAD -> master, style.css) Remove index.ejs
+ae45f13 Rename index.html
 ```
+
+とりあえず直近のコミットを確認したい時、`git log`と打って何百とコミットが出力されるとうっとうしいので、私はエイリアスで最初からコミット数上限を10に指定しています。
+
+```shell
+[alias]
+  # コミット数をデフォルトで10に制限
+  lol = log --all --graph --oneline -10
+```
+
+なお、10よりもさらに多くのコミットを確認したい場合は、コマンド実行時に`git lol -n 30`などと指定すればその数だけコミットが出力されます。
 
 ## `--grep`でコミットメッセージで検索する
 
-`--grep="任意の文字"`とすることで、コミットメッセージによってコミットを検索することができます。
+`--grep="任意の文字"`とすることで、コミットメッセージによってコミットを検索することができます。以下の例だと、コミットメッセージに`Rename`が含まれているコミットが出力されます。
 
 ```shell
 $ git log --oneline --grep="Rename"
@@ -40,7 +82,7 @@ $ git log --oneline --grep="Rename"
 cb039c3 (HEAD -> main) Rename index.html
 ```
 
-なお、`--grep`のみで検索すると、case sensitive、つまり、アルファベットの大文字小文字が区別されます。`--grep="rename"`とすると出力されません。
+なお、`--grep`のみで検索するとcase sensitive、つまり、アルファベットの大文字小文字が区別されます。例えば`--grep="rename"`とすると出力されません。
 
 ```shell
 $ git log --oneline --grep="rename"
@@ -51,7 +93,7 @@ $ git log --oneline --grep="rename"
 ```shell
 $ git log --oneline -i --grep="Rename"
 
-cb039c3 (HEAD -> main) Rename index.html
+ae45f13 Rename index.html
 ```
 
 ### ORとAND
@@ -66,7 +108,7 @@ ae45f13 Rename index.html
 a81b18d Create index.html
 ```
 
-これを**AND**にしたい場合、`--all-match`を付与します。以下の例だと、`Create`と`html`が両方含まれているコミットが出力されます。
+これを**AND**にしたい場合、`--all-match`を付与します。以下の例だと、`Create`と`html`が**両方含まれている**コミットが出力されます。
 
 ```shell
 # ID修正
@@ -81,9 +123,10 @@ a81b18d Create index.html
 ```shell:title=console
 # index.ejsのみ
 $ git log --oneline -- index.ejs
-d7e6535 (HEAD -> main) Delete index.ejs
 
-cb039c3 Rename index.html
+8359ebb (HEAD -> master, style.css) Remove index.ejs
+
+ae45f13 Rename index.html
 
 # style.cssのみ
 $ git log --oneline -- style.css
@@ -93,13 +136,13 @@ $ git log --oneline -- style.css
 
 なお、パスの前に`--`を付与していますが、これは`git log`に「渡しているのはファイル名だよ」と伝える意味を持っています。
 
-### あれ？index.htmlが引っかからないけど。。。
+### あれ？index.htmlが引っかからないけど
 
-今回は途中で`index.html`から`index.ejs`にファイル名を変更しています。`-- index.ejs`で検索しても、`index.html`が対象のコミットは出力されません。
+今回の例では、`index.html`から`index.ejs`にファイル名を変更しています。`-- index.ejs`で検索しても、`index.html`が対象のコミットは出力されません。
 
 ![キャプチャ](./images/image02.png)
 
-そういう時は`--follow`オプションを付けてください。変更前のindex.htmlも検索してくれます。
+今回のように、既にワーキングツリーに存在してないファイルも検索したい場合は、`--follow`オプションを付けてください。変更前のindex.htmlも検索対象になります。
 
 なお、引数の順番は注意が必要です。`--follow -- ファイル名`としなければ旧ファイルが検索されませんでした（git version 2.22.0）。
 
@@ -136,7 +179,7 @@ Use '--' to separate paths from revisions, like this:
 'git <command> [<revision>...] -- [<file>...]'
 ```
 
-`ambiguous argument`、つまり「曖昧な引数」というメッセージが出力され、ご丁寧に「ファイル名の前に`--`をつけてね」というアドバイスまでくれています。
+`ambiguous argument`、つまり「曖昧な引数」というメッセージが出力され、ご丁寧に「ファイル名の前に`--`をつけてね」というアドバイスまでくれています。どうやら、削除やリネームを行って、ワーキングツリーに存在しなくなったファイルを検索する場合には`--`が必要らしいです。
 
 ワーキングツリーに存在している`style.css`であれば`--`なしでも検索できます。
 
@@ -146,7 +189,7 @@ $ git log --oneline style.css
 4aefdf3 Create style.css
 ```
 
-次に、**ファイル名と同じブランチが切られている場合**について検証します。
+次に、ファイル名と同じブランチが切られている場合について検証します。
 
 今、ワーキングツリーには`style.css`がありますから、`style.css`という名前のブランチを切ります。特にコミットはしなくてOKです。
 
@@ -154,7 +197,7 @@ $ git log --oneline style.css
 $  git checkout -b style.css
 ```
 
-ここで`--`を渡さないで
+ここで`--`を渡さないで`git log`を実行すると
 
 ```shell:title=console
 
@@ -179,9 +222,9 @@ $ git log --oneline -- style.css
 
 まとめると、
 
-- 基本的には`--`なしでもパスで履歴を絞れる
-- ただし、削除してワーキングツリーにないファイルで絞る場合には`--`を付与する
-- 万が一ファイル名とブランチ名が被っている場合にも`--`を付与する
+- 🤔 基本的には`--`なしでもファイルでコミットを絞れる
+- 🤔 ただし、ワーキングツリーにないファイルで絞る場合には`--`を付与する
+- 🤔 ファイル名とブランチ名が被っている場合にも`--`を付与する
 
 と考えていいと思います。
 
@@ -228,7 +271,7 @@ ae45f13 Rename index.html
 $ git log --oneline --diff-filter=C
 ```
 
-そして、小文字にすることで意味を反転させることができます。つまり、`--diff-filter=d`とすると、削除があったコミット**以外**が出力されます。
+そして、値を小文字にすることで意味を反転させることができます。つまり、`--diff-filter=d`とすると、削除があったコミット**以外**が出力されます。
 
 ```shell
 $ git log --oneline --diff-filter=d
@@ -243,7 +286,6 @@ dc38817 Edit index.html
 
 a81b18d Create index.html
 ```
-
 
 ## `--since`と`--until`で日付で絞る
 
@@ -398,8 +440,6 @@ fa906d1 dev commit
 4f4d558 initial commit
 ```
 
-### -oを付けた時
-
 ## AuthorやCommitterで絞る
 
 これはそのまま、`--author="〇〇"`、`--committer="〇〇"`の形で記述できます。
@@ -425,7 +465,86 @@ CommitDate: Fri Mar 6 16:27:08 2020 +0900
     create index.html
 ```
 
-## 感想
+## コミット履歴の作り直し
+
+さて、ここからは別のリポジトリを使って解説します。以下のコマンドを順に実行すれば、リポジトリを再現できます。
+
+まずは`script.js`を作成、以下の内容を記述します。
+
+```javascript
+const func = (str)=> {
+  console.log(str)
+};
+
+const temp = "Hello World";
+
+func(temp);
+```
+
+この`script.js`をコミットします。
+
+```shell
+$ git add .
+
+$ git comm-t -m "func関数を作成";
+```
+
+次に、`temp`という変数名がまずいという事で、`message`という変数名に変えたとしましょう。
+
+```javascript
+...(略)
+
+const message = "Hello World";
+
+...(略)
+```
+
+これもコミットします。
+
+```shell
+$ git add .
+
+$ git commit -m "変数名を変更"
+```
+
+## -Sで特定の文字列の変更で絞る
+
+`-S`オプションの後に任意の文字列を渡すことで、その文字列が記述された／変更された／削除されたコミットを出力させることができます。今回の例で言うと「messageって変数名っていつ記述されたんだっけ？」を調べることができます。
+
+```shell
+$ git log --oneline -S message
+
+b7a09d0 (HEAD -> master) 変数名を変更
+```
+
+この`-S`オプションは、変更内容を確認する`-p`（前回勉強しましたね）と一緒に渡すと、具体的にどんな変更があったかを確認できるのでより効果的です。
+
+```shell
+$ git log --oneline -S message -p
+b7a09d0 (HEAD -> master) 変数名を変更
+diff --git a/script.js b/script.js
+index 2dc2d56..095c14d 100644
+--- a/script.js
++++ b/script.js
+@@ -2,7 +2,7 @@ const func = (str) => {
+   console.log(str);
+ };
+
+-const temp = "Hello World";
++const message = "Hello World";
+
+ func(temp);
+```
+
+## まとめ
+
+|オプション名|出力|
+|---|---|
+|-n|出力数を絞る|
+|--|ファイルパスで絞る|
+|--diff-filter|変更内容で絞る|
+|--since, --until|特定の日付以降または以前で絞る|
+
 
 オプションはかなりの種類がありますね。前編と中編で結構な数のオプションを紹介しましたが、これでも全体の一部に過ぎません。
 

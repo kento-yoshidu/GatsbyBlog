@@ -1,7 +1,7 @@
 ---
 title: "JamstackなWebサイトを構築してみた①"
 postdate: "2021-08-06"
-updatedate: "2021-10-29"
+updatedate: "2021-11-03"
 seriesName: "JamstackなWebサイトを構築してみた"
 seriesSlug: "Jamstack"
 description: "Jamstackなサイトを作成してみて、Jamstackについての諸々が何となく分かってきたので知見を記載します。"
@@ -20,7 +20,7 @@ tags: ["Jamstack", "HeadlessCMS", "SSG"]
 
 <aside>
 
-上から3番目以降はサンプル（お試し）で作成しており、内容やブログ記事を定期的に更新とかしているわけではありません。
+4番目以降はサンプル（お試し）で作成しており、内容やブログ記事を定期的に更新とかしているわけではありません。
 
 </aside>
 
@@ -33,8 +33,8 @@ tags: ["Jamstack", "HeadlessCMS", "SSG"]
 |No|サイト名|SSG|コンテンツ管理|ホスティング|
 |---|---|---|---|---|
 |1|[ポートフォリオサイト](https://ps.toriwatari.work)|Gatsby|tsxファイル|AWS Amplify|
-|2|鳥に生まれることができなかった人へ<br>（このサイト）|Gatsby|マークダウンファイル|AWS Amplify|
-|3|[CSS Animation & Tips](https://cssanimation.toriwatari.work/)|Gatsby|mdxファイル|AWS Amplify|
+|2|[CSS Animation & Tips](https://cssanimation-and-tips.netlify.app/)|Gatsby|mdxファイル|Netlify|
+|3|鳥に生まれることができなかった人へ<br>（このサイト）|Gatsby|マークダウンファイル|AWS Amplify|
 |4|[Gatsby-microCMS-Site](https://gatsby-micro-cms.vercel.app/)|Gatsby|microCMS|Vercel|
 |5|[Gatsby-contentful-Site](https://gatsbycafesite.netlify.app/)|Gatsby|Contentfull|Netlify|
 |6|Gatsby-graphCMS-Site|Gatsby|graphCMS|未定|

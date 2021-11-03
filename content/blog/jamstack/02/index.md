@@ -1,7 +1,7 @@
 ---
 title: "JamstackなWebサイトを構築してみた② Jamstackについて"
 postdate: "2021-09-03"
-updatedate: "2021-09-20"
+updatedate: "2021-11-03"
 seriesName: "JamstackなWebサイトを構築してみた"
 seriesSlug: "Jamstack"
 description: "いわゆるJamstackなサイトを作成してみて、何となく分かってきたので知見を記載します。"
@@ -38,11 +38,11 @@ JAMStackのニュアンスだけ残して構成技術は限定しない、とい
 
 参考 : [[英語]>Discussion: jamstack word treatment · Issue #279 · jamstack/jamstack.org](https://github.com/jamstack/jamstack.org/issues/279)
 
-## 従来のWebサイトとの違い
+## Jamstackのメリット
 
 ここまで述べてきたように、Jamstackという言葉は特定の技術の組み合わせを指すものではなく、もっと抽象的なアーキテクチャの考え方を表すものであると考えています。
 
-ここからはJamstackについて、従来のWebサイトの構成との違いから考えたいと思います。当サイトと同じようなブログを展開しているWebサイトを題材にします。
+そこで、Jamstackがどのようなものか、**従来のWebサイトの構成との違い**を元に考えたいと思います。当サイトと同じようなブログを展開しているWebサイトを題材にします。
 
 <aside>
 
@@ -70,13 +70,13 @@ Jamstackでは**コンテンツの更新があった時**に、SSGを利用し�
 
 いわば、ユーザーへWebサイトを公開する前の準備段階です。
 
-そして、CDNのサーバーへデータコピーが完了したら、ユーザーからのアクセスが可能になります。①HTTPリクエストを投げ、②静的ファイルを返す、という単純な流れがあるのみです。
+そして、CDNのサーバーへデータコピーが完了したら、ユーザーからのアクセスが可能になります。ここまで来たら、あとは①HTTPリクエストを投げ、②静的ファイルを返す、という単純な流れがあるのみです。
+
+DBサーバーへのアクセスが丸ごとなくなり、レスポンスまでの工程が減少し高速なアクセスが可能であることが分かると思います。
 
 ![](./images/image03.png)
 
-## Jamstackを利用するメリット
-
-### SSGとCDNによる高速なWebサイト表示
+### CDNによる高速なWebサイト表示
 
 JamstackではCDNというサービスを使用して、SSGで出力した静的なファイルを配信します。
 
@@ -166,14 +166,22 @@ SSGは「前もって静的ファイルを生成する」という仕様上、�
 
 ## 参考
 
-[Jamstackとは何か？まずは基本を理解しよう！ | microCMSブログ](https://blog.microcms.io/jamstack-introduction/)
-
 [What is the Jamstack? | Jamstack](https://jamstack.org/what-is-jamstack/)
 
 [What Is The Jamstack? | Gatsby](https://www.gatsbyjs.com/docs/glossary/jamstack/#gatsby-skip-here)
 
 [Welcome to the Jamstack | What, Why, and How of Jamstack](https://www.netlify.com/jamstack/#main)
 
+[Jamstackとは何か？まずは基本を理解しよう！ | microCMSブログ](https://blog.microcms.io/jamstack-introduction/)
+
+[Jamstackとは？ | 株式会社ピクセルグリッド](https://www.pxgrid.com/jamstack/)
+
+[これだけ読めばOK！ JAMstackのすべてがわかります ｜ monotein](https://monotein.com/blog/what-is-jamstack)
+
+[Jamstack とは？なぜ今 Jamstack なのか？ | Dyno](https://dyno.design/articles/what-is-jamstack/)
+
 [モダンWeb開発「JAMstack」を実践 | ShareCOM](https://sharecom.depart-inc.com/tips/depart-engineering-jamstack/)
 
 [インフラエンジニアが見るJAMStack - NRIネットコム Design and Tech Blog](https://tech.nri-net.com/entry/2021/03/31/115504)
+
+[Jamstackって何なの？何がいいの？ - Qiita](https://qiita.com/ozaki25/items/4075d03278d1fb51cc37)
