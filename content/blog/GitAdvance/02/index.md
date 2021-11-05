@@ -1,7 +1,7 @@
 ---
 title: "#2 git logでコミット履歴を見る(前編)"
 postdate: "2021-09-04"
-updatedate: "2021-11-03"
+updatedate: "2021-11-05"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git log のオプションは多岐にわたります。入門書に載っている基本的で有名なものからちょっとマニアックなものまで、できるだけ例を踏まえて紹介します。"
@@ -265,7 +265,7 @@ bbb
 [-ccc-]
 ```
 
-`aaa`と`aaaaaa`が同じ行で、`[-...-]`と`{+...+}`で表現されています。これにより変更内容が分かりやすくなった…気がしませんか🤔?私はあまり使いませんが。
+`aaa`と`aaaaaa`が同じ行で、`[-...-]`と`{+...+}`で表現されています。これにより変更内容が分かりやすくなった…気がしませんか🤔？私はあまり使いませんが。
 
 ## `--stat`で変更内容を簡易的に確認する
 
@@ -395,7 +395,7 @@ d7e6535 (HEAD -> main) Delete index.ejs
 
 長くなりましたので今回は以上です。中編に続きます。
 
-## 参考 AuthorとCommitterの違い🤔
+## 【参考】 AuthorとCommitterの違い🤔
 
 私は
 
@@ -429,17 +429,7 @@ CommitDate: Fri Feb 28 11:15:26 2020 +0900
 
 - [git-log Documentation](https://git-scm.com/docs/git-log)
 
-- [gitでrename&modifyしたファイルのログを追跡できるようにしたい場合](https://qiita.com/yukimura1227/items/fbb076db61a2e43a32e3)
-
 - [git diff --name-status で出る R100 って何？](https://stakiran.hatenablog.com/entry/2019/01/14/072206)
 
 - [Advanced Git log](https://www.atlassian.com/ja/git/tutorials/git-log)
-
-- [Git で変更内容にある文字列が含まれているコミットを検索する (git log -G/-S) | まくまくGitノート](https://maku77.github.io/git/log/pickaxe.html)
-
-- [Gitで過去に削除したファイルを検索、復元させる方法](https://rcmdnk.com/blog/2017/10/01/computer-git/)
-
-- [SO](https://stackoverflow.com/questions/6058879/what-do-the-git-pairing-broken-and-unknown-statuses-mean-and-when-do-they-o)
-
-- [git diffの全オプション一覧 - Qiita](https://qiita.com/rana_kualu/items/09d2dd379019b8ef0335)
 
