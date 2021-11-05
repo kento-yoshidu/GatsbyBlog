@@ -14,9 +14,9 @@ tags: ["git"]
 
 前回はコミットについて「どういった内容を出力するか」を選択するようなオプションを紹介しました。対して今回は、「どのコミットを出力するか」という、コミットを絞るようなオプションを紹介します。例えば、「2020年のコミットだけを出力する」「`index.html`を変更したコミットだけを出力する」といった具合です。
 
-## リポジトリの再現
+## リポジトリーの再現
 
-前回作成したリポジトリを引き続き使用します。以下の内容を実行することで、リポジトリを再現することができます。
+前回作成したリポジトリーを引き続き使用します。以下の内容を実行することで、リポジトリーを再現することができます。
 
 <details>
 <summary>スクリプトを見る</summary>
@@ -54,7 +54,7 @@ tags: ["git"]
 
 ## `-n <number>`でコミット数を絞る
 
-例えば`-n 1`なら1コミット、`-n 10`なら10コミット出力されます。もしくは、`-10`のように`-`に続けて数値を打っても構いません。
+`-n`オプションで、出力させるコミット数を指定することができます。例えば`-n 1`なら1コミット、`-n 10`なら10コミット出力されます。もしくは、`-10`のように`-`に続けて数値を打っても構いません。
 
 ```console
 $ git log -n 2 --oneline
@@ -62,7 +62,7 @@ $ git log -n 2 --oneline
 ae45f13 Rename index.html
 ```
 
-とりあえず直近のコミットを確認したい時、`git log`と打って何百とコミットが出力されるとうっとうしいので、私はエイリアスで最初からコミット数上限を10に指定しています。
+とりあえず直近のコミットを確認したい時に`git log`と打って何百とコミットが出力されるとうっとうしいので、私はエイリアスで最初からコミット数上限を10に指定しています。
 
 ```shell
 [alias]
@@ -74,34 +74,55 @@ ae45f13 Rename index.html
 
 ## `--grep`でコミットメッセージで検索する
 
-`--grep="任意の文字"`とすることで、コミットメッセージによってコミットを検索することができます。以下の例だと、コミットメッセージに`Rename`が含まれているコミットが出力されます。
+`--grep=任意の文字`とすることで、コミットメッセージによってコミットを検索することができます。以下の例だと、コミットメッセージに`Rename`が含まれているコミットが出力されます。
 
 ```shell
-$ git log --oneline --grep="Rename"
+$ git log --oneline --grep=Rename
 
 cb039c3 (HEAD -> main) Rename index.html
 ```
 
-なお、`--grep`のみで検索するとcase sensitive、つまり、アルファベットの大文字小文字が区別されます。例えば`--grep="rename"`とすると出力されません。
+なお、`--grep`のみで検索するとcase sensitive、つまり、アルファベットの大文字小文字が区別されます。例えば`--grep=rename`とすると出力されません。
 
 ```shell
-$ git log --oneline --grep="rename"
+$ git log --oneline --grep=rename
 ```
 
 この場合、`-i`（`--regexp-ignore-case`のショートハンド）を付与すると、大文字小文字区別なく出力されます。
 
 ```shell
-$ git log --oneline -i --grep="Rename"
+$ git log --oneline -i --grep=Rename
 
 ae45f13 Rename index.html
 ```
+
+また、検索する文字列には正規表現が使用できます。
+
+```shell
+# 先頭がEのコミットメッセージのみ出力
+$ git log --grep=^E --oneline
+
+dc38817 Edit index.html
+```
+
+`--grep`の結果を反転させる、つまり、`Rename`を含むコミットメッセージを除くには、`--invert-grep`を付与します。
+
+```shell
+$ git log --grep=Rename --invert-grep --oneline
+
+8359ebb (HEAD -> master, style.css) Remove index.ejs
+1edf947 2nd Edit index.html
+5a3abbc Create style.css
+dc38817 Edit index.html
+a81b18d Create index.html
+```
+
 
 ### ORとAND
 
 `--grep`を複数使用した場合、**OR**でコミットが検索されます。以下の例だと、`Rename`もしくは`Create`が含まれているコミットが出力されます。
 
 ```shell
-# ID修正
 $ git log --oneline --grep="Rename" --grep="Create"
 ae45f13 Rename index.html
 5a3abbc Create style.css
@@ -111,7 +132,6 @@ a81b18d Create index.html
 これを**AND**にしたい場合、`--all-match`を付与します。以下の例だと、`Create`と`html`が**両方含まれている**コミットが出力されます。
 
 ```shell
-# ID修正
 $ git log --oneline --all-match --grep="Create" --grep="html"
 a81b18d Create index.html
 ```
@@ -548,10 +568,24 @@ index 2dc2d56..095c14d 100644
 
 オプションはかなりの種類がありますね。前編と中編で結構な数のオプションを紹介しましたが、これでも全体の一部に過ぎません。
 
-他のオプションも色々試したのですが、上手く動かなかったり、そもそも意味が分からないような物もありました（私の理解度の問題かもしれませんが）。
+[リファレンス](https://git-scm.com/docs/git-log)を見ると**鬼のような数**のオプションが載っているのですが、上手く動かなかったりそもそも意味が分からないような物もありました（私の理解度の問題かもしれませんが）。自分で理解して説明できる気がしなかったので、この辺りで終了します。
 
-まだ後編が残っていますのでぜひ読んでみてください。
+といいつつ、まだ後編が残っていますのでぜひ読んでみてください。
 
 # 参考
 
-[git の履歴を柔軟に検索する | Solutionware開発ブログ](https://solutionware.jp/blog/2021/01/29/git-%E3%81%AE%E5%B1%A5%E6%AD%B4%E3%82%92%E6%9F%94%E8%BB%9F%E3%81%AB%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B/)
+- [git-log Documentation](https://git-scm.com/docs/git-log)
+
+- [Git - コミット履歴の閲覧](https://git-scm.com/book/ja/v2/Git-%E3%81%AE%E5%9F%BA%E6%9C%AC-%E3%82%B3%E3%83%9F%E3%83%83%E3%83%88%E5%B1%A5%E6%AD%B4%E3%81%AE%E9%96%B2%E8%A6%A7)
+
+- [git の履歴を柔軟に検索する | Solutionware開発ブログ](https://solutionware.jp/blog/2021/01/29/git-%E3%81%AE%E5%B1%A5%E6%AD%B4%E3%82%92%E6%9F%94%E8%BB%9F%E3%81%AB%E6%A4%9C%E7%B4%A2%E3%81%99%E3%82%8B/)
+
+- [Gitで過去に削除したファイルを検索、復元させる方法](https://rcmdnk.com/blog/2017/10/01/computer-git/)
+
+- [SO](https://stackoverflow.com/questions/6058879/what-do-the-git-pairing-broken-and-unknown-statuses-mean-and-when-do-they-o)
+
+- [git diffの全オプション一覧 - Qiita](https://qiita.com/rana_kualu/items/09d2dd379019b8ef0335)
+
+- [Git で変更内容にある文字列が含まれているコミットを検索する (git log -G/-S) | まくまくGitノート](https://maku77.github.io/git/log/pickaxe.html)
+
+- [gitでrename&modifyしたファイルのログを追跡できるようにしたい場合](https://qiita.com/yukimura1227/items/fbb076db61a2e43a32e3)
