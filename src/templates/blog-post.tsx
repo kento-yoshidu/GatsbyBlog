@@ -42,6 +42,7 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
         postdate={data.markdownRemark?.frontmatter?.postdate}
         updatedate={post?.frontmatter?.updatedate}
         tags={post?.frontmatter?.tags}
+        description={post?.frontmatter?.description}
       />
 
       <div className="LoadAnimation">

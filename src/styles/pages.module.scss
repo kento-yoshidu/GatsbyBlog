@@ -50,9 +50,16 @@
           margin-right: 5px;
         }
 			}
+      .description {
+        svg {
+          margin-right: 5px;
+        }
+      }
 			.series,
-      .tags {
+      .tags,
+      .description {
         font-size: 1.7rem;
+        line-height: 1.5;
         padding: 3px 7px 3px 0px;
         margin-bottom: 5px;
         text-decoration: none;

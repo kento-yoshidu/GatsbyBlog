@@ -8,10 +8,12 @@ import {  faFolder,
           faClock,
           faUndo,
           faTags,
+					faCommentDots
         } from "@fortawesome/free-solid-svg-icons"
 
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
+import { decodedTextSpanIntersectsWith } from "typescript";
 config.autoAddCss = false
 
 type Props = {
@@ -64,6 +66,12 @@ const PostList: React.VFC<Props> = ({postData}) => (
 									>#{ tag }</Link>
 								))}
 							</p>
+
+							<p className={Styles.description}>
+								<FontAwesomeIcon icon={faCommentDots} />
+								{ post.frontmatter.description }
+							</p>
+
 						</div>
 					</div>
 				)

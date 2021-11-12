@@ -105,6 +105,7 @@ export const pageQuery = graphql`
               seriesSlug
               title
               tags
+              description
             }
           }
         }
