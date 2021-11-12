@@ -106,15 +106,15 @@
             margin-bottom: 5px;
           }
         }
-
         .series,
-        .tags {
+        .tags,
+        .description {
+          margin-bottom: 5px;
+          padding: 0;
+          font-size: 1.35rem;
           span {
             margin-right: 10px;
           }
-          font-size: 1.35rem;
-          padding: 0;
-          margin-bottom: 5px;
           a {
             margin: 0 5px;
           }
