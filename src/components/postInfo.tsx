@@ -4,7 +4,7 @@ import { Link } from "gatsby"
 const Styles = require("../styles/postInfo.module.scss")
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClock, faUndo ,faFolder, faTags } from "@fortawesome/free-solid-svg-icons"
+import { faClock, faUndo ,faFolder, faTags, faCommentDots } from "@fortawesome/free-solid-svg-icons"
 
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
@@ -18,6 +18,7 @@ type Props = {
 	updatedate: string
 	series?: string
 	tags?: string
+	description?: string
 }
 
 const PostInfo: React.VFC<Props> = ({
@@ -26,7 +27,8 @@ const PostInfo: React.VFC<Props> = ({
 		seriesName,
 		postdate,
 		updatedate,
-		tags
+		tags,
+		description
 	}) => {
 
 	const tag = tags?.map(tag => {
@@ -68,6 +70,11 @@ const PostInfo: React.VFC<Props> = ({
 			<div className={Styles.tags}>
 				<FontAwesomeIcon icon={ faTags } />
 				{ tag }
+			</div>
+
+			<div className={Styles.description}>
+				<FontAwesomeIcon icon={faCommentDots} />
+				{ description }
 			</div>
 
 		</div>

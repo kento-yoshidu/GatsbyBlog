@@ -39,7 +39,7 @@
       margin-right: 30px;
 			margin-bottom: 0;
       svg {
-        margin-right: 7px;
+        margin-right: 10px;
       }
     }
   }
@@ -51,6 +51,7 @@
     flex-direction: row;
     font-size: 1.8rem;
 		margin-top: 0;
+		margin-bottom: 12px;
     svg {
 			margin-right: 10px;
     }
@@ -63,6 +64,14 @@
         }
         color: #444;
       }
+    }
+  }
+  .description {
+    font-size: 1.7rem;
+    line-height: 1.5;
+    width: 90%;
+    svg {
+      margin-right: 10px;
     }
   }
 }
