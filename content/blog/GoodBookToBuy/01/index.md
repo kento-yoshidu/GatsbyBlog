@@ -1,9 +1,10 @@
 ---
 title: "2020年 買ってよかった本"
 postdate: "2021-10-11"
-updatedate: "2021-10-11"
+updatedate: "2021-11-12"
 seriesName: "xx年買ってよかった本"
 seriesSlug: "GoodBookToBuy"
+description: "2020年に買ってよかった本（技術書系）を紹介します。"
 tags: ["書籍", "Vim", "ネットワーク", "Jamstack", "Gatsby"]
 ---
 

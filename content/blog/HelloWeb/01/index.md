@@ -1,10 +1,10 @@
 ---
 title: "#1 初めてのHTML & CSS"
 postdate: "2021-07-30"
-updatedate: "2021-11-03"
+updatedate: "2021-11-12"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
-description: 
+description: "HTMLとCSSを、何も知らないところから学ぶシリーズです。基本的なPC操作が可能であれば始められます。"
 tags: ["HTML", "CSS"]
 ---
 

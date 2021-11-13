@@ -4,7 +4,7 @@ postdate: "2021-10-01"
 updatedate: "2021-11-03"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
-description: ""
+description: "git logコマンドのオプションを紹介します。今回は出力するコミットを条件によって絞るようなオプションを紹介します。"
 tags: ["git"]
 ---
 
@@ -117,13 +117,13 @@ dc38817 Edit index.html
 a81b18d Create index.html
 ```
 
-
 ### ORとAND
 
-`--grep`を複数使用した場合、**OR**でコミットが検索されます。以下の例だと、`Rename`もしくは`Create`が含まれているコミットが出力されます。
+`--grep`を複数使用した場合、**OR**でコミットメッセージが検索されます。以下の例だと、`Rename`もしくは`Create`が含まれているコミットが出力されます。
 
 ```shell
 $ git log --oneline --grep="Rename" --grep="Create"
+
 ae45f13 Rename index.html
 5a3abbc Create style.css
 a81b18d Create index.html
@@ -133,12 +133,13 @@ a81b18d Create index.html
 
 ```shell
 $ git log --oneline --all-match --grep="Create" --grep="html"
+
 a81b18d Create index.html
 ```
 
 ## `-- <path>`で特定のファイルの履歴を確認する
 
-任意のファイルに変更があったコミットのみ出力する場合には、`-- <ファイル名 もしくは パス>`と記述します。`--stat`や`-p`と組み合わせることも可能です。
+任意のファイルに変更があったコミットのみ出力する場合には、`-- [path]`と記述します。`--stat`や`-p`と組み合わせることも可能です。
 
 ```shell:title=console
 # index.ejsのみ
@@ -162,7 +163,7 @@ $ git log --oneline -- style.css
 
 ![キャプチャ](./images/image02.png)
 
-今回のように、既にワーキングツリーに存在してないファイルも検索したい場合は、`--follow`オプションを付けてください。変更前のindex.htmlも検索対象になります。
+今回のように、既にワーキングツリーに存在していないファイルのコミットも検索したい場合は、`--follow`オプションを付けてください。リネーム前の`index.html`も検索対象になります。
 
 なお、引数の順番は注意が必要です。`--follow -- ファイル名`としなければ旧ファイルが検索されませんでした（git version 2.22.0）。
 
@@ -184,11 +185,9 @@ fd4955b Create index.html
 
 ### パスの前に`--`を付けるのはどんな時？
 
-ファイルやパス記述してコミット履歴を絞るには`--`を付与すると説明しました。「じゃあ付けなかったらどうなるの？」と思うのが人情です。
+ファイルやパスを記述してコミット履歴を絞るには`--`を付与すると説明しましたが、実は`--`はつけなくても、多くの場合はちゃんと動作します。つけなくてはいけない場合について、いくつか検証してみます。
 
-いくつか検証してみます。
-
-現在、`index.ejs`は削除されていますが、ここで`--`をつけずにindex.ejsを指定するとエラーになってしまいます。
+現在、`index.ejs`は削除されていますが、ここで`--`をつけずに`index.ejs`を指定するとエラーになってしまいます。
 
 ```shell
 # -- なしで実行
@@ -434,7 +433,7 @@ Date:   5 months ago   # 5か月前
     2nd commit
 ```
 
-## マージ関係
+## `--merge`と`--no-merge`でマージ関係
 
 `--merges`でマージコミットのみ、`--no-merges`でマージコミットを除外してログを出力します。
 
@@ -460,7 +459,7 @@ fa906d1 dev commit
 4f4d558 initial commit
 ```
 
-## AuthorやCommitterで絞る
+## `--Author`と`--Committer`
 
 これはそのまま、`--author="〇〇"`、`--committer="〇〇"`の形で記述できます。
 
@@ -527,7 +526,7 @@ $ git add .
 $ git commit -m "変数名を変更"
 ```
 
-## -Sで特定の文字列の変更で絞る
+## `-S`で特定の文字列の変更で絞る
 
 `-S`オプションの後に任意の文字列を渡すことで、その文字列が記述された／変更された／削除されたコミットを出力させることができます。今回の例で言うと「messageって変数名っていつ記述されたんだっけ？」を調べることができます。
 
