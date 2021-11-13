@@ -4,7 +4,7 @@ postdate: "2021-08-06"
 updatedate: "2021-10-11"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
-description: 
+description: "HTMLファイルを作成してマークアップを行い、Webページを表示するところまでを説明します。"
 tags: ["HTML","入門"]
 ---
 
@@ -36,7 +36,7 @@ CSSは**Cascading Style Sheets**のことで、Webページを**装飾**する�
 
 このWebサイトはhtmlファイルとcssファイルを組み合わせて作成しています。cssファイルを削除し、**htmlファイルだけ**の状態にすると以下のように変化します。
 
-![HTML&CSSフォルダを選択](./images/image02.png)
+![HTML&CSSフォルダーを選択](./images/image02.png)
 
 緑色の背景や文字の配置位置などがなくなり、不愛想なただの文字の羅列になりました。
 
