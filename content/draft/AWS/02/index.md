@@ -109,7 +109,13 @@ VPC間での接続を可能にする。
 
 グローバルIPアドレスを持つAWSサービスに対して、VPCからアクセスするための出口。
 
-## 
+## Transit Gateway
+
+複数のVPC間を接続。オンプレミスを単一のゲートウェイで接続可能にするサービス。
+
+## VPC Flow Logs
+
+Cloud Watchと連携してログを取得する。
 
 
 https://aws.amazon.com/jp/about-aws/global-infrastructure/
