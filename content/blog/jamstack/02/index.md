@@ -36,7 +36,7 @@ JAMStackのニュアンスだけ残して構成技術は限定しない、とい
 
 似たようなものだとAjaxが挙げられます。Ajaxは当初「AJAX」と表記されていました。「Async JavaScript And XML」の頭文字をとって付けられましたが、実際にはXMLではなくJSONが利用されることが多くなりました。では「AJA**X**」が「AJA**J**」に変わったかというとそうではありません。やっていることは変わらないんだけど、「なにかの頭文字をとったんだな」という風に連想させないように「Ajax」という表記に変わっていきました。
 
-参考 : [[英語]>Discussion: jamstack word treatment · Issue #279 · jamstack/jamstack.org](https://github.com/jamstack/jamstack.org/issues/279)
+参考 : [Discussion: jamstack word treatment · Issue #279 · jamstack/jamstack.org](https://github.com/jamstack/jamstack.org/issues/279)
 
 ## Jamstackのメリット
 
