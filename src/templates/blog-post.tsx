@@ -61,7 +61,8 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
       <nav className={Styles.beforeAndAfter}>
         {previous && (
           <Link
-            to={previous?.fields?.slug} rel="prev"
+            to={previous?.fields?.slug}
+            rel="prev"
             className={Styles.before}
           >
             <h2>← 前の記事</h2>
