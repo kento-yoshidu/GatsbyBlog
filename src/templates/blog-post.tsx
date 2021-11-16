@@ -12,7 +12,7 @@ const TableStyles = require("../styles/tableOfContent.module.scss")
 import "prismjs/themes/prism-tomorrow.css"
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
 
-type Props = {
+interface Props {
   data: GatsbyTypes.BlogPostBySlugQuery
   location: {
     pathname: string

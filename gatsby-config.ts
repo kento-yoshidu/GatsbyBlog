@@ -1,5 +1,4 @@
 import type { GatsbyConfig } from "gatsby"
-import { resolve } from "path"
 
 const plugins: GatsbyConfig['plugins'] = [
   `gatsby-plugin-typescript`,

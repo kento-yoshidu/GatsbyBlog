@@ -10,7 +10,7 @@ import Pagination from "../components/pagination"
 import MobilePagination from "../components/mobilePagination"
 import Footer from "../components/footer"
 
-type Props = {
+interface Props {
   data: GatsbyTypes.PagesQuery,
   pageContext: {
     postCount: number,
