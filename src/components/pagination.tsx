@@ -5,9 +5,9 @@ const Styles = require("../styles/pagination.module.scss")
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-		faChevronCircleLeft,
-		faChevronCircleRight
-	} from "@fortawesome/free-solid-svg-icons"
+	faChevronCircleLeft,
+	faChevronCircleRight
+} from "@fortawesome/free-solid-svg-icons"
 
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"

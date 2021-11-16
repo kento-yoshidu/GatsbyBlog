@@ -1,50 +1,50 @@
 .seriesMain,
 .tagsMain {
-	width: 50vw;
-	margin: 70px auto 100px;
-	.seriesList,
-	.tagList {
-		display: flex;
-		list-style: none;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		.listItem {
-			margin-right: 10px;
-			margin-bottom: 15px;
-			a {
-				display: block;
-				padding: 8px 15px;
-				font-size: 1.7rem;
-				text-decoration: none;
-				color: #444;
-				font-weight: 900;
-				transition: .3s;
-				border: 2px solid #888;
-				border-radius: 3px;
-			}
-		}
-	}
-	.tagList {
-		.listItem {
-			margin-right: 5px;
-		}
-	}
+  width: 50vw;
+  margin: 70px auto 100px;
+  .seriesList,
+  .tagList {
+    display: flex;
+    list-style: none;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    .listItem {
+      margin-right: 10px;
+      margin-bottom: 15px;
+      a {
+        display: block;
+        padding: 8px 15px;
+        font-size: 1.7rem;
+        text-decoration: none;
+        color: #444;
+        font-weight: 900;
+        transition: .3s;
+        border: 2px solid #888;
+        border-radius: 3px;
+      }
+    }
+  }
+  .tagList {
+    .listItem {
+      margin-right: 5px;
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
-	.seriesMain,
-	.tagsMain {
-		width: 88vw;
-		.seriesList,
-		.tagList {
-			.listItem {
-				margin-right: 8px;
-				margin-bottom: 12px;
-				a {
-					padding: 6px 10px;
-					font-size: 1.2rem;
-				}
-			}
-		}
-	}
+  .seriesMain,
+  .tagsMain {
+    width: 88vw;
+    .seriesList,
+    .tagList {
+      .listItem {
+        margin-right: 8px;
+        margin-bottom: 12px;
+        a {
+          padding: 6px 10px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
 }
