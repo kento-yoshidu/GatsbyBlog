@@ -8,7 +8,7 @@ import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import Pagination from "../components/pagination"
 
-type Props = {
+interface Props {
   data: GatsbyTypes.TagQuery
   pageContext: {
     postCount: number,

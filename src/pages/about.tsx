@@ -14,24 +14,24 @@ import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
 type Props = {
-	location: {
-		pathname: string
-	}
+  location: {
+    pathname: string
+  }
 }
 
 const AboutPage: React.VFC<Props> = ({ location }) => {
-	const pagepath=location.pathname
+  const pagepath=location.pathname
 
-	return (
-		<Layout>
-			<Seo
+  return (
+    <Layout>
+      <Seo
         title="このブログについて"
-				pagepath={pagepath}
-			/>
+        pagepath={pagepath}
+      />
 
-			<Header
-				pageTitle="このブログについて"
-			/>
+      <Header
+        pageTitle="このブログについて"
+      />
 
       <div className={Styles.dateInfo}>
         <FontAwesomeIcon icon={faUndo} />
@@ -39,8 +39,8 @@ const AboutPage: React.VFC<Props> = ({ location }) => {
         <time>2021.10.11</time>
       </div>
 
-			<main className={Styles.main}>
-				<section>
+      <main className={Styles.main}>
+        <section>
           <h2>このブログは何なのか</h2>
           <p>このブログは<a href="https://github.com/kento-yoshidu/">私</a>の個人ブログです。</p>
           <p>Gatsbyという静的サイトジェネレーターを使用して作成しました。Githubのリポジトリは<a href="https://github.com/kento-yoshidu/GatsbyBlog/" target="_blink">こちら(外部リンク)</a>です。</p>
@@ -79,9 +79,9 @@ const AboutPage: React.VFC<Props> = ({ location }) => {
           <p>個人的な感覚ですが、「投稿日」や「更新日時」が記載されていないページはあまり参考にする気が起きません。これは技術情報だけではなくて、商品のレビューをしているものや、個人の日記のようなものも含めです。私はページを訪れた際、タイトルの次に自然と日時情報を確認します。</p>
           <p>「SEOに有利だから」<strong>ではなく</strong>、ユーザーに日時情報を伝えるため、「更新されている」ないし「更新されていない」ことを知らせるため、日時情報は多くのページで必須だと思っています。</p>
         </section>
-			</main>
-		</Layout>
-	)
+      </main>
+    </Layout>
+  )
 }
 
 export default AboutPage

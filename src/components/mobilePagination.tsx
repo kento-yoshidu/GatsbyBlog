@@ -16,69 +16,69 @@ import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
 type Props = {
-	isFirst: boolean,
-	isLast: boolean,
-	currentPage: number,
-	pageCount: number
+  isFirst: boolean,
+  isLast: boolean,
+  currentPage: number,
+  pageCount: number
 }
 
 const MobilePagination: React.VFC<Props> = ({
-	isFirst,
-	isLast,
-	currentPage,
-	pageCount
+  isFirst,
+  isLast,
+  currentPage,
+  pageCount
 }) => {
 
-	let topButton,
-			lastButton,
-			prevButton,
-			nextButton
+  let topButton,
+      lastButton,
+      prevButton,
+      nextButton
 
-	if (!isFirst) {
-		topButton =
-			<Link
-				to={`/page/1/`}
-				className={Styles.topButton}
-			>
-				<FontAwesomeIcon icon={faAngleDoubleLeft} />
-			</Link>
+  if (!isFirst) {
+    topButton =
+      <Link
+        to={`/page/1/`}
+        className={Styles.topButton}
+      >
+        <FontAwesomeIcon icon={faAngleDoubleLeft} />
+      </Link>
 
-		prevButton =
-		<Link
-			className={Styles.prevButton}
-			to={`/page/${currentPage - 1}/`}
-			rel="prev"
-		>
-			<FontAwesomeIcon icon={faAngleLeft} />
-		</Link>
-	}	
+    prevButton =
+    <Link
+      className={Styles.prevButton}
+      to={`/page/${currentPage - 1}/`}
+      rel="prev"
+    >
+      <FontAwesomeIcon icon={faAngleLeft} />
+    </Link>
+  }	
 
-	if(!isLast) {
-		lastButton =
-			<Link
-				to={`/page/${pageCount}/`}
-				className={Styles.lastButton}
-			>
-				<FontAwesomeIcon icon={faAngleDoubleRight} />
-			</Link>
+  if(!isLast) {
+    lastButton =
+      <Link
+        to={`/page/${pageCount}/`}
+        className={Styles.lastButton}
+      >
+        <FontAwesomeIcon icon={faAngleDoubleRight} />
+      </Link>
 
-		nextButton =
+    nextButton =
       <Link
         to={`/page/${currentPage + 1}/`}
         className={Styles.nextButton}
       >
         <FontAwesomeIcon icon={faAngleRight} />
       </Link>
-	}
+  }
 
-	return (
-		<div className={Styles.mobilePagination}>
-			{ topButton }
-			{ prevButton }
-			{ nextButton }
-			{ lastButton }
-		</div>
-	)
+  return (
+    <div className={Styles.mobilePagination}>
+      { topButton }
+      { prevButton }
+      { nextButton }
+      { lastButton }
+    </div>
+  )
 }
 
 export default MobilePagination
