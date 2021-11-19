@@ -1,10 +1,10 @@
 ---
 title: "#3 git logでコミット履歴を見る(中編)"
 postdate: "2021-10-01"
-updatedate: "2021-11-03"
+updatedate: "2021-11-19"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
-description: "git logコマンドのオプションを紹介します。今回は出力するコミットを条件によって絞るようなオプションを紹介します。"
+description: "git logコマンドのオプションを紹介します。今回は、条件によって出力するコミットを絞るようなオプションを紹介します。"
 tags: ["git"]
 ---
 
@@ -105,7 +105,7 @@ $ git log --grep=^E --oneline
 dc38817 Edit index.html
 ```
 
-`--grep`の結果を反転させる、つまり、`Rename`を含むコミットメッセージを除くには、`--invert-grep`を付与します。
+`--grep`の結果を反転させる、つまり、`Rename`を含むコミットメッセージを**除く**には、`--invert-grep`を付与します。
 
 ```shell
 $ git log --grep=Rename --invert-grep --oneline
@@ -492,12 +492,12 @@ CommitDate: Fri Mar 6 16:27:08 2020 +0900
 
 ```javascript
 const func = (str)=> {
-  console.log(str)
+  console.log(str);
 };
 
-const temp = "Hello World";
+let message = "Hello World";
 
-func(temp);
+func(message);
 ```
 
 この`script.js`をコミットします。
@@ -508,7 +508,7 @@ $ git add .
 $ git comm-t -m "func関数を作成";
 ```
 
-次に、`temp`という変数名がまずいという事で、`message`という変数名に変えたとしましょう。
+次に、`message`変数の宣言文を、`let`から`const`に変更します。
 
 ```javascript
 ...(略)
@@ -523,37 +523,138 @@ const message = "Hello World";
 ```shell
 $ git add .
 
-$ git commit -m "変数名を変更"
+$ git commit -m "letからconstに変更"
 ```
 
 ## `-S`で特定の文字列の変更で絞る
 
-`-S`オプションの後に任意の文字列を渡すことで、その文字列が記述された／変更された／削除されたコミットを出力させることができます。今回の例で言うと「messageって変数名っていつ記述されたんだっけ？」を調べることができます。
+`-S`オプションの後に任意の文字列を渡すことで、ファイルの中身を参照し、任意の文字列が**記述された／削除された**コミットに絞って出力させることができます。`--grep`オプションはコミットメッセージの検索でした。`-S`オプションはファイルの中身を見るという違いがあります。
+
+例えば`git log -S message`とすると、「`message`って変数名っていつ記述されたんだっけ？」を調べることができます。
 
 ```shell
 $ git log --oneline -S message
 
-b7a09d0 (HEAD -> master) 変数名を変更
+b7a09d0 (HEAD -> master) func関数を作成
 ```
 
 この`-S`オプションは、変更内容を確認する`-p`（前回勉強しましたね）と一緒に渡すと、具体的にどんな変更があったかを確認できるのでより効果的です。
 
 ```shell
 $ git log --oneline -S message -p
-b7a09d0 (HEAD -> master) 変数名を変更
+
+fa964e3 func関数を作成
 diff --git a/script.js b/script.js
-index 2dc2d56..095c14d 100644
+new file mode 100644
+index 0000000..ea8a27a
+--- /dev/null
++++ b/script.js
+@@ -0,0 +1,7 @@
++const func = (str) => {
++    console.log(str);
++};
++
++let message = "Hello World";
++
++func(message);
+\ No newline at end of file
+```
+
+続けて、`message`を削除してみましょう。
+
+```javascript
+// この行を削除してください。
+const message = "Hello World";
+```
+
+コミットします。
+
+```console
+
+$ git add .
+
+$ git commit -m "変数を削除"
+```
+
+下記の通り、`message`が削除されたコミットも出力されています。
+
+```shell
+$ git log --oneline -S message
+
+83130f1 (HEAD -> master) 変数を削除
+fa964e3 func関数を作成
+
+$ git log --oneline -S message -p
+
+83130f1 (HEAD -> master) 変数を削除
+diff --git a/script.js b/script.js
+index aa50b5e..30ca481 100644
 --- a/script.js
 +++ b/script.js
-@@ -2,7 +2,7 @@ const func = (str) => {
-   console.log(str);
+@@ -2,6 +2,4 @@ const func = (str) => {
+     console.log(str);
  };
 
--const temp = "Hello World";
-+const message = "Hello World";
+-const message = "Hello World";
 
- func(temp);
+ func(message);
+\ No newline at end of file
+
+fa964e3 func関数を作成
+diff --git a/script.js b/script.js
+new file mode 100644
+index 0000000..ea8a27a
+--- /dev/null
++++ b/script.js
+@@ -0,0 +1,7 @@
++const func = (str) => {
++    console.log(str);
++};
++
++let message = "Hello World";
++
++func(message);
+\ No newline at end of file
 ```
+
+## `-G`というオプションもある
+
+実は、`-S`と似た`-G`というオプションもあります。このオプションもファイルの中身を確認してコミットを絞ります。
+
+例えば、`git log --oneline -G let`としてみましょう。`let`が追加された最初のコミット、`let`から`const`に変更された2番目のコミットが出力されます。
+
+```shell
+$ git log --oneline -G let
+
+fc8313a letからconstに変更
+fa964e3 func関数を作成
+```
+
+では、`git log --oneline -G message`としてみましょう。3行出力されます。`git log --oneline -S message`とすると2行出力されますので、2番目のコミットが余分に出力されていることが分かります。この違いは何でしょうか。
+
+```shell
+$ git log --oneline -G message
+
+83130f1 (HEAD -> master) 変数を削除
+fc8313a letからconstに変更
+fa964e3 func関数を作成
+
+# -Sだと2番目のコミットは出力されない
+$ git log --oneline -S message
+
+83130f1 (HEAD -> master) 変数を削除
+fa964e3 func関数を作成
+```
+
+2つのオプションの特徴をより厳密に言語化します。`-S`は任意の文字列が**追加/削除**されたコミットを出力します（前述しています）。
+
+2番目のコミットは`let`から`const`に宣言文が変わりましたが、`message`という文字列に変化はありませんね。そのため出力対象外です。
+
+対して`-G`オプションは、**変更行の中に**任意のメッセージが含まれているコミットを出力します。2番目のコミットは（何度も書きますが）`let`から`const`に宣言文が代わり、Gitはこの1行を**変更行**だと見做します。そして、その行の中に`message`という文字列があるため、`-G`を付けるとこのコミットが出力されます。
+
+`message`という文字列自体の追加／削除を検知するのではなく、変更行の中に`message`があるかどうかで判断します。
+
+---
 
 ## まとめ
 
@@ -563,9 +664,12 @@ index 2dc2d56..095c14d 100644
 |--|ファイルパスで絞る|
 |--diff-filter|変更内容で絞る|
 |--since, --until|特定の日付以降または以前で絞る|
+|--relative-date|日付を相対表示する|
+|--merge,--no-merge|でマージ関係|
+|--author、--committer|Author、Committerで絞る|
+|-S|ファイルの内容で絞る|
 
-
-オプションはかなりの種類がありますね。前編と中編で結構な数のオプションを紹介しましたが、これでも全体の一部に過ぎません。
+それにしても、オプションはかなりの種類がありますね。前編と中編で結構な数のオプションを紹介しましたが、これでも全体の一部に過ぎません。
 
 [リファレンス](https://git-scm.com/docs/git-log)を見ると**鬼のような数**のオプションが載っているのですが、上手く動かなかったりそもそも意味が分からないような物もありました（私の理解度の問題かもしれませんが）。自分で理解して説明できる気がしなかったので、この辺りで終了します。
 

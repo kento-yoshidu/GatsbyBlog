@@ -12,9 +12,9 @@ tags: ["React", "React Hooks"]
 
 煽りみたいなタイトルを付けましたが、私の経験談です。一通りのコマンドは使えるようになったんだけど、いまいちピンと来ないというか、もっと仕組み的なことを知りたくなって、本腰を入れて勉強しようと思い立ったタイミングがありました。
 
-ここからは「Git内部構造ツアー」と題し、`.git`フォルダーの中に潜入し、Gitがどのように動作しているかを検証します。この記事を読むことで、もしかしたらGitに関する**誤解**が解消されるかもしれません。
+ここからは「Git内部構造ツアー」と題し、`.git/`フォルダーの中に潜入し、Gitがどのように動作しているかを検証します。この記事を読むことで、もしかしたらGitに関する**誤解**が解消されるかもしれません。
 
-今回の記事では、`git add`と`git commit`した時に`.git`フォルダー内部で何が起こるかを検証します。
+今回の記事では、`git add`と`git commit`した時に`.git/`フォルダー内部で何が起こるかを検証します。
 
 ## 全ては`.git`内部で完結する
 
@@ -26,7 +26,7 @@ tags: ["React", "React Hooks"]
 
 ## `git add`によってblobオブジェクトが作成される
 
-`git init`した状態では、`.git/objects`は空（正確には、`info`フォルダーと`pack`フォルダーは存在しているが）。
+`git init`した状態では、`.git/objects/`は空ですね（正確には、`info`フォルダーと`pack`フォルダーは存在していますが）。
 
 ```git
 $ ls -l .git/objects/
@@ -35,7 +35,7 @@ drwxr-xr-x 1 c-yoshizuke 1049089 0 11月 11 10:03 info/
 drwxr-xr-x 1 c-yoshizuke 1049089 0 11月 11 10:03 pack/
 ```
 
-`text.txt`を作成、`git add .`して`.git/objects`を確認する。
+`text.txt`を作成、`git add .`して`.git/objects`を確認すると、`e6/`というフォルダーが作成され、その中に何やらファイルが格納されています。
 
 ```shell
 $ touch text.txt
@@ -52,7 +52,7 @@ $ find .git/objects/
 
 新しくできた`e6/9de29bb～(略)`が**blobオブジェクト**です。blogオブジェクトは、「**ファイルの内容**をSHA-1でハッシュ化した40桁のID」です。
 
-blogオブジェクトのID40桁のうち、先頭2桁をディレクトリー名とし、残り38桁でバイナリファイルを生成します。
+blogオブジェクトのID40桁のうち、先頭2桁をディレクトリィ名とし、残り38桁でバイナリファイルを生成します。
 
 <aside>
 
@@ -60,7 +60,7 @@ blogオブジェクトのID40桁のうち、先頭2桁をディレクトリー�
 
 </aside>
 
-バイナリファイルであるため中身は読めませんが、何かしらは記述されている様子ですね。
+バイナリーファイルであるため中身は読めませんが、何かしらは記述されている様子ですね。
 
 ```shell
 $ cat .git/objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391
@@ -68,13 +68,15 @@ $ cat .git/objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391
 (文字化け)
 ```
 
-`Hello World!`と入力し、`git add .`でステージングに上げます（ぜひ、**Hello World!**一言一句たがわず入力して下さい）。すると、新たなblobファイルが作成されていることがわかります。
+`Hello World!`と入力し、`git add .`でインデックスに登録します（ぜひ、**Hello World!**一言一句たがわず入力して下さい）。すると、新たなblobファイルが作成されていることがわかります。
 
 ```shell
 $ find .git/objects/ -type f
 .git/objects/98/0a0d5f19a64b4b30a87d4206aade58726b60e3
 .git/objects/e6/9de29bb2d1d6434b8b29ae775ad8c2e48c5391
 ```
+
+`git add .`は、ファイルをインデックスに登録し、Gitの管理下に置くということを意味します。
 
 blobの内容は、`git cat-file -p {ハッシュID}`で確認できる。40桁全てを打つ必要はなく、6桁くらい打てばGitがよしなにやってくれる。
 
@@ -170,6 +172,8 @@ https://github.com/git/git/blob/v2.12.0/Documentation/technical/index-format.txt
 
 ## 参考
 
+[](https://github.blog/jp/2021-01-06-commits-are-snapshots-not-diffs/)
+
 [Git - 配管（Plumbing）と磁器（Porcelain）](https://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-%E9%85%8D%E7%AE%A1%EF%BC%88Plumbing%EF%BC%89%E3%81%A8%E7%A3%81%E5%99%A8%EF%BC%88Porcelain%EF%BC%89)
 
 [Gitのコミットハッシュ値は何を元にどうやって生成されているのか | メルカリエンジニアリング](https://engineering.mercari.com/blog/entry/2016-02-08-173000/)
@@ -189,3 +193,5 @@ https://zenn.dev/st43/articles/9f86a107a57aba
 https://mrkmyki.com/%E3%80%90%E5%9B%B3%E8%A7%A3%E3%80%91git%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9%E3%81%AE%E8%AA%AC%E6%98%8E%E3%81%BE%E3%81%A8%E3%82%81
 
 https://qiita.com/DQNEO/items/0233a680b0f9471db9ee
+
+https://www.yoheim.net/blog.php?q=20140301
