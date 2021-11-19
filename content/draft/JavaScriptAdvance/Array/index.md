@@ -58,13 +58,34 @@ console.log(emptyArr);
 //=> []
 ```
 
-また、**Arrayコンストラクタ**である`new Array()`を使うこともできますが、これは`[]`を使うのと一緒です。わざわざArrayコンストラクタを使う理由はありません。
+また、**Arrayコンストラクタ**である`new Array()`を使うこともできますが、これは`[]`を使うのと一緒です。普通に配列を扱いたいなら、わざわざArrayコンストラクタを使う理由はありません。
 
 ```javascript
 const emptyArr = new Array();
 
 console.log(emptyArr);
 //=> []
+```
+
+ただ、`Array()`には変わった性質があります。引数に`10`を渡して配列を生成してみます。すると、10個の`undefined`が格納された配列が作成されます。
+
+```javascript
+console.log(Array(10).length);
+//=> 10
+```
+
+```javascript
+[...Array(10000)].forEach((_, i) => {
+  i++
+  if(i % 15 === 0) {
+    console.log(`${i} => FizzBuzz`)
+  } else if (i % 3 === 0) {
+    console.log(`${i} => Fizz`)
+  } else if (i % 5 === 0) {
+    console.log(`${i} => Buzz`)
+  }
+  console.log(performance.memory)	
+})
 ```
 
 ## 多次元配列
