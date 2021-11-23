@@ -41,27 +41,35 @@ Blog Articles will be prepared as markdown files. Gatsby will generate static fi
 
 ## 💪 Clone this project
 
-At first, clone this repository locally.
+First, clone this repository locally.
 
 ```bash
 $ git clone https://github.com/kento-yoshidu/GatsbyBlog.git <your directory name>
 ```
 
-## Start development server
+Second, install required modules by `yarn install`.
+
+```bash
+$ yarn install
+```
+
+## 🏃 Start development server
 
 Go to the created directory and start the development server.
 
 ```bash
 $ npx gatsby develop
+
+...omission...
+
+You can now view gatsby-starter-blog in the browser.
+⠀
+  http://localhost:8000/
+⠀
+View GraphiQL, an in-browser IDE, to explore your site's data and schema
+⠀
+  http://localhost:8000/___graphql
 ```
 
 The above command should bring up the server. Access `localhost:8000`.
 
-
-
-
-
-Clone this 
-
-```shell
-$ npx 
