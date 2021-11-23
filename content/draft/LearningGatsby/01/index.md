@@ -37,3 +37,11 @@ HeadlessCMSとの連携
 - #6 Contentfulを利用してブログ記事を書く
 - #7 graphCMSを利用してブログ記事を書く
 
+
+## yarn
+
+`yarn init`する。
+
+## Gatsbyのインストール
+
+
