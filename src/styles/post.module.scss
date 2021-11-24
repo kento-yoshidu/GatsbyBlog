@@ -129,10 +129,20 @@
     }
   }
   details {
+    width: 90%;
+    margin: 20px 0;
+    padding: 15px 0 15px 25px;
     font-size: 1.6rem;
-    padding-left: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 2px 3px #eee;
     summary {
-      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    &[open] {
+      padding: 15px 0 5px 25px;
+    }
+    &[open] summary {
+      margin-bottom: 15px;
     }
   }
 }
