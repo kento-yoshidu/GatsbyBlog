@@ -47,15 +47,20 @@ First, clone this repository locally.
 $ git clone https://github.com/kento-yoshidu/GatsbyBlog.git <your directory name>
 ```
 
-Second, install required modules by `yarn install`.
+Second, go to created directory and install required modules by `yarn install`.
 
 ```bash
+$ cd <your directory name>
+
 $ yarn install
+
+...omission...
+
 ```
 
 ## 🏃 Start development server
 
-Go to the created directory and start the development server.
+Start the development server!
 
 ```bash
 $ npx gatsby develop
@@ -71,5 +76,5 @@ View GraphiQL, an in-browser IDE, to explore your site's data and schema
   http://localhost:8000/___graphql
 ```
 
-The above command should bring up the server. Access `localhost:8000`.
+If you visit `http://localhost:8000`, you can see that the page has been created.
 
