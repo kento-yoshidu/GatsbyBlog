@@ -90,7 +90,7 @@ export const pageQuery = graphql`
         }
         frontmatter {
           postdate(formatString: "YYYY年MM月DD日")
-          updatedate(formatString: "YYYY年MM月DD日")
+          update(formatString: "YYYY年MM月DD日")
           seriesName
           seriesSlug
           title

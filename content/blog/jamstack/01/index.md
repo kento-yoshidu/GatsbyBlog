@@ -1,7 +1,7 @@
 ---
 title: "JamstackなWebサイトを構築してみた①"
 postdate: "2021-08-06"
-updatedate: "2021-11-03"
+update: "2021-11-03"
 seriesName: "JamstackなWebサイトを構築してみた"
 seriesSlug: "Jamstack"
 description: "Jamstackなサイトを作成してみて、Jamstackについての諸々が何となく分かってきたので知見を記載します。"

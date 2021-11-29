@@ -1,7 +1,7 @@
 ---
 title: "中小企業診断士試験を受けてきた"
 postdate: "2021-08-24"
-updatedate: "2021-11-12"
+update: "2021-11-12"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "2021年度の中小企業診断士1次試験を受けてきました。その感想です。"
