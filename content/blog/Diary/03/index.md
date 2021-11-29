@@ -1,7 +1,7 @@
 ---
 title: "中小企業診断士試験1次試験に合格した"
 postdate: "2021-09-24"
-updatedate: "2021-11-12"
+update: "2021-11-12"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "2021年度の中小企業診断士1次試験の結果報告です。また、どのような問題が出るかも紹介します。"

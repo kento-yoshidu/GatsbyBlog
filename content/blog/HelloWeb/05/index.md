@@ -1,7 +1,7 @@
 ---
 title: "#5 HTMLの基本② (head要素)"
 postdate: "2021-08-21"
-updatedate: "2021-08-21"
+update: "2021-08-21"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: 

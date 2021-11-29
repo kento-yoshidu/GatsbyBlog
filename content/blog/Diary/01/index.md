@@ -1,7 +1,7 @@
 ---
 title: "Gatsbyでブログを始めました"
 postdate: "2021-07-24"
-updatedate: "2021-11-19"
+update: "2021-11-19"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "静的サイトジェネレーターのGatsbyを使用して、ブログを再構築しました。このブログについて、また、Gatsbyを使ってみた所感について書き記します。"

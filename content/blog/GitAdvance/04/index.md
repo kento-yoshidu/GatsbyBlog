@@ -1,7 +1,7 @@
 ---
 title: "#4 git logでコミット履歴を見る(後編)"
 postdate: "2021-11-19"
-updatedate: "2021-11-19"
+update: "2021-11-19"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logのオプション紹介の後編です。どのブランチのコミットを出力するかを選択するオプションを紹介します。"

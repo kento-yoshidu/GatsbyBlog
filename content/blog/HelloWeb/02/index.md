@@ -1,7 +1,7 @@
 ---
 title: "#2 HTMLでページを作ってみる"
 postdate: "2021-08-06"
-updatedate: "2021-10-11"
+update: "2021-10-11"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "HTMLファイルを作成してマークアップを行い、Webページを表示するところまでを説明します。"

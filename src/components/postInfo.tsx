@@ -15,7 +15,7 @@ type Props = {
   seriesSlug: string
   seriesName: string
   postdate: string
-  updatedate: string
+  update: string
   series?: string
   tags?: string
   description?: string
@@ -26,7 +26,7 @@ const PostInfo: React.VFC<Props> = ({
     seriesSlug,
     seriesName,
     postdate,
-    updatedate,
+    update,
     tags,
     description
   }) => {
@@ -63,7 +63,7 @@ const PostInfo: React.VFC<Props> = ({
           <FontAwesomeIcon icon={faClock} />{ postdate }
         </p>
         <p>
-          <FontAwesomeIcon icon={faUndo} />{ updatedate }
+          <FontAwesomeIcon icon={faUndo} />{ update }
         </p>
       </div>
 

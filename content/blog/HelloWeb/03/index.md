@@ -1,7 +1,7 @@
 ---
 title: "#3 CSSでスタイリングする"
 postdate: "2021-08-08"
-updatedate: "2021-09-24"
+update: "2021-09-24"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: 
