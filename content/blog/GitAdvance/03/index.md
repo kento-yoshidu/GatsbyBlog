@@ -1,7 +1,7 @@
 ---
 title: "#3 git logでコミット履歴を見る(中編)"
 postdate: "2021-10-01"
-updatedate: "2021-11-19"
+update: "2021-11-19"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logコマンドのオプションを紹介します。今回は、条件によって出力するコミットを絞るようなオプションを紹介します。"

@@ -47,7 +47,7 @@ const PostList: React.VFC<Props> = ({postData}) => (
             <div className={Styles.postInfo}>
               <div className={Styles.date}>
                 <p className={Styles.post}><FontAwesomeIcon icon={faClock} />{post.frontmatter.postdate}</p>
-                <p className={Styles.update}><FontAwesomeIcon icon={faUndo} />{post.frontmatter.updatedate}</p>
+                <p className={Styles.update}><FontAwesomeIcon icon={faUndo} />{post.frontmatter.update}</p>
               </div>
 
               <p className={Styles.series}>

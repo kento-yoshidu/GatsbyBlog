@@ -1,7 +1,7 @@
 ---
 title: "#1 Git中級者を目指そう"
 postdate: "2021-09-03"
-updatedate: "2021-09-03"
+update: "2021-09-03"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "Git中級者を目指すためのシリーズです。基本的なコマンドの紹介からはじまり、Gitの内部構造を理解するところまでが目標です。"

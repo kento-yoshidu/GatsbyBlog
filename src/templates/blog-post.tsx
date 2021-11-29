@@ -40,7 +40,7 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
         seriesSlug={data.markdownRemark?.frontmatter?.seriesSlug}
         seriesName={data.markdownRemark?.frontmatter?.seriesName}
         postdate={data.markdownRemark?.frontmatter?.postdate}
-        updatedate={post?.frontmatter?.updatedate}
+        update={post?.frontmatter?.update}
         tags={post?.frontmatter?.tags}
         description={post?.frontmatter?.description}
       />
@@ -110,7 +110,7 @@ export const pageQuery = graphql`
         title
         date(formatString: "MMMM DD, YYYY")
         postdate
-        updatedate
+        update
         description
         seriesSlug
         seriesName
