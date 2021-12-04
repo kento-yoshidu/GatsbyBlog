@@ -1,10 +1,10 @@
 ---
 title: "#6 HTMLの基本③（h要素、p要素）"
 postdate: "2021-09-17"
-update: "2021-10-29"
+updatedate: "2021-12-03"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
-description: 
+description: "見出しを表すh要素、段落を表すp要素を学習します。"
 tags: ["HTML"]
 ---
 
@@ -225,7 +225,7 @@ p要素はブロック要素、次のページで紹介するa要素はインラ
 - p要素は段落を表す
 - br要素で改行を行う
 
-次はimg要素を使って、画像を表示させる方法を学習します。
+次はa要素を使って、ページ間を移動する**リンク**を作成する方法を学びます。
 
 ## 参考
 
