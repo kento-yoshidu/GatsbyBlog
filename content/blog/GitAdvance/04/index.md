@@ -1,7 +1,7 @@
 ---
 title: "#4 git logでコミット履歴を見る(後編)"
 postdate: "2021-11-19"
-update: "2021-11-19"
+updatedate: "2021-11-19"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logのオプション紹介の後編です。どのブランチのコミットを出力するかを選択するオプションを紹介します。"
@@ -216,6 +216,10 @@ git merge --no-ff fix -m "8"
 これもややこしいですね。頭の中でこういったイメージを持ちながらコミットを辿るのは限界があります。GUIツールを頼りましょう。
 
 また、ブランチ名の前にキャレット`^`をつけることで、`--not`と同じく、ブランチを除外することができます。`git log develop ^master ^fix`といった具合です。このように、`^`はブランチ名の前につけるか後ろに付けるかで全く意味が変わってきます。
+
+---
+
+
 
 [[git] チルダ(~)とキャレット(^)の違い | Tech控え帳](https://www.chihayafuru.jp/tech/index.php/archives/2535)
 
