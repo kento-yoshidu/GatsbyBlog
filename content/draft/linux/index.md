@@ -178,5 +178,10 @@ $find . -type f -a -name 'a*.txt'
 専用のデータベースからファイル名を検索してファイルを探す。
 
 
+[GNU/Linuxってなに？を学んだ - matobaの備忘録](https://blog.mtb-production.info/entry/2018/03/18/151646)
 
+[tarコマンドについて詳しくまとめました 【Linuxコマンド集】](https://eng-entrance.com/linux-command-tar)
 
+[CentOS リポジトリ repository](http://mrs.suzu841.com/tebiki/memo/repository.html)
+
+[yum installで学ぶ！ yum の仕組み - RAKUS Developers Blog | ラクス エンジニアブログ](https://tech-blog.rakus.co.jp/entry/2017/12/14/105052)

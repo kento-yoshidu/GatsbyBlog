@@ -1,7 +1,7 @@
 ---
 title: "#1 Git中級者を目指そう"
 postdate: "2021-09-03"
-update: "2021-09-03"
+update: "2021-12-10"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "Git中級者を目指すためのシリーズです。基本的なコマンドの紹介からはじまり、Gitの内部構造を理解するところまでが目標です。"
@@ -64,3 +64,15 @@ Gitのリファレンス本です。Gitの公式リファレンスも良いの�
 全くのGit初心者が最初から勉強できるサイトです。ブランチやstashなどイメージにしにくい要素も図を用いて説明されています。
 
 上記で挙げた**独習Git**よりも易しいと思いますので、まずはこのサイトでGitの感触をつかんでみるのもいいと思います。
+
+### Learn Git Branching
+
+[Webサイト](https://learngitbranching.js.org/?locale=ja)
+
+ブランチに関することを中心に学習できるサイトです。ブランチの様子が可視化されていて非常に勉強になるサイトです。
+
+## 参考
+
+[私家版 Git For Windowsのインストール手順 | OPCDiary](https://opcdiary.net/technical/programming/%E7%A7%81%E5%AE%B6%E7%89%88-git-for-windows%E3%81%AE%E3%82%A4%E3%83%B3%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AB%E6%89%8B%E9%A0%86/)
+
+[Gitのマージを図解する | To Be Decided](https://www.kaitoy.xyz/2015/12/28/git-merge/)

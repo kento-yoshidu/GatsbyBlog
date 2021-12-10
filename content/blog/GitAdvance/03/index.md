@@ -675,7 +675,7 @@ fa964e3 func関数を作成
 
 といいつつ、まだ後編が残っていますのでぜひ読んでみてください。
 
-# 参考
+## 参考
 
 - [git-log Documentation](https://git-scm.com/docs/git-log)
 

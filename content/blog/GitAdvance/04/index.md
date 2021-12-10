@@ -1,7 +1,7 @@
 ---
 title: "#4 git logでコミット履歴を見る(後編)"
 postdate: "2021-11-19"
-updatedate: "2021-11-19"
+updatedate: "2021-12-10"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logのオプション紹介の後編です。どのブランチのコミットを出力するかを選択するオプションを紹介します。"
@@ -220,8 +220,12 @@ git merge --no-ff fix -m "8"
 ---
 
 
+## 参考
 
 [[git] チルダ(~)とキャレット(^)の違い | Tech控え帳](https://www.chihayafuru.jp/tech/index.php/archives/2535)
 
 [Git の HEAD^ と HEAD~ の違い - yu8mada](https://yu8mada.com/2018/05/30/the-difference-between-head-caret-and-head-tilde-in-git/)
 
+[git の歴史の辿り方 &middot; けんごのお屋敷](http://tkengo.github.io/blog/2014/02/10/how-to-track-git-history/)
+
+[[Git] blameコマンドで特定の行がいつ変更されたのか調べて、バグの混入を見つける - YoheiM .NET](https://www.yoheim.net/blog.php?q=20160709)
