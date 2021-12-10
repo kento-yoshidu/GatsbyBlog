@@ -43,3 +43,31 @@ CPUを創ろう
 [O'Reilly Japan - Go言語でつくるインタプリタ](https://www.oreilly.co.jp/books/9784873118222/)
 
 [O'Reilly Japan - アンダースタンディング コンピュテーション](https://www.oreilly.co.jp/books/9784873116976/)
+
+## 参考
+
+[低レイヤーの歩き方 - るくすの日記 ~ Out_Of_Range ~](https://rkx1209.hatenablog.com/entry/2016/12/25/141543)
+
+[RAID5が危ない | NJC](https://www.g-cm3.com/?p=3471)
+
+[DisplayPortとDVIは互換性がない？  |  雑談記](https://yuutosi.net/post-695/)
+
+[トランジスターの仕組み](https://www.intel.co.jp/content/www/jp/ja/innovation/transworks.html)
+
+### CPU
+
+[CPUのアーキテクチャの違いまとめ（x86/x64/x86_64/AMD64/i386/i686とはなんなのか？） - フラミナル](https://blog.framinal.life/entry/2020/04/22/041548)
+
+### メモリー
+
+[メモリの規格と種類は？DDRとPCの違いは何？マザーボードとの相性や帯域の関係とは？ | 自作PCテクニカルセンター](https://jisakupc-technical.info/basic/memory/specification/)
+
+[メモリにも種類がある？DDR4のメモリは何が違うの？｜ドスパラ通販【公式】](https://www.dospara.co.jp/5info/cts_str_parts_ddr4)
+
+### アルゴリズム
+
+[B-Tree by Java &amp; Python -- B木のすごく簡単な実例](http://wwwa.pikara.ne.jp/okojisan/b-tree/index.html)
+
+[JavaScriptで学ぶアルゴリズム②[2分探索]｜Tasting.com 【アプリリリース予定】｜note](https://note.com/tasting/n/n6d746606c532)
+
+[B TreeとB+ Treeの違い - Carpe Diem](https://christina04.hatenablog.com/entry/2017/05/17/190000)

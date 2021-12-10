@@ -1,7 +1,7 @@
 ---
 title: "#2 git logでコミット履歴を見る(前編)"
 postdate: "2021-09-04"
-update: "2021-11-12"
+update: "2021-12-10"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logコマンドのオプションを紹介します。主に出力する内容を決定するオプションを紹介します。"
@@ -435,3 +435,6 @@ CommitDate: Fri Feb 28 11:15:26 2020 +0900
 
 - [Advanced Git log](https://www.atlassian.com/ja/git/tutorials/git-log)
 
+- [git log - Gitコマンド | WWWクリエイターズ](https://www-creators.com/git-command/git-log)
+
+- [transitive.info - git log 使い方](http://transitive.info/article/git/command/log/)
