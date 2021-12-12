@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import { StaticImage } from "gatsby-plugin-image"
 
 import Layout from "../components/layout"
@@ -28,7 +28,7 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
         pageTitle="Top Page"
       />
 
-      <main>
+      <main className={Styles.main}>
         <div className={Styles.image}>
           <StaticImage
             layout="fullWidth"
@@ -36,6 +36,26 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
             src="../../static/gatsby.svg"
           />
         </div>
+
+        <div className={Styles.box}>
+          <Link to="/page/1/">
+            記事一覧を見る
+          </Link>
+        </div>
+
+        <div className={Styles.box}>
+          <Link to="/series">
+            シリーズ一覧を見る
+          </Link>
+        </div>
+
+        <div className={Styles.box}>
+          <Link to="/tags">
+            タグ一覧を見る
+          </Link>
+        </div>
+
+
       </main>
     </Layout>
   )

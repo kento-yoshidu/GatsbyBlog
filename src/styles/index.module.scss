@@ -1,6 +1,23 @@
-.image {
-  margin: 50px auto;
-  width: 50%;
+.main {
+  width: 60%;
+  margin: 0 auto;
+  border: 1px solid red;
+  .image {
+    margin: 50px auto;
+    width: 40%;
+  }
+  ul {
+    list-style: none;
+    li {
+      height: 30vh;
+      text-align: center;
+      .link {
+        font-size: 2rem;
+        text-align: center;
+        margin: 0 auto;
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 768px) {
