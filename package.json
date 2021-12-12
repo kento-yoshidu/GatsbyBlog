@@ -1,11 +1,11 @@
 {
-  "name": "gatsby-starter-blog",
+  "name": "鳥に生まれることができなかった人へ",
   "private": true,
-  "description": "A starter for a blog powered by Gatsby and Markdown",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "My original blog",
+  "version": "1.0.0",
+  "author": "Kento Yoshizu <>",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "http://blog.toriwatari.work"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
