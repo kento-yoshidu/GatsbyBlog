@@ -1,18 +1,24 @@
 ---
-title: "プロキシー環境でKali Linuxを使う"
+title: "プロキシ環境でKali Linuxを使う"
 postdate: "2021-12-13"
-update: "2021-12-13"
+update: "2021-12-14"
 seriesName: "メモ"
 seriesSlug: "Memo"
-description: "プロキシー環境でKali Linux(WSL2)を使うための設定項目をメモします。"
+description: "プロキシ環境でKali Linux(WSL2)を使うための設定項目をメモします。"
 tags: ["Kali Linux", "WSL2"]
 ---
 
-# プロキシー環境でKali Linuxを使いたい
+# プロキシ環境でKali Linuxを使いたい
 
-会社（プロキシー環境）にて、とある事情からKali Linux(WSL2)を使おうと思いプロキシー設定を行いました。普段はWindowsを使用しておりLinuxのプロキシー設定など滅多にやることがなく、やる度に検索することになりそうなのでここにメモしておきます（プロキシ面倒くさいんだよ😡）。
+会社（プロキシ環境）にて、とある事情からKali Linux(WSL2)を使おうと思いプロキシ設定を行いました。普段はWindowsを使用しておりLinuxのプロキシ設定など滅多にやることがなく、やる度に検索することになりそうなのでここにメモしておきます（プロキシ面倒くさいんだよ😡）。
 
-プロキシー設定を行い、`apt`コマンドでVimをインストールするところまでを行います。
+Kali Linuxにおいて、プロキシ設定を行い、`apt`、`wget`、`curl`コマンドが成功するかを確認します。
+
+<aside>
+
+タイトルには「Kali Linux」と銘打っていますが、Debian系であれば概ね共通しているのではないかと推察します。
+
+</aside>
 
 ## 環境
 
@@ -27,21 +33,28 @@ VERSION_ID="2021.1"
 VERSION_CODENAME="kali-rolling"
 ```
 
+記事を書くにあたって、Kali Linuxを初期化してから検証作業を行いました。つまり、ほぼサラピンの状態から以下の作業を行うことでプロキシ設定ができると思われます。
+
+## 環境変数の設定
+
+以下のように設定します。
+
+
 ## aptの設定
+
+まずは`apt`コマンドでVimをインストールできるようにしてみます。
 
 `/etc/apt/`に`apt.conf`を作成し、プロキシーに関する設定を記述します。
 
 ```shell
 $ sudo vim /etc/apt/apt.conf
 
-===
-
 ## 以下を入力
-Acquire::http::Proxy "http://<proxy_server>:<port_number>";
-Acquire::https::Proxy "http://<proxy_server>:<port_number>";
+Acquire::http::Proxy "http://<proxy_server>:<port>";
+Acquire::https::Proxy "http://<proxy_server>:<port>";
 ```
 
-`apt update`が成功すればインターネットとの通信が確立されています。
+`apt update`が成功することを確認します。
 
 ```shell
 $ sudo apt update
@@ -65,10 +78,61 @@ $ sudo apt install vim
 ...(略)
 ```
 
-見事、Vimをインストールできました🎉。めちゃくちゃ簡単でした。以前Ubuntuでやった時は、もっと苦労した記憶があるんだけど、、、。
+見事、Vimをインストールできました🎉。めちゃくちゃ簡単ですね。
 
-## 環境変数を設定する
+## wgetの設定
 
-情報を収集していると、環境変数にプロキシーサーバーのアドレスを設定しなければならないという情報が多く見つかりましたが、今回の環境では上記のように`/etc/apt/apt.conf`の作成と編集のみでインターネットへの接続が可能でした。
+`/etc/wget`を変更します。
 
-私の知識不足で、詳しいことは分からないのですが、環境変数の設定も一応メモしておきます。
+```shell
+$ sudo vim /etc/wget
+
+## 以下を入力
+https_proxy = <proxy_server>:<port>
+http_proxy = <proxy_server>:<port>
+ftp_proxy = <proxy_server>:<port>
+```
+
+以下のようにコマンドを打ち、カレントディレクトリに`index.html`が保存されればOKです。
+
+```shell
+wget https://www.google.com
+--2021-12-14 11:12:43--  https://www.google.com/
+Connecting to <server>:<port>... connected.
+Proxy request sent, awaiting response... 200 OK
+Length: unspecified [text/html]
+Saving to: ‘index.html’
+
+index.html                                          [ <=>                                                                                                  ]  14.92K  --.-KB/s    in 0.01s
+
+2021-12-14 11:12:43 (1.37 MB/s) - ‘index.html’ saved [15281]
+```
+
+見事、`wget`コマンドを実行できました。
+
+## curlの設定
+
+`curl`コマンドについては、`~/.curlrc`を作成し、以下のように記述します。
+
+```shell
+$ vim ~/.curlrc
+
+proxy=http://<proxy_server>:<port>
+```
+
+以下のようにコマンドを打ち、カレントディレクトリに`index.html`が保存されればOKです。
+
+
+以上、簡単な内容でしたが、メモ書きという事でこれくらいにします。いつかちゃんとした記事にしたいと思います。
+
+## 参考
+
+[Proxy 接続設定のまとめ - Qiita](https://qiita.com/msi/items/e3a9700a2ac4a407cec1)
+
+[Debian 10 Buster : プロキシクライアントの設定 : Server World](https://www.server-world.info/query?os=Debian_10&p=squid&f=2)
+
+[プロキシ下でLinuxを使う際のメモ - Λlisue&#39;s blog](https://lambdalisue.hatenablog.com/entry/2013/06/25/140630)
+
+[【2021年最新版】【Linux共通】プロキシサーバーの利用設定](https://www.servernote.net/article.cgi?id=use-proxy-setting-for-linux)
+
+[プロキシ設定いろいろ](https://kapibara-sos.net/archives/109)
