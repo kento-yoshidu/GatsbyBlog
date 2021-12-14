@@ -5,7 +5,7 @@ update: "2021-11-19"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logコマンドのオプションを紹介します。今回は、条件によって出力するコミットを絞るようなオプションを紹介します。"
-tags: ["git"]
+tags: ["Git"]
 ---
 
 # git logのオプション（中編）
