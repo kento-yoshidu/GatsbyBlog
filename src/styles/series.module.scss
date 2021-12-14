@@ -1,7 +1,10 @@
+@import "../scss/variables";
+
 .seriesMain,
 .tagsMain {
-  width: 50vw;
+  width: 55vw;
   margin: 70px auto 100px;
+  padding: 50px;
   .seriesList,
   .tagList {
     display: flex;
@@ -17,10 +20,14 @@
         font-size: 1.7rem;
         text-decoration: none;
         color: #444;
-        font-weight: 900;
+        font-weight: 500;
         transition: .3s;
-        border: 2px solid #888;
+        border: 2.3px solid #888;
         border-radius: 3px;
+        &:hover {
+          color: $main-color2;
+          border-color: $main-color2;
+        }
       }
     }
   }

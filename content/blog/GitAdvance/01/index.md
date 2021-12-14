@@ -5,7 +5,7 @@ update: "2021-12-10"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "Git中級者を目指すためのシリーズです。基本的なコマンドの紹介からはじまり、Gitの内部構造を理解するところまでが目標です。"
-tags: ["git"]
+tags: ["Git"]
 ---
 
 # Git中級者を目指す
