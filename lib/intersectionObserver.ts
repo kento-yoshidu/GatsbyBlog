@@ -1,8 +1,10 @@
 import React from "react"
 
+import * as Styles from "../src/styles/IOTest.module.scss"
+
 const IO = () => {
 	// 今回の交差を監視する要素
-	const boxes = document.querySelectorAll(".box");
+	const boxes = document.querySelectorAll(Styles.box);
 
 	const options = {
 		root: null, // 今回はビューポートをルート要素とする
@@ -35,14 +37,15 @@ const IO = () => {
 	 */
 	function activateIndex(element) {
 		// すでにアクティブになっている目次を選択
-		const currentActiveIndex = document.querySelector("#indexList .active");
+		const currentActiveIndex = document.querySelector(`#indexList ${Styles.active}`);
+    window.alert(currentActiveIndex)
 		// すでにアクティブになっているものが0個の時（=null）以外は、activeクラスを除去
 		if (currentActiveIndex !== null) {
-			currentActiveIndex.classList.remove("active");
+			currentActiveIndex.classList.remove(Styles.active);
 		}
 		// 引数で渡されたDOMが飛び先のaタグを選択し、activeクラスを付与
 		const newActiveIndex = document.querySelector(`a[href='#${element.id}']`);
-		newActiveIndex.classList.add("active");
+		newActiveIndex.classList.add(Styles.active);
 	}
 }
 

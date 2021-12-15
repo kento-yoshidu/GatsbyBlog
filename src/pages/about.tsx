@@ -27,6 +27,7 @@ const AboutPage: React.VFC<Props> = ({ location }) => {
       <Seo
         title="このブログについて"
         pagepath={pagepath}
+        description="このブログは私の個人ブログです。GatsbyというWebフレームワークを使用して作成しました。"
       />
 
       <Header
@@ -43,7 +44,7 @@ const AboutPage: React.VFC<Props> = ({ location }) => {
         <section>
           <h2>このブログは何なのか</h2>
           <p>このブログは<a href="https://github.com/kento-yoshidu/">私</a>の個人ブログです。</p>
-          <p>Gatsbyという静的サイトジェネレーターを使用して作成しました。Githubのリポジトリは<a href="https://github.com/kento-yoshidu/GatsbyBlog/" target="_blink">こちら(外部リンク)</a>です。</p>
+          <p>GatsbyというWebフレームワークを使用して作成しました。Githubのリポジトリは<a href="https://github.com/kento-yoshidu/GatsbyBlog/" target="_blink">こちら(外部リンク)</a>です。</p>
 
           <h3>📝 何を書いているのか</h3>
           <p>基本的にIT、プログラミングに関することを書いています。あと、技術には全然関係ない日記代わりにも使いたいと思います。</p>
