@@ -79,14 +79,6 @@ const Footer: React.VFC = () => {
           target="_blink"
         >
           <FontAwesomeIcon icon={faChevronRight} />
-          サイトポリシー
-        </Link>
-
-        <Link
-          to={"#"}
-          target="_blink"
-        >
-          <FontAwesomeIcon icon={faChevronRight} />
           プライバシーポリシー
         </Link>
       </div>
