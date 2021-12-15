@@ -13,7 +13,7 @@
 		a {
 			color: #444;
 			&:hover {
-				color: $main-color;
+				color: $main-color2;
 			}
 		}
 	}
@@ -23,7 +23,7 @@
     font-size: 3.8rem;
     font-weight: 500;
     letter-spacing: 7px;
-    background: linear-gradient(135deg, $main-color2 40%, $sub-color 55%);
+    background: linear-gradient(135deg, $main-color 45%, $sub-color 55%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: rgba(255,255,255,0.0);
     color: $main-color;
