@@ -11,13 +11,14 @@
     margin: 0 auto;
     border-bottom: 1px solid #bbb;
     text-decoration: none;
+    transition-duration: 0.2s;
 
 		&:first-of-type {
       border-top: 1px solid #bbb;
     }
 
     &:hover {
-      background-color: rgba(200,200,200, .3);
+      background-color: rgba(200,200,200, .2);
     }
 
 		.postTitle {
@@ -30,7 +31,7 @@
         line-height: 1.5;
 
         &:hover {
-          color: $main-color;
+          color: $main-color2;
         }
       }
     }
@@ -71,8 +72,9 @@
           color: #444;
           margin-right: 9px;
           line-height: 1.5;
+          transition-duration: 0.1s;
           &:hover {
-            color: $main-color;
+            color: $main-color2;
           }
         }
 			}

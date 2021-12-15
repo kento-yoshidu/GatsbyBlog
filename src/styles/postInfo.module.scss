@@ -20,7 +20,7 @@
 
 	.postTitle {
 		display: inline-block;
-    background: linear-gradient(90deg, $main-color, $sub-color);
+    background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: rgba(255,255,255,0.0);
     margin: 15px 0;

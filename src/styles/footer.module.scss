@@ -9,8 +9,9 @@
 	line-height: 1.5;
   a {
     color: #ccc;
+    transition-duration: 0.1s;
     &:hover {
-      color: $main-color;
+      color: $main-color2;
     }
   }
   hgroup {

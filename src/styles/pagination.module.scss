@@ -13,21 +13,21 @@
 		transform: translateY(-50%);
     display: inline-block;
     padding: 5px 20px;
-    border: 2px solid $main-color;
+    border: 2px solid $main-color2;
     border-radius: 50px;
     transition: .3s;
     text-decoration: none;
 		svg {
-			color: $main-color;
+			color: $main-color2;
 			font-size: 1.6rem;
 		}
 		span {
 			font-size: 1.6rem;
 			font-weight: 900;
-			color: $main-color;
+			color: $main-color2;
 		}
 			&:hover {
-			background: $main-color;
+			background: $main-color2;
 			svg,
 			span {
 				color: #fff;
@@ -63,7 +63,7 @@
 
       .text {
         padding: 1rem 1.35rem;
-        background-color: $main-color;
+        background-color: $main-color2;
         color: #fff;
       }
       .link {
@@ -76,7 +76,7 @@
         }
         &:hover {
           a {
-            background-color: $main-color;
+            background-color: $main-color2;
           }
         }
       }
