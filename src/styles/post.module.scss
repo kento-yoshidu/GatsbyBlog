@@ -14,14 +14,18 @@
     width: 90%;
     padding-bottom: 8px;
     font-size: 4rem;
-    border-bottom: 7px solid $main-color2;
+    border-bottom: 7px solid;
+    border-image: linear-gradient(to right, $main-color 0%, rgba($main-color2, 0.4) 100%);
+    border-image-slice: 1;
     margin-top: 50px;
     margin-bottom: 30px;
   }
 	h2 {
     font-size: 3.3rem;
     margin: 50px 0 20px;
-    border-left: 10px solid $main-color2;
+    border-left: 10px solid;
+    border-image: linear-gradient(to bottom, $main-color2 0%, rgba($main-color2, 0.3) 100%);
+    border-image-slice: 1;
     padding: 8px 0 8px 2rem;
   }
   h3 {
