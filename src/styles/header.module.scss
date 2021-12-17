@@ -23,10 +23,9 @@
     font-size: 3.8rem;
     font-weight: 500;
     letter-spacing: 7px;
-    background: linear-gradient(135deg, $main-color 45%, $sub-color 55%);
+    background: linear-gradient(to right, $main-color, $sub-color);
     -webkit-background-clip: text;
     -webkit-text-fill-color: rgba(255,255,255,0.0);
-    color: $main-color;
   }
 }
 
