@@ -139,7 +139,7 @@ const plugins: GatsbyConfig['plugins'] = [
     options: {
       name: `鳥に生まれることができなかった人へ`,
       short_name: `鳥に生まれることができなかった人へ`,
-      start_url: `/page/1/`,
+      start_url: `/`,
       background_color: `#ffffff`,
       theme_color: `#663399`,
       display: `minimal-ui`,
