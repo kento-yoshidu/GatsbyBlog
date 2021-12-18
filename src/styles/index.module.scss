@@ -1,3 +1,5 @@
+@import "../scss/variables";
+
 .main {
   width: 60%;
   margin: 80px auto;
@@ -17,20 +19,45 @@
     text-decoration: none;
     svg {
       display: block;
-      color: #444;
       font-size: 5rem;
+      color: #444;
+      transition-duration: 0.3s;
     }
     span {
       color: #444;
       font-size: 2.5rem;
     }
     &:hover {
+      svg {
+        color: $main-color2;
+      }
+    span {
+        color: #ACB6E5;//非対応のブラウザでの文字色を設定
+        background: -webkit-linear-gradient(0deg, $main-color2, $sub-color);//背景色にグラデーションを指定
+        -webkit-background-clip: text;//テキストでくり抜く
+        -webkit-text-fill-color: transparent;//くり抜いた部分は背景を表示
+    }
     }
   }
 }
 
 @media screen and (max-width: 768px) {
-  .image {
+  .main {
     width: 80%;
-  }	
+    margin: 50px auto;
+    flex-direction: column;
+    align-items: center;
+    .box {
+      width: 60%;
+      height: auto;
+      padding: 30px 10px;
+      gap: 20px;
+      svg {
+        font-size: 4rem;
+      }
+      span {
+        font-size: 2rem;
+      }
+    }
+  }
 }
