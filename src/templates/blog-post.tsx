@@ -1,10 +1,11 @@
-import * as React from "react"
+import React, { useEffect, useRef } from "react"
 import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 import PostInfo from "../components/postInfo"
+import IO from "../../lib/intersectionObserver"
 
 const Styles = require("../styles/post.module.scss")
 const TableStyles = require("../styles/tableOfContent.module.scss")
@@ -20,6 +21,13 @@ interface Props {
 }
 
 const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
+  /*
+  const Element = useRef(null)
+  console.log(Element)
+  */
+  useEffect(() => {
+    IO()
+  })
   const post = data.markdownRemark
   const { previous, next } = data
   const tableOfContents = data.markdownRemark?.tableOfContents
@@ -53,7 +61,7 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
         />
 
         <div
-          className={TableStyles.tableOfContent}
+          className={`${TableStyles.tableOfContent} tableOfContent }`}
           dangerouslySetInnerHTML={{ __html: tableOfContents }}
         />
       </div>  
