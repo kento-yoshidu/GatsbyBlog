@@ -25,7 +25,6 @@ const IO = () => {
 		// 交差検知をしたもののなかで、isIntersectingがtrueのDOMを色を変える関数に渡す
 		entries.forEach(entry => {
 			if (entry.isIntersecting) {
-        console.log(entry.target)
 				activateIndex(entry.target);
 			}
 		});
@@ -37,17 +36,20 @@ const IO = () => {
 	 * @param element
    */
 	function activateIndex(element) {
+    console.log(element.id)
 		// すでにアクティブになっている目次を選択
-		const currentActiveIndex = document.querySelector(`#indexList ${Styles.active}`);
+		const currentActiveIndex = document.querySelector(`.tableOfContent .active`);
 		// すでにアクティブになっているものが0個の時（=null）以外は、activeクラスを除去
 		if (currentActiveIndex !== null) {
 			currentActiveIndex.classList.remove(Styles.active);
 		}
-    /*
 		// 引数で渡されたDOMが飛び先のaタグを選択し、activeクラスを付与
-		const newActiveIndex = document.querySelector(`a[href='#${element.id}']`);
-		newActiveIndex.classList.add(Styles.active);
-    */
+		const list = document.querySelectorAll(`.tableOfContent a`);
+
+    Array.from(list).map(l => {
+      console.log(l.innerHTML)
+    })
+		//newActiveIndex?.classList.add(Styles.active);
   }
 }
 
