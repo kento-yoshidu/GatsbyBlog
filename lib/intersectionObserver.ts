@@ -4,8 +4,7 @@ import * as Styles from "../src/styles/IOTest.module.scss"
 
 const IO = () => {
 	// 今回の交差を監視する要素
-	const boxes = document.querySelectorAll(".tableOfContent ul li");
-  console.log(boxes)
+	const boxes = document.querySelectorAll("main > h1, h2, h3");
 
 	const options = {
 		root: null, // 今回はビューポートをルート要素とする
@@ -26,6 +25,7 @@ const IO = () => {
 		// 交差検知をしたもののなかで、isIntersectingがtrueのDOMを色を変える関数に渡す
 		entries.forEach(entry => {
 			if (entry.isIntersecting) {
+        console.log(entry.target)
 				activateIndex(entry.target);
 			}
 		});
