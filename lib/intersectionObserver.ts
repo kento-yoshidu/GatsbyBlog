@@ -10,7 +10,7 @@ const IO = () => {
 
 	const options = {
 		root: null, // 今回はビューポートをルート要素とする
-		rootMargin: "-50% 0px", // ビューポートの中心を判定基準にする
+		rootMargin: "-30% 0px", // ビューポートの中心を判定基準にする
 		threshold: 0 // 閾値は0
 	};
 
@@ -37,19 +37,19 @@ const IO = () => {
 	 * @param element
    */
 	function activateIndex(element) {
+    console.log(element)
 		// すでにアクティブになっている目次を選択
 		const currentActiveIndex = document.querySelector(`.${Styles.tableOfContent} .${Styles.active}`);
-    console.log(currentActiveIndex)
 		// すでにアクティブになっているものが0個の時（=null）以外は、activeクラスを除去
 		if (currentActiveIndex !== null) {
 			currentActiveIndex.classList.remove(Styles.active);
 		}
 		// 引数で渡されたDOMが飛び先のaタグを選択し、activeクラスを付与
-		const list = document.querySelectorAll(`.tableOfContent a`);
+		const links = document.querySelectorAll(`.tableOfContent a`);
 
-    Array.from(list).map(l => {
-      if(element.id === l.innerHTML) {
-        l?.classList.add(Styles.active);
+    Array.from(links).map(link => {
+      if(element.innerHTML === link.innerHTML) {
+        link?.classList.add(Styles.active);
       }
     })
   }

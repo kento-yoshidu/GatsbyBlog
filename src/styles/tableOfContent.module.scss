@@ -1,5 +1,8 @@
 @import "../scss/variables";
 
+html {
+  scroll-behavior: smooth;
+}
 .tableOfContent {
 	width: 30%;
 	margin-top: 80px;
@@ -18,12 +21,21 @@
         margin-bottom: 8px;
       }
 			a {
+        position: relative;
 				color: #444;
 				&:hover {
 					color: $main-color;
 				}
         &.active {
           color: $main-color2;
+          &::before {
+            position: absolute;
+            content: "▶️";
+            font-size: 1.35rem;
+            top: 50%;
+            left: -20px;
+            transform: translateY(-50%);
+          }
         }
 			}
 		}
