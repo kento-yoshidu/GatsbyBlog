@@ -1,10 +1,12 @@
 import React, { useRef } from "react"
 
-import * as Styles from "../src/styles/IOTest.module.scss"
+import * as Styles from "../src/styles/tableOfContent.module.scss"
 
 const IO = () => {
 	// 今回の交差を監視する要素
-	const boxes = document.querySelectorAll("main > h1, h2, h3");
+	const boxes = document.querySelectorAll(".main > h1, h2, h3");
+
+  console.log(boxes)
 
 	const options = {
 		root: null, // 今回はビューポートをルート要素とする
@@ -28,7 +30,6 @@ const IO = () => {
 				activateIndex(entry.target);
 			}
 		});
-		//window.alert('hoge')
 	}
 
 	/**
@@ -36,9 +37,9 @@ const IO = () => {
 	 * @param element
    */
 	function activateIndex(element) {
-    console.log(element.id)
 		// すでにアクティブになっている目次を選択
-		const currentActiveIndex = document.querySelector(`.tableOfContent .active`);
+		const currentActiveIndex = document.querySelector(`.${Styles.tableOfContent} .${Styles.active}`);
+    console.log(currentActiveIndex)
 		// すでにアクティブになっているものが0個の時（=null）以外は、activeクラスを除去
 		if (currentActiveIndex !== null) {
 			currentActiveIndex.classList.remove(Styles.active);
@@ -47,9 +48,10 @@ const IO = () => {
 		const list = document.querySelectorAll(`.tableOfContent a`);
 
     Array.from(list).map(l => {
-      console.log(l.innerHTML)
+      if(element.id === l.innerHTML) {
+        l?.classList.add(Styles.active);
+      }
     })
-		//newActiveIndex?.classList.add(Styles.active);
   }
 }
 
