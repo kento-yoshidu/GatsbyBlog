@@ -1,7 +1,7 @@
 ---
 title: "#1 初めてのHTML & CSS"
 postdate: "2021-07-30"
-update: "2021-11-12"
+update: "2021-12-19"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "HTMLとCSSを、何も知らないところから学ぶシリーズです。基本的なPC操作が可能であれば始められます。"
@@ -29,7 +29,7 @@ HTMLとCSSを用いますが、これらの言語の仕様を説明すること�
 
 ## 最終成果物
 
-この講座でHTMLとCSSを学び、最終成果物として[こちら](http://potsunen.info/storehouse/GatsbyBlog/HelloWeb/SampleWebSite/)のページを作成できるようになることが目標です。トップページ＋ブログ記事ページの構成になっています。
+この講座でHTMLとCSSを学び、最終成果物として[こちら](/sample-page/)のページを作成できるようになることが目標です。トップページ＋ブログ記事ページの構成になっています。
 
 また、理論的な部分を交えながらの解説ですので、ある程度の応用力もついているはずです。
 
