@@ -6,12 +6,13 @@ type Props = {
   children: ReactNode
 }
 
-const Layout:React.VFC<Props> = ({children}) => (
-  <div className="allWrapper">
+const Layout: React.VFC<Props> = ({children}) => (
+  //<div className="allWrapper">
+  <>
     {children}
 
     <Footer />
-  </div>
+  </>
 )
 
 export default Layout

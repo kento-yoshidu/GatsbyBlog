@@ -21,13 +21,9 @@ interface Props {
 }
 
 const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
-  /*
-  const Element = useRef(null)
-  console.log(Element)
-  */
   useEffect(() => {
     IO()
-  })
+  }, [])
   const post = data.markdownRemark
   const { previous, next } = data
   const tableOfContents = data.markdownRemark?.tableOfContents
