@@ -31,13 +31,11 @@ const Footer: React.VFC = () => {
 
   return (
     <footer className={Styles.footer}>
-      <hgroup>
-        <h1>
-          <Link to="/page/1/">
-            { site.siteMetadata.title }
-          </Link>
-        </h1>
-      </hgroup>
+      <h1>
+        <Link to="/page/1/">
+          { site.siteMetadata.title }
+        </Link>
+      </h1>
 
       <div className={`${Styles.link} ${Styles.externalLink}`}>
         <Link

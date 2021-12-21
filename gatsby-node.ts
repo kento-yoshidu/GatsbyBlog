@@ -50,7 +50,9 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
         }
 
         # タグごとに記事を取得
-        articlesByTag: allMarkdownRemark {
+        articlesByTag: allMarkdownRemark(
+          sort: { fields: frontmatter___postdate, order: DESC }
+        ) {
           group(field: frontmatter___tags) {
             fieldValue
             nodes {

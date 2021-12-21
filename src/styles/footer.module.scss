@@ -14,19 +14,17 @@
       color: $main-color2;
     }
   }
-  hgroup {
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 100;
+    letter-spacing: 2px;
+    margin-bottom: 15px;
     width: 50%;
     margin: 0 auto 20px;
-    h1 {
-      font-size: 2.8rem;
-      font-weight: 100;
-      letter-spacing: 2px;
-      margin-bottom: 15px;
-    }
   }
   .link {
     width: 50%;
-    margin: 0 auto 20px;
+    margin: 10px auto;
   }
   .externalLink {
     svg {
@@ -57,17 +55,11 @@
 @media screen and (max-width: 768px) {
   .footer {
     margin-top: 30px;
-    hgroup {
+    h1 {
       width: 90%;
-      h1 {
-        font-size: 1.7rem;
-        letter-spacing: 1px;
-        text-align: center;
-      }
-      h2 {
-        font-size: 1.3rem;
-        text-align: center;
-      }
+      font-size: 1.7rem;
+      letter-spacing: 1px;
+      text-align: center;
     }
     .link {
       width: 80%;
