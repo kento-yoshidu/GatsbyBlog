@@ -9,8 +9,21 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
   const queryResult = await graphql(
     `
       {
-        allArticleByGroup: allMarkdownRemark(
-          sort: { fields: [frontmatter___postdate]}
+        # 全ての記事を取得
+        allArticles: allMarkdownRemark(
+          sort: {fields: frontmatter___postdate, order: DESC}
+        ) {
+          nodes {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+
+        # 全ての記事をグループごとに取得
+        allArticlesByGroup: allMarkdownRemark(
+          sort: { fields: frontmatter___postdate, order: DESC}
         ) {
           group(field: frontmatter___seriesSlug) {
             nodes {
@@ -22,21 +35,13 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
           }
         }
 
-        allArticles: allMarkdownRemark {
-          nodes {
-            id
-            fields {
-              slug
-            }
-          }
-        }
-
-        # カテゴリごとに記事収集
-        postsBySeries: allMarkdownRemark {
+        # シリーズごとに記事を取得
+        articlesBySeries: allMarkdownRemark(
+          sort: { fields: frontmatter___postdate, order: DESC }
+        ) {
           group(field: frontmatter___seriesSlug) {
             fieldValue
             nodes {
-              id
               frontmatter {
                 seriesName
               }
@@ -44,8 +49,8 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
           }
         }
 
-        # タグごとに記事収集
-        postsByTag: allMarkdownRemark {
+        # タグごとに記事を取得
+        articlesByTag: allMarkdownRemark {
           group(field: frontmatter___tags) {
             fieldValue
             nodes {
@@ -65,37 +70,13 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
     return
   }
 
-  const allArticlesByGroup = queryResult.data.allArticleByGroup.group
-
-  allArticlesByGroup.forEach((group) => {
-
-    group.nodes.forEach((node, index) => {
-
-      const previousPostId = index === 0 ? null : group.nodes[index - 1].id
-      const nextPostId = index === group.nodes.length - 1 ? null : group.nodes[index + 1].id
-
-      createPage({
-        path: node.fields.slug,
-        component: path.resolve("./src/templates/blog-post.tsx"),
-        context: {
-          id: node.id,
-          previousPostId,
-          nextPostId,
-        },
-      })
-    })
-  })
-
   // --------------------------------------------------
-  // 記事一覧の表示
+  // 全ての記事を投稿日時順に表示
 
   const allArticles = queryResult.data.allArticles
 
   allArticles.nodes.forEach(_ => {
-    // 記事合計数
     const postCount = allArticles.nodes.length;
-
-    // 何ページ生成することになるかの計算
     const pageCount = Math.ceil(postCount / 6)
 
     Array.from({ length: pageCount }).forEach((_, i) => {
@@ -117,18 +98,37 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
   })
 
   // --------------------------------------------------
-  // カテゴリごとの記事一覧
+  // 記事ページを生成
 
-  const postsBySeries = queryResult.data.postsBySeries.group
+  const allArticlesByGroup = queryResult.data.allArticlesByGroup.group
 
-  postsBySeries.forEach(series => {
+  allArticlesByGroup.forEach((group) => {
+    group.nodes.forEach((node, index) => {
+      const previousPostId = index === 0 ? null : group.nodes[index - 1].id
+      const nextPostId = index === group.nodes.length - 1 ? null : group.nodes[index + 1].id
+
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve("./src/templates/blog-post.tsx"),
+        context: {
+          id: node.id,
+          previousPostId,
+          nextPostId,
+        },
+      })
+    })
+  })
+
+  // --------------------------------------------------
+  // カテゴリごとの記事を表示
+
+  const articlesBySeries = queryResult.data.articlesBySeries.group
+
+  articlesBySeries.forEach(series => {
     const seriesSlug = series.fieldValue
     const seriesName = series.nodes[0].frontmatter.seriesName
 
-    // カテゴリごとの記事合計数
     const postCount = series.nodes.length;
-
-    // 何ページ生成することになるかの計算
     const pageCount = Math.ceil(postCount / 6)
 
     Array.from({ length: pageCount }).forEach((_, i) => {
@@ -152,15 +152,12 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
   })
 
   // --------------------------------------------------
-  // タグごとの記事一覧
+  // タグごとの記事を表示
 
-  const postsByTag = queryResult.data.postsByTag.group
+  const postsByTag = queryResult.data.articlesByTag.group
 
   postsByTag.forEach(tag => {
-    // タグごとの記事合計数
     const postCount = tag.nodes.length;
-
-    // 何ページ生成することになるかの計算
     const pageCount = Math.ceil(postCount / 6);
 
     Array.from({ length: pageCount }).forEach((_, i) => {
@@ -181,7 +178,6 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
     })
   })
 }
-
 
 const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
