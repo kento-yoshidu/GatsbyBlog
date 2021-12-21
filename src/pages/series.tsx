@@ -27,19 +27,16 @@ const Series: React.VFC<Props> = ({ data, location }) => (
 
     <main className={`${Styles.seriesMain} LoadAnimation`}>
       <ul className={Styles.seriesList}>
-        {data.allMarkdownRemark.group.map(category => {
-          return (
-            <li
-              className={Styles.listItem}
-              key={category.fieldValue}
-            >
-              <Link to={`/series/${category.nodes[0].frontmatter?.seriesSlug}/page/1/`}>
-                { category.fieldValue }({ category.totalCount })
-              </Link>
-            </li>
-          )
-        }
-        )}
+        {data.allMarkdownRemark.group.map(series => (
+          <li
+            className={Styles.listItem}
+            key={series.fieldValue}
+          >
+            <Link to={`/series/${series.nodes[0].frontmatter?.seriesSlug}/page/1/`}>
+              { series.fieldValue }({ series.totalCount })
+            </Link>
+          </li>
+        ))}
       </ul>
     </main>
   </Layout>
@@ -58,7 +55,6 @@ export const pageQuery = graphql`
         }
       }
     ) {
-      totalCount
       group(field: frontmatter___seriesName) {
         nodes {
           frontmatter {

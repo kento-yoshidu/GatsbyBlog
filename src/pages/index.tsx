@@ -26,7 +26,7 @@ type Props = {
   }
 }
 
-const BlogIndex: React.VFC<Props> = ({ data, location }) => {
+const BlogIndex: React.VFC<Props> = ({ location }) => {
   const pagepath = location.pathname  
 
   return (
@@ -70,26 +70,3 @@ const BlogIndex: React.VFC<Props> = ({ data, location }) => {
 }
 
 export default BlogIndex
-
-export const pageQuery = graphql`
-  query IndexPage {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
-      nodes {
-        excerpt
-        fields {
-          slug
-        }
-        frontmatter {
-          date(formatString: "MMMM DD, YYYY")
-          title
-          description
-        }
-      }
-    }
-  }
-`
