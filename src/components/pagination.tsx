@@ -35,7 +35,7 @@ const Pagination: React.VFC<Props> = ({
 			nationLinks
 
 	prevButton = 
-		<div>
+		<>
 			{!isFirst && (
 				<Link
 					className={Styles.prev}
@@ -50,20 +50,20 @@ const Pagination: React.VFC<Props> = ({
 					<span>Prev</span>
 				</Link>
 			)}
-		</div>
+		</>
 	
 	nextButton =
-		<div>
+		<>
 			{!isLast && (
 				<Link
 					className={Styles.next}
-					to={`/page/${currentPage + 1}`}
+					to={`/page/${currentPage + 1}/`}
 				>
 					<span>Next</span>
           <FontAwesomeIcon icon={faChevronCircleRight} />
 				</Link>
 			)}
-		</div>
+		</>
 
 	nationLinks =
 		<div className={Styles.nationLinks}>

@@ -31,7 +31,7 @@ const PostInfo: React.VFC<Props> = ({
     description
   }) => {
 
-  const tag = tags?.map(tag => {
+  const tag = tags?.map((tag: string) => {
     return (
       <p key={`tag${tag}`}>
         <Link

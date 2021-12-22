@@ -5,7 +5,6 @@
   width: 50%;
   margin: 100px auto 80px;
   min-height: 1px;
-
 	.prev,
   .next {
 		position: absolute;
@@ -26,8 +25,8 @@
 			font-weight: 900;
 			color: $main-color2;
 		}
-			&:hover {
-			background: $main-color2;
+    &:hover {
+      background: $main-color2;
 			svg,
 			span {
 				color: #fff;
@@ -40,14 +39,12 @@
       margin-right: 8px;
     }
   }
-
   .next {
     right: 0;
     svg {
       margin-left: 8px;
     }
   }
-
 	.nationLinks {
 		display: flex;
     justify-content: space-between;
@@ -60,7 +57,6 @@
     .items {
       list-style: none;
       margin: 0 10px;
-
       .text {
         padding: 1rem 1.35rem;
         background-color: $main-color2;

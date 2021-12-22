@@ -86,7 +86,6 @@ export const pageQuery = graphql`
       }
     ) {
       nodes {
-        id
         fields {
           slug
         }

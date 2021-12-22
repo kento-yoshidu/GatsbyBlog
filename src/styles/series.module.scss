@@ -40,8 +40,8 @@
 @media screen and (max-width: 768px) {
   .seriesMain,
   .tagsMain {
-    width: 91vw;
-    margin: 40px auto 70px;
+    width: 90vw;
+    margin: 30px auto 50px;
     padding: 20px 0;
     .seriesList,
     .tagList {
@@ -50,6 +50,7 @@
         a {
           padding: 6px 10px;
           font-size: 1.2rem;
+          border: 1.5px solid #888;
         }
       }
     }
