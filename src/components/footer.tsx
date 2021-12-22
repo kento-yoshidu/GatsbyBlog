@@ -20,9 +20,6 @@ const Footer: React.VFC = () => {
           siteMetadata {
             title
             siteUrl
-            author {
-              name
-            }
           }
         }
       }

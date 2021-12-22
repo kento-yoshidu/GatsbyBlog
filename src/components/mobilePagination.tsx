@@ -1,15 +1,15 @@
-import * as React /*, { useDebugValue }*/ from "react"
+import * as React from "react"
 import { Link } from "gatsby"
 
 const Styles = require("../styles/mobilePagination.module.scss")
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-          faAngleLeft,
-          faAngleDoubleLeft,
-          faAngleRight,
-          faAngleDoubleRight
-        } from "@fortawesome/free-solid-svg-icons"
+  faAngleLeft,
+  faAngleDoubleLeft,
+  faAngleRight,
+  faAngleDoubleRight
+} from "@fortawesome/free-solid-svg-icons"
 
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"

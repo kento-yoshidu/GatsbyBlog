@@ -17,7 +17,8 @@ const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
             title
           }
         }
-      }`
+      }
+    `
   )
 
   return (

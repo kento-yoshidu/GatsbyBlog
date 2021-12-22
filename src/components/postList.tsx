@@ -13,7 +13,6 @@ import {  faFolder,
 
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
-import { decodedTextSpanIntersectsWith } from "typescript";
 config.autoAddCss = false
 
 type Props = {
@@ -59,7 +58,7 @@ const PostList: React.VFC<Props> = ({postData}) => (
 
               <p className={Styles.tags}>
                 <FontAwesomeIcon icon={faTags} /> <span>タグ</span>
-                {post.frontmatter.tags.map((tag) => (
+                {post.frontmatter.tags.map((tag: string) => (
                   <Link
                     to={`/tag/${tag}/page/1/`}
                     key={`${tag}`}

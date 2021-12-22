@@ -7,7 +7,6 @@ type Props = {
 }
 
 const Layout: React.VFC<Props> = ({children}) => (
-  //<div className="allWrapper">
   <>
     {children}
 

@@ -37,7 +37,7 @@ const AboutPage: React.VFC<Props> = ({ location }) => {
       <div className={Styles.dateInfo}>
         <FontAwesomeIcon icon={faUndo} />
         更新日時
-        <time>2021.10.11</time>
+        <time>2021.12.22</time>
       </div>
 
       <main className={Styles.main}>

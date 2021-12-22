@@ -8,7 +8,6 @@ import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import Pagination from "../components/pagination"
 import MobilePagination from "../components/mobilePagination"
-import Footer from "../components/footer"
 
 interface Props {
   data: GatsbyTypes.PagesQuery,
@@ -57,7 +56,6 @@ const ArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
         isLast={pageContext.isLast}
         currentPage={pageContext.currentPage}
         pageCount={pageContext.pageCount}
-        //tag={pageContext.tag}
       />
 
       <MobilePagination
@@ -76,38 +74,35 @@ export const pageQuery = graphql`
   query Pages(
     $limit: Int!,
     $skip: Int!
+  ) {
+    siteData: site {
+      siteMetadata {
+        title
+        description
+      }
+    }
+    postData: allMarkdownRemark(
+      sort: {
+        fields: [frontmatter___postdate],
+        order: DESC,
+      }
+      limit: $limit,
+      skip: $skip
     ) {
-      siteData: site {
-        siteMetadata {
+      nodes {
+        fields {
+          slug
+        }
+        frontmatter {
+          postdate(formatString: "YYYY年MM月DD日")
+          update(formatString: "YYYY年MM月DD日")
+          seriesName
+          seriesSlug
           title
+          tags
           description
         }
       }
-      postData:
-        allMarkdownRemark(
-          sort: {
-            fields: [frontmatter___postdate],
-            order: DESC,
-          }
-          limit: $limit,
-          skip: $skip
-        ) {
-          nodes {
-            id
-            excerpt
-            fields {
-              slug
-            }
-            frontmatter {
-              postdate(formatString: "YYYY年MM月DD日")
-              update(formatString: "YYYY年MM月DD日")
-              seriesName
-              seriesSlug
-              title
-              tags
-              description
-            }
-          }
-        }
-      }
+    }
+  }
 `

@@ -24,6 +24,7 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
   useEffect(() => {
     IO()
   }, [])
+
   const post = data.markdownRemark
   const { previous, next } = data
   const tableOfContents = data.markdownRemark?.tableOfContents
@@ -106,8 +107,6 @@ export const pageQuery = graphql`
       }
     }
     markdownRemark(id: { eq: $id }) {
-      id
-      excerpt(pruneLength: 160)
       html
       tableOfContents
       frontmatter {
