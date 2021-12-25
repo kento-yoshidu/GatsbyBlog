@@ -172,6 +172,8 @@ https://github.com/git/git/blob/v2.12.0/Documentation/technical/index-format.txt
 
 ## 参考
 
+[Git - gitrepository-layout Documentation](https://git-scm.com/docs/gitrepository-layout)
+
 [](https://github.blog/jp/2021-01-06-commits-are-snapshots-not-diffs/)
 
 [Git - 配管（Plumbing）と磁器（Porcelain）](https://git-scm.com/book/ja/v2/Git%E3%81%AE%E5%86%85%E5%81%B4-%E9%85%8D%E7%AE%A1%EF%BC%88Plumbing%EF%BC%89%E3%81%A8%E7%A3%81%E5%99%A8%EF%BC%88Porcelain%EF%BC%89)
@@ -190,9 +192,13 @@ https://github.com/git/git/blob/v2.12.0/Documentation/technical/index-format.txt
 
 https://zenn.dev/st43/articles/9f86a107a57aba
 
+[たぶんもう怖くないGit ~Git内部の仕組み~ - Qiita](https://qiita.com/marchin_1989/items/2ec01553e907f3a9e6bb)
+
 https://mrkmyki.com/%E3%80%90%E5%9B%B3%E8%A7%A3%E3%80%91git%E3%81%AE%E3%82%A4%E3%83%B3%E3%83%87%E3%83%83%E3%82%AF%E3%82%B9%E3%81%AE%E8%AA%AC%E6%98%8E%E3%81%BE%E3%81%A8%E3%82%81
 
 https://qiita.com/DQNEO/items/0233a680b0f9471db9ee
+
+[Git for Computer Scientists](https://eagain.net/articles/git-for-computer-scientists/)
 
 https://www.yoheim.net/blog.php?q=20140301
 

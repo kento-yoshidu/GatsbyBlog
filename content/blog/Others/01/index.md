@@ -2,8 +2,8 @@
 title: "プロキシ環境でKali Linuxを使う"
 postdate: "2021-12-13"
 update: "2021-12-14"
-seriesName: "メモ"
-seriesSlug: "Memo"
+seriesName: "その他"
+seriesSlug: "Others"
 description: "プロキシ環境でKali Linux(WSL2)を使うための設定項目をメモします。"
 tags: ["Kali Linux", "WSL2"]
 ---
