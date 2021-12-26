@@ -1,7 +1,8 @@
 import * as React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-const Styles = require("../styles/footer.module.scss")
+//const Styles = require("../styles/footer.module.scss")
+import * as Styles from "../styles/footer.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons"

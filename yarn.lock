@@ -5297,6 +5297,13 @@ download@^7.1.0:
     p-event "^2.1.0"
     pify "^3.0.0"
 
+dts-css-modules-loader@1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/dts-css-modules-loader/-/dts-css-modules-loader-1.2.4.tgz#ae0f3001f000f3b78394c4925670593eef39fe80"
+  integrity sha512-/uB7sPhjWsovzN2TKll+/KrK1F2fv3iM4QT+kDZA97ljCoy7csIOoGTgjjwSqMPIAiXVeeaNZHOgXfLnYzmj8g==
+  dependencies:
+    loader-utils "^2.0.0"
+
 duplexer3@^0.1.4:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
@@ -6715,6 +6722,13 @@ gatsby-page-utils@^1.12.0:
     glob "^7.1.7"
     lodash "^4.17.21"
     micromatch "^4.0.4"
+
+gatsby-plugin-dts-css-modules@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-dts-css-modules/-/gatsby-plugin-dts-css-modules-2.2.0.tgz#7d2b00ff0f6b1c4bbc3dc7b3536e80b9ccb63638"
+  integrity sha512-3vEmGedd4MFpg65Mh6MM0bk8DPyYStM5e18aM0ojs0K+naB5nhnFulElStc9GjzZllkGYqh9leQWCJ/x4SuJ2w==
+  dependencies:
+    dts-css-modules-loader "1.2.4"
 
 gatsby-plugin-feed@^3.9.0:
   version "3.12.0"
