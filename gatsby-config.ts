@@ -4,6 +4,7 @@ const plugins: GatsbyConfig['plugins'] = [
   `gatsby-plugin-typescript`,
   `gatsby-plugin-typegen`,
   `gatsby-plugin-sass`,
+  `gatsby-plugin-dts-css-modules`,
   `gatsby-plugin-image`,
   {
     resolve: `gatsby-source-filesystem`,
