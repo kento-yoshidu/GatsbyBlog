@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Link } from "gatsby"
 
-const Styles = require("../styles/postInfo.module.scss")
+import * as Styles from "../styles/postInfo.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faClock, faUndo ,faFolder, faTags, faCommentDots } from "@fortawesome/free-solid-svg-icons"

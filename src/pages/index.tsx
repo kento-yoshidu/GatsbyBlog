@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 
-const Styles = require("../styles/index.module.scss")
+import * as Styles from "../styles/index.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

@@ -7,7 +7,6 @@ import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import Pagination from "../components/pagination"
-import Footer from "../components/footer"
 
 interface Props {
   data: GatsbyTypes.SeriesQuery,

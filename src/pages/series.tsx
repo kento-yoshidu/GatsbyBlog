@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 
-const Styles = require('../styles/series.module.scss');
+import * as Styles from "../styles/series.module.scss"
 
 type Props = {
   data: GatsbyTypes.SeriesPagesQuery

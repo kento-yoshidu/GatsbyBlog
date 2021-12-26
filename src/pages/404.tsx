@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 
-const Styles = require("../styles/404.module.scss")
+import * as Styles from "../styles/404.module.scss"
 
 type Props = {
   location: {
