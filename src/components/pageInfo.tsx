@@ -1,6 +1,6 @@
 import * as React from "react"
 
-const Styles = require("../styles/pageinfo.module.scss")
+import * as Styles from "../styles/pageinfo.module.scss"
 
 type Props = {
   currentPage: number,

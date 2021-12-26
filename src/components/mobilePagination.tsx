@@ -1,7 +1,7 @@
 import * as React from "react"
 import { Link } from "gatsby"
 
-const Styles = require("../styles/mobilePagination.module.scss")
+import * as Styles from "../styles/mobilePagination.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-const Styles = require("../styles/pagination.module.scss")
+import * as Styles from "../styles/pagination.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {

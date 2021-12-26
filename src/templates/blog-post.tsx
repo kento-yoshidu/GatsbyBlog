@@ -7,8 +7,8 @@ import Header from "../components/header"
 import PostInfo from "../components/postInfo"
 import IO from "../../lib/intersectionObserver"
 
-const Styles = require("../styles/post.module.scss")
-const TableStyles = require("../styles/tableOfContent.module.scss")
+import * as Styles from "../styles/post.module.scss"
+import * as TableStyles from "../styles/tableOfContent.module.scss"
 
 import "prismjs/themes/prism-tomorrow.css"
 import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
