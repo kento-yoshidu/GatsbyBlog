@@ -1,5 +1,6 @@
 import type { GatsbyNode } from "gatsby"
 import path, { resolve } from "path"
+import fs from "fs"
 
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
@@ -17,6 +18,20 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
             id
             fields {
               slug
+            }
+          }
+        }
+
+        # 全ての記事を取得(検索用)
+        allArticlesForSearching: allMarkdownRemark(
+          sort: {fields: frontmatter___postdate, order: DESC}
+        ) {
+          edges {
+            node {
+              frontmatter {
+                tags
+                title
+              }
             }
           }
         }
@@ -179,6 +194,17 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
       })
     })
   })
+
+  const test = queryResult.data.allArticlesForSearching
+  test.edges.map(({node}) => {
+    const { tags, title } = node
+    return {
+      tags,
+      title,
+    }
+  })
+
+  fs.writeFileSync('./static/search.json', JSON.stringify(test, null , 2))
 }
 
 const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
