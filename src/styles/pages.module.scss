@@ -25,7 +25,9 @@
         font-weight: 500;
         line-height: 1.5;
         &:hover {
-          color: $main-color2;
+          background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: rgba(255,255,255,0.0);
         }
       }
     }
@@ -66,7 +68,9 @@
           line-height: 1.5;
           transition-duration: 0.1s;
           &:hover {
-            color: $main-color2;
+            background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: rgba(255,255,255,0.0);
           }
         }
 			}
