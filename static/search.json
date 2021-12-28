@@ -1,199 +1,143 @@
-{
-  "edges": [
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "Kali Linux",
-            "WSL2"
-          ],
-          "title": "プロキシ環境でKali Linuxを使う"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "Git"
-          ],
-          "title": "#4 git logでコミット履歴を見る(後編)"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "書籍",
-            "Vim",
-            "ネットワーク",
-            "Jamstack",
-            "Gatsby"
-          ],
-          "title": "2020年 買ってよかった本"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "Git"
-          ],
-          "title": "#3 git logでコミット履歴を見る(中編)"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "資格",
-            "中小企業診断士試験"
-          ],
-          "title": "中小企業診断士試験1次試験に合格した"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "HTML"
-          ],
-          "title": "#6 HTMLの基本③（h要素、p要素）"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "Git"
-          ],
-          "title": "#2 git logでコミット履歴を見る(前編)"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "Git"
-          ],
-          "title": "#1 Git中級者を目指そう"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "Jamstack",
-            "HeadlessCMS",
-            "SSG"
-          ],
-          "title": "JamstackなWebサイトを構築してみた② Jamstackについて"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "中小企業診断士試験",
-            "経営法務"
-          ],
-          "title": "【5科目目】経営法務 知的財産権"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "資格",
-            "中小企業診断士試験"
-          ],
-          "title": "中小企業診断士試験を受けてきた"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "HTML"
-          ],
-          "title": "#5 HTMLの基本② (head要素)"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "HTML"
-          ],
-          "title": "#4 HTMLの基本① (基本的な書き方)"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "HTML",
-            "CSS"
-          ],
-          "title": "#3 CSSでスタイリングする"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "HTML",
-            "入門"
-          ],
-          "title": "#2 HTMLでページを作ってみる"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "Jamstack",
-            "HeadlessCMS",
-            "SSG"
-          ],
-          "title": "JamstackなWebサイトを構築してみた①"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "HTML",
-            "CSS"
-          ],
-          "title": "#1 初めてのHTML & CSS"
-        }
-      }
-    },
-    {
-      "node": {
-        "frontmatter": {
-          "tags": [
-            "Gatsby"
-          ],
-          "title": "Gatsbyでブログを始めました"
-        }
-      }
-    }
-  ]
-}
+[
+  {
+    "tags": [
+      "Kali Linux",
+      "WSL2"
+    ],
+    "title": "プロキシ環境でKali Linuxを使う",
+    "slug": "/Others/01/"
+  },
+  {
+    "tags": [
+      "Git"
+    ],
+    "title": "#4 git logでコミット履歴を見る(後編)",
+    "slug": "/GitAdvance/04/"
+  },
+  {
+    "tags": [
+      "書籍",
+      "Vim",
+      "ネットワーク",
+      "Jamstack",
+      "Gatsby"
+    ],
+    "title": "2020年 買ってよかった本",
+    "slug": "/GoodBookToBuy/01/"
+  },
+  {
+    "tags": [
+      "Git"
+    ],
+    "title": "#3 git logでコミット履歴を見る(中編)",
+    "slug": "/GitAdvance/03/"
+  },
+  {
+    "tags": [
+      "資格",
+      "中小企業診断士試験"
+    ],
+    "title": "中小企業診断士試験1次試験に合格した",
+    "slug": "/Diary/03/"
+  },
+  {
+    "tags": [
+      "HTML"
+    ],
+    "title": "#6 HTMLの基本③（h要素、p要素）",
+    "slug": "/HelloWeb/06/"
+  },
+  {
+    "tags": [
+      "Git"
+    ],
+    "title": "#2 git logでコミット履歴を見る(前編)",
+    "slug": "/GitAdvance/02/"
+  },
+  {
+    "tags": [
+      "Git"
+    ],
+    "title": "#1 Git中級者を目指そう",
+    "slug": "/GitAdvance/01/"
+  },
+  {
+    "tags": [
+      "Jamstack",
+      "HeadlessCMS",
+      "SSG"
+    ],
+    "title": "JamstackなWebサイトを構築してみた② Jamstackについて",
+    "slug": "/Jamstack/02/"
+  },
+  {
+    "tags": [
+      "中小企業診断士試験",
+      "経営法務"
+    ],
+    "title": "【5科目目】経営法務 知的財産権",
+    "slug": "/shindanshi/legal/chizai/"
+  },
+  {
+    "tags": [
+      "資格",
+      "中小企業診断士試験"
+    ],
+    "title": "中小企業診断士試験を受けてきた",
+    "slug": "/Diary/02/"
+  },
+  {
+    "tags": [
+      "HTML"
+    ],
+    "title": "#5 HTMLの基本② (head要素)",
+    "slug": "/HelloWeb/05/"
+  },
+  {
+    "tags": [
+      "HTML"
+    ],
+    "title": "#4 HTMLの基本① (基本的な書き方)",
+    "slug": "/HelloWeb/04/"
+  },
+  {
+    "tags": [
+      "HTML",
+      "CSS"
+    ],
+    "title": "#3 CSSでスタイリングする",
+    "slug": "/HelloWeb/03/"
+  },
+  {
+    "tags": [
+      "HTML",
+      "入門"
+    ],
+    "title": "#2 HTMLでページを作ってみる",
+    "slug": "/HelloWeb/02/"
+  },
+  {
+    "tags": [
+      "Jamstack",
+      "HeadlessCMS",
+      "SSG"
+    ],
+    "title": "JamstackなWebサイトを構築してみた①",
+    "slug": "/Jamstack/01/"
+  },
+  {
+    "tags": [
+      "HTML",
+      "CSS"
+    ],
+    "title": "#1 初めてのHTML & CSS",
+    "slug": "/HelloWeb/01/"
+  },
+  {
+    "tags": [
+      "Gatsby"
+    ],
+    "title": "Gatsbyでブログを始めました",
+    "slug": "/Diary/01/"
+  }
+]
