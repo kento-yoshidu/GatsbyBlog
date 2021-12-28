@@ -1,5 +1,6 @@
 import React, { ReactNode } from "react"
 
+import Search from "./Search"
 import Footer from "./footer"
 
 type Props = {
@@ -8,6 +9,10 @@ type Props = {
 
 const Layout: React.VFC<Props> = ({children}) => (
   <>
+    {/*
+    <Search />
+    */}
+
     {children}
 
     <Footer />
