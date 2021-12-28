@@ -125,6 +125,8 @@ proxy=http://<proxy_server>:<port>
 
 以上、簡単な内容でしたが、メモ書きという事でこれくらいにします。いつかちゃんとした記事にしたいと思います。
 
+そして、2022年こそはちゃんとLinuxを勉強したいと思います🙋‍♂️。
+
 ## 参考
 
 [Proxy 接続設定のまとめ - Qiita](https://qiita.com/msi/items/e3a9700a2ac4a407cec1)
