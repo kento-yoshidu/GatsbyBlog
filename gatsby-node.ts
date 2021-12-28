@@ -1,6 +1,7 @@
 import type { GatsbyNode } from "gatsby"
 import path, { resolve } from "path"
 import fs from "fs"
+import { faTags } from "@fortawesome/free-solid-svg-icons"
 
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
@@ -28,6 +29,9 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
         ) {
           edges {
             node {
+              fields {
+                slug
+              }
               frontmatter {
                 tags
                 title
@@ -196,15 +200,17 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
   })
 
   const test = queryResult.data.allArticlesForSearching
-  test.edges.map(({node}) => {
-    const { tags, title } = node
+  const keywords = test.edges.map(({node}) => {
+    const { frontmatter } = node
+
     return {
-      tags,
-      title,
+      tags: frontmatter.tags,
+      title: frontmatter.title,
+      slug: node.fields.slug
     }
   })
 
-  fs.writeFileSync('./static/search.json', JSON.stringify(test, null , 2))
+  fs.writeFileSync('./static/search.json', JSON.stringify(keywords, null , 2))
 }
 
 const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
