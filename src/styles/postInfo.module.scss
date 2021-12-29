@@ -12,7 +12,9 @@
     a {
       color: #444;
       &:hover {
-        color: $main-color;
+        background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: rgba(255,255,255,0.0);
       }
     }
   }
@@ -34,6 +36,7 @@
     font-size: 1.7rem;
     p {
       margin-right: 30px;
+      letter-spacing: 0.5px;
       svg {
         margin-right: 10px;
       }
@@ -54,9 +57,10 @@
       a {
         color: #444;
         &:hover {
-          color: $main-color;
+          background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: rgba(255,255,255,0.0);
         }
-        color: #444;
       }
     }
   }
