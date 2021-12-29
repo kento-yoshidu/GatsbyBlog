@@ -42,7 +42,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
         # 全ての記事をグループごとに取得
         allArticlesByGroup: allMarkdownRemark(
-          sort: { fields: frontmatter___postdate, order: DESC}
+          sort: { fields: frontmatter___postdate}
         ) {
           group(field: frontmatter___seriesSlug) {
             nodes {
@@ -199,8 +199,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
     })
   })
 
-  const test = queryResult.data.allArticlesForSearching
-  const keywords = test.edges.map(({node}) => {
+  const keywords = queryResult.data.allArticlesForSearching.edges.map(({node}) => {
     const { frontmatter } = node
 
     return {
