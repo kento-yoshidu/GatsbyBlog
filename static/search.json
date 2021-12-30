@@ -110,20 +110,20 @@
   },
   {
     "tags": [
+      "HTML",
+      "入門"
+    ],
+    "title": "#2 HTMLでページを作ってみる",
+    "slug": "/HelloWeb/02/"
+  },
+  {
+    "tags": [
       "Jamstack",
       "HeadlessCMS",
       "SSG"
     ],
     "title": "JamstackなWebサイトを構築してみた①",
     "slug": "/Jamstack/01/"
-  },
-  {
-    "tags": [
-      "HTML",
-      "入門"
-    ],
-    "title": "#2 HTMLでページを作ってみる",
-    "slug": "/HelloWeb/02/"
   },
   {
     "tags": [
