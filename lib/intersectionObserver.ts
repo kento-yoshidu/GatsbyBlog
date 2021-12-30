@@ -12,7 +12,7 @@ const IO = () => {
 
 	const options = {
 		root: null, // ビューポートをルート要素に設定
-		rootMargin: "-30% 0px", // ビューポートの中心を判定基準にする
+		rootMargin: "0% 0px -90% 0px", // ビューポートの中心を判定基準にする
 		threshold: 0,
 	};
 
@@ -36,7 +36,6 @@ const IO = () => {
 	}
 
 	function activateIndex(element) {
-    console.log(element)
 		// すでにアクティブになっている目次を選択
 		const currentActiveIndex = document.querySelector(`.${Styles.tableOfContent} .${Styles.active}`);
 		// すでにアクティブになっているものが0個の時（=null）以外は、activeクラスを除去
