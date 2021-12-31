@@ -9,7 +9,7 @@ type Props = {
 
 const Layout: React.VFC<Props> = ({children}) => (
   <>
-    {/*<Search />*/}
+    <Search />
 
     {children}
 
