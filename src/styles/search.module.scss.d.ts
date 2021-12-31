@@ -3,3 +3,4 @@ export const wrapper: string;
 export const check: string;
 export const menuBtn: string;
 export const list: string;
+export const slugList: string;

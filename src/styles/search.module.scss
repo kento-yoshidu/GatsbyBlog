@@ -11,11 +11,14 @@
   .menuBtn {
     display: block;
     position: relative;
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
     background-color: #ddd;
     border-radius: 100vh;
     transition: 0.2s;
+    background-image: linear-gradient(#e8e8e8 0%, #d6d6d6 100%);
+    box-shadow: inset 0 2px 0 rgba(255,255,255,0.2), 0 2px 2px rgba(0, 0, 0, 0.1);
+    border-bottom: solid 2px #b5b5b5;
     &:hover {
       background-color: #ededed;
     }
@@ -36,9 +39,28 @@
     input {
       border: 1px solid #aaa;
       padding: 0.5rem;
-      border-radius: 100vh;
+      border-radius: 10px;
       &:focus {
         border-color: #eee;
+      }
+    }
+    .slugList {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      width: 200%;
+      ul {
+        background-color: rgba(0,0,0, 0.1);
+        padding: 18px 30px;
+        list-style: none;
+        li {
+          margin-bottom: 15px;
+          a {
+            color: #444;
+            font-size: 1.65rem;
+            line-height: 1.65;
+          }
+        }
       }
     }
   }

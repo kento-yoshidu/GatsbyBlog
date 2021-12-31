@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 import { SearchOutline } from 'react-ionicons'
 
@@ -13,29 +13,21 @@ type Edge = {
   }
 }
 
-/*
-const products2: Post[] = [
-  {
-    "item": "Apple",
-    "slug": "AppleSlug"
-  },
-  {
-    "item": "Banana",
-    "slug": "BananaSlug"
-  },
-  {
-    "item": "Lemon",
-    "slug": "LemonSlug"
-  },
-];
-*/
+type Props = {
+  title?: string;
+  slug?: string
+}
 
-const ListItems = ({title}: { title: string | null}) => {
+const ListItems: React.VFC<Props> = ({ title, slug }) => {
   return (
   <>
     {title
-      ?  <li>{title}</li>
-      : <p>Not Found</p>
+      ?  <li>
+            <Link to={slug}>
+              {title}
+            </Link>
+          </li>
+      : <></>
     }
   </>
   )
@@ -92,7 +84,7 @@ const Search = () => {
 
   return (
     <>
-      <div className={Styles.wrapper}>
+      <ul className={Styles.wrapper}>
         <input
           type="checkbox"
           className={Styles.check}
@@ -114,122 +106,27 @@ const Search = () => {
             onClick={() => setShowLists(true)}
           />
 
-          <div className="slugList">
+          <div className={Styles.slugList}>
             {showLists && typeof filteredPosts !== "string" && filteredPosts &&
-              filteredPosts.map((v: any, i: number) => {
-                console.log("v = ", v)
-                return (
-                  <ListItems key={i} title={v.node.title} />)
-              })
+              <ul>
+                {
+                  filteredPosts.map((edge: Edge, i: number) => {
+                    return (
+                      <ListItems
+                        key={i}
+                        title={edge.node.title}
+                        slug={edge.node.slug}
+                      />
+                    )
+                  })
+                }
+              </ul>
             }
           </div>
         </div>
-      </div>
+      </ul>
     </>
   )
 }
 
 export default Search
-
-/*
-import React, { useState, useEffect } from "react"
-
-import { SearchOutline } from 'react-ionicons'
-
-import * as Styles from "./styles.module.scss"
-
-type Products2 = {
-  item: string;
-  slug: string;
-}
-
-const products2: Products2[] = [
-  {
-    "item": "Apple",
-    "slug": "AppleSlug"
-  },
-  {
-    "item": "Banana",
-    "slug": "BananaSlug"
-  },
-  {
-    "item": "Lemon",
-    "slug": "LemonSlug"
-  },
-];
-
-
-const ListItems = ({slug}: { slug: string | null}) => (
-  <>
-    {slug
-      ?  <li>{slug}</li>
-      : <p>Not Found</p>
-    }
-  </>
-)
-
-const SearchTextField = () => {
-  const [keyword, setKeyword] = useState("")
-  const [showLists, setShowLists] = useState(false)
-  const [filteredProducts, setFilteredProducts] = useState<Products2[] | string | null>(null)
-
-  useEffect(() => {
-    if (keyword === "") {
-      setFilteredProducts("入力して下さい。")
-      return
-    }
-
-    const searchKeywords = keyword
-      .trim()
-      .toLocaleLowerCase()
-      .match(/[^\s]+/g)
-
-    const result = products2.filter(product => {
-      return searchKeywords?.every((kw) => product.item.toLowerCase().indexOf(kw) !== -1) 
-    })
-
-    setFilteredProducts(result.length ? result : null)
-  },[keyword])
-
-  return (
-    <>
-      <div className={Styles.wrapper}>
-        <input
-          type="checkbox"
-          className={Styles.check}
-          id="checked"
-        />
-
-        <label className="menuBtn" htmlFor="checked">
-          <SearchOutline
-            color={'#00000'}
-          />
-        </label>
-
-        <div className={Styles.list}>
-          <input
-            type="text"
-            onChange={(e) => setKeyword(e.target.value)}
-            onClick={() => setShowLists(true)}
-          />
-
-          <div className={Styles.slugList}>
-            {showLists && typeof filteredProducts !== "string" && filteredProducts &&
-              filteredProducts.map((v: any, i: number) => {
-                return (
-                  <ListItems key={i} slug={v.slug} />)
-              })
-            }
-          </div>
-        </div>
-      </div>
-    </>
-  );
-}
-
-const App = () => (
-  <SearchTextField />
-)
-
-export default App
-*/
