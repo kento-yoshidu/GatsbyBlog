@@ -6,6 +6,7 @@ const plugins: GatsbyConfig['plugins'] = [
   `gatsby-plugin-sass`,
   `gatsby-plugin-dts-css-modules`,
   `gatsby-plugin-image`,
+  `gatsby-transformer-json`,
   {
     resolve: `gatsby-source-filesystem`,
     options: {
@@ -18,6 +19,13 @@ const plugins: GatsbyConfig['plugins'] = [
     options: {
       name: `images`,
       path: `${__dirname}/src/images`,
+    },
+  },
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      path: `static`,
+      name: `static`,
     },
   },
   {
