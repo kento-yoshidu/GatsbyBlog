@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
 import { SearchOutline } from 'react-ionicons'
 
 import * as Styles from "../styles/search.module.scss"
 
-type Post = {
-  item: string;
-  slug: string;
+type Edge = {
+  node: {
+    slug: string;
+    tags: string[];
+    title: string
+  }
 }
 
+/*
 const products2: Post[] = [
   {
     "item": "Apple",
@@ -23,22 +28,38 @@ const products2: Post[] = [
     "slug": "LemonSlug"
   },
 ];
+*/
 
-const ListItems = ({slug}: { slug: string | null}) => {
-  console.log(slug)
-
+const ListItems = ({title}: { title: string | null}) => {
   return (
   <>
-    {slug
-      ?  <li>{slug}</li>
+    {title
+      ?  <li>{title}</li>
       : <p>Not Found</p>
     }
   </>
-
   )
 }
 
 const Search = () => {
+  const { allSearchJson } = useStaticQuery(
+    graphql`
+      query {
+        allSearchJson {
+          edges {
+            node {
+              tags
+              slug
+              title
+            }
+          }
+        }
+      }
+    `
+  )
+
+
+  const edges: Edge = allSearchJson.edges
 
   // 検索ボックスに入力された文字列
   const [keyword, setKeyword] = useState<string>("")
@@ -47,7 +68,9 @@ const Search = () => {
   const [showLists, setShowLists] = useState<boolean>(false)
 
   // 条件によって絞り込まれた記事
-  const [filteredPosts, setFilteredPosts] = useState<Post[] | string | null>(null)
+  const [filteredPosts, setFilteredPosts] = useState<Edge | string | null>(edges)
+
+  console.log(filteredPosts)
 
   useEffect(() => {
     if (keyword === "") {
@@ -60,8 +83,8 @@ const Search = () => {
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
 
-    const result = products2.filter(product => {
-      return searchKeywords?.every((kw) => product.item.toLowerCase().indexOf(kw) !== -1) 
+    const result = edges.filter(edge => {
+      return searchKeywords?.every((kw) => edge.node.title.toLowerCase().indexOf(kw) !== -1) 
     })
 
     setFilteredPosts(result.length ? result : null)
@@ -94,8 +117,9 @@ const Search = () => {
           <div className="slugList">
             {showLists && typeof filteredPosts !== "string" && filteredPosts &&
               filteredPosts.map((v: any, i: number) => {
+                console.log("v = ", v)
                 return (
-                  <ListItems key={i} slug={v.slug} />)
+                  <ListItems key={i} title={v.node.title} />)
               })
             }
           </div>
