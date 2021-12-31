@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react"
 
-import Search from "./search"
+import Search from "./searchBox"
 import Footer from "./footer"
 
 type Props = {
