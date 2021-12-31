@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import { Link, useStaticQuery, graphql } from "gatsby"
 
 import { SearchOutline } from 'react-ionicons'
 
@@ -13,28 +13,20 @@ type Edge = {
   }
 }
 
-/*
-const products2: Post[] = [
-  {
-    "item": "Apple",
-    "slug": "AppleSlug"
-  },
-  {
-    "item": "Banana",
-    "slug": "BananaSlug"
-  },
-  {
-    "item": "Lemon",
-    "slug": "LemonSlug"
-  },
-];
-*/
+type Props = {
+  title?: string;
+  slug?: string
+}
 
-const ListItems = ({title}: { title: string | null}) => {
+const ListItems: React.VFC<Props> = ({ title, slug }) => {
   return (
   <>
     {title
-      ?  <li>{title}</li>
+      ?  <li>
+            <Link to={slug}>
+              {title}
+            </Link>
+          </li>
       : <p>Not Found</p>
     }
   </>
@@ -116,10 +108,14 @@ const Search = () => {
 
           <div className="slugList">
             {showLists && typeof filteredPosts !== "string" && filteredPosts &&
-              filteredPosts.map((v: any, i: number) => {
-                console.log("v = ", v)
+              filteredPosts.map((edge: Edge, i: number) => {
+                console.log("v = ", edge)
                 return (
-                  <ListItems key={i} title={v.node.title} />)
+                  <ListItems
+                    key={i}
+                    title={edge.node.title}
+                    slug={edge.node.slug}
+                  />)
               })
             }
           </div>
