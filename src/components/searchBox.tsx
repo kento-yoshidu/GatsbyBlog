@@ -62,8 +62,6 @@ const Search = () => {
   // 条件によって絞り込まれた記事
   const [filteredPosts, setFilteredPosts] = useState<Edge | string | null>(edges)
 
-  console.log(filteredPosts)
-
   useEffect(() => {
     if (keyword === "") {
       setFilteredPosts("入力して下さい。")
@@ -79,53 +77,66 @@ const Search = () => {
       return searchKeywords?.every((kw) => edge.node.title.toLowerCase().indexOf(kw) !== -1) 
     })
 
+    /*
+    const result = edges.filter((edge) => {
+      console.log("edge =", edge)
+      return searchKeywords?.every((kw) => {
+        console.log("kw =", kw)
+        return edge.node.tags.every((tag) => {
+          console.log("kw =", kw)
+          return tag.toLowerCase().indexOf(kw) !== -1
+        })
+      })
+    })
+    */
+
+    console.log(result)
+
     setFilteredPosts(result.length ? result : null)
   },[keyword])
 
   return (
-    <>
-      <ul className={Styles.wrapper}>
+    <ul className={Styles.wrapper}>
+      <input
+        type="checkbox"
+        className={Styles.check}
+        id="checked"
+      />
+
+      <label className={Styles.menuBtn} htmlFor="checked">
+        <SearchOutline
+          color={'#00000'}
+          width="30px"
+          height="30px"
+        />
+      </label>
+
+      <div className={Styles.list}>
         <input
-          type="checkbox"
-          className={Styles.check}
-          id="checked"
+          type="text"
+          onChange={(e) => setKeyword(e.target.value)}
+          onClick={() => setShowLists(true)}
         />
 
-        <label className={Styles.menuBtn} htmlFor="checked">
-          <SearchOutline
-            color={'#00000'}
-            width="30px"
-            height="30px"
-          />
-        </label>
-
-        <div className={Styles.list}>
-          <input
-            type="text"
-            onChange={(e) => setKeyword(e.target.value)}
-            onClick={() => setShowLists(true)}
-          />
-
-          <div className={Styles.slugList}>
-            {showLists && typeof filteredPosts !== "string" && filteredPosts &&
-              <ul>
-                {
-                  filteredPosts.map((edge: Edge, i: number) => {
-                    return (
-                      <ListItems
-                        key={i}
-                        title={edge.node.title}
-                        slug={edge.node.slug}
-                      />
-                    )
-                  })
-                }
-              </ul>
-            }
-          </div>
+        <div className={Styles.slugList}>
+          {showLists && typeof filteredPosts !== "string" && filteredPosts &&
+            <ul>
+              {
+                filteredPosts.map((edge: Edge, i: number) => {
+                  return (
+                    <ListItems
+                      key={i}
+                      title={edge.node.title}
+                      slug={edge.node.slug}
+                    />
+                  )
+                })
+              }
+            </ul>
+          }
         </div>
-      </ul>
-    </>
+      </div>
+    </ul>
   )
 }
 
