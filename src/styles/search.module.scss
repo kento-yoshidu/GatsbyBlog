@@ -3,6 +3,7 @@
   top: 30px;
   right: 40px;
   transition: 0.3s;
+  z-index: 2;
   .check {
     display: none;
   }
@@ -46,13 +47,24 @@
       position: absolute;
       top: 50px;
       right: 0;
-      width: 200%;
+      width: 250%;
+      max-height: 80vh;
+      overflow-y: auto;
       ul {
         background-color: #444;
         padding: 18px 30px;
         list-style: none;
+        p {
+          margin-bottom: 20px;
+          color: #fff;
+          font-size: 1.55rem;
+          font-weight: 900;
+          span {
+            color: rgba(red, 0.6);
+          }
+        }
         li {
-          margin-bottom: 15px;
+          margin-bottom: 10px;
           a {
             color: #fff;
             font-size: 1.65rem;
@@ -62,7 +74,6 @@
       }
     }
   }
-
   .check:checked ~ .list {
     display: block;
   }
@@ -87,7 +98,7 @@
         width: 160%;
         ul {
           li {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             a {
               font-size: 1.5rem;
             }
