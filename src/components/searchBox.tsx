@@ -20,16 +20,11 @@ type Props = {
 
 const ListItems: React.VFC<Props> = ({ title, slug }) => {
   return (
-  <>
-    {title
-      ?  <li>
-            <Link to={slug}>
-              {title}
-            </Link>
-          </li>
-      : <></>
-    }
-  </>
+    <li>
+      <Link to={slug}>
+        {title}
+      </Link>
+    </li>
   )
 }
 
@@ -51,7 +46,7 @@ const Search = () => {
   )
 
 
-  const edges: Edge = allSearchJson.edges
+  const edges: Edge[] = allSearchJson.edges
 
   // 検索ボックスに入力された文字列
   const [keyword, setKeyword] = useState<string>("")
@@ -60,11 +55,11 @@ const Search = () => {
   const [showLists, setShowLists] = useState<boolean>(false)
 
   // 条件によって絞り込まれた記事
-  const [filteredPosts, setFilteredPosts] = useState<Edge | string | null>(edges)
+  const [filteredPosts, setFilteredPosts] = useState<Edge[] | string | null>(edges)
 
   useEffect(() => {
     if (keyword === "") {
-      setFilteredPosts("入力して下さい。")
+      setFilteredPosts(edges)
       return
     }
 
@@ -89,8 +84,6 @@ const Search = () => {
       })
     })
     */
-
-    console.log(result)
 
     setFilteredPosts(result.length ? result : null)
   },[keyword])
@@ -121,11 +114,14 @@ const Search = () => {
         <div className={Styles.slugList}>
           {showLists && typeof filteredPosts !== "string" && filteredPosts &&
             <ul>
+              <p>キーワード検索</p>
+              <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
               {
                 filteredPosts.map((edge: Edge, i: number) => {
+                  console.log(filteredPosts.length) 
                   return (
                     <ListItems
-                      key={i}
+                      key={`key${i}`}
                       title={edge.node.title}
                       slug={edge.node.slug}
                     />
