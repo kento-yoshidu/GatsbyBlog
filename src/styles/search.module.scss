@@ -3,11 +3,9 @@
   top: 30px;
   right: 40px;
   transition: 0.3s;
-
   .check {
     display: none;
   }
-
   .menuBtn {
     display: block;
     position: relative;
@@ -50,13 +48,13 @@
       right: 0;
       width: 200%;
       ul {
-        background-color: rgba(0,0,0, 0.1);
+        background-color: #444;
         padding: 18px 30px;
         list-style: none;
         li {
           margin-bottom: 15px;
           a {
-            color: #444;
+            color: #fff;
             font-size: 1.65rem;
             line-height: 1.65;
           }
@@ -67,5 +65,35 @@
 
   .check:checked ~ .list {
     display: block;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .wrapper {
+    top: 15px;
+    right: 15px;
+    .menuBtn {
+      height: 40px;
+      width: 40px;
+      svg {
+        height: 23px;
+        width: 23px;
+      }
+    }
+    .list {
+      .slugList {
+        left: 50%;
+        transform: translateX(-50%);
+        width: 160%;
+        ul {
+          li {
+            margin-bottom: 10px;
+            a {
+              font-size: 1.5rem;
+            }
+          }
+        }
+      }
+    }
   }
 }
