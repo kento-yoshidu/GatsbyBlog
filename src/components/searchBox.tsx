@@ -55,7 +55,7 @@ const Search = () => {
   const [showLists, setShowLists] = useState<boolean>(false)
 
   // 条件によって絞り込まれた記事
-  const [filteredPosts, setFilteredPosts] = useState<Edge[] | string | null>(edges)
+  const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(edges)
 
   useEffect(() => {
     if (keyword === "") {
@@ -68,22 +68,30 @@ const Search = () => {
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
 
-    const result = edges.filter(edge => {
-      return searchKeywords?.every((kw) => edge.node.title.toLowerCase().indexOf(kw) !== -1) 
-    })
-
     /*
-    const result = edges.filter((edge) => {
-      console.log("edge =", edge)
+    const result: Edge[] = edges.filter((edge) => {
       return searchKeywords?.every((kw) => {
-        console.log("kw =", kw)
-        return edge.node.tags.every((tag) => {
-          console.log("kw =", kw)
+        return edge.node.tags.some((tag) => {
           return tag.toLowerCase().indexOf(kw) !== -1
         })
       })
     })
     */
+
+    const result: Edge[] = []
+
+    // TODO: リファクタリング
+    edges.filter((edge) => {
+      searchKeywords?.every((kw) => {
+        edge.node.tags.some((tag) => {
+          if (tag.toLocaleLowerCase().indexOf(kw) !== -1) {
+            if(result.indexOf(edge) === -1) {
+              result.push(edge)
+            }
+          }
+        })
+      })
+    })
 
     setFilteredPosts(result.length ? result : null)
   },[keyword])
@@ -118,7 +126,6 @@ const Search = () => {
               <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
               {
                 filteredPosts.map((edge: Edge, i: number) => {
-                  console.log(filteredPosts.length) 
                   return (
                     <ListItems
                       key={`key${i}`}
