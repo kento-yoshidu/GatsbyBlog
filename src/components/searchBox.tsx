@@ -45,7 +45,6 @@ const Search = () => {
     `
   )
 
-
   const edges: Edge[] = allSearchJson.edges
 
   // 検索ボックスに入力された文字列
@@ -68,32 +67,22 @@ const Search = () => {
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
 
-    /*
-    const result: Edge[] = edges.filter((edge) => {
-      return searchKeywords?.every((kw) => {
-        return edge.node.tags.some((tag) => {
-          return tag.toLowerCase().indexOf(kw) !== -1
-        })
-      })
-    })
-    */
-
-    const result: Edge[] = []
+    const searchedResult: Edge[] = []
 
     // TODO: リファクタリング
     edges.filter((edge) => {
       searchKeywords?.every((kw) => {
         edge.node.tags.some((tag) => {
           if (tag.toLocaleLowerCase().indexOf(kw) !== -1) {
-            if(result.indexOf(edge) === -1) {
-              result.push(edge)
+            if(searchedResult.indexOf(edge) === -1) {
+              searchedResult.push(edge)
             }
           }
         })
       })
     })
 
-    setFilteredPosts(result.length ? result : null)
+    setFilteredPosts(searchedResult.length ? searchedResult : null)
   },[keyword])
 
   return (
@@ -122,7 +111,7 @@ const Search = () => {
         <div className={Styles.slugList}>
           {showLists && typeof filteredPosts !== "string" && filteredPosts &&
             <ul>
-              <p>キーワード検索</p>
+              <p>タグ検索</p>
               <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
               {
                 filteredPosts.map((edge: Edge, i: number) => {
