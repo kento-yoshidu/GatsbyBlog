@@ -33,7 +33,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
                 slug
               }
               frontmatter {
-                tags
+                keyword
                 title
               }
             }
@@ -200,12 +200,10 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
   })
 
   const keywords = queryResult.data.allArticlesForSearching.edges.map(({node}) => {
-    const { frontmatter } = node
-
     return {
-      tags: frontmatter.tags,
-      title: frontmatter.title,
-      slug: node.fields.slug
+      slug: node.fields.slug,
+      title: node.frontmatter.title,
+      keyword: node.frontmatter.keyword,
     }
   })
 
