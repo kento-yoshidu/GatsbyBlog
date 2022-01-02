@@ -6,6 +6,7 @@ seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "見出しを表すh要素、段落を表すp要素を学習します。"
 tags: ["HTML"]
+keyword: ["HTML", "CSS", "body要素", "h要素", "p要素言", "br要素"]
 ---
 
 # 見出しや文章を作る要素

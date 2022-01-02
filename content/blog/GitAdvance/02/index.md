@@ -6,6 +6,7 @@ seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logコマンドのオプションを紹介します。主に出力する内容を決定するオプションを紹介します。"
 tags: ["Git"]
+keyword: ["Git", "git log", "オプション", "option"]
 ---
 
 # git logのオプション（前編）

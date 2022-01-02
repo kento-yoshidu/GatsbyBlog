@@ -6,6 +6,7 @@ seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logのオプション紹介の後編です。どのブランチのコミットを出力するかを選択するオプションを紹介します。"
 tags: ["Git"]
+keyword: ["Git", "git log", "オプション", "option", "ブランチ", "branch"]
 ---
 
 # git logのオプション（後編）
@@ -218,7 +219,6 @@ git merge --no-ff fix -m "8"
 また、ブランチ名の前にキャレット`^`をつけることで、`--not`と同じく、ブランチを除外することができます。`git log develop ^master ^fix`といった具合です。このように、`^`はブランチ名の前につけるか後ろに付けるかで全く意味が変わってきます。
 
 ---
-
 
 ## 参考
 

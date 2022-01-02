@@ -1,11 +1,12 @@
 ---
 title: "#4 HTMLの基本① (基本的な書き方)"
 postdate: "2021-08-20"
-update: "2021-09-24"
+update: "2022-01-02"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
-description: 
+description: "HTMLの基本的な書き方や記述ルールを学習します。"
 tags: ["HTML"]
+keyword: ["HTML", "CSS", "コメント"]
 ---
 
 # HTMLの文法を覚えよう
