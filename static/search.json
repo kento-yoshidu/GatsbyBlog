@@ -1,143 +1,204 @@
 [
   {
-    "tags": [
-      "Kali Linux",
-      "WSL2"
-    ],
+    "slug": "/Others/01/",
     "title": "プロキシ環境でKali Linuxを使う",
-    "slug": "/Others/01/"
+    "keyword": [
+      "Kali Linux",
+      "WSL2",
+      "Proxy",
+      "プロキシー",
+      "apt",
+      "wget",
+      "curl"
+    ]
   },
   {
-    "tags": [
-      "Git"
-    ],
+    "slug": "/GitAdvance/04/",
     "title": "#4 git logでコミット履歴を見る(後編)",
-    "slug": "/GitAdvance/04/"
+    "keyword": [
+      "Git",
+      "git log",
+      "オプション",
+      "option",
+      "ブランチ",
+      "branch"
+    ]
   },
   {
-    "tags": [
+    "slug": "/GoodBookToBuy/01/",
+    "title": "2020年 買ってよかった本",
+    "keyword": [
       "書籍",
       "Vim",
       "ネットワーク",
       "Jamstack",
-      "Gatsby"
-    ],
-    "title": "2020年 買ってよかった本",
-    "slug": "/GoodBookToBuy/01/"
+      "Gatsby",
+      "2020",
+      "book",
+      "本"
+    ]
   },
   {
-    "tags": [
-      "Git"
-    ],
+    "slug": "/GitAdvance/03/",
     "title": "#3 git logでコミット履歴を見る(中編)",
-    "slug": "/GitAdvance/03/"
+    "keyword": [
+      "Git",
+      "git log",
+      "オプション",
+      "option"
+    ]
   },
   {
-    "tags": [
-      "資格",
-      "中小企業診断士試験"
-    ],
+    "slug": "/Diary/03/",
     "title": "中小企業診断士試験1次試験に合格した",
-    "slug": "/Diary/03/"
+    "keyword": [
+      "資格",
+      "中小企業診断士試験",
+      "日記",
+      "Diary",
+      "2021"
+    ]
   },
   {
-    "tags": [
-      "HTML"
-    ],
+    "slug": "/HelloWeb/06/",
     "title": "#6 HTMLの基本③（h要素、p要素）",
-    "slug": "/HelloWeb/06/"
+    "keyword": [
+      "HTML",
+      "CSS",
+      "body要素",
+      "h要素",
+      "p要素言",
+      "br要素"
+    ]
   },
   {
-    "tags": [
-      "Git"
-    ],
+    "slug": "/GitAdvance/02/",
     "title": "#2 git logでコミット履歴を見る(前編)",
-    "slug": "/GitAdvance/02/"
+    "keyword": [
+      "Git",
+      "git log",
+      "オプション",
+      "option"
+    ]
   },
   {
-    "tags": [
-      "Git"
-    ],
+    "slug": "/GitAdvance/01/",
     "title": "#1 Git中級者を目指そう",
-    "slug": "/GitAdvance/01/"
+    "keyword": [
+      "Git",
+      "git log"
+    ]
   },
   {
-    "tags": [
-      "Jamstack",
-      "HeadlessCMS",
-      "SSG"
-    ],
+    "slug": "/Jamstack/02/",
     "title": "JamstackなWebサイトを構築してみた② Jamstackについて",
-    "slug": "/Jamstack/02/"
+    "keyword": [
+      "Jamstack",
+      "SSG",
+      "静的サイトジェネレーター",
+      "HeadlessCMS",
+      "CDN",
+      "ホスティングサービス"
+    ]
   },
   {
-    "tags": [
+    "slug": "/shindanshi/legal/chizai/",
+    "title": "【5科目目】経営法務 知的財産権",
+    "keyword": [
       "中小企業診断士試験",
       "経営法務"
-    ],
-    "title": "【5科目目】経営法務 知的財産権",
-    "slug": "/shindanshi/legal/chizai/"
+    ]
   },
   {
-    "tags": [
-      "資格",
-      "中小企業診断士試験"
-    ],
+    "slug": "/Diary/02/",
     "title": "中小企業診断士試験を受けてきた",
-    "slug": "/Diary/02/"
+    "keyword": [
+      "資格",
+      "中小企業診断士試験",
+      "日記",
+      "Diary",
+      "2021"
+    ]
   },
   {
-    "tags": [
-      "HTML"
-    ],
+    "slug": "/HelloWeb/05/",
     "title": "#5 HTMLの基本② (head要素)",
-    "slug": "/HelloWeb/05/"
+    "keyword": [
+      "HTML",
+      "CSS",
+      "コメント",
+      "DOCTYPE宣言",
+      "head要素",
+      "meta要素",
+      "title要素"
+    ]
   },
   {
-    "tags": [
-      "HTML"
-    ],
+    "slug": "/HelloWeb/04/",
     "title": "#4 HTMLの基本① (基本的な書き方)",
-    "slug": "/HelloWeb/04/"
+    "keyword": [
+      "HTML",
+      "CSS",
+      "コメント"
+    ]
   },
   {
-    "tags": [
-      "HTML",
-      "CSS"
-    ],
+    "slug": "/HelloWeb/03/",
     "title": "#3 CSSでスタイリングする",
-    "slug": "/HelloWeb/03/"
-  },
-  {
-    "tags": [
+    "keyword": [
       "HTML",
-      "入門"
-    ],
-    "title": "#2 HTMLでページを作ってみる",
-    "slug": "/HelloWeb/02/"
+      "CSS",
+      "セレクター",
+      "プロパティ"
+    ]
   },
   {
-    "tags": [
+    "slug": "/HelloWeb/02/",
+    "title": "#2 HTMLでページを作ってみる",
+    "keyword": [
+      "HTML",
+      "CSS",
+      "タグ",
+      "要素"
+    ]
+  },
+  {
+    "slug": "/Jamstack/01/",
+    "title": "JamstackなWebサイトを構築してみた①",
+    "keyword": [
       "Jamstack",
       "HeadlessCMS",
-      "SSG"
-    ],
-    "title": "JamstackなWebサイトを構築してみた①",
-    "slug": "/Jamstack/01/"
+      "SSG",
+      "静的サイトジェネレーター",
+      "Gatsby",
+      "microCMS",
+      "ホスティングサービス",
+      "Netlify"
+    ]
   },
   {
-    "tags": [
+    "slug": "/HelloWeb/01/",
+    "title": "#1 初めてのHTML & CSS",
+    "keyword": [
       "HTML",
       "CSS"
-    ],
-    "title": "#1 初めてのHTML & CSS",
-    "slug": "/HelloWeb/01/"
+    ]
   },
   {
-    "tags": [
-      "Gatsby"
-    ],
+    "slug": "/Diary/01/",
     "title": "Gatsbyでブログを始めました",
-    "slug": "/Diary/01/"
+    "keyword": [
+      "Gatsby",
+      "ブログ",
+      "Blog",
+      "日記",
+      "Diary",
+      "SSG",
+      "静的サイトジェネレーター",
+      "Jamstack",
+      "マークダウン",
+      "Markdown",
+      "GraphQL"
+    ]
   }
 ]

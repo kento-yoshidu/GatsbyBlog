@@ -8,7 +8,7 @@ import * as Styles from "../styles/search.module.scss"
 type Edge = {
   node: {
     slug: string;
-    tags: string[];
+    keyword?: string[];
     title: string
   }
 }
@@ -35,7 +35,7 @@ const Search = () => {
         allSearchJson {
           edges {
             node {
-              tags
+              keyword
               slug
               title
             }
@@ -72,8 +72,8 @@ const Search = () => {
     // TODO: リファクタリング
     edges.filter((edge) => {
       searchKeywords?.every((kw) => {
-        edge.node.tags.some((tag) => {
-          if (tag.toLocaleLowerCase().indexOf(kw) !== -1) {
+        edge.node.keyword?.some((key) => {
+          if (key.toLocaleLowerCase().indexOf(kw) !== -1) {
             if(searchedResult.indexOf(edge) === -1) {
               searchedResult.push(edge)
             }
@@ -111,7 +111,7 @@ const Search = () => {
         <div className={Styles.slugList}>
           {showLists && typeof filteredPosts !== "string" && filteredPosts &&
             <ul>
-              <p>タグ検索</p>
+              <p>キーワード検索</p>
               <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
               {
                 filteredPosts.map((edge: Edge, i: number) => {
