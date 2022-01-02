@@ -5,7 +5,8 @@ update: "2021-10-11"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "HTMLファイルを作成してマークアップを行い、Webページを表示するところまでを説明します。"
-tags: ["HTML","入門"]
+tags: ["HTML", "CSS"]
+keyword: ["HTML", "CSS", "タグ", "要素"]
 ---
 
 # 最初の一歩

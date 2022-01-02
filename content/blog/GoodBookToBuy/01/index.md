@@ -6,6 +6,7 @@ seriesName: "xx年買ってよかった本"
 seriesSlug: "GoodBookToBuy"
 description: "2020年に買ってよかった本（技術書系）を紹介します。"
 tags: ["書籍", "Vim", "ネットワーク", "Jamstack", "Gatsby"]
+keyword: ["書籍", "Vim", "ネットワーク", "Jamstack", "Gatsby", "2020", "book", "本"]
 ---
 
 # 2020年に買った本の中で良かったものを並べる

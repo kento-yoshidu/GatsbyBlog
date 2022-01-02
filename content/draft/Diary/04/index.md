@@ -6,6 +6,7 @@ seriesName: "日記"
 seriesSlug: "Diary"
 description: "2021年度の中小企業診断士1次試験に合格しました。"
 tags: ["Gatsby"]
+keyword: ["Gatsby", ""]
 ---
 
 # ポートフォリオサイトをGatsbyで再作成した

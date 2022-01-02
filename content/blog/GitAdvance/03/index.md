@@ -6,6 +6,7 @@ seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logコマンドのオプションを紹介します。今回は、条件によって出力するコミットを絞るようなオプションを紹介します。"
 tags: ["Git"]
+keyword: ["Git", "git log", "オプション", "option"]
 ---
 
 # git logのオプション（中編）
