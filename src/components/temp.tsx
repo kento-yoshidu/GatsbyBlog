@@ -8,7 +8,7 @@ const Search = () => {
         allSearchJson {
           edges {
             node {
-              keyword
+              keywords
               slug
               title
             }
@@ -19,23 +19,23 @@ const Search = () => {
   )
 
   // フォームに入力された文字列を保持するフック
-  const [inputedKeyword, setInputedKeyword] = useState("")
+  const [inputtedKeyword, setInputtedKeyword] = useState("")
 
   // 条件によって絞り込まれた記事を保持するフック
   const [filteredPosts, setFilteredPosts] = useState(null)
 
   useEffect(() => {
-    const searchKeywords = inputedKeyword
+    const searchKeywords = inputtedKeyword
       .trim()
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
 
-  }, [inputedKeyword])
+  }, [inputtedKeyword])
 
   return (
     <input
       type="text"
-      onChange={(e) => setInputedKeyword(e.target.value)}
+      onChange={(e) => setInputtedKeyword(e.target.value)}
     />
   )
 }

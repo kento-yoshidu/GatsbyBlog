@@ -6,7 +6,7 @@ seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "HTMLの基本的な書き方や記述ルールを学習します。"
 tags: ["HTML"]
-keyword: ["HTML", "CSS", "コメント"]
+keywords: ["HTML", "CSS", "コメント"]
 ---
 
 # HTMLの文法を覚えよう

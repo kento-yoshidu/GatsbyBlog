@@ -6,7 +6,7 @@ seriesName: "日記"
 seriesSlug: "Diary"
 description: "当ブログにキーワード検索機能を追加したので記事にします。"
 tags: ["Gatsby"]
-keyword: ["Gatsby", "Blog", "ブログ"]
+keywords: ["Gatsby", "Blog", "ブログ"]
 ---
 
 # ブログにキーワード検索機能を追加した

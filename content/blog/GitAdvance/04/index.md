@@ -6,7 +6,7 @@ seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "git logのオプション紹介の後編です。どのブランチのコミットを出力するかを選択するオプションを紹介します。"
 tags: ["Git"]
-keyword: ["Git", "git log", "オプション", "option", "ブランチ", "branch"]
+keywords: ["Git", "git log", "オプション", "option", "ブランチ", "branch"]
 ---
 
 # git logのオプション（後編）
