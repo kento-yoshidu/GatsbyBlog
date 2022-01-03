@@ -1,5 +1,14 @@
 [
   {
+    "slug": "/Diary/04/",
+    "title": "ブログにキーワード検索機能を追加した",
+    "keyword": [
+      "Gatsby",
+      "Blog",
+      "ブログ"
+    ]
+  },
+  {
     "slug": "/Others/01/",
     "title": "プロキシ環境でKali Linuxを使う",
     "keyword": [
