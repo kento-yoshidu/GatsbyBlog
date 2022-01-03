@@ -2,7 +2,7 @@
   {
     "slug": "/Diary/04/",
     "title": "ブログにキーワード検索機能を追加した",
-    "keyword": [
+    "keywords": [
       "Gatsby",
       "Blog",
       "ブログ"
@@ -11,7 +11,7 @@
   {
     "slug": "/Others/01/",
     "title": "プロキシ環境でKali Linuxを使う",
-    "keyword": [
+    "keywords": [
       "Kali Linux",
       "WSL2",
       "Proxy",
@@ -24,7 +24,7 @@
   {
     "slug": "/GitAdvance/04/",
     "title": "#4 git logでコミット履歴を見る(後編)",
-    "keyword": [
+    "keywords": [
       "Git",
       "git log",
       "オプション",
@@ -36,7 +36,7 @@
   {
     "slug": "/GoodBookToBuy/01/",
     "title": "2020年 買ってよかった本",
-    "keyword": [
+    "keywords": [
       "書籍",
       "Vim",
       "ネットワーク",
@@ -50,7 +50,7 @@
   {
     "slug": "/GitAdvance/03/",
     "title": "#3 git logでコミット履歴を見る(中編)",
-    "keyword": [
+    "keywords": [
       "Git",
       "git log",
       "オプション",
@@ -60,7 +60,7 @@
   {
     "slug": "/Diary/03/",
     "title": "中小企業診断士試験1次試験に合格した",
-    "keyword": [
+    "keywords": [
       "資格",
       "中小企業診断士試験",
       "日記",
@@ -71,7 +71,7 @@
   {
     "slug": "/HelloWeb/06/",
     "title": "#6 HTMLの基本③（h要素、p要素）",
-    "keyword": [
+    "keywords": [
       "HTML",
       "CSS",
       "body要素",
@@ -83,7 +83,7 @@
   {
     "slug": "/GitAdvance/02/",
     "title": "#2 git logでコミット履歴を見る(前編)",
-    "keyword": [
+    "keywords": [
       "Git",
       "git log",
       "オプション",
@@ -93,7 +93,7 @@
   {
     "slug": "/GitAdvance/01/",
     "title": "#1 Git中級者を目指そう",
-    "keyword": [
+    "keywords": [
       "Git",
       "git log"
     ]
@@ -101,7 +101,7 @@
   {
     "slug": "/Jamstack/02/",
     "title": "JamstackなWebサイトを構築してみた② Jamstackについて",
-    "keyword": [
+    "keywords": [
       "Jamstack",
       "SSG",
       "静的サイトジェネレーター",
@@ -113,7 +113,7 @@
   {
     "slug": "/shindanshi/legal/chizai/",
     "title": "【5科目目】経営法務 知的財産権",
-    "keyword": [
+    "keywords": [
       "中小企業診断士試験",
       "経営法務"
     ]
@@ -121,7 +121,7 @@
   {
     "slug": "/Diary/02/",
     "title": "中小企業診断士試験を受けてきた",
-    "keyword": [
+    "keywords": [
       "資格",
       "中小企業診断士試験",
       "日記",
@@ -132,7 +132,7 @@
   {
     "slug": "/HelloWeb/05/",
     "title": "#5 HTMLの基本② (head要素)",
-    "keyword": [
+    "keywords": [
       "HTML",
       "CSS",
       "コメント",
@@ -145,7 +145,7 @@
   {
     "slug": "/HelloWeb/04/",
     "title": "#4 HTMLの基本① (基本的な書き方)",
-    "keyword": [
+    "keywords": [
       "HTML",
       "CSS",
       "コメント"
@@ -154,7 +154,7 @@
   {
     "slug": "/HelloWeb/03/",
     "title": "#3 CSSでスタイリングする",
-    "keyword": [
+    "keywords": [
       "HTML",
       "CSS",
       "セレクター",
@@ -164,7 +164,7 @@
   {
     "slug": "/HelloWeb/02/",
     "title": "#2 HTMLでページを作ってみる",
-    "keyword": [
+    "keywords": [
       "HTML",
       "CSS",
       "タグ",
@@ -174,7 +174,7 @@
   {
     "slug": "/Jamstack/01/",
     "title": "JamstackなWebサイトを構築してみた①",
-    "keyword": [
+    "keywords": [
       "Jamstack",
       "HeadlessCMS",
       "SSG",
@@ -188,7 +188,7 @@
   {
     "slug": "/HelloWeb/01/",
     "title": "#1 初めてのHTML & CSS",
-    "keyword": [
+    "keywords": [
       "HTML",
       "CSS"
     ]
@@ -196,7 +196,7 @@
   {
     "slug": "/Diary/01/",
     "title": "Gatsbyでブログを始めました",
-    "keyword": [
+    "keywords": [
       "Gatsby",
       "ブログ",
       "Blog",

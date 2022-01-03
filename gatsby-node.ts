@@ -33,7 +33,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
                 slug
               }
               frontmatter {
-                keyword
+                keywords
                 title
               }
             }
@@ -203,7 +203,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
     return {
       slug: node.fields.slug,
       title: node.frontmatter.title,
-      keyword: node.frontmatter.keyword,
+      keywords: node.frontmatter.keywords,
     }
   })
 

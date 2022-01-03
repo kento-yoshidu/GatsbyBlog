@@ -6,7 +6,7 @@ seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: 
 tags: ["HTML", "CSS"]
-keyword: ["HTML", "CSS", "セレクター", "プロパティ"]
+keywords: ["HTML", "CSS", "セレクター", "プロパティ"]
 ---
 
 # CSSでスタイリングする

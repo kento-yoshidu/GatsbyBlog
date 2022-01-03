@@ -6,7 +6,7 @@ seriesName: "日記"
 seriesSlug: "Diary"
 description: "静的サイトジェネレーターのGatsbyを使用して、ブログを再構築しました。このブログについて、また、Gatsbyを使ってみた所感について書き記します。"
 tags: ["Gatsby"]
-keyword: ["Gatsby", "ブログ", "Blog", "日記", "Diary", "SSG", "静的サイトジェネレーター", "Jamstack", "マークダウン", "Markdown", "GraphQL"]
+keywords: ["Gatsby", "ブログ", "Blog", "日記", "Diary", "SSG", "静的サイトジェネレーター", "Jamstack", "マークダウン", "Markdown", "GraphQL"]
 ---
 
 # Gatsbyでブログを作り直しました

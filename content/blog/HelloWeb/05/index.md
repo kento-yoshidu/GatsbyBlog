@@ -6,7 +6,7 @@ seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "head要素について学習します。"
 tags: ["HTML", "head要素"]
-keyword: ["HTML", "CSS", "コメント", "DOCTYPE宣言", "head要素", "meta要素", "title要素"]
+keywords: ["HTML", "CSS", "コメント", "DOCTYPE宣言", "head要素", "meta要素", "title要素"]
 ---
 
 # DOCTYPE宣言とhead要素
