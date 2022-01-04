@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import { SearchOutline } from 'react-ionicons'
+import { KeyOutline, SearchOutline } from 'react-ionicons'
 
 import * as Styles from "../styles/search.module.scss"
 
@@ -67,6 +67,17 @@ const Search: React.VFC = () => {
       })
     })
     
+    /*
+    const searchedResult = edges.filter(({node}) => {
+      return lowerCaseKeywords?.every((keyword) => {
+        console.log(node.keywords?.indexOf(keyword))
+        return node?.keywords?.indexOf(keyword) != -1
+      })
+    })
+
+    console.log(searchedResult)
+    */
+
     setFilteredPosts(searchedResult.length ? searchedResult : null)
   },[inputtedKeywords])
 
