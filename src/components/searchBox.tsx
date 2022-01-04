@@ -33,7 +33,7 @@ const Search: React.VFC = () => {
   const edges: Edge[] = allSearchJson.edges
 
   // 検索ボックスに入力された文字列
-  const [inputtedKeywords, setInputtedKeyword] = useState<string>("")
+  const [inputtedKeywords, setInputtedKeywords] = useState<string>("")
 
   // 検索結果を表示するか否か
   const [showLists, setShowLists] = useState<boolean>(false)
@@ -47,7 +47,7 @@ const Search: React.VFC = () => {
       return
     }
 
-    const searchKeywords = inputtedKeywords
+    const lowerCaseKeywords = inputtedKeywords
       .trim()
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
@@ -55,10 +55,10 @@ const Search: React.VFC = () => {
     const searchedResult: Edge[] = []
 
     // TODO: リファクタリング
-    edges.filter((edge) => {
-      searchKeywords?.every((kw) => {
-        edge.node.keywords?.some((keyword) => {
-          if (keyword.toLocaleLowerCase().indexOf(kw) !== -1) {
+    edges.forEach((edge) => {
+      lowerCaseKeywords?.forEach((kw) => {
+        edge.node.keywords?.forEach((postsKeyword) => {
+          if (postsKeyword.toLocaleLowerCase().indexOf(kw) !== -1) {
             if(searchedResult.indexOf(edge) === -1) {
               searchedResult.push(edge)
             }
@@ -66,7 +66,7 @@ const Search: React.VFC = () => {
         })
       })
     })
-
+    
     setFilteredPosts(searchedResult.length ? searchedResult : null)
   },[inputtedKeywords])
 
@@ -89,13 +89,13 @@ const Search: React.VFC = () => {
       <div className={Styles.list}>
         <input
           type="text"
-          onChange={(e) => setInputtedKeyword(e.target.value)}
+          onChange={(e) => setInputtedKeywords(e.target.value)}
           onClick={() => setShowLists(true)}
         />
 
-        <div className={Styles.slugList}>
+        <div className={Styles.resultArea}>
           {showLists && filteredPosts &&
-            <ul>
+            <div className={Styles.inner}>
               <p>キーワード検索</p>
               <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
               {
@@ -111,7 +111,7 @@ const Search: React.VFC = () => {
                   )
                 })
               }
-            </ul>
+            </div>
           }
         </div>
       </div>

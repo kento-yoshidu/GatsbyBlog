@@ -19,23 +19,37 @@ const Search = () => {
   )
 
   // フォームに入力された文字列を保持するフック
-  const [inputtedKeyword, setInputtedKeyword] = useState("")
+  const [inputtedKeywords, setInputtedKeywords] = useState("")
 
   // 条件によって絞り込まれた記事を保持するフック
   const [filteredPosts, setFilteredPosts] = useState(null)
 
   useEffect(() => {
-    const searchKeywords = inputtedKeyword
+    const lowerCaseKeywords = inputtedKeywords
       .trim()
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
 
-  }, [inputtedKeyword])
+    const searchResult = []
+
+    allSearchJson.edges.forEach((edge) => {
+      lowerCaseKeywords?.forEach((kw) => {
+        edge.node.keywords?.forEach((postsKeyword) => {
+          if (postsKeyword.toLocaleLowerCase().indexOf(kw) !== -1) {
+            if(searchResult.indexOf(edge) === -1) {
+              searchResult.push(edge)
+            }
+          }
+        })
+      })
+    })
+  }, [inputtedKeywords])
+
 
   return (
     <input
       type="text"
-      onChange={(e) => setInputtedKeyword(e.target.value)}
+      onChange={(e) => setInputtedKeywords(e.target.value)}
     />
   )
 }
