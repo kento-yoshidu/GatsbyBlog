@@ -45,14 +45,14 @@
         border-color: #eee;
       }
     }
-    .slugList {
+    .resultArea {
       position: absolute;
       top: 50px;
       right: 0;
       width: 250%;
       max-height: 80vh;
       overflow-y: auto;
-      ul {
+      .inner{
         background-color: #444;
         padding: 18px 30px;
         list-style: none;
