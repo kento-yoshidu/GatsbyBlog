@@ -69,15 +69,17 @@
             font-weight: 500;
           }
         }
-        li {
-          margin-bottom: 10px;
-          a {
-            color: #fff;
-            font-size: 1.65rem;
-            line-height: 1.65;
-            transition: 0.1s;
-            &:hover {
-              color: $main-color2;
+        ul {
+          li {
+            margin-bottom: 10px;
+            a {
+              color: #fff;
+              font-size: 1.65rem;
+              line-height: 1.65;
+              transition: 0.1s;
+              &:hover {
+                color: $main-color2;
+              }
             }
           }
         }
@@ -102,16 +104,18 @@
       }
     }
     .list {
-      .slugList {
+      .resultArea {
         left: 50%;
         transform: translateX(-50%);
         width: 160%;
         max-height: 60vh;
-        ul {
-          li {
-            margin-bottom: 8px;
-            a {
-              font-size: 1.5rem;
+        .inner {
+          ul {
+            li {
+              margin-bottom: 8px;
+              a {
+                font-size: 1.5rem;
+              }
             }
           }
         }
