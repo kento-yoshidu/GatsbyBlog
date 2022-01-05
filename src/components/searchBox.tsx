@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import { KeyOutline, SearchOutline } from 'react-ionicons'
+import { SearchOutline } from 'react-ionicons'
 
 import * as Styles from "../styles/search.module.scss"
 
@@ -47,39 +47,20 @@ const Search: React.VFC = () => {
       return
     }
 
-    const lowerCaseKeywords = inputtedKeywords
+    // 入力された文字列をspaceごとに配列に格納
+    const lowerCaseKeywords: string[] | null = inputtedKeywords
       .trim()
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
 
-    const searchedResult: Edge[] = []
-
-    // TODO: リファクタリング
-    edges.forEach((edge) => {
-      lowerCaseKeywords?.forEach((kw) => {
-        edge.node.keywords?.forEach((postsKeyword) => {
-          if (postsKeyword.toLocaleLowerCase().indexOf(kw) !== -1) {
-            if(searchedResult.indexOf(edge) === -1) {
-              searchedResult.push(edge)
-            }
-          }
-        })
-      })
-    })
-    
-    /*
-    const searchedResult = edges.filter(({node}) => {
+    const searchedResult: Edge[] = edges.filter(({node}) => {
       return lowerCaseKeywords?.every((keyword) => {
-        console.log(node.keywords?.indexOf(keyword))
-        return node?.keywords?.indexOf(keyword) != -1
+        return node?.keywords?.toString().toLocaleLowerCase().includes(keyword)
       })
     })
-
-    console.log(searchedResult)
-    */
 
     setFilteredPosts(searchedResult.length ? searchedResult : null)
-  },[inputtedKeywords])
+  }, [inputtedKeywords])
 
   return (
     <div className={Styles.wrapper}>
@@ -109,19 +90,21 @@ const Search: React.VFC = () => {
             <div className={Styles.inner}>
               <p>キーワード検索</p>
               <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
-              {
-                filteredPosts.map((edge: Edge, i: number) => {
-                  return (
-                    <li
-                      key={`key${i}`}
-                    >
-                      <Link to={edge.node.slug}>
-                        {edge.node.title}
-                      </Link>
-                    </li>
-                  )
-                })
-              }
+              <ul>
+                {
+                  filteredPosts.map((edge: Edge, i: number) => {
+                    return (
+                      <li
+                        key={`key${i}`}
+                      >
+                        <Link to={edge.node.slug}>
+                          {edge.node.title}
+                        </Link>
+                      </li>
+                    )
+                  })
+                }
+              </ul>
             </div>
           }
         </div>
