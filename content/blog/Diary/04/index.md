@@ -1,21 +1,35 @@
 ---
 title: "ブログにキーワード検索機能を追加しました"
-postdate: "2022-01-02"
-update: "2022-01-03"
+postdate: "2022-01-05"
+update: "2022-01-05"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "当ブログにキーワード検索機能を追加したので記事にします。"
-tags: ["Gatsby"]
-keywords: ["Gatsby", "Blog", "ブログ"]
+tags: ["Gatsby", "Gatsby Blog"]
+keywords: ["Gatsby", "Blog", "ブログ", "React Hooks"]
 ---
 
 # ブログにキーワード検索機能を追加しました
 
-タイトルのまんまです。右上にある虫眼鏡ボタンをクリックすればテキストボックスが現れ、キーワードによる記事の絞り込み検索が可能です。絞り込み検索はインクリメンタルサーチとも呼ばれますね。
+タイトルのまんまです。右上にある虫眼鏡ボタンをクリックすればテキストボックスが現れ、キーワードによる記事の絞り込み検索ができます。
+
+絞り込み検索はインクリメンタルサーチとも呼ばれ、ページ遷移を伴うことなく、以下のように段階的に記事を絞り込んでいきます。
+
+「g」と入力した場合（10件）。
+
+![](./images/image01.png)
+
+「git」と入力した場合（4件）。
+
+![](./images/image02.png)
+
+「git log」と入力した場合（3件）。
+
+![](./images/image03.png)
 
 このブログは既にシリーズ検索とタグ検索の機能を持っておりこれ以上の検索機能は不要かと思ったのですが、年末年始が非常に暇だったこともあり実装しました。
 
-この記事では検索機能について、そしてその実装方法を解説します。
+今回はこの検索機能について、そしてその実装方法を解説します。
 
 ## JSONファイルから検索する
 
@@ -26,9 +40,7 @@ keywords: ["Gatsby", "Blog", "ブログ"]
 - 🤔 Sassを利用するのは大げさ
 - 🤔 全文検索は必要ない
 
-などの理由から導入はしないことにしました。
-
-ではどうやって実装するかと言うと、「全文検索は必要ない」との理由から、Gatsbyのビルドプロセス時に各記事のfrontmatterからJSONファイルを作成し、コンポーネントからJSONファイルを検索する、という至極シンプルな方法をとることにしました。
+などの理由から導入はしないことにしました。今回は、Gatsbyのビルドプロセス時に各記事のfrontmatterからJSONファイルを作成し、コンポーネントからJSONファイルを検索する、という至極シンプルな方法をとることにしました。
 
 ## frontmatterにkeywordsを追加する
 
@@ -40,13 +52,13 @@ keywords: ["Gatsby", "Blog", "ブログ"]
 - 🔍 description
 - 🔍 記事本文（全文検索）
 
-くらいですが、全てを対象にするとロジックが複雑になるうえ（実際に複雑になりました）JSONファイルも非常に肥大化するのでやめました。記事本文もJSONファイルの肥大化、そしてそこまで必要ないという理由で却下。シリーズ名、タグ名による検索もほぼ同じ機能が既にあるので却下。タイトルやdescriptionは検索対象としては情報量が不足するということで却下。
+くらいですが、全てを対象にするとロジックが複雑になるうえJSONファイルも肥大化するのでやめました。記事本文もJSONファイルの肥大化、そしてそこまで必要ないという理由で却下。シリーズ名、タグ名による検索もほぼ同じ機能が既にあるので却下。タイトルやdescriptionは検索対象としては情報量が不足するということで却下。
 
 いくつかの要素を組み合わせようかとも思いましたが、グタグタ考えるくらいならfrontmatterに新しい項目を追加してしまおうということで、「keywords」という項目を追加しました。配列にして各キーワードを記述していきます。
 
-追加する言葉ですが、「タグよりも粒度の細かい言葉」にしました。タグにするほどではないけど本文に何回か出現する言葉ですね。タグと本文の中間くらいのイメージです。
+追加する言葉は「タグよりも粒度の細かい言葉」にしました。タグにするほどではないけど本文に何回か出現する言葉ですね。タグと本文の中間くらいのイメージです。
 
-また、「Blog」「ブログ」などの日本語/英語のゆれ、「SSG」「Static Site Generator」などの略す略さないというゆれはタグ検索では実現しにくいです。機能を追加する利点、モチベーションになると思い、面倒臭いですが細かに記述していきます。
+また、「Blog」「ブログ」などの日本語/英語のゆれ、「SSG」「Static Site Generator」などの略す/略さないというゆれはタグ検索では実現しにくいです。機能を追加する利点、モチベーションになると思い、面倒臭いですが細かに記述していきます。
 
 ```yaml
 ---
@@ -54,6 +66,18 @@ keywords: ["Gatsby", "Blog", "ブログ"]
 keywords: ["Gatsby", "Blog", "ブログ", "SSG", "Static Site Generator"]
 ---
 ```
+
+## 要件定義
+
+ここで、簡単に要件定義をしておきます。
+
+- 入力した文字列をキーワードとして持っている記事を検索し、その記事へのリンクをリストアップする
+- 「キーワード」は、各記事のfrontmatterとして定義する
+- 半角スペースを用いて複数の単語を入力可能にする
+- 複数の文字列が入力された場合はAND検索を行う（AAA BBBと入力されれば、その両方を持っている記事をリストアップする）
+- 英語、日本語を入力対象とする
+- アルファベットはケース・インセンシティブにする（大文字は検索時に内部的に小文字に変換して比較を行う）
+- ページ遷移なしの絞り込み検索を行う
 
 ## ビルド時にJSONファイルを書き出す
 
@@ -99,7 +123,7 @@ JSONファイルの書き出しは以下のように行います。ファイル�
     }
   })
 
-  fs.writeFileSync('./static/search.json', JSON.stringify(keywords, null , 2))
+  fs.writeFileSync('./static/search.json', JSON.stringify(keywords, null, 2))
 ```
 
 試しに`gatsby develop`してみると、`/static/search.json`が生成されおり、JSONファイルは以下のようになっているはずです。
@@ -213,8 +237,14 @@ GraphQLクエリーは以下のように投げます。肝心の`keywords`と、
 
 ここまでくれば目的の大半は達成したも同然です。記事を検索するコンポーネントを作成しましょう。`/src/components/search.tsx`を用意します。まずは以下のように記述しておきます。
 
+<aside>
+
+以下、コード例はTypeScriptで記述しています。ご了承ください。
+
+</aside>
+
 ```tsx
-import * as React from "react"
+import React from "react"
 
 const Search = () => {
   return (
@@ -228,7 +258,7 @@ export default Search
 次に、GraphQLクエリーを記述します。コンポーネントからクエリーを投げるわけですから、`useStaticQuery`を利用します。`useStaticQuery`と`graphql`をインポートし、以下のように記述します。適当な所に`console.log(allSearchJson)`を仕込み、結果を確認できるようにしておきます。
 
 ```tsx{2}title=src/components/search.tsx
-import * as React from "react"
+import React from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
 const Search = () => {
@@ -258,9 +288,24 @@ const Search = () => {
 export default Search
 ```
 
-ファイルができたら、適宜`src/components/layout.tsx`などにコンポーネントを追記します。`gatsby develop`でローカルサーバーを起動し、ページにアクセスしコンソールで結果を確認します。
+ファイルができたら、適宜`/src/components/layout.tsx`などにコンポーネントを追記します。`gatsby develop`でローカルサーバーを起動し、ページにアクセスしコンソールで結果を確認します。
 
-![](/images/image02.png)
+![](/images/image102.png)
+
+まずは、記事を表すオブジェクトの型定義をします。
+
+```tsx
+type Edge = {
+  node: {
+    slug: string;
+    title: string;
+    keywords: string[];
+  }
+}
+
+const Search = () => {
+// ...略
+```
 
 今回、UIの作成には`useState`と`useEffect`を使用します。まずは`useState`で入力された文字列を保持するStateと、条件によって絞り込まれた記事すべてを保持するStateを用意します。
 
@@ -272,10 +317,10 @@ const Search = () => {
   // ...略
 
   // フォームに入力された文字列を保持するState
-  const [inputtedKeyword, setInputtedKeyword] = useState("")
+  const [inputtedKeyword, setInputtedKeyword] = useState<string>("")
 
   // 条件によって絞り込まれた記事を保持するState
-  const [filteredPosts, setFilteredPosts] = useState(null)
+  const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(null)
 
   return (
     <input type="text" />
@@ -335,25 +380,19 @@ useEffect(() => {
 }, [inputtedKeywords])
 ```
 
-また、検索しヒットした記事の`edge.node`を格納する`searchedResult`（配列）も定義しておきます。
+また、検索しヒットした記事は`searchedResult`配列に格納することにしましょう。
 
 ```tsx
-// ヒットした記事hあここに格納される
-const searchedResult = []
+// ヒットした記事がここに格納される
+const searchedResult: Edge[] = // 検索処理を書く
 ```
 
 肝心のヒットするかどうかを判定する部分ですが、私は以下のように書きました。
 
 ```tsx
-edges.map((edge) => {
-  lowerCaseKeywords?.every((kw) => {
-    edge.node.keywords?.some((postsKeyword) => {
-      if (postsKeyword.toLocaleLowerCase().indexOf(kw) !== -1) {
-        if(searchedResult.indexOf(edge) === -1) {
-          searchedResult.push(edge)
-        }
-      }
-    })
+const searchedResult: Edge[] = edges.filter(({node}) => {
+  return lowerCaseKeywords?.every((keyword) => {
+    return node?.keywords?.toString().toLocaleLowerCase().includes(keyword)
   })
 })
 ```
