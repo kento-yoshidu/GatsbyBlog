@@ -10,7 +10,7 @@ type Props = {
 
 const Layout: React.VFC<Props> = ({children}) => (
   <>
-    {/*<Temp />*/}
+    <Temp />
     <Search />
 
     {children}
