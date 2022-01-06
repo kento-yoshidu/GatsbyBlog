@@ -1,8 +1,5 @@
 @import "../scss/variables";
 
-html {
-  scroll-behavior: smooth;
-}
 .tableOfContent {
 	width: 30%;
 	margin-top: 80px;
@@ -24,7 +21,7 @@ html {
         position: relative;
 				color: #444;
 				&:hover {
-					color: $main-color;
+					color: $main-color2;
 				}
         &.active {
           color: $main-color2;

@@ -3,30 +3,30 @@
 .header {
 	margin-top: 6vh;
 	text-align: center;
-
 	.headerTitle {
 		margin-bottom: 5vh;
 		font-size: 2.5rem;
 		font-weight: 100;
 		letter-spacing: 2px;
-
 		a {
 			color: #444;
 			&:hover {
-				color: $main-color2;
+        background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: rgba(255,255,255,0.0);
 			}
 		}
 	}
-
 	.pageTitle {
     display: inline-block;
     margin-bottom: 30px;
-    font-size: 3.8rem;
-    font-weight: 500;
-    letter-spacing: 7px;
     background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: rgba(255,255,255,0.0);
+    font-size: 3.8rem;
+    font-weight: 500;
+    letter-spacing: 7px;
+    line-height: 1.4;
   }
 }
 
@@ -39,12 +39,11 @@
       letter-spacing: 1px;
       margin-bottom: 3vh;
     }
-
     .pageTitle {
-      font-size: 3rem;
-      line-height: 1.3;
       width: 80%;
       margin: 0 auto;
+      font-size: 3rem;
+      line-height: 1.3;
       letter-spacing: 2px;
     }
   }
