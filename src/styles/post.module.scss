@@ -11,11 +11,11 @@
     line-height: 1.5;
   }
 	h1 {
-    width: 90%;
+    width: 95%;
     padding-bottom: 8px;
     font-size: 4rem;
     border-bottom: 7px solid;
-    border-image: linear-gradient(to right, $main-color 0%, rgba($main-color2, 0.4) 100%);
+    border-image: linear-gradient(to right, $main-color2 0%, rgba($main-color2, 0.6) 100%);
     border-image-slice: 1;
     margin-top: 50px;
     margin-bottom: 30px;
@@ -24,7 +24,7 @@
     font-size: 3.3rem;
     margin: 50px 0 20px;
     border-left: 10px solid;
-    border-image: linear-gradient(to bottom, $main-color2 0%, rgba($main-color2, 0.3) 100%);
+    border-image: linear-gradient(to bottom, $main-color2 0%, rgba($main-color2, 0.4) 100%);
     border-image-slice: 1;
     padding: 8px 0 8px 2rem;
   }
@@ -237,26 +237,24 @@
   .before,
   .after {
     display: block;
+    padding: 15px 19px 5px;
     border: 2px solid #bbb;
     border-radius: 3px;
-    padding: 15px 19px 5px;
     color: #444;
     text-decoration: none;
-    &:hover {
-      color: inherit;
-    }
+    transition: 0.25s;
     h2 {
       font-size: 2rem;
       letter-spacing: 1px;
       color: #666;
-      border-bottom: 3px dotted $main-color;
+      border-bottom: 3px dotted $main-color2;
       padding-bottom: 7px;
       margin-bottom: 15px;
     }
     .title {
-      line-height: 1.5;
-      font-size: 2rem;
       margin-bottom: 10px;
+      font-size: 2rem;
+      line-height: 1.5;
     }
     &:hover {
       background: rgba(240,240,240,.5)
