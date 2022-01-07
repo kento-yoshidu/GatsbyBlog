@@ -41,6 +41,10 @@ const Search: React.VFC = () => {
   // 条件によって絞り込まれた記事
   const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(edges)
 
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputtedKeywords(e.target.value)
+  }
+
   useEffect(() => {
     if (inputtedKeywords === "") {
       setFilteredPosts(edges)
@@ -81,7 +85,7 @@ const Search: React.VFC = () => {
       <div className={Styles.list}>
         <input
           type="text"
-          onChange={(e) => setInputtedKeywords(e.target.value)}
+          onChange={handleInput}
           onClick={() => setShowLists(true)}
         />
 
