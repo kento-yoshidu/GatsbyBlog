@@ -184,9 +184,9 @@ module.exports = {
 
 この段階で`gatsby develop`を行い、`localhost:8000/___graphql`にアクセスし、GraphQL PlaygroundでJSONファイルを取得できるかを確認してみます。
 
-JSONファイルを取得するクエリーの名前ですが、`static`に保存しているJSONファイルのファイル名が踏襲されます。今は`**search**.json`を保存しているので、`allSearchJson`ないし、`searchJson`というクエリーが用意されているはずです。
+JSONファイルを取得するクエリーの名前ですが、`static`に保存しているJSONファイルのファイル名が踏襲されます。今は`search.json`という名前でアウトプットしているので、`allSearchJson`ないし、`searchJson`というクエリーが用意されているはずです。
 
-![](./images/image01.png)
+![](./images/image101.png)
 
 GraphQLクエリーは以下のように投げます。肝心の`keywords`と、検索でヒットした記事へのリンクを作成するために`slug`と`title`も必要です。
 
@@ -259,7 +259,7 @@ export default Search
 
 ```tsx{2}title=src/components/search.tsx
 import React from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import {useStaticQuery, graphql} from "gatsby"
 
 const Search = () => {
   const { allSearchJson } = useStaticQuery(
@@ -295,6 +295,9 @@ export default Search
 まずは、記事を表すオブジェクトの型定義をします。
 
 ```tsx
+import React from "react"
+import {useStaticQuery, graphql} from "gatsby"
+
 type Edge = {
   node: {
     slug: string;
