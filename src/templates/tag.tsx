@@ -7,6 +7,7 @@ import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import Pagination from "../components/pagination"
+import MobilePagination from "../components/mobilePagination"
 
 interface Props {
   data: GatsbyTypes.TagQuery
@@ -54,6 +55,14 @@ const Tag: React.VFC<Props> = ({ data, location, pageContext }) => {
         pageCount={pageContext.pageCount}
         isFirst={pageContext.isFirst}
         isLast={pageContext.isLast}
+        tag={pageContext.tag}
+      />
+
+      <MobilePagination
+        isFirst={pageContext.isFirst}
+        isLast={pageContext.isLast}
+        currentPage={pageContext.currentPage}
+        pageCount={pageContext.pageCount}
         tag={pageContext.tag}
       />
 		</Layout>
