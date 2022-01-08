@@ -7,6 +7,7 @@ import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import Pagination from "../components/pagination"
+import MobilePagination from "../components/mobilePagination"
 
 interface Props {
   data: GatsbyTypes.SeriesQuery,
@@ -56,6 +57,14 @@ const Series: React.VFC<Props> = ({ data, pageContext, location }) => {
         pageCount={pageContext.pageCount}
         isFirst={pageContext.isFirst}
         isLast={pageContext.isLast}
+        series={pageContext.seriesSlug}
+      />
+
+      <MobilePagination
+        isFirst={pageContext.isFirst}
+        isLast={pageContext.isLast}
+        currentPage={pageContext.currentPage}
+        pageCount={pageContext.pageCount}
         series={pageContext.seriesSlug}
       />
 		</Layout>

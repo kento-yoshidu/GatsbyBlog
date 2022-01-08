@@ -19,14 +19,18 @@ type Props = {
   isFirst: boolean,
   isLast: boolean,
   currentPage: number,
-  pageCount: number
+  pageCount: number,
+  series?: string,
+  tag?: string,
 }
 
 const MobilePagination: React.VFC<Props> = ({
   isFirst,
   isLast,
   currentPage,
-  pageCount
+  pageCount,
+  tag,
+  series
 }) => {
 
   let topButton,
@@ -35,40 +39,114 @@ const MobilePagination: React.VFC<Props> = ({
       nextButton
 
   if (!isFirst) {
-    topButton =
-      <Link
-        to={`/page/1/`}
-        className={Styles.topButton}
-      >
-        <FontAwesomeIcon icon={faAngleDoubleLeft} />
-      </Link>
+    if(!tag && !series) {
+      topButton =
+        <Link
+          to={`/page/1/`}
+          className={Styles.topButton}
+        >
+          <FontAwesomeIcon icon={faAngleDoubleLeft} />
+        </Link>
+    } else if (tag && !series) {
+      topButton =
+        <Link
+          to={`/tag/${tag}/page/1/`}
+          className={Styles.topButton}
+        >
+          <FontAwesomeIcon icon={faAngleDoubleLeft} />
+        </Link>
+    } else if (!tag && series) {
+      topButton =
+        <Link
+          to={`/series/${series}/page/1/`}
+          className={Styles.topButton}
+        >
+          <FontAwesomeIcon icon={faAngleDoubleLeft} />
+        </Link>
+    }
 
-    prevButton =
-    <Link
-      className={Styles.prevButton}
-      to={`/page/${currentPage - 1}/`}
-      rel="prev"
-    >
-      <FontAwesomeIcon icon={faAngleLeft} />
-    </Link>
+    if(!tag && !series) {
+      prevButton =
+        <Link
+          className={Styles.prevButton}
+          to={`/page/${currentPage - 1}/`}
+          rel="prev"
+        >
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </Link>
+    } else if (series && !tag) {
+      prevButton =
+        <Link
+          className={Styles.prevButton}
+          to={`/series/${series}/page/${currentPage - 1}/`}
+          rel="prev"
+        >
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </Link>
+    } else if (!series && tag) {
+      prevButton =
+        <Link
+          className={Styles.prevButton}
+          to={`/tag/${tag}/page/${currentPage - 1}/`}
+          rel="prev"
+        >
+          <FontAwesomeIcon icon={faAngleLeft} />
+        </Link>
+    }
   }	
 
   if(!isLast) {
-    lastButton =
-      <Link
-        to={`/page/${pageCount}/`}
-        className={Styles.lastButton}
-      >
-        <FontAwesomeIcon icon={faAngleDoubleRight} />
-      </Link>
+    if(!tag && !series) {
+      lastButton =
+        <Link
+          to={`/page/${pageCount}/`}
+          className={Styles.lastButton}
+        >
+          <FontAwesomeIcon icon={faAngleDoubleRight} />
+        </Link>
+    } else if (series && !tag) {
+      lastButton =
+        <Link
+          to={`/series/${series}/page/${pageCount}/`}
+          className={Styles.lastButton}
+        >
+          <FontAwesomeIcon icon={faAngleDoubleRight} />
+        </Link>
+    } else if (!series && tag) {
+      lastButton =
+        <Link
+          to={`/tag/${tag}/page/${pageCount}/`}
+          className={Styles.lastButton}
+        >
+          <FontAwesomeIcon icon={faAngleDoubleRight} />
+        </Link>
+    }
 
-    nextButton =
-      <Link
-        to={`/page/${currentPage + 1}/`}
-        className={Styles.nextButton}
-      >
-        <FontAwesomeIcon icon={faAngleRight} />
-      </Link>
+    if(!tag && !series) {
+      nextButton =
+        <Link
+          to={`/page/${currentPage + 1}/`}
+          className={Styles.nextButton}
+        >
+          <FontAwesomeIcon icon={faAngleRight} />
+        </Link>
+    } else if (series && !tag) {
+      nextButton =
+        <Link
+          to={`/series/${series}/page/${currentPage + 1}/`}
+          className={Styles.nextButton}
+        >
+          <FontAwesomeIcon icon={faAngleRight} />
+        </Link>
+    } else if (!series && tag) {
+      nextButton =
+        <Link
+          to={`/tag/${tag}/page/${currentPage + 1}/`}
+          className={Styles.nextButton}
+        >
+          <FontAwesomeIcon icon={faAngleRight} />
+        </Link>
+    }
   }
 
   return (
