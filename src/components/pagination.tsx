@@ -34,6 +34,7 @@ const Pagination: React.VFC<Props> = ({
 			nextButton,
 			nationLinks
 
+      {/*
 	prevButton = 
 		<>
 			{!isFirst && (
@@ -64,6 +65,7 @@ const Pagination: React.VFC<Props> = ({
 				</Link>
 			)}
 		</>
+      */}
 
 	nationLinks =
 		<div className={Styles.nationLinks}>
@@ -87,6 +89,15 @@ const Pagination: React.VFC<Props> = ({
 									<Link to={`${tag}/page/${i + 1}/`}>
 										{i + 1}
 									</Link>
+								}
+								{
+									!tag && series &&
+                    <Link
+                      to={`/series/${series}/page/${i + 1}/`}
+                      key={`series${series}`}
+                    >
+                      {i + 1}
+                    </Link>
 								}
 								</p>
 						}

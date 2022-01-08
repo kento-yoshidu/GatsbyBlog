@@ -56,6 +56,7 @@ const Series: React.VFC<Props> = ({ data, pageContext, location }) => {
         pageCount={pageContext.pageCount}
         isFirst={pageContext.isFirst}
         isLast={pageContext.isLast}
+        series={pageContext.seriesSlug}
       />
 		</Layout>
 	)
