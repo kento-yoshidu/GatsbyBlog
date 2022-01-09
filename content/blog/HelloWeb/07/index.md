@@ -1,7 +1,7 @@
 ---
 title: "#7 HTMLの基本④（a要素）"
 postdate: "2022-01-07"
-updatedate: "2022-01-07"
+update: "2022-01-07"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "ハイパーリンクを作成するa要素を学習します。また、相対パスについても学習します。"

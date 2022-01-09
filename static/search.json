@@ -41,11 +41,12 @@
   },
   {
     "slug": "/GoodBookToBuy/01/",
-    "title": "2020年 買ってよかった本",
+    "title": "2020年 読んでよかった本",
     "keywords": [
       "書籍",
       "Vim",
       "ネットワーク",
+      "network",
       "Jamstack",
       "Gatsby",
       "2020",
