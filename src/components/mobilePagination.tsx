@@ -34,119 +34,70 @@ const MobilePagination: React.VFC<Props> = ({
 }) => {
 
   let topButton,
+      topPath,
       lastButton,
+      lastPath,
       prevButton,
-      nextButton
+      prevPath,
+      nextButton,
+      nextPath
 
-  if (!isFirst) {
-    if(!tag && !series) {
-      topButton =
-        <Link
-          to={`/page/1/`}
-          className={Styles.topButton}
-        >
-          <FontAwesomeIcon icon={faAngleDoubleLeft} />
-        </Link>
-    } else if (tag && !series) {
-      topButton =
-        <Link
-          to={`/tag/${tag}/page/1/`}
-          className={Styles.topButton}
-        >
-          <FontAwesomeIcon icon={faAngleDoubleLeft} />
-        </Link>
-    } else if (!tag && series) {
-      topButton =
-        <Link
-          to={`/series/${series}/page/1/`}
-          className={Styles.topButton}
-        >
-          <FontAwesomeIcon icon={faAngleDoubleLeft} />
-        </Link>
+  if(!isFirst) {
+    if (!tag && !series) {
+      topPath = `/page/1/`
+      prevPath = `/page/${currentPage - 1}/`
+    } else if (series) {
+      topPath = `/series/${series}/page/1/`
+      prevPath = `/series/${series}/page/${currentPage - 1}/`
+    } else if (tag) {
+      topPath = `/tag/${tag}/page/1/`
+      prevPath = `/tag/${tag}/page/${currentPage - 1}/`
     }
 
-    if(!tag && !series) {
-      prevButton =
-        <Link
-          className={Styles.prevButton}
-          to={`/page/${currentPage - 1}/`}
-          rel="prev"
-        >
-          <FontAwesomeIcon icon={faAngleLeft} />
-        </Link>
-    } else if (series && !tag) {
-      prevButton =
-        <Link
-          className={Styles.prevButton}
-          to={`/series/${series}/page/${currentPage - 1}/`}
-          rel="prev"
-        >
-          <FontAwesomeIcon icon={faAngleLeft} />
-        </Link>
-    } else if (!series && tag) {
-      prevButton =
-        <Link
-          className={Styles.prevButton}
-          to={`/tag/${tag}/page/${currentPage - 1}/`}
-          rel="prev"
-        >
-          <FontAwesomeIcon icon={faAngleLeft} />
-        </Link>
+    topButton =
+      <Link
+        to={topPath}
+        className={Styles.topButton}
+      >
+        <FontAwesomeIcon icon={faAngleDoubleLeft} />
+      </Link>
+
+    prevButton =
+      <Link
+        to={prevPath}
+        className={Styles.prevButton}
+      >
+        <FontAwesomeIcon icon={faAngleLeft} />
+      </Link>
     }
-  }	
 
   if(!isLast) {
-    if(!tag && !series) {
-      lastButton =
-        <Link
-          to={`/page/${pageCount}/`}
-          className={Styles.lastButton}
-        >
-          <FontAwesomeIcon icon={faAngleDoubleRight} />
-        </Link>
-    } else if (series && !tag) {
-      lastButton =
-        <Link
-          to={`/series/${series}/page/${pageCount}/`}
-          className={Styles.lastButton}
-        >
-          <FontAwesomeIcon icon={faAngleDoubleRight} />
-        </Link>
-    } else if (!series && tag) {
-      lastButton =
-        <Link
-          to={`/tag/${tag}/page/${pageCount}/`}
-          className={Styles.lastButton}
-        >
-          <FontAwesomeIcon icon={faAngleDoubleRight} />
-        </Link>
+    if (!series && !tag) {
+      lastPath = `/page/${pageCount}`
+      nextPath = `/page/${currentPage + 1}`
+    } else if (series) {
+      lastPath = `/series/${series}/page/${pageCount}/`
+      nextPath = `/series/${series}/page/${currentPage + 1}`
+    } else if (tag) {
+      lastPath = `/tag/${tag}/page/${pageCount}/`
+      nextPath = `/tag/${tag}/page/${currentPage + 1}`
     }
 
-    if(!tag && !series) {
-      nextButton =
-        <Link
-          to={`/page/${currentPage + 1}/`}
-          className={Styles.nextButton}
-        >
-          <FontAwesomeIcon icon={faAngleRight} />
-        </Link>
-    } else if (series && !tag) {
-      nextButton =
-        <Link
-          to={`/series/${series}/page/${currentPage + 1}/`}
-          className={Styles.nextButton}
-        >
-          <FontAwesomeIcon icon={faAngleRight} />
-        </Link>
-    } else if (!series && tag) {
-      nextButton =
-        <Link
-          to={`/tag/${tag}/page/${currentPage + 1}/`}
-          className={Styles.nextButton}
-        >
-          <FontAwesomeIcon icon={faAngleRight} />
-        </Link>
-    }
+    lastButton = 
+      <Link
+        to={lastPath}
+        className={Styles.lastButton}
+      >
+        <FontAwesomeIcon icon={faAngleDoubleRight} />
+      </Link>
+      
+    nextButton =
+      <Link
+        to={nextPath}
+        className={Styles.nextButton}
+      >
+        <FontAwesomeIcon icon={faAngleRight} />
+      </Link>
   }
 
   return (
