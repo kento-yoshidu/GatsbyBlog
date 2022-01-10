@@ -1,7 +1,7 @@
 ---
 title: "ブログにキーワード検索機能を追加しました"
 postdate: "2022-01-05"
-update: "2022-01-05"
+update: "2022-01-09"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "当ブログにキーワード検索機能を追加したので記事にします。"
@@ -13,7 +13,7 @@ keywords: ["Gatsby", "Blog", "ブログ", "React Hooks"]
 
 タイトルのまんまです。右上にある虫眼鏡ボタンをクリックすればテキストボックスが現れ、キーワードによる記事の絞り込み検索ができます。
 
-絞り込み検索はインクリメンタルサーチとも呼ばれ、ページ遷移を伴うことなく、以下のように段階的に記事を絞り込んでいきます。
+絞り込み検索はインクリメンタルサーチとも呼ばれ、ページ遷移を伴うことなく段階的に記事を絞り込んでいきます。
 
 「g」と入力した場合（10件）。
 
@@ -37,7 +37,7 @@ keywords: ["Gatsby", "Blog", "ブログ", "React Hooks"]
 
 - 🤔 algoliaに関する知識が全くない
 - 🤔 料金がかかるかもしれない 
-- 🤔 Sassを利用するのは大げさ
+- 🤔 Sassなどの外部サービスを利用するのは大げさ
 - 🤔 全文検索は必要ない
 
 などの理由から導入はしないことにしました。今回は、Gatsbyのビルドプロセス時に各記事のfrontmatterからJSONファイルを作成し、コンポーネントからJSONファイルを検索する、という至極シンプルな方法をとることにしました。
@@ -54,7 +54,7 @@ keywords: ["Gatsby", "Blog", "ブログ", "React Hooks"]
 
 くらいですが、全てを対象にするとロジックが複雑になるうえJSONファイルも肥大化するのでやめました。記事本文もJSONファイルの肥大化、そしてそこまで必要ないという理由で却下。シリーズ名、タグ名による検索もほぼ同じ機能が既にあるので却下。タイトルやdescriptionは検索対象としては情報量が不足するということで却下。
 
-いくつかの要素を組み合わせようかとも思いましたが、グタグタ考えるくらいならfrontmatterに新しい項目を追加してしまおうということで、「keywords」という項目を追加しました。配列にして各キーワードを記述していきます。
+いくつかの要素を組み合わせようかとも思いましたが、グタグタ考えるくらいならfrontmatterに新しい項目を追加してしまおうということで、「keywords」という項目を追加しました。キーワードとなる単語を配列に格納していきます。
 
 追加する言葉は「タグよりも粒度の細かい言葉」にしました。タグにするほどではないけど本文に何回か出現する言葉ですね。タグと本文の中間くらいのイメージです。
 
@@ -71,13 +71,15 @@ keywords: ["Gatsby", "Blog", "ブログ", "SSG", "Static Site Generator"]
 
 ここで、簡単に要件定義をしておきます。
 
-- 入力した文字列をキーワードとして持っている記事を検索し、その記事へのリンクをリストアップする
-- 「キーワード」は、各記事のfrontmatterとして定義する
-- 半角スペースを用いて複数の単語を入力可能にする
-- 複数の文字列が入力された場合はAND検索を行う（AAA BBBと入力されれば、その両方を持っている記事をリストアップする）
-- 英語、日本語を入力対象とする
-- アルファベットはケース・インセンシティブにする（大文字は検索時に内部的に小文字に変換して比較を行う）
-- ページ遷移なしの絞り込み検索を行う
+- ✔️ 入力した文字列をキーワードとして持っている記事を検索し、その記事へのリンクをリストアップする
+- ✔️ 「キーワード」は、各記事のfrontmatterとして定義する
+- ✔️ 半角スペースを用いて複数の単語を入力可能にする
+- ✔️ 複数の文字列が入力された場合はAND検索を行う（AAA BBBと入力されれば、その両方を持っている記事をリストアップする）
+- ✔️ 英語、日本語を入力対象とする
+- ✔️ アルファベットはケース・インセンシティブにする（検索時に大文字を内部的に小文字に変換して比較を行う）
+- ✔️ ページ遷移なしの絞り込み検索を行う
+
+これらを元に機能を実装していきます。
 
 ## ビルド時にJSONファイルを書き出す
 
@@ -85,8 +87,8 @@ keywords: ["Gatsby", "Blog", "ブログ", "SSG", "Static Site Generator"]
 
 まずは、全ての記事の`frontmatter`の`keywords`項目を取得するGraphQLクエリーを追加します。
 
-```typescript:title=gatsby-node.ts
-const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
+```typescript:title=gatsby-node.js
+const createPages = async ({ graphql, actions, reporter }) => {
 
   const queryResult = await graphql(
     `
@@ -114,7 +116,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
 JSONファイルの書き出しは以下のように行います。ファイルの保存先はルート直下の`static`にしました。
 
-```typescript:title=gatsby-node.ts
+```typescript:title=gatsby-node.js
   const keywords = queryResult.data.allArticlesForSearching.edges.map(({node}) => {
     return {
       slug: node.fields.slug,
@@ -126,9 +128,9 @@ JSONファイルの書き出しは以下のように行います。ファイル�
   fs.writeFileSync('./static/search.json', JSON.stringify(keywords, null, 2))
 ```
 
-試しに`gatsby develop`してみると、`/static/search.json`が生成されおり、JSONファイルは以下のようになっているはずです。
+ここで`gatsby develop`すると、`/static/search.json`が生成されます。また、その内容は以下のようになっているはずです。
 
-```json
+```json:title=/static/search.json
 [
   {
     "slug": "/Others/01/",
@@ -149,9 +151,9 @@ JSONファイルの書き出しは以下のように行います。ファイル�
 
 ## gatsby-transformer-jsonをインストールする
 
-JSONファイルを生成できたので、次はこれをコンポーネントから取得します。`gatsby-transformer-json`というパッケージが用意されており、これを使うことでGraphQLクエリーでJSONファイルを取得できます。早速インストールしましょう。
+JSONファイルを生成できたので、次はこれをコンポーネントから取得します。Gatsbyには`gatsby-transformer-json`というパッケージが用意されており、これを使うことでGraphQLクエリーでJSONファイルを取得できます。早速インストールしましょう。
 
-なお、`gatsby-transformer-json`は、2022年1月現在、`^4.4.0`が最新なようですが、Gatsby v3を使用している環境だと「warn Plugin gatsby-transformer-json is not compatible with your gatsby version 3.12.1 - It requires gatsby@^4.0.0-next」みたいなエラーが出るはずです。
+なお、`gatsby-transformer-json`は、2022年1月現在`^4.4.0`が最新なようですが、Gatsby v3を使用している環境だと「warn Plugin gatsby-transformer-json is not compatible with your gatsby version 3.12.1 - It requires gatsby@^4.0.0-next」みたいなエラーが出るはずです。
 
 Gatsby v4を使用しているのであれば問題ありませんが、Gatsby v3を使用中の方は`gatsby-transformer-json@^3.0.0`をインストールしましょう。
 
@@ -169,7 +171,7 @@ module.exports = {
   ]    
 ```
 
-また、`/static/search.json`を扱うわけですから、`gatsby-source-filesystem`に`static`への設定をしている必要があります。設定が出来ていない場合は以下のように追記します。
+また、`/static/search.json`を扱うわけですから、`gatsby-source-filesystem`において`/static`への設定をしている必要があります。設定が出来ていない場合は以下のように追記します。
 
 ```javascript
   // 追記
@@ -177,18 +179,18 @@ module.exports = {
     resolve: `gatsby-source-filesystem`,
     options: {
       path: `static`,
-      name: `search`,
+      name: `keywordSearch`,
     },
   },
 ```
 
-この段階で`gatsby develop`を行い、`localhost:8000/___graphql`にアクセスし、GraphQL PlaygroundでJSONファイルを取得できるかを確認してみます。
+ここで再度`gatsby develop`を行い、`localhost:8000/___graphql`にアクセスし、GraphiQLでGraphqlクエリーを発行し、JSONファイルを取得できるかテストしてみましょう。
 
-JSONファイルを取得するクエリーの名前ですが、`static`に保存しているJSONファイルのファイル名が踏襲されます。今は`search.json`という名前でアウトプットしているので、`allSearchJson`ないし、`searchJson`というクエリーが用意されているはずです。
+JSONファイルを取得するクエリーの名前ですが、保存しているJSONファイルのファイル名が踏襲されます。今回は`search.json`という名前でJSONファイルが存在しているので、`allSearchJson`ないし`searchJson`というクエリーが用意されているはずです。
 
-![](./images/image101.png)
+![](./images/image04.png)
 
-GraphQLクエリーは以下のように投げます。肝心の`keywords`と、検索でヒットした記事へのリンクを作成するために`slug`と`title`も必要です。
+GraphQLクエリーは以下のように投げます。取得するフィールドですが、肝心の`keywords`と、検索でヒットした記事へのリンクを作成するために`slug`と`title`も必要です。
 
 ```graphql
 {
@@ -204,9 +206,9 @@ GraphQLクエリーは以下のように投げます。肝心の`keywords`と、
 }
 ```
 
-クエリーを実行して、右側のペインにエラーなく結果が表示されればOKです。以下は筆者の環境でのクエリーの結果です。
+クエリーを実行して右側のペインにエラーなく結果が表示されればOKです。以下は筆者の環境でのクエリーの結果です。
 
-```javascript
+```javascript:title=Graphqlクエリーの結果
 {
   "data": {
     "allSearchJson": {
@@ -214,22 +216,19 @@ GraphQLクエリーは以下のように投げます。肝心の`keywords`と、
         {
           "node": {
             "keywords": [
-              "Kali Linux",
-              "WSL2",
-              "Proxy",
-              "プロキシ",
-              "apt",
-              "wget",
-              "curl"
+              "Gatsby",
+              "Blog",
+              "ブログ",
+              "React Hooks"
             ],
-            "slug": "/Others/01/",
-            "title": "プロキシ環境でKali Linuxを使う"
+            "slug": "/Diary/04/",
+            "title": "ブログにキーワード検索機能を追加しました"
           }
         },
-        //...略
+        // ...略
       ]
     }
-  }
+  },
 }
 ```
 
@@ -237,31 +236,23 @@ GraphQLクエリーは以下のように投げます。肝心の`keywords`と、
 
 ここまでくれば目的の大半は達成したも同然です。記事を検索するコンポーネントを作成しましょう。`/src/components/search.tsx`を用意します。まずは以下のように記述しておきます。
 
-<aside>
-
-以下、コード例はTypeScriptで記述しています。ご了承ください。
-
-</aside>
-
-```tsx
+```jsx:title=/src/components/search.jsx
 import React from "react"
 
-const Search = () => {
+export const Search = () => {
   return (
     <p>This is a search component</p>
   )
 }
-
-export default Search
 ```
 
-次に、GraphQLクエリーを記述します。コンポーネントからクエリーを投げるわけですから、`useStaticQuery`を利用します。`useStaticQuery`と`graphql`をインポートし、以下のように記述します。適当な所に`console.log(allSearchJson)`を仕込み、結果を確認できるようにしておきます。
+次に、GraphQLクエリーを記述します。コンポーネントからクエリーを投げるわけですから`useStaticQuery`を利用します。`useStaticQuery`と`graphql`をインポートし、以下のように記述します。適当な所に`console.log(allSearchJson)`を仕込み、結果を確認できるようにしておきます。
 
-```tsx{2}title=src/components/search.tsx
+```jsx{2}:title=/src/components/search.jsx
 import React from "react"
 import {useStaticQuery, graphql} from "gatsby"
 
-const Search = () => {
+export const Search = () => {
   const { allSearchJson } = useStaticQuery(
     graphql`
       query {
@@ -284,46 +275,26 @@ const Search = () => {
     <p>This is a search component</p>
   )
 }
-
-export default Search
 ```
 
-ファイルができたら、適宜`/src/components/layout.tsx`などにコンポーネントを追記します。`gatsby develop`でローカルサーバーを起動し、ページにアクセスしコンソールで結果を確認します。
+ファイルができたら、適宜`/src/components/layout.jsx`などにコンポーネントを追記します。`gatsby develop`でローカルサーバーを起動し、ページにアクセスしコンソールで結果を確認します。
 
 ![](/images/image102.png)
-
-まずは、記事を表すオブジェクトの型定義をします。
-
-```tsx
-import React from "react"
-import {useStaticQuery, graphql} from "gatsby"
-
-type Edge = {
-  node: {
-    slug: string;
-    title: string;
-    keywords: string[];
-  }
-}
-
-const Search = () => {
-// ...略
-```
 
 今回、UIの作成には`useState`と`useEffect`を使用します。まずは`useState`で入力された文字列を保持するStateと、条件によって絞り込まれた記事すべてを保持するStateを用意します。
 
 ついでに入力フォームも書いておきましょう。
 
-```tsx
+```jsx:title=/src/components/search.jsx
 const Search = () => {
 
   // ...略
 
   // フォームに入力された文字列を保持するState
-  const [inputtedKeyword, setInputtedKeyword] = useState<string>("")
+  const [inputtedKeyword, setInputtedKeyword] = useState("")
 
   // 条件によって絞り込まれた記事を保持するState
-  const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(null)
+  const [filteredPosts, setFilteredPosts] = useState(null)
 
   return (
     <input type="text" />
@@ -335,7 +306,7 @@ const Search = () => {
 
 まずはinput要素に`onChange`属性を定義し、入力された文字列を`setInputtedKeywords`に渡すようにします。
 
-```tsx
+```jsx:title=/src/components/search.jsx
   return (
     <input
       type="text"
@@ -346,7 +317,7 @@ const Search = () => {
 
 続けて、`useEffect`を定義し、第二引数に`inputtedKeywords`を渡します。これで入力フォームに書き込まれるたびに`useEffect`が実行される状態になりました。`useEffect`には`console.log(inputtedKeywords)`などと記述し、フォームに1文字入力されるたびにコンソール出力されることを確認してください。
 
-```tsx
+```jsx:title=/src/components/search.jsx
 const Search = () => {
   // ...略
 
@@ -373,7 +344,7 @@ export default Search
 
 それでは`useEffect`の処理を記述します。まずは入力された文字列を全て小文字に変換し、`lowerCaseKeywords`といった変数に保管します。
 
-```tsx
+```jsx:title=/src/components/search.jsx
 useEffect(() => {
   // 入力されたキーワードを小文字に変換する
   const lowerCaseKeywords = inputtedKeywords
@@ -385,21 +356,24 @@ useEffect(() => {
 
 また、検索しヒットした記事は`searchedResult`配列に格納することにしましょう。
 
-```tsx
+```jsx:title=/src/components/search.jsx
 // ヒットした記事がここに格納される
-const searchedResult: Edge[] = // 検索処理を書く
+const searchedResult = // 検索処理を書く
 ```
 
 肝心のヒットするかどうかを判定する部分ですが、私は以下のように書きました。
 
-```tsx
-const searchedResult: Edge[] = edges.filter(({node}) => {
+```jsx:title=/src/components/search.jsx
+const searchedResult = edges.filter(({node}) => {
   return lowerCaseKeywords?.every((keyword) => {
     return node?.keywords?.toString().toLocaleLowerCase().includes(keyword)
   })
 })
+
+// 結果確認用
+console.log(searchedResult)
 ```
 
-多分、リファクタリングできると思うので、よろしければissueをお願いします。
+
 
 

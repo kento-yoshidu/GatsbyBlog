@@ -18,19 +18,11 @@ const Search = () => {
     `
   )
 
-  type Edge = {
-    node: {
-      keywords: string[];
-      slug: string;
-      title: string;
-    }
-  }
-
   // フォームに入力された文字列を保持するフック
-  const [inputtedKeywords, setInputtedKeywords] = useState<string>("")
+  const [inputtedKeywords, setInputtedKeywords] = useState("")
 
   // 条件によって絞り込まれた記事を保持するフック
-  const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(null)
+  const [filteredPosts, setFilteredPosts] = useState(null)
 
   useEffect(() => {
     const lowerCaseKeywords = inputtedKeywords
@@ -38,7 +30,7 @@ const Search = () => {
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
 
-    const searchedResult: Edge[] = allSearchJson.edges.filter((edge: Edge) => {
+    const searchedResult = allSearchJson.edges.filter((edge) => {
       return lowerCaseKeywords?.every((keyword) => {
         return edge.node.keywords.toString().toLocaleLowerCase().includes(keyword)
         })
@@ -46,7 +38,7 @@ const Search = () => {
       
     console.log(searchedResult)
 
-    setFilteredPosts(searchedResult.length ? searchedResult : null)
+    // setFilteredPosts(searchedResult.length ? searchedResult : null)
   }, [inputtedKeywords])
 
   return (
