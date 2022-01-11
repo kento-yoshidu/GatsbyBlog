@@ -11,9 +11,13 @@ import MobilePagination from "../components/mobilePagination"
 
 import type { PageContext } from "../../type"
 
+interface Series {
+  seriesName: string;
+  seriesSlug: string;
+}
 interface Props {
   data: GatsbyTypes.SeriesQuery,
-  pageContext: PageContext,
+  pageContext: PageContext & Series,
   location: {
     pathname: string
   }

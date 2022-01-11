@@ -11,9 +11,12 @@ import MobilePagination from "../components/mobilePagination"
 
 import type { PageContext } from "../../type"
 
+interface Tag {
+  tag: string
+}
 interface Props {
   data: GatsbyTypes.TagQuery,
-  pageContext: PageContext,
+  pageContext: PageContext & Tag,
   location: {
     pathname: string
   }

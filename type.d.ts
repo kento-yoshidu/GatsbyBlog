@@ -6,8 +6,4 @@ export type PageContext = {
   currentPage: number,
   isFirst: boolean,
   isLast: boolean,
-  series?: string,
-  seriesName?: string,
-  seriesSlug?: string,
-  tag?: string,
 }
