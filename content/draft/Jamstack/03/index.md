@@ -66,13 +66,13 @@ SSGとは、
 - Nuxt.js
 - Gridsome
 
-私が使用してきたSSGをいくつかピックアップして簡単な解説をしたいと思います。私はReactベースのSSGばかり触っていますので、そっちに偏った解説になっていると思いますがご了承ください。
+私が使用してきたSSGをいくつかピックアップして簡単な解説をしたいと思います。私はReactベースのフレームワークばかり触っていますので、そっちに偏った解説になっていますがご了承ください。
 
 ### Gatsby
 
 [公式サイト](https://www.gatsbyjs.com/)
 
-多分、一番難易度が高いのがGatsbyです。Reactベースのグレー無ワークです。
+多分、一番難易度が高いのがGatsbyです。Reactベースのフレームワークです。
 
 Reactベースなのに加えデータ取得にGraphQLを使用していますので、それらについて初見の方が一から覚えていくのはきついと思います。
 
@@ -104,7 +104,7 @@ query(
 				}
 				frontmatter {
 					postdate(formatString: "YYYY年MM月DD日")
-					updatedate(formatString: "YYYY年MM月DD日")
+					update(formatString: "YYYY年MM月DD日")
 					seriesName
 					seriesSlug
 					title
@@ -117,11 +117,9 @@ query(
 
 初見でこれだけを見ると何のこっちゃ分からないと思いますが、Gatsbyには**GraphiQL**というGUIなGraphQLクライアントツールが付属しています。これを使用すればクエリー作成をだんだん覚えていけるはずです。
 
-
-
 <aside>
 
-最新リリースの**Gatsby V4**では、SSGだけではなくDSG(Deferred Static Generation)やSSR(Server Side Rendering)に対応しており、機能が充実していっています。もはや「Gatsby=SSG」ではなく、機能の厚いWebフレームワークであると捉えた方がいいでしょう。
+最新リリースの**Gatsby Version4**では、SSGだけではなくDSG(Deferred Static Generation)やSSR(Server Side Rendering)に対応しており、機能が充実していっています。もはや「Gatsby=SSG」ではなく、機能の厚いWebフレームワークであると捉えた方がいいでしょう。
 
 </aside>
 
@@ -133,17 +131,11 @@ Next.jsはGatsbyと同じく、Reactベースのフレームワークです。SS
 
 Next.jsの方が機能がぐっと薄い印象です。プラグインに頼らず、ゴリゴリ機能を付与したい方にとってはNext.jsの方が取り組みやすいかも知れません。
 
-また、GitHubのスター数でみても、Next.jsの方が主流であると言えます。
-
-前述したように、Gatsbyも機能が追加されてきており、だんだんNext.jsとできることが重複してきました。
-
-https://trends.google.co.jp/trends/explore?q=%2Fm%2F012l1vxv,%2Fm%2F0j45p7w,%2Fg%2F11c0vmgx5d&geo=,,&date=today%205-y,today%205-y,today%205-y&cat=13#TIMESERIES
+前述したように、Gatsbyも機能が追加されてきており、だんだんNext.jsとできることが重複してきました。私などはGatsbyばっかり触っているのですが、現在の主流は間違いなくこのNext.jsでしょう。どちらを学習するのかを迷っているのでしたらNext.jsを選んでおけば間違いないと思います。
 
 両者とも単なるWebフレームワークの一種に過ぎないので、3年後、5年後には跡形もなく無くなっているかもと思いながら勉強する必要があります。
 
-とはいいつつ、ベースがReactであることからして、早々廃れることはないんじゃないかというのが個人的な感想です。
-
-最近では**Remix**というReactベースのフレームワークがリリースされました。ますますReact界隈が盛り上がっていきそうな予感です。
+とはいいつつ、ベースがReactであることからして、早々廃れることはないんじゃないかというのが個人的な感想です。最近では**Remix**というReactベースのフレームワークがリリースされました。ますますReact界隈が盛り上がっていきそうな予感です。
 
 ### Nuxt.js
 
@@ -171,7 +163,6 @@ ReactはMeta社（旧Facebook社）、Vue.jsはエヴァン・ヨー氏、Angula
 
 [Google Trends](https://trends.google.co.jp/trends/explore?cat=13&date=today%205-y,today%205-y,today%205-y,today%205-y&geo=,,,&q=%2Fm%2F012l1vxv,%2Fm%2F0j45p7w,%2Fg%2F11c0vmgx5d,Svelte#TIMESERIES)
 
-
 ## 参考
 
 [【2021注目】フロントエンド開発「静的サイトジェネレータ」 | FASTCODING BLOG](https://fastcoding.jp/blog/all/info/ssg/)
@@ -185,3 +176,5 @@ ReactはMeta社（旧Facebook社）、Vue.jsはエヴァン・ヨー氏、Angula
 [](https://frontarm.com/james-k-nelson/static-vs-server-rendering/)
 
 https://dev.classmethod.jp/articles/gatsby-prerendering/
+
+https://trends.google.co.jp/trends/explore?q=%2Fm%2F012l1vxv,%2Fm%2F0j45p7w,%2Fg%2F11c0vmgx5d&geo=,,&date=today%205-y,today%205-y,today%205-y&cat=13#TIMESERIES

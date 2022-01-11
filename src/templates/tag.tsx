@@ -9,18 +9,11 @@ import PostList from "../components/postList"
 import Pagination from "../components/pagination"
 import MobilePagination from "../components/mobilePagination"
 
+import type { PageContext } from "../../type"
+
 interface Props {
-  data: GatsbyTypes.TagQuery
-  pageContext: {
-    postCount: number,
-    pageCount: number,
-    skip: number,
-    limit: number,
-    currentPage: number,
-    isFirst: boolean,
-    isLast: boolean,
-    tag: string,
-  }
+  data: GatsbyTypes.TagQuery,
+  pageContext: PageContext,
   location: {
     pathname: string
   }
