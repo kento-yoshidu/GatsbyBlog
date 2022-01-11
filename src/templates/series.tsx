@@ -9,20 +9,11 @@ import PostList from "../components/postList"
 import Pagination from "../components/pagination"
 import MobilePagination from "../components/mobilePagination"
 
+import type { PageContext } from "../../type"
+
 interface Props {
   data: GatsbyTypes.SeriesQuery,
-  pageContext: {
-    postCount: number,
-    pageCount: number,
-    totalPageCount: number,
-    skip: number,
-    limit: number,
-    currentPage: number,
-    isFirst: boolean,
-    isLast: boolean,
-    seriesName: string,
-    seriesSlug: string
-  },
+  pageContext: PageContext,
   location: {
     pathname: string
   }
