@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 import { Link } from "gatsby"
 
 import * as Styles from "../styles/mobilePagination.module.scss"
@@ -69,7 +69,7 @@ const MobilePagination: React.VFC<Props> = ({
       >
         <FontAwesomeIcon icon={faAngleLeft} />
       </Link>
-    }
+  }
 
   if(!isLast) {
     if (!series && !tag) {
