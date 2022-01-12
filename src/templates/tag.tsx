@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -14,6 +14,7 @@ import type { PageContext } from "../../type"
 interface Tag {
   tag: string
 }
+
 interface Props {
   data: GatsbyTypes.TagQuery,
   pageContext: PageContext & Tag,

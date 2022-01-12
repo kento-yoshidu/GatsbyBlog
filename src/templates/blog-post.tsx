@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useEffect } from "react"
 import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -116,7 +116,7 @@ export const pageQuery = graphql`
         description
         seriesSlug
         seriesName
-        tags,
+        tags
       }
     }
     previous: markdownRemark(id: { eq: $previousPostId }) {

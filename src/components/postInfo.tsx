@@ -1,48 +1,46 @@
-import * as React from "react"
+import React from "react"
 import { Link } from "gatsby"
 
 import * as Styles from "../styles/postInfo.module.scss"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faUndo ,faFolder, faTags, faCommentDots } from "@fortawesome/free-solid-svg-icons"
 
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-type Props = {
-  postTitle: string
-  seriesSlug: string
-  seriesName: string
-  postdate: string
-  update: string
+interface Props {
+  postTitle?: string
+  seriesSlug?: string
+  seriesName?: string
+  postdate?: string
+  update?: string
   series?: string
-  tags?: string
+  tags?: string[]
   description?: string
 }
 
 const PostInfo: React.VFC<Props> = ({
-    postTitle,
-    seriesSlug,
-    seriesName,
-    postdate,
-    update,
-    tags,
-    description
-  }) => {
+  postTitle,
+  seriesSlug,
+  seriesName,
+  postdate,
+  update,
+  tags,
+  description
+}) => {
 
-  const tag = tags?.map((tag: string) => {
-    return (
-      <p key={`tag${tag}`}>
-        <Link
-          to={`/tag/${tag}/page/1/`}
-          key={`link${tag}`}
-        >
+  const tag = tags?.map((tag: string) => (
+    <p key={`tag${tag}`}>
+      <Link
+        to={`/tag/${tag}/page/1/`}
+        key={`link${tag}`}
+      >
         #{ tag }
-        </Link>
-      </p>
-    )
-  })
+      </Link>
+    </p>
+  ))
 
   return (
     <div className={Styles.postInfo}>

@@ -5,11 +5,11 @@ import { SearchOutline } from 'react-ionicons'
 
 import * as Styles from "../styles/search.module.scss"
 
-type Edge = {
+interface Edge {
   node: {
     slug: string;
     keywords?: string[];
-    title: string
+    title: string;
   }
 }
 

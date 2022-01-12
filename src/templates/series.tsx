@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 import { graphql } from "gatsby"
 
 import Layout from "../components/layout"
@@ -15,6 +15,7 @@ interface Series {
   seriesName: string;
   seriesSlug: string;
 }
+
 interface Props {
   data: GatsbyTypes.SeriesQuery,
   pageContext: PageContext & Series,

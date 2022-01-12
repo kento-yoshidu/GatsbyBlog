@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react"
 
 import Search from "./searchBox"
-import Temp from "./temp"
 import Footer from "./footer"
 
 type Props = {

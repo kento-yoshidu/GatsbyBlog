@@ -1,4 +1,4 @@
-import * as React from "react"
+import React from "react"
 import { Link } from "gatsby"
 
 import * as Styles from "../styles/pages.module.scss"
@@ -15,24 +15,38 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-type Props = {
-  postData: {
-    allMarkdownRemark: {
-      nodes: {
-        id: string,
-      }
-    }
+interface Node {
+  fields: {
+    slug: string;
+  }
+  frontmatter: {
+    postdate: string;
+    description: string; 
+    seriesName: string;
+    seriesSlug: string;
+    tags: string[];
+    title: string;
+    update: string;
   }
 }
 
-const PostList: React.VFC<Props> = ({postData}) => (
+interface Props {
+  postData: {
+    nodes: Node[]
+  }
+}
+
+const PostList: React.VFC<Props> = ({postData}) => {
+  console.log(postData)
+
+  return (
   <div className="LoadAnimation">
     <section className={Styles.postList}>
-      {postData.nodes.map((post) => {
+      {postData.nodes.map((post: Node) => {
         const title = post.frontmatter.title || post.fields.slug
 
         return (
-          <div key={post.id}
+          <div
             className={Styles.postItem}
             itemScope
             itemType="http://schema.org/Article"
@@ -77,6 +91,8 @@ const PostList: React.VFC<Props> = ({postData}) => (
       })}
     </section>
   </div>
-)
+
+  )
+}
 
 export default PostList
