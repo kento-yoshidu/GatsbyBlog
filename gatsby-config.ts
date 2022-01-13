@@ -1,8 +1,10 @@
 import type { GatsbyConfig } from "gatsby"
 
+/*
 require('dotenv').config({
   path: `.env.${process.env.NODE_ENV}`,
 });
+*/
 
 const plugins: GatsbyConfig['plugins'] = [
   `gatsby-plugin-typescript`,
