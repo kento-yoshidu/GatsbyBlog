@@ -14,10 +14,10 @@ interface Edge {
 }
 
 const Search: React.VFC = () => {
-  const { allSearchJson } = useStaticQuery(
+  const { allKeywordSearchJson } = useStaticQuery(
     graphql`
       query {
-        allSearchJson {
+        allKeywordSearchJson {
           edges {
             node {
               keywords
@@ -25,12 +25,12 @@ const Search: React.VFC = () => {
               title
             }
           }
-        }
+      }
       }
     `
   )
 
-  const edges: Edge[] = allSearchJson.edges
+  const edges: Edge[] = allKeywordSearchJson.edges
 
   // 検索ボックスに入力された文字列
   const [inputtedKeywords, setInputtedKeywords] = useState<string>("")

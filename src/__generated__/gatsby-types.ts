@@ -78,10 +78,10 @@ type File = Node & {
   readonly childrenImageSharp: Maybe<ReadonlyArray<Maybe<ImageSharp>>>;
   /** Returns the first child node of type ImageSharp or null if there are no children of given type on this node */
   readonly childImageSharp: Maybe<ImageSharp>;
-  /** Returns all children nodes filtered by type SearchJson */
-  readonly childrenSearchJson: Maybe<ReadonlyArray<Maybe<SearchJson>>>;
-  /** Returns the first child node of type SearchJson or null if there are no children of given type on this node */
-  readonly childSearchJson: Maybe<SearchJson>;
+  /** Returns all children nodes filtered by type KeywordSearchJson */
+  readonly childrenKeywordSearchJson: Maybe<ReadonlyArray<Maybe<KeywordSearchJson>>>;
+  /** Returns the first child node of type KeywordSearchJson or null if there are no children of given type on this node */
+  readonly childKeywordSearchJson: Maybe<KeywordSearchJson>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -886,7 +886,7 @@ type SiteBuildMetadata_buildTimeArgs = {
   locale: Maybe<Scalars['String']>;
 };
 
-type SearchJson = Node & {
+type KeywordSearchJson = Node & {
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -915,8 +915,8 @@ type Query = {
   readonly allSitePlugin: SitePluginConnection;
   readonly siteBuildMetadata: Maybe<SiteBuildMetadata>;
   readonly allSiteBuildMetadata: SiteBuildMetadataConnection;
-  readonly searchJson: Maybe<SearchJson>;
-  readonly allSearchJson: SearchJsonConnection;
+  readonly keywordSearchJson: Maybe<KeywordSearchJson>;
+  readonly allKeywordSearchJson: KeywordSearchJsonConnection;
 };
 
 
@@ -959,8 +959,8 @@ type Query_fileArgs = {
   childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
   childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   childImageSharp: Maybe<ImageSharpFilterInput>;
-  childrenSearchJson: Maybe<SearchJsonFilterListInput>;
-  childSearchJson: Maybe<SearchJsonFilterInput>;
+  childrenKeywordSearchJson: Maybe<KeywordSearchJsonFilterListInput>;
+  childKeywordSearchJson: Maybe<KeywordSearchJsonFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -1184,7 +1184,7 @@ type Query_allSiteBuildMetadataArgs = {
 };
 
 
-type Query_searchJsonArgs = {
+type Query_keywordSearchJsonArgs = {
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -1195,9 +1195,9 @@ type Query_searchJsonArgs = {
 };
 
 
-type Query_allSearchJsonArgs = {
-  filter: Maybe<SearchJsonFilterInput>;
-  sort: Maybe<SearchJsonSortInput>;
+type Query_allKeywordSearchJsonArgs = {
+  filter: Maybe<KeywordSearchJsonFilterInput>;
+  sort: Maybe<KeywordSearchJsonSortInput>;
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
 };
@@ -1396,11 +1396,11 @@ type ImageSharpResizeFilterInput = {
   readonly originalName: Maybe<StringQueryOperatorInput>;
 };
 
-type SearchJsonFilterListInput = {
-  readonly elemMatch: Maybe<SearchJsonFilterInput>;
+type KeywordSearchJsonFilterListInput = {
+  readonly elemMatch: Maybe<KeywordSearchJsonFilterInput>;
 };
 
-type SearchJsonFilterInput = {
+type KeywordSearchJsonFilterInput = {
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -1768,89 +1768,89 @@ type FileFieldsEnum =
   | 'childImageSharp.internal.mediaType'
   | 'childImageSharp.internal.owner'
   | 'childImageSharp.internal.type'
-  | 'childrenSearchJson'
-  | 'childrenSearchJson.id'
-  | 'childrenSearchJson.parent.id'
-  | 'childrenSearchJson.parent.parent.id'
-  | 'childrenSearchJson.parent.parent.children'
-  | 'childrenSearchJson.parent.children'
-  | 'childrenSearchJson.parent.children.id'
-  | 'childrenSearchJson.parent.children.children'
-  | 'childrenSearchJson.parent.internal.content'
-  | 'childrenSearchJson.parent.internal.contentDigest'
-  | 'childrenSearchJson.parent.internal.description'
-  | 'childrenSearchJson.parent.internal.fieldOwners'
-  | 'childrenSearchJson.parent.internal.ignoreType'
-  | 'childrenSearchJson.parent.internal.mediaType'
-  | 'childrenSearchJson.parent.internal.owner'
-  | 'childrenSearchJson.parent.internal.type'
-  | 'childrenSearchJson.children'
-  | 'childrenSearchJson.children.id'
-  | 'childrenSearchJson.children.parent.id'
-  | 'childrenSearchJson.children.parent.children'
-  | 'childrenSearchJson.children.children'
-  | 'childrenSearchJson.children.children.id'
-  | 'childrenSearchJson.children.children.children'
-  | 'childrenSearchJson.children.internal.content'
-  | 'childrenSearchJson.children.internal.contentDigest'
-  | 'childrenSearchJson.children.internal.description'
-  | 'childrenSearchJson.children.internal.fieldOwners'
-  | 'childrenSearchJson.children.internal.ignoreType'
-  | 'childrenSearchJson.children.internal.mediaType'
-  | 'childrenSearchJson.children.internal.owner'
-  | 'childrenSearchJson.children.internal.type'
-  | 'childrenSearchJson.internal.content'
-  | 'childrenSearchJson.internal.contentDigest'
-  | 'childrenSearchJson.internal.description'
-  | 'childrenSearchJson.internal.fieldOwners'
-  | 'childrenSearchJson.internal.ignoreType'
-  | 'childrenSearchJson.internal.mediaType'
-  | 'childrenSearchJson.internal.owner'
-  | 'childrenSearchJson.internal.type'
-  | 'childrenSearchJson.slug'
-  | 'childrenSearchJson.title'
-  | 'childrenSearchJson.keywords'
-  | 'childSearchJson.id'
-  | 'childSearchJson.parent.id'
-  | 'childSearchJson.parent.parent.id'
-  | 'childSearchJson.parent.parent.children'
-  | 'childSearchJson.parent.children'
-  | 'childSearchJson.parent.children.id'
-  | 'childSearchJson.parent.children.children'
-  | 'childSearchJson.parent.internal.content'
-  | 'childSearchJson.parent.internal.contentDigest'
-  | 'childSearchJson.parent.internal.description'
-  | 'childSearchJson.parent.internal.fieldOwners'
-  | 'childSearchJson.parent.internal.ignoreType'
-  | 'childSearchJson.parent.internal.mediaType'
-  | 'childSearchJson.parent.internal.owner'
-  | 'childSearchJson.parent.internal.type'
-  | 'childSearchJson.children'
-  | 'childSearchJson.children.id'
-  | 'childSearchJson.children.parent.id'
-  | 'childSearchJson.children.parent.children'
-  | 'childSearchJson.children.children'
-  | 'childSearchJson.children.children.id'
-  | 'childSearchJson.children.children.children'
-  | 'childSearchJson.children.internal.content'
-  | 'childSearchJson.children.internal.contentDigest'
-  | 'childSearchJson.children.internal.description'
-  | 'childSearchJson.children.internal.fieldOwners'
-  | 'childSearchJson.children.internal.ignoreType'
-  | 'childSearchJson.children.internal.mediaType'
-  | 'childSearchJson.children.internal.owner'
-  | 'childSearchJson.children.internal.type'
-  | 'childSearchJson.internal.content'
-  | 'childSearchJson.internal.contentDigest'
-  | 'childSearchJson.internal.description'
-  | 'childSearchJson.internal.fieldOwners'
-  | 'childSearchJson.internal.ignoreType'
-  | 'childSearchJson.internal.mediaType'
-  | 'childSearchJson.internal.owner'
-  | 'childSearchJson.internal.type'
-  | 'childSearchJson.slug'
-  | 'childSearchJson.title'
-  | 'childSearchJson.keywords'
+  | 'childrenKeywordSearchJson'
+  | 'childrenKeywordSearchJson.id'
+  | 'childrenKeywordSearchJson.parent.id'
+  | 'childrenKeywordSearchJson.parent.parent.id'
+  | 'childrenKeywordSearchJson.parent.parent.children'
+  | 'childrenKeywordSearchJson.parent.children'
+  | 'childrenKeywordSearchJson.parent.children.id'
+  | 'childrenKeywordSearchJson.parent.children.children'
+  | 'childrenKeywordSearchJson.parent.internal.content'
+  | 'childrenKeywordSearchJson.parent.internal.contentDigest'
+  | 'childrenKeywordSearchJson.parent.internal.description'
+  | 'childrenKeywordSearchJson.parent.internal.fieldOwners'
+  | 'childrenKeywordSearchJson.parent.internal.ignoreType'
+  | 'childrenKeywordSearchJson.parent.internal.mediaType'
+  | 'childrenKeywordSearchJson.parent.internal.owner'
+  | 'childrenKeywordSearchJson.parent.internal.type'
+  | 'childrenKeywordSearchJson.children'
+  | 'childrenKeywordSearchJson.children.id'
+  | 'childrenKeywordSearchJson.children.parent.id'
+  | 'childrenKeywordSearchJson.children.parent.children'
+  | 'childrenKeywordSearchJson.children.children'
+  | 'childrenKeywordSearchJson.children.children.id'
+  | 'childrenKeywordSearchJson.children.children.children'
+  | 'childrenKeywordSearchJson.children.internal.content'
+  | 'childrenKeywordSearchJson.children.internal.contentDigest'
+  | 'childrenKeywordSearchJson.children.internal.description'
+  | 'childrenKeywordSearchJson.children.internal.fieldOwners'
+  | 'childrenKeywordSearchJson.children.internal.ignoreType'
+  | 'childrenKeywordSearchJson.children.internal.mediaType'
+  | 'childrenKeywordSearchJson.children.internal.owner'
+  | 'childrenKeywordSearchJson.children.internal.type'
+  | 'childrenKeywordSearchJson.internal.content'
+  | 'childrenKeywordSearchJson.internal.contentDigest'
+  | 'childrenKeywordSearchJson.internal.description'
+  | 'childrenKeywordSearchJson.internal.fieldOwners'
+  | 'childrenKeywordSearchJson.internal.ignoreType'
+  | 'childrenKeywordSearchJson.internal.mediaType'
+  | 'childrenKeywordSearchJson.internal.owner'
+  | 'childrenKeywordSearchJson.internal.type'
+  | 'childrenKeywordSearchJson.slug'
+  | 'childrenKeywordSearchJson.title'
+  | 'childrenKeywordSearchJson.keywords'
+  | 'childKeywordSearchJson.id'
+  | 'childKeywordSearchJson.parent.id'
+  | 'childKeywordSearchJson.parent.parent.id'
+  | 'childKeywordSearchJson.parent.parent.children'
+  | 'childKeywordSearchJson.parent.children'
+  | 'childKeywordSearchJson.parent.children.id'
+  | 'childKeywordSearchJson.parent.children.children'
+  | 'childKeywordSearchJson.parent.internal.content'
+  | 'childKeywordSearchJson.parent.internal.contentDigest'
+  | 'childKeywordSearchJson.parent.internal.description'
+  | 'childKeywordSearchJson.parent.internal.fieldOwners'
+  | 'childKeywordSearchJson.parent.internal.ignoreType'
+  | 'childKeywordSearchJson.parent.internal.mediaType'
+  | 'childKeywordSearchJson.parent.internal.owner'
+  | 'childKeywordSearchJson.parent.internal.type'
+  | 'childKeywordSearchJson.children'
+  | 'childKeywordSearchJson.children.id'
+  | 'childKeywordSearchJson.children.parent.id'
+  | 'childKeywordSearchJson.children.parent.children'
+  | 'childKeywordSearchJson.children.children'
+  | 'childKeywordSearchJson.children.children.id'
+  | 'childKeywordSearchJson.children.children.children'
+  | 'childKeywordSearchJson.children.internal.content'
+  | 'childKeywordSearchJson.children.internal.contentDigest'
+  | 'childKeywordSearchJson.children.internal.description'
+  | 'childKeywordSearchJson.children.internal.fieldOwners'
+  | 'childKeywordSearchJson.children.internal.ignoreType'
+  | 'childKeywordSearchJson.children.internal.mediaType'
+  | 'childKeywordSearchJson.children.internal.owner'
+  | 'childKeywordSearchJson.children.internal.type'
+  | 'childKeywordSearchJson.internal.content'
+  | 'childKeywordSearchJson.internal.contentDigest'
+  | 'childKeywordSearchJson.internal.description'
+  | 'childKeywordSearchJson.internal.fieldOwners'
+  | 'childKeywordSearchJson.internal.ignoreType'
+  | 'childKeywordSearchJson.internal.mediaType'
+  | 'childKeywordSearchJson.internal.owner'
+  | 'childKeywordSearchJson.internal.type'
+  | 'childKeywordSearchJson.slug'
+  | 'childKeywordSearchJson.title'
+  | 'childKeywordSearchJson.keywords'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -1986,8 +1986,8 @@ type FileFilterInput = {
   readonly childMarkdownRemark: Maybe<MarkdownRemarkFilterInput>;
   readonly childrenImageSharp: Maybe<ImageSharpFilterListInput>;
   readonly childImageSharp: Maybe<ImageSharpFilterInput>;
-  readonly childrenSearchJson: Maybe<SearchJsonFilterListInput>;
-  readonly childSearchJson: Maybe<SearchJsonFilterInput>;
+  readonly childrenKeywordSearchJson: Maybe<KeywordSearchJsonFilterListInput>;
+  readonly childKeywordSearchJson: Maybe<KeywordSearchJsonFilterInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -3861,52 +3861,52 @@ type SiteBuildMetadataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type SearchJsonConnection = {
+type KeywordSearchJsonConnection = {
   readonly totalCount: Scalars['Int'];
-  readonly edges: ReadonlyArray<SearchJsonEdge>;
-  readonly nodes: ReadonlyArray<SearchJson>;
+  readonly edges: ReadonlyArray<KeywordSearchJsonEdge>;
+  readonly nodes: ReadonlyArray<KeywordSearchJson>;
   readonly pageInfo: PageInfo;
   readonly distinct: ReadonlyArray<Scalars['String']>;
   readonly max: Maybe<Scalars['Float']>;
   readonly min: Maybe<Scalars['Float']>;
   readonly sum: Maybe<Scalars['Float']>;
-  readonly group: ReadonlyArray<SearchJsonGroupConnection>;
+  readonly group: ReadonlyArray<KeywordSearchJsonGroupConnection>;
 };
 
 
-type SearchJsonConnection_distinctArgs = {
-  field: SearchJsonFieldsEnum;
+type KeywordSearchJsonConnection_distinctArgs = {
+  field: KeywordSearchJsonFieldsEnum;
 };
 
 
-type SearchJsonConnection_maxArgs = {
-  field: SearchJsonFieldsEnum;
+type KeywordSearchJsonConnection_maxArgs = {
+  field: KeywordSearchJsonFieldsEnum;
 };
 
 
-type SearchJsonConnection_minArgs = {
-  field: SearchJsonFieldsEnum;
+type KeywordSearchJsonConnection_minArgs = {
+  field: KeywordSearchJsonFieldsEnum;
 };
 
 
-type SearchJsonConnection_sumArgs = {
-  field: SearchJsonFieldsEnum;
+type KeywordSearchJsonConnection_sumArgs = {
+  field: KeywordSearchJsonFieldsEnum;
 };
 
 
-type SearchJsonConnection_groupArgs = {
+type KeywordSearchJsonConnection_groupArgs = {
   skip: Maybe<Scalars['Int']>;
   limit: Maybe<Scalars['Int']>;
-  field: SearchJsonFieldsEnum;
+  field: KeywordSearchJsonFieldsEnum;
 };
 
-type SearchJsonEdge = {
-  readonly next: Maybe<SearchJson>;
-  readonly node: SearchJson;
-  readonly previous: Maybe<SearchJson>;
+type KeywordSearchJsonEdge = {
+  readonly next: Maybe<KeywordSearchJson>;
+  readonly node: KeywordSearchJson;
+  readonly previous: Maybe<KeywordSearchJson>;
 };
 
-type SearchJsonFieldsEnum =
+type KeywordSearchJsonFieldsEnum =
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -3997,17 +3997,17 @@ type SearchJsonFieldsEnum =
   | 'title'
   | 'keywords';
 
-type SearchJsonGroupConnection = {
+type KeywordSearchJsonGroupConnection = {
   readonly totalCount: Scalars['Int'];
-  readonly edges: ReadonlyArray<SearchJsonEdge>;
-  readonly nodes: ReadonlyArray<SearchJson>;
+  readonly edges: ReadonlyArray<KeywordSearchJsonEdge>;
+  readonly nodes: ReadonlyArray<KeywordSearchJson>;
   readonly pageInfo: PageInfo;
   readonly field: Scalars['String'];
   readonly fieldValue: Maybe<Scalars['String']>;
 };
 
-type SearchJsonSortInput = {
-  readonly fields: Maybe<ReadonlyArray<Maybe<SearchJsonFieldsEnum>>>;
+type KeywordSearchJsonSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<KeywordSearchJsonFieldsEnum>>>;
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
@@ -4021,6 +4021,14 @@ type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
+type PagesQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+}>;
+
+
+type PagesQuery = { readonly siteData: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }>, readonly postData: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
+
 type TagsPageQueryVariables = Exact<{
   tag: Maybe<Scalars['String']>;
 }>;
@@ -4030,16 +4038,6 @@ type TagsPageQuery = { readonly allMarkdownRemark: { readonly group: ReadonlyArr
       Pick<MarkdownRemarkGroupConnection, 'fieldValue' | 'totalCount'>
       & { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<Pick<Frontmatter, 'tags'>> }> }
     )> } };
-
-type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_3_Query = { readonly allSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<SearchJson, 'keywords' | 'slug' | 'title'> }> } };
-
-type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_4_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
 
 type SeriesPagesQueryVariables = Exact<{
   series: Maybe<Scalars['String']>;
@@ -4051,14 +4049,15 @@ type SeriesPagesQuery = { readonly allMarkdownRemark: { readonly group: Readonly
       & { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<Pick<Frontmatter, 'seriesSlug' | 'seriesName'>> }> }
     )> } };
 
-type TagQueryVariables = Exact<{
-  tag: Scalars['String'];
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-}>;
+type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type TagQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
+type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
+
+type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_4_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
 
 type BlogPostBySlugQueryVariables = Exact<{
   id: Scalars['String'];
@@ -4072,19 +4071,6 @@ type BlogPostBySlugQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe
     & { readonly frontmatter: Maybe<Pick<Frontmatter, 'title' | 'postdate' | 'update' | 'description' | 'seriesSlug' | 'seriesName' | 'tags'>> }
   )>, readonly previous: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }>, readonly next: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }> };
 
-type PagesQueryVariables = Exact<{
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-}>;
-
-
-type PagesQuery = { readonly siteData: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }>, readonly postData: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
-
-type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_5_Query = { readonly allSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<SearchJson, 'keywords' | 'slug' | 'title'> }> } };
-
 type SeriesQueryVariables = Exact<{
   seriesSlug: Scalars['String'];
   limit: Scalars['Int'];
@@ -4093,6 +4079,15 @@ type SeriesQueryVariables = Exact<{
 
 
 type SeriesQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
+
+type TagQueryVariables = Exact<{
+  tag: Scalars['String'];
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+}>;
+
+
+type TagQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
