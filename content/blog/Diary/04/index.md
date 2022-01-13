@@ -125,10 +125,10 @@ JSONファイルの書き出しは以下のように行います。ファイル�
     }
   })
 
-  fs.writeFileSync('./static/search.json', JSON.stringify(keywords, null, 2))
+  fs.writeFileSync('./static/keywordSearch.json', JSON.stringify(keywords, null, 2))
 ```
 
-ここで`gatsby develop`すると、`/static/search.json`が生成されます。また、その内容は以下のようになっているはずです。
+ここで`gatsby develop`すると、`/static/keywordSearch.json`が生成されます。また、その内容は以下のようになっているはずです。
 
 ```json:title=/static/search.json
 [
@@ -163,7 +163,7 @@ $ yarn add gatsby-transformer-json@^3.0.0
 
 インストールできたら、まずは`gatsby-config.js`のプラグインの部分に追記します。
 
-```javascript
+```javascript:title=/gatsby.config.js
 module.exports = {
   plugins: [
     `gatsby-transformer-json`,
@@ -186,7 +186,7 @@ module.exports = {
 
 ここで再度`gatsby develop`を行い、`localhost:8000/___graphql`にアクセスし、GraphiQLでGraphqlクエリーを発行し、JSONファイルを取得できるかテストしてみましょう。
 
-JSONファイルを取得するクエリーの名前ですが、保存しているJSONファイルのファイル名が踏襲されます。今回は`search.json`という名前でJSONファイルが存在しているので、`allSearchJson`ないし`searchJson`というクエリーが用意されているはずです。
+JSONファイルを取得するクエリーの名前ですが、保存しているJSONファイルのファイル名が踏襲されます。今回は`search.json`という名前でJSONファイルが存在しているので、`allKeywordSearchJson`ないし`searchJson`というクエリーが用意されているはずです。
 
 ![](./images/image04.png)
 
