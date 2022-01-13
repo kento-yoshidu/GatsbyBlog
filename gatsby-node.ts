@@ -199,15 +199,19 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
     })
   })
 
-  const keywords = queryResult.data.allArticlesForSearching.edges.map(({node}) => {
-    return {
-      slug: node.fields.slug,
-      title: node.frontmatter.title,
-      keywords: node.frontmatter.keywords,
-    }
-  })
+  const createSearchJsonFile = () => {
+    const keywords = queryResult.data.allArticlesForSearching.edges.map(({node}) => {
+      return {
+        slug: node.fields.slug,
+        title: node.frontmatter.title,
+        keywords: node.frontmatter.keywords,
+      }
+    })
 
-  fs.writeFileSync('./static/search.json', JSON.stringify(keywords, null , 2))
+    fs.writeFileSync('./static/keywordSearch.json', JSON.stringify(keywords, null , 2))
+  }
+
+  createSearchJsonFile()
 }
 
 const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
