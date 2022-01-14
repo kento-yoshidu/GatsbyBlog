@@ -1,6 +1,6 @@
 ---
 title: "#2 HTMLでページを作ってみる"
-postdate: "2021-08-06"
+postdate: "2021-08-05"
 update: "2021-10-11"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
@@ -20,6 +20,7 @@ keywords: ["HTML", "CSS", "タグ", "要素"]
 上記3つを行います。
 
 当ブログのモットーは**最小構成 & スモールステップ**です。やることは**極限までシンプル**に、そして**目標は小さく設定**し、一つずつクリアしていけばHTMLとCSSの学習は難しくありません。
+
 
 ## HTMLとCSS
 
