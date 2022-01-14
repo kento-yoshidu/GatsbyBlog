@@ -171,7 +171,7 @@ module.exports = {
   ]    
 ```
 
-また、`/static/search.json`を扱うわけですから、`gatsby-source-filesystem`において`/static`への設定をしている必要があります。設定が出来ていない場合は以下のように追記します。
+また、`/static/keywordSearch.json`を扱うわけですから、`gatsby-source-filesystem`において`/static`への設定をしている必要があります。設定が出来ていない場合は以下のように追記します。
 
 ```javascript
   // 追記
@@ -186,7 +186,7 @@ module.exports = {
 
 ここで再度`gatsby develop`を行い、`localhost:8000/___graphql`にアクセスし、GraphiQLでGraphqlクエリーを発行し、JSONファイルを取得できるかテストしてみましょう。
 
-JSONファイルを取得するクエリーの名前ですが、保存しているJSONファイルのファイル名が踏襲されます。今回は`search.json`という名前でJSONファイルが存在しているので、`allKeywordSearchJson`ないし`searchJson`というクエリーが用意されているはずです。
+JSONファイルを取得するクエリーの名前ですが、保存しているJSONファイルのファイル名が踏襲されます。今回は`keywordSearch.json`という名前でJSONファイルが存在しているので、`allKeywordSearchJson`ないし`searchJson`というクエリーが用意されているはずです。
 
 ![](./images/image04.png)
 

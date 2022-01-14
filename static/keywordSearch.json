@@ -172,16 +172,6 @@
     ]
   },
   {
-    "slug": "/HelloWeb/02/",
-    "title": "#2 HTMLでページを作ってみる",
-    "keywords": [
-      "HTML",
-      "CSS",
-      "タグ",
-      "要素"
-    ]
-  },
-  {
     "slug": "/Jamstack/01/",
     "title": "JamstackなWebサイトを構築してみた①",
     "keywords": [
@@ -193,6 +183,16 @@
       "microCMS",
       "ホスティングサービス",
       "Netlify"
+    ]
+  },
+  {
+    "slug": "/HelloWeb/02/",
+    "title": "#2 HTMLでページを作ってみる",
+    "keywords": [
+      "HTML",
+      "CSS",
+      "タグ",
+      "要素"
     ]
   },
   {
