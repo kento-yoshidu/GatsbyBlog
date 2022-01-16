@@ -6,7 +6,7 @@ seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "ハイパーリンクを作成するa要素を学習します。また、相対パスについても学習します。"
 tags: ["HTML"]
-keywords: ["HTML", "a要素", "ハイパーリンク"]
+keywords: ["HTML", "a要素"]
 ---
 
 # Webはリンクの集まり
@@ -227,7 +227,7 @@ a要素はp要素の中に入れることができます。ネスト出来ると
 
 [Webってどういう意味？意外と知らないWebの歴史【インターネット・アカデミー】](https://www.internetacademy.jp/special/history.html)
 
-[第12回インターネット講座](http://www.tufs.ac.jp/ts/personal/yamaguci/inet_lec/lec12/98med12.html
+[第12回インターネット講座](http://www.tufs.ac.jp/ts/personal/yamaguci/inet_lec/lec12/98med12.html)
 
 [絶対パス・相対パスとは？｜パスの見方・書き方](https://www.yamanjo.net/knowledge/file/file_05.html)
 

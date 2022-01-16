@@ -36,10 +36,7 @@ interface Props {
   }
 }
 
-const PostList: React.VFC<Props> = ({postData}) => {
-  console.log(postData)
-
-  return (
+const PostList: React.VFC<Props> = ({postData}) => (
   <div className="LoadAnimation">
     <section className={Styles.postList}>
       {postData.nodes.map((post: Node) => {
@@ -91,8 +88,6 @@ const PostList: React.VFC<Props> = ({postData}) => {
       })}
     </section>
   </div>
-
-  )
-}
+)
 
 export default PostList
