@@ -2,6 +2,7 @@ import React, { ReactNode } from "react"
 
 import Search from "./searchBox"
 import Footer from "./footer"
+import { KeywordSearch } from "./keywordSearch"
 
 type Props = {
   children: ReactNode
@@ -9,7 +10,7 @@ type Props = {
 
 const Layout: React.VFC<Props> = ({children}) => (
   <>
-    {/*<Temp />*/}
+    <KeywordSearch />
     <Search />
 
     {children}
