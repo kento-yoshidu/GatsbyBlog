@@ -1,7 +1,7 @@
 ---
 title: "ブログにキーワード検索機能を追加しました"
 postdate: "2022-01-05"
-update: "2022-01-09"
+update: "2022-01-16"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "当ブログにキーワード検索機能を追加したので記事にします。"
@@ -114,7 +114,7 @@ const createPages = async ({ graphql, actions, reporter }) => {
     `
 ```
 
-JSONファイルの書き出しは以下のように行います。ファイルの保存先はルート直下の`static`にしました。
+JSONファイルの書き出しは以下のように行います。ファイルの保存先はルート直下の`static`、ファイル名は`keywordSearch.json`にしました。
 
 ```typescript:title=gatsby-node.js
   const keywords = queryResult.data.allArticlesForSearching.edges.map(({node}) => {
@@ -130,7 +130,7 @@ JSONファイルの書き出しは以下のように行います。ファイル�
 
 ここで`gatsby develop`すると、`/static/keywordSearch.json`が生成されます。また、その内容は以下のようになっているはずです。
 
-```json:title=/static/search.json
+```json:title=/static/keywordSearch.json
 [
   {
     "slug": "/Others/01/",
@@ -139,7 +139,7 @@ JSONファイルの書き出しは以下のように行います。ファイル�
       "Kali Linux",
       "WSL2",
       "Proxy",
-      "プロキシー",
+      "プロキシ",
       "apt",
       "wget",
       "curl"
@@ -171,14 +171,16 @@ module.exports = {
   ]    
 ```
 
-また、`/static/keywordSearch.json`を扱うわけですから、`gatsby-source-filesystem`において`/static`への設定をしている必要があります。設定が出来ていない場合は以下のように追記します。
+また、`/static`の中にあるファイルを扱うわけですから、`gatsby-source-filesystem`において`/static`への設定をしている必要があります。設定が出来ていない場合は以下のように追記します。
 
 ```javascript
   // 追記
   {
     resolve: `gatsby-source-filesystem`,
     options: {
+      // フォルダーを指定
       path: `static`,
+      // 任意の名前を付ける
       name: `keywordSearch`,
     },
   },
@@ -193,8 +195,8 @@ JSONファイルを取得するクエリーの名前ですが、保存してい�
 GraphQLクエリーは以下のように投げます。取得するフィールドですが、肝心の`keywords`と、検索でヒットした記事へのリンクを作成するために`slug`と`title`も必要です。
 
 ```graphql
-{
-  allSearchJson {
+query MyQuery {
+  allKeywordSearchJson {
     edges {
       node {
         keywords
@@ -204,6 +206,7 @@ GraphQLクエリーは以下のように投げます。取得するフィール�
     }
   }
 }
+
 ```
 
 クエリーを実行して右側のペインにエラーなく結果が表示されればOKです。以下は筆者の環境でのクエリーの結果です。
@@ -211,21 +214,24 @@ GraphQLクエリーは以下のように投げます。取得するフィール�
 ```javascript:title=Graphqlクエリーの結果
 {
   "data": {
-    "allSearchJson": {
+    "allKeywordSearchJson": {
       "edges": [
         {
           "node": {
             "keywords": [
-              "Gatsby",
-              "Blog",
-              "ブログ",
-              "React Hooks"
+              "Kali Linux",
+              "WSL2",
+              "Proxy",
+              "プロキシー",
+              "apt",
+              "wget",
+              "curl"
             ],
-            "slug": "/Diary/04/",
-            "title": "ブログにキーワード検索機能を追加しました"
+            "slug": "/Others/01/",
+            "title": "プロキシ環境でKali Linuxを使う"
           }
         },
-        // ...略
+        // ...以下、同様に続く
       ]
     }
   },
@@ -234,29 +240,29 @@ GraphQLクエリーは以下のように投げます。取得するフィール�
 
 ## コンポーネントを作成する
 
-ここまでくれば目的の大半は達成したも同然です。記事を検索するコンポーネントを作成しましょう。`/src/components/search.tsx`を用意します。まずは以下のように記述しておきます。
+ここまでくれば目的の大半は達成したも同然です。記事を検索するコンポーネントを作成しましょう。`/src/components/keywordSearch.jsx`を用意します。まずは以下のように記述しておきます。
 
-```jsx:title=/src/components/search.jsx
+```jsx:title=/src/components/keywordSearch.jsx
 import React from "react"
 
-export const Search = () => {
+export const KeywordSearch = () => {
   return (
     <p>This is a search component</p>
   )
 }
 ```
 
-次に、GraphQLクエリーを記述します。コンポーネントからクエリーを投げるわけですから`useStaticQuery`を利用します。`useStaticQuery`と`graphql`をインポートし、以下のように記述します。適当な所に`console.log(allSearchJson)`を仕込み、結果を確認できるようにしておきます。
+次に、GraphQLクエリーを記述します。コンポーネントからクエリーを投げるわけですから`useStaticQuery`を利用します。`useStaticQuery`と`graphql`をインポートし、以下のように記述します。適当な所に`console.log(allKeywordSearchJson)`を仕込み、結果を確認できるようにしておきます。
 
-```jsx{2}:title=/src/components/search.jsx
+```jsx:title=/src/components/KeywordSearch.jsx
 import React from "react"
 import {useStaticQuery, graphql} from "gatsby"
 
-export const Search = () => {
-  const { allSearchJson } = useStaticQuery(
+export const KeywordSearch = () => {
+  const {allKeywordSearchJson} = useStaticQuery(
     graphql`
-      query {
-        allSearchJson {
+      {
+        allKeywordSearchJson {
           edges {
             node {
               keywords
@@ -269,7 +275,7 @@ export const Search = () => {
     `
   )
 
-  console.log(allSearchJson)
+  console.log(allKeywordSearchJson)
 
   return (
     <p>This is a search component</p>
@@ -277,24 +283,60 @@ export const Search = () => {
 }
 ```
 
-ファイルができたら、適宜`/src/components/layout.jsx`などにコンポーネントを追記します。`gatsby develop`でローカルサーバーを起動し、ページにアクセスしコンソールで結果を確認します。
+ファイルができたら、適宜`/src/components/layout.jsx`などにコンポーネントを追記します。
 
-![](/images/image102.png)
+```jsx:title=/src/components/layout.jsx
+import React, { ReactNode } from "react"
+
+import { KeywordSearch } from "./keywordSearch"
+
+const Layout = ({children}) => (
+  <>
+    <KeywordSrarch />
+
+    {children}
+  </>
+)
+
+export default Layout
+```
+
+`gatsby develop`でローカルサーバーを起動し、ページにアクセスしコンソールで結果を確認します。
+
+![](/images/image05.png)
+
+---
 
 今回、UIの作成には`useState`と`useEffect`を使用します。まずは`useState`で入力された文字列を保持するStateと、条件によって絞り込まれた記事すべてを保持するStateを用意します。
 
 ついでに入力フォームも書いておきましょう。
 
-```jsx:title=/src/components/search.jsx
-const Search = () => {
+```jsx:title=/src/components/KeyWordSearch.jsx
+import React, {useState, useEffect} from "react"
+import { useStaticQuery, graphql } from "gatsby"
 
-  // ...略
-
+export const KeywordSearch = () => {
   // フォームに入力された文字列を保持するState
-  const [inputtedKeyword, setInputtedKeyword] = useState("")
+  const [inputtedWords, setInputtedWords] = useState("")
 
   // 条件によって絞り込まれた記事を保持するState
   const [filteredPosts, setFilteredPosts] = useState(null)
+
+  const { allKeywordSearchJson } = useStaticQuery(
+    graphql`
+      {
+        allKeywordSearchJson(skip: 3) {
+          edges {
+            node {
+              keywords
+              slug
+              title
+            }
+          }
+        }
+      }
+    `
+  )
 
   return (
     <input type="text" />
@@ -302,59 +344,63 @@ const Search = () => {
 }
 ```
 
-今回はインクリメンタルサーチですから、入力ボックスに1文字入力されるたびに`allSearchJson`を走査して、結果を書き換える必要があります。
+今回はインクリメンタルサーチですから、入力ボックスに1文字入力されるたびにGraphQLクエリーの結果が入っている`allSearchJson`オブジェクトを走査して、結果を書き換える必要があります。
 
 まずはinput要素に`onChange`属性を定義し、入力された文字列を`setInputtedKeywords`に渡すようにします。
 
-```jsx:title=/src/components/search.jsx
-  return (
-    <input
-      type="text"
-      onChange={(e) => setInputtedKeywords(e.target.value)}
-    />
-  )
-```
-
-続けて、`useEffect`を定義し、第二引数に`inputtedKeywords`を渡します。これで入力フォームに書き込まれるたびに`useEffect`が実行される状態になりました。`useEffect`には`console.log(inputtedKeywords)`などと記述し、フォームに1文字入力されるたびにコンソール出力されることを確認してください。
-
-```jsx:title=/src/components/search.jsx
-const Search = () => {
-  // ...略
-
-  // フォームに文字列が入力されるたびに実行される
-  useEffect(() => {
-    console.log(inputtedKeywords)
-
-    // ここにinputtedKeywordsの中身を使ってJSONファイルを走査し、
-    // filteredPostsを書き換える処理を書く
-
-  }, [inputtedKeywords])
-
+```jsx:title=/src/components/KeywordSearch.jsx
   return (
     <input
       type="text"
       // 入力された文字列でinputtedKeywordsを更新する
-      onChange={(e) => setInputtedKeywords(e.target.value)}
+      onChange={(e) => setInputtedWords(e.target.value)}
     />
   )
-}
-
-export default Search
 ```
 
-それでは`useEffect`の処理を記述します。まずは入力された文字列を全て小文字に変換し、`lowerCaseKeywords`といった変数に保管します。
+続けて、`useEffect`を定義し、第二引数に`inputtedWords`を渡します。これで入力フォームに1文字書き込まれるたびに`useEffect`が実行される状態になりました。`useEffect`には`console.log(inputtedWords)`などと記述し、フォームに1文字入力されるたびにコンソール出力されることを確認してください。
 
-```jsx:title=/src/components/search.jsx
+```jsx:title=/src/components/KeywordSearch.jsx
+export const KeywordSearch = () => {
+  //...略
+
+  // フォームに文字列が入力されるたびに実行される
+  useEffect(() => {
+    console.log(inputtedWords)
+
+    // ここにinputtedWordsの中身を使ってJSONファイルを走査し、
+    // filteredPostsを書き換える処理を書く
+
+  }, [inputtedWords])
+```
+
+![](./images/image06.png)
+
+それでは`useEffect`の処理を記述します。
+
+今回、アルファベットの検索はケース・インセンシティブに実装するので、入力された文字列を全て小文字に変換する必要があります。
+
+以下のように、入力された文字列を全て小文字に変換し`lowerCaseKeywords`といった変数に**配列として**保管します。
+
+複数の文字が入力された場合にAND検索を行う必要があるため、取り回しがしやすいように配列にしています。
+
+```jsx:title=/src/components/KeywordSearch.jsx
 useEffect(() => {
   // 入力されたキーワードを小文字に変換する
   const lowerCaseKeywords = inputtedKeywords
     .trim()
     .toLocaleLowerCase()
     .match(/[^\s]+/g)
+
+  console.log(lowerCaseKeywords)
 }, [inputtedKeywords])
 ```
 
-また、検索しヒットした記事は`searchedResult`配列に格納することにしましょう。
+以下の画像は、`Hello World`と入力した時のコンソール出力の様子です。アルファベットが小文字に変換され、単語ごとに配列に格納されていることがわかります。
+
+![](./images/image07.png)
+
+---
 
 ```jsx:title=/src/components/search.jsx
 // ヒットした記事がここに格納される
