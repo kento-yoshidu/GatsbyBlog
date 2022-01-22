@@ -1,5 +1,5 @@
-import React, {useState, useEffect} from "react"
-import { useStaticQuery, graphql } from "gatsby"
+import React, { useState, useEffect } from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
 
 export const KeywordSearch = () => {
   // フォームに入力された文字列を保持するState
@@ -16,8 +16,15 @@ export const KeywordSearch = () => {
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
     
-    console.log(lowerCaseWords)
+    // ヒットした記事がここに格納される
+    const searchedResult = allKeywordSearchJson.edges.filter(({node}) => {
+      return lowerCaseWords?.every((word) => {
+        return node?.keywords?.toString().toLocaleLowerCase().includes(word)
+      })
+    })
 
+    // 絞り込まれた記事一覧で更新する
+    setFilteredPosts(searchedResult.length ? searchedResult : null)
   }, [inputtedWords])
 
   const { allKeywordSearchJson } = useStaticQuery(
@@ -37,10 +44,27 @@ export const KeywordSearch = () => {
   )
 
   return (
-    <input
-      type="text"
-      onChange={(e) => setInputtedWords(e.target.value)}
-    />
+    <>
+      <input
+        type="text"
+        onChange={(e) => setInputtedWords(e.target.value)}
+      />
+
+      <ul>
+        {filteredPosts && filteredPosts.map((post) => {
+          return (
+            <li style={{"fontSize": "140%"}}>
+              <Link
+                to={post.node.slug}
+                key={post.node.slug}
+              >
+                {post.node.title}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    </>
   )
 }
 
