@@ -1,7 +1,7 @@
 ---
 title: "ブログにキーワード検索機能を追加しました"
 postdate: "2022-01-05"
-update: "2022-01-16"
+update: "2022-01-22"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "当ブログにキーワード検索機能を追加したので記事にします。"
@@ -380,20 +380,20 @@ export const KeywordSearch = () => {
 
 今回、アルファベットの検索はケース・インセンシティブに実装するので、入力された文字列を全て小文字に変換する必要があります。
 
-以下のように、入力された文字列を全て小文字に変換し`lowerCaseKeywords`といった変数に**配列として**保管します。
+以下のように、入力された文字列を全て小文字に変換し`lowerCaseWords`といった変数に**配列として**保管します。
 
 複数の文字が入力された場合にAND検索を行う必要があるため、取り回しがしやすいように配列にしています。
 
 ```jsx:title=/src/components/KeywordSearch.jsx
 useEffect(() => {
   // 入力されたキーワードを小文字に変換する
-  const lowerCaseKeywords = inputtedKeywords
+  const lowerCaseWords = inputtedWords
     .trim()
     .toLocaleLowerCase()
     .match(/[^\s]+/g)
 
-  console.log(lowerCaseKeywords)
-}, [inputtedKeywords])
+  console.log(lowerCaseWords)
+}, [inputtedWords])
 ```
 
 以下の画像は、`Hello World`と入力した時のコンソール出力の様子です。アルファベットが小文字に変換され、単語ごとに配列に格納されていることがわかります。
@@ -402,7 +402,7 @@ useEffect(() => {
 
 ---
 
-```jsx:title=/src/components/search.jsx
+```jsx:title=/src/components/keywordSearch.jsx
 // ヒットした記事がここに格納される
 const searchedResult = // 検索処理を書く
 ```
@@ -410,15 +410,180 @@ const searchedResult = // 検索処理を書く
 肝心のヒットするかどうかを判定する部分ですが、私は以下のように書きました。
 
 ```jsx:title=/src/components/search.jsx
-const searchedResult = edges.filter(({node}) => {
-  return lowerCaseKeywords?.every((keyword) => {
-    return node?.keywords?.toString().toLocaleLowerCase().includes(keyword)
+// ヒットした記事がここに格納される
+const searchedResult = allKeywordSearchJson.edges.filter(({node}) => {
+  return lowerCaseWords?.every((word) => {
+    return node?.keywords?.toString().toLocaleLowerCase().includes(word)
   })
 })
 
 // 結果確認用
-console.log(searchedResult)
+console.log(lowerCaseWords, searchedResult)
 ```
+
+これで1文字打つたびに検索が行われ、結果がコンソール出力されます。
+
+![](images/image08.png)
+
+この`searchedResult`を、検索結果を保持するstateである`filteredPosts`に代入します。
+
+```jsx:title=/src/components/keywordSearch.jsx
+  // 絞り込まれた記事一覧で更新する
+  setFilteredPosts(searchedResult.length ? searchedResult : null)
+```
+
+最後に、ヒットした記事一覧を表示する部分を書けば完成です。ここでは`ul`要素と`li`要素、`a要素`を使用することにします。
+
+ひとまず出力結果を確認したいので、以下のように書いてみましょう。
+
+```jsx
+  return (
+    <>
+      <input
+        type="text"
+        onChange={(e) => setInputtedWords(e.target.value)}
+      />
+
+      <ul>
+        {filteredPosts && filteredPosts.map((post) => {
+          return (
+            <li>
+              {post.node.title}
+            </li>
+          )
+        })}
+      </ul>
+    </>
+  )
+```
+
+![](images/image09.png)
+
+正しく記事リストが出力されればOKです。
+
+後は`Link`をインポートして、
+
+```jsx:title=/src/components/keywordSearch.jsx
+import React, { useState, useEffect } from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
+
+// ...略
+```
+
+`slug`を使ってパスを記述するように書き換えます。
+
+```jsx:title=/src/components/keywordSearch.jsx
+  return (
+    <>
+      <input
+        type="text"
+        onChange={(e) => setInputtedWords(e.target.value)}
+      />
+
+      <ul>
+        {filteredPosts && filteredPosts.map((post) => {
+          return (
+            <li style={{"fontSize": "140%"}}>
+              <Link
+                to={post.node.slug}
+                key={post.node.slug}
+              >
+                {post.node.title}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    </>
+  )
+```
+
+ちゃんとリンクが表示され、機能することを確認します。
+
+![](images/image10.png)
+
+これで基本機能は完成です。UIも何もあったもんじゃないですが、これをベースにカスタマイズしていけば実用的な検索機能として使えるはずです。
+
+`/src/components/keywordSearch.jsx`のコード全体を置いておきます。
+
+```jsx:title=/src/components/keywordSearch.jsx
+import React, { useState, useEffect } from "react"
+import { useStaticQuery, graphql, Link } from "gatsby"
+
+export const KeywordSearch = () => {
+  // フォームに入力された文字列を保持するState
+  const [inputtedWords, setInputtedWords] = useState("")
+
+  // 条件によって絞り込まれた記事を保持するState
+  const [filteredPosts, setFilteredPosts] = useState(null)
+
+  // フォームに文字列が入力されるたびに実行される
+  useEffect(() => {
+    // 入力されたキーワードを小文字に変換する
+    const lowerCaseWords = inputtedWords
+      .trim()
+      .toLocaleLowerCase()
+      .match(/[^\s]+/g)
+    
+    // ヒットした記事がここに格納される
+    const searchedResult = allKeywordSearchJson.edges.filter(({node}) => {
+      return lowerCaseWords?.every((word) => {
+        return node?.keywords?.toString().toLocaleLowerCase().includes(word)
+      })
+    })
+
+    // 絞り込まれた記事一覧で更新する
+    setFilteredPosts(searchedResult.length ? searchedResult : null)
+  }, [inputtedWords])
+
+  const { allKeywordSearchJson } = useStaticQuery(
+    graphql`
+      {
+        allKeywordSearchJson(skip: 3) {
+          edges {
+            node {
+              keywords
+              slug
+              title
+            }
+          }
+        }
+      }
+    `
+  )
+
+  return (
+    <>
+      <input
+        type="text"
+        onChange={(e) => setInputtedWords(e.target.value)}
+      />
+
+      <ul>
+        {filteredPosts && filteredPosts.map((post) => {
+          return (
+            <li style={{"fontSize": "140%"}}>
+              <Link
+                to={post.node.slug}
+                key={post.node.slug}
+              >
+                {post.node.title}
+              </Link>
+            </li>
+          )
+        })}
+      </ul>
+    </>
+  )
+}
+```
+
+## マークダウンの編集で`gatsby develop`が死ぬ
+
+
+
+
+
 
 
 
