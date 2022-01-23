@@ -128,7 +128,7 @@ JSONファイルの書き出しは以下のように行います。ファイル�
   fs.writeFileSync('./static/keywordSearch.json', JSON.stringify(keywords, null, 2))
 ```
 
-ここで`gatsby develop`すると、`/static/keywordSearch.json`が生成されます。また、その内容は以下のようになっているはずです。
+ここで`gatsby develop`すると、`static/keywordSearch.json`が生成されます。また、その内容は以下のようになっているはずです。
 
 ```json:title=/static/keywordSearch.json
 [
@@ -163,7 +163,7 @@ $ yarn add gatsby-transformer-json@^3.0.0
 
 インストールできたら、まずは`gatsby-config.js`のプラグインの部分に追記します。
 
-```javascript:title=/gatsby.config.js
+```javascript:title=gatsby-config.js
 module.exports = {
   plugins: [
     `gatsby-transformer-json`,
@@ -171,7 +171,7 @@ module.exports = {
   ]    
 ```
 
-また、`/static`の中にあるファイルを扱うわけですから、`gatsby-source-filesystem`において`/static`への設定をしている必要があります。設定が出来ていない場合は以下のように追記します。
+また、`static`の中にあるファイルを扱うわけですから、`gatsby-source-filesystem`において`static`への設定をしている必要があります。設定が出来ていない場合は以下のように追記します。
 
 ```javascript
   // 追記
@@ -188,7 +188,7 @@ module.exports = {
 
 ここで再度`gatsby develop`を行い、`localhost:8000/___graphql`にアクセスし、GraphiQLでGraphqlクエリーを発行し、JSONファイルを取得できるかテストしてみましょう。
 
-JSONファイルを取得するクエリーの名前ですが、保存しているJSONファイルのファイル名が踏襲されます。今回は`keywordSearch.json`という名前でJSONファイルが存在しているので、`allKeywordSearchJson`ないし`searchJson`というクエリーが用意されているはずです。
+JSONファイルを取得するクエリーの名前ですが、保存しているJSONファイルのファイル名が踏襲されます。今回は`keywordSearch.json`という名前でJSONファイルが存在しているので、`allKeywordSearchJson`ないし`keywordSearchJson`というクエリーが用意されているはずです。
 
 ![](./images/image04.png)
 
@@ -240,9 +240,9 @@ query MyQuery {
 
 ## コンポーネントを作成する
 
-ここまでくれば目的の大半は達成したも同然です。記事を検索するコンポーネントを作成しましょう。`/src/components/keywordSearch.jsx`を用意します。まずは以下のように記述しておきます。
+ここまでくれば目的の大半は達成したも同然です。記事を検索するコンポーネントを作成しましょう。`src/components/keywordSearch.jsx`を用意します。まずは以下のように記述しておきます。
 
-```jsx:title=/src/components/keywordSearch.jsx
+```jsx:title=src/components/keywordSearch.jsx
 import React from "react"
 
 export const KeywordSearch = () => {
@@ -254,7 +254,7 @@ export const KeywordSearch = () => {
 
 次に、GraphQLクエリーを記述します。コンポーネントからクエリーを投げるわけですから`useStaticQuery`を利用します。`useStaticQuery`と`graphql`をインポートし、以下のように記述します。適当な所に`console.log(allKeywordSearchJson)`を仕込み、結果を確認できるようにしておきます。
 
-```jsx:title=/src/components/KeywordSearch.jsx
+```jsx:title=src/components/KeywordSearch.jsx
 import React from "react"
 import {useStaticQuery, graphql} from "gatsby"
 
@@ -283,9 +283,9 @@ export const KeywordSearch = () => {
 }
 ```
 
-ファイルができたら、適宜`/src/components/layout.jsx`などにコンポーネントを追記します。
+ファイルができたら、適宜`src/components/layout.jsx`などにコンポーネントを追記します。
 
-```jsx:title=/src/components/layout.jsx
+```jsx:title=src/components/layout.jsx
 import React, { ReactNode } from "react"
 
 import { KeywordSearch } from "./keywordSearch"
@@ -311,7 +311,7 @@ export default Layout
 
 ついでに入力フォームも書いておきましょう。
 
-```jsx:title=/src/components/KeyWordSearch.jsx
+```jsx:title=src/components/KeyWordSearch.jsx
 import React, {useState, useEffect} from "react"
 import { useStaticQuery, graphql } from "gatsby"
 
@@ -348,7 +348,7 @@ export const KeywordSearch = () => {
 
 まずはinput要素に`onChange`属性を定義し、入力された文字列を`setInputtedKeywords`に渡すようにします。
 
-```jsx:title=/src/components/KeywordSearch.jsx
+```jsx:title=src/components/KeywordSearch.jsx
   return (
     <input
       type="text"
@@ -360,7 +360,7 @@ export const KeywordSearch = () => {
 
 続けて、`useEffect`を定義し、第二引数に`inputtedWords`を渡します。これで入力フォームに1文字書き込まれるたびに`useEffect`が実行される状態になりました。`useEffect`には`console.log(inputtedWords)`などと記述し、フォームに1文字入力されるたびにコンソール出力されることを確認してください。
 
-```jsx:title=/src/components/KeywordSearch.jsx
+```jsx:title=src/components/KeywordSearch.jsx
 export const KeywordSearch = () => {
   //...略
 
@@ -384,7 +384,7 @@ export const KeywordSearch = () => {
 
 複数の文字が入力された場合にAND検索を行う必要があるため、取り回しがしやすいように配列にしています。
 
-```jsx:title=/src/components/KeywordSearch.jsx
+```jsx:title=src/components/KeywordSearch.jsx
 useEffect(() => {
   // 入力されたキーワードを小文字に変換する
   const lowerCaseWords = inputtedWords
@@ -402,14 +402,14 @@ useEffect(() => {
 
 ---
 
-```jsx:title=/src/components/keywordSearch.jsx
+```jsx:title=src/components/keywordSearch.jsx
 // ヒットした記事がここに格納される
 const searchedResult = // 検索処理を書く
 ```
 
 肝心のヒットするかどうかを判定する部分ですが、私は以下のように書きました。
 
-```jsx:title=/src/components/search.jsx
+```jsx:title=src/components/keywordSearch.jsx
 // ヒットした記事がここに格納される
 const searchedResult = allKeywordSearchJson.edges.filter(({node}) => {
   return lowerCaseWords?.every((word) => {
@@ -427,7 +427,7 @@ console.log(lowerCaseWords, searchedResult)
 
 この`searchedResult`を、検索結果を保持するstateである`filteredPosts`に代入します。
 
-```jsx:title=/src/components/keywordSearch.jsx
+```jsx:title=src/components/keywordSearch.jsx
   // 絞り込まれた記事一覧で更新する
   setFilteredPosts(searchedResult.length ? searchedResult : null)
 ```
@@ -436,7 +436,7 @@ console.log(lowerCaseWords, searchedResult)
 
 ひとまず出力結果を確認したいので、以下のように書いてみましょう。
 
-```jsx
+```jsx:title=src/components/keywordSearch.jsx
   return (
     <>
       <input
@@ -463,7 +463,7 @@ console.log(lowerCaseWords, searchedResult)
 
 後は`Link`をインポートして、
 
-```jsx:title=/src/components/keywordSearch.jsx
+```jsx:title=src/components/keywordSearch.jsx
 import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 
@@ -472,7 +472,7 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 
 `slug`を使ってパスを記述するように書き換えます。
 
-```jsx:title=/src/components/keywordSearch.jsx
+```jsx:title=src/components/keywordSearch.jsx
   return (
     <>
       <input
@@ -504,9 +504,9 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 
 これで基本機能は完成です。UIも何もあったもんじゃないですが、これをベースにカスタマイズしていけば実用的な検索機能として使えるはずです。
 
-`/src/components/keywordSearch.jsx`のコード全体を置いておきます。
+`src/components/keywordSearch.jsx`のコード全体を置いておきます。
 
-```jsx:title=/src/components/keywordSearch.jsx
+```jsx:title=src/components/keywordSearch.jsx
 import React, { useState, useEffect } from "react"
 import { useStaticQuery, graphql, Link } from "gatsby"
 
