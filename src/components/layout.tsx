@@ -1,8 +1,7 @@
 import React, { ReactNode } from "react"
 
-import Search from "./searchBox"
+import KeywordSearch from "./keywordSearch"
 import Footer from "./footer"
-import { KeywordSearch } from "./keywordSearch"
 
 type Props = {
   children: ReactNode
@@ -10,8 +9,7 @@ type Props = {
 
 const Layout: React.VFC<Props> = ({children}) => (
   <>
-    {/*<KeywordSearch />*/}
-    <Search />
+    <KeywordSearch />
 
     {children}
 
