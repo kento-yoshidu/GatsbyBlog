@@ -1,12 +1,12 @@
 @import "../scss/variables";
 
 .postList {
-  width: 60%;
   list-style: none;
+  width: clamp(400px, 65vw, 1000px);
 	.postItem {
     display: block;
     padding: 30px 50px 30px 40px;
-    width: 75%;
+    width: clamp(280px, 85%, 920px);
     margin: 0 auto;
     border-bottom: 1px solid #bbb;
     text-decoration: none;
@@ -22,6 +22,7 @@
       a {
         color: #444;
         font-size: 3rem;
+        font-size: clamp(2rem, 3vw, 3.5rem);
         font-weight: 500;
         line-height: 1.5;
         &:hover {
@@ -80,17 +81,9 @@
 
 @media screen and (max-width: 768px) {
   .postList {
-    width: 90%;
-    margin: 0 auto;
     .postItem {
       margin-bottom: 20px;
-      width: 90%;
       padding: 8px 15px;
-      .postTitle {
-        a {
-          font-size: 2rem;
-        }
-      }
       .postInfo {
         flex-direction: column;
         margin: 0;
