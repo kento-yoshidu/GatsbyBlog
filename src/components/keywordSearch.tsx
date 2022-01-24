@@ -13,6 +13,19 @@ interface Edge {
   }
 }
 
+const PostList = React.memo(({ key, slug, title}: { key: string, slug: string, title: string }) => {
+  console.log("rendering!")
+  return (
+    <li
+      key={key}
+    >
+      <Link to={slug}>
+        {title}
+      </Link>
+    </li>
+  )
+})
+
 const Search: React.VFC = () => {
   const { allKeywordSearchJson } = useStaticQuery(
     graphql`
@@ -96,7 +109,13 @@ const Search: React.VFC = () => {
               <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
               <ul>
                 {
-                  filteredPosts.map((edge: Edge, i: number) => {
+                  filteredPosts.map((edge: Edge, i: number) => (
+                    <PostList
+                      key={`key${i}`}
+                      slug={edge.node.slug}
+                      title={edge.node.title}
+                    />
+                    /*
                     return (
                       <li
                         key={`key${i}`}
@@ -106,7 +125,8 @@ const Search: React.VFC = () => {
                         </Link>
                       </li>
                     )
-                  })
+                    */
+                  ))
                 }
               </ul>
             </div>
