@@ -6,7 +6,7 @@ import * as Styles from "../src/styles/tableOfContent.module.scss"
 
 const IO = () => {
 	// 交差を監視する要素
-	const boxes = document.querySelectorAll(".main > h1, h2, h3")
+	const boxes = document.querySelectorAll<HTMLHeadingElement>(".main > h1, h2, h3")
 
 	const options = {
 		root: null, // ビューポートをルート要素に設定
@@ -33,16 +33,16 @@ const IO = () => {
 		})
 	}
 
-	function activateIndex(element: HTMLElement) {
+	function activateIndex(element: Element) {
 		// すでにアクティブになっている目次を選択
-		const currentActiveIndex = document.querySelector(`.${Styles.tableOfContent} .${Styles.active}`);
+		const currentActiveIndex = document.querySelector<HTMLAnchorElement>(`.${Styles.tableOfContent} .${Styles.active}`);
 
 		// すでにアクティブになっているものが0個の時（=null）以外は、activeクラスを除去
 		if (currentActiveIndex !== null) {
 			currentActiveIndex.classList.remove(Styles.active);
 		}
 		// 引数で渡されたDOMが飛び先のaタグを選択し、activeクラスを付与
-		const links = document.querySelectorAll(`.tableOfContent a`);
+		const links = document.querySelectorAll<HTMLAnchorElement>(`.tableOfContent a`);
 
     Array.from(links).map(link => {
       if(element?.innerHTML === link.innerHTML) {
