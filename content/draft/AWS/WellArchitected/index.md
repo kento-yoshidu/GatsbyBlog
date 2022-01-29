@@ -1,11 +1,12 @@
 ---
 title: "AWS SAAメモ Well-Architected"
 postdate: "2021-06-24"
-updatedate: "2021-06-24"
+update: "2021-06-24"
 seriesName: "AWS SAA勉強メモ"
 seriesSlug: "AWS"
 description: ""
 tags: ["AWS", "AWS SQS"]
+draft: true
 ---
 
 # Design for Failure

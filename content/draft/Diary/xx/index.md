@@ -1,12 +1,13 @@
 ---
 title: "ポートフォリオサイトをGatsbyで再作成した"
 postdate: "2099-01-01"
-updatedate: "2099-01-01"
+update: "2099-01-01"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "2021年度の中小企業診断士1次試験に合格しました。"
 tags: ["Gatsby"]
 keyword: ["Gatsby", ""]
+draft: true
 ---
 
 # ポートフォリオサイトをGatsbyで再作成した

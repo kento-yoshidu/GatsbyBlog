@@ -1,11 +1,12 @@
 ---
 title: "JavaScriptの非同期処理のメモ"
 postdate: "2099-01-01"
-updatedate: "2099-01-01"
+update: "2099-01-01"
 seriesName: "JavaScript 非同期処理を学ぶ"
 seriesSlug: "JSAsync"
 description: ""
 tags: ["JavaScript", "非同期処理"]
+draft: true
 ---
 
 # JavaScriptの非同期処理を学ぶ

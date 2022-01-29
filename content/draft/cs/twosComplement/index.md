@@ -1,10 +1,11 @@
 ---
 title: "2の補数"
 postdate: "2020-12-23"
-updatedate: "2020-12-23"
-categoryName: "CS最勉強"
-categorySlug: "StudyingCS"
+update: "2020-12-23"
+seriesName: "CS最勉強"
+seriesSlug: "StudyingCS"
 tags: ["コンピュータ サイエンス"]
+draft: true
 ---
 
 # そもそも補数とは
