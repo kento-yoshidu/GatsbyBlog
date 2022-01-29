@@ -20,6 +20,15 @@ const plugins: GatsbyConfig['plugins'] = [
       name: `blog`,
     },
   },
+  /*
+  {
+    resolve: `gatsby-source-filesystem`,
+    options: {
+      path: `${__dirname}/content/draft`,
+      name: `draft`,
+    },
+  },
+  */
   {
     resolve: `gatsby-source-filesystem`,
     options: {

@@ -1,11 +1,12 @@
 ---
 title: "#1 AWS SAAメモ"
 postdate: "2021-06-25"
-updatedate: "2021-06-25"
+update: "2021-06-25"
 seriesName: "AWS SAA勉強メモ"
 seriesSlug: "AWS"
 description: ""
 tags: ["AWS", "AWS SAA", "EFS"]
+draft: true
 ---
 
 # なにこれ

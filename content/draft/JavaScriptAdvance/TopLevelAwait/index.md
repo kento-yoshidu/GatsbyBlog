@@ -1,11 +1,12 @@
 ---
 title: "トップレベルawait"
 postdate: "2021-01-01"
-updatedate: "2021-01-01"
+update: "2021-01-01"
 seriesName: "JavaScript中級者を目指す"
-seriesName: "JavaScriptAdvance"
+seriesSlug: "JavaScriptAdvance"
 description: ""
 tags: ["JavaScript", "async/await"]
+draft: true
 ---
 
 ## トップレベルawait

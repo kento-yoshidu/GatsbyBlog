@@ -1,10 +1,11 @@
 ---
 title: "#1 2進数"
 postdate: "2021-02-24"
-updatedate: "2021-02-24"
-categoryName: "CS最勉強"
-categorySlug: "StudyingCS"
+update: "2021-02-24"
+seriesName: "CS最勉強"
+seriesSlug: "StudyingCS"
 tags: ["コンピュータ サイエンス", "2進数"]
+draft: true
 ---
 
 ## 私たちは10進数の世界で生きている

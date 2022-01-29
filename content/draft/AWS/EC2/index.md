@@ -1,11 +1,12 @@
 ---
 title: "#2 AWS SAAメモ インフラ・VPC"
 postdate: "2021-10-08"
-updatedate: "2021-10-08"
+update: "2021-10-08"
 seriesName: "AWS SAA勉強メモ"
 seriesSlug: "AWS"
 description: ""
 tags: ["AWS", "AWS SAA", "VPC"]
+draft: true
 ---
 
 # EC2
@@ -13,7 +14,7 @@ tags: ["AWS", "AWS SAA", "VPC"]
 |a|a|
 |---|---|
 |オンデマンド|秒単位で料金発生|
-|りーざぶド|1念か3年を指定して予約|
+|りーざぶド|1年か3年を指定して予約|
 |スケジュールドリザーブド|1年間、指定した期間だけ繰り返しキャパシティー予約|
 |スポット|未使用のインスタンスを利用できる|
 

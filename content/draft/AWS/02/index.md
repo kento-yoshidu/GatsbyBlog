@@ -1,11 +1,12 @@
 ---
 title: "#2 AWS SAAメモ インフラ・VPC"
 postdate: "2021-10-08"
-updatedate: "2021-10-08"
+update: "2021-10-08"
 seriesName: "AWS SAA勉強メモ"
 seriesSlug: "AWS"
 description: ""
 tags: ["AWS", "AWS SAA", "VPC"]
+draft: true
 ---
 
 ## リージョン
