@@ -7,6 +7,7 @@ seriesSlug: "HelloWeb"
 description: "head要素について学習します。"
 tags: ["HTML", "head要素"]
 keywords: ["HTML", "CSS", "コメント", "DOCTYPE宣言", "head要素", "meta要素", "title要素"]
+published: true
 ---
 
 # DOCTYPE宣言とhead要素

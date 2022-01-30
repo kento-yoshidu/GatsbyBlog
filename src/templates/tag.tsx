@@ -83,6 +83,7 @@ export const pageQuery = graphql`
       skip: $skip
       filter: {
         frontmatter: {
+          published: { eq: true }
           tags: {
             in: [$tag]
           }

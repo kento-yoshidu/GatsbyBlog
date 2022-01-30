@@ -7,6 +7,7 @@ seriesSlug: "GoodBookToBuy"
 description: "2020年に読んでよかった本（技術書系）を紹介します。"
 tags: ["書籍", "Vim", "ネットワーク", "Jamstack", "Gatsby"]
 keywords: ["書籍", "Vim", "ネットワーク", "network", "Jamstack", "Gatsby", "2020", "book", "本"]
+published: true
 ---
 
 # 2020年に読んで良かった本を並べる

@@ -84,6 +84,7 @@ export const pageQuery = graphql`
       skip: $skip
       filter: {
         frontmatter: {
+          published: { eq: true }
           seriesSlug: {
             eq: $seriesSlug
           }

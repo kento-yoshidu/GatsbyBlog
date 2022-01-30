@@ -7,6 +7,7 @@ seriesSlug: "Diary"
 description: "Amazonで注文するのをやめ、本の取り寄せ含め、近くの本屋を積極的に利用するようになりました。"
 tags: ["書籍"]
 keywords: ["書籍", "本"]
+published: true
 ---
 
 # 2021年は本の取り寄せをしてもらった
