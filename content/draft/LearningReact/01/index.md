@@ -1,7 +1,7 @@
 ---
 title: "再レンダリングのタイミング"
 postdate: "2099-01-01"
-updatedate: "2099-01-01"
+update: "2099-01-01"
 seriesName: "ラーニングReact"
 seriesSlug: "LearningReact"
 description: ""

@@ -1,9 +1,9 @@
 ---
 title: "ハンズオンPostgreSQL はじめに"
 postdate: "2020-12-23"
-updatedate: "2020-12-23"
-categoryName: "ハンズオンPostgreSQL"
-categorySlug: "HandsonPostgreSQL"
+update: "2020-12-23"
+seriesName: "ハンズオンPostgreSQL"
+seriesSlug: "HandsonPostgreSQL"
 tags: ["PostgreSQL"]
 ---
 

@@ -1,7 +1,7 @@
 ---
 title: "経営法務 知的財産権"
 postdate: "2021-07-21"
-updatedate: "2021-08-27"
+update: "2021-08-27"
 seriesName: "中小企業診断士試験 メモ"
 seriesSlug: "shindanshi"
 description: 

@@ -1,9 +1,9 @@
 ---
 title: "#2 graphql-yoga🧘でMongoDBに接続する"
 postdate: "2021-03-01"
-updatedate: "2021-03-02"
-categoryName: "入門GraphQL"
-categorySlug: introGraphQL
+update: "2021-03-02"
+seriesName: "入門GraphQL"
+seriesSlug: introGraphQL
 tags: ["GraphQL", "GraphQL-Yoga", "入門"]
 ---
 

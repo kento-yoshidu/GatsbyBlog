@@ -1,7 +1,7 @@
 ---
 title: "#2 graphql-yogaでGraphQLサーバーを立てる"
 postdate: "2021-09-24"
-updatedate: "2021-09-24"
+update: "2021-09-24"
 seriesName: "ラーニングGraphQL"
 seriesSlug: "LearningGraphQL"
 tags: ["GraphQL", "graphql-yoga"]

@@ -1,7 +1,7 @@
 ---
 title: "Composition API"
 postdate: "2021-03-05"
-updatedate: "2021-03-16"
+update: "2021-03-16"
 seriesName: "Vue.js"
 seriesSlug: "Vue.js"
 description: ""

@@ -1,7 +1,7 @@
 ---
 title: "運営管理"
 postdate: "2021-07-25"
-updatedate: "2021-07-25"
+update: "2021-07-25"
 seriesName: "中小企業診断士試験 メモ"
 seriesSlug: "shindanshi"
 description: 

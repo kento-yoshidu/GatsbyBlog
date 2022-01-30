@@ -1,7 +1,7 @@
 ---
 title: "今更Pythonに入門してみた"
 postdate: "2021-01-01"
-updatedate: "2021-01-01"
+update: "2021-01-01"
 categoryName: "今更Rubyに入門してみた"
 categorySlug: "introPython"
 tags: ["Python"]

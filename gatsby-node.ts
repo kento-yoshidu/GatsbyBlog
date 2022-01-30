@@ -1,7 +1,7 @@
 import type { GatsbyNode } from "gatsby"
 import path, { resolve } from "path"
 import fs from "fs"
-import { faTags } from "@fortawesome/free-solid-svg-icons"
+//import { faTags } from "@fortawesome/free-solid-svg-icons"
 
 const { createFilePath } = require(`gatsby-source-filesystem`)
 
@@ -103,7 +103,6 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
   allArticles.nodes.forEach(_ => {
     const postCount = allArticles.nodes.length;
-    console.log("Post count = ", postCount)
     const pageCount = Math.ceil(postCount / 6)
 
     Array.from({ length: pageCount }).forEach((_, i) => {
@@ -215,6 +214,54 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
     })
 
     fs.writeFileSync('./static/keywordSearch.json', JSON.stringify(keywords, null , 2))
+  }
+
+  /*
+  * ドラフトページを作成(develop環境時のみ)
+  */
+  if(process.env.NODE_ENV === 'development') {
+    const draftPosts = await graphql(`
+      {
+        # 全ての記事を取得
+        allMarkdownRemark(
+          filter: {frontmatter: {published: {ne: true}}}
+          sort: {fields: frontmatter___postdate, order: DESC}
+        ) {
+          nodes {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    `)
+
+    // --------------------------------------------------
+    // 全てのドラフト記事を投稿日時順に表示
+
+    draftPosts.data.allMarkdownRemark.nodes.forEach(_ => {
+      const postCount = draftPosts.data.allMarkdownRemark.nodes.length;
+      const pageCount = Math.ceil(postCount / 10)
+
+      Array.from({ length: pageCount }).forEach((_, i) => {
+        createPage({
+          path: i === 0 ? "/draft/page/1/" : `/draft/page/${i + 1}/`,
+          component: path.resolve("./src/templates/draftPages.tsx"),
+          context: {
+            postCount: postCount,
+            pageCount: pageCount,
+            totalPageCount: pageCount,
+            skip: 6 * i,
+            limit: 6,
+            currentPage: i + 1,
+            isFirst: i + 1 === 1,
+            isLast: i + 1 === pageCount,
+          }
+        })
+      })
+      
+    });
   }
 }
 

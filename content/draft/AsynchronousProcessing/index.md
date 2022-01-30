@@ -6,7 +6,6 @@ seriesName: "JavaScript 非同期処理を学ぶ"
 seriesSlug: "JSAsync"
 description: ""
 tags: ["JavaScript", "非同期処理"]
-draft: true
 ---
 
 # JavaScriptの非同期処理を学ぶ
