@@ -7,6 +7,7 @@ seriesSlug: "HelloWeb"
 description: "HTMLファイルを作成してマークアップを行い、Webページを表示するところまでを説明します。"
 tags: ["HTML", "CSS"]
 keywords: ["HTML", "CSS", "タグ", "要素"]
+published: true
 ---
 
 # 最初の一歩

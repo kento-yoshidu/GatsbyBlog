@@ -1,11 +1,12 @@
 ---
 title: "#1 ESLint入門"
 postdate: "2100-01-01"
-updatedate: "2100-01-01"
+update: "2100-01-01"
 seriesName: "ESLint入門"
 seriesSlug: "ESLint"
 description: 
 tags: ["JavaScript", "ESLint"]
+draft: true
 ---
 
 # ESLintでコードチェックを始めよう

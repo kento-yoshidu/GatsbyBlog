@@ -7,6 +7,7 @@ seriesSlug: "shindanshi"
 description: 
 tags: ["中小企業診断士試験", "経営法務"]
 keywords: ["中小企業診断士試験", "経営法務"]
+published: true
 ---
 
 # 知的財産法

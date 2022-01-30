@@ -7,6 +7,7 @@ seriesSlug: "HelloWeb"
 description: "HTMLとCSSを、何も知らないところから学ぶシリーズです。基本的なPC操作が可能であれば始められます。"
 tags: ["HTML", "CSS"]
 keywords: ["HTML", "CSS"]
+published: true
 ---
 
 # 本講座の目的
