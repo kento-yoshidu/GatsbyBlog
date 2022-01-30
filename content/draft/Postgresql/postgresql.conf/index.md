@@ -1,9 +1,9 @@
 ---
 title: postgresql.confファイル
 postdate: "2021-01-09"
-updatedate: "2021-01-26"
-categoryName: "ハンズオンPostgreSQL"
-categorySlug: "HandsonPostgreSQL"
+update: "2021-01-26"
+seriesName: "ハンズオンPostgreSQL"
+seriesSlug: "HandsonPostgreSQL"
 tags: ["PostgreSQL", "postgresql.conf"]
 ---
 

@@ -6,7 +6,6 @@ seriesName: "AWS SAA勉強メモ"
 seriesSlug: "AWS"
 description: ""
 tags: ["AWS", "AWS SAA", "EFS"]
-draft: true
 ---
 
 # なにこれ

@@ -1,9 +1,9 @@
 ---
 title: "PostgreSQL メタ的なコマンド(仮)"
 postdate: "2021-01-28"
-updatedate: "2021-01-28"
-categoryName: "ハンズオンPostgreSQL"
-categorySlug: "HandsonPostgreSQL"
+update: "2021-01-28"
+seriesName: "ハンズオンPostgreSQL"
+seriesSlug: "HandsonPostgreSQL"
 tags: ["PostgreSQL"]
 ---
 
