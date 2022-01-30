@@ -7,6 +7,7 @@ seriesSlug: "Others"
 description: "プロキシ環境でKali Linux(WSL2)を使うための設定項目をメモします。"
 tags: ["Kali Linux", "WSL2", "Proxy"]
 keywords: ["Kali Linux", "WSL2", "Proxy", "プロキシー", "apt", "wget", "curl"]
+published: true
 ---
 
 # プロキシ環境でKali Linuxを使いたい

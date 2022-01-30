@@ -1,3 +1,13 @@
+---
+title: "2の補数"
+postdate: "2020-12-23"
+update: "2020-12-23"
+seriesName: "CS最勉強"
+seriesSlug: "StudyingCS"
+tags: ["コンピュータ サイエンス"]
+draft: true
+---
+
 ## 参考
 
 ## 2進数

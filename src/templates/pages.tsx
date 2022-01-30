@@ -20,6 +20,7 @@ interface Props {
 }
 
 const ArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
+  console.log(data)
 	const { postData } = data
 
   return (
@@ -68,13 +69,8 @@ export const pageQuery = graphql`
     $limit: Int!,
     $skip: Int!
   ) {
-    siteData: site {
-      siteMetadata {
-        title
-        description
-      }
-    }
     postData: allMarkdownRemark(
+      filter: {frontmatter: {published: {eq: true}}}
       sort: {
         fields: [frontmatter___postdate],
         order: DESC,

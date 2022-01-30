@@ -49,6 +49,7 @@ export const pageQuery = graphql`
     allMarkdownRemark(
       filter: {
         frontmatter: {
+          published: { eq: true }
           tags: {eq: $tag}
         }
       }

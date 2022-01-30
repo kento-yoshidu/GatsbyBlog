@@ -82,6 +82,10 @@ type File = Node & {
   readonly childrenKeywordSearchJson: Maybe<ReadonlyArray<Maybe<KeywordSearchJson>>>;
   /** Returns the first child node of type KeywordSearchJson or null if there are no children of given type on this node */
   readonly childKeywordSearchJson: Maybe<KeywordSearchJson>;
+  /** Returns all children nodes filtered by type ExportImportJson */
+  readonly childrenExportImportJson: Maybe<ReadonlyArray<Maybe<ExportImportJson>>>;
+  /** Returns the first child node of type ExportImportJson or null if there are no children of given type on this node */
+  readonly childExportImportJson: Maybe<ExportImportJson>;
   readonly id: Scalars['ID'];
   readonly parent: Maybe<Node>;
   readonly children: ReadonlyArray<Node>;
@@ -265,8 +269,6 @@ type Directory_ctimeArgs = {
 type Site = Node & {
   readonly buildTime: Maybe<Scalars['Date']>;
   readonly siteMetadata: Maybe<SiteSiteMetadata>;
-  readonly port: Maybe<Scalars['Int']>;
-  readonly host: Maybe<Scalars['String']>;
   readonly polyfill: Maybe<Scalars['Boolean']>;
   readonly pathPrefix: Maybe<Scalars['String']>;
   readonly id: Scalars['ID'];
@@ -679,6 +681,12 @@ type Frontmatter = {
   readonly seriesSlug: Maybe<Scalars['String']>;
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly published: Maybe<Scalars['Boolean']>;
+  readonly draft: Maybe<Scalars['Boolean']>;
+  readonly updatedate: Maybe<Scalars['Date']>;
+  readonly categoryName: Maybe<Scalars['String']>;
+  readonly categorySlug: Maybe<Scalars['String']>;
+  readonly keyword: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
 
@@ -699,6 +707,14 @@ type Frontmatter_postdateArgs = {
 
 
 type Frontmatter_updateArgs = {
+  formatString: Maybe<Scalars['String']>;
+  fromNow: Maybe<Scalars['Boolean']>;
+  difference: Maybe<Scalars['String']>;
+  locale: Maybe<Scalars['String']>;
+};
+
+
+type Frontmatter_updatedateArgs = {
   formatString: Maybe<Scalars['String']>;
   fromNow: Maybe<Scalars['Boolean']>;
   difference: Maybe<Scalars['String']>;
@@ -898,6 +914,22 @@ type KeywordSearchJson = Node & {
   readonly keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
+type ExportImportJson = Node & {
+  readonly id: Scalars['ID'];
+  readonly parent: Maybe<Node>;
+  readonly children: ReadonlyArray<Node>;
+  readonly internal: Internal;
+  readonly name: Maybe<Scalars['String']>;
+  readonly version: Maybe<Scalars['String']>;
+  readonly main: Maybe<Scalars['String']>;
+  readonly license: Maybe<Scalars['String']>;
+  readonly exports: Maybe<ExportImportJsonExports>;
+};
+
+type ExportImportJsonExports = {
+  readonly import: Maybe<Scalars['String']>;
+};
+
 type Query = {
   readonly file: Maybe<File>;
   readonly allFile: FileConnection;
@@ -919,6 +951,8 @@ type Query = {
   readonly allSiteBuildMetadata: SiteBuildMetadataConnection;
   readonly keywordSearchJson: Maybe<KeywordSearchJson>;
   readonly allKeywordSearchJson: KeywordSearchJsonConnection;
+  readonly exportImportJson: Maybe<ExportImportJson>;
+  readonly allExportImportJson: ExportImportJsonConnection;
 };
 
 
@@ -963,6 +997,8 @@ type Query_fileArgs = {
   childImageSharp: Maybe<ImageSharpFilterInput>;
   childrenKeywordSearchJson: Maybe<KeywordSearchJsonFilterListInput>;
   childKeywordSearchJson: Maybe<KeywordSearchJsonFilterInput>;
+  childrenExportImportJson: Maybe<ExportImportJsonFilterListInput>;
+  childExportImportJson: Maybe<ExportImportJsonFilterInput>;
   id: Maybe<StringQueryOperatorInput>;
   parent: Maybe<NodeFilterInput>;
   children: Maybe<NodeFilterListInput>;
@@ -1030,8 +1066,6 @@ type Query_allDirectoryArgs = {
 type Query_siteArgs = {
   buildTime: Maybe<DateQueryOperatorInput>;
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  port: Maybe<IntQueryOperatorInput>;
-  host: Maybe<StringQueryOperatorInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   id: Maybe<StringQueryOperatorInput>;
@@ -1206,6 +1240,27 @@ type Query_allKeywordSearchJsonArgs = {
   limit: Maybe<Scalars['Int']>;
 };
 
+
+type Query_exportImportJsonArgs = {
+  id: Maybe<StringQueryOperatorInput>;
+  parent: Maybe<NodeFilterInput>;
+  children: Maybe<NodeFilterListInput>;
+  internal: Maybe<InternalFilterInput>;
+  name: Maybe<StringQueryOperatorInput>;
+  version: Maybe<StringQueryOperatorInput>;
+  main: Maybe<StringQueryOperatorInput>;
+  license: Maybe<StringQueryOperatorInput>;
+  exports: Maybe<ExportImportJsonExportsFilterInput>;
+};
+
+
+type Query_allExportImportJsonArgs = {
+  filter: Maybe<ExportImportJsonFilterInput>;
+  sort: Maybe<ExportImportJsonSortInput>;
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+};
+
 type StringQueryOperatorInput = {
   readonly eq: Maybe<Scalars['String']>;
   readonly ne: Maybe<Scalars['String']>;
@@ -1281,6 +1336,19 @@ type FrontmatterFilterInput = {
   readonly seriesSlug: Maybe<StringQueryOperatorInput>;
   readonly tags: Maybe<StringQueryOperatorInput>;
   readonly keywords: Maybe<StringQueryOperatorInput>;
+  readonly published: Maybe<BooleanQueryOperatorInput>;
+  readonly draft: Maybe<BooleanQueryOperatorInput>;
+  readonly updatedate: Maybe<DateQueryOperatorInput>;
+  readonly categoryName: Maybe<StringQueryOperatorInput>;
+  readonly categorySlug: Maybe<StringQueryOperatorInput>;
+  readonly keyword: Maybe<StringQueryOperatorInput>;
+};
+
+type BooleanQueryOperatorInput = {
+  readonly eq: Maybe<Scalars['Boolean']>;
+  readonly ne: Maybe<Scalars['Boolean']>;
+  readonly in: Maybe<ReadonlyArray<Maybe<Scalars['Boolean']>>>;
+  readonly nin: Maybe<ReadonlyArray<Maybe<Scalars['Boolean']>>>;
 };
 
 type FieldsFilterInput = {
@@ -1332,13 +1400,6 @@ type InternalFilterInput = {
   readonly mediaType: Maybe<StringQueryOperatorInput>;
   readonly owner: Maybe<StringQueryOperatorInput>;
   readonly type: Maybe<StringQueryOperatorInput>;
-};
-
-type BooleanQueryOperatorInput = {
-  readonly eq: Maybe<Scalars['Boolean']>;
-  readonly ne: Maybe<Scalars['Boolean']>;
-  readonly in: Maybe<ReadonlyArray<Maybe<Scalars['Boolean']>>>;
-  readonly nin: Maybe<ReadonlyArray<Maybe<Scalars['Boolean']>>>;
 };
 
 type ImageSharpFilterListInput = {
@@ -1412,6 +1473,26 @@ type KeywordSearchJsonFilterInput = {
   readonly slug: Maybe<StringQueryOperatorInput>;
   readonly title: Maybe<StringQueryOperatorInput>;
   readonly keywords: Maybe<StringQueryOperatorInput>;
+};
+
+type ExportImportJsonFilterListInput = {
+  readonly elemMatch: Maybe<ExportImportJsonFilterInput>;
+};
+
+type ExportImportJsonFilterInput = {
+  readonly id: Maybe<StringQueryOperatorInput>;
+  readonly parent: Maybe<NodeFilterInput>;
+  readonly children: Maybe<NodeFilterListInput>;
+  readonly internal: Maybe<InternalFilterInput>;
+  readonly name: Maybe<StringQueryOperatorInput>;
+  readonly version: Maybe<StringQueryOperatorInput>;
+  readonly main: Maybe<StringQueryOperatorInput>;
+  readonly license: Maybe<StringQueryOperatorInput>;
+  readonly exports: Maybe<ExportImportJsonExportsFilterInput>;
+};
+
+type ExportImportJsonExportsFilterInput = {
+  readonly import: Maybe<StringQueryOperatorInput>;
 };
 
 type FileConnection = {
@@ -1515,6 +1596,12 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark.frontmatter.seriesSlug'
   | 'childrenMarkdownRemark.frontmatter.tags'
   | 'childrenMarkdownRemark.frontmatter.keywords'
+  | 'childrenMarkdownRemark.frontmatter.published'
+  | 'childrenMarkdownRemark.frontmatter.draft'
+  | 'childrenMarkdownRemark.frontmatter.updatedate'
+  | 'childrenMarkdownRemark.frontmatter.categoryName'
+  | 'childrenMarkdownRemark.frontmatter.categorySlug'
+  | 'childrenMarkdownRemark.frontmatter.keyword'
   | 'childrenMarkdownRemark.fields.slug'
   | 'childrenMarkdownRemark.excerpt'
   | 'childrenMarkdownRemark.rawMarkdownBody'
@@ -1578,6 +1665,12 @@ type FileFieldsEnum =
   | 'childMarkdownRemark.frontmatter.seriesSlug'
   | 'childMarkdownRemark.frontmatter.tags'
   | 'childMarkdownRemark.frontmatter.keywords'
+  | 'childMarkdownRemark.frontmatter.published'
+  | 'childMarkdownRemark.frontmatter.draft'
+  | 'childMarkdownRemark.frontmatter.updatedate'
+  | 'childMarkdownRemark.frontmatter.categoryName'
+  | 'childMarkdownRemark.frontmatter.categorySlug'
+  | 'childMarkdownRemark.frontmatter.keyword'
   | 'childMarkdownRemark.fields.slug'
   | 'childMarkdownRemark.excerpt'
   | 'childMarkdownRemark.rawMarkdownBody'
@@ -1855,6 +1948,93 @@ type FileFieldsEnum =
   | 'childKeywordSearchJson.slug'
   | 'childKeywordSearchJson.title'
   | 'childKeywordSearchJson.keywords'
+  | 'childrenExportImportJson'
+  | 'childrenExportImportJson.id'
+  | 'childrenExportImportJson.parent.id'
+  | 'childrenExportImportJson.parent.parent.id'
+  | 'childrenExportImportJson.parent.parent.children'
+  | 'childrenExportImportJson.parent.children'
+  | 'childrenExportImportJson.parent.children.id'
+  | 'childrenExportImportJson.parent.children.children'
+  | 'childrenExportImportJson.parent.internal.content'
+  | 'childrenExportImportJson.parent.internal.contentDigest'
+  | 'childrenExportImportJson.parent.internal.description'
+  | 'childrenExportImportJson.parent.internal.fieldOwners'
+  | 'childrenExportImportJson.parent.internal.ignoreType'
+  | 'childrenExportImportJson.parent.internal.mediaType'
+  | 'childrenExportImportJson.parent.internal.owner'
+  | 'childrenExportImportJson.parent.internal.type'
+  | 'childrenExportImportJson.children'
+  | 'childrenExportImportJson.children.id'
+  | 'childrenExportImportJson.children.parent.id'
+  | 'childrenExportImportJson.children.parent.children'
+  | 'childrenExportImportJson.children.children'
+  | 'childrenExportImportJson.children.children.id'
+  | 'childrenExportImportJson.children.children.children'
+  | 'childrenExportImportJson.children.internal.content'
+  | 'childrenExportImportJson.children.internal.contentDigest'
+  | 'childrenExportImportJson.children.internal.description'
+  | 'childrenExportImportJson.children.internal.fieldOwners'
+  | 'childrenExportImportJson.children.internal.ignoreType'
+  | 'childrenExportImportJson.children.internal.mediaType'
+  | 'childrenExportImportJson.children.internal.owner'
+  | 'childrenExportImportJson.children.internal.type'
+  | 'childrenExportImportJson.internal.content'
+  | 'childrenExportImportJson.internal.contentDigest'
+  | 'childrenExportImportJson.internal.description'
+  | 'childrenExportImportJson.internal.fieldOwners'
+  | 'childrenExportImportJson.internal.ignoreType'
+  | 'childrenExportImportJson.internal.mediaType'
+  | 'childrenExportImportJson.internal.owner'
+  | 'childrenExportImportJson.internal.type'
+  | 'childrenExportImportJson.name'
+  | 'childrenExportImportJson.version'
+  | 'childrenExportImportJson.main'
+  | 'childrenExportImportJson.license'
+  | 'childrenExportImportJson.exports.import'
+  | 'childExportImportJson.id'
+  | 'childExportImportJson.parent.id'
+  | 'childExportImportJson.parent.parent.id'
+  | 'childExportImportJson.parent.parent.children'
+  | 'childExportImportJson.parent.children'
+  | 'childExportImportJson.parent.children.id'
+  | 'childExportImportJson.parent.children.children'
+  | 'childExportImportJson.parent.internal.content'
+  | 'childExportImportJson.parent.internal.contentDigest'
+  | 'childExportImportJson.parent.internal.description'
+  | 'childExportImportJson.parent.internal.fieldOwners'
+  | 'childExportImportJson.parent.internal.ignoreType'
+  | 'childExportImportJson.parent.internal.mediaType'
+  | 'childExportImportJson.parent.internal.owner'
+  | 'childExportImportJson.parent.internal.type'
+  | 'childExportImportJson.children'
+  | 'childExportImportJson.children.id'
+  | 'childExportImportJson.children.parent.id'
+  | 'childExportImportJson.children.parent.children'
+  | 'childExportImportJson.children.children'
+  | 'childExportImportJson.children.children.id'
+  | 'childExportImportJson.children.children.children'
+  | 'childExportImportJson.children.internal.content'
+  | 'childExportImportJson.children.internal.contentDigest'
+  | 'childExportImportJson.children.internal.description'
+  | 'childExportImportJson.children.internal.fieldOwners'
+  | 'childExportImportJson.children.internal.ignoreType'
+  | 'childExportImportJson.children.internal.mediaType'
+  | 'childExportImportJson.children.internal.owner'
+  | 'childExportImportJson.children.internal.type'
+  | 'childExportImportJson.internal.content'
+  | 'childExportImportJson.internal.contentDigest'
+  | 'childExportImportJson.internal.description'
+  | 'childExportImportJson.internal.fieldOwners'
+  | 'childExportImportJson.internal.ignoreType'
+  | 'childExportImportJson.internal.mediaType'
+  | 'childExportImportJson.internal.owner'
+  | 'childExportImportJson.internal.type'
+  | 'childExportImportJson.name'
+  | 'childExportImportJson.version'
+  | 'childExportImportJson.main'
+  | 'childExportImportJson.license'
+  | 'childExportImportJson.exports.import'
   | 'id'
   | 'parent.id'
   | 'parent.parent.id'
@@ -1992,6 +2172,8 @@ type FileFilterInput = {
   readonly childImageSharp: Maybe<ImageSharpFilterInput>;
   readonly childrenKeywordSearchJson: Maybe<KeywordSearchJsonFilterListInput>;
   readonly childKeywordSearchJson: Maybe<KeywordSearchJsonFilterInput>;
+  readonly childrenExportImportJson: Maybe<ExportImportJsonFilterListInput>;
+  readonly childExportImportJson: Maybe<ExportImportJsonFilterInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
   readonly parent: Maybe<NodeFilterInput>;
   readonly children: Maybe<NodeFilterListInput>;
@@ -2301,8 +2483,6 @@ type SiteFieldsEnum =
   | 'siteMetadata.social.twitter'
   | 'siteMetadata.lang'
   | 'siteMetadata.locale'
-  | 'port'
-  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'id'
@@ -2404,8 +2584,6 @@ type SiteGroupConnection = {
 type SiteFilterInput = {
   readonly buildTime: Maybe<DateQueryOperatorInput>;
   readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  readonly port: Maybe<IntQueryOperatorInput>;
-  readonly host: Maybe<StringQueryOperatorInput>;
   readonly polyfill: Maybe<BooleanQueryOperatorInput>;
   readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly id: Maybe<StringQueryOperatorInput>;
@@ -3157,6 +3335,12 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.seriesSlug'
   | 'frontmatter.tags'
   | 'frontmatter.keywords'
+  | 'frontmatter.published'
+  | 'frontmatter.draft'
+  | 'frontmatter.updatedate'
+  | 'frontmatter.categoryName'
+  | 'frontmatter.categorySlug'
+  | 'frontmatter.keyword'
   | 'fields.slug'
   | 'excerpt'
   | 'rawMarkdownBody'
@@ -4019,6 +4203,158 @@ type KeywordSearchJsonSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
+type ExportImportJsonConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<ExportImportJsonEdge>;
+  readonly nodes: ReadonlyArray<ExportImportJson>;
+  readonly pageInfo: PageInfo;
+  readonly distinct: ReadonlyArray<Scalars['String']>;
+  readonly max: Maybe<Scalars['Float']>;
+  readonly min: Maybe<Scalars['Float']>;
+  readonly sum: Maybe<Scalars['Float']>;
+  readonly group: ReadonlyArray<ExportImportJsonGroupConnection>;
+};
+
+
+type ExportImportJsonConnection_distinctArgs = {
+  field: ExportImportJsonFieldsEnum;
+};
+
+
+type ExportImportJsonConnection_maxArgs = {
+  field: ExportImportJsonFieldsEnum;
+};
+
+
+type ExportImportJsonConnection_minArgs = {
+  field: ExportImportJsonFieldsEnum;
+};
+
+
+type ExportImportJsonConnection_sumArgs = {
+  field: ExportImportJsonFieldsEnum;
+};
+
+
+type ExportImportJsonConnection_groupArgs = {
+  skip: Maybe<Scalars['Int']>;
+  limit: Maybe<Scalars['Int']>;
+  field: ExportImportJsonFieldsEnum;
+};
+
+type ExportImportJsonEdge = {
+  readonly next: Maybe<ExportImportJson>;
+  readonly node: ExportImportJson;
+  readonly previous: Maybe<ExportImportJson>;
+};
+
+type ExportImportJsonFieldsEnum =
+  | 'id'
+  | 'parent.id'
+  | 'parent.parent.id'
+  | 'parent.parent.parent.id'
+  | 'parent.parent.parent.children'
+  | 'parent.parent.children'
+  | 'parent.parent.children.id'
+  | 'parent.parent.children.children'
+  | 'parent.parent.internal.content'
+  | 'parent.parent.internal.contentDigest'
+  | 'parent.parent.internal.description'
+  | 'parent.parent.internal.fieldOwners'
+  | 'parent.parent.internal.ignoreType'
+  | 'parent.parent.internal.mediaType'
+  | 'parent.parent.internal.owner'
+  | 'parent.parent.internal.type'
+  | 'parent.children'
+  | 'parent.children.id'
+  | 'parent.children.parent.id'
+  | 'parent.children.parent.children'
+  | 'parent.children.children'
+  | 'parent.children.children.id'
+  | 'parent.children.children.children'
+  | 'parent.children.internal.content'
+  | 'parent.children.internal.contentDigest'
+  | 'parent.children.internal.description'
+  | 'parent.children.internal.fieldOwners'
+  | 'parent.children.internal.ignoreType'
+  | 'parent.children.internal.mediaType'
+  | 'parent.children.internal.owner'
+  | 'parent.children.internal.type'
+  | 'parent.internal.content'
+  | 'parent.internal.contentDigest'
+  | 'parent.internal.description'
+  | 'parent.internal.fieldOwners'
+  | 'parent.internal.ignoreType'
+  | 'parent.internal.mediaType'
+  | 'parent.internal.owner'
+  | 'parent.internal.type'
+  | 'children'
+  | 'children.id'
+  | 'children.parent.id'
+  | 'children.parent.parent.id'
+  | 'children.parent.parent.children'
+  | 'children.parent.children'
+  | 'children.parent.children.id'
+  | 'children.parent.children.children'
+  | 'children.parent.internal.content'
+  | 'children.parent.internal.contentDigest'
+  | 'children.parent.internal.description'
+  | 'children.parent.internal.fieldOwners'
+  | 'children.parent.internal.ignoreType'
+  | 'children.parent.internal.mediaType'
+  | 'children.parent.internal.owner'
+  | 'children.parent.internal.type'
+  | 'children.children'
+  | 'children.children.id'
+  | 'children.children.parent.id'
+  | 'children.children.parent.children'
+  | 'children.children.children'
+  | 'children.children.children.id'
+  | 'children.children.children.children'
+  | 'children.children.internal.content'
+  | 'children.children.internal.contentDigest'
+  | 'children.children.internal.description'
+  | 'children.children.internal.fieldOwners'
+  | 'children.children.internal.ignoreType'
+  | 'children.children.internal.mediaType'
+  | 'children.children.internal.owner'
+  | 'children.children.internal.type'
+  | 'children.internal.content'
+  | 'children.internal.contentDigest'
+  | 'children.internal.description'
+  | 'children.internal.fieldOwners'
+  | 'children.internal.ignoreType'
+  | 'children.internal.mediaType'
+  | 'children.internal.owner'
+  | 'children.internal.type'
+  | 'internal.content'
+  | 'internal.contentDigest'
+  | 'internal.description'
+  | 'internal.fieldOwners'
+  | 'internal.ignoreType'
+  | 'internal.mediaType'
+  | 'internal.owner'
+  | 'internal.type'
+  | 'name'
+  | 'version'
+  | 'main'
+  | 'license'
+  | 'exports.import';
+
+type ExportImportJsonGroupConnection = {
+  readonly totalCount: Scalars['Int'];
+  readonly edges: ReadonlyArray<ExportImportJsonEdge>;
+  readonly nodes: ReadonlyArray<ExportImportJson>;
+  readonly pageInfo: PageInfo;
+  readonly field: Scalars['String'];
+  readonly fieldValue: Maybe<Scalars['String']>;
+};
+
+type ExportImportJsonSortInput = {
+  readonly fields: Maybe<ReadonlyArray<Maybe<ExportImportJsonFieldsEnum>>>;
+  readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+};
+
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -4027,7 +4363,17 @@ type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pic
 type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+type Unnamed_2_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
+
+type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+
+type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_4_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
 
 type BlogPostBySlugQueryVariables = Exact<{
   id: Scalars['String'];
@@ -4041,34 +4387,6 @@ type BlogPostBySlugQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe
     & { readonly frontmatter: Maybe<Pick<Frontmatter, 'title' | 'postdate' | 'update' | 'description' | 'seriesSlug' | 'seriesName' | 'tags'>> }
   )>, readonly previous: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }>, readonly next: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }> };
 
-type cGithubGatsbyBlogsrccomponentskeywordSearchTsx1318453225QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type cGithubGatsbyBlogsrccomponentskeywordSearchTsx1318453225Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
-
-type PagesQueryVariables = Exact<{
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-}>;
-
-
-type PagesQuery = { readonly siteData: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description'>> }>, readonly postData: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
-
-type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
-
-type TagsPageQueryVariables = Exact<{
-  tag: Maybe<Scalars['String']>;
-}>;
-
-
-type TagsPageQuery = { readonly allMarkdownRemark: { readonly group: ReadonlyArray<(
-      Pick<MarkdownRemarkGroupConnection, 'fieldValue' | 'totalCount'>
-      & { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<Pick<Frontmatter, 'tags'>> }> }
-    )> } };
-
 type SeriesPagesQueryVariables = Exact<{
   series: Maybe<Scalars['String']>;
 }>;
@@ -4079,15 +4397,6 @@ type SeriesPagesQuery = { readonly allMarkdownRemark: { readonly group: Readonly
       & { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<Pick<Frontmatter, 'seriesSlug' | 'seriesName'>> }> }
     )> } };
 
-type SeriesQueryVariables = Exact<{
-  seriesSlug: Scalars['String'];
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-}>;
-
-
-type SeriesQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
-
 type TagQueryVariables = Exact<{
   tag: Scalars['String'];
   limit: Scalars['Int'];
@@ -4097,10 +4406,32 @@ type TagQueryVariables = Exact<{
 
 type TagQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type SeriesQueryVariables = Exact<{
+  seriesSlug: Scalars['String'];
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+}>;
 
 
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+type SeriesQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
+
+type PagesQueryVariables = Exact<{
+  limit: Scalars['Int'];
+  skip: Scalars['Int'];
+}>;
+
+
+type PagesQuery = { readonly postData: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
+
+type TagsPageQueryVariables = Exact<{
+  tag: Maybe<Scalars['String']>;
+}>;
+
+
+type TagsPageQuery = { readonly allMarkdownRemark: { readonly group: ReadonlyArray<(
+      Pick<MarkdownRemarkGroupConnection, 'fieldValue' | 'totalCount'>
+      & { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<Pick<Frontmatter, 'tags'>> }> }
+    )> } };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

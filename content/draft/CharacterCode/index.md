@@ -1,11 +1,12 @@
 ---
 title: "文字コード"
 postdate: "2099-01-01"
-updatedate: "2099-01-01"
+update: "2099-01-01"
 seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "Git内部構造ツアーの第一弾です。git add、git commitコマンドを実行した時、Git内部で何が起こるのかを検証します。"
 tags: ["React", "React Hooks"]
+draft: true
 ---
 
 ## 参考

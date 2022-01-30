@@ -7,6 +7,7 @@ seriesSlug: "Jamstack"
 description: "いわゆるJamstackなサイトを作成してみて、何となく分かってきたので知見を記載します。"
 tags: ["Jamstack", "HeadlessCMS", "SSG"]
 keywords: ["Jamstack", "SSG", "静的サイトジェネレーター", "HeadlessCMS", "CDN", "ホスティングサービス"]
+published: true
 ---
 
 # Jamstackとはいったい何？
