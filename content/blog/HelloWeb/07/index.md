@@ -7,6 +7,7 @@ seriesSlug: "HelloWeb"
 description: "ハイパーリンクを作成するa要素を学習します。また、相対パスについても学習します。"
 tags: ["HTML"]
 keywords: ["HTML", "a要素"]
+published: true
 ---
 
 # Webはリンクの集まり

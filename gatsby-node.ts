@@ -13,6 +13,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
       {
         # 全ての記事を取得
         allArticles: allMarkdownRemark(
+          filter: {frontmatter: {published: {eq: true}}}
           sort: {fields: frontmatter___postdate, order: DESC}
         ) {
           nodes {
@@ -25,6 +26,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
         # 全ての記事を取得(検索用)
         allArticlesForSearching: allMarkdownRemark(
+          filter: {frontmatter: {published: {eq: true}}}
           sort: {fields: frontmatter___postdate, order: DESC}
         ) {
           edges {
@@ -42,6 +44,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
         # 全ての記事をグループごとに取得
         allArticlesByGroup: allMarkdownRemark(
+          filter: {frontmatter: {published: {eq: true}}}
           sort: { fields: frontmatter___postdate}
         ) {
           group(field: frontmatter___seriesSlug) {
@@ -56,6 +59,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
         # シリーズごとに記事を取得
         articlesBySeries: allMarkdownRemark(
+          filter: {frontmatter: {published: {eq: true}}}
           sort: { fields: frontmatter___postdate, order: DESC }
         ) {
           group(field: frontmatter___seriesSlug) {
@@ -70,6 +74,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
         # タグごとに記事を取得
         articlesByTag: allMarkdownRemark(
+          filter: {frontmatter: {published: {eq: true}}}
           sort: { fields: frontmatter___postdate, order: DESC }
         ) {
           group(field: frontmatter___tags) {
@@ -98,6 +103,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
   allArticles.nodes.forEach(_ => {
     const postCount = allArticles.nodes.length;
+    console.log("Post count = ", postCount)
     const pageCount = Math.ceil(postCount / 6)
 
     Array.from({ length: pageCount }).forEach((_, i) => {

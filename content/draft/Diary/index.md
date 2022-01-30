@@ -1,11 +1,12 @@
 ---
 title: "満腹まで食べないという投資"
 postdate: "2099-01-01"
-updatedate: "2099-01-01"
+update: "2099-01-01"
 seriesName: "JavaScript 非同期処理を学ぶ"
 seriesSlug: "JSAsync"
 description: ""
 tags: ["書籍"]
+draft: true
 ---
 
 # 本のアウトプットをしたい

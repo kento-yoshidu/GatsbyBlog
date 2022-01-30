@@ -20,7 +20,6 @@ const plugins: GatsbyConfig['plugins'] = [
       name: `blog`,
     },
   },
-  /*
   {
     resolve: `gatsby-source-filesystem`,
     options: {
@@ -28,7 +27,6 @@ const plugins: GatsbyConfig['plugins'] = [
       name: `draft`,
     },
   },
-  */
   {
     resolve: `gatsby-source-filesystem`,
     options: {

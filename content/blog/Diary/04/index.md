@@ -7,6 +7,7 @@ seriesSlug: "Diary"
 description: "当ブログにキーワード検索機能を追加したので記事にします。"
 tags: ["Gatsby", "Gatsby Blog"]
 keywords: ["Gatsby", "Blog", "ブログ", "React Hooks"]
+published: true
 ---
 
 # ブログにキーワード検索機能を追加しました
