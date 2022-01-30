@@ -1,7 +1,7 @@
 ---
 title: "AWS SAAメモ EFS"
 postdate: "2021-06-21"
-updatedate: "2021-06-22"
+update: "2021-06-22"
 seriesName: "AWS SAA勉強メモ"
 seriesSlug: "AWS"
 description: ""

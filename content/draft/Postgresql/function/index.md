@@ -1,9 +1,9 @@
 ---
 title: プリペアド文を作成する
 postdate: "2021-01-05"
-updatedate: "2020-01-05"
-categoryName: "ハンズオンPostgreSQL"
-categorySlug: "HandsonPostgreSQL"
+update: "2020-01-05"
+seriesName: "ハンズオンPostgreSQL"
+seriesSlug: "HandsonPostgreSQL"
 tags: ["PostgreSQL", "PREPARE"]
 ---
 

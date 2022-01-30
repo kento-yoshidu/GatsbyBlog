@@ -1,7 +1,7 @@
 ---
 title: "GatsbyとContetnfulでブログを作成する時の注意点"
 postdate: "2021-05-21"
-updatedate: "2021-05-22"
+update: "2021-05-22"
 seriesName: "単発記事"
 seriesSlug: "OneShot"
 description: ""

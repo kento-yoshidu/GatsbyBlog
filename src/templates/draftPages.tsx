@@ -19,7 +19,7 @@ interface Props {
   }
 }
 
-const ArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
+const DraftArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
 	const { postData } = data
 
   return (
@@ -61,15 +61,15 @@ const ArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
   )
 }
 
-export default ArticleList
+export default DraftArticleList
 
 export const pageQuery = graphql`
-  query Pages(
+  query DraftPages(
     $limit: Int!,
     $skip: Int!
   ) {
     postData: allMarkdownRemark(
-      filter: {frontmatter: {published: {eq: true}}}
+      filter: {frontmatter: {published: {ne: true}}}
       sort: {
         fields: [frontmatter___postdate],
         order: DESC,

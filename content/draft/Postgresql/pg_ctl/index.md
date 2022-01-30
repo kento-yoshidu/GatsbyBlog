@@ -1,9 +1,9 @@
 ---
 title: "pg_ctl"
 postdate: "2020-12-12"
-updatedate: "2020-12-12"
-categoryName: "ハンズオンPostgreSQL"
-categorySlug: "HandsonPostgreSQL"
+update: "2020-12-12"
+seriesName: "ハンズオンPostgreSQL"
+seriesSlug: "HandsonPostgreSQL"
 tags: ["PostgreSQL", "pg_ctl"]
 ---
 

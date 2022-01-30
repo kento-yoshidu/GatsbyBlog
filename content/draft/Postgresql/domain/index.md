@@ -1,9 +1,9 @@
 ---
 title: ドメイン
 postdate: "2021-01-09"
-updatedate: "2021-01-09"
-categoryName: "ハンズオンPostgreSQL"
-categorySlug: "HandsonPostgreSQL"
+update: "2021-01-09"
+seriesName: "ハンズオンPostgreSQL"
+seriesSlug: "HandsonPostgreSQL"
 tags: ["PostgreSQL","ドメイン"]
 ---
 
