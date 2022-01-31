@@ -33,10 +33,11 @@ interface Node {
 interface Props {
   postData: {
     nodes: Node[]
-  }
+  },
+  isDraft: boolean
 }
 
-const PostList: React.VFC<Props> = ({postData}) => (
+const PostList: React.VFC<Props> = ({postData, isDraft}) => (
   <div className="LoadAnimation">
     <section className={Styles.postList}>
       {postData.nodes.map((post: Node) => {
@@ -49,9 +50,18 @@ const PostList: React.VFC<Props> = ({postData}) => (
             itemType="http://schema.org/Article"
           >
             <p className={Styles.postTitle}>
-              <Link to={post.fields.slug} itemProp="url">
-                <span itemProp="headline">{ title }</span>
-              </Link>
+              {!isDraft && (
+                <Link to={post.fields.slug} itemProp="url">
+                  <span itemProp="headline">{ title }</span>
+                </Link>
+              )}
+              {
+                isDraft && (
+                  <Link to={`/draft${post.fields.slug}`} itemProp="url">
+                    <span itemProp="headline">{ title }</span>
+                  </Link>
+                )
+              }
             </p>
 
             <div className={Styles.postInfo}>
