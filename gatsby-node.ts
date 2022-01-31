@@ -222,8 +222,8 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
   if(process.env.NODE_ENV === 'development') {
     const draftPosts = await graphql(`
       {
-        # 全ての記事を取得
-        allMarkdownRemark(
+        # 全てのドラフト記事を取得
+        allDraftArticles: allMarkdownRemark(
           filter: {frontmatter: {published: {ne: true}}}
           sort: {fields: frontmatter___postdate, order: DESC}
         ) {
@@ -234,14 +234,30 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
             }
           }
         }
+        # 全ての記事をグループごとに取得
+        allDraftArticlesByGroup: allMarkdownRemark(
+          filter: {frontmatter: {published: {ne: true}}}
+          sort: { fields: frontmatter___postdate}
+        ) {
+          group(field: frontmatter___seriesSlug) {
+            nodes {
+              id
+              fields {
+                slug
+              }
+            }
+          }
+        }
       }
     `)
 
     // --------------------------------------------------
     // 全てのドラフト記事を投稿日時順に表示
 
-    draftPosts.data.allMarkdownRemark.nodes.forEach(_ => {
-      const postCount = draftPosts.data.allMarkdownRemark.nodes.length;
+    const { allDraftArticles } = draftPosts.data
+
+    allDraftArticles.nodes.forEach(_ => {
+      const postCount = allDraftArticles.nodes.length;
       const pageCount = Math.ceil(postCount / 10)
 
       Array.from({ length: pageCount }).forEach((_, i) => {
@@ -260,7 +276,25 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
           }
         })
       })
-      
+    });
+
+    const { allDraftArticlesByGroup } = draftPosts.data
+
+    allDraftArticlesByGroup.group.forEach((group) => {
+      group.nodes.forEach((node, index) => {
+        const previousPostId = index === 0 ? null : group.nodes[index - 1].id
+        const nextPostId = index === group.nodes.length - 1 ? null : group.nodes[index + 1].id
+
+        createPage({
+          path: `/draft${node.fields.slug}`,
+          component: path.resolve("./src/templates/draftPost.tsx"),
+          context: {
+            id: node.id,
+            previousPostId,
+            nextPostId,
+          },
+        })
+      })
     });
   }
 }

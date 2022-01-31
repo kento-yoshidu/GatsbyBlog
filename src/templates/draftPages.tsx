@@ -42,6 +42,7 @@ const DraftArticleList: React.VFC<Props> = ({ data, pageContext, location }) => 
 
       <PostList
         postData={postData}
+        isDraft={true}
       />
 
       <Pagination
