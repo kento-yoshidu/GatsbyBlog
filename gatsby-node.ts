@@ -1,7 +1,6 @@
 import type { GatsbyNode } from "gatsby"
 import path, { resolve } from "path"
 import fs from "fs"
-//import { faTags } from "@fortawesome/free-solid-svg-icons"
 
 const { createFilePath } = require(`gatsby-source-filesystem`)
 

@@ -1,7 +1,7 @@
 ---
 title: "ブログにキーワード検索機能を追加しました"
 postdate: "2022-01-05"
-update: "2022-01-22"
+update: "2022-02-01"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "当ブログにキーワード検索機能を追加したので記事にします。"
@@ -581,7 +581,51 @@ export const KeywordSearch = () => {
 
 ## マークダウンの編集で`gatsby develop`が死ぬ
 
+ある時から、`gatsby develop`中にマークダウンを編集するとプロセスが死ぬようになりました。
 
+```shell
+info changed file at C:\github\GatsbyBlog\static\keywordSearch.json
+success extract queries from components - 0.108s
+success write out requires - 0.002s
+success Writing page-data.json files to public directory - 0.000s - 0/44
+119144.33/s
+
+ ERROR
+
+Panicking because nodes appear to be being changed every time we run queries.
+This would cause the site to recompile infinitely.
+Check custom resolvers to see if they are unconditionally creating or mutating
+nodes on every query.
+This may happen if they create nodes with a field that is different every time,
+such as a timestamp or unique id.
+```
+
+前述のとおり、`gatsby-node.js`でマークダウンファイルを基にJSONファイルを生成しているわけですが、マークダウンファイルの更新をきっかけにホットリロードが走り、JSONファイルの生成が無限ループしてしまっているようです。当初はこんなこと起きなかったと思うんですが、いつからかこうなってしまいました😭（血涙）。
+
+ただ、本番環境で起きるエラーではなくそこまでクリティカルな問題ではなかったことが救いです。
+
+環境変数`process.env.NODE_ENV`を利用すれば、Gatsbyがどのモードで実行されているかを取り出せます。`gatsby develop`なら`development`、`gatsby build`なら`production`が格納されます。
+
+今回は`gatsby-node.js`を以下のように書き換え、本番環境時（`gatsby build`が実行された時）のみJSONファイルの生成を行うようにしました。
+
+```javascript:title=gatsby-node.js
+  // 本番環境のみJSONファイルの生成を行う
+  if(process.env.NODE_ENV === 'production') {
+    const keywords = queryResult.data.allArticlesForSearching.edges.map(({node}) => {
+      return {
+        slug: node.fields.slug,
+        title: node.frontmatter.title,
+        keywords: node.frontmatter.keywords,
+      }
+    })
+
+    fs.writeFileSync('./static/keywordSearch.json', JSON.stringify(keywords, null , 2))
+  }
+```
+
+ローカルで`gatsby develop`している時にはfrontmatterの`keywords`を書き換える頻度は多くないですし、書き換えたとしても一度`gatsby build`すればJSONファイルを最新にできます。
+
+デプロイする時には`gatsby build`が行われますので、本番環境ではJSONファイルはちゃんと最新になっています。
 
 
 
