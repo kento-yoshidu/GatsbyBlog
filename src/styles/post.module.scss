@@ -26,7 +26,6 @@
     border-left: 10px solid;
     border-image: linear-gradient(to bottom, $main-color2 0%, rgba($main-color2, 0.4) 100%);
     border-image-slice: 1;
-    // font-size: 3.3rem;
     font-size: clamp(2.1rem, 5.1vw, 3.5rem);
   }
   h3 {
@@ -35,10 +34,10 @@
   }
   p {
     margin-bottom: 15px;
-    font-size: 1.75rem;
+    font-size: 1.68rem;
     letter-spacing: 0.5px;
-    line-height: 1.65;
-    text-indent: .8rem;
+    line-height: 1.7;
+    text-indent: 0.8rem;
   }
   ol {
     padding: 10px 20px;
@@ -165,7 +164,6 @@
       margin: 45px 0 20px;
       padding: 4px 0 4px 1.2rem;
       border-left: 7px solid $main-color2;
-      //font-size: 2.1rem;
     }
     h3 {
       margin-bottom: 10px;
