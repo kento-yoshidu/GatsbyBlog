@@ -41,8 +41,10 @@
       border: 1px solid #aaa;
       padding: 0.5rem;
       border-radius: 10px;
+      appearance: none;
       &:focus {
-        border-color: #eee;
+        box-shadow: 0 0 7px $main-color2;
+        border: 1px solid #1675cc;
       }
     }
     .resultArea {
