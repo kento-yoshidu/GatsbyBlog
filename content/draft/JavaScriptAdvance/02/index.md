@@ -20,19 +20,23 @@ JavaScriptはよく「Webサイトに動きを付ける言語」とも呼ばれ�
 
 JavaScriptに改名された背景として、当時Netscape Communications社はSun Microsystems社と業務提携しており、また、Sun社が開発し**イケイケドンドン**だったJavaの名前を拝借してあやかろう、というマーケティング的な一面があったようです。ただ、あくまでも名前（加えて、一部の構文）をもじっただけであり、JavaScriptとJavaの間に技術的な関係はありません。
 
-Netscape Navigatorの活躍から少し遅れ、Microsoft社が現在でもおなじみのInternet Explorer（以下、IE）を開発、リリースします。
+Netscape Navigatorの活躍から少し遅れ、Microsoft社が少し前まで現役だったInternet Explorer（以下、IE）を開発、リリースします。
 
 IEにJavaScriptを乗せられればよかったのですが、Netscape社はそれを許さなかったようです。そしてMicrosoftはMicrosoftで、JavaScriptの代替として独自に**JScript**という言語を開発します。
 
 <aside>
+
 以前までは「JScriptってなに？変な略し方するなよ」とか思ってましたが、似てはいるものの、別物のれっきとしたプログラミング言語なんですね。勉強になりました。
+
 </aside>
 
 <aside>
+
 Windows10になった現在でもJScriptはWSH（Windows Script Host）上で動作します。古めかしい言語のように思えますが、まだ現役です。
+
 </aside>
 
-しかし、JavaScriptとJScriptは似てはいるものの互換性がありませんでした。さらに、両社、さらにはブラウザベンダ各社までが対抗しそれぞれに独自の機能を追加していき、「JavaScriptはIEでは動かない」、反対に「JScriptはNetscapeでは動かない」、、、etc と言った状況に陥りました（この辺りは想像に難しくないですよね）。
+しかし、JavaScriptとJScriptは似てはいるものの互換性がありませんでした。さらに、両社、さらにはブラウザーベンダー各社までが対抗しそれぞれに独自の機能を追加していき、「JavaScriptはIEでは動かない」、反対に「JScriptはNetscapeでは動かない」、、、etc と言った状況に陥りました（この辺りは想像に難しくないですよね）。
 
 ## ECMAScriptの誕生
 
@@ -40,18 +44,21 @@ Windows10になった現在でもJScriptはWSH（Windows Script Host）上で動
 
 ECMAScriptとはいったい何でしょうか。ECMAScriptは「JavaScriptのコアとなる**仕様**」であると私は考えています。
 
-ECMAScriptという仕様を元に、各社がブラウザにJavaScriptを実装します。ECMAScriptは**仕様**を定めているのみで、実装方法を定めるものではありません。ですので、ほとんどの機能は同じだけど、細かいところでブラウザによって挙動に違いがあることがあります。
-
+ECMAScriptという仕様を元に、各社がブラウザーにJavaScriptを実装します。ECMAScriptは**仕様**を定めているのみで、実装方法を定めるものではありません。ですので、ほとんどの機能は同じだけど、細かいところでブラウザーによって挙動に違いがあることがあります。
 
 <aside>
-この「ブラウザ間の挙動の違い」を吸収するのがJQueryだったりします。
+
+この「ブラウザー間の挙動の違い」を吸収していたのがJQueryだったりします。
+
 </aside>
 
 <aside>
-標準化の流れのもと、2021年ともなれば、ブラウザ間でのJavaScriptの挙動の違いはほとんどないように思えます。
+
+標準化の流れのもと、2023年ともなれば、ブラウザー間でのJavaScriptの挙動の違いはほとんどないように思えます。
+
 </aside>
 
-逆に、「JavaScriptって何？」と問われれば、「ECMAScriptをブラウザベンダが実装したもの」と答えることができます。
+逆に、「JavaScriptって何？」と問われれば、「ECMAScriptをブラウザーベンダーが実装したもの」と答えることができます。
 
 ### ECMAScriptは新しいエディションがリリースされる
 
@@ -79,7 +86,6 @@ ECMAScriptはたびたび改定されます。恐らく**ES5**だったり**ES20
 2015年リリースのES6までは1～6という風に数字が増えていっていました。ES6はリリース後にES2015と改名され、以降、リリースされた年度を冠する命名方式に変わりました。分かりやすくていいですね。
 
 このブログでは、比較的新しく追加された構文や機能には、リリースされたECMAScriptのエディション名を出来る限り記述します。例えば、変数宣言に用いられる`const`キーワードはES2015から登場しました。`const`を紹介する時は`const[ES2015]`という形でECMAScriptエディションを書き記したいと思います。
-
 
 ## JavaScriptの発展まで
 

@@ -75,7 +75,6 @@ console.log(myobj);
 //=> ReferenceError: myobj is not defined
 ```
 
-
 ## `"use strict";`を付ける
 
 JavaScriptファイルの中に`"use strict";`と記述することで、そのファイル中のコードは**Strictモード**で実行されます。これによりシンタックスがより厳格にチェックされ、問題のあるコードや推奨されないコードはエラーとなります（JavaScriptは普段、構文を厳密にチェックしていない、ということもわかります）。
