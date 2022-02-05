@@ -63,6 +63,59 @@ AZ、インスタンスサイズ、ネットワークタイプの変更が可能
 
 1年だと31%、3年だと54%。
 
+## リザーブドインスタンス
+
+OSとインスタンスタイプの組み合わせごとに購入が可能。対象インスタンスを選択できない。
+
+### Standard RI
+
+途中のインスタンスタイプの変更が出来ない代わりに割引率は大きいです。
+
+### Convertible RI
+
+途中のインスタンスタイプの変更が出来る代わりに割引率は小さいです。
+
+## Saving Plans
+
+時間単位の利用料先払い。柔軟性が高い。
+
+## 専用ホスト
+
+**物理サーバーを占有**する。
+
+## キャパシティの予約
+
+**オンデマンドインスタンス**のキャパシティを予約できる。多くのインスタンスを起動しようとしたときに失敗することがあるが、それを防げる。ただし割引はない。
+
+## ハイバネーション(インスタンスの休止)
+
+停止と休止の違いは、休止の方が再開までの時間が短くなる。メモリにデータが保管さるので復旧が早い。ハイバネーションを使用するには、対象となるインスタンスであること、さらに設定が必要である。インスタンスストアのデータは失われる。
+
+### Compute Savings Plans
+
+EC2、EMR、ECS、EKSクラスターの一部、Fargate、Lambda。最大66%の割引が可能。
+
+### EC2 Instance Savings Plans
+
+EC2インスタンスのみに割引が適用、最大72%の割引。
+
+https://dev.classmethod.jp/articles/ec2-reserved-instances-savings-plans-comparison/
+
+https://blog.serverworks.co.jp/reserved-instance-savings-plan
+
+https://dev.classmethod.jp/articles/ec2-reserved-instances-savings-plans-comparison/
+
+## AMI
+
+AMIはリージョンにおいて一意。他のリージョンで使いたいときはコピーする。
+
+他のアカウントとも共有可能。
+
+
+
+
+
+
 ## ストレージ
 
 ### インスタンスストア

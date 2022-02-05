@@ -37,7 +37,6 @@ tags: ["ネットワーク"]
 
 CPUを創ろう
 
-
 ## コンパイラー、インタプリター、言語処理など
 
 ### オートマトン
@@ -58,11 +57,19 @@ CPUを創ろう
 
 [DisplayPortとDVIは互換性がない？  |  雑談記](https://yuutosi.net/post-695/)
 
-[トランジスターの仕組み](https://www.intel.co.jp/content/www/jp/ja/innovation/transworks.html)
+## ブール演算
+
+[](https://www.saluteweb.net/~oss_1bitcpu.html)
+
+[1バイトの都市伝説](http://diode.matrix.jp/LEGEND/BYTE.htm)
+
+[](https://qiita.com/yaju/items/c5da6df2221d5c3611e0)
 
 ### CPU
 
 [CPUのアーキテクチャの違いまとめ（x86/x64/x86_64/AMD64/i386/i686とはなんなのか？） - フラミナル](https://blog.framinal.life/entry/2020/04/22/041548)
+
+[トランジスターの仕組み](https://www.intel.co.jp/content/www/jp/ja/innovation/transworks.html)
 
 ### メモリー
 

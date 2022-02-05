@@ -391,8 +391,7 @@ console.log("My name is ${name}");
 //=>My name is ${name}
 ```
 
-ダブルクオートでも実現できますが、`+`演算子で文字列を連結させる必要があります。
-バッククオートを使って変数展開した方が分かりやすいと思いますがどうでしょう。
+ダブルクオートでも実現できますが、`+`演算子で文字列を連結させる必要があります。バッククオートを使って変数展開した方が分かりやすいと思いますがどうでしょう。
 
 ```javascript
 const name = "Kento";
@@ -413,7 +412,6 @@ console.log(`9の二乗は${square(9)}です。`);
 //=> 9の二乗は81です。
 ```
 
-
 JavaScriptは文字コードとしてUTF-16を採用しています。
 
 ## null
@@ -426,10 +424,6 @@ JavaScriptは文字コードとしてUTF-16を採用しています。
 [>typeof null](https://esdiscuss.org/topic/typeof-null#content-44)
 
 ## typeof演算子について考える
-
-
-
----
 
 # プリミティブとオブジェクト
 

@@ -1,7 +1,7 @@
 ---
 title: "#5 HTMLの基本② (head要素)"
 postdate: "2021-08-21"
-update: "2021-08-21"
+update: "2022-02-05"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "head要素について学習します。"
@@ -54,9 +54,9 @@ DOCTYPE宣言はHTMLにおけるタグや要素ではありませんが、現代
 
 > ～ その文書が**最新のhtmlで記述された文書である**ということがブラウザーに伝わります。
 
-という記述をしました。
+という記述をしました。<br>
 
-恐らくインターネット上を見ると「`<!DOCTYPE html>`とすることで、そのファイルが**HTML5**であることをブラウザーに伝える」という説明が多いと思います。しかし、2021年1月29日に、[W3Cによる「HTML5」が廃止されました](https://html.spec.whatwg.org/review-drafts/2020-01/)。それにより、WHATWGの[HTML Living standard](https://html.spec.whatwg.org/)がHTMLの唯一の仕様となりました。
+恐らくインターネット上を見ると「`<!DOCTYPE html>`とすることで、そのファイルが**HTML5**であることをブラウザーに伝える」という説明が多いと思います。しかし、2021年1月29日に、[W3Cによる「HTML5」が廃止されました](https://html.spec.whatwg.org/review-drafts/2020-01/)。それにより、WHATWGの[HTML Living standard](https://html.spec.whatwg.org/)がHTMLの唯一の仕様となりました。<br>
 
 つまり、**HTML5**という仕様がなくなったわけです。この辺りを鑑み、**最新のHTML**という表現にしています（WHATWGによるHTMLは`5`→`6`→`7`みたいに数字によるバージョニングはされない）。また、当ブログでもHTML5という単語は使用せず、**HTML**という表現に統一したいと思います。
 

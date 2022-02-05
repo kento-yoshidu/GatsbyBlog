@@ -185,3 +185,7 @@ $find . -type f -a -name 'a*.txt'
 [CentOS リポジトリ repository](http://mrs.suzu841.com/tebiki/memo/repository.html)
 
 [yum installで学ぶ！ yum の仕組み - RAKUS Developers Blog | ラクス エンジニアブログ](https://tech-blog.rakus.co.jp/entry/2017/12/14/105052)
+
+## TTY
+
+https://qiita.com/toshihirock/items/22de12f99b5c40365369
