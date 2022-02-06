@@ -13,18 +13,18 @@ interface Edge {
   }
 }
 
-const PostList = React.memo(({ key, slug, title}: { key: string, slug: string, title: string }) => {
-  console.log("rendering!")
-  return (
-    <li
-      key={key}
-    >
-      <Link to={slug}>
-        {title}
-      </Link>
-    </li>
-  )
-})
+const PostList = React.memo((
+  { key, slug, title}:
+  { key: string, slug: string, title: string }
+) => (
+  <li
+    key={key}
+  >
+    <Link to={slug}>
+      {title}
+    </Link>
+  </li>
+))
 
 const Search: React.VFC = () => {
   const { allKeywordSearchJson } = useStaticQuery(
@@ -38,7 +38,7 @@ const Search: React.VFC = () => {
               title
             }
           }
-      }
+        }
       }
     `
   )
@@ -115,17 +115,6 @@ const Search: React.VFC = () => {
                       slug={edge.node.slug}
                       title={edge.node.title}
                     />
-                    /*
-                    return (
-                      <li
-                        key={`key${i}`}
-                      >
-                        <Link to={edge.node.slug}>
-                          {edge.node.title}
-                        </Link>
-                      </li>
-                    )
-                    */
                   ))
                 }
               </ul>
