@@ -45,12 +45,14 @@ const DraftArticleList: React.VFC<Props> = ({ data, pageContext, location }) => 
         isDraft={true}
       />
 
+{/*
       <Pagination
         isFirst={pageContext.isFirst}
         isLast={pageContext.isLast}
         currentPage={pageContext.currentPage}
         pageCount={pageContext.pageCount}
       />
+*/}
 
       <MobilePagination
         isFirst={pageContext.isFirst}
