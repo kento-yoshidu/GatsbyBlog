@@ -233,7 +233,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
             }
           }
         }
-        # 全ての記事をグループごとに取得
+        # 全てのドラフト記事をグループごとに取得
         allDraftArticlesByGroup: allMarkdownRemark(
           filter: {frontmatter: {published: {ne: true}}}
           sort: { fields: frontmatter___postdate}
@@ -257,7 +257,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
     allDraftArticles.nodes.forEach(_ => {
       const postCount = allDraftArticles.nodes.length;
-      const pageCount = Math.ceil(postCount / 10)
+      const pageCount = Math.ceil(postCount / 30)
 
       Array.from({ length: pageCount }).forEach((_, i) => {
         createPage({
@@ -267,8 +267,8 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
             postCount: postCount,
             pageCount: pageCount,
             totalPageCount: pageCount,
-            skip: 6 * i,
-            limit: 6,
+            skip: 30 * i,
+            limit: 30,
             currentPage: i + 1,
             isFirst: i + 1 === 1,
             isLast: i + 1 === pageCount,
