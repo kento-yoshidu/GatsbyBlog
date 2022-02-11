@@ -1,23 +1,11 @@
 .countInfo {
   margin: 0 auto 50px;
-  font-size: 2.2rem;
+  font-size: clamp(15px, 1.8vw, 22px);
   text-align: center;
   .page {
-    margin: 0px 0 20px;
+    margin: 10px 0 20px;
     span {
-      font-size: 3.5rem;
-    }
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .countInfo {
-    font-size: 1.5rem;
-    .page {
-      margin: 10px 0 15px;
-      span {
-        font-size: 2.3rem;
-      }
+      font-size: clamp(23px, 2vw, 35px);
     }
   }
 }
