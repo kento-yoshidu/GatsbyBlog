@@ -15,15 +15,14 @@
     }
   }
   h1 {
-    font-size: 2.8rem;
+    width: unquote("max(50%, 324px)");
+    margin: 0 auto 20px;
+    font-size: clamp(17px, 2.8vw, 28px);
     font-weight: 100;
     letter-spacing: 2px;
-    margin-bottom: 15px;
-    width: 50%;
-    margin: 0 auto 20px;
   }
   .link {
-    width: 50%;
+    width: unquote("max(288px, 50%)");
     margin: 10px auto;
   }
   .externalLink {
@@ -38,7 +37,7 @@
     a {
       margin-right: 25px;
       margin-bottom: 5px;
-      font-size: 1.5rem;
+      font-size: clamp(14px, 2vw, 17px);
       svg {
         margin-right: 5px;
       }
@@ -46,37 +45,14 @@
   }
   .copyright {
     margin-top: 30px;
-    font-size: 1.7rem;
+    font-size: clamp(15px, 1.4vw, 17px);
     letter-spacing: .5px;
     text-align: center;
   }
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .footer {
-    margin-top: 30px;
-    h1 {
-      width: 90%;
-      font-size: 1.7rem;
-      letter-spacing: 1px;
-      text-align: center;
-    }
-    .link {
-      width: 80%;
-    }
-    .externalLink {
-      text-align: center;
-    }
-    .internalLink,
-    .metaLink {
-      a {
-        font-size: 1.2rem;
-        margin-right: 15px;
-      }
-    }
-    .copyright {
-      margin-top: 30px;
-      font-size: 1.5rem;
-    }
+    text-align: center;
   }
 }
