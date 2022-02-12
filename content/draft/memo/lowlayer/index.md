@@ -57,6 +57,8 @@ CPUを創ろう
 
 [DisplayPortとDVIは互換性がない？  |  雑談記](https://yuutosi.net/post-695/)
 
+[低レイヤを知りたい人のためのCコンパイラ作成入門](https://www.sigbus.info/compilerbook)
+
 ## ブール演算
 
 [](https://www.saluteweb.net/~oss_1bitcpu.html)

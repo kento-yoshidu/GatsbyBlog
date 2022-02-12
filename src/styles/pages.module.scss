@@ -27,7 +27,7 @@
         line-height: 1.5;
         &:hover {
           background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
-          -webkit-background-clip: text;
+          background-clip: text;
           -webkit-text-fill-color: rgba(255,255,255,0.0);
         }
       }
@@ -70,7 +70,7 @@
           transition-duration: 0.1s;
           &:hover {
             background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
-            -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: rgba(255,255,255,0.0);
           }
         }
@@ -79,7 +79,7 @@
 	}
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .postList {
     .postItem {
       margin-bottom: 20px;

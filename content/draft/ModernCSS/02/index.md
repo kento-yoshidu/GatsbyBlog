@@ -49,8 +49,10 @@ CSSに関する仕様が並んでいますね。リンクを踏めば『Title』
 
 [W3C Process Document | 6.3. The W3C Recommendation Track](https://www.w3.org/2021/Process-20211102/#rec-track)
 
-https://www.kanzaki.com/w3c/process.html
+[W3C勧告プロセスの概要](https://www.kanzaki.com/w3c/process.html)
 
-[](https://wemo.tech/795)
+[W3C勧告とはなんぞ？Web標準化とW3Cにおける勧告プロセスについて | WEMO](https://wemo.tech/795)
 
 [W3Cとは？Web標準化の重要性とW3Cの勧告プロセス](https://www.internetacademy.jp/it/design/homepage/web-standardization-and-w3c-recommendation-process.html)
+
+[Flexboxの仕様って勧告に至ってないけど使っていいの？迷ったのでW3Cの仕様策定プロセスを読んでみた  |  Rriver](https://parashuto.com/rriver/others/w3c-technical-report-dev-process)
