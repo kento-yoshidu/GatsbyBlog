@@ -1,8 +1,8 @@
 @import "../scss/variables";
 
 .blogPost {
-  width: 50%;
-	margin-left: 14vw;
+  width: unquote("max(52%, 324px)");
+	margin-left: 13vw;
   margin-right: 5vw;
 	h1,
   h2,
@@ -152,9 +152,8 @@
   }
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
 	.blogPost {
-		width: 90%;
 		margin: 0 auto 50px;
 		h1 {
       width: 100%;
@@ -221,10 +220,9 @@
 }
 
 .beforeAndAfter {
-  width: 50%;
-  margin-top: 80px;
+  width: unquote("max(50%, 324px)");
+  margin-top: 50px;
   margin-left: 15vw;
-  padding-bottom: 50px;
   .before,
   .after {
     display: block;
@@ -244,7 +242,7 @@
     }
     .title {
       margin-bottom: 10px;
-      font-size: 2rem;
+      font-size: clamp(15px, 2vw, 20px);
       line-height: 1.5;
     }
     &:hover {
@@ -258,18 +256,13 @@
 
 @media screen and (Max-width: 768px) {
   .beforeAndAfter {
-    width: 90%;
     margin: 0 auto;
-    padding-bottom: 20px;
     .before,
     .after {
       padding: 10px 15px;
       h2 {
         margin-bottom: 10px;
         font-size: 1.3rem;
-      }
-      .title {
-        font-size: 1.5rem;
       }
     }
     .before {

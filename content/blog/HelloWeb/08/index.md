@@ -10,11 +10,11 @@ keywords: ["HTML", "img", "画像"]
 published: true
 ---
 
-# 画像を表示しよう
+# 画像を表示させよう
 
-今回はWebページに画像を表示させる方法を学びます。画像の表示は意外とややこしく方法はいくつかありますが、今回は**img要素**を使う方法を紹介します。
+今回はWebページに画像を表示させる方法を学びます。画像の表示は意外とややこしく方法はいくつかありますが、今回は**img要素**を使う方法を紹介します。この方法が一番簡単です。
 
-とりあえずは以下のような`index.html`を用意します。
+まずは以下のような`index.html`を用意します。
 
 ```html:title=index.html
 <!DOCTYPE html>
@@ -62,7 +62,7 @@ published: true
 
 具体的にHTMLコードは以下のようになります。
 
-```html
+```html:title=index.html
 <body>
   <img src="images/sample-image.png">
 </body>
@@ -90,7 +90,7 @@ published: true
 </body>
 ```
 
-この状態でアクセスすると、画像を示すアイコンとalt属性に記述した文章が表示されていることが分かります。
+この状態でアクセスすると、画像を示すアイコンとalt属性に記述した文章が表示されていることが分かります。このようなアイコンと文字、見たことありますよね？
 
 ![](./images/image03.png)
 
@@ -182,7 +182,7 @@ published: true
 <aside>
 
 レイアウトシフトとは、画像ファイルが後から読み込まれ、ページのレイアウトがずれる現象です。レイアウトシフトについてこの講座では詳しく説明しませんが、以下のページに分かりやすく記述されているので興味のある方は読んでみてください。
-
+<br><br>
 [CLS(Cumulative Layout Shift)とは？対策・改善方法も紹介！ | 模写修行メディア](https://moshashugyo.com/media/layout-shift)
 
 </aside>

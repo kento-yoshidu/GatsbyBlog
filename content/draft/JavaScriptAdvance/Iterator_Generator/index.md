@@ -67,9 +67,9 @@ console.log(iterator.next());
 
 また、4回目の呼び出しの結果は、`value`がundefinedで`done`が`ture`になっていることを覚えておいてください。
 
-## イテレーターの定義
+## イテレーターの特徴
 
-では改めて、イテレーターの定義を考えてみたいと思います。
+では改めて、イテレーターの特徴を考えてみたいと思います。
 
 1. `next()`を持つオブジェクトである
 2. `next()`を使用することで、自身が持つ値を順番に取り出すことができる
@@ -83,12 +83,53 @@ console.log(iterator.next());
 
 なお、`next()`の戻り値であるオブジェクトは、特に**イテレーターリザルト**と呼ばれることがあります。
 
-## Iteratorを反復処理する
+## イテレーターを自作する
+
+試しにイテレーターを自作してみましょう。その方がきっと理解が進みます。
+
+上記の5つの条件を踏まえ、このようなイテレーターを作成しました。
+
+```js
+const iterator = {
+  value: 0,
+
+  next: function() {
+    if (this.value < 3) {
+      return {
+        value: this.value,
+        done: false
+      }
+      this.value++;
+    } else {
+      return {
+        done: true
+      }
+    }
+  }
+}
+```
+
+`next()`をもち、`value`の値が3以下であれば
+
+参考 ： [【JavaScript】 Iterator(イテレーター)とは？避けて通りたいけど説明してみる](https://note.affi-sapo-sv.com/js-iterator.php)
+
+
+
+## `for...of`はイテラブル
+
+`next()`を呼び出さなくても、`for...of`構文を使用することでIteratorを扱うことができます。
+
+```ts
+for (const i of iterator) {
+  console.log(i)
+}
+```
 
 `for-of`にはiterableを渡します。iteratorではありません。
 
+## Iterableなオブジェクト
 
-## イテラブルなオブジェクト
+次は**Iterableなオブジェクト**です。Iterableなオブジェクトは**Iteratorを生成する+**ことができます。
 
 [Symbol.iterator]() メソッドが実装されている事。メソッドを呼ぶことで新しいイテレーターオブジェクトが返ります。
 
@@ -115,7 +156,6 @@ for(const num of arr) {
 ```
 
 for-ofに**iterable**を渡すと**iterator**が作成され、値を順番に寄り出すことができます。
-
 
 ```javascript
 // 空のオブジェクトを作成
@@ -179,19 +219,19 @@ for (const key of iterableObj) {
 
 ## 参考
 
+[](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Iterators_and_Generators)
+
 [Objectオブジェクトについて[組み込みオブジェクト]](https://noumenon-th.net/programming/2017/02/02/object-built/)
 
 [Array.prototype.values() - JavaScript | MDN](https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/values)
 
-[反復可能なオブジェクト](https://ja.javascript.info/iterable)
+[JavaScriptのIterator / Generatorの整理](https://zenn.dev/qnighy/articles/112af47edfda96)
 
-https://scleapt.com/javascript_iterator/
+[反復可能なオブジェクト](https://ja.javascript.info/iterable)
 
 [JavaScriptのIteratorとGeneratorを使って反復処理を書く](https://sbfl.net/blog/2016/08/17/javascript-iterator-generator/)
 
-https://blog.logrocket.com/javascript-iterators-and-generators-a-complete-guide/#:~:text=With%20the%20introduction%20of%20ES6,object%20that%20follows%20the%20specification.
-
-https://www.javadrive.jp/javascript/start/index1.html
+[JavaScript iterators and generators: A complete guide - LogRocket Blog](https://blog.logrocket.com/javascript-iterators-and-generators-a-complete-guide/#:~:text=With%20the%20introduction%20of%20ES6,object%20that%20follows%20the%20specification.)
 
 [JavaScriptのイテレータが持つメソッドをそろそろ知っておきたい人が読む記事 - Qiita](https://qiita.com/uhyo/items/cc68e66e4008a66f3d94)
 
@@ -202,3 +242,104 @@ https://www.javadrive.jp/javascript/start/index1.html
 [【javascript】イテラブル - Qiita](https://qiita.com/oouaioi/items/d00fe83800ba613a0de7)
 
 [JavaScriptプログラミング講座【Iterator について】](https://hakuhin.jp/js/iterator.html)
+
+[JavaScript のジェネレーターでフィボナッチ数列を返す関数作ってみた](https://zenn.dev/phi/articles/javascript-generator-fibonacci)
+
+---
+title: "ジェネレーター"
+postdate: "2021-01-01"
+updatedate: "2020-01-01"
+seriesName: "JavaScript中級者を目指す"
+seriesSlug: "JavaScriptAdvance"
+description: 
+tags: ["JavaScript", "ジェネレーター"]
+---
+
+## ジェネレーター関数
+
+<!--ジェネレーター関数は、**イテレーター**を作成するための関数です。-->
+ジェネレーター関数は、**ジェネレーターオブジェクト**を作成するための関数です。
+
+ジェネレーター関数を作成し、さらにジェネレーターオブジェクトを作成してみたいと思います。まずはジェネレーター関数の作成からですね。ポイントは2つあり、`function`の後に`*`を付けること、関数内で`yield`キーワードを使用することです。
+
+```javascript
+// ジェネレーター関数
+function* myGenerator() {
+  console.log('first');
+  yield;
+
+  console.log('second');
+  yield;
+
+  console.log('third');
+}
+```
+
+ジェネレーター関数は、**ジェネレーターオブジェクト**を返します。
+
+では`myGenerator`を利用し、**ジェネレーターオブジェクト**`gen`を作成します。試しにコンソール出力してみると、`gen`がどうやらジェネレーターオブジェクトっぽいことが分かります。
+
+```javascript
+// ジェネレーターオブジェクト
+const gen = myGenerator();
+
+console.log(gen);
+//=> Object [Generator] {}
+```
+
+ジェネレーターオブジェクトは、`next()`を呼ぶことで、ジェネレーター関数を実行することができます。
+
+```javascript
+const gen = myGenerator();
+
+gen.next();
+//=> first
+```
+
+`next()`を呼ぶと、**最初のyieldキーワード**が出現するまでの内容が実行されます。最初の`yield`の前には`first`を出力する`console`文しかないので、`first`のみが出力されます。
+
+続けて`next()`を呼び出していきます。
+
+```javascript
+const gen = myGenerator();
+
+gen.next(); //=> first
+gen.next(); //=> second
+gen.next(); //=> third
+```
+
+`next()`を実行すると、`yield`が出現するところまでを実行し、そこで一時停止するイメージです。再度`next()`を呼ぶことで、次の`yield`までを実行することができます。
+
+戻り値がイテレーターリザルトであることがわかります。以下は、`next()`を実行した時に返ってくる入れてーたーオブジェクトを1回ずつコンソール出力した様子です。
+
+```javascript
+const gen = myGenerator();
+
+let g = gen.next(); //=> first
+
+console.log(g) //=> { value: undefined, done: false }
+
+g = gen.next(); //=> second
+
+console.log(g); //=> { value: undefined, done: false }
+
+g = gen.next(); //=> third
+
+console.log(g); //=> { value: undefined, done: true }
+```
+
+## 値を渡す
+
+```javascript
+// ジェネレーター関数
+function* myGenerator() {
+  let text = yield;
+  console.log(`My name is ${text}`)
+}
+
+const gen = myGenerator();
+
+gen.next();
+gen.next("Kento");
+```
+
