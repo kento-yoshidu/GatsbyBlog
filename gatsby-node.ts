@@ -1,10 +1,10 @@
 import type { GatsbyNode } from "gatsby"
-import path, { resolve } from "path"
+import path from "path"
 import fs from "fs"
 
-const { createFilePath } = require(`gatsby-source-filesystem`)
+const { createFilePath } = require("gatsby-source-filesystem")
 
-const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, reporter }) => {
+const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions
 
   const queryResult = await graphql(
@@ -89,7 +89,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
   if (queryResult.errors) {
     reporter.panicOnBuild(
-      `There was an error loading your blog posts`,
+      "There was an error loading your blog posts",
       queryResult.errors
     )
     return
@@ -100,8 +100,8 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
   const allArticles = queryResult.data.allArticles
 
-  allArticles.nodes.forEach(_ => {
-    const postCount = allArticles.nodes.length;
+  allArticles.nodes.forEach((_) => {
+    const postCount = allArticles.nodes.length
     const pageCount = Math.ceil(postCount / 6)
 
     Array.from({ length: pageCount }).forEach((_, i) => {
@@ -116,7 +116,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
           limit: 6,
           currentPage: i + 1,
           isFirst: i + 1 === 1,
-          isLast: i + 1 === pageCount,
+          isLast: i + 1 === pageCount
         }
       })
     })
@@ -138,8 +138,8 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
         context: {
           id: node.id,
           previousPostId,
-          nextPostId,
-        },
+          nextPostId
+        }
       })
     })
   })
@@ -149,11 +149,11 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
   const articlesBySeries = queryResult.data.articlesBySeries.group
 
-  articlesBySeries.forEach(series => {
+  articlesBySeries.forEach((series) => {
     const seriesSlug = series.fieldValue
     const seriesName = series.nodes[0].frontmatter.seriesName
 
-    const postCount = series.nodes.length;
+    const postCount = series.nodes.length
     const pageCount = Math.ceil(postCount / 6)
 
     Array.from({ length: pageCount }).forEach((_, i) => {
@@ -170,7 +170,7 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
           isFirst: i + 1 === 1,
           isLast: i + 1 === pageCount,
           seriesName: seriesName,
-          seriesSlug: seriesSlug,
+          seriesSlug: seriesSlug
         }
       })
     })
@@ -181,14 +181,14 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
   const postsByTag = queryResult.data.articlesByTag.group
 
-  postsByTag.forEach(tag => {
-    const postCount = tag.nodes.length;
-    const pageCount = Math.ceil(postCount / 6);
+  postsByTag.forEach((tag) => {
+    const postCount = tag.nodes.length
+    const pageCount = Math.ceil(postCount / 6)
 
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
         path: i === 0 ? `/tag/${tag.fieldValue}/page/1/` : `/tag/${tag.fieldValue}/page/${i + 1}/`,
-        component: path.resolve(`./src/templates/tag.tsx`),
+        component: path.resolve("./src/templates/tag.tsx"),
         context: {
           postCount: postCount,
           pageCount: pageCount,
@@ -197,28 +197,28 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
           currentPage: i + 1,
           isFirst: i + 1 === 1,
           isLast: i + 1 === pageCount,
-          tag: tag.fieldValue,
+          tag: tag.fieldValue
         }
       })
     })
   })
 
-  if(process.env.NODE_ENV === 'production') {
-    const keywords = queryResult.data.allArticlesForSearching.edges.map(({node}) => {
+  if (process.env.NODE_ENV === "production") {
+    const keywords = queryResult.data.allArticlesForSearching.edges.map(({ node }) => {
       return {
         slug: node.fields.slug,
         title: node.frontmatter.title,
-        keywords: node.frontmatter.keywords,
+        keywords: node.frontmatter.keywords
       }
     })
 
-    fs.writeFileSync('./static/keywordSearch.json', JSON.stringify(keywords, null , 2))
+    fs.writeFileSync("./static/keywordSearch.json", JSON.stringify(keywords, null, 2))
   }
 
   /*
   * ドラフトページを作成(develop環境時のみ)
   */
-  if(process.env.NODE_ENV === 'development') {
+  if (process.env.NODE_ENV === "development") {
     const draftPosts = await graphql(`
       {
         # 全てのドラフト記事を取得
@@ -255,8 +255,8 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
 
     const { allDraftArticles } = draftPosts.data
 
-    allDraftArticles.nodes.forEach(_ => {
-      const postCount = allDraftArticles.nodes.length;
+    allDraftArticles.nodes.forEach((_) => {
+      const postCount = allDraftArticles.nodes.length
       const pageCount = Math.ceil(postCount / 30)
 
       Array.from({ length: pageCount }).forEach((_, i) => {
@@ -271,11 +271,11 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
             limit: 30,
             currentPage: i + 1,
             isFirst: i + 1 === 1,
-            isLast: i + 1 === pageCount,
+            isLast: i + 1 === pageCount
           }
         })
       })
-    });
+    })
 
     const { allDraftArticlesByGroup } = draftPosts.data
 
@@ -290,24 +290,24 @@ const createPages: GatsbyNode['createPages'] = async ({ graphql, actions, report
           context: {
             id: node.id,
             previousPostId,
-            nextPostId,
-          },
+            nextPostId
+          }
         })
       })
-    });
+    })
   }
 }
 
-const onCreateNode: GatsbyNode['onCreateNode'] = ({ node, actions, getNode }) => {
+const onCreateNode: GatsbyNode["onCreateNode"] = ({ node, actions, getNode }) => {
   const { createNodeField } = actions
 
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === "MarkdownRemark") {
     const value = createFilePath({ node, getNode })
 
     createNodeField({
-      name: `slug`,
+      name: "slug",
       node,
-      value,
+      value
     })
   }
 }

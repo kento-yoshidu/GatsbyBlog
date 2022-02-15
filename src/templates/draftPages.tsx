@@ -6,7 +6,6 @@ import Seo from "../components/seo"
 import Header from "../components/header"
 import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
-import Pagination from "../components/pagination"
 import MobilePagination from "../components/mobilePagination"
 
 import type { PageContext } from "../../type"
@@ -20,7 +19,7 @@ interface Props {
 }
 
 const DraftArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
-	const { postData } = data
+  const { postData } = data
 
   return (
     <Layout>

@@ -60,6 +60,7 @@
     "eslint-plugin-react": "^7.28.0",
     "gatsby-plugin-dts-css-modules": "^2.2.0",
     "prettier": "2.3.2",
+    "prop-types": "^15.8.1",
     "typescript": "^4.4.2"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",

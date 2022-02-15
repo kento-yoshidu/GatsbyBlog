@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
-  const { site } = useStaticQuery (
+  const { site } = useStaticQuery(
     graphql`
       query {
         site {
@@ -24,7 +24,7 @@ const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
   return (
     <header className={Styles.header}>
       <h1 className={Styles.headerTitle}>
-        {pathname === `/page/1/`
+        {pathname === "/page/1/"
           ? <>{site.siteMetadata.title}</>
           : <Link to="/page/1/">{site.siteMetadata.title}</Link>
         }

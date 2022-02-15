@@ -7,7 +7,7 @@ type Props = {
   children: ReactNode
 }
 
-const Layout: React.VFC<Props> = ({children}) => (
+const Layout: React.VFC<Props> = ({ children }) => (
   <>
     <KeywordSearch />
 
