@@ -1,5 +1,5 @@
-import React, { useEffect } from "react"
-import { Link, graphql } from "gatsby"
+import React from "react"
+import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -7,7 +7,7 @@ import Header from "../components/header"
 
 import * as Styles from "../styles/index.module.scss"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faFileAlt,
   faFolder,
@@ -41,11 +41,11 @@ const BlogIndex: React.VFC<Props> = ({ location }) => (
       >
         <FontAwesomeIcon icon={faFileAlt} />
         <span>記事一覧</span>
-        </Link>
+      </Link>
 
       <Link
         to="/series/"
-        className={Styles.box} 
+        className={Styles.box}
       >
         <FontAwesomeIcon icon={faFolder} />
         <span>シリーズ一覧</span>

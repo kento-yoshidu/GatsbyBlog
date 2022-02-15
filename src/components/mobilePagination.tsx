@@ -32,7 +32,6 @@ const MobilePagination: React.VFC<Props> = ({
   tag,
   series
 }) => {
-
   let topButton,
       topPath,
       lastButton,
@@ -42,9 +41,9 @@ const MobilePagination: React.VFC<Props> = ({
       nextButton,
       nextPath
 
-  if(!isFirst) {
+  if (!isFirst) {
     if (!tag && !series) {
-      topPath = `/page/1/`
+      topPath = "/page/1/"
       prevPath = `/page/${currentPage - 1}/`
     } else if (series) {
       topPath = `/series/${series}/page/1/`
@@ -71,7 +70,7 @@ const MobilePagination: React.VFC<Props> = ({
       </Link>
   }
 
-  if(!isLast) {
+  if (!isLast) {
     if (!series && !tag) {
       lastPath = `/page/${pageCount}`
       nextPath = `/page/${currentPage + 1}`
@@ -83,14 +82,14 @@ const MobilePagination: React.VFC<Props> = ({
       nextPath = `/tag/${tag}/page/${currentPage + 1}`
     }
 
-    lastButton = 
+    lastButton =
       <Link
         to={lastPath}
         className={Styles.lastButton}
       >
         <FontAwesomeIcon icon={faAngleDoubleRight} />
       </Link>
-      
+
     nextButton =
       <Link
         to={nextPath}

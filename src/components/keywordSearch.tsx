@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import { SearchOutline } from 'react-ionicons'
+import { SearchOutline } from "react-ionicons"
 
 import * as Styles from "../styles/search.module.scss"
 
@@ -14,7 +14,7 @@ interface Edge {
 }
 
 const PostList = React.memo((
-  { key, slug, title}:
+  { key, slug, title }:
   { key: string, slug: string, title: string }
 ) => (
   <li
@@ -70,7 +70,7 @@ const Search: React.VFC = () => {
       .toLocaleLowerCase()
       .match(/[^\s]+/g)
 
-    const searchedResult: Edge[] = edges.filter(({node}) => {
+    const searchedResult: Edge[] = edges.filter(({ node }) => {
       return lowerCaseKeywords?.every((keyword) => {
         return node?.keywords?.toString().toLocaleLowerCase().includes(keyword)
       })
@@ -89,7 +89,7 @@ const Search: React.VFC = () => {
 
       <label className={Styles.menuBtn} htmlFor="checked">
         <SearchOutline
-          color={'#00000'}
+          color={ "#00000" }
           width="30px"
           height="30px"
         />

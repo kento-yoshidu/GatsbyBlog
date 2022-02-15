@@ -11,7 +11,7 @@ import * as Styles from "../styles/post.module.scss"
 import * as TableStyles from "../styles/tableOfContent.module.scss"
 
 import "prismjs/themes/prism-tomorrow.css"
-import 'prismjs/plugins/line-numbers/prism-line-numbers.css'
+import "prismjs/plugins/line-numbers/prism-line-numbers.css"
 
 interface Props {
   data: GatsbyTypes.BlogPostBySlugQuery
@@ -61,7 +61,7 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
           className={`${TableStyles.tableOfContent} tableOfContent }`}
           dangerouslySetInnerHTML={{ __html: tableOfContents }}
         />
-      </div>  
+      </div>
 
       <nav className={Styles.beforeAndAfter}>
         {previous && (

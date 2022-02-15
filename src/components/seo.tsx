@@ -32,8 +32,8 @@ const Seo: React.VFC<Props> = (props) => {
   const description = props.description || site.siteMetadata.description
 
   const url = props.pagepath
-      ? `${site.siteMetadata.siteUrl}${props.pagepath}`
-      : site.siteMetadata.siteUrl
+    ? `${site.siteMetadata.siteUrl}${props.pagepath}`
+    : site.siteMetadata.siteUrl
 
   return (
     <Helmet>
