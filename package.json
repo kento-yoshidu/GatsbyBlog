@@ -52,6 +52,8 @@
     "@types/react-helmet": "^6.1.2",
     "esbuild": "^0.13.4",
     "esbuild-register": "^3.0.0",
+    "eslint": "^8.9.0",
+    "eslint-loader": "^4.0.2",
     "gatsby-plugin-dts-css-modules": "^2.2.0",
     "prettier": "2.3.2",
     "typescript": "^4.4.2"
