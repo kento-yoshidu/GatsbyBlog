@@ -27,7 +27,7 @@ const Tags: React.VFC<Props> = ({ data, location }) => (
 
     <main className={`${Styles.tagsMain} LoadAnimation`}>
       <ul className={Styles.tagList}>
-        {data.allMarkdownRemark.group.map(tag => (
+        {data.allMarkdownRemark.group.map((tag) => (
           <li
             className={Styles.listItem}
             key={tag.fieldValue}

@@ -6,7 +6,7 @@ import Seo from "../components/seo"
 
 import * as Styles from "../styles/404.module.scss"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUndo } from "@fortawesome/free-solid-svg-icons"
 
 import "@fortawesome/fontawesome-svg-core/styles.css"

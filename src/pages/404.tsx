@@ -1,5 +1,5 @@
 import * as React from "react"
-import { graphql, Link } from "gatsby"
+import { Link } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
@@ -29,8 +29,8 @@ const NotFoundPage: React.VFC<Props> = ({ location }) => {
 
       <main className={Styles.main}>
         <h2>ページが見つかりません。</h2>
-        <p>ページが削除された、もしくは移動した可能性があります。<Link to={`/page/1/`}>トップページ</Link>に戻り、改めてお探しください。</p>
-        <p>また、<Link to={`/series/`}>カテゴリ一覧ページ</Link>や<Link to={`/tags/`}>タグ一覧ページ</Link>も用意してあります。こちらからの方が探しやすいかもしれません。</p>
+        <p>ページが削除された、もしくは移動した可能性があります。<Link to={"/page/1/"}>トップページ</Link>に戻り、改めてお探しください。</p>
+        <p>また、<Link to={"/series/"}>カテゴリ一覧ページ</Link>や<Link to={"/tags/"}>タグ一覧ページ</Link>も用意してあります。こちらからの方が探しやすいかもしれません。</p>
       </main>
     </Layout>
   )

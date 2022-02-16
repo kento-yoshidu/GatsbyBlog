@@ -27,7 +27,7 @@ const Series: React.VFC<Props> = ({ data, location }) => (
 
     <main className={`${Styles.seriesMain} LoadAnimation`}>
       <ul className={Styles.seriesList}>
-        {data.allMarkdownRemark.group.map(series => (
+        {data.allMarkdownRemark.group.map((series) => (
           <li
             className={Styles.listItem}
             key={series.fieldValue}

@@ -3,13 +3,13 @@ import { Link } from "gatsby"
 
 import * as Styles from "../styles/pages.module.scss"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {  faFolder,
-          faClock,
-          faUndo,
-          faTags,
-          faCommentDots
-        } from "@fortawesome/free-solid-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFolder,
+  faClock,
+  faUndo,
+  faTags,
+  faCommentDots
+} from "@fortawesome/free-solid-svg-icons"
 
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
@@ -21,7 +21,7 @@ interface Node {
   }
   frontmatter: {
     postdate: string;
-    description: string; 
+    description: string;
     seriesName: string;
     seriesSlug: string;
     tags: string[];
@@ -37,7 +37,7 @@ interface Props {
   isDraft: boolean
 }
 
-const PostList: React.VFC<Props> = ({postData, isDraft}) => (
+const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
   <div className="LoadAnimation">
     <section className={Styles.postList}>
       {postData.nodes.map((post: Node) => {
@@ -48,6 +48,7 @@ const PostList: React.VFC<Props> = ({postData, isDraft}) => (
             className={Styles.postItem}
             itemScope
             itemType="http://schema.org/Article"
+            key={`${post.fields}key`}
           >
             <p className={Styles.postTitle}>
               {!isDraft && (
