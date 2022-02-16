@@ -25,18 +25,18 @@ interface Props {
 }
 
 const Series: React.VFC<Props> = ({ data, pageContext, location }) => {
-	const postData = data.allMarkdownRemark
+  const postData = data.allMarkdownRemark
 
-	return (
-		<Layout>
+  return (
+    <Layout>
       <Seo
         title={`${pageContext.seriesName}シリーズの記事`}
         pagepath={location.pathname}
       />
 
-			<Header
-				pageTitle={`${pageContext.seriesName} シリーズの記事`}
-			/>
+      <Header
+        pageTitle={`${pageContext.seriesName} シリーズの記事`}
+      />
 
       <PageInfo
         currentPage={pageContext.currentPage}
@@ -63,8 +63,8 @@ const Series: React.VFC<Props> = ({ data, pageContext, location }) => {
         pageCount={pageContext.pageCount}
         series={pageContext.seriesSlug}
       />
-		</Layout>
-	)
+    </Layout>
+  )
 }
 
 export default Series
