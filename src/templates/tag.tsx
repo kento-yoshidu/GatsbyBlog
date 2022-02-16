@@ -24,28 +24,28 @@ interface Props {
 }
 
 const Tag: React.VFC<Props> = ({ data, location, pageContext }) => {
-	const postData = data.allMarkdownRemark
+  const postData = data.allMarkdownRemark
 
-	return (
-		<Layout>
+  return (
+    <Layout>
       <Seo
         title={`${pageContext.tag}タグの記事`}
         pagepath={location.pathname}
       />
 
-			<Header
-				pageTitle={`${pageContext.tag} タグの記事`}
-			/>
+      <Header
+        pageTitle={`${pageContext.tag} タグの記事`}
+      />
 
-			<PageInfo
-				currentPage={pageContext.currentPage}
-				postCount={pageContext.postCount}
-				pageCount={pageContext.pageCount}
-			/>
+      <PageInfo
+        currentPage={pageContext.currentPage}
+        postCount={pageContext.postCount}
+        pageCount={pageContext.pageCount}
+      />
 
-			<PostList
-				postData={postData}
-			/>
+      <PostList
+        postData={postData}
+      />
 
       <Pagination
         currentPage={pageContext.currentPage}
@@ -62,8 +62,8 @@ const Tag: React.VFC<Props> = ({ data, location, pageContext }) => {
         pageCount={pageContext.pageCount}
         tag={pageContext.tag}
       />
-		</Layout>
-	)
+    </Layout>
+  )
 }
 
 export default Tag

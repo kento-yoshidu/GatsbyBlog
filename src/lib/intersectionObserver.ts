@@ -2,7 +2,7 @@
 *  /src/templates/blog-post.tsxにて、
 *  ToCのスクロール追従を実行
 */
-import * as Styles from "../src/styles/tableOfContent.module.scss"
+import * as Styles from "../styles/tableOfContent.module.scss"
 
 const IO = () => {
   // 交差を監視する要素

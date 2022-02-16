@@ -20,7 +20,7 @@ interface Props {
 }
 
 const ArticleList: React.VFC<Props> = ({ data, pageContext, location }) => {
-	const { postData } = data
+  const { postData } = data
 
   return (
     <Layout>
