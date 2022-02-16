@@ -1,105 +1,103 @@
 import type { GatsbyConfig } from "gatsby"
 
-const plugins: GatsbyConfig['plugins'] = [
-  `gatsby-plugin-typescript`,
-  `gatsby-plugin-typegen`,
-  `gatsby-plugin-sass`,
-  `gatsby-plugin-dts-css-modules`,
-  `gatsby-plugin-image`,
-  `gatsby-transformer-json`,
+const plugins: GatsbyConfig["plugins"] = [
+  "gatsby-plugin-typescript",
+  "gatsby-plugin-typegen",
+  "gatsby-plugin-sass",
+  "gatsby-plugin-dts-css-modules",
+  "gatsby-plugin-image",
+  "gatsby-transformer-json",
   {
-    resolve: `gatsby-source-filesystem`,
+    resolve: "gatsby-source-filesystem",
     options: {
       path: `${__dirname}/content/blog`,
-      name: `blog`,
-    },
+      ame: "blog"
+    }
   },
   {
-    resolve: `gatsby-source-filesystem`,
+    resolve: "gatsby-source-filesystem",
     options: {
       path: `${__dirname}/content/draft`,
-      name: `draft`,
-    },
+      name: "draft"
+    }
   },
   {
-    resolve: `gatsby-source-filesystem`,
+    resolve: "gatsby-source-filesystem",
     options: {
-      name: `images`,
-      path: `${__dirname}/src/images`,
-    },
+      name: "images",
+      path: `${__dirname}/src/images`
+    }
   },
   {
-    resolve: `gatsby-source-filesystem`,
+    resolve: "gatsby-source-filesystem",
     options: {
-      path: `static`,
-      name: `static`,
-    },
+      path: "static",
+      name: "static"
+    }
   },
   {
-    resolve: `gatsby-transformer-remark`,
+    resolve: "gatsby-transformer-remark",
     options: {
       plugins: [
         {
-          resolve: `gatsby-remark-images`,
+          resolve: "gatsby-remark-images",
           options: {
-            maxWidth: 630,
-          },
+            maxWidth: 630
+          }
         },
         {
-          resolve: `gatsby-remark-responsive-iframe`,
+          resolve: "gatsby-remark-responsive-iframe",
           options: {
-            wrapperStyle: `margin-bottom: 1.0725rem`,
-          },
+            wrapperStyle: "margin-bottom: 1.0725rem"
+          }
         },
-        `gatsby-remark-code-titles`,
+        "gatsby-remark-code-titles",
         {
-          resolve: `gatsby-remark-autolink-headers`,
+          resolve: "gatsby-remark-autolink-headers",
           options: {
-            offsetY: `30`,
+            offsetY: "30",
             icon: false,
-            className: `custom-class`,
-            maintainCase: false,
-          },
+            className: "custom-class",
+            maintainCase: false
+          }
         },
         {
-          resolve: `gatsby-remark-prismjs`,
+          resolve: "gatsby-remark-prismjs",
           options: {
-            showLineNumbers: true,
-          },
+            showLineNumbers: true
+          }
         },
-        `gatsby-remark-copy-linked-files`,
-        `gatsby-remark-smartypants`,
+        "gatsby-remark-copy-linked-files",
+        "gatsby-remark-smartypants",
         {
-        resolve: `gatsby-remark-emojis`,
-        options: {
-          active: true,
-          class  : 'emoji-icon',
-            size   : 64,
-            styles : {
-              display      : 'inline',
-              margin       : '0',
-              'margin-top' : '0',
-              position     : 'relative',
-              top          : '0.125rem',
-              width        : '1.4rem',
-              border       : 'none'
+          resolve: "gatsby-remark-emojis",
+          options: {
+            active: true,
+            class: "emoji-icon",
+            size: 64,
+            styles: {
+              display: "inline",
+              margin: "0",
+              position: "relative",
+              top: "0.125rem",
+              width: "1.4rem",
+              border: "none"
             }
+          }
         }
-
-        }
-      ],
-    },
+      ]
+    }
   },
-  `gatsby-transformer-sharp`,
-  `gatsby-plugin-sharp`,
+  "gatsby-transformer-sharp",
+  "gatsby-plugin-sharp",
   {
-    resolve: `gatsby-plugin-google-analytics`,
+    resolve: "gatsby-plugin-google-analytics",
     options: {
-      trackingId: `UA-177277170-2`,
-    },
+      trackingId: "UA-177277170-2"
+    }
   },
   {
-    resolve: `gatsby-plugin-feed`,
+    resolve: "gatsby-plugin-feed",
     options: {
       query: `
         {
@@ -116,13 +114,13 @@ const plugins: GatsbyConfig['plugins'] = [
       feeds: [
         {
           serialize: ({ query: { site, allMarkdownRemark } }) => {
-            return allMarkdownRemark.nodes.map(node => {
+            return allMarkdownRemark.nodes.map((node) => {
               return Object.assign({}, node.frontmatter, {
                 description: node.excerpt,
                 date: node.frontmatter.date,
                 url: site.siteMetadata.siteUrl + node.fields.slug,
                 guid: site.siteMetadata.siteUrl + node.fields.slug,
-                custom_elements: [{ "content:encoded": node.html }],
+                custom_elements: [{ "content:encoded": node.html }]
               })
             })
           },
@@ -145,46 +143,42 @@ const plugins: GatsbyConfig['plugins'] = [
               }
             }
           `,
-          output: "/rss.xml",
-        },
-      ],
-    },
+          output: "/rss.xml"
+        }
+      ]
+    }
   },
   {
-    resolve: `gatsby-plugin-manifest`,
+    resolve: "gatsby-plugin-manifest",
     options: {
-      name: `鳥に生まれることができなかった人へ`,
-      short_name: `鳥に生まれることができなかった人へ`,
-      start_url: `/`,
-      background_color: `#ffffff`,
-      theme_color: `#663399`,
-      display: `minimal-ui`,
-      icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
-    },
+      name: "鳥に生まれることができなかった人へ",
+      short_name: "鳥に生まれることができなかった人へ",
+      start_url: "/",
+      background_color: "#ffffff",
+      theme_color: "#663399",
+      display: "minimal-ui",
+      icon: "src/images/gatsby-icon.png"
+    }
   },
-  `gatsby-plugin-offline`,
-  `gatsby-plugin-react-helmet`,
-  `gatsby-plugin-gatsby-cloud`,
+  "gatsby-plugin-offline",
+  "gatsby-plugin-react-helmet",
+  "gatsby-plugin-gatsby-cloud"
 ]
 
-const siteMetadata: GatsbyConfig['siteMetadata'] = {
-  title: `鳥に生まれることができなかった人へ`,
-  description: `ITと趣味`,
-  lang: `ja`,
-  siteUrl: `https://blog.toriwatari.work/page/1/`,
-  locale: `ja_JP`,
+const siteMetadata: GatsbyConfig["siteMetadata"] = {
+  title: "鳥に生まれることができなかった人へ",
+  description: "ITと趣味",
+  lang: "ja",
+  siteUrl: "https://blog.toriwatari.work/page/1/",
+  locale: "ja_JP",
   author: {
-    name: `Kento Yoshizu`,
-  },
-  //description: `A starter blog demonstrating what Gatsby can do.`,
-  social: {
-    //twitter: `kylemathews`,
-  },
+    name: "Kento Yoshizu"
+  }
 }
 
 const config: GatsbyConfig = {
   siteMetadata,
-  plugins,
+  plugins
 }
 
 export default config

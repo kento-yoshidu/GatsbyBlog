@@ -749,6 +749,7 @@ type SitePluginPluginOptions = {
   readonly namedExport: Maybe<Scalars['Boolean']>;
   readonly banner: Maybe<Scalars['String']>;
   readonly path: Maybe<Scalars['String']>;
+  readonly ame: Maybe<Scalars['String']>;
   readonly name: Maybe<Scalars['String']>;
   readonly maxWidth: Maybe<Scalars['Int']>;
   readonly linkImagesToOriginal: Maybe<Scalars['Boolean']>;
@@ -839,7 +840,6 @@ type SitePluginPluginOptionsPluginsPluginOptions = {
 type SitePluginPluginOptionsPluginsPluginOptionsStyles = {
   readonly display: Maybe<Scalars['String']>;
   readonly margin: Maybe<Scalars['String']>;
-  readonly margin_top: Maybe<Scalars['String']>;
   readonly position: Maybe<Scalars['String']>;
   readonly top: Maybe<Scalars['String']>;
   readonly width: Maybe<Scalars['String']>;
@@ -849,7 +849,6 @@ type SitePluginPluginOptionsPluginsPluginOptionsStyles = {
 type SitePluginPluginOptionsStyles = {
   readonly display: Maybe<Scalars['String']>;
   readonly margin: Maybe<Scalars['String']>;
-  readonly margin_top: Maybe<Scalars['String']>;
   readonly position: Maybe<Scalars['String']>;
   readonly top: Maybe<Scalars['String']>;
   readonly width: Maybe<Scalars['String']>;
@@ -2806,6 +2805,7 @@ type SitePluginPluginOptionsFilterInput = {
   readonly namedExport: Maybe<BooleanQueryOperatorInput>;
   readonly banner: Maybe<StringQueryOperatorInput>;
   readonly path: Maybe<StringQueryOperatorInput>;
+  readonly ame: Maybe<StringQueryOperatorInput>;
   readonly name: Maybe<StringQueryOperatorInput>;
   readonly maxWidth: Maybe<IntQueryOperatorInput>;
   readonly linkImagesToOriginal: Maybe<BooleanQueryOperatorInput>;
@@ -2900,7 +2900,6 @@ type SitePluginPluginOptionsPluginsPluginOptionsFilterInput = {
 type SitePluginPluginOptionsPluginsPluginOptionsStylesFilterInput = {
   readonly display: Maybe<StringQueryOperatorInput>;
   readonly margin: Maybe<StringQueryOperatorInput>;
-  readonly margin_top: Maybe<StringQueryOperatorInput>;
   readonly position: Maybe<StringQueryOperatorInput>;
   readonly top: Maybe<StringQueryOperatorInput>;
   readonly width: Maybe<StringQueryOperatorInput>;
@@ -2910,7 +2909,6 @@ type SitePluginPluginOptionsPluginsPluginOptionsStylesFilterInput = {
 type SitePluginPluginOptionsStylesFilterInput = {
   readonly display: Maybe<StringQueryOperatorInput>;
   readonly margin: Maybe<StringQueryOperatorInput>;
-  readonly margin_top: Maybe<StringQueryOperatorInput>;
   readonly position: Maybe<StringQueryOperatorInput>;
   readonly top: Maybe<StringQueryOperatorInput>;
   readonly width: Maybe<StringQueryOperatorInput>;
@@ -3173,6 +3171,7 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.namedExport'
   | 'pluginCreator.pluginOptions.banner'
   | 'pluginCreator.pluginOptions.path'
+  | 'pluginCreator.pluginOptions.ame'
   | 'pluginCreator.pluginOptions.name'
   | 'pluginCreator.pluginOptions.maxWidth'
   | 'pluginCreator.pluginOptions.linkImagesToOriginal'
@@ -3197,7 +3196,6 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.size'
   | 'pluginCreator.pluginOptions.styles.display'
   | 'pluginCreator.pluginOptions.styles.margin'
-  | 'pluginCreator.pluginOptions.styles.margin_top'
   | 'pluginCreator.pluginOptions.styles.position'
   | 'pluginCreator.pluginOptions.styles.top'
   | 'pluginCreator.pluginOptions.styles.width'
@@ -3808,6 +3806,7 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.namedExport'
   | 'pluginOptions.banner'
   | 'pluginOptions.path'
+  | 'pluginOptions.ame'
   | 'pluginOptions.name'
   | 'pluginOptions.maxWidth'
   | 'pluginOptions.linkImagesToOriginal'
@@ -3832,7 +3831,6 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.size'
   | 'pluginOptions.styles.display'
   | 'pluginOptions.styles.margin'
-  | 'pluginOptions.styles.margin_top'
   | 'pluginOptions.styles.position'
   | 'pluginOptions.styles.top'
   | 'pluginOptions.styles.width'
@@ -4358,125 +4356,11 @@ type ExportImportJsonSortInput = {
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }> };
 
 type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }> };
-
-type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
-
-type TagsPageQueryVariables = Exact<{
-  tag: Maybe<Scalars['String']>;
-}>;
-
-
-type TagsPageQuery = { readonly allMarkdownRemark: { readonly group: ReadonlyArray<(
-      Pick<MarkdownRemarkGroupConnection, 'fieldValue' | 'totalCount'>
-      & { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<Pick<Frontmatter, 'tags'>> }> }
-    )> } };
-
-type SeriesPagesQueryVariables = Exact<{
-  series: Maybe<Scalars['String']>;
-}>;
-
-
-type SeriesPagesQuery = { readonly allMarkdownRemark: { readonly group: ReadonlyArray<(
-      Pick<MarkdownRemarkGroupConnection, 'fieldValue' | 'totalCount'>
-      & { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<Pick<Frontmatter, 'seriesSlug' | 'seriesName'>> }> }
-    )> } };
-
-type BlogPostBySlugQueryVariables = Exact<{
-  id: Scalars['String'];
-  previousPostId: Maybe<Scalars['String']>;
-  nextPostId: Maybe<Scalars['String']>;
-}>;
-
-
-type BlogPostBySlugQuery = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }>, readonly markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'html' | 'tableOfContents'>
-    & { readonly frontmatter: Maybe<Pick<Frontmatter, 'title' | 'postdate' | 'update' | 'description' | 'seriesSlug' | 'seriesName' | 'tags'>> }
-  )>, readonly previous: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }>, readonly next: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }> };
-
-type DraftBlogPostBySlugQueryVariables = Exact<{
-  id: Scalars['String'];
-  previousPostId: Maybe<Scalars['String']>;
-  nextPostId: Maybe<Scalars['String']>;
-}>;
-
-
-type DraftBlogPostBySlugQuery = { readonly markdownRemark: Maybe<(
-    Pick<MarkdownRemark, 'html' | 'tableOfContents'>
-    & { readonly frontmatter: Maybe<Pick<Frontmatter, 'title' | 'postdate' | 'update' | 'description' | 'seriesSlug' | 'seriesName' | 'tags'>> }
-  )>, readonly previous: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }>, readonly next: Maybe<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'title'>> }> };
-
-type DraftPagesQueryVariables = Exact<{
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-}>;
-
-
-type DraftPagesQuery = { readonly postData: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
-
-type SeriesQueryVariables = Exact<{
-  seriesSlug: Scalars['String'];
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-}>;
-
-
-type SeriesQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
-
-type PagesQueryVariables = Exact<{
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-}>;
-
-
-type PagesQuery = { readonly postData: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
-
-type TagQueryVariables = Exact<{
-  tag: Scalars['String'];
-  limit: Scalars['Int'];
-  skip: Scalars['Int'];
-}>;
-
-
-type TagQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
-
-type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
-
-type GatsbyImageSharpFixed_tracedSVGFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
-
-type GatsbyImageSharpFixed_withWebpFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
-
-type GatsbyImageSharpFixed_withWebp_tracedSVGFragment = Pick<ImageSharpFixed, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
-
-type GatsbyImageSharpFixed_noBase64Fragment = Pick<ImageSharpFixed, 'width' | 'height' | 'src' | 'srcSet'>;
-
-type GatsbyImageSharpFixed_withWebp_noBase64Fragment = Pick<ImageSharpFixed, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
-
-type GatsbyImageSharpFluidFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
-
-type GatsbyImageSharpFluidLimitPresentationSizeFragment = { maxHeight: ImageSharpFluid['presentationHeight'], maxWidth: ImageSharpFluid['presentationWidth'] };
-
-type GatsbyImageSharpFluid_tracedSVGFragment = Pick<ImageSharpFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
-
-type GatsbyImageSharpFluid_withWebpFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
-
-type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_4_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
+type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
 }
