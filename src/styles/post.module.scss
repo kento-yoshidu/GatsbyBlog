@@ -2,15 +2,17 @@
 
 .blogPost {
   width: unquote("max(52%, 324px)");
-	margin-left: 13vw;
+  margin-left: 13vw;
   margin-right: 5vw;
-	h1,
+
+  h1,
   h2,
   h3 {
     padding-top: 10px;
     line-height: 1.5;
   }
-	h1 {
+
+  h1 {
     width: 95%;
     margin-top: 50px;
     margin-bottom: 30px;
@@ -20,7 +22,8 @@
     border-image-slice: 1;
     font-size: clamp(26px, 5vw, 40px);
   }
-	h2 {
+
+  h2 {
     margin: 50px 0 20px;
     padding: 8px 0 8px 2rem;
     border-left: 10px solid;
@@ -28,11 +31,13 @@
     border-image-slice: 1;
     font-size: clamp(2.1rem, 4.1vw, 3.5rem);
   }
+
   h3 {
     font-size: 2.8rem;
     font-size: clamp(18px, 4vw, 28px);
     margin: 30px 0 20px;
   }
+
   p {
     margin-bottom: 15px;
     font-size: clamp(15px, 3vw, 17.5px);
@@ -40,23 +45,28 @@
     line-height: 1.75;
     text-indent: 0.8rem;
   }
+
   ol {
     padding: 10px 20px;
+
     li {
       font-size: 1.8rem;
       line-height: 1.5;
       margin-bottom: 10px;
     }
   }
+
   ul {
     list-style: none;
     padding: 10px 20px;
+
     li {
       font-size: 1.8rem;
       line-height: 1.5;
       margin-bottom: 10px;
     }
   }
+
   blockquote {
     position: relative;
     width: 85%;
@@ -68,11 +78,13 @@
     border-radius: 3px;
     box-shadow: 0 0 1.5px 1.5px #ddd;
     color: #666;
+
     p {
       margin: 0;
       font-size: clamp(14px, 2vw, 16.5px);
       line-height: 1.6;
     }
+
     &::before {
       position: absolute;
       top: 50%;
@@ -83,8 +95,10 @@
       margin-left: -50px;
     }
   }
+
   table {
     margin: 40px 0;
+
     tr {
       th {
         border: 1px solid #bbb;
@@ -96,6 +110,7 @@
         line-height: 1.3;
         vertical-align: middle;
       }
+
       td {
         padding: 10px 20px;
         font-size: 1.7rem;
@@ -104,6 +119,7 @@
       }
     }
   }
+
   aside {
     position: relative;
     padding: 18px 20px 18px 60px;
@@ -112,11 +128,13 @@
     border-radius: 3px;
     background-color: rgba(#396afc, 0.15);
     box-shadow: 0 0 1.5px 1.5px rgba(#396afc, 0.25);
+
     p {
       margin: 0;
       font-size: clamp(15.5px, 2.5vw, 17px);
       line-height: 1.6;
     }
+
     &::before {
       content: "💡";
       top: 50%;
@@ -133,6 +151,7 @@
       text-align: center;
     }
   }
+
   details {
     width: 90%;
     margin: 20px 0;
@@ -140,12 +159,15 @@
     font-size: 1.6rem;
     border-radius: 5px;
     box-shadow: 0 0 2px 3px #eee;
+
     summary {
       cursor: pointer;
     }
+
     &[open] {
       padding: 15px 0 5px 25px;
     }
+
     &[open] summary {
       margin-bottom: 15px;
     }
@@ -153,62 +175,76 @@
 }
 
 @media (max-width: 768px) {
-	.blogPost {
-		margin: 0 auto 50px;
-		h1 {
+  .blogPost {
+    margin: 0 auto 50px;
+
+    h1 {
       width: 100%;
       margin: 30px 0 20px;
     }
+
     h2 {
       margin: 45px 0 20px;
       padding: 4px 0 4px 1.2rem;
       border-left: 7px solid $main-color2;
     }
+
     h3 {
       margin-bottom: 10px;
       padding: 3px 0;
     }
+
     p {
       margin-bottom: 10px;
     }
+
     ul {
       padding: 5px 15px;
+
       li {
         font-size: 1.4rem;
       }
     }
+
     blockquote {
       width: 80%;
       padding: 10px 12px;
       border-left: 6px solid #bbb;
       border-radius: 0;
+
       &::before {
         display: none;
       }
     }
+
     table {
       display: block;
       overflow-x: scroll;
       white-space: nowrap;
       -webkit-overflow-scrolling: touch;
       margin: 25px auto;
+
       tr {
         th {
           padding: 5px 8px;
           font-size: 1.5rem;
         }
+
         td {
           padding: 5px 8px;
           font-size: 1.4rem;
         }
       }
     }
+
     aside {
       padding: 10px 15px 10px 50px;
       width: 80%;
+
       p {
         line-height: 1.5;
       }
+
       &::before {
         font-size: 1.5rem;
         height: 2.5rem;
@@ -216,13 +252,14 @@
         margin-left: -40px;
       }
     }
-	}	
+  }	
 }
 
 .beforeAndAfter {
   width: unquote("max(50%, 324px)");
   margin-top: 50px;
   margin-left: 15vw;
+
   .before,
   .after {
     display: block;
@@ -232,6 +269,7 @@
     color: #444;
     text-decoration: none;
     transition: 0.25s;
+
     h2 {
       font-size: 2rem;
       letter-spacing: 1px;
@@ -240,15 +278,18 @@
       padding-bottom: 7px;
       margin-bottom: 15px;
     }
+
     .title {
       margin-bottom: 10px;
       font-size: clamp(15px, 2vw, 20px);
       line-height: 1.5;
     }
+
     &:hover {
-      background: rgba(240,240,240,.5)
+      background: rgba(240, 240, 240, 0.5)
     }
   }
+
   .before {
     margin-bottom: 30px;
   }
@@ -257,14 +298,17 @@
 @media screen and (Max-width: 768px) {
   .beforeAndAfter {
     margin: 0 auto;
+
     .before,
     .after {
       padding: 10px 15px;
+
       h2 {
         margin-bottom: 10px;
         font-size: 1.3rem;
       }
     }
+
     .before {
       margin-bottom: 15px;
     }
