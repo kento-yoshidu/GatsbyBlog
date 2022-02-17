@@ -3,7 +3,7 @@
 .postList {
   list-style: none;
   width: clamp(400px, 65vw, 1000px);
-	.postItem {
+  .postItem {
     display: block;
     padding: 30px 50px 30px 40px;
     width: clamp(280px, 85%, 920px);
@@ -11,13 +11,13 @@
     border-bottom: 1px solid #bbb;
     text-decoration: none;
     transition-duration: 0.2s;
-		&:first-of-type {
+    &:first-of-type {
       border-top: 1px solid #bbb;
     }
     &:hover {
       background-color: rgba(200,200,200, .2);
     }
-		.postTitle {
+    .postTitle {
       margin-bottom: 10px;
       a {
         color: #444;
@@ -32,11 +32,11 @@
         }
       }
     }
-		.postInfo {
+    .postInfo {
       .date {
         display: flex;
         margin-bottom: 5px;
-				.post,
+        .post,
         .update {
           font-size: 1.65rem;
           padding: 3px 7px 3px 0px;
@@ -46,13 +46,13 @@
         svg {
           margin-right: 5px;
         }
-			}
+      }
       .description {
         svg {
           margin-right: 5px;
         }
       }
-			.series,
+      .series,
       .tags,
       .description {
         font-size: 1.7rem;
@@ -60,10 +60,10 @@
         padding: 3px 7px 3px 0px;
         margin-bottom: 5px;
         text-decoration: none;
-				span {
+        span {
           margin-right: 10px;
         }
-				a {
+        a {
           color: #444;
           margin-right: 9px;
           line-height: 1.5;
@@ -74,9 +74,9 @@
             -webkit-text-fill-color: rgba(255,255,255,0.0);
           }
         }
-			}
-		}
-	}
+      }
+    }
+  }
 }
 
 @media (max-width: 768px) {
@@ -110,5 +110,5 @@
         }
       }
     }
-	}
+  }
 }
