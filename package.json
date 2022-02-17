@@ -49,6 +49,7 @@
     "typeface-montserrat": "0.0.75"
   },
   "devDependencies": {
+    "@danbruegge/gatsby-plugin-stylelint": "^4.1.0",
     "@types/react-helmet": "^6.1.2",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
@@ -61,6 +62,8 @@
     "gatsby-plugin-dts-css-modules": "^2.2.0",
     "prettier": "2.3.2",
     "prop-types": "^15.8.1",
+    "stylelint": "^14.5.1",
+    "stylelint-config-standard": "^25.0.0",
     "typescript": "^4.4.2"
   },
   "homepage": "https://github.com/gatsbyjs/gatsby-starter-blog#readme",
@@ -81,6 +84,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "lint": "eslint src/**/**.{js,jsx,ts,tsx} gatsby-*.ts"
+    "lint": "eslint src/**/**.{js,jsx,ts,tsx} gatsby-*.ts",
+    "stylelint": "stylelint src/**/**.{css,scss,sass} --config stylelint.config.js --allow-empty-input"
   }
 }
