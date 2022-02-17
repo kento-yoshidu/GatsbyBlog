@@ -7,14 +7,14 @@ const plugins: GatsbyConfig["plugins"] = [
   "gatsby-plugin-dts-css-modules",
   "gatsby-plugin-image",
   "gatsby-transformer-json",
-  {
-    options: {
-      files: [
-        "**/*.{css,sass,scss}"
-      ]
-    },
-    resolve: "@danbruegge/gatsby-plugin-stylelint"
-  },
+  //{
+    //options: {
+      //files: [
+        //"**/*.{css,sass,scss}"
+      //]
+    //},
+    //resolve: "@danbruegge/gatsby-plugin-stylelint"
+  //},
   {
     resolve: "gatsby-source-filesystem",
     options: {
