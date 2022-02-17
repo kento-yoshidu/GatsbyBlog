@@ -1,25 +1,25 @@
 @import "../scss/variables";
 
 .header {
-	margin-top: unquote("max(100px, 8vh)");
-	text-align: center;
-	.headerTitle {
-		margin-bottom: 5vh;
+  margin-top: unquote("max(100px, 8vh)");
+  text-align: center;
+  .headerTitle {
+    margin-bottom: 5vh;
     margin-bottom: unquote("max(5vh, 30px)");
     font-size: clamp(17px, 1.8vw, 30px);
-		font-weight: 100;
+    font-weight: 100;
     line-height: 1.5;
-		letter-spacing: 2px;
-		a {
-			color: #444;
-			&:hover {
+    letter-spacing: 2px;
+    a {
+      color: #444;
+      &:hover {
         background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: rgba(255,255,255,0.0);
-			}
-		}
-	}
-	.pageTitle {
+      }
+    }
+  }
+  .pageTitle {
     display: inline-block;
     margin-bottom: 30px;
     background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);

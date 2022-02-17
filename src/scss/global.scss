@@ -20,21 +20,21 @@ html {
   scroll-behavior: smooth;
 }
 
-.LoadAnimation {
-  animation: fadeIn 1s ease 0s 1 normal;
+.load-animation {
+  animation: fade-in 1s ease 0s 1 normal;
 
-  @keyframes fadeIn {
-    0% { opacity: 0 }
-    100% { opacity: 1 }
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 
-  @-webkit-keyframes fadeIn {
-    0% { opacity: 0 }
-    100% { opacity: 1 }
+  @-webkit-keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
   }
 }
 
-.LoadAnimation {
+.load-animation {
   display: flex;
   justify-content: center;
 }
