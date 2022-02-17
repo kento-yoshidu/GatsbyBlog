@@ -85,6 +85,6 @@
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
     "lint": "eslint src/**/**.{js,jsx,ts,tsx} gatsby-*.ts",
-    "stylelint": "stylelint src/**/**.{css,scss,sass} --config .stylelint.config.js --allow-empty-input"
+    "stylelint": "stylelint src/**/**.{css,scss,sass} --config stylelint.config.js --allow-empty-input"
   }
 }
