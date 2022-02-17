@@ -15,29 +15,29 @@ footer,header,nav,section {
   display:block;
 }
 blockquote, q {
-    quotes:none;
+  quotes:none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-    content:'';
-    content:none;
+  content:'';
+  content:none;
 }
 a {
-    margin:0;
-    padding:0;
-    font-size:100%;
-    vertical-align:baseline;
-    background:transparent;
+  margin:0;
+  padding:0;
+  font-size:100%;
+  vertical-align:baseline;
+  background:transparent;
 }
 table {
-    border-collapse:collapse;
-    border-spacing:0;
+  border-collapse:collapse;
+  border-spacing:0;
 }
 hr {
-    display:block;
-    height:1px;
-    border:0;
-    border-top:1px solid #cccccc;
-    margin:1em 0;
-    padding:0;
+  display:block;
+  height:1px;
+  border:0;
+  border-top:1px solid #cccccc;
+  margin:1em 0;
+  padding:0;
 }

@@ -5,35 +5,35 @@
   width: 50%;
   margin: 100px auto 80px;
   min-height: 1px;
-	.prev,
+  .prev,
   .next {
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     display: inline-block;
     padding: 5px 20px;
     border: 2px solid $main-color2;
     border-radius: 50px;
     transition: .3s;
     text-decoration: none;
-		svg {
-			color: $main-color2;
-			font-size: 1.6rem;
-		}
-		span {
-			font-size: 1.6rem;
-			font-weight: 900;
-			color: $main-color2;
-		}
+    svg {
+      color: $main-color2;
+      font-size: 1.6rem;
+    }
+    span {
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: $main-color2;
+    }
     &:hover {
       background: $main-color2;
-			svg,
-			span {
-				color: #fff;
-			}
-		}
-	}
-	.prev {
+      svg,
+      span {
+        color: #fff;
+      }
+    }
+  }
+  .prev {
     left: 0;
     svg {
       margin-right: 8px;
@@ -45,8 +45,8 @@
       margin-left: 8px;
     }
   }
-	.nationLinks {
-		display: flex;
+  .nationLinks {
+    display: flex;
     justify-content: space-between;
     align-items: center;
     position: absolute;

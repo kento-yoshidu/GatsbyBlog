@@ -1,18 +1,20 @@
 @import "../scss/variables";
 
-.seriesMain,
-.tagsMain {
+.series-main,
+.tags-main {
   width: 55vw;
   margin: 70px auto 100px;
   padding: 50px 0;
-  .seriesList,
-  .tagList {
+
+  .series-list,
+  .tag-list {
     display: flex;
     list-style: none;
     justify-content: flex-start;
     flex-wrap: wrap;
     gap: 10px;
-    .listItem {
+
+    .list-item {
       a {
         display: block;
         padding: 8px 15px;
@@ -20,9 +22,10 @@
         text-decoration: none;
         color: #444;
         font-weight: 500;
-        transition: .3s;
+        transition: 0.3s;
         border: 2.3px solid #888;
         border-radius: 3px;
+
         &:hover {
           color: $main-color2;
           border-color: $main-color2;
@@ -30,23 +33,26 @@
       }
     }
   }
-  .tagList {
-    .listItem {
+
+  .tag-list {
+    .list-item {
       margin-right: 5px;
     }
   }
 }
 
 @media screen and (max-width: 768px) {
-  .seriesMain,
-  .tagsMain {
+  .series-main,
+  .tags-main {
     width: 90vw;
     margin: 30px auto 50px;
     padding: 20px 0;
-    .seriesList,
-    .tagList {
+
+    .series-list,
+    .tag-list {
       gap: 8px;
-      .listItem {
+
+      .list-item {
         a {
           padding: 6px 10px;
           font-size: 1.2rem;

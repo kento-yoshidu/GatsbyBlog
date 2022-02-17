@@ -38,7 +38,7 @@ interface Props {
 }
 
 const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
-  <div className="LoadAnimation">
+  <div className="load-animation">
     <section className={Styles.postList}>
       {postData.nodes.map((post: Node) => {
         const title = post.frontmatter.title || post.fields.slug

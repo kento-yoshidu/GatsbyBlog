@@ -50,7 +50,7 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
         description={post?.frontmatter?.description}
       />
 
-      <div className="LoadAnimation">
+      <div className="load-animation">
         <main
           dangerouslySetInnerHTML={{ __html: post?.html }}
           itemProp="articleBody"
