@@ -5,76 +5,90 @@
   width: 50%;
   margin: 100px auto 80px;
   min-height: 1px;
-  .prev,
-  .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: inline-block;
-    padding: 5px 20px;
-    border: 2px solid $main-color2;
-    border-radius: 50px;
-    transition: .3s;
-    text-decoration: none;
-    svg {
-      color: $main-color2;
-      font-size: 1.6rem;
-    }
+}
+
+.prev {
+  left: 0;
+
+  svg {
+    margin-right: 8px;
+  }
+}
+
+.next {
+  right: 0;
+
+  svg {
+    margin-left: 8px;
+  }
+}
+
+.prev,
+.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: inline-block;
+  padding: 5px 20px;
+  border: 2px solid $main-color2;
+  border-radius: 50px;
+  transition: 0.3s;
+  text-decoration: none;
+
+  svg {
+    color: $main-color2;
+    font-size: 1.6rem;
+  }
+
+  span {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: $main-color2;
+  }
+
+  &:hover {
+    background: $main-color2;
+
+    svg,
     span {
-      font-size: 1.6rem;
-      font-weight: 900;
-      color: $main-color2;
+      color: #fff;
     }
+  }
+}
+
+.nation-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+}
+
+.items {
+  list-style: none;
+  margin: 0 10px;
+
+  .text {
+    padding: 1rem 1.35rem;
+    background-color: $main-color2;
+    color: #fff;
+  }
+
+  .link {
+    a {
+      display: block;
+      padding: 1rem 1.35rem;
+      background-color: #888;
+      color: #fff;
+      text-decoration: none;
+    }
+
     &:hover {
-      background: $main-color2;
-      svg,
-      span {
-        color: #fff;
-      }
-    }
-  }
-  .prev {
-    left: 0;
-    svg {
-      margin-right: 8px;
-    }
-  }
-  .next {
-    right: 0;
-    svg {
-      margin-left: 8px;
-    }
-  }
-  .nationLinks {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 2rem;
-    .items {
-      list-style: none;
-      margin: 0 10px;
-      .text {
-        padding: 1rem 1.35rem;
+      a {
         background-color: $main-color2;
-        color: #fff;
-      }
-      .link {
-        a {
-          display: block;
-          padding: 1rem 1.35rem;
-          background-color: #888;
-          color: #fff;
-          text-decoration: none;
-        }
-        &:hover {
-          a {
-            background-color: $main-color2;
-          }
-        }
       }
     }
   }

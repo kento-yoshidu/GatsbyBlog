@@ -1,4 +1,4 @@
-.mobilePagination {
+.mobile-pagination {
   position: relative;
   display: flex;
   justify-content: space-around;
@@ -7,10 +7,11 @@
   margin: 20px 0 50px;
   font-size: 2.5rem;
   font-weight: 100;
-  .topButton,
-  .lastButton,
-  .prevButton,
-  .nextButton {
+
+  .top-button,
+  .last-button,
+  .prev-button,
+  .next-button {
     position: absolute;
     width: 20%;
     padding: 8px 0;
@@ -18,26 +19,31 @@
     border: 1px solid #ccc;
     border-radius: 2px;
     text-align: center;
+
     svg {
       color: #888;
     }
   }
-  .topButton {
+
+  .top-button {
     left: 2.2%;
   }
-  .prevButton {
+
+  .prev-button {
     left: 27%;
   }
-  .nextButton {
+
+  .next-button {
     right: 27%;
   }
-  .lastButton {
+
+  .last-button {
     right: 2.2%;
   }
 }
 
-@media screen and (min-width: 768px) {
-  .mobilePagination {
+@media (min-width: 768px) {
+  .mobile-pagination {
     display: none;
   }
 }

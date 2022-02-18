@@ -2,7 +2,6 @@
 export const postList: string;
 export const postItem: string;
 export const postTitle: string;
-export const postInfo: string;
 export const date: string;
 export const post: string;
 export const update: string;

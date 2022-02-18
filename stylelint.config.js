@@ -13,6 +13,7 @@ module.exports = {
         "tailwind"
       ]
     }],
-    "indentation": 2
+    "indentation": 2,
+    "color-function-notation": "legacy"
   }
 }

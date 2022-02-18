@@ -1,114 +1,124 @@
 @import "../scss/variables";
 
-.postList {
+.post-list {
   list-style: none;
   width: clamp(400px, 65vw, 1000px);
-  .postItem {
-    display: block;
-    padding: 30px 50px 30px 40px;
-    width: clamp(280px, 85%, 920px);
-    margin: 0 auto;
-    border-bottom: 1px solid #bbb;
-    text-decoration: none;
-    transition-duration: 0.2s;
-    &:first-of-type {
-      border-top: 1px solid #bbb;
-    }
+}
+
+.post-item {
+  display: block;
+  padding: 30px 50px 30px 40px;
+  width: clamp(280px, 85%, 920px);
+  margin: 0 auto;
+  border-bottom: 1px solid #bbb;
+  text-decoration: none;
+  transition-duration: 0.2s;
+
+  &:first-of-type {
+    border-top: 1px solid #bbb;
+  }
+
+  &:hover {
+    background-color: rgba(200, 200, 200, 20%);
+  }
+}
+
+.post-title {
+  margin-bottom: 10px;
+
+  a {
+    color: #444;
+    font-size: 3rem;
+    font-size: clamp(2rem, 3vw, 3.5rem);
+    font-weight: 500;
+    line-height: 1.5;
+
     &:hover {
-      background-color: rgba(200,200,200, .2);
+      background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+      background-clip: text;
+      -webkit-text-fill-color: rgba(255, 255, 255, 0%);
     }
-    .postTitle {
-      margin-bottom: 10px;
-      a {
-        color: #444;
-        font-size: 3rem;
-        font-size: clamp(2rem, 3vw, 3.5rem);
-        font-weight: 500;
-        line-height: 1.5;
-        &:hover {
-          background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
-          background-clip: text;
-          -webkit-text-fill-color: rgba(255,255,255,0.0);
-        }
-      }
-    }
-    .postInfo {
-      .date {
-        display: flex;
-        margin-bottom: 5px;
-        .post,
-        .update {
-          font-size: 1.65rem;
-          padding: 3px 7px 3px 0px;
-          margin-right: 20px;
-          text-decoration: none;
-        }
-        svg {
-          margin-right: 5px;
-        }
-      }
-      .description {
-        svg {
-          margin-right: 5px;
-        }
-      }
-      .series,
-      .tags,
-      .description {
-        font-size: 1.7rem;
-        line-height: 1.5;
-        padding: 3px 7px 3px 0px;
-        margin-bottom: 5px;
-        text-decoration: none;
-        span {
-          margin-right: 10px;
-        }
-        a {
-          color: #444;
-          margin-right: 9px;
-          line-height: 1.5;
-          transition-duration: 0.1s;
-          &:hover {
-            background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
-            background-clip: text;
-            -webkit-text-fill-color: rgba(255,255,255,0.0);
-          }
-        }
-      }
+  }
+}
+
+.date {
+  display: flex;
+  margin-bottom: 5px;
+
+  .post,
+  .update {
+    font-size: 1.65rem;
+    padding: 3px 7px 3px 0;
+    margin-right: 20px;
+    text-decoration: none;
+  }
+
+  svg {
+    margin-right: 5px;
+  }
+}
+
+.description {
+  svg {
+    margin-right: 5px;
+  }
+}
+
+.series,
+.tags,
+.description {
+  font-size: 1.7rem;
+  line-height: 1.5;
+  padding: 3px 7px 3px 0;
+  margin-bottom: 5px;
+  text-decoration: none;
+
+  span {
+    margin-right: 10px;
+  }
+
+  a {
+    color: #444;
+    margin-right: 9px;
+    line-height: 1.5;
+    transition-duration: 0.1s;
+
+    &:hover {
+      background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+      background-clip: text;
+      -webkit-text-fill-color: rgba(255, 255, 255, 0%);
     }
   }
 }
 
 @media (max-width: 768px) {
-  .postList {
-    .postItem {
-      margin-bottom: 20px;
-      padding: 8px 15px;
-      .postInfo {
-        flex-direction: column;
-        margin: 0;
-        .date {
-          .post,
-          .update {
-            font-size: 1.35rem;
-            padding: 0;
-            margin-bottom: 5px;
-          }
-        }
-        .series,
-        .tags,
-        .description {
-          margin-bottom: 5px;
-          padding: 0;
-          font-size: 1.35rem;
-          span {
-            margin-right: 10px;
-          }
-          a {
-            margin: 0 5px;
-          }
-        }
-      }
+  .post-item {
+    margin-bottom: 20px;
+    padding: 8px 15px;
+  }
+
+  .date {
+    .post,
+    .update {
+      font-size: 1.35rem;
+      padding: 0;
+      margin-bottom: 5px;
+    }
+  }
+
+  .series,
+  .tags,
+  .description {
+    margin-bottom: 5px;
+    padding: 0;
+    font-size: 1.35rem;
+
+    span {
+      margin-right: 10px;
+    }
+
+    a {
+      margin: 0 5px;
     }
   }
 }
