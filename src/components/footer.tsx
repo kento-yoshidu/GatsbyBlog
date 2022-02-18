@@ -27,7 +27,7 @@ const Footer: React.VFC = () => {
 
   return (
     <footer className={Styles.footer}>
-      <h1>
+      <h1 className={Styles.footerTitle}>
         <Link to="/page/1/">
           { site.siteMetadata.title }
         </Link>

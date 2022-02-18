@@ -1,11 +1,13 @@
-.countInfo {
+.count-info {
   margin: 0 auto 50px;
   font-size: clamp(15px, 1.8vw, 22px);
   text-align: center;
-  .page {
-    margin: 10px 0 20px;
-    span {
-      font-size: clamp(23px, 2vw, 35px);
-    }
+}
+
+.page {
+  margin: 10px 0 20px;
+
+  span {
+    font-size: clamp(23px, 2vw, 35px);
   }
 }

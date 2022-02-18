@@ -1,6 +1,6 @@
 @import "../scss/variables";
 
-.blogPost {
+.blog-post {
   width: unquote("max(52%, 324px)");
   margin-left: 13vw;
   margin-right: 5vw;
@@ -175,7 +175,7 @@
 }
 
 @media (max-width: 768px) {
-  .blogPost {
+  .blog-post {
     margin: 0 auto 50px;
 
     h1 {
@@ -252,51 +252,51 @@
         margin-left: -40px;
       }
     }
-  }	
+  }
 }
 
-.beforeAndAfter {
+.before-and-after {
   width: unquote("max(50%, 324px)");
   margin-top: 50px;
   margin-left: 15vw;
+}
 
-  .before,
-  .after {
-    display: block;
-    padding: 15px 19px 5px;
-    border: 2px solid #bbb;
-    border-radius: 3px;
-    color: #444;
-    text-decoration: none;
-    transition: 0.25s;
+.before {
+  margin-bottom: 30px;
+}
 
-    h2 {
-      font-size: 2rem;
-      letter-spacing: 1px;
-      color: #666;
-      border-bottom: 3px dotted $main-color2;
-      padding-bottom: 7px;
-      margin-bottom: 15px;
-    }
+.before,
+.after {
+  display: block;
+  padding: 15px 19px 5px;
+  border: 2px solid #bbb;
+  border-radius: 3px;
+  color: #444;
+  text-decoration: none;
+  transition: 0.25s;
 
-    .title {
-      margin-bottom: 10px;
-      font-size: clamp(15px, 2vw, 20px);
-      line-height: 1.5;
-    }
-
-    &:hover {
-      background: rgba(240, 240, 240, 0.5)
-    }
+  h2 {
+    font-size: 2rem;
+    letter-spacing: 1px;
+    color: #666;
+    border-bottom: 3px dotted $main-color2;
+    padding-bottom: 7px;
+    margin-bottom: 15px;
   }
 
-  .before {
-    margin-bottom: 30px;
+  .title {
+    margin-bottom: 10px;
+    font-size: clamp(15px, 2vw, 20px);
+    line-height: 1.5;
+  }
+
+  &:hover {
+    background: rgba(240, 240, 240, 50%);
   }
 }
 
-@media screen and (Max-width: 768px) {
-  .beforeAndAfter {
+@media screen and (max-width: 768px) {
+  .before-and-after {
     margin: 0 auto;
 
     .before,

@@ -3,41 +3,43 @@
 .header {
   margin-top: unquote("max(100px, 8vh)");
   text-align: center;
-  .headerTitle {
-    margin-bottom: 5vh;
-    margin-bottom: unquote("max(5vh, 30px)");
-    font-size: clamp(17px, 1.8vw, 30px);
-    font-weight: 100;
-    line-height: 1.5;
-    letter-spacing: 2px;
-    a {
-      color: #444;
-      &:hover {
-        background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: rgba(255,255,255,0.0);
-      }
+}
+
+.header-title {
+  margin-bottom: 5vh;
+  margin-bottom: unquote("max(5vh, 30px)");
+  font-size: clamp(17px, 1.8vw, 30px);
+  font-weight: 100;
+  line-height: 1.5;
+  letter-spacing: 2px;
+
+  a {
+    color: #444;
+
+    &:hover {
+      background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+      background-clip: text;
+      -webkit-text-fill-color: rgba(255, 255, 255, 0%);
     }
-  }
-  .pageTitle {
-    display: inline-block;
-    margin-bottom: 30px;
-    background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: rgba(255,255,255,0.0);
-    font-size: clamp(30px, 3vw, 38px);
-    font-weight: 500;
-    letter-spacing: 7px;
-    line-height: 1.4;
   }
 }
 
-@media screen and (max-width: 768px) {
-  .header {
-    .pageTitle {
-      width: 80%;
-      margin: 0 auto;
-      letter-spacing: 2px;
-    }
+.page-title {
+  display: inline-block;
+  margin-bottom: 30px;
+  background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+  background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0%);
+  font-size: clamp(30px, 3vw, 38px);
+  font-weight: 500;
+  letter-spacing: 7px;
+  line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    width: 80%;
+    margin: 0 auto;
+    letter-spacing: 2px;
   }
 }
