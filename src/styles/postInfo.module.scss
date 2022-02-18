@@ -5,12 +5,12 @@
   margin-left: 15vw;
   width: unquote("max(50%, 324px)");
 
-  .series {
-    font-size: clamp(15px, 2vw, 18px);
+  svg {
+    margin-right: 10px;
+  }
 
-    svg {
-      margin-right: 10px;
-    }
+  p {
+    margin-right: 20px;
 
     a {
       color: #444;
@@ -22,72 +22,54 @@
       }
     }
   }
+}
 
-  .post-title {
-    display: inline-block;
-    background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
-    background-clip: text;
-    -webkit-text-fill-color: rgba(255, 255, 255, 0%);
-    margin: 15px 0;
-    font-size: clamp(24px, 2.5vw, 33px);
-    font-weight: 400;
-    letter-spacing: 1px;
-    line-height: 1.5;
-  }
+.tags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+  font-size: clamp(15px, 1.8vw, 18px);
+  line-height: 1.5;
+}
 
-  .date-info {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 12px;
-    font-size: clamp(15px, 1.3vw, 17px);
+.series {
+  font-size: clamp(15px, 2vw, 18px);
+}
 
-    p {
-      margin-right: 30px;
-      letter-spacing: 0.5px;
+.post-title {
+  display: inline-block;
+  background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+  background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0%);
+  margin: 15px 0;
+  font-size: clamp(24px, 2.5vw, 33px);
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
 
-      svg {
-        margin-right: 10px;
-      }
-    }
-  }
+.date-info {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  font-size: clamp(15px, 1.3vw, 17px);
 
-  .tags {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    flex-wrap: wrap;
-    margin: 0 0 12px;
-    font-size: clamp(15px, 1.8vw, 18px);
-    line-height: 1.5;
-
-    svg {
-      margin-right: 10px;
-    }
-
-    p {
-      margin-right: 20px;
-
-      a {
-        color: #444;
-
-        &:hover {
-          background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
-          background-clip: text;
-          -webkit-text-fill-color: rgba(255, 255, 255, 0%);
-        }
-      }
-    }
-  }
-
-  .description {
-    width: unquote("max(300px, 90%)");
-    font-size: clamp(13.5px, 1.4vw, 17px);
-    line-height: 1.5;
+  p {
+    margin-right: 30px;
+    letter-spacing: 0.5px;
 
     svg {
       margin-right: 10px;
     }
   }
+}
+
+.description {
+  width: unquote("max(300px, 90%)");
+  font-size: clamp(13.5px, 1.4vw, 17px);
+  line-height: 1.5;
 }
 
 @media (max-width: 768px) {

@@ -1,54 +1,63 @@
 @import "../scss/variables";
 
 .footer {
-  background: #444;
-  color: #ccc;
   margin-top: 30px;
   padding-top: 40px;
   padding-bottom: 40px;
+  background: #444;
+  color: #ccc;
   line-height: 1.5;
+
   a {
     color: #ccc;
     transition-duration: 0.1s;
+
     &:hover {
       color: $main-color2;
     }
   }
-  h1 {
+
+  .footer-title {
     width: unquote("max(50%, 324px)");
     margin: 0 auto 20px;
     font-size: clamp(17px, 2.8vw, 28px);
     font-weight: 100;
     letter-spacing: 2px;
   }
-  .link {
-    width: unquote("max(288px, 50%)");
-    margin: 10px auto;
+}
+
+.link {
+  width: unquote("max(288px, 50%)");
+  margin: 10px auto;
+}
+
+.external-link {
+  svg {
+    font-size: 3rem;
   }
-  .externalLink {
+}
+
+.internal-link,
+.meta-link {
+  display: flex;
+  flex-wrap: wrap;
+
+  a {
+    margin-right: 25px;
+    margin-bottom: 5px;
+    font-size: clamp(14px, 2vw, 17px);
+
     svg {
-      font-size: 3rem;
+      margin-right: 5px;
     }
   }
-  .internalLink,
-  .metaLink {
-    display: flex;
-    flex-wrap: wrap;
-    a {
-      margin-right: 25px;
-      margin-bottom: 5px;
-      font-size: clamp(14px, 2vw, 17px);
-      svg {
-        margin-right: 5px;
-      }
-    }
-  }
-  .copyright {
-    margin-top: 30px;
-    font-size: clamp(15px, 1.4vw, 17px);
-    letter-spacing: .5px;
-    text-align: center;
-  }
+}
+
+.copyright {
+  margin-top: 30px;
+  font-size: clamp(15px, 1.4vw, 17px);
+  letter-spacing: 0.5px;
+  text-align: center;
 }
 
 @media (max-width: 768px) {
