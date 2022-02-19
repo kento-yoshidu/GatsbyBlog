@@ -7,6 +7,7 @@ seriesSlug: "HelloWeb"
 description: "CSSの要素セレクターとクラスセレクター、ユニバーサルセレクターについて学習します。"
 tags: ["CSS"]
 keywords: ["CSS", "セレクター"]
+published: true
 ---
 
 # CSSのセレクターについて
