@@ -4,7 +4,7 @@ postdate: "2021-07-30"
 update: "2022-02-12"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
-description: "HTMLとCSSを、何も知らないところから学ぶシリーズです。基本的なPC操作が可能であれば始められます。"
+description: "HTMLとCSSを何も知らないところから学ぶシリーズです。基本的なPC操作が可能であれば始められます。"
 tags: ["HTML", "CSS"]
 keywords: ["HTML", "CSS"]
 published: true

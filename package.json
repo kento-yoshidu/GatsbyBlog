@@ -49,7 +49,6 @@
     "typeface-montserrat": "0.0.75"
   },
   "devDependencies": {
-    "@danbruegge/gatsby-plugin-stylelint": "^4.1.0",
     "@types/react-helmet": "^6.1.2",
     "@typescript-eslint/eslint-plugin": "^5.12.0",
     "@typescript-eslint/parser": "^5.12.0",
