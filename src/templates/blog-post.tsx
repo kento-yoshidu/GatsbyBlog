@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 import PostInfo from "../components/postInfo"
-import IO from "../lib/intersectionObserver"
+import intersectionObserver from "../lib/intersectionObserver"
 
 import * as Styles from "../styles/post.module.scss"
 import * as TableStyles from "../styles/tableOfContent.module.scss"
@@ -22,7 +22,7 @@ interface Props {
 
 const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
   useEffect(() => {
-    IO()
+    intersectionObserver()
   }, [])
 
   const post = data.markdownRemark
