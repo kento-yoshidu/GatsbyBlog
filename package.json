@@ -59,6 +59,7 @@
     "eslint-loader": "^4.0.2",
     "eslint-plugin-react": "^7.28.0",
     "gatsby-plugin-dts-css-modules": "^2.2.0",
+    "postcss-scss": "^4.0.3",
     "prettier": "2.3.2",
     "prop-types": "^15.8.1",
     "stylelint": "^14.5.1",
@@ -83,7 +84,7 @@
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
-    "lint": "eslint src/**/**.{js,jsx,ts,tsx} gatsby-*.ts",
+    "eslint": "eslint src/**/**.{js,jsx,ts,tsx} gatsby-*.ts",
     "stylelint": "stylelint src/**/**.{css,scss,sass} --config stylelint.config.js --allow-empty-input"
   }
 }

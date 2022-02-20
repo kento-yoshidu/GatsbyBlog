@@ -3,7 +3,7 @@ import { Link } from "gatsby"
 
 import * as Styles from "../styles/mobilePagination.module.scss"
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faAngleLeft,
   faAngleDoubleLeft,
@@ -32,14 +32,14 @@ const MobilePagination: React.VFC<Props> = ({
   tag,
   series
 }) => {
-  let topButton,
-      topPath,
-      lastButton,
-      lastPath,
-      prevButton,
-      prevPath,
-      nextButton,
-      nextPath
+  let topButton
+  let topPath
+  let lastButton
+  let lastPath
+  let prevButton
+  let prevPath
+  let nextButton
+  let nextPath
 
   if (!isFirst) {
     if (!tag && !series) {

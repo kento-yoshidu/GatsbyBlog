@@ -8,7 +8,7 @@ import PageInfo from "../components/pageInfo"
 import PostList from "../components/postList"
 import MobilePagination from "../components/mobilePagination"
 
-import type { PageContext } from "../../type"
+import type { PageContext } from "../types/type"
 
 interface Props {
   data: GatsbyTypes.PagesQuery,
