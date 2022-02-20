@@ -1,8 +1,9 @@
 module.exports = {
   "extends": [
-    "stylelint-config-standard"
+    "stylelint-config-standard",
   ],
   "defaultSeverity": "warning",
+  "customSyntax": "postcss-scss",
   "ignoreFiles": [
     "**/_reset.scss"
   ],
