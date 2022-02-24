@@ -70,8 +70,8 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
             rel="prev"
             className={Styles.before}
           >
-            <h2>← 前の記事</h2>
-            <p className={Styles.title}>
+            <h2 className={Styles.title}>← 前の記事</h2>
+            <p className={Styles.postTitle}>
               {previous?.frontmatter?.title}
             </p>
           </Link>
@@ -82,8 +82,8 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
             to={next?.fields?.slug}
             className={Styles.after}
           >
-            <h2>次の記事 →</h2>
-            <p className={Styles.title}>
+            <h2 className={Styles.title}>次の記事 →</h2>
+            <p className={Styles.postTitle}>
               {next?.frontmatter?.title}
             </p>
           </Link>

@@ -19,6 +19,7 @@ const PostList = React.memo((
 ) => (
   <li
     key={key}
+    className={Styles.listItem}
   >
     <Link to={slug}>
       {title}
@@ -98,6 +99,7 @@ const Search: React.VFC = () => {
       <div className={Styles.list}>
         <input
           type="text"
+          className={Styles.input}
           onChange={handleInput}
           onClick={() => setShowLists(true)}
         />
@@ -107,7 +109,7 @@ const Search: React.VFC = () => {
             <div className={Styles.inner}>
               <p>キーワード検索</p>
               <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
-              <ul>
+              <ul className={Styles.articleList}>
                 {
                   filteredPosts.map((edge: Edge, i: number) => (
                     <PostList

@@ -11,15 +11,15 @@
 
   p {
     margin-right: 20px;
+  }
 
-    a {
-      color: #444;
+  a {
+    color: #444;
 
-      &:hover {
-        background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
-        background-clip: text;
-        -webkit-text-fill-color: rgba(255, 255, 255, 0%);
-      }
+    &:hover {
+      background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+      background-clip: text;
+      -webkit-text-fill-color: rgba(255, 255, 255, 0);
     }
   }
 }
@@ -42,7 +42,7 @@
   display: inline-block;
   background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
   background-clip: text;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0%);
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
   margin: 15px 0;
   font-size: clamp(24px, 2.5vw, 33px);
   font-weight: 400;
@@ -59,10 +59,10 @@
   p {
     margin-right: 30px;
     letter-spacing: 0.5px;
+  }
 
-    svg {
-      margin-right: 10px;
-    }
+  svg {
+    margin-right: 10px;
   }
 }
 
@@ -75,11 +75,11 @@
 @media (max-width: 768px) {
   .post-info {
     margin: 30px auto 0;
+  }
 
-    .date-info {
-      p:not(:last-child) {
-        margin-bottom: 10px;
-      }
+  .date-info {
+    p:not(:last-child) {
+      margin-bottom: 10px;
     }
   }
 }
