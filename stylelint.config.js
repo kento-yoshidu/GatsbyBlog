@@ -15,6 +15,8 @@ module.exports = {
       ]
     }],
     "indentation": 2,
-    "color-function-notation": "legacy"
+    "color-function-notation": "legacy",
+    "alpha-value-notation": "number",
+    "function-no-unknown": null
   }
 }
