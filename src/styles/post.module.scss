@@ -275,42 +275,42 @@
   text-decoration: none;
   transition: 0.25s;
 
-  h2 {
-    font-size: 2rem;
-    letter-spacing: 1px;
-    color: #666;
-    border-bottom: 3px dotted $main-color2;
-    padding-bottom: 7px;
-    margin-bottom: 15px;
-  }
-
-  .title {
-    margin-bottom: 10px;
-    font-size: clamp(15px, 2vw, 20px);
-    line-height: 1.5;
-  }
-
   &:hover {
     background: rgba(240, 240, 240, 50%);
   }
 }
 
-@media screen and (max-width: 768px) {
+.title {
+  font-size: 2rem;
+  letter-spacing: 1px;
+  color: #666;
+  border-bottom: 3px dotted $main-color2;
+  padding-bottom: 7px;
+  margin-bottom: 15px;
+}
+
+.post-title {
+  margin-bottom: 10px;
+  font-size: clamp(15px, 2vw, 20px);
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
   .before-and-after {
     margin: 0 auto;
+  }
 
-    .before,
-    .after {
-      padding: 10px 15px;
+  .before,
+  .after {
+    padding: 10px 15px;
+  }
 
-      h2 {
-        margin-bottom: 10px;
-        font-size: 1.3rem;
-      }
-    }
+  .title {
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+  }
 
-    .before {
-      margin-bottom: 15px;
-    }
+  .before {
+    margin-bottom: 15px;
   }
 }

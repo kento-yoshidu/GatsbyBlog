@@ -3,5 +3,7 @@ export const wrapper: string;
 export const check: string;
 export const menuBtn: string;
 export const list: string;
+export const input: string;
 export const resultArea: string;
 export const inner: string;
+export const listItem: string;

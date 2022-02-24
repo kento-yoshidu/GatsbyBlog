@@ -7,39 +7,39 @@
   margin: 20px 0 50px;
   font-size: 2.5rem;
   font-weight: 100;
+}
 
-  .top-button,
-  .last-button,
-  .prev-button,
-  .next-button {
-    position: absolute;
-    width: 20%;
-    padding: 8px 0;
-    background-image: linear-gradient(to bottom, #eee, #ddd);
-    border: 1px solid #ccc;
-    border-radius: 2px;
-    text-align: center;
+.top-button,
+.last-button,
+.prev-button,
+.next-button {
+  position: absolute;
+  width: 20%;
+  padding: 8px 0;
+  background-image: linear-gradient(to bottom, #eee, #ddd);
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  text-align: center;
 
-    svg {
-      color: #888;
-    }
+  svg {
+    color: #888;
   }
+}
 
-  .top-button {
-    left: 2.2%;
-  }
+.top-button {
+  left: 2.2%;
+}
 
-  .prev-button {
-    left: 27%;
-  }
+.prev-button {
+  left: 27%;
+}
 
-  .next-button {
-    right: 27%;
-  }
+.next-button {
+  right: 27%;
+}
 
-  .last-button {
-    right: 2.2%;
-  }
+.last-button {
+  right: 2.2%;
 }
 
 @media (min-width: 768px) {

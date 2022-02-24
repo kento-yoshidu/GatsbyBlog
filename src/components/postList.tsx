@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import * as Styles from "../styles/pages.module.scss"
+import * as Styles from "../styles/postList.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFolder,

@@ -4,24 +4,20 @@
   font-size: clamp(13px, 1.8vw, 18px);
   font-weight: 900;
   text-align: center;
-
-  svg {
-    margin-right: 8px;
-  }
-
-  time {
-    margin-left: 25px;
-    font-weight: 700;
-  }
 }
 
-@media screen and (max-width: 768px) {
+.icon {
+  margin-right: 8px;
+}
+
+.time {
+  margin-left: 25px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
   .date-info {
     margin-top: 20px;
-
-    time {
-      margin-left: 15px;
-    }
   }
 }
 
@@ -29,59 +25,57 @@
   width: unquote("max(300px, 50%)");
   margin: clamp(30px, 4vw, 50px) auto clamp(50px, 5vw, 100px);
 
-  h2 {
-    margin: 60px 0 40px;
-    font-size: clamp(25px, 2vw, 32px);
-    text-align: center;
-  }
-
-  h3 {
-    margin: 40px 0 20px;
-    font-size: clamp(20px, 2vw, 25px);
-    line-height: 1.5;
-  }
-
   p {
     margin-bottom: 10px;
     font-size: clamp(16px, 1.8vw, 1.8rem);
     letter-spacing: 0.5px;
     text-indent: 0.8rem;
     line-height: 1.65;
-
-    a {
-      color: #444;
-
-      &:hover {
-        color: $main-color;
-      }
-    }
   }
 
-  ul {
-    width: unquote("max(270px, 88%)");
-    margin: 20px 10px;
-    padding: 20px 25px;
-    border: 1px dotted #aaa;
-    border-radius: 2px;
-    list-style: none;
+  a {
+    color: #444;
 
-    li {
-      margin-bottom: 15px;
-      font-size: clamp(15px, 1.3vw, 17px);
-      line-height: 1.5;
+    &:hover {
+      color: $main-color;
     }
   }
 }
 
-@media (max-width: 768px) {
-  .main {
-    h2 {
-      margin-bottom: 30px;
-    }
+.h2-title {
+  margin: 60px 0 40px;
+  font-size: clamp(25px, 2vw, 32px);
+  text-align: center;
+}
 
-    ul {
-      margin: 20px auto;
-      padding: 15px 20px;
-    }
+.h3-title {
+  margin: 40px 0 20px;
+  font-size: clamp(20px, 2vw, 25px);
+  line-height: 1.5;
+}
+
+.list {
+  width: unquote("max(270px, 88%)");
+  margin: 20px 10px;
+  padding: 20px 25px;
+  border: 1px dotted #aaa;
+  border-radius: 2px;
+  list-style: none;
+
+  li {
+    margin-bottom: 15px;
+    font-size: clamp(15px, 1.3vw, 17px);
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 768px) {
+  .h2-title {
+    margin-bottom: 30px;
+  }
+
+  .list {
+    margin: 20px auto;
+    padding: 15px 20px;
   }
 }

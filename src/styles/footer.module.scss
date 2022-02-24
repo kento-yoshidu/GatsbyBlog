@@ -16,14 +16,14 @@
       color: $main-color2;
     }
   }
+}
 
-  .footer-title {
-    width: unquote("max(50%, 324px)");
-    margin: 0 auto 20px;
-    font-size: clamp(17px, 2.8vw, 28px);
-    font-weight: 100;
-    letter-spacing: 2px;
-  }
+.footer-title {
+  width: unquote("max(50%, 324px)");
+  margin: 0 auto 20px;
+  font-size: clamp(17px, 2.8vw, 28px);
+  font-weight: 100;
+  letter-spacing: 2px;
 }
 
 .link {

@@ -29,14 +29,14 @@
   a {
     color: #444;
     font-size: 3rem;
-    font-size: clamp(2rem, 3vw, 3.5rem);
+    font-size: clamp(1.8rem, 2vw, 3.2rem);
     font-weight: 500;
     line-height: 1.5;
 
     &:hover {
       background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
       background-clip: text;
-      -webkit-text-fill-color: rgba(255, 255, 255, 0%);
+      -webkit-text-fill-color: rgba(255, 255, 255, 0);
     }
   }
 }
@@ -44,21 +44,14 @@
 .date {
   display: flex;
   margin-bottom: 5px;
-
-  .post,
-  .update {
-    font-size: 1.65rem;
-    padding: 3px 7px 3px 0;
-    margin-right: 20px;
-    text-decoration: none;
-  }
-
-  svg {
-    margin-right: 5px;
-  }
 }
 
-.description {
+.post,
+.update {
+  font-size: 1.65rem;
+  padding: 3px 7px 3px 0;
+  margin-right: 20px;
+  text-decoration: none;
   svg {
     margin-right: 5px;
   }
@@ -73,6 +66,10 @@
   margin-bottom: 5px;
   text-decoration: none;
 
+  svg {
+    margin-right: 5px;
+  }
+
   span {
     margin-right: 10px;
   }
@@ -86,7 +83,7 @@
     &:hover {
       background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
       background-clip: text;
-      -webkit-text-fill-color: rgba(255, 255, 255, 0%);
+      -webkit-text-fill-color: rgba(255, 255, 255, 0);
     }
   }
 }
@@ -97,13 +94,11 @@
     padding: 8px 15px;
   }
 
-  .date {
-    .post,
-    .update {
-      font-size: 1.35rem;
-      padding: 0;
-      margin-bottom: 5px;
-    }
+  .post,
+  .update {
+    font-size: 1.35rem;
+    padding: 0;
+    margin-bottom: 5px;
   }
 
   .series,
