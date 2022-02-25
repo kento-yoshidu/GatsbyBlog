@@ -30,12 +30,12 @@
   align-items: center;
   flex-wrap: wrap;
   margin: 0 0 12px;
-  font-size: clamp(15px, 1.8vw, 18px);
+  font-size: clamp(1.5rem, 1.8vw, 1.8rem);
   line-height: 1.5;
 }
 
 .series {
-  font-size: clamp(15px, 2vw, 18px);
+  font-size: clamp(1.5rem, 2vw, 1.8rem);
 }
 
 .post-title {
@@ -44,7 +44,7 @@
   background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
   margin: 15px 0;
-  font-size: clamp(24px, 2.5vw, 33px);
+  font-size: clamp(2.4rem, 2.5vw, 3.3rem);
   font-weight: 400;
   letter-spacing: 1px;
   line-height: 1.5;
@@ -54,7 +54,7 @@
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 12px;
-  font-size: clamp(15px, 1.3vw, 17px);
+  font-size: clamp(1.5rem, 1.3vw, 1.7rem);
 
   p {
     margin-right: 30px;
@@ -68,7 +68,7 @@
 
 .description {
   width: unquote("max(300px, 90%)");
-  font-size: clamp(13.5px, 1.4vw, 17px);
+  font-size: clamp(1.35rem, 1.4vw, 1.7rem);
   line-height: 1.5;
 }
 

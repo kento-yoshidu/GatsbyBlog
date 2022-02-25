@@ -8,7 +8,7 @@
 .header-title {
   margin-bottom: 5vh;
   margin-bottom: unquote("max(5vh, 30px)");
-  font-size: clamp(17px, 1.8vw, 30px);
+  font-size: clamp(1.7rem, 1.8vw, 3rem);
   font-weight: 100;
   line-height: 1.5;
   letter-spacing: 2px;
@@ -30,7 +30,7 @@
   background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
   background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
-  font-size: clamp(30px, 3vw, 38px);
+  font-size: clamp(3rem, 3vw, 3.8rem);
   font-weight: 500;
   letter-spacing: 7px;
   line-height: 1.4;

@@ -22,14 +22,14 @@
 
   svg {
     display: block;
-    font-size: clamp(40px, 3vw, 50px);
+    font-size: clamp(4rem, 3vw, 5rem);
     color: #444;
     transition-duration: 0.1s;
   }
 
   span {
     color: #444;
-    font-size: clamp(20px, 1.6vw, 25px);
+    font-size: clamp(2rem, 1.6vw, 2.5rem);
   }
 
   &:hover {
