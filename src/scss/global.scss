@@ -80,7 +80,7 @@ html {
   padding-left: 2.5em;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .gatsby-highlight {
     font-size: 1.3rem;
     margin: 20px 0 25px;
@@ -88,72 +88,65 @@ html {
 }
 
 .gatsby-code-title {
-  background: $main-color2;
-  color: #ddd;
+  display: table;
   margin-top: 35px;
   margin-bottom: -0.65em;
   padding: 1.5rem 1.8rem 2.5rem;
-  font-size: 1.6rem;
-  line-height: 0.2;
-  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: $main-color2;
+  border-radius: 1px 1px 0 0;
+  color: #ddd;
+  font-size: clamp(1.4rem, 1.5vw, 1.6rem);
   font-weight: 400;
-  border-radius: 2px 2px 0 0;
-  display: table;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  line-height: 0.2;
 }
 
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .gatsby-code-title {
-    padding: 1.2rem 1.5rem 1rem;
     margin-top: 20px;
     margin-bottom: -2rem;
-    font-size: 1.4rem;
+    padding: 1.2rem 1.5rem 1rem;
   }
 }
 
 .warn {
   position: relative;
+  width: 80%;
   padding: 18px 30px 18px 60px;
   margin-bottom: 20px;
-  width: 80%;
-  border-radius: 3px;
   background-color: rgba(red, 0.15);
+  border-radius: 3px;
   box-shadow: 0 0 1.5px 1.5px rgba(red, 0.2);
 
   p {
     margin: 0;
-    font-size: 1.6rem;
+    font-size: clamp(1.3rem, 1.5vw, 1.6rem);
     line-height: 1.6;
   }
 
   &::before {
+    position: absolute;
     content: "❕";
     top: 50%;
-    font-size: 2rem;
-    line-height: 1.6;
     transform: translateY(-50%);
-    position: absolute;
-    z-index: 1;
+    height: 3.5rem;
+    width: 3.5rem;
     margin-left: -50px;
     background-color: rgba(red, 0.4);
     border-radius: 100%;
-    height: 3.5rem;
-    width: 3.5rem;
+    font-size: clamp(1.5rem, 1.8vw, 2rem);
+    line-height: 1.6;
     text-align: center;
+    z-index: 1;
   }
 }
 
 @media (max-width: 768px) {
   .warn {
-    padding: 10px 15px 10px 50px;
     width: 80%;
-
-    p {
-      font-size: 1.3rem;
-      line-height: 1.5;
-    }
+    padding: 10px 15px 10px 50px;
 
     &::before {
-      font-size: 1.5rem;
       height: 2.5rem;
       width: 2.5rem;
       margin-left: -40px;

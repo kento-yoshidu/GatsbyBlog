@@ -1,5 +1,5 @@
 ---
-title: "#9 CSSの基本①（セレクターの基礎）"
+title: "#9 CSSの基本①（セレクターの基礎①）"
 postdate: "2022-02-19"
 update: "2022-02-19"
 seriesName: "初めてのHTML & CSS"

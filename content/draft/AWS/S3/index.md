@@ -9,15 +9,38 @@ tags: ["AWS", "AWS SAA", "S3"]
 draft: true
 ---
 
+# S3
+
+オブジェクトストレージの1種。Key-Value型。
+
+99.99999999%の耐久性。
+
+デフォルトで複数AZに冗長化されている。
+
+## バケット
+
+オブジェクトの保存場所。バケット名はグローバルで一意である必要がある。
+
+## オブジェクト
+
+データ、ファイル。一つ一つにURLが付与される。オブジェクト数は無制限。データサイズは**5TB**まで可能。
+
+key、value、バージョンID、メタデータ、サブリソース。
+
 ## ストレージクラス
 
-|クラス|
-|---|
-|S3 Standard|
-|S3 Standard-IA|
+IA = 低頻度アクセス用ストレージ。
+One Zone = 一つのAZで保管されるので可用性が落ちる.
+
+|クラス|可用性|特徴|
+|---|---|---|
+|S3 Standard|99.99%|標準|
+|S3 Standard-IA|99.9%|安価。ただし、取り出しに費用が発生する|
+|S3 One Zone-IA|99.5%|頻度は低いが、すぐに取り出したいとき|
+|S3 Glacier|-|アーカイブ。取り出しに時間と費用がかかる|
+
+
 |S3 Intelligent-Tiering|
-|S3 One Zone-IA|
-|S3 Glacier|
 |S3 Glacier Deep Archive|
 
 https://dev.classmethod.jp/articles/3minutes-s3-versioning-lifecycle/
@@ -26,21 +49,29 @@ https://dev.classmethod.jp/articles/3minutes-s3-versioning-lifecycle/
 
 IAは**Infrequent Access**のことで、低頻度なアクセスの意味を持つ。データの取り出しに料金が発生する。また、最低ストレージ期間が30日である。つまり1日保管しただけで30日分の料金が発生する。
 
-### Glacier
+## Intelligent-Tiering
 
-最低ストレージ期間は90日。
+低頻度アクセスのオブジェクトを自動的に低頻度アクセス層に移動させる機能。
 
-## 最小ストレージ期間
+強い一貫性。
 
+## アクセス管理
 
+### IAM
 
-## バージョニングの考え方
+IAMユーザー単位での制限ができる。
 
-https://dev.classmethod.jp/articles/3minutes-s3-versioning-lifecycle/
+### バケットポリシー
 
-## プロトコル
+バケット単位で制御。JSONで設定。他アカウントの制御も可能。
 
-SFTPを利用してファイルを転送する。
+### ACL
+
+バケットと個々のオブジェクトへのアクセスを管理。XMLで設定。他アカウントの制御も可能。
+
+### バブリックアクセス
+
+インターネットからHTTPSで直接アクセスできる。
 ## 暗号化方式
 
 サーバー側（S3上）で暗号化する方法と、クライアント側で暗号化してからS3に送る方法がある。
@@ -69,5 +100,20 @@ https://blog.usize-tech.com/s3-encryption/
 
 https://tech-dive.xyz/2018/10/29/post-122/
 
+### Glacier
+
+最低ストレージ期間は90日。
+
+## 最小ストレージ期間
+
+
+
+## バージョニングの考え方
+
+https://dev.classmethod.jp/articles/3minutes-s3-versioning-lifecycle/
+
+## プロトコル
+
+SFTPを利用してファイルを転送する。
 ## ライフサイクル
 

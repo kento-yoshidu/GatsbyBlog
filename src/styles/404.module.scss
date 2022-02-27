@@ -1,7 +1,7 @@
 @import "../scss/variables";
 
 .date-info {
-  font-size: clamp(13px, 1.8vw, 18px);
+  font-size: clamp(1.3rem, 1.8vw, 1.8rem);
   font-weight: 900;
   text-align: center;
 }
@@ -22,12 +22,12 @@
 }
 
 .main {
-  width: unquote("max(300px, 50%)");
-  margin: clamp(30px, 4vw, 50px) auto clamp(50px, 5vw, 100px);
+  width: unquote("max(310px, 50%)");
+  margin: clamp(3rem, 4vw, 5rem) auto clamp(5rem, 5vw, 10rem);
 
   p {
     margin-bottom: 10px;
-    font-size: clamp(16px, 1.8vw, 1.8rem);
+    font-size: clamp(1.6rem, 1.8vw, 1.8rem);
     letter-spacing: 0.5px;
     text-indent: 0.8rem;
     line-height: 1.65;
@@ -43,14 +43,14 @@
 }
 
 .h2-title {
-  margin: 60px 0 40px;
-  font-size: clamp(25px, 2vw, 32px);
+  margin: 60px 0 clamp(30px, 4.5vw, 40px);
+  font-size: clamp(2.5rem, 2vw, 3.2rem);
   text-align: center;
 }
 
 .h3-title {
   margin: 40px 0 20px;
-  font-size: clamp(20px, 2vw, 25px);
+  font-size: clamp(2rem, 2vw, 2.5rem);
   line-height: 1.5;
 }
 
@@ -64,16 +64,16 @@
 
   li {
     margin-bottom: 15px;
-    font-size: clamp(15px, 1.3vw, 17px);
+    font-size: clamp(1.5rem, 1.3vw, 1.7rem);
     line-height: 1.5;
+
+    &:last-child {
+      margin: 0;
+    }
   }
 }
 
 @media (max-width: 768px) {
-  .h2-title {
-    margin-bottom: 30px;
-  }
-
   .list {
     margin: 20px auto;
     padding: 15px 20px;
