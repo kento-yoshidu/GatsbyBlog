@@ -90,7 +90,6 @@ const Search: React.VFC = () => {
 
       <label className={Styles.menuBtn} htmlFor="checked">
         <SearchOutline
-          color={ "#00000" }
           width="30px"
           height="30px"
         />

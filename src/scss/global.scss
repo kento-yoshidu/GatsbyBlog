@@ -3,13 +3,9 @@
 :root {
   --main-color: #1675cc;
   --sub-color: #ff4c89;
-  --bg-color: #fff;
-  --text-color: #444;
-  --dark-bg-color: #222;
 }
 
 html {
-  color: var(--text-color);
   font-size: 62.5%;
   font-family:
     -apple-system,
@@ -28,7 +24,24 @@ html {
 }
 
 body {
+  --bg-color: #fff;
+  --text-color: #444;
+  --lin-color: #444;
+  --footer-bg-color: #444;
+
   background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+body.dark {
+  --bg-color: #232323;
+  --text-color: #ddd;
+  --link-color: #ddd;
+  --footer-bg-color: #121212;
+  /*
+  background-color: var(--dark-bg-color);
+  color: var(--dark-text-color);
+  */
 }
 
 .load-animation {
@@ -103,7 +116,7 @@ body {
   margin-top: 35px;
   margin-bottom: -0.65em;
   padding: 1.5rem 1.8rem 2.5rem;
-  background: var(--main-color2);
+  background: var(--main-color);
   border-radius: 1px 1px 0 0;
   color: #ddd;
   font-size: clamp(1.4rem, 1.5vw, 1.6rem);
