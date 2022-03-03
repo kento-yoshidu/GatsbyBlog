@@ -1,5 +1,3 @@
-@import "../scss/variables";
-
 .series-main,
 .tags-main {
   width: 55vw;
@@ -29,8 +27,8 @@
     transition: 0.3s;
 
     &:hover {
-      color: $main-color2;
-      border-color: $main-color2;
+      color: var(--main-color2);
+      border-color: var(--main-color2);
     }
   }
 }
