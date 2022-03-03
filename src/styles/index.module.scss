@@ -1,5 +1,3 @@
-@import "../scss/variables";
-
 .main {
   width: 60%;
   margin: 80px auto;
@@ -34,12 +32,12 @@
 
   &:hover {
     svg {
-      color: $main-color2;
+      color: var(--main-color);
     }
 
     span {
       color: #acb6e5;
-      background: linear-gradient(135deg, $main-color2, $sub-color);
+      background: linear-gradient(135deg, var(--main-color), var(--sub-color));
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }

@@ -1,7 +1,15 @@
 [
   {
+    "slug": "/HelloWeb/10/",
+    "title": "#10 CSSの基本②（セレクターの基礎②）",
+    "keywords": [
+      "CSS",
+      "セレクター"
+    ]
+  },
+  {
     "slug": "/HelloWeb/09/",
-    "title": "#9 CSSの基本①（セレクターの基礎）",
+    "title": "#9 CSSの基本①（セレクターの基礎①）",
     "keywords": [
       "CSS",
       "セレクター"
