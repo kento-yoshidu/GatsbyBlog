@@ -1,8 +1,15 @@
 @import "./reset";
-@import "./variables";
+
+:root {
+  --main-color: #1675cc;
+  --sub-color: #ff4c89;
+  --bg-color: #fff;
+  --text-color: #444;
+  --dark-bg-color: #222;
+}
 
 html {
-  color: #444;
+  color: var(--text-color);
   font-size: 62.5%;
   font-family:
     -apple-system,
@@ -18,6 +25,10 @@ html {
     Meiryo,
     sans-serif;
   scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-color);
 }
 
 .load-animation {
@@ -92,7 +103,7 @@ html {
   margin-top: 35px;
   margin-bottom: -0.65em;
   padding: 1.5rem 1.8rem 2.5rem;
-  background: $main-color2;
+  background: var(--main-color2);
   border-radius: 1px 1px 0 0;
   color: #ddd;
   font-size: clamp(1.4rem, 1.5vw, 1.6rem);

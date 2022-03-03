@@ -1,5 +1,3 @@
-@import "../scss/variables";
-
 .post-info {
   margin-top: 50px;
   margin-left: 15vw;
@@ -17,7 +15,7 @@
     color: #444;
 
     &:hover {
-      background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+      background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
       background-clip: text;
       -webkit-text-fill-color: rgba(255, 255, 255, 0);
     }
@@ -40,7 +38,7 @@
 
 .post-title {
   display: inline-block;
-  background: linear-gradient(135deg, $main-color 10%, $sub-color 90%);
+  background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
   background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
   margin: 15px 0;
