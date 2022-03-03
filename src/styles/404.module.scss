@@ -32,7 +32,7 @@
   }
 
   a {
-    color: #444;
+    color: var(--lin-color);
 
     &:hover {
       color: var(--main-color);

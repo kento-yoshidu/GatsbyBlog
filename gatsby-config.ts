@@ -162,7 +162,8 @@ const plugins: GatsbyConfig["plugins"] = [
   },
   "gatsby-plugin-offline",
   "gatsby-plugin-react-helmet",
-  "gatsby-plugin-gatsby-cloud"
+  "gatsby-plugin-gatsby-cloud",
+  "gatsby-plugin-dark-mode"
 ]
 
 const siteMetadata: GatsbyConfig["siteMetadata"] = {
