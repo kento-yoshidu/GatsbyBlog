@@ -20,7 +20,7 @@
 
       a {
         position: relative;
-        color: #444;
+        color: var(--link-color);
 
         &:hover {
           color: var(--main-color);
