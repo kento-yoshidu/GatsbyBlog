@@ -1,7 +1,7 @@
 .wrapper {
   position: fixed;
   top: 30px;
-  right: 40px;
+  right: 120px;
   transition: 0.3s;
   z-index: 2;
 }
@@ -107,22 +107,22 @@
 
 @media screen and (max-width: 768px) {
   .wrapper {
-    top: 15px;
-    right: 15px;
+    top: 13px;
+    right: 65px;
   }
 
   .menu-btn {
-    height: 40px;
-    width: 40px;
+    height: 41px;
+    width: 41px;
 
     svg {
-      height: 23px;
-      width: 23px;
+      height: 20px;
+      width: 20px;
     }
   }
 
   .result-area {
-    left: 50%;
+    left: 70%;
     transform: translateX(-50%);
     width: 160%;
     max-height: 60vh;
