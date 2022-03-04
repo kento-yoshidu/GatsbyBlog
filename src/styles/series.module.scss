@@ -20,15 +20,15 @@
     padding: 8px 15px;
     border: 2.3px solid #888;
     border-radius: 3px;
-    color: #444;
+    color: var(--link-color);
     font-size: 1.7rem;
     font-weight: 500;
     text-decoration: none;
     transition: 0.3s;
 
     &:hover {
-      color: var(--main-color2);
-      border-color: var(--main-color2);
+      color: var(--main-color);
+      border-color: var(--main-color);
     }
   }
 }

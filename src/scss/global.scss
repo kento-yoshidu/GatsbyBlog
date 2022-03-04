@@ -26,22 +26,21 @@ html {
 body {
   --bg-color: #fff;
   --text-color: #444;
-  --lin-color: #444;
+  --link-color: #444;
   --footer-bg-color: #444;
+  --post-link-color: #0000ee;
 
   background-color: var(--bg-color);
   color: var(--text-color);
 }
 
 body.dark {
-  --bg-color: #232323;
-  --text-color: #ddd;
+  // --bg-color: #232323;
+  --bg-color: #15141a;
+  --text-color: #fbfbfe;
   --link-color: #ddd;
   --footer-bg-color: #121212;
-  /*
-  background-color: var(--dark-bg-color);
-  color: var(--dark-text-color);
-  */
+  --post-link-color: var(--main-color);
 }
 
 .load-animation {
