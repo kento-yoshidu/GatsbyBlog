@@ -3,7 +3,6 @@ import { Link, useStaticQuery, graphql } from "gatsby"
 
 import * as Styles from "../styles/header.module.scss"
 // import { topButton } from "../styles/mobilePagination.module.scss"
-// import ToggleButton from "./toggleButton"
 
 type Props = {
   pageTitle?: string,
@@ -24,8 +23,6 @@ const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
   )
   return (
     <header className={Styles.header}>
-
-      {/* <ToggleButton /> */}
 
       <h1 className={Styles.headerTitle}>
         {pathname === "/page/1/"
