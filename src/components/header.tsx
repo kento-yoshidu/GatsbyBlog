@@ -1,8 +1,9 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
-import { ThemeToggler } from 'gatsby-plugin-dark-mode'
 
 import * as Styles from "../styles/header.module.scss"
+// import { topButton } from "../styles/mobilePagination.module.scss"
+// import ToggleButton from "./toggleButton"
 
 type Props = {
   pageTitle?: string,
@@ -21,23 +22,10 @@ const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
       }
     `
   )
-
   return (
     <header className={Styles.header}>
-      {/*
-      <ThemeToggler>
-        {({ theme, toggleTheme }) => (
-          <label>
-            <input
-              type="checkbox"
-              onChange={(e) => toggleTheme(e.target.checked ? "dark" : "light")}
-              checked={theme === "dark"}
-            />{" "}
-            Dark mode
-          </label>
-        )}
-      </ThemeToggler>
-      */}
+
+      {/* <ToggleButton /> */}
 
       <h1 className={Styles.headerTitle}>
         {pathname === "/page/1/"
