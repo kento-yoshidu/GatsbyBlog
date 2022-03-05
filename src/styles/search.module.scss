@@ -1,7 +1,5 @@
 .wrapper {
-  position: fixed;
-  top: 30px;
-  right: 120px;
+  position: relative;
   transition: 0.3s;
   z-index: 2;
 }
@@ -13,8 +11,9 @@
 .menu-btn {
   display: block;
   position: relative;
-  height: 50px;
-  width: 50px;
+  height: 45px;
+  width: 45px;
+  margin-right: 10px;
   background-color: #ddd;
   border-radius: 100vh;
   transition: 0.2s;
@@ -33,6 +32,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    height: 28px !important;
+    width: 28px !important;
     z-index: 2;
   }
 }
@@ -63,6 +64,7 @@
   width: 250%;
   max-height: 80vh;
   overflow-y: auto;
+  z-index: 200;
 }
 
 .inner {
@@ -105,19 +107,14 @@
   display: block;
 }
 
-@media screen and (max-width: 768px) {
-  .wrapper {
-    top: 13px;
-    right: 65px;
-  }
-
+@media (max-width: 768px) {
   .menu-btn {
-    height: 41px;
-    width: 41px;
+    height: 38px;
+    width: 38px;
 
     svg {
-      height: 20px;
-      width: 20px;
+      height: 10px;
+      width: 10px;
     }
   }
 
