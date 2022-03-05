@@ -90,8 +90,8 @@ const Search: React.VFC = () => {
 
       <label className={Styles.menuBtn} htmlFor="checked">
         <SearchOutline
-          width="30px"
-          height="30px"
+          width="27px"
+          height="27px"
         />
       </label>
 
@@ -108,7 +108,8 @@ const Search: React.VFC = () => {
             <div className={Styles.inner}>
               <p>キーワード検索</p>
               <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
-              <ul className={Styles.articleList}>
+              {/* <ul className={Styles.articleList}> */}
+              <ul>
                 {
                   filteredPosts.map((edge: Edge, i: number) => (
                     <PostList
