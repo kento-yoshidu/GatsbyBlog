@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react"
 
-import KeywordSearch from "./keywordSearch"
-import ToggleButton from "./toggleButton"
+import Tool from "./Tool"
 import Footer from "./footer"
 
 type Props = {
@@ -10,9 +9,13 @@ type Props = {
 
 const Layout: React.VFC<Props> = ({ children }) => (
   <>
+    {/*
     <KeywordSearch />
 
     <ToggleButton />
+    */}
+
+    <Tool />
 
     {children}
 
