@@ -1,7 +1,6 @@
 .wrapper {
   position: relative;
   transition: 0.3s;
-  z-index: 2;
 }
 
 .check {
@@ -32,9 +31,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 28px !important;
-    width: 28px !important;
-    z-index: 2;
   }
 }
 
@@ -64,7 +60,6 @@
   width: 250%;
   max-height: 80vh;
   overflow-y: auto;
-  z-index: 200;
 }
 
 .inner {
