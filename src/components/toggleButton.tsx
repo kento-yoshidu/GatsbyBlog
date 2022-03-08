@@ -14,17 +14,6 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-{/*
-<label className={Styles.toggleSwitch}>
-  <input
-    type="checkbox"
-    onChange={(e) => toggleTheme(e.target.checked ? "dark" : "light")}
-    checked={theme === "dark"}
-  />{" "}
-  Dark mode
-</label>
-*/}
-
 const ToggleButton = () => {
   return (
     <ThemeToggler>
