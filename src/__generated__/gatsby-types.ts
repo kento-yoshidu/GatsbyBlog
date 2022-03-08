@@ -684,10 +684,10 @@ type Frontmatter = {
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly published: Maybe<Scalars['Boolean']>;
-  readonly draft: Maybe<Scalars['Boolean']>;
   readonly updatedate: Maybe<Scalars['Date']>;
   readonly categoryName: Maybe<Scalars['String']>;
   readonly categorySlug: Maybe<Scalars['String']>;
+  readonly draft: Maybe<Scalars['Boolean']>;
   readonly keyword: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
@@ -1340,10 +1340,10 @@ type FrontmatterFilterInput = {
   readonly tags: Maybe<StringQueryOperatorInput>;
   readonly keywords: Maybe<StringQueryOperatorInput>;
   readonly published: Maybe<BooleanQueryOperatorInput>;
-  readonly draft: Maybe<BooleanQueryOperatorInput>;
   readonly updatedate: Maybe<DateQueryOperatorInput>;
   readonly categoryName: Maybe<StringQueryOperatorInput>;
   readonly categorySlug: Maybe<StringQueryOperatorInput>;
+  readonly draft: Maybe<BooleanQueryOperatorInput>;
   readonly keyword: Maybe<StringQueryOperatorInput>;
 };
 
@@ -1600,10 +1600,10 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark.frontmatter.tags'
   | 'childrenMarkdownRemark.frontmatter.keywords'
   | 'childrenMarkdownRemark.frontmatter.published'
-  | 'childrenMarkdownRemark.frontmatter.draft'
   | 'childrenMarkdownRemark.frontmatter.updatedate'
   | 'childrenMarkdownRemark.frontmatter.categoryName'
   | 'childrenMarkdownRemark.frontmatter.categorySlug'
+  | 'childrenMarkdownRemark.frontmatter.draft'
   | 'childrenMarkdownRemark.frontmatter.keyword'
   | 'childrenMarkdownRemark.fields.slug'
   | 'childrenMarkdownRemark.excerpt'
@@ -1669,10 +1669,10 @@ type FileFieldsEnum =
   | 'childMarkdownRemark.frontmatter.tags'
   | 'childMarkdownRemark.frontmatter.keywords'
   | 'childMarkdownRemark.frontmatter.published'
-  | 'childMarkdownRemark.frontmatter.draft'
   | 'childMarkdownRemark.frontmatter.updatedate'
   | 'childMarkdownRemark.frontmatter.categoryName'
   | 'childMarkdownRemark.frontmatter.categorySlug'
+  | 'childMarkdownRemark.frontmatter.draft'
   | 'childMarkdownRemark.frontmatter.keyword'
   | 'childMarkdownRemark.fields.slug'
   | 'childMarkdownRemark.excerpt'
@@ -3342,10 +3342,10 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.tags'
   | 'frontmatter.keywords'
   | 'frontmatter.published'
-  | 'frontmatter.draft'
   | 'frontmatter.updatedate'
   | 'frontmatter.categoryName'
   | 'frontmatter.categorySlug'
+  | 'frontmatter.draft'
   | 'frontmatter.keyword'
   | 'fields.slug'
   | 'excerpt'
@@ -4447,22 +4447,31 @@ type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArr
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 type Unnamed_1_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
 =======
 type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 >>>>>>> Stashed changes
+=======
+type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }> };
+>>>>>>> develop
 
 type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
+<<<<<<< HEAD
 type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }> };
 <<<<<<< Updated upstream
 =======
+=======
+type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+>>>>>>> develop
 
 type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
+<<<<<<< HEAD
 type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
 
 type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
@@ -4470,6 +4479,9 @@ type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 
 type Unnamed_4_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
 >>>>>>> Stashed changes
+=======
+type Unnamed_3_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
+>>>>>>> develop
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -4497,12 +4509,15 @@ type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
+=======
+>>>>>>> develop
 type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
