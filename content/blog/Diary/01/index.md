@@ -1,7 +1,7 @@
 ---
 title: "Gatsbyでブログを始めました"
 postdate: "2021-07-24"
-update: "2022-01-05"
+update: "2022-03-08"
 seriesName: "日記"
 seriesSlug: "Diary"
 description: "静的サイトジェネレーターのGatsbyを使用して、ブログを再構築しました。このブログについて、また、Gatsbyを使ってみた所感について書き記します。"
@@ -168,9 +168,64 @@ PWAに対応しています。
 
 当初はNetlifyというホスティングサービスを利用しサイトを公開していましたが、せっかくなのでAWS Amplifyに移行しました。
 
-特に難しいことはしていませんが、以下が構成図です。
+## Point9 キーワード検索システム
 
-![](./images/image10.png)
+2022年1月に、サイト内検索システムを実装しました。右上の虫眼鏡マークのアイコンをクリックし、テキストボックスに任意の文字列を入力することでキーワードによる記事の検索を行えます。
+
+機能実装のために各マークダウンのfrontmatterに`keywords`という項目を追加しました。それらをJSONファイルに書き出し検索を行います。詳しくは[こちら](/Diary/04/)の記事をご覧ください。
+
+## Point10 ダークモード
+
+2022年3月、いわゆるダークモードに対応させました。右上の太陽／月のアイコンをクリックすると、light／darkが切り替わります。
+
+この機能の実装には`gatsby-plugin-dark-mode`を利用しました。以下のように`ThemeToggler`コンポーネントをインポートして利用します。`toggleTheme`を実行することでbody要素に`light`クラスか`dark`クラスを付与します。
+
+```tsx:title=toggle.tsx
+import { ThemeToggler } from 'gatsby-plugin-dark-mode'
+
+export const ToggleButton = () => (
+  <ThemeToggler>
+    {({ theme, toggleTheme }) => {
+
+      // darkモードがどうかを保持
+      const isDark = theme === 'dark'
+
+      const icon = isDark ? (
+        <FontAwesomeIcon icon={faMoon} />
+      ) : (
+        <FontAwesomeIcon icon={faSun} />
+      )
+
+      return (
+        <div
+          // モードを反転させる
+          onClick={() => toggleTheme(isDark ? 'light' : 'dark')}
+        >
+          { icon }
+        </div>
+
+      )
+    }}
+  </ThemeToggler>
+)
+```
+
+CSS側ではCSS カスタムコンポーンネント（いわゆるCSS変数というやつ）を利用し、body要素に`dark`クラスが付与されている時、いない時のスタイルを切り替えます。
+
+```css
+body {
+  --bg-color: #fff;
+  --text-color: #444;
+
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+body.dark {
+  --bg-color: #15141a;
+  --text-color: #fbfbfe;
+}
+```
 
 ## これから
 
