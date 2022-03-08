@@ -504,3 +504,7 @@ puts arr2
 ```
 
 
+https://zenn.dev/tatsurom/articles/2b92156e509d9e27f81b
+
+https://www.youtube.com/watch?v=sh4WrNGDvQM
+
