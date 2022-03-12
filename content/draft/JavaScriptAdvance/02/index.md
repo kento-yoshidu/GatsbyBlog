@@ -18,7 +18,13 @@ JavaScriptはよく「Webサイトに動きを付ける言語」とも呼ばれ�
 
 その後、LiveScriptは改名され、無事JavaScriptとなります。
 
-JavaScriptに改名された背景として、当時Netscape Communications社はSun Microsystems社と業務提携しており、また、Sun社が開発し**イケイケドンドン**だったJavaの名前を拝借してあやかろう、というマーケティング的な一面があったようです。ただ、あくまでも名前（加えて、一部の構文）をもじっただけであり、JavaScriptとJavaの間に技術的な関係はありません。
+JavaScriptに改名された背景として、当時Netscape Communications社はSun Microsystems社と業務提携しており、また、Sun社が開発し**イケイケドンドン**だったJavaの名前を拝借してあやかろう、というマーケティング的な一面があったようです。また、
+
+> How a <mark>sidekick scripting language for Java</mark>, created at Netscape in a ten-day hack, ships first as a de facto Web standard and eventually becomes the world’s most widely used programming language.
+
+参考 : 
+
+とあるように、最初はJavaの兄弟的な言語になることを目的としていたことも伺えます。伴い、Javaから拝借している構文などもあります。ただ、あくまでも始まりの時点での話であり、現在においてはJavaScriptとJavaの間に技術的な関係はありません。
 
 Netscape Navigatorの活躍から少し遅れ、Microsoft社が少し前まで現役だったInternet Explorer（以下、IE）を開発、リリースします。
 
@@ -89,7 +95,13 @@ ECMAScriptはたびたび改定されます。恐らく**ES5**だったり**ES20
 
 ## JavaScriptの発展まで
 
-ECMAScriptが作成され標準化が一応進んだはいいものの、1990年代～2000年代初頭にかけては、JavaScriptの評価は低く、「プログラミング初心者が使う、おもちゃのようなプログラミング言語」だと考えられていたようです。
+ECMAScriptが作成され標準化が一応進んだはいいものの、1990年代～2000年代初頭にかけてはJavaScriptの評価は**とても**低いものでした。
+
+そのころのJavaScriptの使用目的と言えば、Webサイトをデコレーションする（例えば星を降らせたりとか）のが主だったようです。
+
+また、JavaScriptを悪用したブラクラなども流行しJavaScriptを無効化することが推奨されるような時代でした。
+
+そのため、当時のプログラマーたちからは「プログラミング初心者が使う**おもちゃのような**言語」だったり「**使うこと自体が恥ずかしい**言語」だったり「」など散々な評価をされていたようです。
 
 ## Ajaxの登場
 
@@ -102,7 +114,7 @@ ECMAScriptが作成され標準化が一応進んだはいいものの、1990年
 
 どんどん現代的な機能、文法が取り込まれていくことになります。
 
-## 参考 | ECMAScriptの仕様書の在処
+## 【参考】ECMAScriptの仕様書の在処
 
 「昔のECMAScriptも読んでみたい！」という物好きな諸兄姉のために、各エディションのWebページとPDFへのリンクを貼っておきます。
 
@@ -137,3 +149,5 @@ ECMAScriptが作成され標準化が一応進んだはいいものの、1990年
 [A brief history of JavaScript | by Ben Aston | Medium](https://medium.com/@_benaston/lesson-1a-the-history-of-javascript-8c1ce3bffb17)
 
 [JavaScript（ジャバスクリプト）の歴史について](https://noveltyinc.jp/2020/02/14/javascript-history/)
+
+[JavaScriptの歴史〜名前の由来とは？〜 | テクフリ](https://freelance.techcareer.jp/skills/21/articles/544/)
