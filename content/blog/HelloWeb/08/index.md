@@ -1,7 +1,7 @@
 ---
 title: "#8 HTMLの基本⑤（img要素）"
 postdate: "2022-02-12"
-update: "2022-03-08"
+update: "2022-03-11"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "画像を表示させるimg要素を学習します。"
@@ -56,7 +56,7 @@ published: true
 
 また、**src属性**に画像ファイルの保存場所をパスで記述することで指定して、画像ファイルを取り込みます。「source」のsrcですね、わかりやすいです。
 
-パスについては前回やりましたね。今回も相対パスを使います。`images`フォルダーの中の`sample-image.png`を表すためには、`src="images/sample-image.png"`と記述します。
+パスについては前回学習しました。今回も相対パスを使います。`images`フォルダーの中の`sample-image.png`を表すためには、`src="images/sample-image.png"`と記述します。
 
 そして`img`タグは**空タグ**なので、終了タグは存在しません。
 
@@ -68,7 +68,7 @@ published: true
 </body>
 ```
 
-ここで実際にページを確認してましょう。
+ここで実際にページを確認してみます。
 
 ![](./images/image02.png)
 
@@ -104,7 +104,7 @@ img要素において`src`属性は必須です。画像ファイルの在処を
 
 ## 画像をリンクにすることもできる
 
-前回学習したa要素と組み合わせ、画像をリンクにすることもできます。`index.html`以外にももう一つhtmlファイルを用意してください。ここでは以前作成した`about.html`を利用します。`index.html`と同じフォルダー内に保存します。
+前回学習した`a`要素と組み合わせ、画像をリンクにすることもできます。`index.html`以外にももう一つhtmlファイルを用意してください。ここでは以前作成した`about.html`を利用します。`index.html`と同じフォルダー内に保存します。
 
 <aside>
 
@@ -112,7 +112,7 @@ img要素において`src`属性は必須です。画像ファイルの在処を
 
 </aside>
 
-さて思い出してほしいのですが、`<a href="">`と`</a>`に囲まれた中身が実際のリンクになるんでしたね。今回は画像をリンクにするため、a要素でimg要素を囲えばOKです。
+さて思い出してほしいのですが、`<a href="">`と`</a>`に囲まれた中身が実際のリンクになるんでしたね。今回は画像をリンクにするため、`a`要素で`img`要素を囲えばOKです。
 
 ```html:title=index.html
 <body>
@@ -212,7 +212,7 @@ img要素において`src`属性は必須です。画像ファイルの在処を
 
 ## まとめ
 
-- ✅ 画像はimg要素で表示する
+- ✅ 画像は`img`要素で表示する
 - ✅ `src`属性に画像ファイルのパスを記述する
 - ✅ `alt`属性も必須ではないが記述するべき
 - ✅ `width`属性、`height`属性も指定するのがおすすめ
@@ -235,3 +235,7 @@ img要素において`src`属性は必須です。画像ファイルの在処を
 [レスポンシブデザインに於けるwidth, height属性について | The other way round](https://vanillaice000.blog.fc2.com/blog-entry-1063.html)
 
 [source要素にwidth/height属性を指定して各画像のアスペクト比の維持とCLSの改善を図る | フロントエンドBlog | ミツエーリンクス](https://www.mitsue.co.jp/knowledge/blog/frontend/202105/31_1512.html)
+
+[画像による Layout Shift が無くなる Web がやって来る - mizdra&#39;s blog](https://www.mizdra.net/entry/2020/05/31/192613)
+
+[A more elegant and easier to use solution · Issue #16 · WICG/intrinsicsize-attribute](https://github.com/WICG/intrinsicsize-attribute/issues/16)

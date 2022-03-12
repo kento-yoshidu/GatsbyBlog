@@ -1,7 +1,7 @@
 ---
 title: "#11 CSSの基本③（継承）"
 postdate: "2022-03-04"
-update: "2022-03-08"
+update: "2022-03-04"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "CSSの継承の概念について学習します。"
@@ -44,7 +44,7 @@ p {
 
 ![](./images/image01.png)
 
-もっと子孫要素を増やしてネストさせてみましょう。以下のHTMLは、`p`クラスの中にspan要素を用意しさらにその中にspan要素を用意した例です。
+もっと子孫要素を増やしてネストさせてみましょう。以下のHTMLは、pクラスの中にspan要素を用意しさらにその中にspan要素を用意した例です。
 
 ```html
 <body>
@@ -60,7 +60,7 @@ p {
 </body>
 ```
 
-※ span要素に青い枠線をつけスペースを空けます。
+※span要素に青い枠線をつけスペースを空けます。
 
 ```css
 p {
