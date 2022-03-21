@@ -42,6 +42,10 @@ body.dark {
   --post-link-color: var(--main-color);
 }
 
+body[data-lock="lock"] {
+  overflow: hidden;
+}
+
 .load-animation {
   display: flex;
   justify-content: center;
