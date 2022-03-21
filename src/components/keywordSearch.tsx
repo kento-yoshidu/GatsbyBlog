@@ -55,6 +55,16 @@ const Search: React.VFC = () => {
   // 条件によって絞り込まれた記事
   const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(edges)
 
+  const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setShowLists(true)
+
+    if (document.body.getAttribute("data-lock") === "lock") {
+      document.body.removeAttribute("data-lock")
+    } else {
+      document.body.setAttribute("data-lock", "lock")
+    }
+  }
+
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputtedKeywords(e.target.value)
   }
@@ -86,9 +96,13 @@ const Search: React.VFC = () => {
         type="checkbox"
         className={Styles.check}
         id="checked"
+        onClick={handleClick}
       />
 
-      <label className={Styles.menuBtn} htmlFor="checked">
+      <label
+        className={Styles.menuBtn}
+        htmlFor="checked"
+      >
         <SearchOutline
           width="27px"
           height="27px"
@@ -100,7 +114,6 @@ const Search: React.VFC = () => {
           type="text"
           className={Styles.input}
           onChange={handleInput}
-          onClick={() => setShowLists(true)}
         />
 
         <div className={Styles.resultArea}>
@@ -108,7 +121,7 @@ const Search: React.VFC = () => {
             <div className={Styles.inner}>
               <p>キーワード検索</p>
               <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
-              {/* <ul className={Styles.articleList}> */}
+
               <ul>
                 {
                   filteredPosts.map((edge: Edge, i: number) => (

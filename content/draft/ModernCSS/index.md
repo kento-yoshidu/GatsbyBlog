@@ -1,3 +1,14 @@
+---
+title: "#2 CSSの仕様を知る"
+postdate: "2022-06-16"
+update: "2022-06-16"
+seriesName: "モダンCSS"
+seriesSlug: "ModernCSS"
+description: "現代のモダンなCSSを学びます。"
+tags: ["CSS"]
+keywords: ["CSS"]
+---
+
 # Index
 
 - Flexbox
