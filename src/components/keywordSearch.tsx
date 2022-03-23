@@ -70,6 +70,8 @@ const Search: React.VFC = () => {
   }
 
   useEffect(() => {
+    document.body.removeAttribute("data-lock")
+
     if (inputtedKeywords === "") {
       setFilteredPosts(edges)
       return
