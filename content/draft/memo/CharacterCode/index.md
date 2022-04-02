@@ -6,10 +6,13 @@ seriesName: "Git中級者を目指す"
 seriesSlug: "GitAdvance"
 description: "Git内部構造ツアーの第一弾です。git add、git commitコマンドを実行した時、Git内部で何が起こるのかを検証します。"
 tags: ["React", "React Hooks"]
-draft: true
+keywords: ["文字コード", "unicode", "utf-8", "utf-16", "utf-16"]
+published: false
 ---
 
 ## 参考
+
+[UnicodeとUTF-8の違い。UTF-8・UTF-16・UTF-32とは - Archive of Yone](https://elite-lane.com/difference-between-unicode-and-utf-8-and-utf-16-and-utf-32/)
 
 [Unicode ～UTF-8、UTF-16との違い～（文字コード関連） | 読み物 | ウナのIT資格一問一答](http://una.soragoto.net/topics/9.html)
 

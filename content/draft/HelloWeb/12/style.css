@@ -1,7 +1,11 @@
-.wrapper {
-  border: 1px solid black;
+h1 {
+  color: Thistle;
 }
 
-h1 {
-  border: inherit;
+h2 {
+  color: green;
+}
+
+h3 {
+  color: red;
 }
