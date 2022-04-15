@@ -1,5 +1,5 @@
 ---
-title: "AWS SAA勉強メモ Amazon S3"
+title: "Amazon S3"
 postdate: "2021-06-25"
 update: "2021-06-25"
 seriesName: "AWS SAA勉強メモ"
@@ -38,8 +38,6 @@ One Zone = 一つのAZで保管されるので可用性が落ちる.
 |S3 Standard-IA|99.9%|安価。ただし、取り出しに費用が発生する|
 |S3 One Zone-IA|99.5%|頻度は低いが、すぐに取り出したいとき|
 |S3 Glacier|-|アーカイブ。取り出しに時間と費用がかかる|
-
-
 |S3 Intelligent-Tiering|
 |S3 Glacier Deep Archive|
 
