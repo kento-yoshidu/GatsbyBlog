@@ -4,7 +4,7 @@ postdate: "2021-08-08"
 update: "2022-03-08"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
-description: 
+description: "CSSを使って、背景色を変えたり文字の色を変えたりします。"
 tags: ["HTML", "CSS"]
 keywords: ["HTML", "CSS", "セレクター", "プロパティ"]
 published: true
