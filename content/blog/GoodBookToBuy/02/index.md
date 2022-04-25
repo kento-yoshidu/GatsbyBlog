@@ -1,7 +1,7 @@
 ---
 title: "2021年 読んでよかった本"
 postdate: "2022-04-25"
-update: "2022-04-25"
+update: "2022-04-26"
 seriesSlug: "GoodBookToBuy"
 seriesName: "xx年読んでよかった本"
 description: "2021年に読んでよかった本を紹介します。"
