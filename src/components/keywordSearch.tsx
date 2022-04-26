@@ -56,13 +56,15 @@ const Search: React.VFC = () => {
   const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(edges)
 
   const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setShowLists(true)
+    setShowLists(!showLists)
 
+    /*
     if (document.body.getAttribute("data-lock") === "lock") {
       document.body.removeAttribute("data-lock")
     } else {
       document.body.setAttribute("data-lock", "lock")
     }
+    */
   }
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
