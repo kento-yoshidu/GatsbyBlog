@@ -1,5 +1,24 @@
 [
   {
+    "slug": "/GoodBookToBuy/02/",
+    "title": "2021年 読んでよかった本",
+    "keywords": [
+      "書籍",
+      "本",
+      "React",
+      "HTML",
+      "CSS",
+      "2021"
+    ]
+  },
+  {
+    "slug": "/Diary/08/",
+    "title": "2022年度の目標",
+    "keywords": [
+      "2022年"
+    ]
+  },
+  {
     "slug": "/HelloWeb/11/",
     "title": "#11 CSSの基本③（継承）",
     "keywords": [
