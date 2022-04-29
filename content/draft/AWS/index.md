@@ -10,6 +10,26 @@ keywords: ["Memo"]
 published: false
 ---
 
+## Cloudfront
+
+**エッジロケーション**でファイル圧縮を行うことにより、コスト削減可能。
+
+## RedShift
+
+RedShiftは**シングルAZ**のみを提供する。バックアップのためにはクロスリージョンスナップショットを利用する。
+
+### 拡張VPCルーティング
+
+拡張VPCルーティングを利用し、VPC内にデータ移動を制御することが可能。
+
+## S3
+
+S3 Glacierの最低保持期間は**90日間**。例えば、30日後に削除するライフサイクルポリシーを設定しても90日分の料金が発生する。
+## Route53
+
+Blue/Greenデプロイメントは、加重ルーティングポリシーを利用する。
+
+
 ## Aurora
 
 > Aurora のストレージシステムは、分散型で耐障害性と自己修復機能を備えており、<mark>コンピューティングリソースから切り離され</mark>、データベースインスタンスごとに<mark>最大 128 TB まで自動的にスケールアップされます</mark>。
@@ -39,3 +59,6 @@ published: false
 [[アップデート]ECS TaskにIAMロールを付与することができるようになりました | DevelopersIO](https://dev.classmethod.jp/articles/20160715-ecs-task-iam-role/)
 
 
+## EMR
+
+Apache Spark と Hadoop を使用して、膨大な量のデータを分析するサービス。データベースではないことに注意。
