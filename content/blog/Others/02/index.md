@@ -1,5 +1,5 @@
 ---
-title: "CSSの`is()`擬似クラス関数"
+title: "CSSのis()擬似クラス関数"
 postdate: "2022-04-29"
 update: "2022-04-29"
 seriesName: "その他"
@@ -10,7 +10,7 @@ keywords: ["CSS", "擬似クラス関数", "is()"]
 published: true
 ---
 
-# :is()擬似クラス関数について
+# `:is()`擬似クラス関数について
 
 CSSの擬似クラス関数である`:is()`については、前から存在は知っていましたが実際に使ったことは一度もありませんでした。
 
@@ -186,7 +186,7 @@ a:has(> img) {
 }
 ```
 
-上記のMDNの例で言うと、img要素を直近の子要素にもつa要素に対して指定する擬似クラスです。かなり便利そうですね。
+上記のMDNの例で言うと、img要素を直近の子要素にもつa要素に対してスタイルを指定する擬似クラスです。かなり便利そうですね。
 
 まぁ一例として挙げただけなので、詳しい挙動は置いておきます。この擬似クラスは2022年4月現在、まだどのブラウザーも実装していないため動作しないわけです。これを従来の書き方に沿って記述した場合、**セレクターリスト全体が無効になります**。
 
@@ -251,4 +251,4 @@ section :is(.title, h1, h2, #page-title) {
 
 [:is | CSS-Tricks - CSS-Tricks](https://css-tricks.com/almanac/selectors/i/is/)
 
-https://web.dev/css-is-and-where/
+[New CSS functional pseudo-class selectors :is() and :where()](https://web.dev/css-is-and-where/)

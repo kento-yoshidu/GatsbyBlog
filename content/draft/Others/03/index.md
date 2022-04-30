@@ -7,7 +7,7 @@ seriesSlug: "Others"
 description: "CSSのwhere()擬似クラス関数について学習しました。"
 tags: ["CSS", "擬似クラス関数"]
 keywords: ["CSS", "擬似クラス関数", "where()"]
-published: true
+published: false
 ---
 
 # :where()擬似クラス関数について
