@@ -1,24 +1,24 @@
 ---
-title: "CSSの`where()`擬似クラス関数"
-postdate: "2022-05-06"
-update: "2022-05-06"
+title: "CSSのwhere()擬似クラス関数"
+postdate: "2022-05-01"
+update: "2022-05-01"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "CSSのwhere()擬似クラス関数について学習しました。"
 tags: ["CSS", "擬似クラス関数"]
 keywords: ["CSS", "擬似クラス関数", "where()"]
-published: false
+published: true
 ---
 
 # :where()擬似クラス関数について
 
 [こちらのページ](/Others/02/)で`:is()`擬似クラス関数を紹介しましたが、今回はそれととても似ている`:where'()`擬似クラス関数を紹介します。
 
-`:where()`も複数のセレクターをまとめることができますが、**リストの詳細度が0になる**という特徴があります。
+`:where()`も複数のセレクターをまとめることができる疑似クラス関数ですが、**リストの詳細度が0になる**という特徴があります。
 
 `:is()`と同じく、2022年5月現在、ほぼ全ての主要ブラウザーで使用することができます。
 
-[Can I use](https://caniuse.com/?search=%3Awhere())
+※参考 : [Can I use](https://caniuse.com/?search=%3Awhere())
 
 <aside>
 
@@ -129,8 +129,9 @@ sanitize.cssでは、リストに関するスタイルを一まとめにして`m
 
 [:where() | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/:where)
 
-https://www.w3.org/TR/selectors-4/#zero-matches
+[Selectors Level 4](https://www.w3.org/TR/selectors-4/#zero-matches)
 
-https://css-tricks.com/almanac/selectors/w/where/
 
-https://web.dev/css-is-and-where/
+[:where | CSS-Tricks - CSS-Tricks](https://css-tricks.com/almanac/selectors/w/where/)
+
+[New CSS functional pseudo-class selectors :is() and :where()](https://web.dev/css-is-and-where/)
