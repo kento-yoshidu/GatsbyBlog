@@ -126,12 +126,17 @@ VPC間での接続を可能にする。
 
 ## Transit Gateway
 
-複数のVPC間を接続。オンプレミスを単一のゲートウェイで接続可能にするサービス。
+**複数のVPC間を接続**。オンプレミスを単一のゲートウェイで接続可能にするサービス。
 
 ## VPC Flow Logs
 
 Cloud Watchと連携してログを取得する。
 
+## DNS hostnamesオプション
+
+https://qiita.com/rihofujino/items/a8f3106dbd5557097ad6
+
+## 参考
 
 https://aws.amazon.com/jp/about-aws/global-infrastructure/
 
