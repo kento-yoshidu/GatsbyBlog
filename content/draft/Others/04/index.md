@@ -1,34 +1,34 @@
 ---
 title: "CSS Custom Properties"
-postdate: "2022-05-08"
-update: "2022-05-08"
+postdate: "2022-05-04"
+update: "2022-05-04"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "CSS Custom Properties（CSS変数）について紹介します。"
 tags: ["CSS", "CSS Custom Properties", "CSS変数"]
 keywords: ["CSS", "CSS Custom Properties", "CSS変数"]
-published: false
+published: true
 ---
 
 # CSSでも変数が使える❗️❗️
 
-CSSでは長らく、いわゆる「変数」なるものを使用することが出来ませんでした。例えばサイトのテーマカラーが`#339898`だとしたら、CSSファイルの色んな所でこの文字列をハードコードしないといけなかったわけです。何ともウェッブ明瞭期らしい香りがしますね。
+CSSでは長らく、いわゆる「変数」なるものを使用することが出来ませんでした。例えばサイトのテーマカラーが`#339898`だとしたら、CSSファイルの色んな所でこの文字列をハードコードしないといけなかったわけです。何ともウェッブ黎明期らしい香りがしますね。
 
-SCSSには変数という機能がありこれをカバーしてくれるので、SCSSを使用しだしてからは不便さは感じていなかったんですが、現在では生のCSSで変数を使用することができます。
+SCSSには変数という機能がありこれをカバーしてくれるので、SCSSを使用しだしてからは不便さは感じていなかったんですが、現在では生のCSSで変数を使用できるというわけです。
 
-仕様としてはまだ勧告候補の状態ですが、[この通り](https://caniuse.com/css-variables)モダンブラウザーは既にこの仕様をサポートしているので今日から早速使っていきましょう。
+仕様としてはまだ勧告候補（Candidate Recommendation Draft）の状態ですが、[この通り](https://caniuse.com/css-variables)モダンブラウザーは既にこの仕様をサポートしているので早速試してみましょう。
 
-今回の記事ではCSS変数の概要について説明します。なお、正式名称は「CSS変数」ではなく、**CSS custom properties for cascading variables**といいます。ただし今回の記事では便宜上、CSS変数と呼ぶことにします。
+今回の記事ではCSS変数の概要について簡単に説明します。なお、正式名称は「CSS変数」ではなく、**CSS custom properties for cascading variables**といいます。ただし今回の記事では便宜上、CSS変数と呼ぶことにします。
 
 <aside>
 
-余談ですが、CSSが充実するにつれ「SCSSを使用しなくてもいいんでは？」という場面が増えてきた印象です。大変喜ばしいことですね。
+余談ですが、CSSが充実するにつれ「SCSSを使用しなくてもいいのでは？」という場面が増えてきた印象です。大変喜ばしいことですね。
 
 </aside>
 
 ## 変数の定義と呼び出し方
 
-では、サイトのメインカラーの値を定義する変数を用意して使用してみましょう。以下のように変数を定義します。
+では、サイトのメインカラーの値を定義する変数を用意して使用してみましょう。以下のように`変数名: 値`という風に変数を定義します。
 
 ```css:title=style.css
 :root {
@@ -36,7 +36,7 @@ SCSSには変数という機能がありこれをカバーしてくれるので�
 }
 ```
 
-この変数`--main-color`を呼び出すには、`var()`関数を使用します。
+この変数`--main-color`を呼び出すには、`var`関数を使用します。
 
 ```css:title=style.css
 :root {
@@ -83,11 +83,11 @@ h1 {
 ```css:title=style.css
 :root {
   /* 単位も含めること */
-  --width-container: 1166px;
+  --wrapper-width: 1166px;
 }
 
-.container {
-  width: var(--width-container);
+.wrapper {
+  width: var(--wrapper-width);
 }
 ```
 
@@ -96,24 +96,26 @@ h1 {
 ```css:title=style.css
 :root {
   /* 単位なし */
-  --width-container: 1166;
+  --wrapper-width: 1166;
 }
 
-.container {
-  /* ここで単位を付与しようとしても動作しない */
-  width: var(--width-container)px;
+.wrapper {
+  /* こんな風に単位を付与しようとしても動作しない */
+  width: var(--wrapper-width)px;
 }
 ```
 
-`calc()`を使用して、変数から呼び出した値に`* 1px`などとして単位を付与することも一応できます。ただ、これはハック的というか、個人的にはあまり好きではない方法です。
+`calc()`を使用して、変数から呼び出した値に`* 1px`などとして単位を付与することもできます。ただ、これはハック的というか、個人的にはあまり好きではない方法です。
 
 ```css:title=style.css
 :root {
+  /* 単位なし */
   --width-container: 1166;
 }
 
-.container {
-  width: calc(var(--width-container) * 1px);
+.wrapper {
+  /* 1pxをかけて単位をつける */
+  width: calc(var(--wrapper-width) * 1px);
 }
 ```
 
@@ -122,16 +124,19 @@ h1 {
 プログラミング言語の変数と同じように、CSS変数もスコープを持ちます。変数定義の際、`:root`ブロックの中で宣言すればHTMLファイル全体で有効な変数を定義することになります。例えば`section`ブロックの中なら`section`要素の中だけ、`.wrapper`ブロックならば`wrapper`クラスの中でだけ有効な変数になります。
 
 ```css:title=style.css
+/* HTML全体で使用できる */
 :root {
   --main-color: #338989;
 }
 
+/* sectionの中でのみ使用できる */
 section {
-  --title-color: #445;
+  --section-title-color: #445;
 }
 
+/* wrapperクラスの中でのみ使用できる */
 .wrapper {
-  --width: 1166px;
+  --wrapper-width: 1166px;
 }
 ```
 
@@ -177,7 +182,7 @@ HTMLとCSSは以下の通りです。
   border: 1px solid #444;
 }
 
-/* グラデーションバーのスタイル */
+/* グラデーションバーの共通スタイル */
 .bar {
   position: absolute;
   display: block;
@@ -199,7 +204,7 @@ HTMLとCSSは以下の通りです。
 }
 ```
 
-構成をざっと説明します。`.wrapper`がバーの外枠で、`.bar`がグラデーションになっている部分です。CSS変数`--wrapper-width`を定義することで、外枠の大きさを定義しています。グラデーションバーについては、`.bar`で定義しています。また、3つの`span`それぞれに`bar1`、`bar2`、`bar3`と個別のクラスを定義し、そこで`calc()`を使って`width`の値を計算しています。
+構成をざっと説明します。`.wrapper`がバーの外枠で、`.bar`が青のグラデーションになっている部分です。CSS変数`--wrapper-width`を定義することで、外枠の大きさを定義しています。グラデーションバーについては、`.bar`で定義しています。また、3つの`.bar`それぞれに`bar1`、`bar2`、`bar3`と個別のクラスを定義し、そこで`calc()`を使って`width`の値を計算しています。
 
 これでも問題ないのですが、HTML側でもCSS側でも`bar1`、`bar2`、`bar3`という3つのクラスが定義されていることがちょっと気になります。以下のようにHTML側でCSS変数を定義してみましょう。
 
@@ -224,9 +229,22 @@ HTML側では`style`属性の中にCSS変数を定義します。そうすれば
   position: absolute;
   display: block;
   height: 20px;
+  /* style属性で定義された--widthを利用して計算する */
   width: calc(var(--wrapper-width) * var(--width));
   background: linear-gradient(to right, #5691c8, #457fca);
 }
 ```
 
-こうしてCSS側での`.bar1`、`.bar2`、`.bar3`を削除することができました。
+こうしてCSS側での`.bar1`、`.bar2`、`.bar3`を削除することができました。メンテナンス性も向上しますね。
+
+---
+
+このCSS変数はかなり利用シーンが広そうなので、改めて別で詳しく記事にする予定です。
+
+## 参考
+
+- [CSS カスタムプロパティ (変数) の使用 | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/Using_CSS_custom_properties)
+
+- [CSS Custom Properties for Cascading Variables Module Level 1](https://www.w3.org/TR/2021/CRD-css-variables-1-20211111/)
+
+- [A Complete Guide to Custom Properties | CSS-Tricks - CSS-Tricks](https://css-tricks.com/a-complete-guide-to-custom-properties/)
