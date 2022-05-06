@@ -1,7 +1,7 @@
 ---
 title: "CSSのis()擬似クラス関数"
 postdate: "2022-04-29"
-update: "2022-04-29"
+update: "2022-05-06"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "CSSのis()擬似クラス関数について学習しました。"
@@ -196,6 +196,8 @@ a :has(> img) {
   color: red;
 }
 ```
+
+> Warning: the equivalence is true in this example because all the selectors are valid selectors. If just one of these selectors were invalid, the entire selector list would be invalid. This would invalidate the rule for all three heading elements, whereas in the former case only one of the three individual heading rules would be invalidated.
 
 上記の例で言うと、`.title`も含め無効化されるので、`.title`は赤くなりません。将来`:has()`が実用化された時、あのブラウザーだけまだ対応されない、という状況は容易に想像できますね。
 
