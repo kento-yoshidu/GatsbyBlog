@@ -1,7 +1,7 @@
 ---
 title: "CSSのwhere()擬似クラス関数"
 postdate: "2022-05-01"
-update: "2022-05-01"
+update: "2022-05-13"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "CSSのwhere()擬似クラス関数について学習しました。"
@@ -36,7 +36,7 @@ published: true
 
 `section`の中にある見出しや本文の色を薄くしたい場合は、`:where()`を使用してセレクターをまとめて記述することができます。
 
-```css
+```css:title=style.css
 /* 従来の書き方 */
 section h1,
 section h2,
@@ -60,7 +60,7 @@ section :where(h1, h2, h3, p) {
 <h1 class="title">h1</h1>
 ```
 
-```css
+```css:title=style.css
 /* 詳細度 : 0 */
 :where(.title) {
   color: red;
@@ -80,7 +80,7 @@ classセレクターの方が要素セレクターより詳細度が高いのは
 
 以下のように、`:where(a)`でブラウザーの持つデフォルトCSSを上書きし（詳細度が0と言ってもUser Agent Stylesheetは上書きできるため注意）、`nav a`のように必要な箇所にCSSを当てていくことができます。
 
-```css
+```css:title=style.css
 /* ブラウザーのデフォルトCSSを上書き */
 :where(a) {
   color: #444
@@ -98,7 +98,7 @@ nav a {
 
 sanitize.cssでは、リストに関するスタイルを一まとめにして`margin`をなくしています。
 
-```css
+```css:title=style.css
 :where(dl, ol, ul) :where(dl, ol, ul) {
   margin: 0;
 }
@@ -106,7 +106,7 @@ sanitize.cssでは、リストに関するスタイルを一まとめにして`m
 
 また、セレクターをまとめずとも、詳細度を0にする目的で`:where()`を利用しているであろう部分もありました。
 
-```css
+```css:title=style.css
 :where(body) {
   margin: 0;
 }
@@ -130,7 +130,6 @@ sanitize.cssでは、リストに関するスタイルを一まとめにして`m
 [:where() | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/:where)
 
 [Selectors Level 4](https://www.w3.org/TR/selectors-4/#zero-matches)
-
 
 [:where | CSS-Tricks - CSS-Tricks](https://css-tricks.com/almanac/selectors/w/where/)
 
