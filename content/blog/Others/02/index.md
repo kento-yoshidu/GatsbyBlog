@@ -1,7 +1,7 @@
 ---
 title: "CSSのis()擬似クラス関数"
 postdate: "2022-04-29"
-update: "2022-05-06"
+update: "2022-05-13"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "CSSのis()擬似クラス関数について学習しました。"
@@ -30,7 +30,7 @@ CSSの擬似クラス関数である`:is()`については、前から存在は�
 
 `header`、`section`、`footer`の直下にある`h1`にだけCSSを当てたい状況があるとします。通常、こんな風に書きますよね。
 
-```css
+```css:title=style.css:title=style.css
 header > h1,
 main > h1,
 footer > h1 {
@@ -44,7 +44,7 @@ footer > h1 {
 
 ここで`:is()`を使用すれば、`header`、`main`、`footer`を**リスト**としてまとめることができます。
 
-```css
+```css:title=style.css
 :is(header, main, footer) > h1 {
   color: red;
 }
@@ -54,7 +54,7 @@ footer > h1 {
 
 上記は要素セレクターを使用しましたが、もちろんクラスセレクターなどを使用することもできます。
 
-```css
+```css:title=style.css
 /* プライマリーとセカンダリーのボックスの中の.textだけ文字を太くする */
 :is(.primary-box, .secondary-box) .text {
   font-weight: bold;
@@ -63,7 +63,7 @@ footer > h1 {
 
 また、`section`の中でだけ`h1`、`h2`、`h3`にCSSを当てたい場合には、以下のように記述できます。
 
-```css
+```css:title=style.css
 section :is(h1, h2, h3) {
   font-weight: bold;
 }
@@ -71,7 +71,7 @@ section :is(h1, h2, h3) {
 
 `:is()`を複数組み合わせることもできます。以下の例では、`header`もしくは`footer`の直下の、`h1`もしくは`h2`にスタイルが当たります。
 
-```css
+```css:title=style.css
 :is(header, footer) > :is(h1, h2) {
   color: blue;  
 }
@@ -89,7 +89,7 @@ section :is(h1, h2, h3) {
 
 以下のようなHTMLを用意します。
 
-```html
+```html:title=index.html
 <section>
   <h1 class="red">h1</h1>
 </section>
@@ -97,7 +97,7 @@ section :is(h1, h2, h3) {
 
 `:is()`を使用してCSSを記述します。この時、要素セレクターが2つ並んでいると見做され、詳細度は0.0.2となります。
 
-```css
+```css:title=style.css
 /* 詳細度 : 0.0.2 */
 section :is(h1) {
   color: blue;
@@ -106,11 +106,11 @@ section :is(h1) {
 
 続いて、`.red`を追加し文字を赤くします。
 
-```css
+```css:title=style.css
 
 /* 詳細度 : 0.0.2 */
 section :is(h1) {
-  color: blue
+  color: blue;
 }
 
 /* 詳細度 : 0.1.0 */
@@ -125,7 +125,7 @@ section :is(h1) {
 
 なんと、青く表示されます。この時、詳細度は1.0.1となったのではないかと推測されます。
 
-```css
+```css:title=style.css
 /* 詳細度 : 1.0.1 */
 section :is(h1, #hello-world) {
   color: blue;
@@ -139,7 +139,7 @@ section :is(h1, #hello-world) {
 
 もちろん、従来の書き方であればこんなことは起こりません。以下のCSSの場合、文字は赤く表示されます。
 
-```css
+```css:title=style.css
 /* 詳細度 : 0.0.2 */
 section h1,
 /* 詳細度 : 1.0.1 */
@@ -177,7 +177,7 @@ section #hello-world {
 
 現在ドラフト状態にあるSelectors Level 4の中に、[:has()](https://www.w3.org/TR/selectors-4/#has-pseudo)という擬似クラスがあります。
 
-```css
+```css:title=style.css
 /* MDNより */
 /* https://developer.mozilla.org/ja/docs/Web/CSS/:has */
 
@@ -190,20 +190,20 @@ a:has(> img) {
 
 まぁ一例として挙げただけなので、詳しい挙動は置いておきます。この擬似クラスは2022年4月現在、まだどのブラウザーも実装していないため動作しないわけです。これを従来の書き方に沿って記述した場合、**セレクターリスト全体が無効になります**。
 
-```css
+```css:title=style.css
 .title,
 a :has(> img) {
   color: red;
 }
 ```
 
-> Warning: the equivalence is true in this example because all the selectors are valid selectors. If just one of these selectors were invalid, the entire selector list would be invalid. This would invalidate the rule for all three heading elements, whereas in the former case only one of the three individual heading rules would be invalidated.
+> Warning: the equivalence is true in this example because all the selectors are valid selectors. <mark>If just one of these selectors were invalid, the entire selector list would be invalid</mark>. This would invalidate the rule for all three heading elements, whereas in the former case only one of the three individual heading rules would be invalidated.
 
 上記の例で言うと、`.title`も含め無効化されるので、`.title`は赤くなりません。将来`:has()`が実用化された時、あのブラウザーだけまだ対応されない、という状況は容易に想像できますね。
 
 しかし、`:is()`を使用すると、無効なセレクターは無視して出来る限りスタイルを当ててくれるようになります。
 
-```css
+```css:title=style.css
 /* これなら.titleは赤くなる */
 :is(.title, a:has(> img)) {
   color: red;
@@ -218,7 +218,7 @@ a :has(> img) {
 
 `:is()`を使用しても詳細度が変わらないのであれば使用しやすいかなと思います。つまり、リストの中の各セレクターの詳細度が同じ場合ですね。この場合はこれまでのセレクターを並べる書き方を単純に置き換えるものとして使用できます。
 
-```css
+```css:title=style.css
 /* この2つは同じ意味を持つと見做せる */
 
 /* これまで */
@@ -236,7 +236,7 @@ section :is(h1, h2, h3) {
 
 しかし、idセレクターとclassセレクターなど、詳細度が違うものがリストに混在する時にはこの書き方は避けたいかなーと思いました。詳細度が予期せず高くなることで、後からスタイルを上書きすることが出来なくなります。
 
-```css
+```css:title=style.css
 /* 1.0.1 */
 section :is(.title, h1, h2, #page-title) {
   color: red;
