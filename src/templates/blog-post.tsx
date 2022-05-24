@@ -3,6 +3,7 @@ import { Link, graphql } from "gatsby"
 
 import Layout from "../components/layout"
 import Seo from "../components/seo"
+import { Helmet } from "react-helmet"
 import Header from "../components/header"
 import PostInfo from "../components/postInfo"
 import intersectionObserver from "../lib/intersectionObserver"
@@ -35,6 +36,10 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
         title={post?.frontmatter?.title}
         pagepath={location.pathname}
       />
+
+      <Helmet>
+        <script async src="//cdn.iframe.ly/embed.js" charSet="utf-8"></script>
+      </Helmet>
 
       <Header
         pathname={location.pathname}
