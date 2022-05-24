@@ -1,7 +1,7 @@
 ---
 title: "2021年 読んでよかった本"
 postdate: "2022-04-25"
-update: "2022-04-26"
+update: "2022-05-25"
 seriesSlug: "GoodBookToBuy"
 seriesName: "xx年読んでよかった本"
 description: "2021年に読んでよかった本を紹介します。"
@@ -22,7 +22,7 @@ published: true
 
 ## 🥉 第3位 モダンJavaScriptの基本から始める　React実践の教科書
 
-[出版社リンク](https://www.sbcr.jp/product/4815610722/)
+<div class="iframely-embed" style="margin: 50px 0;"><div class="iframely-responsive" style="height: 170px; padding-bottom: 0;"><a href="https://www.sbcr.jp/product/4815610722/" data-iframely-url="//iframely.net/GX57i7Y"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
 ES2015以降のJavaScriptの解説から始まり、Reactに関してコンポーネントやReact Hooksの説明、さらにはCSSの扱い方（CSS ModulesやStyled JSXなど）、TypeScriptまで広く浅く学べる良書だと思います。
 
@@ -51,16 +51,23 @@ React初心者の方は「モダンJavaScript～」もしくは「基礎から�
 
 ## 🥇 第1位 作って学ぶ HTML＆CSSモダンコーディング
 
-[出版社リンク](https://ebisu.com/html-css-modern-coding/)
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://ebisu.com/html-css-modern-coding/" data-iframely-url="//iframely.net/z6x7cns?card=small"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
 著者の[エビスコム](https://ebisu.com/)さんは、私がこのブログを始めるきっかけになった[Webサイト高速化のための 静的サイトジェネレーター活用入門](https://ebisu.com/gatsbyjs-book/)も書かれています。
 
-モダンコーディングというタイトル、また著者NOTEの
+モダンコーディングというタイトル、また[著者NOTE](https://ebisu.com/note/about-modern-coding/)の
 
 > IE を気にする必要がなくなったこのタイミングで、レスポンシブWebデザインをマスター（再確認）するための本として出来上がったのが、今回の『作って学ぶ　HTML＆CSSモダンコーディング』です。
 
 という言葉が表す通り、IE対応という制約がなくなりモダンなHTML & CSSをゴリゴリ使っていける今だからこそ読みたい本です。
 
-HTMLとCSSの学習や基礎の習得はなまじ簡単に出来る分、最新情報のキャッチアップに力をいれずモダンなコーディングが出来ていないことに気づきました。もちろんネットで情報を集めるくらいは行っていましたが、やはり書籍で体形的に勉強できるのはいいですね。
+HTMLとCSSの学習や基礎の習得はなまじ簡単に出来る分、最新情報のキャッチアップに力をいれずモダンなコーディングが出来ていないことに気づきました。もちろんネットで情報を集めるくらいは行っていましたが、やはり書籍で体系的に勉強できるのはいいですね。
 
 この本を読んでから、これまでに作成したWebサイトのCSSを全て見直すことにしました。
+
+<details style="margin-top: 60px">
+<summary>更新履歴</summary>
+
+- 2022年5月25日 : 出版社リンクをリンクカードに差し替え。誤字脱字を修正。
+
+</details>
