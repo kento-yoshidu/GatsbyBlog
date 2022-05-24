@@ -26,6 +26,8 @@ SCSSには変数という機能がありこれをカバーしてくれるので�
 
 </aside>
 
+<div class="iframely-embed"><a class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://blog.toriwatari.work/page/1/Others/02/" data-iframely-url="//iframely.net/LXtfFQM"></a></a></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
+
 ## 変数の定義と呼び出し方
 
 では、サイトのメインカラーの値を定義する変数を用意して使用してみましょう。以下のように`変数名: 値`という風に変数を定義します。
