@@ -11,7 +11,8 @@ draft: true
 
 # EFS
 
-Elastic File Systemの略。**複数のインスタンスからアクセス可能**な共有ストレージ。
+Elastic File Systemの略。**複数のインスタンスからアクセス可能**な共有ストレージ。POSIX準拠。
+
 
 ## EFSの特徴
 

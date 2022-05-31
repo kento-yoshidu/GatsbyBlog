@@ -28,7 +28,6 @@ Gitは今や、私たちの日常に欠かせない当たり前のツールに�
 - #x Git内部構造ツアー①
 - #x Git内部構造ツアー②
 
-
 ## 参考にした書籍、サイト
 
 このシリーズを書くにあたり参考にした書籍やWebサイトを紹介しておきます。書籍に関してはお勧め度を⭐️で表しています。
@@ -41,9 +40,7 @@ Gitは今や、私たちの日常に欠かせない当たり前のツールに�
 
 ### 独習Git
 
-[Amazonリンク](https://www.amazon.co.jp/dp/B01C2TRNUG/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1)
-
-出版：2016年2月
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://www.shoeisha.co.jp/book/detail/9784798144610" data-iframely-url="//iframely.net/9I3Qjxl?card=small"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
 お勧め度：⭐⭐️⭐⭐️⭐️
 
@@ -51,9 +48,7 @@ Gitは今や、私たちの日常に欠かせない当たり前のツールに�
 
 ### 【改訂新版】Gitポケットリファレンス
 
-[Amazonリンク](https://www.amazon.co.jp/dp/B01NBJYEXP/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1)
-
-出版：2016年12月
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://gihyo.jp/book/2017/978-4-7741-8593-4" data-iframely-url="//iframely.net/AdiBNys?card=small"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
 お勧め度：⭐⭐️⭐⭐️
 
@@ -61,7 +56,7 @@ Gitのリファレンス本です。Gitの公式リファレンスも良いの�
 
 ### サル先生のGit入門〜バージョン管理を使いこなそう〜【プロジェクト管理ツールBacklog】
 
-[Webサイト](https://backlog.com/ja/git-tutorial/)
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://backlog.com/ja/git-tutorial/" data-iframely-url="//iframely.net/SeBmIQX?card=small"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
 全くのGit初心者が最初から勉強できるサイトです。ブランチやstashなどイメージにしにくい要素も図を用いて説明されています。
 
@@ -69,7 +64,7 @@ Gitのリファレンス本です。Gitの公式リファレンスも良いの�
 
 ### Learn Git Branching
 
-[Webサイト](https://learngitbranching.js.org/?locale=ja)
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://pcottle.github.io/learnGitBranching/index.html?demo" data-iframely-url="//iframely.net/V45xJdg?card=small"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
 ブランチに関することを中心に学習できるサイトです。ブランチの様子が可視化されていて非常に勉強になるサイトです。
 
