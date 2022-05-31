@@ -24,9 +24,7 @@ published: true
 
 ## 🥉 第3位 実践Vim
 
-[出版社リンク](https://tatsu-zine.com/books/practical-vim)
-
-発売 : 2013年8月
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 170px; padding-bottom: 0;"><a href="https://tatsu-zine.com/books/practical-vim" data-iframely-url="//iframely.net/ItP8Lf8"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
 Vimは自己満足レベルで使えるんだけど、イマイチ使いこなせている感がなかったんですが、この本を買って正解でした。この本を読んでからは、Vimの機能の1割も使いこなせていなかったことを恥じるとともに、Vimがもっと好きになりました。
 
@@ -36,13 +34,9 @@ Windowsを使用している人でもWSLで作業することがこれから増�
 
 ## 🥈 第2位 マスタリングTCP/IP　入門編（第6版）
 
-[出版社リンク](https://www.ohmsha.co.jp/book/9784274224478/)
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 170px; padding-bottom: 0;"><a href="https://www.ohmsha.co.jp/book/9784274224478/" data-iframely-url="//iframely.net/PBYZEtB"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
-発売 : 2019年12月
-
-ネットワークに関する名著です。TCP/IPと言いながらイーサネットやHTTPに関することも解説されています。
-
-2012年に発売された第5版から、実に約8年ぶりの改定です。ずっと第5版を読んでいたんですが、ちょっと古いと感じる部分もありましたので（無線LANの辺りとか）、第6版の発売後すぐに飛びつきました。
+ネットワークに関する名著です。2012年に発売された第5版から、実に約8年ぶりの改定です。ずっと第5版を読んでいたんですが、ちょっと古いと感じる部分もありましたので（無線LANの辺りとか）、第6版の発売後すぐに飛びつきました。
 
 結構分量がある本ですので、長期休暇（年末年始、GW、お盆）ごとに2~3日かけて繰り返し読むようにしています。一度読んだだけじゃ分からなくても、時間を置いて再度読んでみると理解できることが多かったりするので楽しいですね。
 
@@ -50,9 +44,7 @@ Windowsを使用している人でもWSLで作業することがこれから増�
 
 ## 🥇 第1位 Webサイト高速化のための　静的サイトジェネレーター活用入門
 
-[出版社リンク](https://book.mynavi.jp/ec/products/detail/id=115483)
-
-発売 : 2020年6月
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 170px; padding-bottom: 0;"><a href="https://book.mynavi.jp/ec_products_detail/id=115483" data-iframely-url="//iframely.net/IpyNkvc"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
 何を隠そう、このブログを始めるきっかけとなった本です。恐らく当時は、日本語で読める唯一の静的サイトジェネレーター（以下、SSG）とJamstackについての技術書だったと思います（電子書籍除く）。
 
@@ -67,3 +59,10 @@ SSGであるGatsbyの使い方から始まり、Headless CMSであるContentful�
 ## また来年書きます。
 
 また2022年になったら続きを書きます🙋‍♀️
+
+<details style="margin-top: 60px">
+<summary>更新履歴</summary>
+
+- 2022年5月31日 : 出版社リンクをリンクカードに差し替え。誤字脱字を修正。
+
+</details>
