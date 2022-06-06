@@ -3,8 +3,11 @@ title: "pg_ctl"
 postdate: "2020-12-12"
 update: "2020-12-12"
 seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsonPostgreSQL"
+seriesSlug: "HandsOnPostgreSQL"
+description: "test"
 tags: ["PostgreSQL", "pg_ctl"]
+keywords: ["PostgresQL", "OSS-DB", "資格"]
+published: false
 ---
 
 # pg_ctl
