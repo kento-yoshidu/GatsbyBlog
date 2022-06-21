@@ -1,11 +1,15 @@
 ---
-title: ドメイン
+title: "ドメイン"
 postdate: "2021-01-09"
 update: "2021-01-09"
 seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsonPostgreSQL"
+seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL","ドメイン"]
+keywords: ["PostgreSQL", "Database", "DB"]
+published: false
 ---
+
+## ドメイン
 
 `CREATE DOMAIN ドメイン名 AS データ型`
 
@@ -84,3 +88,5 @@ postgres=# SELECT * FROM test_table2;
 ```
 
 https://www.postgresql.jp/document/12/html/domains.html
+
+CHECK制約でカラムの値を表す場合はVALUEキーワードを用いる
