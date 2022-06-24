@@ -112,3 +112,21 @@ $ npx tsc
 $ ls dist/
 script.js
 ```
+
+## 型ガード
+
+ある値の方によって処理を分けること。
+
+`typeof`演算子を使って型を得ることができる。
+
+```ts
+function typeGuard (a: string | number ) {
+  if (typeof a === "number") {
+    console.log("数値型です。")
+  } else {
+    console.log("文字列型です。")
+  }
+}
+```
+
+`instanceof`演算子は、特定のクラスのインスタンスかどうかを判定します。

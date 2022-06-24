@@ -685,6 +685,8 @@ type Frontmatter = {
   readonly categorySlug: Maybe<Scalars['String']>;
   readonly draft: Maybe<Scalars['Boolean']>;
   readonly keyword: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
+  readonly SeriesName: Maybe<Scalars['String']>;
+  readonly SeriesSlug: Maybe<Scalars['String']>;
 };
 
 
@@ -1300,6 +1302,8 @@ type FrontmatterFilterInput = {
   readonly categorySlug: Maybe<StringQueryOperatorInput>;
   readonly draft: Maybe<BooleanQueryOperatorInput>;
   readonly keyword: Maybe<StringQueryOperatorInput>;
+  readonly SeriesName: Maybe<StringQueryOperatorInput>;
+  readonly SeriesSlug: Maybe<StringQueryOperatorInput>;
 };
 
 type BooleanQueryOperatorInput = {
@@ -1540,6 +1544,8 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark.frontmatter.categorySlug'
   | 'childrenMarkdownRemark.frontmatter.draft'
   | 'childrenMarkdownRemark.frontmatter.keyword'
+  | 'childrenMarkdownRemark.frontmatter.SeriesName'
+  | 'childrenMarkdownRemark.frontmatter.SeriesSlug'
   | 'childrenMarkdownRemark.fields.slug'
   | 'childrenMarkdownRemark.excerpt'
   | 'childrenMarkdownRemark.rawMarkdownBody'
@@ -1609,6 +1615,8 @@ type FileFieldsEnum =
   | 'childMarkdownRemark.frontmatter.categorySlug'
   | 'childMarkdownRemark.frontmatter.draft'
   | 'childMarkdownRemark.frontmatter.keyword'
+  | 'childMarkdownRemark.frontmatter.SeriesName'
+  | 'childMarkdownRemark.frontmatter.SeriesSlug'
   | 'childMarkdownRemark.fields.slug'
   | 'childMarkdownRemark.excerpt'
   | 'childMarkdownRemark.rawMarkdownBody'
@@ -3193,6 +3201,8 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.categorySlug'
   | 'frontmatter.draft'
   | 'frontmatter.keyword'
+  | 'frontmatter.SeriesName'
+  | 'frontmatter.SeriesSlug'
   | 'fields.slug'
   | 'excerpt'
   | 'rawMarkdownBody'
@@ -4141,7 +4151,7 @@ type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArr
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }> };
+type Unnamed_1_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
 
 type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4151,12 +4161,12 @@ type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pic
 type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
+type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }> };
 
 type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_4_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
+type Unnamed_4_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
