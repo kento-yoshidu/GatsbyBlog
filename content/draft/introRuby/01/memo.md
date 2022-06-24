@@ -508,3 +508,28 @@ https://zenn.dev/tatsurom/articles/2b92156e509d9e27f81b
 
 https://www.youtube.com/watch?v=sh4WrNGDvQM
 
+
+## 多重代入
+
+```ruby
+arr = 14.divmod(3)
+
+puts arr
+```
+
+### delete_if
+
+Trueだったら配列から削除する。
+
+```ruby
+arr = [1,2,3,4,5,6,7,8,9,10]
+
+arr.delete_if do |n|
+  n.odd?
+end
+
+puts arr
+```
+
+
+https://qiita.com/rotelstift/items/70461f35c0d691e7b246
