@@ -1,3 +1,0 @@
-interface User {
-  id: number;
-}
