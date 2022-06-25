@@ -1,7 +1,7 @@
 ---
 title: "CSSのis()擬似クラス関数"
 postdate: "2022-04-29"
-update: "2022-05-13"
+update: "2022-06-25"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "CSSのis()擬似クラス関数について学習しました。"
@@ -155,7 +155,7 @@ section #hello-world {
 
 ## 仕様書を確認する
 
-まぁ自分の手で作業して確認するのもいいんですが、ちゃんと仕様書を確認しましょうという話です。
+まぁ自分の手で作業して確認するのもいいんですが、特にこういう目に見えないものはちゃんと仕様書を確認しましょうという話です。
 
 [こちらのページ](https://drafts.csswg.org/selectors/#specificity-rules)には、
 
@@ -181,18 +181,18 @@ section #hello-world {
 /* MDNより */
 /* https://developer.mozilla.org/ja/docs/Web/CSS/:has */
 
-a:has(> img) {
+a:has(> span) {
   color: red;
 }
 ```
 
-上記のMDNの例で言うと、img要素を直近の子要素にもつa要素に対してスタイルを指定する擬似クラスです。かなり便利そうですね。
+上記のMDNの例で言うと、span要素を直近の子要素にもつa要素に対してスタイルを指定する擬似クラスです。かなり便利そうですね。
 
 まぁ一例として挙げただけなので、詳しい挙動は置いておきます。この擬似クラスは2022年4月現在、まだどのブラウザーも実装していないため動作しないわけです。これを従来の書き方に沿って記述した場合、**セレクターリスト全体が無効になります**。
 
 ```css:title=style.css
 .title,
-a :has(> img) {
+a :has(> span) {
   color: red;
 }
 ```
@@ -205,7 +205,7 @@ a :has(> img) {
 
 ```css:title=style.css
 /* これなら.titleは赤くなる */
-:is(.title, a:has(> img)) {
+:is(.title, a:has(> span)) {
   color: red;
 }
 ```
@@ -244,6 +244,13 @@ section :is(.title, h1, h2, #page-title) {
 ```
 
 もちろん、CSSを上手に書ける人やCSS設計をちゃんと出来る人であれば問題ないかも知れませんが、大規模なCSSになってくると私には難しいと感じました。
+
+<details style="margin-top: 60px">
+<summary>更新履歴</summary>
+
+- 2022年6月25日 : 誤字脱字を修正。細かい文言を変更。
+
+</details>
 
 ## 参考
 

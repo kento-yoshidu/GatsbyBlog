@@ -7,7 +7,7 @@ seriesSlug: "Others"
 description: "TypeScriptにおいて、typeとinterfaceは何が違うのか。"
 tags: ["TypeScript"]
 keywords: ["TypeScript", "type", "interface"]
-published: true
+published: false
 ---
 
 # TypeScriptにおけるtypeとinterfaceの違い
