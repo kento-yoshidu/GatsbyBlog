@@ -6,8 +6,10 @@ import Seo from "../components/seo"
 import Header from "../components/header"
 import PostInfo from "../components/postInfo"
 
+/*
 import * as Styles from "../styles/post.module.scss"
 import * as TableStyles from "../styles/tableOfContent.module.scss"
+*/
 
 import "prismjs/themes/prism-tomorrow.css"
 import "prismjs/plugins/line-numbers/prism-line-numbers.css"

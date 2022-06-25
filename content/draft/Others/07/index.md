@@ -34,6 +34,8 @@ HTMLはW3C管轄の時と違い、**常に**更新されています。これだ
 
 「HTMLについてちゃんとしたことを学びたい」という方は**HTML5プロフェッショナル認定試験**の受験をお勧めします。
 
+<div class="iframely-embed"><div class="iframely-responsive" style="height: 140px; padding-bottom: 0;"><a href="https://html5exam.jp/" data-iframely-url="//iframely.net/xhiYUNQ"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
+
 この試験はレベル1とレベル2に分かれており、レベル1でHTMLとCSSに関する問題が出題されます（レベル2ではJavaScriptに関する問題が出題されるようです）。
 
 資格名は「HTML5」と関していますが、[その有効性はこれからも変わらないでしょう](https://html5exam.jp/measures/column_01.html)。

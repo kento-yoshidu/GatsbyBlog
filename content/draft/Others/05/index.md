@@ -7,7 +7,7 @@ seriesSlug: "Others"
 description: "意外と知られていないVimのTipsを紹介します。"
 tags: ["Vim"]
 keywords: ["Vim"]
-published: true
+published: false
 ---
 
 # 知られていないVimのTips
