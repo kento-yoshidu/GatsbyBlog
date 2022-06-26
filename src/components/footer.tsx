@@ -67,17 +67,9 @@ const Footer: React.VFC = () => {
           <FontAwesomeIcon icon={faChevronRight} />
           このブログについて
         </Link>
-
-        <Link
-          to={"#"}
-          target="_blink"
-        >
-          <FontAwesomeIcon icon={faChevronRight} />
-          プライバシーポリシー
-        </Link>
       </div>
 
-      <p className={Styles.copyright}>Copyright @ 2021 toriwatari</p>
+      <p className={Styles.copyright}>Copyright @ 2022 toriwatari</p>
     </footer>
   )
 }
