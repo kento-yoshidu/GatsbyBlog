@@ -31,14 +31,14 @@ const PostInfo: React.VFC<Props> = ({
   description
 }) => {
   const tag = tags?.map((tag: string) => (
-    <p key={`tag${tag}`}>
+    <li key={`tag${tag}`}>
       <Link
         to={`/tag/${tag}/page/1/`}
         key={`link${tag}`}
       >
         #{ tag }
       </Link>
-    </p>
+    </li>
   ))
 
   return (
@@ -55,19 +55,20 @@ const PostInfo: React.VFC<Props> = ({
         {postTitle}
       </h2>
 
-      <div className={Styles.dateInfo}>
-        <p>
-          <FontAwesomeIcon icon={faClock} />{ postdate }
-        </p>
-        <p>
+      <ul className={Styles.dateInfo}>
+        <li>
+          <FontAwesomeIcon icon={faClock} />
+          <time>{ postdate }</time>
+        </li>
+        <li>
           <FontAwesomeIcon icon={faUndo} />{ update }
-        </p>
-      </div>
+        </li>
+      </ul>
 
-      <div className={Styles.tags}>
+      <ul className={Styles.tags}>
         <FontAwesomeIcon icon={ faTags } />
         { tag }
-      </div>
+      </ul>
 
       <div className={Styles.description}>
         <FontAwesomeIcon icon={faCommentDots} />

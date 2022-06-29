@@ -1,22 +1,27 @@
 ---
-title: プリペアド文を作成する
-postdate: "2021-01-05"
-update: "2020-01-05"
+title: "関数を作成する"
+postdate: "2022-07-05"
+update: "2022-07-05"
 seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsonPostgreSQL"
-tags: ["PostgreSQL", "PREPARE"]
+seriesSlug: "HandsOnPostgreSQL"
+description: "PostgreSQLの関数機能について説明します。"
+tags: ["PostgreSQL"]
+keywords: ["PostgreSQL", "function", "関数"]
+published: true
 ---
+
+# 関数
 
 まずはテーブルを用意します。
 
-```sql
-sample=# CREATE TABLE test_table (id INT, name TEXT);
+```sql:title=console
+postgres=# CREATE TABLE test_table (id INT, name TEXT);
 CREATE TABLE
 
-sample=# INSERT INTO test_table VALUES(1, 'takashi');
-sample=# INSERT INTO test_table VALUES(2, 'keiko');
-sample=# INSERT INTO test_table VALUES(3, 'ryo');
-sample=# INSERT INTO test_table VALUES(4, 'takashi');
+postgres=# INSERT INTO test_table VALUES(1, 'takashi');
+postgres=# INSERT INTO test_table VALUES(2, 'keiko');
+postgres=# INSERT INTO test_table VALUES(3, 'ryo');
+postgres=# INSERT INTO test_table VALUES(4, 'takashi');
 
 sample=# SELECT * FROM test_table;
  id |  name
@@ -39,7 +44,7 @@ sample=# SELECT * FROM test_table;
 また、作成した関数は`\df`コマンドで確認します。
 
 ```sql
-sample=# CREATE OR REPLACE FUNCTION test_func(TEXT)
+postgres=# CREATE OR REPLACE FUNCTION test_func(TEXT)
           RETURNS VARCHAR AS
           $$
             SELECT name FROM test_Table
@@ -47,7 +52,7 @@ sample=# CREATE OR REPLACE FUNCTION test_func(TEXT)
           $$
           LANGUAGE SQL;
 
-sample=# \df
+postgres=# \df
                              関数一覧
  スキーマ |   名前    |  結果のデータ型   | 引数のデータ型 |  型
 ----------+-----------+-------------------+----------------+------
@@ -55,12 +60,11 @@ sample=# \df
 (1 行)
 ```
 
- - [OR REPLACE]オプションを付与し、既に同じ名前の関数があった場合に置き換えるように設定しています。
- - 関数名は`test_func`としました。また、引数のデータ型はTEXTとしました。
- - 
+- [OR REPLACE]オプションを付与し、既に同じ名前の関数があった場合に置き換えるように設定しています。
+- 関数名は`test_func`としました。また、引数のデータ型はTEXTとしました。
 
-```
-sample=# CREATE OR REPLACE FUNCTION test_func2(TEXT)
+```dummy:title=console
+postgres=# CREATE OR REPLACE FUNCTION test_func2(TEXT)
       RETURNS SETOF VARCHAR AS
     $$
       SELECT name FROM test_Table
@@ -69,8 +73,8 @@ sample=# CREATE OR REPLACE FUNCTION test_func2(TEXT)
       LANGUAGE SQL;
 ```
 
+では呼び出してみます。
 
 
 
-
-
+`DROP FUNCTION 関数名`で関数を削除します。

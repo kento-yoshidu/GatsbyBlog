@@ -3,8 +3,10 @@ title: PostgreSQLをDockerで使う
 postdate: "2021-01-27"
 update: "2021-02-18"
 seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsonPostgreSQL"
+seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL", "Docker"]
+keywords: ["PostgreSQL", "Database", "DB", "Docker"]
+published: false
 ---
 
 まずはdocker runで起動してみて、所感をつかみます。その後はdocker-compose化します。最後にユーザ名やパスワードを`.env`化します。
@@ -12,10 +14,10 @@ tags: ["PostgreSQL", "Docker"]
 # 前提
 
  - Windows10 64bit 2004
- - Doceker version 20.10.2, build 2291f61
- - dokcerイメージ postgres:12-alpine
+ - Docker version 20.10.2, build 2291f61
+ - dockerイメージ postgres:12-alpine
 
-## apline版のDockerファイルを落とす
+## Apline版のDockerファイルを落とす
 
 まずはDocker Hubにアクセスし、alpineイメージがあるかを確認しておきます。
 
@@ -63,7 +65,5 @@ $ docker container ls
 CONTAINER ID   IMAGE             COMMAND                  CREATED          STATUS          PORTS                     NAMES
 3fdd895b7ee7   postgres:alpine   "docker-entrypoint.s…"   14 seconds ago   Up 14 seconds   0.0.0.0:11111->5432/tcp   postgres
 ```
-
-
 
 ## docker-compose化する
