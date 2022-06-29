@@ -65,10 +65,16 @@ const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
               }
             </p>
 
-            <div className={Styles.date}>
-              <p className={Styles.post}><FontAwesomeIcon icon={faClock} />{post.frontmatter.postdate}</p>
-              <p className={Styles.update}><FontAwesomeIcon icon={faUndo} />{post.frontmatter.update}</p>
-            </div>
+            <ul className={Styles.date}>
+              <li className={Styles.post}>
+                <FontAwesomeIcon icon={faClock} />
+                <time>{post.frontmatter.postdate}</time>
+              </li>
+              <li className={Styles.update}>
+                <FontAwesomeIcon icon={faUndo} />
+                <time>{post.frontmatter.update}</time>
+              </li>
+            </ul>
 
             <p className={Styles.series}>
               <FontAwesomeIcon icon={faFolder} /> <span>シリーズ</span>
@@ -77,15 +83,16 @@ const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
               </Link>
             </p>
 
-            <p className={Styles.tags}>
+            <ul className={Styles.tags}>
               <FontAwesomeIcon icon={faTags} /> <span>タグ</span>
               {post.frontmatter.tags.map((tag: string) => (
-                <Link
-                  to={`/tag/${tag}/page/1/`}
-                  key={`${tag}`}
-                >#{ tag }</Link>
+                <li key={tag}>
+                  <Link
+                    to={`/tag/${tag}/page/1/`}
+                  >#{ tag }</Link>
+                </li>
               ))}
-            </p>
+            </ul>
 
             <p className={Styles.description}>
               <FontAwesomeIcon icon={faCommentDots} />

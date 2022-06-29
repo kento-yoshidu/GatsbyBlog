@@ -41,6 +41,7 @@
 .date {
   display: flex;
   margin-bottom: 5px;
+  list-style: none;
 }
 
 .post,
@@ -84,6 +85,11 @@
       -webkit-text-fill-color: rgba(255, 255, 255, 0);
     }
   }
+}
+
+.tags {
+  display: flex;
+  list-style: none;
 }
 
 @media (max-width: 768px) {
