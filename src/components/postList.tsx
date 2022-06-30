@@ -43,6 +43,9 @@ const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
       {postData.nodes.map((post: Node) => {
         const title = post.frontmatter.title || post.fields.slug
 
+        const [postY, postM, postD] = post.frontmatter.postdate.split("-")
+        const [updateY, updateM, updateD] = post.frontmatter.update.split("-")
+
         return (
           <div
             className={Styles.postItem}
@@ -68,11 +71,16 @@ const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
             <ul className={Styles.date}>
               <li className={Styles.post}>
                 <FontAwesomeIcon icon={faClock} />
-                <time>{post.frontmatter.postdate}</time>
+                <time dateTime={post.frontmatter.postdate}>
+                  {`${postY}年${postM}月${postD}日`}
+                </time>
               </li>
+
               <li className={Styles.update}>
                 <FontAwesomeIcon icon={faUndo} />
-                <time>{post.frontmatter.update}</time>
+                <time dateTime={post.frontmatter.postdate}>
+                  {`${updateY}年${updateM}月${updateD}日`}
+                </time>
               </li>
             </ul>
 
