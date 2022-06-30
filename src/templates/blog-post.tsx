@@ -116,8 +116,8 @@ export const pageQuery = graphql`
       tableOfContents
       frontmatter {
         title
-        postdate(formatString: "YYYY年MM月DD日")
-        update(formatString: "YYYY年MM月DD日")
+        postdate(formatString: "YYYY-MM-DD")
+        update(formatString: "YYYY-MM-DD")
         description
         seriesSlug
         seriesName

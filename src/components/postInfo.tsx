@@ -14,8 +14,8 @@ interface Props {
   postTitle?: string
   seriesSlug?: string
   seriesName?: string
-  postdate?: string
-  update?: string
+  postdate: string
+  update: string
   series?: string
   tags?: string[]
   description?: string
@@ -30,6 +30,9 @@ const PostInfo: React.VFC<Props> = ({
   tags,
   description
 }) => {
+  const [postY, postM, postD] = postdate.split("-")
+  const [updateY, updateM, updateD] = update.split("-")
+
   const tag = tags?.map((tag: string) => (
     <li key={`tag${tag}`}>
       <Link
@@ -58,10 +61,16 @@ const PostInfo: React.VFC<Props> = ({
       <ul className={Styles.dateInfo}>
         <li>
           <FontAwesomeIcon icon={faClock} />
-          <time>{ postdate }</time>
+          <time dateTime={postdate}>
+            {`${postY}年${postM}月${postD}日`}
+          </time>
         </li>
+
         <li>
-          <FontAwesomeIcon icon={faUndo} />{ update }
+          <FontAwesomeIcon icon={faUndo} />
+          <time dateTime={update}>
+            {`${updateY}年${updateM}月${updateD}日`}
+          </time>
         </li>
       </ul>
 
