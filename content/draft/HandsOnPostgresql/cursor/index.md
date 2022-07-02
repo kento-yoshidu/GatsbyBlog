@@ -1,146 +1,89 @@
----
-title: "カーソル"
-postdate: "2022-07-01"
-update: "2021-07-01"
-seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsOnPostgreSQL"
-tags: ["PostgreSQL", "バックアップ"]
-keywords: ["PostgreSQL", "cursor", "Database", "DB"]
-published: true
----
 
-## カーソルの作成
+カーソルは`pg_cursors`テーブルで確認することができます。
 
-`DECLARE CURSOR`コマンドでカーソルを作成できます。
 
-トランザクション中である必要があるため、まずは`BEGIN`でトランザクションを開始します。
+## `NO SCROLL`で逆方向へのカーソル移動を不可にする
 
-最低限の文法はこれだけです。とりあえず作ってましょう。
+`BACKWARD`で逆方向へのカーソル移動を行えることは説明しましたが、`NO SCROLL`オプションを指定することでそれを禁止することができます。
 
-`DECLARE sample_cursor CURSOR for SELECT * FROM sample;`
+`DECLARE sample_cursor NO SCROLL CURSOR FOR SELECT* FROM sample;`とします。
 
 ```dummy:title=console
-postgres=# DECLARE sample_cursor CURSOR for SELECT * FROM sample;
+postgres=*# DECLARE sample_cursor NO SCROLL CURSOR FOR SELECT * FROM sample;
 DECLARE CURSOR
 ```
 
-`fetch`とするだけで現在行を取得し、カーソルは自動で1つ前進します。
-
-具体的には、`FETCH FROM sample_cursor;`と入力します。
+順方向への`FETCH`は問題なくできますね。
 
 ```dummy:title=console
-postgres=# FETCH FROM sample_cursor;
- id | name 
-----+------
-  1 | 前田
-(1 row)
-```
-
-この時、カーソルは2行目に移動しています。再度`FETCH`を実行すると、2行目が取得されます。
-
-```dummy:title=console
-postgres=# FETCH FROM sample_cursor;
- id | name 
-----+------
-  2 | 山本
-(1 row)
-```
-
-このまま`FETCH`を続けていくと、やがて最終行にカーソルが移動します。そこからはいくら`FETCH`を実行してもデータが取得されることはありません。
-
-```dummy:title=console
-postgres=# FETCH FROM sample_cursor;
- id | name 
-----+------
-  3 | 高橋
-(1 row)
-
-postgres=# FETCH FROM sample_cursor;
- id | name 
-----+------
-  4 | 大西
-(1 row)
-
-postgres=# FETCH FROM sample_cursor;
- id | name 
-----+------
-  5 | 山田
-(1 row)
-
-postgres=# FETCH FROM sample_cursor;
- id | name 
-----+------
-(0 rows)
-```
-
-カーソルを後ろに進めるには、`BACKWARD`もしくは`PRIOR`オプションを付与します。
-
-こちらも同じく、先頭行にたどり着いた後は`FETCH`してもデータは取得されません。
-
-```dummy:title=console
-postgres=# FETCH BACKWARD FROM sample_cursor;
- id | name 
-----+------
-  5 | 山田
-(1 row)
-
-postgres=# FETCH BACKWARD FROM sample_cursor;
- id | name 
-----+------
-  4 | 大西
-(1 row)
-
-postgres=# FETCH BACKWARD FROM sample_cursor;
- id | name 
-----+------
-  3 | 高橋
-(1 row)
-
-postgres=# FETCH BACKWARD FROM sample_cursor;
+postgres=*# FETCH FROM sample_cursor; 
  id | name
 ----+------
-  2 | 山本
-(1 row)
-
-postgres=# FETCH BACKWARD FROM sample_cursor;
- id | name 
-----+------
-  1 | 前田
-(1 row)
-
-postgres=# FETCH BACKWARD FROM sample_cursor;
- id | name 
-----+------
-(0 rows)
+  1 | 高橋
+(1 行)
 ```
 
-## MOVE
-
-`MOVE`コマンドはカーソル移動のみを行い、データは取得しません。
+`BACKWARD`オプションを付けるとエラーになることがわかります。
 
 ```dummy:title=console
-postgres=# MOVE FROM sample_cursor;
-MOVE 1
-
-postgres=# FETCH FROM sample_Cursor;
- id | name 
-----+------
-  2 | 山本
-(1 row)
+postgres=*# FETCH BACKWARD from sample_cursor;
+ERROR:  cursor can only scan forward
+HINT:  Declare it with SCROLL option to enable backward scan.
 ```
 
-### ALLで全てのデータを取得する
+## `WITH HOLD`でカーソルを維持する
 
-`ALL`オプションを付与すると、現在のカーソル位置から先の全てのデータを取得し、末尾にカーソルを移動させます。
+実は`WITHOUT HOLD`オプションがデフォルトで付与されていて、カーソルを生成した**トランザクションの外部**では、そのカーソルを使用できません。
+
+カーソルを維持できます。
 
 ```dummy:title=console
-postgres=# FETCH ALL FROM sample_cursor;
- id | name 
+postgres=*# DECLARE sample_cursor CURSOR WITH HOLD FOR SELECT * FROM sample;
+DECLARE CURSOR
+```
+
+適当に`FETCH`でカーソルを移動させ、`COMMIT`でトランザクションを終了させます。
+
+```dummy:title=console
+postgres=*# fetch from sample_cursor;
+ id | name
 ----+------
-  1 | 前田
-  2 | 山本
-  3 | 高橋
-  4 | 大西
-  5 | 山田
-(5 rows)
+  1 | 高橋
+(1 行)
+
+
+postgres=*# fetch from sample_cursor;
+ id | name
+----+------
+  2 | 山田
+(1 行)
+
+
+postgres=*# commit;
+COMMIT
+```
+
+トランザクションを開始し、`FETCH`を実行すると、前回のカーソル位置が維持されていることがわかります。
+
+```dummy:title=console
+postgres=# BEGIN;
+
+postgres=*# fetch from sample_cursor;
+ id | name
+----+------
+  3 | 結城
+(1 行)
+```
+
+さらに、`COMMIT`してトランザクションを終了させ、`pg_cursors`テーブルを確認してみましょう。
+
+```dummy:title=console
+postgres=*# commit;
+COMMIT
+
+postgres=# select * from pg_cursors;
+     name      |                            statement                             | is_holdable | is_binary | is_scrollable |         creation_time
+---------------+------------------------------------------------------------------+-------------+-----------+---------------+-------------------------------
+ sample_cursor | declare sample_cursor cursor with hold for select * from sample; | t           | f         | t             | 2022-06-29 12:30:31.856551+09
+(1 行)
 ```
