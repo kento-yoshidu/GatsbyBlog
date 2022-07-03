@@ -57,14 +57,6 @@ const Search: React.VFC = () => {
 
   const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShowLists(!showLists)
-
-    /*
-    if (document.body.getAttribute("data-lock") === "lock") {
-      document.body.removeAttribute("data-lock")
-    } else {
-      document.body.setAttribute("data-lock", "lock")
-    }
-    */
   }
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 
 import * as Styles from "../styles/postList.module.scss"
 
+import type { Frontmatter } from "../types/type"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faFolder,
   faClock,
@@ -19,15 +21,7 @@ interface Node {
   fields: {
     slug: string;
   }
-  frontmatter: {
-    postdate: string;
-    description: string;
-    seriesName: string;
-    seriesSlug: string;
-    tags: string[];
-    title: string;
-    update: string;
-  }
+  frontmatter: Frontmatter
 }
 
 interface Props {

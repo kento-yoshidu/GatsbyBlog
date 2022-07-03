@@ -18,7 +18,7 @@ const ToggleButton = () => {
   return (
     <ThemeToggler>
       {({ theme, toggleTheme }) => {
-        const isDark = theme === 'dark'
+        const isDark = theme === "dark"
 
         const icon = isDark ? (
           <FontAwesomeIcon
@@ -35,7 +35,7 @@ const ToggleButton = () => {
         return (
           <div
             className={Styles.wrapper}
-            onClick={() => toggleTheme(isDark ? 'light' : 'dark')}
+            onClick={() => toggleTheme(isDark ? "light" : "dark")}
           >
             { icon }
           </div>

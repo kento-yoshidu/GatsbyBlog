@@ -1,24 +1,5 @@
 [
   {
-    "slug": "/HandsOnPostgresql/function/",
-    "title": "関数を作成する",
-    "keywords": [
-      "PostgreSQL",
-      "function",
-      "関数"
-    ]
-  },
-  {
-    "slug": "/HandsOnPostgresql/cursor/",
-    "title": "カーソル",
-    "keywords": [
-      "PostgreSQL",
-      "cursor",
-      "Database",
-      "DB"
-    ]
-  },
-  {
     "slug": "/Others/05/",
     "title": "メディアクエリーで > とか < が（一部）使えるぞ",
     "keywords": [

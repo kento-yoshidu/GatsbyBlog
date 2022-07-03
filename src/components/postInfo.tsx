@@ -3,6 +3,8 @@ import { Link } from "gatsby"
 
 import * as Styles from "../styles/postInfo.module.scss"
 
+import type { Frontmatter } from "../types/type"
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faUndo, faFolder, faTags, faCommentDots } from "@fortawesome/free-solid-svg-icons"
 
@@ -10,19 +12,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-interface Props {
-  postTitle?: string
-  seriesSlug?: string
-  seriesName?: string
-  postdate: string
-  update: string
-  series?: string
-  tags?: string[]
-  description?: string
-}
-
-const PostInfo: React.VFC<Props> = ({
-  postTitle,
+const PostInfo: React.VFC<Partial<Frontmatter>> = ({
+  title,
   seriesSlug,
   seriesName,
   postdate,
@@ -55,7 +46,7 @@ const PostInfo: React.VFC<Props> = ({
       </p>
 
       <h2 className={Styles.postTitle}>
-        {postTitle}
+        {title}
       </h2>
 
       <ul className={Styles.dateInfo}>
