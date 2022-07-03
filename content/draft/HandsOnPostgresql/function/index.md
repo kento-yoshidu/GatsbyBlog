@@ -7,7 +7,7 @@ seriesSlug: "HandsOnPostgreSQL"
 description: "PostgreSQLの関数機能について説明します。"
 tags: ["PostgreSQL"]
 keywords: ["PostgreSQL", "function", "関数"]
-published: true
+published: false
 ---
 
 # 関数

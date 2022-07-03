@@ -11,7 +11,7 @@ published: false
 
 # シーケンス
 
-連番を振ってくれる。idなどに使用できます。
+連番を振ってくれます。idなどに使用できます。
 
 `CREATE SEQUENCE [シーケンス名]`で作成できます。
 
@@ -31,7 +31,6 @@ postgres=# \ds
 (1 行)
 ```
 
-
 また、`pg_sequences`テーブルにはより詳細なシーケンスに関する情報が記載されています。
 
 ```dummy:title=console
@@ -44,7 +43,9 @@ postgres=# SELECT * FROM pg_sequences;
 
 特に指定しない限り、初期値は`1`です。
 
-## nextvalで連番を取り出す
+## `nextval()`で連番を取り出す
+
+`nextval([シーメンス名])`とすることで、次のシーケンス値を取得することができます。`SELECT`文を使って表示させてみましょう。
 
 ```dummy
 postgres=# select nextval('sample_seq');
@@ -74,7 +75,7 @@ postgres=# select nextval('sample_seq');
 (1 行)
 ```
 
-ためしにテーブルに挿入してみます。
+試しにテーブルに挿入してみます。
 
 ```dummy:title=console
 postgres=# CREATE TABLE sample (id INT, name VARCHAR(10));
@@ -92,8 +93,11 @@ postgres=# select * from sample;
 (1 行)
 ```
 
+なお、現在のシーケンス値は`currval()`で取得することができます。
 
-## `setval`で任意の値をシーケンスにセットする
+
+
+## `setval()`で任意の値をシーケンスにセットする
 
 ```dummy:title=console
 postgres=# select setval('sample_seq', 100); 
@@ -127,7 +131,46 @@ postgres=# select * from sample;
 `DROP SEQUENCE [シーケンス名]`でシーケンスを削除することができます。
 
 
-## 初期値、マックス値を決める
+## 初期値、上限値を決める
+
+次に上限値を設定してみます。
+
+上限値の3を超えた時にはエラーが発生します。
+
+```dummy:title=console
+postgres=# insert into sample values (nextval('sample_seq'));
+ERROR:  nextval: reached maximum value of sequence "sample_seq" (3)
+```
+
+
+## CACHE
+
+> メモリに格納できるシーケンス番号の量を指定。
+
+## CYCLE
+
+```dummy:title=console
+postgres=# insert into sample values(nextval('sample_seq'));
+INSERT 0 1
+postgres=# insert into sample values(nextval('sample_seq'));
+INSERT 0 1
+postgres=# insert into sample values(nextval('sample_seq'));
+INSERT 0 1
+postgres=# insert into sample values(nextval('sample_seq'));
+INSERT 0 1
+postgres=# insert into sample values(nextval('sample_seq'));
+INSERT 0 1
+postgres=# select * from sample;
+ id 
+----
+  1
+  2
+  3
+  1
+  2
+```
+
+## 参考
 
 https://qiita.com/jiyu58546526/items/3edf794cc29dc05f364e
 
