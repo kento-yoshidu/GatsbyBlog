@@ -46,7 +46,7 @@ const BlogPostTemplate: React.VFC<Props> = ({ data, location }) => {
       />
 
       <PostInfo
-        postTitle={post?.frontmatter?.title}
+        title={post?.frontmatter?.title}
         seriesSlug={data.markdownRemark?.frontmatter?.seriesSlug}
         seriesName={data.markdownRemark?.frontmatter?.seriesName}
         postdate={data.markdownRemark?.frontmatter?.postdate}
