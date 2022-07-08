@@ -3,7 +3,7 @@ title: "マテリアライズドビュー"
 postdate: "2021-01-28"
 update: "2021-01-28"
 seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsonPostgreSQL"
+seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL"]
 ---
 

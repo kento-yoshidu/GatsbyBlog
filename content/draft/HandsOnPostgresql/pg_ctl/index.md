@@ -13,7 +13,7 @@ published: false
 # pg_ctl
 
 pg_ctlはPostgresサーバを管理するためのツールです。サーバの起動や停止を行うことができます。
-PostreSQLの標準ツールであり、PostgreSQLのインストール時に同じくインストールされます。
+PostgreSQLの標準ツールであり、PostgreSQLのインストール時に同じくインストールされます。
 
 pg_ctlコマンドはPostgreSQLサーバが稼働するホスト上でのみ実行可能です(リモート実行は不可)。また、PostgreSQLの管理ユーザでのみ実行可能です。
 

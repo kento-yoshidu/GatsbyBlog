@@ -3,7 +3,7 @@ title: postgresql.confファイル
 postdate: "2021-01-09"
 update: "2021-01-26"
 seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsonPostgreSQL"
+seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL", "postgresql.conf"]
 ---
 

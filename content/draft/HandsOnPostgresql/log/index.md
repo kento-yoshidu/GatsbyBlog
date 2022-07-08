@@ -3,7 +3,7 @@ title: "ログ出力ハンズオン"
 postdate: "2020-12-23"
 update: "2020-12-23"
 seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsonPostgreSQL"
+seriesSlug: "HandsOnPostgreSQL"
 tags: ["git"]
 ---
 

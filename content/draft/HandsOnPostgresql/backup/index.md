@@ -3,7 +3,7 @@ title: バックアップを行う
 postdate: "2021-01-09"
 update: "2021-01-09"
 seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsonPostgreSQL"
+seriesSlug: "HandSonPostgreSQL"
 tags: ["PostgreSQL", "バックアップ"]
 ---
 
