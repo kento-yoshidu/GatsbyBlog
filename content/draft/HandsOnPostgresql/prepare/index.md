@@ -1,11 +1,17 @@
 ---
-title: PREPARE文2
+title: "プリペアド文"
 postdate: "2021-01-05"
 update: "2020-01-05"
 seriesName: "ハンズオンPostgreSQL"
-seriesSlug: "HandsonPostgreSQL"
+seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL", "PREPARE"]
+keywords: ["PostgreSQL"]
+published: false
 ---
+
+# プリペアド文
+
+プリペアド文を使用すると指定した問い合わせの書き換え・構文の解析・実行計画の作成が一度実行するだけで済むため、性能の向上が図れます。
 
 ## `PREPARE`でプリペアド文を定義する
 
@@ -53,9 +59,9 @@ postgres=# EXECUTE prepare_state(3);
 (1 行)
 ```
 
-もちろん、引数を複数とることもできます。\$1、\$2...と続く。
+もちろん、引数を複数とることもできます。\$1、\$2...と続きます。
 
-```
+```dummy:title=console
 postgres=# PREPARE prepare_state (INT, TEXT) AS
                   SELECT * FROM prepare
               WHERE id = $1 AND name = $2;
@@ -66,13 +72,21 @@ postgres=# EXECUTE prepare_state(1, 'takashi');
   1 | takashi
 (1 行)
 
-postgres=# EXECUTE prepare_state(2, 'takashi');
+postgres=# EXECUTE prepare_state(2, 'hiroshi');
  id | name
 ----+------
 (0 行)
-
 ```
 
-DEALLOCATE文で削除
+## `pg_prepared_statements`テーブル
+
+```dummy:title=console
+postgres=# select * from pg_prepared_statements;
+ name | statement | prepare_time | parameter_types | from_sql
+------+-----------+--------------+-----------------+----------
+(0 rows)
+```
+
+## DEALLOCATE文で削除
 
 `DEALLOCATE prepare_state`

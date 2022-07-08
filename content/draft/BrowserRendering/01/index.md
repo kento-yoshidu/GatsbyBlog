@@ -1,9 +1,9 @@
 ---
 title: "#1 Webページレンダリングの仕組み"
 postdate: "2023-01-01"
-update: "2021-01-01"
-seriesName: "ブラウザーを知る"
-seriesSlug: "LearningBrowser"
+update: "2023-01-01"
+seriesName: "ブラウザーレンダリングの仕組み"
+seriesSlug: "BrowswerRendering"
 description: ""
 tags: ["AWS", "AWS SAA", "EFS"]
 keywords: ["ブラウザー", "browser"]
@@ -55,15 +55,15 @@ HTTPリクエストを使用してHTMLファイルをWebサーバーからダウ
 
 [ブラウザはどのようにコンテンツをレンダリングしているのか？ - GIGAZINE](https://gigazine.net/news/20180323-rendering-engine/)
 
-[](https://commandlinefanatic.com/cgi-bin/showarticle.cgi?article=art034)
+[Using the Chrome web developer tools, Part 2: The Network Tab](https://commandlinefanatic.com/cgi-bin/showarticle.cgi?article=art034)
 
 [ブラウザレンダリングの仕組み - Qiita](https://qiita.com/sasakiki/items/91dcc8b50d7a61ce98bc)
 
-https://zenn.dev/silverbirder/articles/e10295948e17ca
+[📚ブラウザの仕組みを学ぶ](https://zenn.dev/silverbirder/articles/e10295948e17ca)
 
-https://www.yoheim.net/blog.php?q=20140703
+[ブラウザレンダリングの仕組みを理解して、ブラウザに優しいJavaScriptを書こう - YoheiM .NET](https://www.yoheim.net/blog.php?q=20140703)
 
 [ブラウザのしくみ: 最新ウェブブラウザの内部構造 - HTML5 Rocks](https://www.html5rocks.com/ja/tutorials/internals/howbrowserswork/)
 
+[Webページ高速化に必須の知識！ブラウザがWebページをどのようにレンダリングしているか、図を用いて解説 | コリス](https://coliss.com/articles/build-websites/operation/work/how-the-browser-renders-a-web-page.html)
 
-https://coliss.com/articles/build-websites/operation/work/how-the-browser-renders-a-web-page.html
