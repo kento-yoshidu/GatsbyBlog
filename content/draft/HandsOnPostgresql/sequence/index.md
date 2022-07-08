@@ -93,9 +93,7 @@ postgres=# select * from sample;
 (1 行)
 ```
 
-なお、現在のシーケンス値は`currval()`で取得することができます。
-
-
+なお、現在のシーケンス値は`currval()`で取得することができます。ただし、シーケンスの作成後、`nextval()`を実行する前に`currval()`を実行するとエラーになります。
 
 ## `setval()`で任意の値をシーケンスにセットする
 
@@ -131,7 +129,7 @@ postgres=# select * from sample;
 `DROP SEQUENCE [シーケンス名]`でシーケンスを削除することができます。
 
 
-## 初期値、上限値を決める
+## 上限値、下限値、初期値を決める
 
 次に上限値を設定してみます。
 
@@ -142,6 +140,18 @@ postgres=# insert into sample values (nextval('sample_seq'));
 ERROR:  nextval: reached maximum value of sequence "sample_seq" (3)
 ```
 
+
+次に、初期値を設定してみます。
+
+```dummy:title=console
+postgres=# create sequence sample_seq start 100;
+CREATE SEQUENCE
+postgres=# select nextval('sample_seq');
+ nextval 
+---------
+     100
+(1 row)
+```
 
 ## CACHE
 
