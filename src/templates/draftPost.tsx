@@ -6,11 +6,6 @@ import Seo from "../components/seo"
 import Header from "../components/header"
 import PostInfo from "../components/postInfo"
 
-/*
-import * as Styles from "../styles/post.module.scss"
-import * as TableStyles from "../styles/tableOfContent.module.scss"
-*/
-
 import "prismjs/themes/prism-tomorrow.css"
 import "prismjs/plugins/line-numbers/prism-line-numbers.css"
 
@@ -103,8 +98,8 @@ export const pageQuery = graphql`
       tableOfContents
       frontmatter {
         title
-        postdate(formatString: "YYYY年MM月DD日")
-        update(formatString: "YYYY年MM月DD日")
+        postdate(formatString: "YYYY-MM-DD")
+        update(formatString: "YYYY-MM-DD")
         description
         seriesSlug
         seriesName
