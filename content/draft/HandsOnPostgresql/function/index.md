@@ -77,4 +77,4 @@ postgres=# CREATE OR REPLACE FUNCTION test_func2(TEXT)
 
 
 
-`DROP FUNCTION 関数名`で関数を削除します。
+`DROP FUNCTION [関数名]([引数名])`で関数を削除します。
