@@ -7,7 +7,7 @@ seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL"]
 ---
 
-# マテリアライズドニュー
+# マテリアライズビュー
 
 ## CREATE MATERIALIZED VIEW
 
@@ -17,7 +17,7 @@ tags: ["PostgreSQL"]
 
 ### WITH DATA
 
-マテリアライズドビュー作成時に、データを投入する。
+マテリアライズドビュー作成時や更新時に、データを投入する。
 
 ### WITH NO DATA
 
@@ -45,7 +45,9 @@ tags: ["PostgreSQL"]
 
 ## REFRESH
 
-CONCURRENTLY
+### CONCURRENTLY
+
+マテリアライズドビューの更新中も、SELECT処理をブロックしません。
 
 ビューの更新中、**SELECT処理を**ぶろっくしない
 
