@@ -14,3 +14,27 @@ OracleDBやMySQLはネットでの情報や書籍も多いですが、PostgreSQL
 公式リファレンスを見てもらうのが一番ですが、
 
 なお、SQL自体については特に説明しませんのであしからず。
+
+## DDL
+
+Data Definition Languageの略で、データを**定義**するSQLです。
+
+- CREATE
+- DROP
+- ALTER
+- TRUNCATE
+
+
+## DML
+
+Data Manipulation Languageの略で、データを**操作**するSQLです。いわゆるCRUDにあたるSQLが該当します。
+
+## DCL
+
+Data Control Languageの略で、システムを**管理**するSQLです。権限とトランザクションに関するSQLが該当します。
+
+- BEGIN
+- ROLLBACK
+- COMMIT
+- GRANT
+- REVOKE

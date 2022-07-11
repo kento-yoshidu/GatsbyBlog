@@ -34,3 +34,12 @@ DIRTY READは、他トランザクションによって変更された**コミ�
 
 https://qiita.com/song_ss/items/38e514b05e9dabae3bdb#%E3%83%95%E3%82%A1%E3%82%B8%E3%83%BC%E3%83%AA%E3%83%BC%E3%83%89%E3%83%8E%E3%83%B3%E3%83%AA%E3%83%94%E3%83%BC%E3%82%BF%E3%83%96%E3%83%AB%E3%83%AA%E3%83%BC%E3%83%89-fuzzy-read--non-repeatable-read
 
+
+## 分離レベル
+
+|分離レベル|ダーティリード|ファジーリード|ファントムリード|
+|---|---|---|---|
+|READ UNCOMMITTED|❌|❌|❌|
+|READ COMMITTED|⭕|❌|❌|
+|REPEATABLE READ|⭕|⭕|❌|
+|SERIALIZABLE|⭕|⭕|⭕|
