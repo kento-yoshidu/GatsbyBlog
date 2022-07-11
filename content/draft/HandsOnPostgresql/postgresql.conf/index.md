@@ -138,17 +138,17 @@ TCP接続を許可するIPアドレスを指定します。デフォルト値は
 
 新しいトランザクションの分離レベルを設定します。
 
-postgres.confの再読み込み、SETコマンドで設定の繁栄が可能です。
+`postgres.conf`の再読み込み、SETコマンドで設定の反映が可能です。
 
-READ UNCOMMITED
+**READ UNCOMMITED**
 
 **コミットされていない**変更を他のトランザクションから参照できます。なお、コミットされていない変更を読み取ってしまうことを**ダーディリード**といいます。
 
-READ COMMITTED
+**READ COMMITTED**
 
 **コミットされた**変更を他のトランザクションから参照できます。postgres.sqlにおけるデフォルトのレベルです。
 
-REPEATABLE READ
+**REPEATABLE READ**
 
 ## SETコマンドによる設定の変更
 
