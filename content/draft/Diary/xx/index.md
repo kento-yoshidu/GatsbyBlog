@@ -7,7 +7,7 @@ seriesSlug: "Diary"
 description: ""
 tags: ["日記", "サボテン🌵"]
 keyword: ["日記", "Diary", "サボテン"]
-published: true
+published: false
 ---
 
 # サボテンが赤い花を付けたよと言って
