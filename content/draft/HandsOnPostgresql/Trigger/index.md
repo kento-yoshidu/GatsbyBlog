@@ -15,3 +15,6 @@ trigger
 
 タイミングとして`INSERT`、`UPDATE`、`DELETE`、`TRUNCATE`の4種類を指定できます。
 
+## ALTER
+
+ALTER TRIGGER [トリガー名] ON [テーブル名] RENAME TO [新しいトリガー名]
