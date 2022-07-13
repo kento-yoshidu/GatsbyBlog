@@ -7,7 +7,7 @@ seriesSlug: "Others"
 description: ""
 tags: ["ネットワーク", "無線LAN", "IEEE802.11"]
 keywords: ["ネットワーク", "Network", "無線LAN", "IEEE802.11"]
-published: true
+published: false
 ---
 
 # 無線LANの基礎を学ぶ

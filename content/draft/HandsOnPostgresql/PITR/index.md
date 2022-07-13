@@ -41,3 +41,5 @@ OSS-DB Silver受験に際しては、細かい内容は覚える必要はあり�
 　off … WALアーカイブを無効にする
 
 PITRを行うには、このarchive_modeをデフォルト値から変更する必要があります。
+
+archive_modeはデフォルトでは**off**であるため、`on`もしくは`always`に変更する必要があります。
