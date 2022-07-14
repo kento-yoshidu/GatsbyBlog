@@ -12,7 +12,39 @@ keywords: ["PostgreSQL", "Database", "DB", "OSS-Silver"]
 
 `CREATE [OR REPLACE] RULE ルール名 AS ON イベント TO テーブル名 DO 元の処理の扱い {実行するSQL文 | NOTHING};`
 
+元テーブルが更新されると、ビューから得られるデータも当然更新されたものになります。
+
+こんなテーブルがあったとして、
+
+```dummy:title=console
+postgres=# select * from sample2;
+ name  | price | count 
+-------+-------+-------
+ ItemA |   300 |    50
+ ItemB |   200 |    50
+ ItemC |   500 |   120
+(3 rows)
+```
+
+`name`カラムと`price`と`count`をかけた売上金額にあたる`sales`カラムを出したいとします。
+
+`SELECT name, price * count as sales, price, count FROM sample`というコマンドでもOKですが、
+
+```dummy:title=console
+postgres=# select name, price * count as sales, price, count from sample2;
+ name  | sales | price | count 
+-------+-------+-------+-------
+ ItemA | 15000 |   300 |    50
+ ItemB | 10000 |   200 |    50
+ ItemC | 60000 |   500 |   120
+(3 rows)
+```
+
+また、ビューに対する権限を与え元テーブルへの権限は与えない、ということもできるため、個人情報に該当する情報を除いたビューを作成する、という使い方もできます。
+
 ## CREATE
+
+ルールを定義することでビューやビューの元になるテーブルへの更新処理を可能にします。
 
 `CREATE VIEW [ビュー名] AS 検索処理`でビューを作成します。
 

@@ -38,3 +38,8 @@ Data Control Languageの略で、システムを**管理**するSQLです。権�
 - COMMIT
 - GRANT
 - REVOKE
+
+## 記事一覧
+
+- 関数
+- トリガー
