@@ -1,3 +1,7 @@
-const str = "sample.txt"
+const str = `
+*** OK
+OK ***
+*** OK
+`
 
-console.log(/sample[1]*.txt/.test(str))
+console.log(str.match(/^OK/))

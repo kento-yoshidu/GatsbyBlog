@@ -1,21 +1,31 @@
 ---
-title: "HTTP勉強用"
+title: "パケットキャプチャで学ぶHTTP"
 postdate: "2023-01-01"
 update: "2023-01-01"
-seriesName: "HTTP"
-seriesSlug: "HTTP入門"
-tags: ["HTTP", "HTTP3"]
+seriesName: "パケットキャプチャで学ぶHTTP"
+seriesSlug: "HTTPProtocol"
+tags: ["HTTP", "Wireshark"]
 keywords: ["HTTP3"]
 published: false
 ---
 
+# HTTPについて復習
+
+このような辺境のブログを見ている紳士淑女の皆様であれば、HTTPやネットワークの概要はご存じだと思いますので、本当に基本的な部分（Webサーバーって何？TCPって何？など）はざっと解説するに留まります。
+
 # HTTPの歴史
 
-HTTPはもともとはWebページを閲覧するため、はいパテキストをやり取りするために生まれた通信プロトコル。
+HTTPは**Webページを閲覧するため**に生まれた通信プロトコルです。**HyperText Transfer Protocol**の略称であり、ハイパーテキスト（htmlファイルなど）をやり取りできるプロトコルです。
 
-今ではAPI呼び出しやgRPC、認可プロトコルなどにも利用されている。
+<aside>
 
-HTTP/1.1はテキスト形式だが、HTTP/2はバイナリ。
+たまに「HTTPプロトコル」と記している所がありますが、プロトコルプロトコルとなるので正しくありません。しかし気持ちは分かります。私も口頭では「HTTPプロトコル」と言ってしまう時があります。
+
+</aside>
+
+そのシンプルさが故か、今ではAPI呼び出しやgRPC、認可プロトコルなど幅広く利用されています。しかし、今回のシリーズではあくまでもWebページの表示を元に話を進めます。
+
+HTTPの仕組みは非常にシンプルです。WebサーバーとWebブラウザーがHTTPリクエスト、HTTPレスポンスでhtmlやcssなどのファイルをやり取りします。
 
 ## 標準化
 
@@ -124,12 +134,20 @@ HTTP3では、TCPではなくQUICというプロトコルを使う。HTTP3では
 2018年~、QUICに改名する動きが起きる。
 
 
+HTTP/1.1はテキスト形式だが、HTTP/2はバイナリ。
+
+
+
+## 参考
+
+[](https://gihyo.jp/admin/serial/01/http3/0001)
+
+https://qiita.com/m_mizutani/items/dc331fa89ca9b7c2a0fe
 
 
 
 
 
 
-
-
+https://qiita.com/unsoluble_sugar/items/b080a16701946fcfce70
 
