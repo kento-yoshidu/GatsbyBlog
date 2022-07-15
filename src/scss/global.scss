@@ -183,3 +183,12 @@ body[data-lock="lock"] {
 .iframely-embed {
   margin: 30px 0;
 }
+
+.history {
+  .history-list {
+    list-style: disc;
+    li {
+      font-size: 1.48rem;
+    }
+  }
+}

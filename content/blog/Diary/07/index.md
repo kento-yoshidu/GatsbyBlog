@@ -77,11 +77,11 @@ Web系ばっかり勉強していてもつまらないので、以前から低�
 
 果たして、いくつ達成できるのか❗️❓
 
-<details style="margin-top: 60px">
+<details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
-- 2022年7月04日 : 「ジークンドーを習う」を追加。
-
+<ul class="history-list">
+  <li>2022年7月04日 : 「ジークンドーを習う」を追加。</li>
 </details>
 
 ## 参考
