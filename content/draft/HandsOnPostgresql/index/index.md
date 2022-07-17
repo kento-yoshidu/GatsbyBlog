@@ -48,8 +48,14 @@ postgres=# \d sample;
     "sample_index" btree (id)
 ```
 
-
 なお、インデックス名は省略可能です。省略した場合はPostgreSQLが良い感じにインデックス名を付与してくれます。
+
+```dummy:title=console
+postgres=# CREATE INDEX ON sample (id);
+CREATE INDEX
+```
+
+インデックスの種類を指定しないと、B-treeインデックスが採用されます。
 
 https://www.dbonline.jp/postgresql/index/index1.html
 

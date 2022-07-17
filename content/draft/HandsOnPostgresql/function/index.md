@@ -75,6 +75,6 @@ postgres=# CREATE OR REPLACE FUNCTION test_func2(TEXT)
 
 では呼び出してみます。
 
-
-
 `DROP FUNCTION [関数名]([引数名])`で関数を削除します。
+
+> `SETOF`オプションが設定されているため、戻り値が複数ある場合は複数件返されます。また、`STRICT`オプションが設定されているため、引数に`NULL`が含まれる場合は処理を実行せずにNULLを返します。
