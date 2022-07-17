@@ -6,7 +6,7 @@ seriesName: "ハンズオンPostgreSQL"
 seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL", "OSS-DB"]
 keywords: ["PostgreSQL", "Database", "DB"]
-published: true
+published: false
 ---
 
 # PostgreSQLの特徴
@@ -40,6 +40,8 @@ https://www.postgresql.org/about/licence/
 
 試験対策としては、似たようなライセンスはどれか、みたいな問題も出そうです。同じBSDライセンスをベースにしている**MITランセンス**を覚えておきましょう。反対に、制限が厳しいライセンスとしてGPLライセンスがあります。対比的なライセンスとしてこちらも覚えておきましょう。
 
+また、ソースコードの公開義務もありません。
+
 ## 日本PostgreSQLユーザ会
 
 日本でいうと、日本PostgreSQLユーザ会が存在します。
@@ -51,3 +53,12 @@ https://www.postgresql.jp/
 とのことです。加えて、日本語メーリングリストの運営も行っています。
 
 
+## 開発コミュニティ
+
+メーリングリストの管理やイベントの開催などを行っています。
+
+メーリングリストのメンバーによって議論がされますが、最終決定を行うのはあくまでコアメンバーです。
+
+## バージョンアップ
+
+メジャーバージョン、マイナーバージョンのアップデートの両方でリリースノートが発行されます。

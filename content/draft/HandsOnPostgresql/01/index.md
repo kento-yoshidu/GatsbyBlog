@@ -6,7 +6,7 @@ seriesName: "ハンズオンPostgreSQL"
 seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL", "OSS-DB"]
 keywords: ["PostgreSQL", "Database", "DB"]
-published: true
+published: false
 ---
 
 # ハンズオンPostgreSQL

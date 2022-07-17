@@ -7,7 +7,7 @@ seriesSlug: "Others"
 description: "2022年4月に発売された「HTML 解体新書」を紹介します。"
 tags: ["HTML", "書籍"]
 keywords: ["HTML", "書籍", "本"]
-published: true
+published: false
 ---
 
 # 「HTMLとか簡単ｗｗｗ」とか言うな👿
