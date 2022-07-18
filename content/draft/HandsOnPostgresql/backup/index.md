@@ -1,10 +1,12 @@
 ---
-title: バックアップを行う
+title: "バックアップを行う"
 postdate: "2021-01-09"
 update: "2021-01-09"
 seriesName: "ハンズオンPostgreSQL"
 seriesSlug: "HandSonPostgreSQL"
-tags: ["PostgreSQL", "バックアップ"]
+tags: ["PostgreSQL", "バックアップ", "OSS-DB Silver"]
+keywords: ["PostgreSQL", "Database", "DB", "OSS DB Silver"]
+published: false
 ---
 
 ## pg_dumpとpg_dumpall
@@ -202,10 +204,15 @@ pg_dumpコマンドは`-F`オプションでバックアップファイルの形
 - ロールやテーブルスペースは不可
 - 出力されるファイル形式を選択できる
 
-という特徴があり、`pg_Dumpall`は
+という特徴があり、`pg_dumpall`は
 
 - グローバルオブジェクトのみをバックアップできる
 - ファイルはテキスト形式で出力される（選択できない）
+
+
+## pg_restore
+
+`-c`で既存のデータベースオブジェクトを削除します。
 
 ## pg_basebackup
 
