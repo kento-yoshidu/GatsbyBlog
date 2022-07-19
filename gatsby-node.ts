@@ -102,7 +102,7 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, report
 
   allArticles.nodes.forEach((_) => {
     const postCount = allArticles.nodes.length
-    const pageCount = Math.ceil(postCount / 6)
+    const pageCount = Math.ceil(postCount / 10)
 
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
@@ -112,8 +112,8 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, report
           postCount: postCount,
           pageCount: pageCount,
           totalPageCount: pageCount,
-          skip: 6 * i,
-          limit: 6,
+          skip: 10 * i,
+          limit: 10,
           currentPage: i + 1,
           isFirst: i + 1 === 1,
           isLast: i + 1 === pageCount
@@ -154,7 +154,7 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, report
     const seriesName = series.nodes[0].frontmatter.seriesName
 
     const postCount = series.nodes.length
-    const pageCount = Math.ceil(postCount / 6)
+    const pageCount = Math.ceil(postCount / 10)
 
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
@@ -164,8 +164,8 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, report
           postCount: postCount,
           pageCount: pageCount,
           totalPageCount: pageCount,
-          skip: 6 * i,
-          limit: 6,
+          skip: 10 * i,
+          limit: 10,
           currentPage: i + 1,
           isFirst: i + 1 === 1,
           isLast: i + 1 === pageCount,
@@ -183,7 +183,7 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, report
 
   postsByTag.forEach((tag) => {
     const postCount = tag.nodes.length
-    const pageCount = Math.ceil(postCount / 6)
+    const pageCount = Math.ceil(postCount / 10)
 
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
@@ -192,8 +192,8 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, report
         context: {
           postCount: postCount,
           pageCount: pageCount,
-          skip: 6 * i,
-          limit: 6,
+          skip: 10 * i,
+          limit: 10,
           currentPage: i + 1,
           isFirst: i + 1 === 1,
           isLast: i + 1 === pageCount,
