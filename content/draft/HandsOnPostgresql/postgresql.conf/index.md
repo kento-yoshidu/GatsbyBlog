@@ -70,6 +70,8 @@ postgresql.confで設定されているパラメータは、テキストエデ�
 |listen_address|Postgresサーバ自身のIPアドレス|localhost|
 |log_connections|待ち受けポート番号|5432|
 |max_connections|サーバへの最大同時接続数|100|
+|log_destination|サーバーのログの出力先|
+|log_directory|サーバログを格納するディレクトリー|
 
 上記設定は**Postgresサーバの再起動のみ**によって、設定変更が反映されます。※postgres.confの再読み込みやSETコマンドの実行によって変更されない。
 
@@ -77,6 +79,12 @@ postgresql.confで設定されているパラメータは、テキストエデ�
 
 TCP接続を許可するIPアドレスを指定します。デフォルト値は`localhost`であり、自身のサーバからしか接続できない設定になっています。
 他のマシンからの接続を許可するのであれば、`172.168.24.10`のようにIPアドレスを指定したり、`*`とすることで全てのマシンからの接続を許可することができます。
+
+PostgreSQLサーバのログ出力先を設定するパラメータはlog_destinationです。
+設定できるログの出力先は以下の通りです。
+　stderr…サーバログを平文で標準エラー出力に出力
+　csvlog…サーバログをCSV形式で標準エラー出力に出力
+　syslog…サーバログをsyslogに出力
 
 ## ログ関係
 
