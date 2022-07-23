@@ -22,8 +22,6 @@ tags: ["PostgreSQL"]
 
 => pg_stat_databaseテーブル
 
-
-
 ## pg_controldata
 
 クラスターの制御情報を取得。
@@ -48,5 +46,65 @@ Latest checkpoint's full_page_writes: on
 
 また、クラスターの管理ユーザーで行う必要があります。
 
+## データのコピー
 
+### \copyコマンド
+
+
+```dummy
+postgres=# \copy sample to sample.txt;
+COPY 3
+
+postgres=# \q
+
+# cat sample.txt 
+1       北海道
+2       宮城
+3       和歌山
+```
+
+`delimiter as '区切り文字'`で区切り文字を指定できます。
+
+```dummy
+postgres=# \copy sample to sample.txt delimiter as ',';
+COPY 3
+
+postgres=# \q
+
+# cat sample.txt 
+1,北海道
+2,宮城
+3,和歌山
+```
+
+## CSVとして出力する
+
+`csv`とします。
+
+```dummy
+postgres=# \copy sample to sample.csv csv header;
+COPY 3
+
+postgres=# \q
+
+# cat sample.csv 
+1,北海道
+2,宮城
+3,和歌山
+```
+
+`header`を付ける。
+
+```dummy
+postgres=# \copy sample to sample.csv csv header;
+COPY 3
+
+postgres=# \q
+
+# cat sample.csv 
+id,name
+1,北海道
+2,宮城
+3,和歌山
+```
 
