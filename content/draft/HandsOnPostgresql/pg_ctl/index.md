@@ -139,24 +139,30 @@ https://www.postgresql.jp/document/12/html/app-pg-ctl.html
 
 ## ファイル実行
 
+```
 $ psql -f '{ファイル名}' --file={}
+```
 
 
 ## DB表示
 
+```
 $ psql -l --list
+```
 
 ## コマンド実行
 
+```
 $ psql -c {} --command={}
 
 $ psql -s --single-step
 
 $ psql -1 --single-transaction
+```
 
 ## 情報取得
 
-\dp \z テーブル、ビュー、シーケンス、をアクっす件と共に取得
+\dp \z テーブル、ビュー、シーケンス、をアクセス権と共に取得
 
 ## ユーザ作成
 
@@ -205,6 +211,8 @@ template1 デフォルト -E不可
 
 ```console
 $ initdb -D .
+```
+
 データベースシステム内のファイルの所有者はユーザ"kento"となります。
 このユーザをサーバプロセスの所有者とする必要があります。
 
