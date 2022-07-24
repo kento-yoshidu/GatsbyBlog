@@ -16,15 +16,17 @@ CREATE USERは接続権限あり、 CREATE ROLEはないため、`CREATE ROLE [�
 ## GRANT
 
 >・SELECTとCOPY TOの実行を許可する(SELECT)
-・INSERTとCOPY FROMの実行を許可する(INSERT)
-・UPDATEの実行を許可する(UPDATE)
-・DELETEの実行を許可する(DELETE)
-・TRUNCATEの実行(テーブルの全データを高速で削除)を許可する(TRUNCATE)
-・外部キー制約を作成することを許可する(REFERENCES)
-・トリガーの作成を許可する(TRIGGER)
-・データベースへの接続を許可する(CONNECT)
-・データベースに対するスキーマの作成を許可する(CREATE)
-・スキーマに対するオブジェクトの作成を許可する(CREATE)
+> ・INSERTとCOPY FROMの実行を許可する(INSERT)
+> ・UPDATEの実行を許可する(UPDATE)
+> ・DELETEの実行を許可する(DELETE)
+> ・TRUNCATEの実行(テーブルの全データを高速で削除)を許可する(TRUNCATE)
+> ・外部キー制約を作成することを許可する(REFERENCES)
+> ・トリガーの作成を許可する(TRIGGER)
+> ・データベースへの接続を許可する(CONNECT)
+> ・データベースに対するスキーマの作成を許可する(CREATE)
+> ・スキーマに対するオブジェクトの作成を許可する(CREATE)
+
+スキーマ・トリガー・外部キー
 
 ## テーブルの継承
 
