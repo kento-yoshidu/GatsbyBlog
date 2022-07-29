@@ -248,8 +248,9 @@ section :is(.title, h1, h2, #page-title) {
 <details style="margin-top: 60px">
 <summary>更新履歴</summary>
 
-- 2022年6月25日 : 誤字脱字を修正。細かい文言を変更。
-
+<ul class="history-list">
+  <li>2022年6月25日 : 誤字脱字を修正。細かい文言を変更。</li>
+</ul>
 </details>
 
 ## 参考

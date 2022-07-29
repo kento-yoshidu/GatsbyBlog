@@ -1,7 +1,7 @@
 ---
 title: "#5 HTMLの基本② (head要素)"
 postdate: "2021-08-21"
-update: "2022-02-05"
+update: "2022-07-29"
 seriesName: "初めてのHTML & CSS"
 seriesSlug: "HelloWeb"
 description: "head要素について学習します。"
@@ -75,11 +75,11 @@ DOCTYPE宣言はHTMLにおけるタグや要素ではありませんが、現代
 </html>
 ```
 
-ところで、html開始タグを見て見ると`lang="ja"`と書かれてありますが、これは一旦何でしょうか？
+ところで、html開始タグを見て見ると`lang="ja"`と書かれてありますが、これは一体何でしょうか？
 
 ### 属性
 
-ここで新しい言葉が出てきました。開始タグの中には**属性**を付与し、その要素に**情報を付加**できます。属性の書き方は以下の通りです。
+ここで新しい言葉の登場です。開始タグの中には**属性**を付与し、その要素に**情報を付加**できます。属性の書き方は以下の通りです。
 
 ```html
 <要素名 属性="属性値">
@@ -87,7 +87,7 @@ DOCTYPE宣言はHTMLにおけるタグや要素ではありませんが、現代
 
 html要素には**lang属性**を付与し、html要素内の**文章の言語**を指定するのが一般的です。
 
-lang属性（languageのlangです）は文字通り、記述されている文章の言語を情報として付与する属性です。属性値として`ja`を指定していますが、これは「日本語」という意味の属性値です。つまり、「html要素内（≒このWebページ）は、日本語の文章で構成されています」と宣言していることになります。
+lang属性（languageのlangです）は文字通り、記述されている文章の言語を情報として付与する属性です。属性値として`ja`を指定していますが、これは「日本語」という意味です。つまり、「html要素内（≒このWebページ）は、日本語の文章で構成されています」と宣言していることになります。
 
 属性はlang属性以外にも無数にあり、様々な情報を要素に付加できます。属性に関しても地道に少しづつ憶えていきましょう。
 
@@ -236,7 +236,7 @@ title要素はhead要素内に**必ず一つだけ入れる必要があります
 
 |要素・タグ名|役割|
 |---|---|
-|<!DOCTYPE html>|最新のHTMLであることを表す|
+|DOCTYPE宣言|HTMLのバージョンを宣言する|
 |html|HTML文書であることを表す|
 |head|Webページの情報を記述する|
 |body|Webページのコンテンツを記述する|
@@ -249,6 +249,14 @@ title要素はhead要素内に**必ず一つだけ入れる必要があります
 - title要素の役割
 
 の2点だけ押さえておけばOKです。
+
+<details style="margin-top: 60px" class="history">
+<summary>更新履歴</summary>
+
+<ul class="history-list">
+  <li>2022年7月29日 : 誤字脱字を修正。</li>
+</ul>
+</details>
 
 ## 参考
 
@@ -270,6 +278,6 @@ title要素はhead要素内に**必ず一つだけ入れる必要があります
 
 [HTML Standard Review Draft January 2020](https://html.spec.whatwg.org/review-drafts/2020-01/)
 
-[HTMLの言語指定  は必要？不要？　lang属性をGoogleは無視](https://schole-otium.com/blog/programming/html/lang-attribute-necessary/)
+[HTMLの言語指定  は必要？不要？ lang属性をGoogleは無視](https://schole-otium.com/blog/programming/html/lang-attribute-necessary/)
 
 [lang 属性にGoogle「言語指定にlangは使うな」／公式発言](https://seopack.jp/seoblog/20161111-use-hreflang/)

@@ -1,5 +1,5 @@
 ---
-title: "#1 Webページレンダリングの仕組み"
+title: "#1 ブラウザーレンダリングの仕組み"
 postdate: "2023-01-01"
 update: "2023-01-01"
 seriesName: "ブラウザーレンダリングの仕組み"
@@ -34,10 +34,13 @@ HTTPリクエストを使用してHTMLファイルをWebサーバーからダウ
 
 さて、HTMLはタグの集合で出来ていることはご存じだと思います。後述する**DOMツリー**を生成するため、**DOM**に変換する作業を行います。
 
-まず、バイトデータをHTMLドキュメントに変換する作業が待っています。
+まず、バイトデータを個々の文字に変換します。この時、HTMLファイルで指定されている文字コード（UTF-8など）を使用します。
 
-これを**トークン**というものに変換します。例えば`<html>`や`</html>`などの開始タグや終了タグはそれぞれ一つのトークンに変換されます。
+これを**トークン**と呼ばれるものに変換します。例えば`<html>`や`</html>`などの開始タグや終了タグはそれぞれ一つのトークンに変換されます。
 
+トークンはオブジェクトに変換されます。
+
+そして親子関係が表現されたDOMツリーが完成します。
 
 ### キャラクタートークン
 
@@ -53,8 +56,6 @@ HTTPリクエストを使用してHTMLファイルをWebサーバーからダウ
 
 [ブラウザレンダリングの仕組み](https://zenn.dev/ak/articles/c28fa3a9ba7edb)
 
-[ブラウザはどのようにコンテンツをレンダリングしているのか？ - GIGAZINE](https://gigazine.net/news/20180323-rendering-engine/)
-
 [Using the Chrome web developer tools, Part 2: The Network Tab](https://commandlinefanatic.com/cgi-bin/showarticle.cgi?article=art034)
 
 [ブラウザレンダリングの仕組み - Qiita](https://qiita.com/sasakiki/items/91dcc8b50d7a61ce98bc)
@@ -67,3 +68,6 @@ HTTPリクエストを使用してHTMLファイルをWebサーバーからダウ
 
 [Webページ高速化に必須の知識！ブラウザがWebページをどのようにレンダリングしているか、図を用いて解説 | コリス](https://coliss.com/articles/build-websites/operation/work/how-the-browser-renders-a-web-page.html)
 
+https://blog.logrocket.com/how-browser-rendering-works-behind-scenes/
+
+https://qiita.com/codemafia0000/items/caed57ec30d638e40728
