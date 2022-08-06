@@ -61,6 +61,16 @@ postgres=# select (select id from sample where id = 1);
 ```
 
 
+```dummy:title=console
+postgres=# insert into sample values (10);
+ERROR:  new row for relation "sample" violates check constraint "num_check"
+DETAIL:  Failing row contains (10).
+```
+
+```dummy:title=console
+postgres=# insert into sample values (9);
+INSERT 0 1
+```
 
 
 
