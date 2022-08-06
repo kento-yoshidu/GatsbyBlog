@@ -59,6 +59,38 @@ postgres=# SELECT table_name FROM information_schema.tables;
 
 スキーマ名はsystem_catalog、、、ではなく、`pg_catalog`です。`pg_catalog.pg_tables`テーブルを参照することで、テーブル一覧を取得することができます。
 
+# 正規表現
+
+`LIKE`と`SIMILAR`演算子は文字列全体を対象に検索をかけます。つまり、`AAA`を**含む**パターンを検索したいなら、`%AAA%`とする必要があります。
+
+```dummy:title=console
+postgres=# select * from sample where char like 'AAA';
+ char      
+------     
+ AAA       
+(1 row)    
+
+postgres=# select * from sample where char like '%AAA%';
+ char      
+-------    
+ .AAA.     
+ AAA       
+(2 rows)   
+```
+
+POSIX検索パターンなら`AAA`とすると2行ともにマッチします。
+
+```dummy:title=console
+postgres=# select * From sample where char ~ 'AAA';
+ char  
+-------
+ .AAA.
+ AAA
+(2 rows)
+```
+
+
+
 
 
 

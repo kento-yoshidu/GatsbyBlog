@@ -42,6 +42,13 @@ https://www.postgresql.org/about/licence/
 
 また、ソースコードの公開義務もありません。
 
+## PGDG
+
+PostgreSQLを開発しているのはPGDG（PostgreSQL Global Development Group）という開発コミュニティです。
+
+- メーリングリストの運用
+- ソースコード、バイナリーパッケージの無償公開
+
 ## 日本PostgreSQLユーザ会
 
 日本でいうと、日本PostgreSQLユーザ会が存在します。
