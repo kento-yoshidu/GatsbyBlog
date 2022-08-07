@@ -42,7 +42,7 @@ drwxr-xr-x 1 c-yoshizuke 1049089     0  1月 27 09:50 pg_xact/
 
 ```shell
 > SHOW config_file;
-         config_file
+         config_fil。
 -----------------------------
  c:/postgres/postgresql.conf
 (1 行)
@@ -54,6 +54,44 @@ drwxr-xr-x 1 c-yoshizuke 1049089     0  1月 27 09:50 pg_xact/
 - `#`でコメントアウト
 - 大文字と小文字は区別されない
 - データ型は論理型、文字列型、数値型、（単位付きの）数値型、列挙型（いわゆるenum）の5つ
+
+`SHOW ALL`コマンドで設定内容を全て出力することができます。
+
+```dummy:title=console
+postgres=# show all;
+
+name | setting |  description
++------+------+---------
+allow_system_table_mods |off | Allows modifications of the structure of system tables.
+application_name |psql | Sets the application name to be reported in statistics and logs.
+archive_cleanup_command | | Sets the shell command that will be executed at every restart point.
+# 略
+```
+
+さらに詳しい情報は、`pg_settings`ビューを参照することで得ることができます。
+
+```dummy:title=console
+postgres=# SELECT name, setting, unit, context FROM pg_settings;
+```
+※見やすいように出力結果をテーブルにしました。
+
+|name|setting|unit|context|
+|---|---|---|---|
+|allow_system_table_mods|off| |postmaster|
+|application_name|psql| |user|
+|archive_cleanup_command| | |sighup|
+|archive_command|(disabled)| |sighup|
+|archive_mode|off| |postmaster|
+
+## 設定内容を変更する方法
+
+試験では代表的な設定内容をどのようにして変更するかという問題が出題されます。もちろん`postgresql.conf`を書き換えてサーバーを再起動すれば反映できますが、それ以外にも方法があります。
+
+|方法|タイミング|
+|---|---|
+|SET文の実行|セッション内で即座に反映される|
+|signupシグナル|PostgreSQLサーバープロセスがsignupシグナルを受け取った時点で設定を反映しリロードする|
+|PostgreSQL起動|
 
 ## postgresql.confの編集
 
@@ -94,7 +132,6 @@ PostgreSQLサーバのログ出力先を設定するパラメータはlog_destin
 |log_connections|クライアントの認証、サーバへの接続など、クライアントに関するログを出力するかどうか|
 |log_min_messages|出力するログレベルを指定※後述|
 |log_line_prefix|ログの行頭にユーザ名やDB名などの情報を付与する|
-
 
 # エラー関係
 
