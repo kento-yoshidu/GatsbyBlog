@@ -1,5 +1,5 @@
 ---
-title: "#2 [PostgreSQL]PostgreSQLの特徴"
+title: "#3 [PostgreSQL]PostgreSQLの特徴"
 postdate: "2099-12-24"
 update: "2099-12-24"
 seriesName: "ハンズオンPostgreSQL"
