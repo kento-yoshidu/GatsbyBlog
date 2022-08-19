@@ -9,10 +9,4 @@ keywords: ["PostgreSQL", "Database", "DB", "OSS-DB Sliver"]
 published: false
 ---
 
-# WIndowsｊｊ：ｗ
-
-データベース設計
-
-概念データモデル　現実世界を概念的に表現
-
-概念データモデルを論理データモデルに変換するのがDB設計
+# Windows
