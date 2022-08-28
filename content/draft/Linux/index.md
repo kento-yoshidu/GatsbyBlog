@@ -53,3 +53,70 @@ I/Oポートアドレスとは周辺機器(デバイス)とCPUがデータをや
 `lsusb`、`/proc/bus/usb/devices`。
 
 `/proc/interrupts`
+
+# initプログラム
+
+Upstart
+
+ジョブ、イベント駆動型、並列処理が可能
+
+## 初期RAMディスク
+
+・ファイルシステムへアクセスするのに必要なドライバやスクリプトが含まれている
+・カーネルイメージと同様に「/boot」ディレクトリに格納される
+・カーネルのバージョンごとに内容が異なる
+
+# SysVinit
+
+`telinit q`、`init Q`で`/etc/inittab`の変更を即座に反映する。
+
+# systemd
+
+扱う処理をUnitという単位で管理する
+
+サービスの並列起動によって高速なシステム起動や停止が行える
+
+cgroupsでプロセスのリソースを管理する
+
+## systemd-journald
+
+各サービスのログを扱う
+
+## cgroups
+
+プロセスのリソース管理
+
+## /proc/cmdline
+
+ブートローダーからカーネルに渡されたパラメーター
+
+
+# ランレベル
+
+`systemctl rescue`でシングルユーザーモードに切り替える。`systemctl default`、`Ctrl-D`を実行するか、`systemctl reboot`で再起動すると元に戻る。
+
+
+`runlevel.target`、`rescue.target`
+
+マルチユーザー`2, 3, 5`
+
+マルチユーザー、GUIログイン`5`
+
+
+## ランレベルの変更
+
+`init`、`telinit`
+
+## 一つ前のランレベル
+
+`runlevel`
+
+## 次回起動時のランレベル
+
+`/etc/systemd/system`のシンボリックリンク`default.target`確認する。
+
+`shutdown -h +60`
+
+`systemd`システムなら`systemctl get-defalut`で確認する。
+
+`systemctl set-default graphical.target`などで次回を指定する。
