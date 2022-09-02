@@ -5,12 +5,11 @@ update: "2021-01-26"
 seriesName: "ハンズオンPostgreSQL"
 seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL", "postgresql.conf"]
-keywords: ["PostgreSQL", "Database", "DB", "OSS-DB"]
 ---
 
 # postgresql.conf
 
-PostgreSQLサーバ全体の動作を制御するのがpostgresql.confファイルです。initdb実行時に作成され、クラスター内に格納されます。
+PostgreSQLサーバ全体の動作を制御するのがpostgresql.confファイルです。initdb実行時に作成され、DBクラスタ内に格納されます。
 
 ```shell{20}
 $ ll
@@ -159,12 +158,10 @@ PostgreSQLサーバのログ出力先を設定するパラメータはlog_destin
 
 ログファイル関係と覚えればよさそう
 
-|設定値|内容|
-|---|---|
-|log_directions|
-|log_Directory|ログファイルの格納場所|
-|log_filename|ログファイルのファイル名|
-|log-line-prefix|プレフィックス文字列設定|
+- log_directions
+- log_Directory
+- log_filename
+- log-line-prefix
 
 ## スーパーユーザによるSETコマンドで可能
 
@@ -182,6 +179,20 @@ PostgreSQLサーバのログ出力先を設定するパラメータはlog_destin
 
 ## その他
 
+### default_transaction_isolation
+
+新しいトランザクションの分離レベルを設定します。
+
+`postgres.conf`の再読み込み、SETコマンドで設定の反映が可能です。
+
+**READ UNCOMMITED**
+
+**コミットされていない**変更を他のトランザクションから参照できます。なお、コミットされていない変更を読み取ってしまうことを**ダーディリード**といいます。
+
+**READ COMMITTED**
+
+**コミットされた**変更を他のトランザクションから参照できます。postgres.sqlにおけるデフォルトのレベルです。
+
 **REPEATABLE READ**
 
 ## SETコマンドによる設定の変更
@@ -189,10 +200,6 @@ PostgreSQLサーバのログ出力先を設定するパラメータはlog_destin
 **コミットされた追加・変更**を他のトランザクションから参照できます。
 
 セッション内でのみ有効です。切断してしまえば元に戻ります。
-
-### default_transaction_isolation
-
-新しいトランザクションの分離レベルを設定します。**SETコマンドで設定の反映が可能**です。
 
 ## ALTER SYSTEM
 
@@ -203,7 +210,8 @@ PostgreSQLサーバのログ出力先を設定するパラメータはlog_destin
 
 ## pg_settingsビュー
 
-pg_settingsはサーバの実行時パラメータを取得できるビューです。中でもcontextカラムは**パラメータを変更するために必要な動作**が記載されています。
+pg_settingsはサーバの実行時パラメータを取得できるビューです。
+中でもcontextカラムは**パラメータを変更するために必要な動作**が記載されています。
 
 |値|内容|
 |:--|:--|
@@ -214,14 +222,6 @@ pg_settingsはサーバの実行時パラメータを取得できるビューで
 |user|一般ユーザのSETコマンド|
 |superuser-backend|スーパーユーザが新しいセッションを開始|
 |backend|一般ユーザが新しいセッションを開始|
-
-UPDATE文による更新が可能です。
-
-## postgresql.auto.conf
-
-`ALTER SYSTEM`コマンドを使用したときに変更されます。`postgresql.conf`の再読み込み時に`postgresql.auto.conf`の内容で上書きされます。
-
-バージョン9.4で登場しました。
 
 
 https://sites.google.com/site/kojimemos/home/mysql/toranzakushon/toranzakushon-fen-lireberu
