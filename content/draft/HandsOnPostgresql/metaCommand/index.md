@@ -7,21 +7,6 @@ seriesSlug: "HandsOnPostgreSQL"
 tags: ["PostgreSQL"]
 ---
 
-# pqsl
-
-## メタコマンド
-
-|コマンド|説明|
-|---|---|
-|\d|テーブル、ビュー、シーケンス|
-|\dt|テーブル|
-|\du|ユーザー|
-|\dp、\z|\dにアクセス権が付く|
-|\\?|メタコマンド|
-|\h|SQLコマンドのヘルプ|
-|\\!|OSコマンドを実行|
-
-
 ## DBクラスタの場所を知りたい
 
 ```postgresql
@@ -39,7 +24,7 @@ tags: ["PostgreSQL"]
 
 ## pg_controldata
 
-クラスターの制御情報を取得できます。
+クラスターの制御情報を取得。
 
 ```dummy:title=shell
 # pg_controldata

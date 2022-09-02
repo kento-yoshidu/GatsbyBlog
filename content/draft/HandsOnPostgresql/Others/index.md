@@ -88,3 +88,10 @@ postgres=# select * From sample where char ~ 'AAA';
  AAA
 (2 rows)
 ```
+
+
+
+
+
+
+
