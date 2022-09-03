@@ -7,7 +7,7 @@ seriesSlug: "Diary"
 description: "PostgreSQLのPITRをハンズオン形式で学びます。"
 tags: ["PostgreSQL", "PITR"]
 keywords: ["PostgreSQL", "PITR", "DB", "Database"]
-published: true
+published: false
 ---
 
 # 男性ホルモンを支える食事
