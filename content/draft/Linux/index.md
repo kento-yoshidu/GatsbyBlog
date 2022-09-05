@@ -162,7 +162,7 @@ cgroupsでプロセスのリソースを管理する
 
 # yum
 
-設定ファイル`/etc/yum.conf`
+設定ファイル`/etc/yum.conf`。
 
 リポジトリー。`/etc/yum.repos.d/`
 
@@ -170,21 +170,56 @@ YUMの後継`dnf`。リポジトリーもYUMと同じ`/etc/yum.repos.d/`。
 
 パッケージグループの表示。`grouplist`
 
+`search`
 
+`check-update`
 
 
 # ZYPPER
 
+openSUSEで使用されます。
+
 `install`か`in`でパッケージインストール。
+
 キーワードを含むパッケージ。`search`、`se`
+
+- `repos`、`lr`
+- `search`、`se`
+- `remove`、`rm` パッケージのアンインストール
 
 # rpm
 
-`-a`、`--all`で全パッケージの表示。
-`-i`、`--install`でインストール。
-`-h`、`--hash`で進行状況を表示。
+## オプション
+
+`-i`、`--install` インストール
+`-e`、`--erase`でアンインストール。
+`-q`、`--query` パッケージがインストールされているか
+`-U`、`--upgrade` アップグレード（なければインストール）
+`-F`、`--freshen` アップグレード（ある時だけ）
 `-V`、`--verify`でパッケージの検査。
+
+## 併用オプション
+
+`-i`、`--info`で詳細情報
+
+`-a`、`--all`で全パッケージの表示。
+`-h`、`--hash`で進行状況を表示。
 `-v` 詳細情報
+`-R`、`--requires`で依存するファイル
 `--nodeps`で依存関係を無視。
 `--nomd5`で検査しない
-`-i`、`--info`で詳細情報
+`-f`、`--file` 指定したファイルのインストール元のパッケージを表示する
+`-p`、`--package` 照会対象をパッケージファイルとする
+`--test`
+`-c`、`--configfiles`
+
+
+`--changelog`でパッケージの変更履歴
+`-l`、`--list`パッケージに含まれるファイル
+
+rpm2cpio
+
+
+https://atmarkit.itmedia.co.jp/ait/articles/1609/13/news024.html#:~:text=%E3%80%8Crpm%E3%80%8D%E3%81%AF%E3%80%81Red%20Hat,%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82
+
+https://www.kinakomotitti.net/entry/2018/07/03/213449
