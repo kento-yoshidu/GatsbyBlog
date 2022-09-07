@@ -169,10 +169,15 @@ cgroupsでプロセスのリソースを管理する
 YUMの後継`dnf`。リポジトリーもYUMと同じ`/etc/yum.repos.d/`。
 
 パッケージグループの表示。`grouplist`
+パッケージグループのインストール `groupinstall`
 
 `search`
 
-`check-update`
+`info` 詳細な情報
+
+`list` パッケージ一覧
+
+`check-update` アップデートできるパッケージを取得
 
 
 # ZYPPER
@@ -184,8 +189,11 @@ openSUSEで使用されます。
 キーワードを含むパッケージ。`search`、`se`
 
 - `repos`、`lr`
+- `lu`、`list-updates` アップデート可能なパッケージ
 - `search`、`se`
+- `up` `update` パッケージのアップデート
 - `remove`、`rm` パッケージのアンインストール
+- `refresh` リポジトリーの更新
 
 # rpm
 
@@ -223,3 +231,5 @@ rpm2cpio
 https://atmarkit.itmedia.co.jp/ait/articles/1609/13/news024.html#:~:text=%E3%80%8Crpm%E3%80%8D%E3%81%AF%E3%80%81Red%20Hat,%E3%83%87%E3%83%BC%E3%82%BF%E3%83%99%E3%83%BC%E3%82%B9%E3%81%A7%E7%AE%A1%E7%90%86%E3%81%95%E3%82%8C%E3%81%BE%E3%81%99%E3%80%82
 
 https://www.kinakomotitti.net/entry/2018/07/03/213449
+
+https://www.orangeitems.com/entry/2019/03/07/000500
