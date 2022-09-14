@@ -19,4 +19,12 @@ void func(void) {
 
 `mov`でデータを移動（コピー）する。
 
-`mov 移動先 移動元`
+`mov 移動先 移動元`ですので、 `mov ebp,esp`はebsからespへのデータのコピーです。
+
+ebpは**ベースポインタ**、espは**スタックポインタ**と呼ばれるレジスターで、常にスタックのトップアドレスを表します。
+
+[アセンブリ言語を読むための基礎知識 | 晴耕雨読](https://tex2e.github.io/blog/security/assembly-language)
+
+`mov dword [ebp-0x4],0x0`ebp-4**から始まる**メモリー番地にコピーする。アセンブリでメモリーを扱うには`[]`を使用します。
+
+
