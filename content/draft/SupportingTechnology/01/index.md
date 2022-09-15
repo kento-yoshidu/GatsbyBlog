@@ -7,7 +7,7 @@ seriesSlug: "SupportingTechnology"
 description: "男性ホルモンの代表格、テストステロンについて。"
 tags: ["テストステロン"]
 keywords: ["テストステロン"]
-published: true
+published: false
 ---
 
 # 男性ホルモンを支える技術
