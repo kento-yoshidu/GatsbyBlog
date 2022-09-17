@@ -14,17 +14,17 @@ tags: ["JavaScript", "ECMAScript"]
 
 JavaScriptは1995年、Netscape Communications社のプログラマーであった**ブレンダン・アイク**さんによって生み出されました。
 
-JavaScriptはよく「Webサイトに動きを付ける言語」とも呼ばれますが、JavaScriptが生み出された当時はHTML＋CSSで構成されたWebサイトがほとんどだったようです。そんな中、「Webサイトに動きがつけられる！」という触れ込みで、ブレンダンさんが開発したJavaScriptの前身となるLiveScriptが、当時のナウいブラウザであったNetscape Navigatorに実装されました。
+JavaScriptはよく「Webサイトに動きを付ける言語」とも呼ばれますが、JavaScriptが生み出された当時はHTML＋CSSで構成されたWebサイトがほとんどだったようです。そんな中、「Webサイトに動きがつけられる！」という触れ込みで、ブレンダンさんが開発したJavaScriptの前身となるLiveScriptが、当時のナウいブラウザーであったNetscape Navigatorに実装されました。
 
 その後、LiveScriptは改名され、無事JavaScriptとなります。
 
-JavaScriptに改名された背景として、当時Netscape Communications社はSun Microsystems社と業務提携しており、また、Sun社が開発し**イケイケドンドン**だったJavaの名前を拝借してあやかろう、というマーケティング的な一面があったようです。また、
+JavaScriptに改名された背景として、当時Netscape Communications社はSun Microsystems社と業務提携しており、また、Sun社が開発し**イケイケドンドン**だったJavaの名前を拝借してあやかろう、というマーケティング的な一面があったようです。より正確に言うならば、
 
 > How a <mark>sidekick scripting language for Java</mark>, created at Netscape in a ten-day hack, ships first as a de facto Web standard and eventually becomes the world’s most widely used programming language.
 
 参考 : 
 
-とあるように、最初はJavaの兄弟的な言語になることを目的としていたことも伺えます。伴い、Javaから拝借している構文などもあります。ただ、あくまでも始まりの時点での話であり、現在においてはJavaScriptとJavaの間に技術的な関係はありません。
+とあるように、最初はJavaの兄弟的な言語になることを目的としていた（なかば強制）ことも伺えます。伴い、Javaから拝借している構文などもあります。ただ、あくまでも始まりの時点での話であり、現在においてはJavaScriptとJavaの間に技術的な関係はありません。
 
 Netscape Navigatorの活躍から少し遅れ、Microsoft社が少し前まで現役だったInternet Explorer（以下、IE）を開発、リリースします。
 
@@ -137,6 +137,8 @@ ECMAScriptが作成され標準化が一応進んだはいいものの、1990年
 ## 参考
 
 [JavaScript: The First 20 Years](https://dl.acm.org/doi/pdf/10.1145/3386327)
+
+[https://nowokay.hatenablog.com/?page=1645950837](JavaScriptはJavaのScript版(であろうと努力はした) - きしだのHatena)
 
 [25 年に渡る JavaScript の歴史 | JetBrains](https://www.jetbrains.com/ja-jp/lp/javascript-25/)
 
