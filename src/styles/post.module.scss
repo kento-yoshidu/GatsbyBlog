@@ -127,14 +127,14 @@
     position: relative;
     width: 85%;
     margin-bottom: 20px;
-    padding: 18px 20px 18px 60px;
+    padding: 18px 30px 18px 60px;
     background-color: rgba(#396afc, 0.15);
     border-radius: 3px;
     box-shadow: 0 0 1.5px 1.5px rgba(#396afc, 0.25);
 
     p {
       margin: 0;
-      font-size: clamp(1.55rem, 2.5vw, 1.7rem);
+      font-size: clamp(1.3rem, 1.5vw, 1.6rem);
       line-height: 1.6;
     }
 
@@ -148,7 +148,7 @@
       margin-left: -50px;
       background-color: rgba(#396afc, 0.3);
       border-radius: 100%;
-      font-size: 2rem;
+      font-size: clamp(1.5rem, 1.8vw, 2rem);
       line-height: 1.6;
       text-align: center;
       z-index: 1;
