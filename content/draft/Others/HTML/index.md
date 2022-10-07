@@ -21,7 +21,7 @@ HTMLについてはこれまで、
 
 という声を聞いてきました（幾分誇張しています）。
 
-HTMLを軽く見てるやつはこの本を読んでみろ👊。
+2022年、そんなことを言う奴らに読ませたい本が2冊出版されました。
 
 <div class="iframely-embed"><div class="iframely-responsive" style="height: 170px; padding-bottom: 0;"><a href="https://www.borndigital.co.jp/book/25999.html" data-iframely-url="//iframely.net/7YNmOLr"></a></div></div><script async src="//iframely.net/embed.js" charset="utf-8"></script>
 
