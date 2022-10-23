@@ -2,8 +2,8 @@
 title: "2021年 読んでよかった本"
 postdate: "2022-04-25"
 update: "2022-05-25"
-seriesSlug: "GoodBookToBuy"
-seriesName: "xx年読んでよかった本"
+seriesSlug: "GoodBookToRead"
+seriesName: "読んでよかった本"
 description: "2021年に読んでよかった本を紹介します。"
 tags: ["書籍", "React", "オートマトン", "HTML", "CSS"]
 keywords: ["書籍", "本", "React", "HTML", "CSS", "2021"]
