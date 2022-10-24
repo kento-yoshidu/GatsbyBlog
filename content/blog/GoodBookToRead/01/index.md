@@ -2,8 +2,8 @@
 title: "2020年 読んでよかった本"
 postdate: "2021-10-11"
 update: "2022-07-01"
-seriesName: "xx年読んでよかった本"
-seriesSlug: "GoodBookToBuy"
+seriesName: "読んでよかった本"
+seriesSlug: "GoodBookToRead"
 description: "2020年に読んでよかった本（技術書系）を紹介します。"
 tags: ["書籍", "Vim", "ネットワーク", "Jamstack", "Gatsby"]
 keywords: ["書籍", "Vim", "ネットワーク", "network", "Jamstack", "Gatsby", "2020", "book", "本"]
