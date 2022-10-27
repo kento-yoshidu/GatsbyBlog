@@ -1,9 +1,8 @@
-const book = {
-  rating: 3
-}
+let word = '⭐'
+let code
 
-let star = "⭐".repeat(book.rating)
+code = word.charCodeAt(0)
+console.log('0x' + code.toString(16))
 
-console.log(star.length)
-
-
+code = word.charCodeAt(1)
+console.log('0x' + code.toString(16))
