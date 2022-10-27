@@ -80,3 +80,5 @@ console.log("AAAAA".padEnd(5, "a"))
 ```
 
 この2つの関数を使えば、大抵の文字列の場合は上手くいきます。
+
+https://ja.stackoverflow.com/questions/5918/javascript%E3%81%A7%E7%B5%B5%E6%96%87%E5%AD%97%E3%81%AE%E6%AD%A3%E7%A2%BA%E3%81%AA%E9%95%B7%E3%81%95%E3%82%92%E5%8F%96%E5%BE%97%E3%81%99%E3%82%8B
