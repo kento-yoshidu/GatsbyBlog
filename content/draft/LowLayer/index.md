@@ -17,7 +17,7 @@ tags: ["低レイヤー", "CPU"]
 - アセンブラ
 - アルゴリズム
 - コンパイラー、インタプリター
-- OS
+- OS概論
 - Linuxカーネル
 - ネットワーク（イーサネット、無線LAN、TCP/IP）
 - DBアーキテクチャー
@@ -100,9 +100,5 @@ CPUを創ろう
 ## 参考
 
 [低レイヤーの歩き方 - るくすの日記 ~ Out_Of_Range ~](https://rkx1209.hatenablog.com/entry/2016/12/25/141543)
-
-[RAID5が危ない | NJC](https://www.g-cm3.com/?p=3471)
-
-[DisplayPortとDVIは互換性がない？  |  雑談記](https://yuutosi.net/post-695/)
 
 [低レイヤを知りたい人のためのCコンパイラ作成入門](https://www.sigbus.info/compilerbook)
