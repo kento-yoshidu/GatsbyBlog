@@ -144,3 +144,5 @@ $ git log --graph --pretty=format:"%C(red bold) %cd %Creset %x09 %C(magenta dim)
 [git logのフォーマットを指定する](https://qiita.com/harukasan/items/9149542584385e8dea75)
 
 [git log を見やすくする](https://qiita.com/takasianpride/items/842a785af610025a2030)
+
+https://qiita.com/qurage/items/daa67763e5a0090af06a
