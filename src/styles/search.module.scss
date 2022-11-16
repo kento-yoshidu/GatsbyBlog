@@ -35,17 +35,28 @@
 }
 
 .list {
-  position: absolute;
-  top: 10px;
-  left: -200px;
-  display: none;
+  position: relative;
+  width: 60%;
+  height: 80vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: none;
+  overflow: hidden;
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 }
 
 .input {
+  display: block;
   border: 1px solid #aaa;
-  padding: 0.5rem;
+  padding: 0.8rem;
   border-radius: 10px;
   appearance: none;
+  margin: 50px auto 20px;
+  width: 30%;
+  font-size: 2rem;
+  font-weight: bold;
 
   &:focus {
     box-shadow: 0 0 7px var(--main-color);
@@ -54,18 +65,14 @@
 }
 
 .result-area {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  width: 250%;
-  max-height: 80vh;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 .inner {
-  background-color: #444;
   padding: 18px 30px;
   list-style: none;
+  max-height: 60vh;
+  overflow-y: scroll;
 
   p {
     margin-bottom: 20px;
@@ -76,8 +83,11 @@
     line-height: 1.4;
 
     span {
+      display: inline-block;
+      margin-left: 10px;
+      margin-right: 5px;
       color: red;
-      font-size: 2rem;
+      font-size: 2.8rem;
       font-weight: 500;
     }
   }
@@ -98,9 +108,11 @@
   }
 }
 
+/*
 .check:checked ~ .list {
   display: block;
 }
+*/
 
 @media (max-width: 768px) {
   .menu-btn {
