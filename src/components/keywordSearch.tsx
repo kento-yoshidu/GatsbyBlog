@@ -46,7 +46,7 @@ const Search: React.VFC = () => {
 
   const edges: Edge[] = allKeywordSearchJson.edges
 
-  const ref = useRef(null)
+  const ref = useRef<HTMLDialogElement | null>(null)
 
   // 検索ボックスに入力された文字列
   const [inputtedKeywords, setInputtedKeywords] = useState<string>("")
@@ -59,7 +59,12 @@ const Search: React.VFC = () => {
 
   const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShowLists(!showLists)
-    ref.current.showModal()
+    ref?.current?.showModal()
+  }
+
+  const handleCloseClick = () => {
+    setShowLists(false)
+    ref?.current?.close()
   }
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -67,8 +72,6 @@ const Search: React.VFC = () => {
   }
 
   useEffect(() => {
-    // document.body.removeAttribute("data-lock")
-
     if (inputtedKeywords === "") {
       setFilteredPosts(edges)
       return
@@ -121,8 +124,7 @@ const Search: React.VFC = () => {
         <div className={Styles.resultArea}>
           {showLists && filteredPosts &&
             <div className={Styles.inner}>
-              <p>キーワード検索</p>
-              <p><span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
+              <p>キーワード検索 <span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
 
               <ul>
                 {
@@ -138,6 +140,8 @@ const Search: React.VFC = () => {
             </div>
           }
         </div>
+
+        <button onClick={handleCloseClick}>CLOSE</button>
       </dialog>
     </div>
   )
