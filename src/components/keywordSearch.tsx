@@ -52,18 +52,18 @@ const Search: React.VFC = () => {
   const [inputtedKeywords, setInputtedKeywords] = useState<string>("")
 
   // 検索結果を表示するか否か
-  const [showLists, setShowLists] = useState<boolean>(false)
+  // const [showLists, setShowLists] = useState<boolean>(false)
 
   // 条件によって絞り込まれた記事
   const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(edges)
 
   const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setShowLists(!showLists)
+    // setShowLists(!showLists)
     ref?.current?.showModal()
   }
 
   const handleCloseClick = () => {
-    setShowLists(false)
+    // setShowLists(false)
     ref?.current?.close()
   }
 
@@ -113,7 +113,7 @@ const Search: React.VFC = () => {
 
       <dialog
         ref={ref}
-        className={Styles.list}
+        className={Styles.dialog}
       >
         <input
           type="text"
@@ -121,24 +121,30 @@ const Search: React.VFC = () => {
           onChange={handleInput}
         />
 
-        <div className={Styles.resultArea}>
-          {showLists && filteredPosts &&
-            <div className={Styles.inner}>
-              <p>キーワード検索 <span>{filteredPosts.length}件</span>の記事がヒットしました。</p>
+        <p className={Styles.message}>キーワード検索
+          {filteredPosts !== null
+            ? (
+              <span>{filteredPosts?.length}件</span>
+            ) : (
+              <span>0件</span>
+            )}
+          の記事がヒットしました。
+        </p>
 
-              <ul>
-                {
-                  filteredPosts.map((edge: Edge, i: number) => (
-                    <PostList
-                      key={`key${i}`}
-                      slug={edge.node.slug}
-                      title={edge.node.title}
-                    />
-                  ))
-                }
-              </ul>
-            </div>
-          }
+        <div className={Styles.resultArea}>
+          <div className={Styles.inner}>
+            <ul>
+              {
+                filteredPosts?.map((edge: Edge, i: number) => (
+                  <PostList
+                    key={`key${i}`}
+                    slug={edge.node.slug}
+                    title={edge.node.title}
+                  />
+                ))
+              }
+            </ul>
+          </div>
         </div>
 
         <button onClick={handleCloseClick}>CLOSE</button>
