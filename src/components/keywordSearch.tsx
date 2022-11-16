@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
 import { SearchOutline } from "react-ionicons"
@@ -46,6 +46,8 @@ const Search: React.VFC = () => {
 
   const edges: Edge[] = allKeywordSearchJson.edges
 
+  const ref = useRef(null)
+
   // 検索ボックスに入力された文字列
   const [inputtedKeywords, setInputtedKeywords] = useState<string>("")
 
@@ -57,6 +59,7 @@ const Search: React.VFC = () => {
 
   const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
     setShowLists(!showLists)
+    ref.current.showModal()
   }
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,7 +108,10 @@ const Search: React.VFC = () => {
         />
       </label>
 
-      <div className={Styles.list}>
+      <dialog
+        ref={ref}
+        className={Styles.list}
+      >
         <input
           type="text"
           className={Styles.input}
@@ -132,7 +138,7 @@ const Search: React.VFC = () => {
             </div>
           }
         </div>
-      </div>
+      </dialog>
     </div>
   )
 }

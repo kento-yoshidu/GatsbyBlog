@@ -35,17 +35,25 @@
 }
 
 .list {
-  position: absolute;
-  top: 10px;
-  left: -200px;
-  display: none;
+  position: relative;
+  width: 60%;
+  height: 80vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: none;
+
+  &::backdrop {
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 }
 
 .input {
+  display: block;
   border: 1px solid #aaa;
-  padding: 0.5rem;
+  padding: 0.8rem;
   border-radius: 10px;
   appearance: none;
+  margin: 50px auto;
+  width: 30%;
 
   &:focus {
     box-shadow: 0 0 7px var(--main-color);
@@ -54,16 +62,12 @@
 }
 
 .result-area {
-  position: absolute;
-  top: 50px;
-  right: 0;
-  width: 250%;
-  max-height: 80vh;
+  // width: 250%;
+  // max-height: 80vh;
   overflow-y: auto;
 }
 
 .inner {
-  background-color: #444;
   padding: 18px 30px;
   list-style: none;
 
