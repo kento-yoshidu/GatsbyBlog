@@ -35,7 +35,7 @@
 }
 
 .dialog {
-  position: relative;
+  position: fixed;
   width: 60%;
   height: 80vh;
   background-color: rgba(0, 0, 0, 0.8);
@@ -87,6 +87,7 @@
   list-style: none;
   max-height: 55vh;
   overflow-y: scroll;
+  overscroll-behavior: none;
 }
 
 .list-item {
