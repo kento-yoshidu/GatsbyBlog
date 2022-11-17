@@ -35,9 +35,10 @@
 }
 
 .dialog {
-  position: relative;
+  position: fixed;
   width: 60%;
   height: 80vh;
+  padding: 0;
   background-color: rgba(0, 0, 0, 0.8);
   border: none;
   overflow: hidden;
@@ -45,6 +46,10 @@
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.4);
   }
+}
+
+.inner {
+  height: 80vh;
 }
 
 .input {
@@ -82,11 +87,12 @@
   }
 }
 
-.inner {
+.result-area {
   padding: 18px 30px;
   list-style: none;
   max-height: 55vh;
   overflow-y: scroll;
+  overscroll-behavior: none;
 }
 
 .list-item {

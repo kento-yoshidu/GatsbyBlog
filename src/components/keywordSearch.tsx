@@ -51,24 +51,23 @@ const Search: React.VFC = () => {
   // 検索ボックスに入力された文字列
   const [inputtedKeywords, setInputtedKeywords] = useState<string>("")
 
-  // 検索結果を表示するか否か
-  // const [showLists, setShowLists] = useState<boolean>(false)
-
   // 条件によって絞り込まれた記事
   const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(edges)
 
   const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // setShowLists(!showLists)
     ref?.current?.showModal()
   }
 
   const handleCloseClick = () => {
-    // setShowLists(false)
     ref?.current?.close()
   }
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputtedKeywords(e.target.value)
+  }
+
+  const stopPropagation = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    e.stopPropagation()
   }
 
   useEffect(() => {
@@ -114,25 +113,29 @@ const Search: React.VFC = () => {
       <dialog
         ref={ref}
         className={Styles.dialog}
+        onClick={handleCloseClick}
       >
-        <input
-          type="text"
-          className={Styles.input}
-          onChange={handleInput}
-        />
+        <div
+          className={Styles.inner}
+          onClick={stopPropagation}
+        >
+          <input
+            type="text"
+            className={Styles.input}
+            onChange={handleInput}
+          />
 
-        <p className={Styles.message}>キーワード検索
-          {filteredPosts !== null
-            ? (
-              <span>{filteredPosts?.length}件</span>
-            ) : (
-              <span>0件</span>
-            )}
-          の記事がヒットしました。
-        </p>
+          <p className={Styles.message}>キーワード検索
+            {filteredPosts !== null
+              ? (
+                <span>{filteredPosts?.length}件</span>
+              ) : (
+                <span>0件</span>
+              )}
+            の記事がヒットしました。
+          </p>
 
-        <div className={Styles.resultArea}>
-          <div className={Styles.inner}>
+          <div className={Styles.resultArea}>
             <ul>
               {
                 filteredPosts?.map((edge: Edge, i: number) => (
@@ -145,9 +148,9 @@ const Search: React.VFC = () => {
               }
             </ul>
           </div>
-        </div>
 
-        <button onClick={handleCloseClick}>CLOSE</button>
+          <button onClick={handleCloseClick}>CLOSE</button>
+        </div>
       </dialog>
     </div>
   )
