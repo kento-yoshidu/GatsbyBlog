@@ -54,11 +54,11 @@ const Search: React.VFC = () => {
   // 条件によって絞り込まれた記事
   const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(edges)
 
-  const handleClick = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const dialogOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
     ref?.current?.showModal()
   }
 
-  const handleCloseClick = () => {
+  const dialogClose = () => {
     ref?.current?.close()
   }
 
@@ -93,27 +93,20 @@ const Search: React.VFC = () => {
 
   return (
     <div className={Styles.wrapper}>
-      <input
-        type="checkbox"
-        className={Styles.check}
-        id="checked"
-        onClick={handleClick}
-      />
-
-      <label
+      <button
         className={Styles.menuBtn}
-        htmlFor="checked"
+        onClick={dialogOpen}
       >
         <SearchOutline
-          width="27px"
-          height="27px"
+          width="38px"
+          height="38px"
         />
-      </label>
+      </button>
 
       <dialog
         ref={ref}
         className={Styles.dialog}
-        onClick={handleCloseClick}
+        onClick={dialogClose}
       >
         <div
           className={Styles.inner}
@@ -149,7 +142,7 @@ const Search: React.VFC = () => {
             </ul>
           </div>
 
-          <button onClick={handleCloseClick}>CLOSE</button>
+          <button onClick={dialogClose}>CLOSE</button>
         </div>
       </dialog>
     </div>
