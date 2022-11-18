@@ -76,7 +76,7 @@
 
 .result-area {
   padding: 18px 30px;
-  max-height: 55vh;
+  height: 55vh;
   overflow-y: scroll;
   overscroll-behavior: none;
 }
@@ -94,6 +94,42 @@
     &:hover {
       color: var(--main-color);
     }
+  }
+}
+
+.close-button {
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 50px;
+  top: 35px;
+  left: 35px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+
+  &::before,
+  &::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    content: "";
+    width: 2px;
+    height: 60px;
+    background-color: #888;
+  }
+
+  &::before {
+    transform: translate(-50%,-50%) rotate(45deg);
+  }
+
+  &::after {
+    transform: translate(-50%,-50%) rotate(-45deg);
+  }
+
+  &:hover &::before,
+  &:hover &::after {
+    background-color: #fff;
   }
 }
 
