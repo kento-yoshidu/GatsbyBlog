@@ -8,3 +8,4 @@ export const input: string;
 export const message: string;
 export const resultArea: string;
 export const listItem: string;
+export const closeButton: string;

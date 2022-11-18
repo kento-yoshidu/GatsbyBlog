@@ -128,21 +128,23 @@ const Search: React.VFC = () => {
             の記事がヒットしました。
           </p>
 
-          <div className={Styles.resultArea}>
-            <ul>
-              {
-                filteredPosts?.map((edge: Edge, i: number) => (
-                  <PostList
-                    key={`key${i}`}
-                    slug={edge.node.slug}
-                    title={edge.node.title}
-                  />
-                ))
-              }
-            </ul>
-          </div>
+          <ul className={Styles.resultArea}>
+            {
+              filteredPosts?.map((edge: Edge, i: number) => (
+                <PostList
+                  key={`key${i}`}
+                  slug={edge.node.slug}
+                  title={edge.node.title}
+                />
+              ))
+            }
+          </ul>
 
-          <button onClick={dialogClose}>CLOSE</button>
+          <button
+            className={Styles.closeButton}
+            onClick={dialogClose}
+          >
+          </button>
         </div>
       </dialog>
     </div>
