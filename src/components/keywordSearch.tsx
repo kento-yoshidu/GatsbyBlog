@@ -54,7 +54,7 @@ const Search: React.VFC = () => {
   // 条件によって絞り込まれた記事
   const [filteredPosts, setFilteredPosts] = useState<Edge[] | null>(edges)
 
-  const dialogOpen = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const dialogOpen = () => {
     ref?.current?.showModal()
   }
 
@@ -71,6 +71,7 @@ const Search: React.VFC = () => {
   }
 
   useEffect(() => {
+    // 何も入力されていない時は全ての記事を表示
     if (inputtedKeywords === "") {
       setFilteredPosts(edges)
       return
