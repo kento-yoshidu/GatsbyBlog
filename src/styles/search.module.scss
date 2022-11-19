@@ -57,7 +57,8 @@
 }
 
 .message {
-  margin-bottom: 20px;
+  width: 80%;
+  margin: 0 auto 20px;
   color: #fff;
   font-size: 1.55rem;
   font-weight: 900;
@@ -144,6 +145,12 @@
     }
   }
 
+  .input {
+    margin: 18px auto;
+    width: 55%;
+    padding: 0.5rem;
+  }
+
   .dialog {
     width: 95%;
   }
@@ -154,5 +161,21 @@
 
   .list-item {
     margin-bottom: 8px;
+  }
+
+  .message {
+    margin: 0 auto 10px;
+  }
+
+  .close-button {
+    width: 30px;
+    height: 30px;
+    top: 20px;
+    left: 20px;
+
+    &::before,
+    &::after {
+      height: 40px;
+    }
   }
 }
