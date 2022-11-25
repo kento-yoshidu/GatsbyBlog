@@ -7,7 +7,7 @@ seriesName: "日記"
 description: "dialog要素を使って検索モーダルを作成しましたので、諸々について解説します。"
 tags: ["Gatsby", "Gatsby Blog", "HTML", "React"]
 keywords: ["Gatsby", "Gatsby Blog", "HTML", "React"]
-published: true
+published: false
 ---
 
 # dialog要素を使用して検索モーダルを実装する
