@@ -1,7 +1,7 @@
 ---
 title: "dialog要素で検索モーダルを作り直しました"
-postdate: "2023-01-01"
-update: "2022-01-01"
+postdate: "2022-12-01"
+update: "2022-12-01"
 seriesSlug: "Diary"
 seriesName: "日記"
 description: "dialog要素を使って検索モーダルを作成しましたので、諸々について解説します。"
@@ -30,7 +30,7 @@ published: false
 
 <aside>
 
-実装はReact環境を想定していますが、一部、素のJavaScriptでのコード例も記述しています。
+実装はReact（& TypeScript）環境を想定していますが、一部、素のJavaScriptでのコード例も記述しています。
 
 </aside>
 
@@ -318,7 +318,105 @@ backdrop疑似要素はデフォルトで透過性のある灰色になってい
 
 ![](./images/image08.png)
 
+### アニメーションを適用する
+
+モーダルとbackdrop疑似要素にCSSでアニメーションを適用させてみます。まずはモーダルから。以下のようにすれば、下の方からふわっとモーダルが浮き上がってくるようになります。
+
+```css:title=app.css
+.dialog {
+  opacity: 0;
+  animation-name: dialog-animation;
+  animation-duration: 0.75s;
+  animation-delay: 0.05s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes dialog-animation {
+  0% {
+    transform: translateY(10px);
+  } 
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+```
+
+![](./images/gif05.gif)
+
+一例ですが、backdrop疑似要素は以下のようにスタイリングします（サンプルを分かりやすくするため、背景色は濃く、アニメーションに2秒かかるようにしています）。
+
+```css:title=app.css
+.dialog::backdrop {
+  background-color: rgba(0, 0, 255, 0.5);
+  animation-name: backdrop-animation;
+  animation-duration: 2s;
+}
+
+@keyframes backdrop-animation {
+  0% {
+    opacity: 0;
+  } 
+  100% {
+    opacity: 1;
+  }
+}
+```
+
 ### モーダル上でのスクロールがバックグラウンドに伝搬するのを防ぐ
+
+次に、モーダル上でスクロールが発生している状況を考えます。また、ページはスクロールできるほど十分に長いとします。
+
+```tsx:title=App.tsx
+return (
+  <>
+    <button
+      onClick={showModal}
+      className="openButton"
+    >
+      Open
+    </button>
+
+    <dialog
+      className="dialog"
+      ref={ref}
+      onClick={closeModal}
+    >
+      <div onClick={stopPropagation}>
+        Dialog area
+
+        <button
+          onClick={closeModal}
+          className="closeButton"
+        >
+          Close
+        </button>
+      </div>
+
+      <ul className="list">
+        <li>ダミー</li>
+        <li>ダミー</li>
+        <li>ダミー</li>
+        <li>ダミー</li>
+        <li>ダミー</li>
+        <li>ダミー</li>
+        <li>ダミー</li>
+        <li>ダミー</li>
+        <li>ダミー</li>
+        <li>ダミー</li>
+        <li>ダミー</li>
+      </ul>
+    </dialog>
+
+    {/* スクロールできるほど長いページ */}
+    <div style={{ "height": "400vh" }}>
+      {/* ダミーテキストを挿入 */} 
+    </div>
+  </>
+)
+```
+
+
 
 ## 参考
 
