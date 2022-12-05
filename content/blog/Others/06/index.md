@@ -1,9 +1,9 @@
 ---
 title: "ブログにキーワード検索機能を追加しました"
 postdate: "2022-01-05"
-update: "2022-03-11"
-seriesName: "日記"
-seriesSlug: "Diary"
+update: "2022-12-05"
+seriesName: "その他"
+seriesSlug: "Others"
 description: "当ブログにキーワード検索機能を追加したので記事にします。"
 tags: ["Gatsby", "Gatsby Blog"]
 keywords: ["Gatsby", "Blog", "ブログ", "React Hooks"]
@@ -602,7 +602,7 @@ such as a timestamp or unique id.
 
 前述のとおり、`gatsby-node.js`でマークダウンファイルを基にJSONファイルを生成しているわけですが、マークダウンファイルの更新をきっかけにホットリロードが走り、JSONファイルの生成が無限ループしてしまっているようです。当初はこんなこと起きなかったと思うんですが、いつからかこうなってしまいました😭（血涙）。
 
-ただ、本番環境で起きるエラーではなくそこまでクリティカルな問題ではなかったことが救いです。
+ただ、本番環境で起きる類のものではなくそこまでクリティカルな問題ではなかったことが救いです。
 
 環境変数`process.env.NODE_ENV`を利用すれば、Gatsbyがどのモードで実行されているかを取り出せます。`gatsby develop`なら`development`、`gatsby build`なら`production`が格納されます。
 
@@ -627,9 +627,9 @@ such as a timestamp or unique id.
 
 デプロイする時には`gatsby build`が行われますので、本番環境ではJSONファイルはちゃんと最新になっています。
 
+<details style="margin-top: 60px" class="history">
+<summary>更新履歴</summary>
 
-
-
-
-
-
+<ul class="history-list">
+  <li>2022年12月05日 : シリーズを「日記」から「その他」に変更。</li>
+</details>
