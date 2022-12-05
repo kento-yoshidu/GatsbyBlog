@@ -1,13 +1,13 @@
 ---
 title: "dialog要素で検索モーダルを作り直しました"
-postdate: "2022-12-01"
-update: "2022-12-01"
-seriesSlug: "Diary"
-seriesName: "日記"
+postdate: "2022-12-05"
+update: "2022-12-05"
+seriesSlug: "Others"
+seriesName: "その他"
 description: "dialog要素を使って検索モーダルを作成しましたので、諸々について解説します。"
 tags: ["Gatsby", "Gatsby Blog", "HTML", "React"]
-keywords: ["Gatsby", "Gatsby Blog", "HTML", "React"]
-published: false
+keywords: ["Gatsby", "Gatsby Blog", "HTML", "React", "dialog"]
+published: true
 ---
 
 # dialog要素を使用して検索モーダルを実装する
@@ -236,7 +236,7 @@ const closeModal = () => {
 
 ここまででCloseボタンを押すことでモーダルを閉じるように実装することはできましたが、モーダル以外の部分（backdrop疑似要素）をクリックした時にもモーダルを閉じれるようにしてみましょう。
 
-ひとまず、dialog要素にも`onClick={closeModal}`を追加してみましょう。
+ひとまず、dialog要素自身にも`onClick={closeModal}`を追加してみましょう。
 
 ```tsx:title=App.tsx
 <dialog
@@ -365,7 +365,9 @@ backdrop疑似要素はデフォルトで透過性のある灰色になってい
 
 ### モーダル上でのスクロールがバックグラウンドに伝搬するのを防ぐ
 
-次に、モーダル上でスクロールが発生している状況を考えます。また、ページはスクロールできるほど十分に長いとします。
+次に、モーダル上でスクロールが発生している状況を考えます。また、ページはスクロールできるほど十分に長いとします。おおよそ、以下の画像のようなモーダルです。
+
+![](./images/image09.png)
 
 ```tsx:title=App.tsx
 return (
@@ -393,6 +395,7 @@ return (
         </button>
       </div>
 
+      {/* スクロールされるリスト */}
       <ul className="list">
         <li>ダミー</li>
         <li>ダミー</li>
@@ -416,8 +419,39 @@ return (
 )
 ```
 
+```css:title=app.css
+.list {
+  height: 200px;
+  overflow-y: scroll;
+}
+```
 
+この状態でモーダルのリストをスクロールした時、スクロールがバックグラウンドに伝わります。もっと正確に言うならば、モーダルのリストのスクロールが最上部ないし最下部に達している状態でさらにスクロールを行った場合、バックグラウンドもスクロールされる、ということになります。以下のアニメーションのような動作です。
+
+![](./images/gif06.gif)
+
+モーダル上のリストをスクロールしているのに、それがバックグラウンドにまで伝わってしまうのはユーザーの予期せぬ動作であり、避けたいところです。これはモーダル上のスクロール可能な要素のcssに`overscroll-behavior`を設定すれば防げます。
+
+```css:title=app.css
+.list {
+  height: 180px;
+  overflow-y: scroll;
+  overscroll-behavior: none;
+}
+```
+
+![](./images/gif07.gif)
+
+この`overscroll-behavior`の動作については、ICS MEDIA様の以下の記事が詳しいです。
+
+[overscroll-behaviorがお手軽！モーダルUI等のスクロール連鎖を防ぐ待望のCSS](https://ics.media/entry/221024/)
+
+---
+
+以上、駆け足になりましたが、dialog要素についてざっと眺めました。そのうち、もう少し個々の要素についてピックアップした記事も作成したいと思います。
 
 ## 参考
 
-https://developer.mozilla.org/ja/docs/Web/CSS/::backdrop
+[&lt;dialog&gt;&colon; ダイアログ要素 | MDN](https://developer.mozilla.org/ja/docs/Web/HTML/Element/dialog)
+
+[&colon;&colon;backdrop | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/::backdrop)
