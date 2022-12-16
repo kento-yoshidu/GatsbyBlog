@@ -1,0 +1,13 @@
+body {
+  padding: 50px;
+}
+
+.box {
+  width: 150px;
+  height: 150px;
+  border: 1px solid #444;
+}
+
+.box p {
+  color: red;
+}
