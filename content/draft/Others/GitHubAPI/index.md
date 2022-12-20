@@ -7,7 +7,7 @@ seriesSlug: "Others"
 description: ""
 tags: ["Next.js", "Apollo Client"]
 keywords: ["Next.js", "Apollo Client"]
-published: true
+published: false
 ---
 
 # 
