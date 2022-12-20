@@ -1,10 +1,35 @@
 [
   {
+    "slug": "/Others/07/",
+    "title": "dialog要素で検索モーダルを作り直しました",
+    "keywords": [
+      "Gatsby",
+      "Gatsby Blog",
+      "HTML",
+      "React",
+      "dialog"
+    ]
+  },
+  {
+    "slug": "/SupportingTechnology/01/",
+    "title": "男性ホルモンを支える技術① テストステロンについて",
+    "keywords": [
+      "テストステロン"
+    ]
+  },
+  {
     "slug": "/Others/05/",
     "title": "メディアクエリーで > とか < が（一部）使えるぞ",
     "keywords": [
       "CSS",
       "Media Query"
+    ]
+  },
+  {
+    "slug": "/Others/ErrorHandling/",
+    "title": "【メモ】RustのResult型",
+    "keywords": [
+      "Rust"
     ]
   },
   {
@@ -35,7 +60,7 @@
     ]
   },
   {
-    "slug": "/GoodBookToBuy/02/",
+    "slug": "/GoodBookToRead/02/",
     "title": "2021年 読んでよかった本",
     "keywords": [
       "書籍",
@@ -47,7 +72,7 @@
     ]
   },
   {
-    "slug": "/Diary/08/",
+    "slug": "/Diary/07/",
     "title": "2022年度の目標",
     "keywords": [
       "2022年"
@@ -109,7 +134,7 @@
     ]
   },
   {
-    "slug": "/Diary/04/",
+    "slug": "/Others/06/",
     "title": "ブログにキーワード検索機能を追加しました",
     "keywords": [
       "Gatsby",
@@ -144,7 +169,7 @@
     ]
   },
   {
-    "slug": "/GoodBookToBuy/01/",
+    "slug": "/GoodBookToRead/01/",
     "title": "2020年 読んでよかった本",
     "keywords": [
       "書籍",
