@@ -23,7 +23,7 @@ published: true
 
 回復不能なエラー（以下、パニック）はマクロ`panic!`を呼び出すことで起こすことができます。
 
-```rs
+```rust
 fn main() {
     panic!("回復不能なエラーが発生!");
     // thread 'main' panicked at '回復不能なエラーが発生!'
@@ -32,7 +32,7 @@ fn main() {
 
 他にも、配列の範囲外の要素へアクセスしようとした時にもパニックが発生します。
 
-```rs
+```rust
 fn main() {
     let v = vec![1, 2, 3];
 
@@ -45,7 +45,7 @@ fn main() {
 
 本題の`Result`型です。Result型は列挙型の一種です。「エラーになるかも？」を扱える型で、`Ok(T)`と`Err(E)`という列挙子を持ちます。
 
-```rs
+```rust
 enum Result<T, E> {
     Ok(T),
     Err(E)
@@ -56,7 +56,7 @@ enum Result<T, E> {
 
 例えば、与えられた数値で100を割る関数を定義します。引数に`0`が渡されるとpanicになります。
 
-```rs
+```rust
 fn division(num: i32) -> i32 {
     100 / num
 }
