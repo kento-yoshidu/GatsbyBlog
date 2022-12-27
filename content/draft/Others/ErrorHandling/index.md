@@ -7,7 +7,7 @@ seriesSlug: "Others"
 description: "メディアクエリーにおける比較演算子の使い方を紹介します"
 tags: ["Rust"]
 keywords: ["Rust"]
-published: true
+published: false
 ---
 
 # Result型のエラーハンドリング
