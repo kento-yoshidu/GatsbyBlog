@@ -10,29 +10,7 @@ keywords: ["React", "Next.js"]
 published: false
 ---
 
-# Next.js 13を使ってみたメモ
 
-## Next.jsの環境構築
-
-`npx create-next-app . --ts`でインストール。
-
-`npm run dev`で動作確認。
-
-## GitHubで認証キーを得る
-
-[こちら](https://github.com/settings/apps)にアクセスし、「Personal access tokens」の中の「Tokens(classic)」をクリック。
-
-![](./images/image01.png)
-
-さらに「Generate new token」をクリックし、こちらもclassicを洗濯します。
-
-![](./images/image02.png)
-
-「Note」には任意の名前、「Expiration」にはAPIキーの有効期限を設定します（最長1年間）。
-
-![](./images/image03.png)
-
-「read:user」のみにチェックを入れます。
 
 ![](./images/image03.png)
 

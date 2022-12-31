@@ -1,5 +1,20 @@
 [
   {
+    "slug": "/Diary/08/",
+    "title": "自分は今年、一体何をしていたのか",
+    "keywords": [
+      "2022年"
+    ]
+  },
+  {
+    "slug": "/Others/08/",
+    "title": "CSSのhas擬似クラス",
+    "keywords": [
+      "CSS",
+      "has"
+    ]
+  },
+  {
     "slug": "/Others/07/",
     "title": "dialog要素で検索モーダルを作り直しました",
     "keywords": [
@@ -23,13 +38,6 @@
     "keywords": [
       "CSS",
       "Media Query"
-    ]
-  },
-  {
-    "slug": "/Others/ErrorHandling/",
-    "title": "【メモ】RustのResult型",
-    "keywords": [
-      "Rust"
     ]
   },
   {
