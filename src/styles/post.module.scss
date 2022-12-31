@@ -49,6 +49,14 @@
     text-indent: 0.8rem;
   }
 
+  hr {
+    margin: 60px auto;
+    border-width: 0 0 8px;
+    border-style: solid;
+    border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 1"><circle fill="hsla(0, 0%, 65%, 1.0)" cx="1" cy="0.5" r="0.5"/></svg>') 0 0 100% repeat;
+    width: 432px;
+  }
+
   ol {
     padding: 10px 20px;
 
@@ -199,6 +207,10 @@
 
     p {
       margin-bottom: 10px;
+    }
+
+    hr {
+      width: 216px;
     }
 
     ul {
