@@ -4,10 +4,10 @@ postdate: "2023-01-07"
 update: "2023-01-07"
 seriesName: "その他"
 seriesSlug: "Others"
-description: ""
+description: "Apollo Clientを使い、GitHub APIからデータを取得する方法を解説します。"
 tags: ["React", "Apollo Client"]
 keywords: ["React", "Apollo Client"]
-published: false
+published: true
 ---
 
 # Apollo Clientの使い方
@@ -26,7 +26,7 @@ published: false
 
 こんな風にエラーメッセージが表示されます。
 
-この記事ではApollo Clientの`useQuery`フックを使用し、GitHub APIからデータを取得する方法とそのエラーハンドリングの方法を解説します（コントリビューション情報を元に草を生やしたりなどのデータ表示に関する解説はありません）。主役はGitHub APIではなくApollo Clientの方です。
+この記事ではApollo Clientの`useQuery`フックを使用し、GitHub APIからデータを取得する方法とそのエラーハンドリングの方法を解説します（コントリビューション情報を元に草を生やしたりなどのデータ表示に関する解説はありません）。
 
 ## 環境
 
@@ -72,7 +72,7 @@ $ npm install @apollo/client graphql
 
 チェックを入れたらページの一番下まで移動し、「Generate token」をクリックします。
 
-すると画面遷移し、アクセストークンが表示されます。いわゆる「一回しか見れない系」の情報ですのでちゃんとコピーしておきます。
+すると画面遷移し、「ghp_」から始まるアクセストークンが表示されます。いわゆる「一度しか見れない系」の情報ですのでちゃんとコピーしておきます。
 
 ![](./images/image07.png)
 
@@ -100,5 +100,38 @@ NEXT_PUBLIC_GITHUB_API=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 
 </aside>
+
+## GraphQLクエリーをテストする
+
+Reactでコードを書き始める前に、どのようなクエリーを投げればいいかを確認しておきます。[エクスプローラー - GitHub Docs](https://docs.github.com/ja/graphql/overview/explorer)にアクセスすればクエリーをテストできます。プレイグラウンドでテストするだけですので、読み飛ばしていただいても構いません。
+
+画面右側にある緑色の「Sign in with GitHub」というボタンをクリックしてGitHubにログインします。そうすることでクエリーを実行できるようになります。
+
+![](./images/image08.png)
+
+いきなり例を出しますが、以下のようなクエリーを投げてみます。
+
+```graphql
+query {
+  user(login: "<自身のアカウント名>") {
+    contributionsCollection {
+      contributionCalendar {
+        totalContributions
+        weeks {
+          contributionDays {
+            date
+            contributionCount
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+1年間の総コントリビューション数を表す「totalContributions」と「week」という配列が返され、配列の中に日ごとの日付やコントリビューション数が格納されていることがわかります。
+
+![](./images/image09.png)
+
 
 
