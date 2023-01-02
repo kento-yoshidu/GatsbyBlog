@@ -36,6 +36,8 @@ published: false
 
 ## 各種パッケージのインストール
 
+細かいところは後回しにして、ひとまずReactからAPIを叩いてデータを取得するところまでを目指しましょう。
+
 以下のコマンドでReactとTypeScriptをインストールします。
 
 ```shell:title=console
@@ -50,7 +52,7 @@ $ npm install @apollo/client graphql
 
 ## GitHubで認証キーを得る
 
-次はGitHubでAPIを叩けるように設定を行います。誰でもAPIを叩けるわけではありませんので、秘密の認証キー(以下、アクセストークン)を手に入れます。
+次はGitHubのAPIを叩けるように認証キー（以下、アクセストークン）の取得を行います。
 
 まずはGitHubの[こちらのページ](https://github.com/settings/apps)にアクセスします。恐らく画面左に「Personal Access Tokens」があるので「Tokens(classic)」をクリックします。
 
@@ -225,7 +227,7 @@ function App() {
 
 ### loading
 
-APIからデータを取得している間は`loading`が`true`になっています。実際は以下のようにローディング中で表すメッセージを返したり、コンポーネントを表示させるのがいいでしょう。
+APIからデータを取得している間は`loading`が`true`になっています。実際は以下のようにローディング中であることを表すメッセージを返すのがいいでしょう。
 
 ```tsx:title=app.tsx
 if (loading) {
@@ -235,4 +237,11 @@ if (loading) {
 }
 ```
 
-「データの取得が速すぎてメッセージが表示されているのか分からない」
+<aside>
+
+あまりないと思いますが、「データの取得が速すぎてメッセージが表示されているのか分からない」という場合にはChromeのデベロッパーツールを開き、「Performance」から「Network」を「Slow 3G」にすれば仮想的に遅いネットワーク環境での動作が確認できます。
+
+![](./images/image11.png)
+
+</aside>
+
