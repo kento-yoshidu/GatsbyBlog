@@ -1,4 +1,4 @@
-@import "./reset";
+@import url("./reset");
 
 :root {
   --main-color: #1675cc;
@@ -50,11 +50,11 @@ body[data-lock="lock"] {
   display: flex;
   justify-content: center;
   animation: fade-in 1s ease 0s 1 normal;
+}
 
-  @keyframes fade-in {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
 }
 
 .gatsby-resp-image-wrapper {
@@ -62,11 +62,11 @@ body[data-lock="lock"] {
   margin-left: 1rem !important;
   margin-bottom: 50px;
   max-width: 90%;
+}
 
-  img {
-    height: auto;
-    box-shadow: 0 0 5px 5px #eee !important;
-  }
+.gatsby-resp-image-wrapper img {
+  height: auto;
+  box-shadow: 0 0 5px 5px #eee !important;
 }
 
 .language-text {
@@ -140,43 +140,43 @@ body[data-lock="lock"] {
   width: 85%;
   margin-bottom: 20px;
   padding: 18px 30px 18px 60px;
-  background-color: rgba(red, 0.15);
+  background-color: rgba(255, 0, 0, 0.15);
   border-radius: 3px;
-  box-shadow: 0 0 1.5px 1.5px rgba(red, 0.2);
+  box-shadow: 0 0 1.5px 1.5px rgba(255, 0, 0, 0.2);
+}
 
-  p {
-    margin: 0;
-    font-size: clamp(1.3rem, 1.5vw, 1.6rem) !important;
-    line-height: 1.6;
-  }
+.warn p {
+  margin: 0;
+  font-size: clamp(1.3rem, 1.5vw, 1.6rem) !important;
+  line-height: 1.6;
+}
 
-  &::before {
-    position: absolute;
-    content: "❕";
-    top: 50%;
-    transform: translateY(-50%);
-    height: 3.5rem;
-    width: 3.5rem;
-    margin-left: -50px;
-    background-color: rgba(red, 0.4);
-    border-radius: 100%;
-    font-size: clamp(1.5rem, 1.8vw, 2rem);
-    line-height: 1.6;
-    text-align: center;
-    z-index: 1;
-  }
+.warn::before {
+  position: absolute;
+  content: "❕";
+  top: 50%;
+  transform: translateY(-50%);
+  height: 3.5rem;
+  width: 3.5rem;
+  margin-left: -50px;
+  background-color: rgba(255, 0, 0, 0.4);
+  border-radius: 100%;
+  font-size: clamp(1.5rem, 1.8vw, 2rem);
+  line-height: 1.6;
+  text-align: center;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
   .warn {
     width: 80%;
     padding: 10px 15px 10px 50px;
+  }
 
-    &::before {
-      height: 2.5rem;
-      width: 2.5rem;
-      margin-left: -40px;
-    }
+  .warn::before {
+    height: 2.5rem;
+    width: 2.5rem;
+    margin-left: -40px;
   }
 }
 
@@ -184,11 +184,10 @@ body[data-lock="lock"] {
   margin: 30px 0;
 }
 
-.history {
-  .history-list {
-    list-style: disc;
-    li {
-      font-size: 1.48rem;
-    }
-  }
+.history .history-list {
+  list-style: disc;
+}
+
+.history .history-list li {
+  font-size: 1.48rem;
 }
