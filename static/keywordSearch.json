@@ -236,13 +236,6 @@
     ]
   },
   {
-    "slug": "/GitAdvance/01/",
-    "title": "#1 Git中級者を目指そう",
-    "keywords": [
-      "Git"
-    ]
-  },
-  {
     "slug": "/Jamstack/02/",
     "title": "JamstackなWebサイトを構築してみた② Jamstackについて",
     "keywords": [
@@ -252,6 +245,13 @@
       "HeadlessCMS",
       "CDN",
       "ホスティングサービス"
+    ]
+  },
+  {
+    "slug": "/GitAdvance/01/",
+    "title": "#1 Git中級者を目指そう",
+    "keywords": [
+      "Git"
     ]
   },
   {
