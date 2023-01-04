@@ -2,7 +2,7 @@ import React from "react"
 
 import { ThemeToggler } from 'gatsby-plugin-dark-mode'
 
-import * as Styles from "../styles/toggleButton.module.scss"
+import * as Styles from "../styles/toggleButton.module.css"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -17,7 +17,7 @@ config.autoAddCss = false
 const ToggleButton = () => {
   return (
     <ThemeToggler>
-      {({ theme, toggleTheme }) => {
+      {({ theme, toggleTheme }: { theme: "light" | "dark", toggleTheme: Function }) => {
         const isDark = theme === "dark"
 
         const icon = isDark ? (
@@ -33,12 +33,12 @@ const ToggleButton = () => {
         )
 
         return (
-          <div
+          <button
             className={Styles.wrapper}
             onClick={() => toggleTheme(isDark ? "light" : "dark")}
           >
             { icon }
-          </div>
+          </button>
 
         )
       }}
