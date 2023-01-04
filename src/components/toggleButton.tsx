@@ -20,24 +20,22 @@ const ToggleButton = () => {
       {({ theme, toggleTheme }: { theme: "light" | "dark", toggleTheme: Function }) => {
         const isDark = theme === "dark"
 
-        const icon = isDark ? (
-          <FontAwesomeIcon
-            className={Styles.moonIcon}
-            icon={faMoon}
-          />
-        ) : (
-          <FontAwesomeIcon
-            className={Styles.sunIcon}
-            icon={faSun}
-          />
-        )
-
         return (
           <button
             className={Styles.wrapper}
             onClick={() => toggleTheme(isDark ? "light" : "dark")}
           >
-            { icon }
+            {isDark ? (
+              <FontAwesomeIcon
+                className={Styles.moonIcon}
+                icon={faMoon}
+              />
+            ) : (
+              <FontAwesomeIcon
+                className={Styles.sunIcon}
+                icon={faSun}
+              />
+            ) }
           </button>
 
         )
