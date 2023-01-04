@@ -6,7 +6,7 @@ seriesSlug: "Diary"
 seriesName: "日記"
 description: "虚無感に包まれた2022年を振り返ります。"
 tags: ["2022年"]
-keywords: ["2022年"]
+keywords: ["2022年", "日記"]
 published: true
 ---
 
