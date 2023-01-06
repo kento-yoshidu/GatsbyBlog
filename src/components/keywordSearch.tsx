@@ -5,6 +5,13 @@ import { SearchOutline } from "react-ionicons"
 
 import * as Styles from "../styles/search.module.scss"
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSearchPlus } from "@fortawesome/free-solid-svg-icons"
+
+import "@fortawesome/fontawesome-svg-core/styles.css"
+import { config } from "@fortawesome/fontawesome-svg-core"
+config.autoAddCss = false
+
 interface Edge {
   node: {
     slug: string;
@@ -98,9 +105,14 @@ const Search: React.VFC = () => {
         className={Styles.menuBtn}
         onClick={dialogOpen}
       >
+        {/*
         <SearchOutline
           width="38px"
           height="38px"
+        />
+  */}
+        <FontAwesomeIcon
+          icon={faSearchPlus}
         />
       </button>
 

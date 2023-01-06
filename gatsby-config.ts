@@ -11,7 +11,7 @@ const plugins: GatsbyConfig["plugins"] = [
     resolve: "gatsby-source-filesystem",
     options: {
       path: `${__dirname}/content/blog`,
-      ame: "blog"
+      name: "blog"
     }
   },
   {

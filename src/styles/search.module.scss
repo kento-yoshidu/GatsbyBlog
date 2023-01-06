@@ -17,7 +17,11 @@
 
   &:hover {
     border-radius: 50%;
-    background-color: #ededed;
+  }
+
+  svg {
+    color: var(--text-color);
+    font-size: 3.8rem;
   }
 }
 
