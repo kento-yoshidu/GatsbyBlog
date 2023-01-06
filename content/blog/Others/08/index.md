@@ -1,7 +1,7 @@
 ---
 title: "CSSのhas擬似クラス"
 postdate: "2022-12-27"
-update: "2022-12-27"
+update: "2023-01-06"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "CSSのhas擬似クラスについて学習しました。"
@@ -28,7 +28,7 @@ published: true
 
 要素の親子関係を元にスタイルを決定するセレクターといえば、子孫セレクターが該当します。`div p {}`の様に要素間に半角スペースを空けて記述します。これは「ある親要素を持つ子孫要素のスタイルを指定する」と捉えることができます。以下の例で言うと、「boxクラスを親要素に持つp要素」のみにスタイルを当てています。
 
-```html
+```html:title=index.html
 <div class="box">
   <p>boxクラスの中のp要素です。</p>
 </div>
@@ -36,7 +36,7 @@ published: true
 <p>p要素です。</p>
 ```
 
-```css
+```css:title=style.css
 .box {
   width: 150px;
   height: 150px;
@@ -51,7 +51,7 @@ published: true
 
 `:has()`は言わば逆で、「ある子孫要素を持つ親要素」のスタイルを指定することができます。子孫要素の有無で自身のスタイルを変更できるということです。
 
-```html
+```html:title=index.html
 <div class="box">
   <p>p要素を持つboxクラスです。</p>
 </div>
@@ -61,7 +61,7 @@ published: true
 </div>
 ```
 
-```css
+```css:title=style.css
 .box {
   width: 150px;
   height: 150px;
@@ -76,7 +76,7 @@ published: true
 
 子孫セレクターと`:has()`の違いは以下の通りです。
 
-```css
+```css:title=style.css
 /* 子要素(p)のスタイルを定義している */
 .box p {}
 
@@ -194,7 +194,7 @@ published: true
 
 以下の例は、`+`を使い「h2要素に**隣接する**table要素がある時、h2要素の`margin-bottom`を`30px`にする」というCSSです。
 
-```css
+```css:title=style.css
 /* 基本的にはあまりマージンは空けない */
 h2 {
   margin-bottom: 10px;
@@ -223,7 +223,7 @@ h2:has(+ table) {
 <details>
 <summary>コードを見る</summary>
 
-```html
+```html:title=index.html
 <form>
   <!-- 3つのラジオボタンを囲う領域 -->
   <div class="radio-wrapper">
@@ -266,7 +266,7 @@ h2:has(+ table) {
 </form>
 ```
 
-```css
+```css:title=style.css
 label {
   display: block;
   cursor: pointer;
@@ -298,7 +298,7 @@ label {
 <details>
 <summary>コードを見る</summary>
 
-```html
+```html:title=index.html
 <form class="form">
   <label>
     <input type="checkbox">利用規約に同意する
@@ -308,7 +308,7 @@ label {
 </form>
 ```
 
-```css
+```css:title=style.css
 label {
   cursor: pointer;
 }
@@ -348,7 +348,16 @@ button {
 
 余談ですが、個人的に一番実現してほしい機能は[css-nesting](https://www.w3.org/TR/css-nesting-1/)ですが、まだWFPDの段階であり、[シンタックスをどうするか議論している](https://github.com/w3c/csswg-drafts/issues/8248)様子を見つけました。あまり情報は追えていませんが、他にもまだまだ課題があるようです。実現はまだ先ですかね。
 
+<details style="margin-top: 60px" class="history">
+<summary>更新履歴</summary>
+
+<ul class="history-list">
+  <li>2023年1月6日 : 誤字脱字を修正。</li>
+</details>
+
 ## 参考
+
+[:has() | MDN](https://developer.mozilla.org/ja/docs/Web/CSS/:has)
 
 [Selectors Level 4](https://w3c.github.io/csswg-drafts/selectors/#relational)
 
@@ -356,4 +365,4 @@ button {
 
 [CSS Parent Selector - Ahmad Shadeed](https://ishadeed.com/article/css-has-parent-selector/)
 
-[](https://css-tricks.com/almanac/selectors/h/has/)
+[:has() | CSS-Tricks - CSS-Tricks](https://css-tricks.com/almanac/selectors/h/has/)

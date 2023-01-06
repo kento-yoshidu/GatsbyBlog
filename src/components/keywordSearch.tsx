@@ -1,8 +1,6 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import { SearchOutline } from "react-ionicons"
-
 import * as Styles from "../styles/search.module.scss"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -105,12 +103,6 @@ const Search: React.VFC = () => {
         className={Styles.menuBtn}
         onClick={dialogOpen}
       >
-        {/*
-        <SearchOutline
-          width="38px"
-          height="38px"
-        />
-  */}
         <FontAwesomeIcon
           icon={faSearchPlus}
         />
