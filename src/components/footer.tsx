@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import * as Styles from "../styles/footer.module.scss"
+import * as Styles from "../styles/footer.module.css"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons"
@@ -29,7 +29,7 @@ const Footer: React.VFC = () => {
     <footer className={Styles.footer}>
       <h1 className={Styles.footerTitle}>
         <Link to="/page/1/">
-          { site.siteMetadata.title }
+          {site.siteMetadata.title}
         </Link>
       </h1>
 

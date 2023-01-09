@@ -2,22 +2,22 @@
   margin-top: 30px;
   padding-top: 40px;
   padding-bottom: 40px;
-  background: var(--footer-bg-color);
+  background: #444;
   color: #ccc;
   line-height: 1.5;
+}
 
-  a {
-    color: #ccc;
-    transition-duration: 0.1s;
+.footer a {
+  color: #ccc;
+  transition-duration: 0.1s;
+}
 
-    &:hover {
-      color: var(--main-color);
-    }
-  }
+.footer a:hover {
+  color: var(--main-color);
 }
 
 .footer-title {
-  width: unquote("max(50%, 324px)");
+  width: max(50%, 324px);
   margin: 0 auto 20px;
   font-size: clamp(1.7rem, 2.8vw, 2.8rem);
   font-weight: 100;
@@ -25,30 +25,30 @@
 }
 
 .link {
-  width: unquote("max(288px, 50%)");
+  width: max(288px, 50%);
   margin: 10px auto;
 }
 
-.external-link {
-  svg {
-    font-size: 3rem;
-  }
+.external-link svg {
+  font-size: 3rem;
 }
 
 .internal-link,
 .meta-link {
   display: flex;
   flex-wrap: wrap;
+}
 
-  a {
-    margin-right: 25px;
-    margin-bottom: 5px;
-    font-size: clamp(1.4rem, 2vw, 1.7rem);
+.internal-link a,
+.meta-link a {
+  margin-right: 25px;
+  margin-bottom: 5px;
+  font-size: clamp(1.4rem, 2vw, 1.7rem);
+}
 
-    svg {
-      margin-right: 5px;
-    }
-  }
+.internal-link svg,
+.external-link svg {
+  margin-right: 5px;
 }
 
 .copyright {
