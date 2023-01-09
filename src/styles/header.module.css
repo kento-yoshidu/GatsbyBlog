@@ -1,29 +1,25 @@
 .header {
-  margin-top: unquote("max(100px, 8vh)");
+  margin-top: max(100px, 8vh);
   text-align: center;
-}
-
-.toggle-switch {
-  border: 1px solid red;
 }
 
 .header-title {
   margin-bottom: 5vh;
-  margin-bottom: unquote("max(5vh, 30px)");
+  margin-bottom: max(5vh, 30px);
   font-size: clamp(1.7rem, 1.8vw, 3rem);
   font-weight: 100;
   line-height: 1.5;
   letter-spacing: 2px;
+}
 
-  a {
-    color: var(--link-color);
+.link {
+  color: var(--link-color);
+}
 
-    &:hover {
-      background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
-      background-clip: text;
-      -webkit-text-fill-color: rgba(255, 255, 255, 0);
-    }
-  }
+.link:hover {
+  background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
+  background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
 
 .page-title {
