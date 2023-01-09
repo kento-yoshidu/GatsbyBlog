@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 
-import * as Styles from "../styles/series.module.scss"
+import * as Styles from "../styles/series.module.css"
 
 type Props = {
   data: GatsbyTypes.SeriesPagesQuery
@@ -32,7 +32,10 @@ const Series: React.VFC<Props> = ({ data, location }) => (
             className={Styles.listItem}
             key={series.fieldValue}
           >
-            <Link to={`/series/${series.nodes[0].frontmatter?.seriesSlug}/page/1/`}>
+            <Link
+              className={Styles.link}
+              to={`/series/${series.nodes[0].frontmatter?.seriesSlug}/page/1/`}
+            >
               { series.fieldValue }({ series.totalCount })
             </Link>
           </li>

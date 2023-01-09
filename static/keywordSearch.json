@@ -1,13 +1,5 @@
 [
   {
-    "slug": "/Others/GitHubAPI/",
-    "title": "Apollo ClientでGitHub APIからコントリビューション情報を取得する",
-    "keywords": [
-      "React",
-      "Apollo Client"
-    ]
-  },
-  {
     "slug": "/Diary/08/",
     "title": "自分は今年、一体何をしていたのか",
     "keywords": [
