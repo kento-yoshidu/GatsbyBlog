@@ -20,24 +20,24 @@
 }
 
 .main {
-  width: unquote("max(310px, 50%)");
+  width: max(310px, 50%);
   margin: clamp(3rem, 4vw, 5rem) auto clamp(5rem, 5vw, 10rem);
+}
 
-  p {
-    margin-bottom: 10px;
-    font-size: clamp(1.6rem, 1.8vw, 1.8rem);
-    letter-spacing: 0.5px;
-    text-indent: 0.8rem;
-    line-height: 1.65;
-  }
+.main p {
+  margin-bottom: 10px;
+  font-size: clamp(1.6rem, 1.8vw, 1.8rem);
+  letter-spacing: 0.5px;
+  text-indent: 0.8rem;
+  line-height: 1.65;
+}
 
-  a {
-    color: var(--lin-color);
+.main a {
+  color: var(--lin-color);
+}
 
-    &:hover {
-      color: var(--main-color);
-    }
-  }
+.main a:hover {
+  color: var(--main-color);
 }
 
 .h2-title {
@@ -53,22 +53,22 @@
 }
 
 .list {
-  width: unquote("max(270px, 88%)");
+  width: max(270px, 88%);
   margin: 20px 10px;
   padding: 20px 25px;
   border: 1px dotted #aaa;
   border-radius: 2px;
   list-style: none;
+}
 
-  li {
-    margin-bottom: 15px;
-    font-size: clamp(1.5rem, 1.3vw, 1.7rem);
-    line-height: 1.5;
+.list li {
+  margin-bottom: 15px;
+  font-size: clamp(1.5rem, 1.3vw, 1.7rem);
+  line-height: 1.5;
+}
 
-    &:last-child {
-      margin: 0;
-    }
-  }
+.list li:last-child {
+  margin: 0;
 }
 
 @media (max-width: 768px) {
