@@ -62,7 +62,7 @@
 
     li {
       margin-bottom: 10px;
-      font-size: 1.8rem;
+      font-size: clamp(1.4rem, 1.65vw, 1.8rem);
       line-height: 1.5;
     }
   }

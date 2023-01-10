@@ -680,8 +680,8 @@ type Frontmatter = {
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly published: Maybe<Scalars['Boolean']>;
-  readonly updatedate: Maybe<Scalars['Date']>;
   readonly draft: Maybe<Scalars['Boolean']>;
+  readonly updatedate: Maybe<Scalars['Date']>;
   readonly categoryName: Maybe<Scalars['String']>;
   readonly categorySlug: Maybe<Scalars['String']>;
   readonly keyword: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
@@ -1294,8 +1294,8 @@ type FrontmatterFilterInput = {
   readonly tags: Maybe<StringQueryOperatorInput>;
   readonly keywords: Maybe<StringQueryOperatorInput>;
   readonly published: Maybe<BooleanQueryOperatorInput>;
-  readonly updatedate: Maybe<DateQueryOperatorInput>;
   readonly draft: Maybe<BooleanQueryOperatorInput>;
+  readonly updatedate: Maybe<DateQueryOperatorInput>;
   readonly categoryName: Maybe<StringQueryOperatorInput>;
   readonly categorySlug: Maybe<StringQueryOperatorInput>;
   readonly keyword: Maybe<StringQueryOperatorInput>;
@@ -1534,8 +1534,8 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark.frontmatter.tags'
   | 'childrenMarkdownRemark.frontmatter.keywords'
   | 'childrenMarkdownRemark.frontmatter.published'
-  | 'childrenMarkdownRemark.frontmatter.updatedate'
   | 'childrenMarkdownRemark.frontmatter.draft'
+  | 'childrenMarkdownRemark.frontmatter.updatedate'
   | 'childrenMarkdownRemark.frontmatter.categoryName'
   | 'childrenMarkdownRemark.frontmatter.categorySlug'
   | 'childrenMarkdownRemark.frontmatter.keyword'
@@ -1603,8 +1603,8 @@ type FileFieldsEnum =
   | 'childMarkdownRemark.frontmatter.tags'
   | 'childMarkdownRemark.frontmatter.keywords'
   | 'childMarkdownRemark.frontmatter.published'
-  | 'childMarkdownRemark.frontmatter.updatedate'
   | 'childMarkdownRemark.frontmatter.draft'
+  | 'childMarkdownRemark.frontmatter.updatedate'
   | 'childMarkdownRemark.frontmatter.categoryName'
   | 'childMarkdownRemark.frontmatter.categorySlug'
   | 'childMarkdownRemark.frontmatter.keyword'
@@ -3185,8 +3185,8 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.tags'
   | 'frontmatter.keywords'
   | 'frontmatter.published'
-  | 'frontmatter.updatedate'
   | 'frontmatter.draft'
+  | 'frontmatter.updatedate'
   | 'frontmatter.categoryName'
   | 'frontmatter.categorySlug'
   | 'frontmatter.keyword'
@@ -4117,22 +4117,22 @@ type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArr
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
+type Unnamed_1_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
 
 type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }> };
+type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
 type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
+type Unnamed_3_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }> };
 
 type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_4_Query = { readonly allKeywordSearchJson: { readonly edges: ReadonlyArray<{ readonly node: Pick<KeywordSearchJson, 'keywords' | 'slug' | 'title'> }> } };
+type Unnamed_4_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'lang' | 'description' | 'siteUrl' | 'locale'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 

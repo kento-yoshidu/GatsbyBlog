@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import * as Styles from "../styles/mobilePagination.module.scss"
+import * as Styles from "../styles/mobilePagination.module.css"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -58,7 +58,10 @@ const MobilePagination: React.VFC<Props> = ({
         to={topPath}
         className={Styles.topButton}
       >
-        <FontAwesomeIcon icon={faAngleDoubleLeft} />
+        <FontAwesomeIcon
+          icon={faAngleDoubleLeft}
+          className={Styles.icon}
+        />
       </Link>
 
     prevButton =
@@ -66,7 +69,10 @@ const MobilePagination: React.VFC<Props> = ({
         to={prevPath}
         className={Styles.prevButton}
       >
-        <FontAwesomeIcon icon={faAngleLeft} />
+        <FontAwesomeIcon
+          icon={faAngleLeft}
+          className={Styles.icon}
+        />
       </Link>
   }
 
@@ -87,7 +93,10 @@ const MobilePagination: React.VFC<Props> = ({
         to={lastPath}
         className={Styles.lastButton}
       >
-        <FontAwesomeIcon icon={faAngleDoubleRight} />
+        <FontAwesomeIcon
+          icon={faAngleDoubleRight}
+          className={Styles.icon}
+        />
       </Link>
 
     nextButton =
@@ -95,7 +104,10 @@ const MobilePagination: React.VFC<Props> = ({
         to={nextPath}
         className={Styles.nextButton}
       >
-        <FontAwesomeIcon icon={faAngleRight} />
+        <FontAwesomeIcon
+          icon={faAngleRight}
+          className={Styles.icon}
+        />
       </Link>
   }
 
