@@ -1,8 +1,7 @@
 import React from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import * as Styles from "../styles/header.module.scss"
-// import { topButton } from "../styles/mobilePagination.module.scss"
+import * as Styles from "../styles/header.module.css"
 
 type Props = {
   pageTitle?: string,
@@ -27,7 +26,12 @@ const Header: React.VFC<Props> = ({ pageTitle, pathname }) => {
       <h1 className={Styles.headerTitle}>
         {pathname === "/page/1/"
           ? <>{site.siteMetadata.title}</>
-          : <Link to="/page/1/">{site.siteMetadata.title}</Link>
+          : <Link
+              className={Styles.link}
+              to="/page/1/"
+            >
+              {site.siteMetadata.title}
+            </Link>
         }
       </h1>
 
