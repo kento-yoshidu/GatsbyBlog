@@ -5,7 +5,7 @@ import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Header from "../components/header"
 
-import * as Styles from "../styles/series.module.scss"
+import * as Styles from "../styles/series.module.css"
 
 type Props= {
   data: GatsbyTypes.TagsPageQuery
@@ -29,10 +29,12 @@ const Tags: React.VFC<Props> = ({ data, location }) => (
       <ul className={Styles.tagList}>
         {data.allMarkdownRemark.group.map((tag) => (
           <li
-            className={Styles.listItem}
             key={tag.fieldValue}
           >
-            <Link to={`/tag/${tag.fieldValue}/page/1/`}>
+            <Link
+              className={Styles.link}
+              to={`/tag/${tag.fieldValue}/page/1/`}
+            >
               { tag.fieldValue }({ tag.totalCount })
             </Link>
           </li>

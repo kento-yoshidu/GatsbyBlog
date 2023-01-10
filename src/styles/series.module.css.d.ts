@@ -3,4 +3,4 @@ export const seriesMain: string;
 export const tagsMain: string;
 export const seriesList: string;
 export const tagList: string;
-export const listItem: string;
+export const link: string;
