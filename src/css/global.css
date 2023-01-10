@@ -27,7 +27,6 @@ body {
   --bg-color: #fff;
   --text-color: #444;
   --link-color: #444;
-  --footer-bg-color: #444;
   --post-link-color: #0000ee;
 
   background-color: var(--bg-color);
@@ -38,7 +37,6 @@ body.dark {
   --bg-color: #15141a;
   --text-color: #fbfbfe;
   --link-color: #ddd;
-  --footer-bg-color: #121212;
   --post-link-color: var(--main-color);
 }
 
