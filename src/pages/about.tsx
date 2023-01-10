@@ -4,7 +4,7 @@ import Layout from "../components/layout"
 import Header from "../components/header"
 import Seo from "../components/seo"
 
-import * as Styles from "../styles/404.module.scss"
+import * as Styles from "../styles/404.module.css"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUndo } from "@fortawesome/free-solid-svg-icons"
