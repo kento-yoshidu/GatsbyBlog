@@ -1,6 +1,6 @@
 import React from "react"
 
-import * as Styles from "../styles/pageinfo.module.scss"
+import * as Styles from "../styles/pageinfo.module.css"
 
 type Props = {
   currentPage: number,
