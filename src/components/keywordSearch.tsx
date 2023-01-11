@@ -102,6 +102,7 @@ const Search: React.VFC = () => {
       <button
         className={Styles.menuBtn}
         onClick={dialogOpen}
+        aria-label="検索"
       >
         <FontAwesomeIcon
           icon={faSearchPlus}
@@ -148,6 +149,7 @@ const Search: React.VFC = () => {
           <button
             className={Styles.closeButton}
             onClick={dialogClose}
+            aria-label="閉じる"
           >
           </button>
         </div>
