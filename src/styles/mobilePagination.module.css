@@ -9,10 +9,10 @@
   font-weight: 100;
 }
 
-.top-button,
-.last-button,
-.prev-button,
-.next-button {
+.topButton,
+.lastButton,
+.prevButton,
+.nextButton {
   position: absolute;
   width: 20%;
   padding: 8px 0;
@@ -20,25 +20,25 @@
   border: 1px solid #ccc;
   border-radius: 2px;
   text-align: center;
-
-  svg {
-    color: #888;
-  }
 }
 
-.top-button {
+.icon {
+  color: #888;
+}
+
+.topButton {
   left: 2.2%;
 }
 
-.prev-button {
+.prevButton {
   left: 27%;
 }
 
-.next-button {
+.nextButton {
   right: 27%;
 }
 
-.last-button {
+.lastButton {
   right: 2.2%;
 }
 
