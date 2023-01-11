@@ -24,6 +24,7 @@ const ToggleButton = () => {
           <button
             className={Styles.wrapper}
             onClick={() => toggleTheme(isDark ? "light" : "dark")}
+            aria-label="テーマ切り替え"
           >
             {isDark ? (
               <FontAwesomeIcon

@@ -17,31 +17,29 @@
   gap: 30px;
   text-align: center;
   text-decoration: none;
+}
 
-  svg {
-    display: block;
-    font-size: clamp(4rem, 3vw, 5rem);
-    color: var(--text-color);
-    transition-duration: 0.1s;
-  }
+.box svg {
+  display: block;
+  font-size: clamp(4rem, 3vw, 5rem);
+  color: var(--text-color);
+  transition-duration: 0.1s;
+}
 
-  span {
-    color: var(--text-color);
-    font-size: clamp(2rem, 1.6vw, 2.5rem);
-  }
+.box span {
+  color: var(--text-color);
+  font-size: clamp(2rem, 1.6vw, 2.5rem);
+}
 
-  &:hover {
-    svg {
-      color: var(--main-color);
-    }
+.box:hover svg {
+  color: var(--main-color);
+}
 
-    span {
-      color: #acb6e5;
-      background: linear-gradient(135deg, var(--main-color), var(--sub-color));
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-  }
+.box:hover span {
+  color: #acb6e5;
+  background: linear-gradient(135deg, var(--main-color), var(--sub-color));
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 @media (max-width: 768px) {

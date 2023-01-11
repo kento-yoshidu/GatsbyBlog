@@ -6,8 +6,8 @@
 
 .page {
   margin: 10px 0 20px;
+}
 
-  span {
-    font-size: clamp(2.3rem, 2vw, 3.5rem);
-  }
+.page span {
+  font-size: clamp(2.3rem, 2vw, 3.5rem);
 }

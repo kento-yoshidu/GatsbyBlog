@@ -4,3 +4,4 @@ export const topButton: string;
 export const lastButton: string;
 export const prevButton: string;
 export const nextButton: string;
+export const icon: string;
