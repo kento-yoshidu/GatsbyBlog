@@ -8,7 +8,7 @@ import Header from "../components/header"
 import PostInfo from "../components/postInfo"
 import intersectionObserver from "../lib/intersectionObserver"
 
-import * as Styles from "../styles/post.module.scss"
+import * as Styles from "../styles/post.module.css"
 import * as TableStyles from "../styles/tableOfContent.module.scss"
 
 import "prismjs/themes/prism-tomorrow.css"

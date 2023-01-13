@@ -36,24 +36,19 @@ const Footer: React.VFC = () => {
       <div className={`${Styles.link} ${Styles.externalLink}`}>
         <Link
           to={"https://github.com/kento-yoshidu/Gatsby3Blog"}
-          target="_blink"
+          aria-label="GitHubリポジトリーへのリンク"
         >
           <FontAwesomeIcon icon={faGithubSquare} />
         </Link>
       </div>
 
       <div className={`${Styles.link} ${Styles.internalLink}`}>
-        <Link
-          to={"/series/"}
-          target="_blink"
-        >
+        <Link to={"/series/"}>
           <FontAwesomeIcon icon={faChevronRight} />
           シリーズ一覧
         </Link>
-        <Link
-          to={"/tags/"}
-          target="_blink"
-        >
+
+        <Link to={"/tags/"}>
           <FontAwesomeIcon icon={faChevronRight} />
           タグ一覧
         </Link>
