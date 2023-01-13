@@ -1,18 +1,20 @@
 ---
-title: "CSS コンテナークエリー"
+title: "CSS Container Query"
 postdate: "2022-10-10"
 update: "2022-10-10"
 seriesName: "その他"
 seriesSlug: "Others"
-description: "CSSのコンテナークエリーについて紹介します。"
-tags: ["CSS", "コンテナークエリー"]
-keywords: ["CSS", "Container Query", "コンテナークエリー"]
+description: "CSSのContainer Queryを触ってみました。"
+tags: ["CSS", "@container"]
+keywords: ["CSS", "@container", "Container Query", "コンテナークエリー"]
 published: false
 ---
 
-# 対応が始まったコンテナークエリー
+# 対応完了間近の`@container`
 
-まだWD（Working Draft）の段階ですが、2022年10月現在、Google ChromeやMicrosoft Edge、
+CSSの新しいクエリーであるContainer Query（`@container`）ですが、2023年1月現在、Firefoxを除く主要ブラウザーで使用できるようになっています。Firefoxもバージョン108からは対応されているようですので、実践投入できるタイミングも近づいてきたように思います。
+
+![Firefox以外のブラウザーで対応完了。Firefoxでもバージョン108から対応。](./images/image01.png)
 
 ブラウザーのビューポートのサイズではなく、コンテナー（≒親要素）のサイズによって変更できます。
 
