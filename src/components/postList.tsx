@@ -86,14 +86,15 @@ const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
             </p>
 
             <ul className={Styles.tags}>
-              <FontAwesomeIcon icon={faTags} /> <span>タグ</span>
-              {post.frontmatter.tags.map((tag: string) => (
-                <li key={tag}>
+              <li>
+                <FontAwesomeIcon icon={faTags} /> <span>タグ</span>
+                {post.frontmatter.tags.map((tag: string) => (
                   <Link
                     to={`/tag/${tag}/page/1/`}
+                    key={tag}
                   >#{ tag }</Link>
-                </li>
-              ))}
+                ))}
+              </li>
             </ul>
 
             <p className={Styles.description}>
