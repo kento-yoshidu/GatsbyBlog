@@ -57,6 +57,7 @@ const MobilePagination: React.VFC<Props> = ({
       <Link
         to={topPath}
         className={Styles.topButton}
+        aria-label="最初のページへ移動する"
       >
         <FontAwesomeIcon
           icon={faAngleDoubleLeft}
@@ -68,6 +69,7 @@ const MobilePagination: React.VFC<Props> = ({
       <Link
         to={prevPath}
         className={Styles.prevButton}
+        aria-label="前のページへ移動する"
       >
         <FontAwesomeIcon
           icon={faAngleLeft}
@@ -92,6 +94,7 @@ const MobilePagination: React.VFC<Props> = ({
       <Link
         to={lastPath}
         className={Styles.lastButton}
+        aria-label="最後のページへ移動する"
       >
         <FontAwesomeIcon
           icon={faAngleDoubleRight}
@@ -103,6 +106,7 @@ const MobilePagination: React.VFC<Props> = ({
       <Link
         to={nextPath}
         className={Styles.nextButton}
+        aria-label="次のページへ移動する"
       >
         <FontAwesomeIcon
           icon={faAngleRight}
