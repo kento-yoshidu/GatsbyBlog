@@ -29,7 +29,6 @@ const Series: React.VFC<Props> = ({ data, location }) => (
       <ul className={Styles.seriesList}>
         {data.allMarkdownRemark.group.map((series) => (
           <li
-            className={Styles.listItem}
             key={series.fieldValue}
           >
             <Link

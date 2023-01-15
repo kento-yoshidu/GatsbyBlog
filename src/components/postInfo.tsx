@@ -3,8 +3,6 @@ import { Link } from "gatsby"
 
 import * as Styles from "../styles/postInfo.module.scss"
 
-import type { Frontmatter } from "../types/type"
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faUndo, faFolder, faTags, faCommentDots } from "@fortawesome/free-solid-svg-icons"
 
@@ -12,7 +10,17 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import { config } from "@fortawesome/fontawesome-svg-core"
 config.autoAddCss = false
 
-const PostInfo: React.VFC<Partial<Frontmatter>> = ({
+type Props = {
+  title: string,
+  seriesSlug: string,
+  seriesName: string,
+  postdate: string,
+  update: string,
+  tags: string[],
+  description: string
+}
+
+const PostInfo = ({
   title,
   seriesSlug,
   seriesName,
@@ -20,20 +28,9 @@ const PostInfo: React.VFC<Partial<Frontmatter>> = ({
   update,
   tags,
   description
-}) => {
+}: Props) => {
   const [postY, postM, postD] = postdate.split("-")
   const [updateY, updateM, updateD] = update.split("-")
-
-  const tag = tags?.map((tag: string) => (
-    <li key={`tag${tag}`}>
-      <Link
-        to={`/tag/${tag}/page/1/`}
-        key={`link${tag}`}
-      >
-        #{ tag }
-      </Link>
-    </li>
-  ))
 
   return (
     <div className={Styles.postInfo}>
@@ -67,14 +64,23 @@ const PostInfo: React.VFC<Partial<Frontmatter>> = ({
 
       <ul className={Styles.tags}>
         <FontAwesomeIcon icon={ faTags } />
-        { tag }
+
+        {tags?.map((tag: string) => (
+          <li key={`tag${tag}`}>
+            <Link
+              to={`/tag/${tag}/page/1/`}
+              key={`link${tag}`}
+            >
+              #{ tag }
+            </Link>
+          </li>
+        ))}
       </ul>
 
       <div className={Styles.description}>
         <FontAwesomeIcon icon={faCommentDots} />
         { description }
       </div>
-
     </div>
   )
 }
