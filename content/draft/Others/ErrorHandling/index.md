@@ -1,16 +1,16 @@
 ---
-title: "【メモ】RustのResult型"
-postdate: "2022-06-24"
-update: "2022-06-24"
+title: "RustのResult型何もわからん"
+postdate: "2023-01-20"
+update: "2023-01-20"
 seriesName: "その他"
 seriesSlug: "Others"
-description: "メディアクエリーにおける比較演算子の使い方を紹介します"
+description: "RustのOption型を学びました。"
 tags: ["Rust"]
 keywords: ["Rust"]
 published: false
 ---
 
-# Result型のエラーハンドリング
+# Result型のOption型
 
 最近、趣味でRustを勉強しています。エラーハンドリングがややこしくテンパってしまったので、Result型について学習メモを残しておきます。間違いが多くあるかもしれませんので参考程度にお願いします。
 

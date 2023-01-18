@@ -74,7 +74,7 @@ body[data-lock="lock"] {
 
 .gatsby-highlight {
   width: 93%;
-  background-color: #444;
+  background-color: #000;
   border-radius: 0 0.3rem 0.3rem;
   margin: 0 0 30px;
   padding: 0.6em;
@@ -118,7 +118,7 @@ body[data-lock="lock"] {
   padding: 1.5rem 1.8rem 2.5rem;
   background: var(--main-color);
   border-radius: 1px 1px 0 0;
-  color: #ddd;
+  color: #fff;
   font-size: clamp(1.4rem, 1.5vw, 1.6rem);
   font-weight: 400;
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
