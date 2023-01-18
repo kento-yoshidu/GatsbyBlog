@@ -25,14 +25,14 @@
 
       a {
         position: relative;
-        color: var(--link-color);
+        color: #fff;
 
         &:hover {
-          color: var(--main-color);
+          color: var(--post-link-color);
         }
 
         &.active {
-          color: var(--main-color);
+          color: var(--post-link-color);
 
           &::before {
             position: absolute;

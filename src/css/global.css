@@ -27,7 +27,8 @@ body {
   --bg-color: #fff;
   --text-color: #444;
   --link-color: #444;
-  --post-link-color: #0000ee;
+  --post-link-color: #00e;
+  --heading-bar-color: #00e;
 
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -37,7 +38,8 @@ body.dark {
   --bg-color: #15141a;
   --text-color: #fbfbfe;
   --link-color: #ddd;
-  --post-link-color: var(--main-color);
+  --post-link-color: #dd4cdd;
+  --heading-bar-color: #dd4cdd;
 }
 
 body[data-lock="lock"] {
@@ -116,7 +118,7 @@ body[data-lock="lock"] {
   margin-top: 15px;
   margin-bottom: -0.65em;
   padding: 1.5rem 1.8rem 2.5rem;
-  background: var(--main-color);
+  background: var(--heading-bar-color);
   border-radius: 1px 1px 0 0;
   color: #fff;
   font-size: clamp(1.4rem, 1.5vw, 1.6rem);

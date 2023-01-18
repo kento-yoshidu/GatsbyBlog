@@ -24,14 +24,14 @@
   margin-top: 50px;
   margin-bottom: 30px;
   padding-bottom: 8px;
-  border-bottom: 7px solid var(--main-color);
+  border-bottom: 7px solid var(--heading-bar-color);
   font-size: clamp(2.6rem, 5vw, 4rem);
 }
 
 .blog-post h2 {
   margin: 50px 0 20px;
   padding: 7px 0 7px 2rem;
-  border-left: 9px solid var(--main-color);
+  border-left: 9px solid var(--heading-bar-color);
   font-size: clamp(2.1rem, 4.1vw, 3.5rem);
 }
 
@@ -289,7 +289,7 @@
   font-size: 2rem;
   letter-spacing: 1px;
   color: #666;
-  border-bottom: 3px dotted var(--main-color);
+  border-bottom: 3px dotted var(--heading-bar-color);
   padding-bottom: 7px;
   margin-bottom: 15px;
 }
