@@ -13,7 +13,9 @@
 }
 
 .footer a:hover {
-  color: var(--main-color);
+  background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
+  background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
 
 .footer-title {
