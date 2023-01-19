@@ -27,8 +27,8 @@ body {
   --bg-color: #fff;
   --text-color: #444;
   --link-color: #444;
-  --post-link-color: #00e;
-  --heading-bar-color: #00e;
+  --post-link-color: #33d;
+  --heading-bar-color: #33d;
 
   background-color: var(--bg-color);
   color: var(--text-color);
