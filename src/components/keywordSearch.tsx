@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 import { Link, useStaticQuery, graphql } from "gatsby"
 
-import * as Styles from "../styles/search.module.scss"
+import * as Styles from "../styles/search.module.css"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearchPlus } from "@fortawesome/free-solid-svg-icons"
@@ -26,7 +26,10 @@ const PostList = React.memo((
     key={key}
     className={Styles.listItem}
   >
-    <Link to={slug}>
+    <Link
+      to={slug}
+      className={Styles.link}
+    >
       {title}
     </Link>
   </li>
@@ -127,9 +130,9 @@ const Search: React.VFC = () => {
           <p className={Styles.message}>キーワード検索
             {filteredPosts !== null
               ? (
-                <span>{filteredPosts?.length}件</span>
+                <span className={Styles.hitCount}>{filteredPosts?.length}件</span>
               ) : (
-                <span>0件</span>
+                <span className={Styles.hitCount}>0件</span>
               )}
             の記事がヒットしました。
           </p>
