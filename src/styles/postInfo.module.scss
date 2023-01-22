@@ -38,6 +38,7 @@
   background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
   margin: 15px 0;
+  font-size: clamp(1.2rem, 2.5vw, 3.5rem);
   font-weight: 400;
   letter-spacing: 1px;
   line-height: 1.5;

@@ -57,7 +57,6 @@ const Footer: React.VFC = () => {
       <div className={`${Styles.link} ${Styles.metaLink}`}>
         <Link
           to={"/about/"}
-          target="_blink"
         >
           <FontAwesomeIcon icon={faChevronRight} />
           このブログについて

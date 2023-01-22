@@ -1,5 +1,4 @@
 .date-info {
-  font-size: clamp(1.3rem, 1.8vw, 1.8rem);
   font-weight: 900;
   text-align: center;
 }
@@ -26,7 +25,6 @@
 
 .main p {
   margin-bottom: 10px;
-  font-size: clamp(1.6rem, 1.8vw, 1.8rem);
   letter-spacing: 0.5px;
   text-indent: 0.8rem;
   line-height: 1.65;
@@ -63,7 +61,6 @@
 
 .list li {
   margin-bottom: 15px;
-  font-size: clamp(1.5rem, 1.3vw, 1.7rem);
   line-height: 1.5;
 }
 
