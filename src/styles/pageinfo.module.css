@@ -1,6 +1,6 @@
 .count-info {
   margin: 0 auto 50px;
-  font-size: clamp(1.5rem, 1.8vw, 2.2rem);
+  font-size: clamp(1.15rem, 1.8vw, 1.5rem);
   text-align: center;
 }
 
@@ -9,5 +9,5 @@
 }
 
 .page span {
-  font-size: clamp(2.3rem, 2vw, 3.5rem);
+  font-size: clamp(1.75rem, 2vw, 2.8rem);
 }
