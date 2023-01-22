@@ -134,6 +134,7 @@
 
 .blog-post aside p {
   margin: 0;
+  font-size: clamp(0.85rem, 1vw, 0.98rem);
   line-height: 1.6;
 }
 

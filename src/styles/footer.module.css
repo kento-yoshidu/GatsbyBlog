@@ -21,6 +21,7 @@
 .footer-title {
   width: max(50%, 324px);
   margin: 0 auto 20px;
+  font-size: clamp(1.05rem, 1.8vw, 1.75rem);
   font-weight: 100;
   letter-spacing: 2px;
 }
