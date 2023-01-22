@@ -3,10 +3,11 @@
 :root {
   --main-color: #1675cc;
   --sub-color: #ff4c89;
+
+  --body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
 }
 
 html {
-  font-size: 62.5%;
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -32,6 +33,7 @@ body {
 
   background-color: var(--bg-color);
   color: var(--text-color);
+  font-size: var(--body);
 }
 
 body.dark {
@@ -186,8 +188,4 @@ body[data-lock="lock"] {
 
 .history .history-list {
   list-style: disc;
-}
-
-.history .history-list li {
-  font-size: 1.48rem;
 }
