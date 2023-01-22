@@ -83,7 +83,7 @@ body[data-lock="lock"] {
   margin: 0 0 30px;
   padding: 0.6em;
   overflow: auto;
-  font-size: 1.6rem;
+  font-size: clamp(0.8rem, 1vw, 0.98rem);
 }
 
 .gatsby-highlight-code-line {
@@ -110,7 +110,6 @@ body[data-lock="lock"] {
 
 @media (max-width: 768px) {
   .gatsby-highlight {
-    font-size: 1.3rem;
     margin: 20px 0 25px;
   }
 }
@@ -119,11 +118,11 @@ body[data-lock="lock"] {
   display: table;
   margin-top: 15px;
   margin-bottom: -0.65em;
-  padding: 1.5rem 1.8rem 2.5rem;
+  padding: 18px 18px 25px 16px;
   background: var(--heading-bar-color);
   border-radius: 1px 1px 0 0;
   color: #fff;
-  font-size: clamp(1.4rem, 1.5vw, 1.6rem);
+  font-size: clamp(0.8rem, 1vw, 0.9rem);
   font-weight: 400;
   font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   line-height: 0.2;
@@ -149,7 +148,6 @@ body[data-lock="lock"] {
 
 .warn p {
   margin: 0;
-  font-size: clamp(1.3rem, 1.5vw, 1.6rem) !important;
   line-height: 1.6;
 }
 
