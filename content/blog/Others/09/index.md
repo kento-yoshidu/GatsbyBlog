@@ -1,28 +1,26 @@
 ---
-title: "【随時更新】css-nestingについて"
+title: "【随時更新】CSS Nestingについて"
 postdate: "2023-01-11"
-update: "2023-01-13"
+update: "2023-01-19"
 seriesName: "その他"
 seriesSlug: "Others"
-tags: ["CSS", "css-nesting"]
-description: "待望のcss-nestingについてまとめます。"
-keywords: ["CSS", "css-nesting"]
+tags: ["CSS", "CSS Nesting"]
+description: "待望のCSS Nestingについてまとめます。"
+keywords: ["CSS", "CSS Nesting"]
 published: true
 ---
 
-# 【随時更新】css-nestingについて
+# 【随時更新】CSS Nestingについて
 
-個人的に一番実現を望んでいる**css-nesting**ですが、2022年後半から大きく進み出した雰囲気があり、(　ﾟ∀ﾟ)o彡゜ワッフル！ワッフル！しています。
+個人的に一番実現を望んでいる**CSS Nesting**ですが、2022年後半から大きく進み出した雰囲気があり、(　ﾟ∀ﾟ)o彡゜ワッフル！ワッフル！しています。
 
-実は、今年の目標の一つとして**脱Sass**を掲げています。Sassを覚えたてのころは「Sassすごすぎｗｗｗｗ」とか言って既存のCSSを全てSassに置き換える勢いで利用していましたが、CSSネイティブの機能が充実してきた今、「出来るだけCSSのみを使っていこうかな」という風にお気持ちが変わってきました。そして、それを一番後押ししているのがcss-nestingの存在です。
+実は、今年の目標の一つとして**脱Sass**を掲げています。Sassを覚えたてのころは「Sassすごすぎｗｗｗｗ」とか言って既存のCSSを全てSassに置き換える勢いで利用していましたが、CSSネイティブの機能が充実してきた今、「出来るだけCSSのみを使っていこうかな」という風にお気持ちが変わってきました。そして、それを一番後押ししているのがCSS Nestingの存在です。
 
-将来css-nestingが実用化されたとき、乗り遅れないために今のうちから情報を集めておこうと思い、この記事にまとめたいと思います。とりあえずは随時更新という形をとり、どこかのタイミングでクローズするつもりです。仕様の解説ではなく、調べたことをメモ的に羅列していくだけなので悪しからず。間違ったことを書いている可能性も高いと思いますので、半信半疑でお読みください。
+将来CSS Nestingが実用化されたとき、乗り遅れないために今のうちから情報を集めておこうと思い、この記事にまとめたいと思います。とりあえずは随時更新という形をとり、どこかのタイミングでクローズするつもりです。仕様の解説ではなく、調べたことをメモ的に羅列していくだけなので悪しからず。間違ったことを書いている可能性も高いと思いますので、半信半疑でお読みください。
 
 ## W3Cの仕様書
 
 W3Cの仕様書はこちら。[CSS Nesting Module(Working Draft)](https://www.w3.org/TR/2021/WD-css-nesting-1-20210831/)
-
-2023年1月現在のステータスは**FPWD**です。
 
 Editors Draftはこちら。[CSS Nesting Module(Editor's Draft)](https://drafts.csswg.org/css-nesting-1/)
 
@@ -41,17 +39,19 @@ Editors Draftはこちら。[CSS Nesting Module(Editor's Draft)](https://drafts.
 
 - [[css-nesting-1] Syntax Invites Errors · Issue #7834 · w3c/csswg-drafts · GitHub](https://github.com/w3c/csswg-drafts/issues/7834)
 
+- [[css-nesting-1] &amp; representing parent elements vs parent selector · Issue #8310 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/8310)
+
 ## ブラウザーで使えるのか
 
-Google Chromeのバージョン109以降であれば、フラッグを立てることで利用できます。
+Google Chromeのバージョン109以降であれば、Experimental Web Platform featuresをEnabledにすることで利用できます。
 
 [Can I use](https://caniuse.com/css-nesting)
 
 ## シンタックス
 
-[投票の結果](https://webkit.org/blog/13607/help-choose-from-options-for-css-nesting-syntax/)、最多の票を獲得したシンタックス。でも変更される可能性もなくはないと思われます。基本的に、Sass(というかSCSS)と同じように書くことができます。
+[投票の結果](https://webkit.org/blog/13607/help-choose-from-options-for-css-nesting-syntax/)、最多の票を獲得したシンタックス。でも変更される可能性もなくはないと思われる。基本的にSCSSと同じように書くことができます。
 
-```css
+```scss
 .wrapper {
   width: 50%;
 
@@ -61,9 +61,9 @@ Google Chromeのバージョン109以降であれば、フラッグを立てる�
 }
 ```
 
-要素セレクターを記述する時は、前に`&`を置く必要があります。
+要素セレクターをネストさせる時は、前に`&`を置く必要があります。
 
-```css
+```scss
 .wrapper {
   width: 50%;
 
@@ -79,7 +79,7 @@ Google Chromeのバージョン109以降であれば、フラッグを立てる�
 
 擬似クラスや擬似要素もSCSSと同じように記述できます。
 
-```css
+```scss
 /* 擬似クラスの例① */
 p {
   color: #444;
@@ -113,6 +113,35 @@ p {
 }
 ```
 
+メディアクエリーをネストさせることもできます。メデイアクエリーが絡むと、ネストは見通しが急激に悪くなるので多様厳禁ですね（CSS Nestingに限った話ではありませんが）。
+
+```scss
+.wrapper {
+  & p {
+    font-size: 2.2rem;
+
+    @media (width < 768px) {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+/* @mediaの中でのネストもできる
+ * でもぱっと見あんまわからん
+*/
+.wrapper {
+  display: flex;
+
+  @media (width < 768px) {
+    flex-direction: column;
+
+    & p {
+      font-size: 1.5rem;
+    }
+  }
+}
+```
+
 ## CSSに書き換えてみて
 
 現在、プライベートで運用しているサイトのSassをCSSに置き換えていっています。
@@ -133,7 +162,7 @@ ul {
 }
 ```
 
-css-nestingで書き換えるなら以下のようになると思います。
+CSS Nestingで書き換えるなら以下のようになると思います。
 
 ```scss
 ul {
@@ -149,7 +178,7 @@ ul {
 }
 ```
 
-ネストで書けるのはSass（とcss-nesting）のメリットではありますが、そもそもネストはレンダリング的にも良くないので、適切なクラスを付与して以下のように書くことにしました。CSS Modulesを利用しモジュール分割しているので、クラス名がバッティングする心配も少ないです。
+ネストで書けるのはSass（とCSS Nesting）のメリットではありますが、そもそもネストはレンダリング的にも良くないので、適切なクラスを付与して以下のように書くことにしました。CSS Modulesを利用しモジュール分割しているので、クラス名がバッティングする心配も少ないです。
 
 ```css
 .link {
@@ -161,7 +190,7 @@ ul {
 }
 ```
 
-これくらいの記述量であれば負担にもなりませんね。css-nestingが実現すれば以下のように記述できそうです。
+これくらいの記述量であれば負担にもなりませんね。CSS Nestingが実現すれば以下のように記述できそうです。
 
 ```scss
 .link {
@@ -172,5 +201,9 @@ ul {
   }
 }
 ```
+
+- 2023年1月19日　表記を「CSS Nesting」に変更。
+
+## 参考
 
 - [Help pick a syntax for CSS nesting - Chrome Developers](https://developer.chrome.com/blog/help-css-nesting/)
