@@ -1,7 +1,7 @@
 ---
 title: "#12 CSSプロパティ① color/font-size"
 postdate: "2022-03-25"
-update: "2022-03-25"
+updatedate: "2022-03-25"
 seriesName: "初めてのHTML&CSS"
 seriesSlug: "HelloWeb"
 description: "文字に関するCSSプロパティを学習します。"

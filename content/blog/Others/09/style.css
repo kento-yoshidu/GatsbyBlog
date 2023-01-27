@@ -1,0 +1,11 @@
+.wrapper {
+  display: flex;
+
+  @media (width < 768px) {
+    flex-direction: column;
+
+    & p {
+      color: red;
+    }
+  }
+}

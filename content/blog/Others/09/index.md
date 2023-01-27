@@ -1,7 +1,7 @@
 ---
 title: "【随時更新】CSS Nestingについて"
 postdate: "2023-01-11"
-update: "2023-01-19"
+update: "2023-01-27"
 seriesName: "その他"
 seriesSlug: "Others"
 tags: ["CSS", "CSS Nesting"]
@@ -18,26 +18,30 @@ published: true
 
 将来CSS Nestingが実用化されたとき、乗り遅れないために今のうちから情報を集めておこうと思い、この記事にまとめたいと思います。とりあえずは随時更新という形をとり、どこかのタイミングでクローズするつもりです。仕様の解説ではなく、調べたことをメモ的に羅列していくだけなので悪しからず。間違ったことを書いている可能性も高いと思いますので、半信半疑でお読みください。
 
-## W3Cの仕様書
+## 各種リンク
+
+### W3Cの仕様書
 
 W3Cの仕様書はこちら。[CSS Nesting Module(Working Draft)](https://www.w3.org/TR/2021/WD-css-nesting-1-20210831/)
 
 Editors Draftはこちら。[CSS Nesting Module(Editor's Draft)](https://drafts.csswg.org/css-nesting-1/)
 
-## 日本語で書かれている記事
+### 日本語で書かれている記事
 
 - 2021年12月　[そろそろ Native CSS Nesting の話をしよう - Qiita](https://qiita.com/otsuky/items/68a5fa533aff3f9386e5)
 - 2022年11月　[CSS Nestingを試してみる - Qiita](https://qiita.com/yuki-endo/items/37cd718318488ced7254)
 - 2022年11月　[Sassなしで入れ子が可能に。CSSネストがブラウザにやってきた](https://zenn.dev/moneyforward/articles/css-nesting-without-sass)
 
-## 英語で書かれている記事
+### 英語で書かれている記事
 
 - 2023年1月　[🎨 W3C Decided On CSS Nested Syntax | by Tom Smykowski | Jan, 2023 | Medium](https://tomaszs2.medium.com/w3c-decided-on-css-nested-syntax-950bc13f3ce7)
 - 2022年12月　[Help choose the syntax for CSS Nesting | WebKit](https://webkit.org/blog/13607/help-choose-from-options-for-css-nesting-syntax/)
 
-## GitHubのIssue
+### GitHubのIssue
 
 - [[css-nesting-1] Syntax Invites Errors · Issue #7834 · w3c/csswg-drafts · GitHub](https://github.com/w3c/csswg-drafts/issues/7834)
+
+- [[css-nesting] Choose Nesting syntax — Option 3, 4 or 5? · Issue #8248 · w3c/csswg-drafts · GitHub](https://github.com/w3c/csswg-drafts/issues/8248)
 
 - [[css-nesting-1] &amp; representing parent elements vs parent selector · Issue #8310 · w3c/csswg-drafts](https://github.com/w3c/csswg-drafts/issues/8310)
 
@@ -46,6 +50,14 @@ Editors Draftはこちら。[CSS Nesting Module(Editor's Draft)](https://drafts.
 Google Chromeのバージョン109以降であれば、Experimental Web Platform featuresをEnabledにすることで利用できます。
 
 [Can I use](https://caniuse.com/css-nesting)
+
+### Google Chrome
+
+[Chrome Platform Status](https://chromestatus.com/feature/5800613594529792)
+
+[Intent to Ship: CSS Nesting](https://groups.google.com/a/chromium.org/g/blink-dev/c/eFCrkiLynfU/m/JLsh3zQuAAAJ)
+
+👆 3月リリースのバージョン112から利用可能になる？
 
 ## シンタックス
 
@@ -202,7 +214,8 @@ ul {
 }
 ```
 
-- 2023年1月19日　表記を「CSS Nesting」に変更。
+- 2023年1月19日　表記を「CSS Nesting」に変更
+- 2023年1月27日　Google Chromeに関する記事のリンクを追加
 
 ## 参考
 
