@@ -7,7 +7,7 @@ seriesSlug: "GitAdvance"
 description: "git logの出力結果をカスタマイズするオプションを紹介します。"
 tags: ["git"]
 keywords: ["git", "git log"]
-published: true
+published: false
 ---
 
 # コンフリクト
