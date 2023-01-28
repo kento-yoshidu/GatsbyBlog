@@ -3,8 +3,7 @@
 :root {
   --main-color: #1675cc;
   --sub-color: #ff4c89;
-
-  --body: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);
+  --body: clamp(0.95rem, 0.95rem + 0.2vw, 1.1rem);
 }
 
 html {
@@ -83,7 +82,7 @@ body[data-lock="lock"] {
   margin: 0 0 30px;
   padding: 0.6em;
   overflow: auto;
-  font-size: clamp(0.8rem, 1vw, 0.98rem);
+  font-size: clamp(0.8rem, 1vw, 1rem);
 }
 
 .gatsby-highlight-code-line {
