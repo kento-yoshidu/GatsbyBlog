@@ -26,7 +26,7 @@
 
   a {
     color: var(--link-color);
-    font-size: clamp(1.2rem, 2vw, 2.5rem);
+    font-size: clamp(1.2rem, 2vw, 2.3rem);
     font-weight: 500;
     line-height: 1.5;
 
@@ -42,7 +42,7 @@
 .series,
 .tags,
 .description {
-  font-size: clamp(0.9rem, 1.5vw, 0.98rem);
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
 }
 
 .date {
