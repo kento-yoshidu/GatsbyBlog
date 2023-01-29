@@ -16,9 +16,9 @@
 
 ## 🌐 WebSite
 
- [Webサイト](https://blog.toriwatari.work/page/1/)
+ [WebSite](https://blog.toriwatari.work/page/1/)
 
-## ⚙️ 構成要素
+## ⚙️ Technologies
 
 - 🐬 Gatsby v3
 - 🐋 Markdown file
@@ -27,3 +27,11 @@
 - 🐟 CSS Modules
 - 🐡 Headless UI
 - 🦞 AWS Amplify
+
+## Template
+
+テンプレートとして利用したい方こちらから（作成中）。
+
+Click here to use as a template(in preparation).
+
+https://github.com/kento-yoshidu/GatsbyBlog/tree/template
