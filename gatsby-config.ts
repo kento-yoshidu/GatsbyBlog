@@ -17,13 +17,6 @@ const plugins: GatsbyConfig["plugins"] = [
   {
     resolve: "gatsby-source-filesystem",
     options: {
-      path: `${__dirname}/content/draft`,
-      name: "draft"
-    }
-  },
-  {
-    resolve: "gatsby-source-filesystem",
-    options: {
       name: "images",
       path: `${__dirname}/src/images`
     }
@@ -151,8 +144,8 @@ const plugins: GatsbyConfig["plugins"] = [
   {
     resolve: "gatsby-plugin-manifest",
     options: {
-      name: "鳥に生まれることができなかった人へ",
-      short_name: "鳥に生まれることができなかった人へ",
+      name: "My Gatsby Blog",
+      short_name: "My Gatsby Blog",
       start_url: "/",
       background_color: "#ffffff",
       theme_color: "#663399",
@@ -167,13 +160,13 @@ const plugins: GatsbyConfig["plugins"] = [
 ]
 
 const siteMetadata: GatsbyConfig["siteMetadata"] = {
-  title: "鳥に生まれることができなかった人へ",
-  description: "ITと趣味",
+  title: "My Gatsby Blog",
+  description: "My Gatsby Blog",
   lang: "ja",
-  siteUrl: "https://blog.toriwatari.work/page/1/",
+  siteUrl: "https://xxxx.xxx/",
   locale: "ja_JP",
   author: {
-    name: "Kento Yoshizu"
+    name: "Your Name"
   }
 }
 
