@@ -27,3 +27,9 @@
 - 🐟 CSS Modules
 - 🐡 Headless UI
 - 🦞 AWS Amplify
+
+## テンプレート
+
+テンプレートはこちらから（作成中）。
+
+https://github.com/kento-yoshidu/GatsbyBlog/tree/template
