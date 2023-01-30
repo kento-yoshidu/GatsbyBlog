@@ -7,18 +7,18 @@
 
 .prev {
   left: 0;
+}
 
-  svg {
-    margin-right: 8px;
-  }
+.prev svg {
+  margin-right: 8px;
 }
 
 .next {
   right: 0;
+}
 
-  svg {
-    margin-left: 8px;
-  }
+.next svg {
+  margin-left: 8px;
 }
 
 .prev,
@@ -32,24 +32,14 @@
   border-radius: 50px;
   transition: 0.3s;
   text-decoration: none;
+  color: var(--main-color);
+  font-weight: 500;
+}
 
-  svg {
-    color: var(--main-color);
-  }
-
-  span {
-    color: var(--main-color);
-    font-weight: 900;
-  }
-
-  &:hover {
-    background: var(--main-color);
-
-    svg,
-    span {
-      color: #fff;
-    }
-  }
+.prev:hover,
+.next:hover {
+  background: var(--main-color);
+  color: #fff;
 }
 
 .nation-links {
@@ -66,28 +56,24 @@
 .items {
   list-style: none;
   margin: 0 10px;
+}
 
-  .text {
-    padding: 0.7rem 1rem;
-    background-color: var(--main-color);
-    color: #fff;
-  }
+.items .text {
+  padding: 0.7rem 1rem;
+  background-color: var(--main-color);
+  color: #fff;
+}
 
-  .link {
-    a {
-      display: block;
-      padding: 0.7rem 1rem;
-      background-color: #888;
-      color: #fff;
-      text-decoration: none;
-    }
+.items .link a {
+  display: block;
+  padding: 0.7rem 1rem;
+  background-color: #888;
+  color: #fff;
+  text-decoration: none;
+}
 
-    &:hover {
-      a {
-        background-color: var(--main-color);
-      }
-    }
-  }
+.items .link:hover a {
+  background-color: var(--main-color);
 }
 
 @media (max-width: 768px) {
