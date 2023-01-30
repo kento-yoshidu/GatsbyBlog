@@ -11,3 +11,5 @@ published: true
 ---
 
 # Hello Gatsby Blog!
+
+This is my original Gatsby Blog template.

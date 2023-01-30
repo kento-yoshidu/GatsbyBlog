@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import * as Styles from "../styles/pagination.module.scss"
+import * as Styles from "../styles/pagination.module.css"
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
@@ -84,7 +84,7 @@ const Pagination: React.VFC<Props> = ({
         className={Styles.next}
         to={`/page/${currentPage + 1}/`}
       >
-        <span>Next</span>
+        Next
         <FontAwesomeIcon icon={faChevronCircleRight} />
       </Link>
     )}

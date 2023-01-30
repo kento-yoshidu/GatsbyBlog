@@ -1,0 +1,70 @@
+.post-info {
+  margin-top: 50px;
+  margin-left: 13vw;
+  width: max(50%, 324px);
+}
+
+.svg {
+  margin-right: 10px;
+}
+
+.list-item {
+  margin-right: 20px;
+}
+
+.post-info a {
+  color: var(--link-color);
+}
+
+.post-info a:hover {
+  background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
+  background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+.post-title {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
+  background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  margin: 15px 0;
+  font-size: clamp(1.2rem, 2.5vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: 1px;
+  line-height: 1.5;
+}
+
+.date-info {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+  list-style: none;
+}
+
+.series {
+  margin-bottom: 12px;
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 0 0 12px;
+  line-height: 1.5;
+  list-style: none;
+}
+
+.description {
+  width: max(300px, 90%);
+}
+
+@media (max-width: 768px) {
+  .post-info {
+    margin: 30px auto 0;
+  }
+
+  .date-info li:first-child {
+    margin-bottom: 10px;
+  }
+}

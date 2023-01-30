@@ -5,25 +5,12 @@
   </a>
 </p>
 <h1 align="center">
-  Gatsbyでブログを作成しました
+  My Gatsby Blog Template
 </h1>
 
-<p align="center">
-  <a href="https://blog/toriwatari.work/page/1/">
-    <img alt="image" src="./src/images/image.png" width="480" />
-  </a>
-</p>
-
-## 🌐 WebSite
-
- [Webサイト](https://blog.toriwatari.work/page/1/)
-
-## ⚙️ 構成要素
+## ⚙️ Technologies
 
 - 🐬 Gatsby v3
 - 🐋 Markdown file
 - 🐠 TypeScript
-- 🦐 SCSS
 - 🐟 CSS Modules
-- 🐡 Headless UI
-- 🦞 AWS Amplify

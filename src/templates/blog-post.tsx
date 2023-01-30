@@ -9,7 +9,7 @@ import PostInfo from "../components/postInfo"
 import intersectionObserver from "../lib/intersectionObserver"
 
 import * as Styles from "../styles/post.module.css"
-import * as TableStyles from "../styles/tableOfContent.module.scss"
+import * as TableStyles from "../styles/tableOfContent.module.css"
 
 import "prismjs/themes/prism-tomorrow.css"
 import "prismjs/plugins/line-numbers/prism-line-numbers.css"
