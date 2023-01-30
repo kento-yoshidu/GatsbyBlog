@@ -5,7 +5,7 @@
   </a>
 </p>
 <h1 align="center">
-  Gatsbyでブログを作成しました
+  My Gatsby Blog
 </h1>
 
 <p align="center">
@@ -16,19 +16,19 @@
 
 ## 🌐 WebSite
 
- [WebSite](https://blog.toriwatari.work/page/1/)
+[WebSite](https://blog.toriwatari.work/page/1/)
 
 ## ⚙️ Technologies
 
 - 🐬 Gatsby v3
 - 🐋 Markdown file
 - 🐠 TypeScript
-- 🦐 SCSS
 - 🐟 CSS Modules
-- 🐡 Headless UI
 - 🦞 AWS Amplify
+- ~~🦐 SCSS~~
+  - I decided not to use scss 😉. The evolution of css is amazing 😍.
 
-## Template
+## ✍️ Template
 
 テンプレートとして利用したい方こちらから（作成中）。
 
