@@ -1,7 +1,7 @@
 import React from "react"
 import { Link } from "gatsby"
 
-import * as Styles from "../styles/postList.module.scss"
+import * as Styles from "../styles/postList.module.css"
 
 import type { Frontmatter } from "../types/type"
 
@@ -48,30 +48,30 @@ const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
             key={`${post.fields}key`}
           >
             <p className={Styles.postTitle}>
-              {!isDraft && (
-                <Link to={post.fields.slug} itemProp="url">
-                  <span itemProp="headline">{ title }</span>
-                </Link>
-              )}
-              {
-                isDraft && (
-                  <Link to={`/draft${post.fields.slug}`} itemProp="url">
-                    <span itemProp="headline">{ title }</span>
-                  </Link>
-                )
-              }
+              <Link
+                className={Styles.postLink}
+                to={post.fields.slug}
+              >
+                { title }
+              </Link>
             </p>
 
             <ul className={Styles.date}>
               <li className={Styles.post}>
-                <FontAwesomeIcon icon={faClock} />
+                <FontAwesomeIcon
+                  icon={faClock}
+                  className={Styles.svg}
+                />
                 <time dateTime={post.frontmatter.postdate}>
                   {`${postY}年${postM}月${postD}日`}
                 </time>
               </li>
 
               <li className={Styles.update}>
-                <FontAwesomeIcon icon={faUndo} />
+                <FontAwesomeIcon
+                  className={Styles.svg}
+                  icon={faUndo}
+                />
                 <time dateTime={post.frontmatter.postdate}>
                   {`${updateY}年${updateM}月${updateD}日`}
                 </time>
@@ -79,7 +79,11 @@ const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
             </ul>
 
             <p className={Styles.series}>
-              <FontAwesomeIcon icon={faFolder} /> <span>シリーズ</span>
+              <FontAwesomeIcon
+                className={Styles.svg}
+                icon={faFolder}
+              />
+
               <Link to={`/series/${post.frontmatter.seriesSlug}/page/1/`}>
                 { post.frontmatter.seriesName }
               </Link>
@@ -87,7 +91,10 @@ const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
 
             <ul className={Styles.tags}>
               <li>
-                <FontAwesomeIcon icon={faTags} /> <span>タグ</span>
+                <FontAwesomeIcon
+                  className={Styles.svg}
+                  icon={faTags}
+                />
                 {post.frontmatter.tags.map((tag: string) => (
                   <Link
                     to={`/tag/${tag}/page/1/`}
@@ -98,7 +105,10 @@ const PostList: React.VFC<Props> = ({ postData, isDraft }) => (
             </ul>
 
             <p className={Styles.description}>
-              <FontAwesomeIcon icon={faCommentDots} />
+              <FontAwesomeIcon
+                className={Styles.svg}
+                icon={faCommentDots}
+              />
               { post.frontmatter.description }
             </p>
           </div>

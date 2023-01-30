@@ -11,31 +11,31 @@
   border-bottom: 1px solid #bbb;
   text-decoration: none;
   transition-duration: 0.2s;
+}
 
-  &:first-of-type {
-    border-top: 1px solid #bbb;
-  }
-
-  &:hover {
-    background-color: rgba(200, 200, 200, 0.2);
-  }
+.post-item:first-of-type {
+  border-top: 1px solid #bbb;
 }
 
 .post-title {
   margin-bottom: 10px;
+}
 
-  a {
-    color: var(--link-color);
-    font-size: clamp(1.2rem, 2vw, 2.3rem);
-    font-weight: 500;
-    line-height: 1.5;
+.post-link {
+  color: var(--link-color);
+  font-size: clamp(1.2rem, 2vw, 2.2rem);
+  font-weight: 500;
+  line-height: 1.5;
+}
 
-    &:hover {
-      background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
-      background-clip: text;
-      -webkit-text-fill-color: rgba(255, 255, 255, 0);
-    }
-  }
+.post-link:hover {
+  background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
+  background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+.svg {
+  margin-right: 8px;
 }
 
 .date,
@@ -56,10 +56,6 @@
   padding: 3px 7px 3px 0;
   margin-right: 20px;
   text-decoration: none;
-
-  svg {
-    margin-right: 5px;
-  }
 }
 
 .series,
@@ -69,27 +65,21 @@
   padding: 3px 7px 3px 0;
   line-height: 1.5;
   text-decoration: none;
+}
 
-  svg {
-    margin-right: 5px;
-  }
+.series a,
+.tags a {
+  margin-right: 9px;
+  color: var(--link-color);
+  line-height: 1.5;
+  transition-duration: 0.1s;
+}
 
-  span {
-    margin-right: 10px;
-  }
-
-  a {
-    margin-right: 9px;
-    color: var(--link-color);
-    line-height: 1.5;
-    transition-duration: 0.1s;
-
-    &:hover {
-      background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
-      background-clip: text;
-      -webkit-text-fill-color: rgba(255, 255, 255, 0);
-    }
-  }
+.series a:hover,
+.tags a:hover {
+  background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
+  background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
 }
 
 .tags {
@@ -114,13 +104,10 @@
   .description {
     margin-bottom: 5px;
     padding: 0;
+  }
 
-    span {
-      margin-right: 10px;
-    }
-
-    a {
-      margin: 0 5px;
-    }
+  .series a,
+  .tags a {
+    margin: 0 5px;
   }
 }
