@@ -1,10 +1,18 @@
 [
   {
+    "slug": "/GitAdvance/05/",
+    "title": "#5 git logの出力をカスタマイズする",
+    "keywords": [
+      "git",
+      "git log"
+    ]
+  },
+  {
     "slug": "/Others/09/",
-    "title": "【随時更新】css-nestingについて",
+    "title": "【随時更新】CSS Nestingについて",
     "keywords": [
       "CSS",
-      "css-nesting"
+      "CSS Nesting"
     ]
   },
   {
@@ -251,7 +259,7 @@
     ]
   },
   {
-    "slug": "/Jamstack/02/",
+    "slug": "/jamstack/02/",
     "title": "JamstackなWebサイトを構築してみた② Jamstackについて",
     "keywords": [
       "Jamstack",
@@ -314,7 +322,7 @@
     ]
   },
   {
-    "slug": "/Jamstack/01/",
+    "slug": "/jamstack/01/",
     "title": "JamstackなWebサイトを構築してみた①",
     "keywords": [
       "Jamstack",
