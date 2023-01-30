@@ -3,9 +3,8 @@ module.exports = {
     "stylelint-config-standard",
   ],
   "defaultSeverity": "warning",
-  "customSyntax": "postcss-scss",
   "ignoreFiles": [
-    "**/_reset.scss"
+    "src/css/*.css"
   ],
   "rules": {
     "at-rule-no-unknown": [true, {
