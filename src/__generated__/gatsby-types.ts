@@ -4078,12 +4078,8 @@ type TagsPageQuery = { readonly allMarkdownRemark: { readonly group: ReadonlyArr
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_1_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'siteUrl'>> }> };
-
 type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
-
-type Unnamed_2_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title'>> }> };
 
 type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 

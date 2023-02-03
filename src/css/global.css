@@ -39,8 +39,8 @@ body.dark {
   --bg-color: #15141a;
   --text-color: #fbfbfe;
   --link-color: #ddd;
-  --post-link-color: #dd4cdd;
-  --heading-bar-color: #dd4cdd;
+  --post-link-color: #cc3bcc;
+  --heading-bar-color: #cc3bcc;
 }
 
 body[data-lock="lock"] {
