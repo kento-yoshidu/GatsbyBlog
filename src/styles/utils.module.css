@@ -1,0 +1,12 @@
+/* 横並び */
+
+.side-by-side {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (width < 768px) {
+  .side-by-side {
+    flex-direction: column;
+  }
+}
