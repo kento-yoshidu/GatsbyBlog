@@ -2,8 +2,7 @@
   position: fixed;
   top: 30px;
   right: 30px;
-  display: flex;
-  justify-content: space-between;
+  composes: sideBySide from "./utils.module.css";
   align-items: center;
   padding: 0 20px;
   z-index: 9999;
@@ -14,5 +13,6 @@
     top: 10px;
     right: 10px;
     padding: 0 10px;
-  } 
+    flex-direction: row;
+  }
 }
