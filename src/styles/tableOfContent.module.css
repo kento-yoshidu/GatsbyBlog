@@ -1,12 +1,12 @@
 .table-of-content {
   width: 30%;
   margin-top: 80px;
-  margin-right: 50px;
+  margin-right: 40px;
 }
 
 .table-of-content ul {
   position: sticky;
-  top: 9vh;
+  top: 15vh;
   padding-left: 12px;
   list-style: none;
   margin-left: 2px;
