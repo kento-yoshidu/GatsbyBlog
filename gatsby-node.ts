@@ -107,7 +107,8 @@ const createPages: GatsbyNode["createPages"] = async ({ graphql, actions, report
     Array.from({ length: pageCount }).forEach((_, i) => {
       createPage({
         path: i === 0 ? "/page/1/" : `/page/${i + 1}/`,
-        component: path.resolve("./src/templates/pages.tsx"),
+        // component: path.resolve("./src/templates/pages.tsx"),
+        component: path.resolve("./src/templates/pages.jsx"),
         context: {
           postCount: postCount,
           pageCount: pageCount,
