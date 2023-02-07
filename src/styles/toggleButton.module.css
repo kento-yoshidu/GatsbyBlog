@@ -18,9 +18,7 @@
   color: yellow;
 }
 
-.moonIcon:hover,
-.sunIcon:hover
-{
+:is(.moonIcon, .sunIcon):hover {
   animation: 2.4s rotation infinite;
 }
 

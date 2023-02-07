@@ -41,14 +41,12 @@
   flex-wrap: wrap;
 }
 
-.internal-link a,
-.meta-link a {
+:is(.internal-link, .meta-link) a {
   margin-right: 25px;
   margin-bottom: 5px;
 }
 
-.internal-link svg,
-.external-link svg {
+:is(.internal-link, .external-link) svg {
   margin-right: 5px;
 }
 

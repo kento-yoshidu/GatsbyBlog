@@ -12,9 +12,7 @@
   text-decoration: underline;
 }
 
-.blog-post h1,
-.blog-post h2,
-.blog-post h3 {
+:is(.blog-post) h1, h2, h3 {
   padding-top: 10px;
   line-height: 1.5;
 }

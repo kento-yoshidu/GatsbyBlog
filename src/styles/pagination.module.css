@@ -34,8 +34,7 @@
   font-weight: 500;
 }
 
-.prev:hover,
-.next:hover {
+:is(.prev, .next):hover {
   background: var(--main-color);
   color: #fff;
 }
