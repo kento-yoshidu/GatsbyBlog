@@ -14,6 +14,8 @@
   </a>
 </p>
 
+[![build](https://github.com/kento-yoshidu/GatsbyBlog/actions/workflows/build.yml/badge.svg)](https://github.com/kento-yoshidu/GatsbyBlog/actions/workflows/build.yml)
+
 ## 🌐 WebSite
 
 [WebSite](https://blog.toriwatari.work/page/1/)
