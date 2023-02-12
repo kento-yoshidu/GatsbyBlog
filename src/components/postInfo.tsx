@@ -6,10 +6,6 @@ import * as Styles from "../styles/postInfo.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faClock, faUndo, faFolder, faTags, faCommentDots } from "@fortawesome/free-solid-svg-icons"
 
-import "@fortawesome/fontawesome-svg-core/styles.css"
-import { config } from "@fortawesome/fontawesome-svg-core"
-config.autoAddCss = false
-
 type Props = {
   title: string,
   seriesSlug: string,

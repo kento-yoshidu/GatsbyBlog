@@ -9,10 +9,6 @@ import * as Styles from "../styles/404.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUndo } from "@fortawesome/free-solid-svg-icons"
 
-import "@fortawesome/fontawesome-svg-core/styles.css"
-import { config } from "@fortawesome/fontawesome-svg-core"
-config.autoAddCss = false
-
 type Props = {
   location: {
     pathname: string

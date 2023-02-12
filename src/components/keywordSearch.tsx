@@ -6,10 +6,6 @@ import * as Styles from "../styles/search.module.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSearchPlus } from "@fortawesome/free-solid-svg-icons"
 
-import "@fortawesome/fontawesome-svg-core/styles.css"
-import { config } from "@fortawesome/fontawesome-svg-core"
-config.autoAddCss = false
-
 interface Edge {
   node: {
     slug: string;
