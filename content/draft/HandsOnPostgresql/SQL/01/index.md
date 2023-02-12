@@ -41,18 +41,18 @@ CREATE TABLE sample2 (tel CHAR(11)) INHERITS (sample1);
 
 SELECT句を使用した副問い合わせの場合、1列、結果は1件のみ。
 
-```dummy:title=console
+```
 postgres=# SELECT (SELECT * FROM sample);
 ERROR:  subquery must return only one column
 LINE 1: select (select * from sample);
 ```
 
-```dummy:title=console
+```
 postgres=# select (select id from sample);
 ERROR:  more than one row returned by a subquery used as an expression
 ```
 
-```dummy:title=console
+```
 postgres=# select (select id from sample where id = 1);
  id
 ----
@@ -61,20 +61,15 @@ postgres=# select (select id from sample where id = 1);
 ```
 
 
-```dummy:title=console
+```
 postgres=# insert into sample values (10);
 ERROR:  new row for relation "sample" violates check constraint "num_check"
 DETAIL:  Failing row contains (10).
 ```
 
-```dummy:title=console
+```
 postgres=# insert into sample values (9);
 INSERT 0 1
 ```
 
-
-
-
 https://zukucode.com/2017/09/sql-subquery-select.html
-
-

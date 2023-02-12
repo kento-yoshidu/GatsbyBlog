@@ -121,7 +121,7 @@ Server is running on localhost:4000
 
 左上のペインに以下の`hello`クエリを入力し、画面真ん中の三角ボタンをクリックします。
 
-```graphql:title="Playground"
+```graphql:title=Playground
   query {
     hello
   }
@@ -158,7 +158,7 @@ const resolvers = {
 ...
 ```
 
-```graphql:title="GraphQL Playground"
+```graphql:title=GraphQL Playground
   query {
     hello(name: "kento")
   }

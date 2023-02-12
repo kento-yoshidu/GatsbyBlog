@@ -8,14 +8,14 @@
 
 `DECLARE sample_cursor NO SCROLL CURSOR FOR SELECT* FROM sample;`とします。
 
-```dummy:title=console
+```
 postgres=*# DECLARE sample_cursor NO SCROLL CURSOR FOR SELECT * FROM sample;
 DECLARE CURSOR
 ```
 
 順方向への`FETCH`は問題なくできますね。
 
-```dummy:title=console
+```
 postgres=*# FETCH FROM sample_cursor; 
  id | name
 ----+------
@@ -25,7 +25,7 @@ postgres=*# FETCH FROM sample_cursor;
 
 `BACKWARD`オプションを付けるとエラーになることがわかります。
 
-```dummy:title=console
+```
 postgres=*# FETCH BACKWARD from sample_cursor;
 ERROR:  cursor can only scan forward
 HINT:  Declare it with SCROLL option to enable backward scan.
@@ -37,14 +37,14 @@ HINT:  Declare it with SCROLL option to enable backward scan.
 
 カーソルを維持できます。
 
-```dummy:title=console
+```
 postgres=*# DECLARE sample_cursor CURSOR WITH HOLD FOR SELECT * FROM sample;
 DECLARE CURSOR
 ```
 
 適当に`FETCH`でカーソルを移動させ、`COMMIT`でトランザクションを終了させます。
 
-```dummy:title=console
+```
 postgres=*# fetch from sample_cursor;
  id | name
 ----+------
@@ -65,7 +65,7 @@ COMMIT
 
 トランザクションを開始し、`FETCH`を実行すると、前回のカーソル位置が維持されていることがわかります。
 
-```dummy:title=console
+```
 postgres=# BEGIN;
 
 postgres=*# fetch from sample_cursor;
@@ -77,7 +77,7 @@ postgres=*# fetch from sample_cursor;
 
 さらに、`COMMIT`してトランザクションを終了させ、`pg_cursors`テーブルを確認してみましょう。
 
-```dummy:title=console
+```
 postgres=*# commit;
 COMMIT
 

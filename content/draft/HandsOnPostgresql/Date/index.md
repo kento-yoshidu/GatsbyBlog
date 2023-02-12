@@ -23,7 +23,7 @@ tags: ["PostgreSQL"]
 |current_Time|現在のトランザクションの開始時間|
 
 
-```dummy:title=console
+```
 postgres=# select now();
               now
 -------------------------------
@@ -31,7 +31,7 @@ postgres=# select now();
 (1 row)
 ```
 
-```dummy:title=console
+```
 postgres=# select statement_timestamp();
       statement_timestamp      
 -------------------------------
@@ -39,7 +39,7 @@ postgres=# select statement_timestamp();
 (1 row)
 ```
 
-```dummy:title=console
+```
 postgres=# select current_date;
  current_date 
 --------------
@@ -47,7 +47,7 @@ postgres=# select current_date;
 (1 row)
 ```
 
-```dummy
+```
 postgres=# select current_time;
     current_time    
 --------------------
@@ -64,7 +64,7 @@ postgres=# select current_time;
 
 `DATE`型であれば、`DATE '日付'`もしくは`'日付'::DATE`という風に指定します。
 
-```dummy:title=console
+```
 postgres=# SELECT age(DATE '20221003', DATE '20220101');
       age      
 ---------------
@@ -74,7 +74,7 @@ postgres=# SELECT age(DATE '20221003', DATE '20220101');
 
 `古い, 新しい`の順で実行すると、マイナスの値を得ることができます。
 
-```dummy:title=console
+```
 postgres=# SELECT age(DATE '20220101', DATE '20221003');
        age       
 -----------------
@@ -84,7 +84,7 @@ postgres=# SELECT age(DATE '20220101', DATE '20221003');
 
 ### TIMESTAMP型
 
-```dummy:title=console
+```
 postgres=# select age(now(), timestamp '20210101');
                  age
 -------------------------------------
@@ -99,7 +99,7 @@ postgres=# select age(now(), timestamp '20210101');
 
 `date_part('フィールド', interval 'インターバル値')`
 
-```dummy:title=console
+```
 postgres=# SELECT extract (day from interval '2 years 9 mons 2 days');
  date_part 
 -----------
@@ -126,7 +126,7 @@ postgres=# SELECT extract (year from interval '2 years 9 mons 2 days');
 
 `date_part`
 
-```dummy:title=console
+```
 postgres=# select date_part('day', interval '2 years 0 mons 2 days');
  date_part 
 -----------

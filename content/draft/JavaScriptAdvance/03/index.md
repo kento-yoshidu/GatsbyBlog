@@ -67,7 +67,7 @@ Node.jsを利用すれば、コンソールから`node`コマンドでのJavaScr
 
 続いて、コンソール（コマンドプロンプトなど）を立ち上げ、`node -v`と入力し実行します。`-v`オプションを渡すことでNode.jsのバージョンを確認することができます。
 
-```console:title=console
+```shell
 $ node -v
 v14.17.0
 ```
@@ -86,7 +86,7 @@ console.log('Hello World');
 
 コンソールで`script.js`を保存しているフォルダまで移動し、`node`コマンドで実行します。
 
-```console:title=console
+```
 $ node script.js 
 Hello World
 ```
@@ -99,7 +99,7 @@ Node.jsには**REPL**と呼ばれる実行モードが備わっており、JavaS
 
 コンソールで`node`とだけ打って実行してください。以下のようなコンソールに切り替わります。
 
-```console:title=console
+```bash:title=console
 $ node
 Welcome to Node.js v14.17.0.
 Type ".help" for more information.

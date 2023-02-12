@@ -73,7 +73,7 @@ fn main() {
 
 成功した場合には`Ok`、失敗した場合には`Err`を返すよう関数を定義します。
 
-```rs
+```rust
 // 除算が成功したらi32、0除算になり失敗したならStringを返す
 fn division(num: i32) -> Result<i32, String> {
     if num != 0 {
@@ -94,7 +94,7 @@ fn main() {
 
 列挙型なので、`match`式で`Ok`の場合と`Err`の場合をすくうことができます。
 
-```rs
+```rust
 fn main() {
     let result = division(0);
 
@@ -108,7 +108,7 @@ fn main() {
 
 `Err`が返ってきた場合に`panic!`を使うこともできます。でも、後で紹介する`unwrap`を使う方法もあります。
 
-```rs
+```rust
 fn main() {
     let result = devision(0);
 
@@ -122,7 +122,7 @@ fn main() {
 
 `match`式で`Ok`しか処理しなかった場合（その逆もしかり）、「`Err(_)`をカバーしていないよ」ということでエラーが発生します。
 
-```rs
+```rust
 fn main() {
     let result = division(1);
 
@@ -137,7 +137,7 @@ fn main() {
 
 `Ok`の場合だけ、またその逆の場合だけ処理したいなら、`if let`式を使用します。
 
-```rs
+```rust
 fn main() {
     let result = division(1);
 
@@ -156,7 +156,7 @@ fn main() {
 
 値が`Ok`の場合は`T`を返し（今回の例であれば商）、`Err`の場合はパニックを起こします。
 
-```rs
+```rust
 fn main() {
     let result = division(1);
 
@@ -174,7 +174,7 @@ fn main() {
 
 `expect`メソッドは`unwrap`メソッドに似ていて、`Result`型から`Ok`もしくは`Err`を取り出します。値が`Ok`の場合は`T`を返すのは同じですが、`Err`の場合は`expect`に渡した引数のメッセージとともにパニックを起こします。`unwrap()`＋任意のメッセージ、という感じでしょうか。
 
-```rs
+```rust
 fn main() {
     let result = division(1);
 
@@ -192,7 +192,7 @@ fn main() {
 
 `Ok`の場合は`T`、`Err`の場合は引数に渡した値を返します。
 
-```rs
+```rust
 fn main() {
     let result = division(1);
 
@@ -209,7 +209,7 @@ fn main() {
 
 `unwrap_or`に渡す引数の型は`Result`型の`T`型と同じでなければいけません（要出典）。
 
-```rs
+```rust
 fn main() {
     let result = devision(0);
 
@@ -230,7 +230,7 @@ fn main() {
 
 `Ok`の場合は引数に渡した`&str`とともにパニック、`Err`の場合はエラーメッセージ（今回の例なら`String`）が返り、パニックは起こりません。
 
-```rs
+```rust
 fn main() {
     let result = division(1);
 

@@ -21,7 +21,7 @@ PostgreSQLのインデックスは、
 
 `CREATE INDEX [インデックス名] ON [テーブル名] ([カラム名])`という形でインデックスを作成します。
 
-```dummy:title=console
+```
 postgres=# \d sample;
                        テーブル"public.sample"
   列  |        タイプ         | 照合順序 | Null 値を許容 | デフォルト
@@ -30,14 +30,14 @@ postgres=# \d sample;
  name | character varying(20) |          |               |
 ```
 
-```dummy:title=console
+```
 postgres=# CREATE INDEX sample_index ON sample (id);
 CREATE INDEX
 ```
 
 `\d テーブル名`でテーブル情報を確認してみます。
 
-```dummy:title=console
+```
 postgres=# \d sample;
                        テーブル"public.sample"
   列  |        タイプ         | 照合順序 | Null 値を許容 | デフォルト
@@ -50,7 +50,7 @@ postgres=# \d sample;
 
 なお、インデックス名は省略可能です。省略した場合はPostgreSQLが良い感じにインデックス名を付与してくれます。
 
-```dummy:title=console
+```
 postgres=# CREATE INDEX ON sample (id);
 CREATE INDEX
 ```

@@ -16,7 +16,7 @@ published: false
 
 `interval`で時間間隔を格納できる。
 
-```dummy:title=console
+```
 postgres=# SELECT now() - interval '3 month' as result;
             result
 -------------------------------
@@ -26,7 +26,7 @@ postgres=# SELECT now() - interval '3 month' as result;
 
 もしくはこんな書き方もできます。
 
-```dummy:title=console
+```
 postgres=# SELECT now() - '3 month'::interval as result;
             result
 ------------------------------

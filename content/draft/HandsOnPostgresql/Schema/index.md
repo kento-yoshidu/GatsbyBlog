@@ -23,7 +23,7 @@ published: false
 
 `current_schema()`で現在のスキーマを確認することができます。
 
-```dummy:title=console
+```
 postgres=# select current_schema();
  current_schema 
 ----------------
@@ -33,12 +33,12 @@ postgres=# select current_schema();
 
 テーブルはスキーマの中に作成します。
 
-```dummy:title=console
+```
 postgres=# create table sample_schema.sample (id INT);
 CREATE TABLE
 ```
 
-```dummy:title=console
+```
 postgres=# select * from sample_schema.sample;
  id  
 -----
@@ -46,7 +46,7 @@ postgres=# select * from sample_schema.sample;
 (1 row)
 ```
 
-```dummy:title=console
+```
 postgres=# select * from sample;
  id 
 ----

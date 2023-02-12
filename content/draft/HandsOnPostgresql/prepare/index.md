@@ -61,7 +61,7 @@ postgres=# EXECUTE prepare_state(3);
 
 もちろん、引数を複数とることもできます。\$1、\$2...と続きます。
 
-```dummy:title=console
+```
 postgres=# PREPARE prepare_state (INT, TEXT) AS
                   SELECT * FROM prepare
               WHERE id = $1 AND name = $2;
@@ -80,7 +80,7 @@ postgres=# EXECUTE prepare_state(2, 'hiroshi');
 
 ## `pg_prepared_statements`テーブル
 
-```dummy:title=console
+```
 postgres=# select * from pg_prepared_statements;
  name | statement | prepare_time | parameter_types | from_sql
 ------+-----------+--------------+-----------------+----------
