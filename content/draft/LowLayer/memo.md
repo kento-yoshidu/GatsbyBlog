@@ -7,7 +7,7 @@ void func(void) {
 }
 ```
 
-```assembly
+```
 00000000  55                push ebp
 00000001  89E5              mov ebp,esp
 00000003  83EC10            sub esp,byte +0x10

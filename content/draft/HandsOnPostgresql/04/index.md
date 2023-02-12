@@ -78,13 +78,13 @@ PostgreSQLのデフォルトのポート番号は`5432`であり、今回作成�
 
 ポート番号は`data`フォルダー直下の`postgresql.conf`に記載されています。`port`で検索すると、おそらく64行目あたりに以下の記述を見つけられます。
 
-```conf:title=postgresql.conf
+```
 #port = 5432				# (change requires restart)
 ```
 
 先頭の`#`によってコメントアウトされていますので、`#`は削除し、`5432`を`5433`などに書き換えましょう。
 
-```conf:title=postgresql.conf
+```
 port = 5433				# (change requires restart)
 ```
 
