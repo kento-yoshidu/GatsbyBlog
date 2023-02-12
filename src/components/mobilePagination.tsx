@@ -57,7 +57,6 @@ const MobilePagination: React.VFC<Props> = ({
       >
         <FontAwesomeIcon
           icon={faAngleDoubleLeft}
-          className={Styles.icon}
         />
       </Link>
 
@@ -69,7 +68,6 @@ const MobilePagination: React.VFC<Props> = ({
       >
         <FontAwesomeIcon
           icon={faAngleLeft}
-          className={Styles.icon}
         />
       </Link>
   }
@@ -94,7 +92,6 @@ const MobilePagination: React.VFC<Props> = ({
       >
         <FontAwesomeIcon
           icon={faAngleDoubleRight}
-          className={Styles.icon}
         />
       </Link>
 
@@ -106,7 +103,6 @@ const MobilePagination: React.VFC<Props> = ({
       >
         <FontAwesomeIcon
           icon={faAngleRight}
-          className={Styles.icon}
         />
       </Link>
   }

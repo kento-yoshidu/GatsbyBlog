@@ -9,7 +9,7 @@ tags: ["PostgreSQL"]
 
 ## DBクラスタの場所を知りたい
 
-```postgresql
+```
 # => SHOW data_directory
 
     data_directory
@@ -26,7 +26,7 @@ tags: ["PostgreSQL"]
 
 クラスターの制御情報を取得。
 
-```dummy:title=shell
+```
 # pg_controldata
 pg_control version number:            1201
 Catalog version number:               201909212
@@ -51,7 +51,7 @@ Latest checkpoint's full_page_writes: on
 ### \copyコマンド
 
 
-```dummy
+```
 postgres=# \copy sample to sample.txt;
 COPY 3
 
@@ -65,7 +65,7 @@ postgres=# \q
 
 `delimiter as '区切り文字'`で区切り文字を指定できます。
 
-```dummy
+```
 postgres=# \copy sample to sample.txt delimiter as ',';
 COPY 3
 
@@ -81,7 +81,7 @@ postgres=# \q
 
 `csv`とします。
 
-```dummy
+```
 postgres=# \copy sample to sample.csv csv header;
 COPY 3
 
@@ -95,7 +95,7 @@ postgres=# \q
 
 `header`を付ける。
 
-```dummy
+```
 postgres=# \copy sample to sample.csv csv header;
 COPY 3
 
