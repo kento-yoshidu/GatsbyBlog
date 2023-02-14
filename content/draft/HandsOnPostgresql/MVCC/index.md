@@ -29,7 +29,7 @@ VACUUMコマンドを実行することで、不要領域を回収し、PostgreS
 
 適当にテーブルを作成します。私はpostgresデータベース上でテーブルを作成しました。お好みでどうぞ。
 
-```postgresql
+```
 postgres=# CREATE TABLE TEST (id INT, name TEXT);
 ```
 
@@ -37,7 +37,7 @@ postgres=# CREATE TABLE TEST (id INT, name TEXT);
 
 PostgreSQLにログインし(psql -cでもいいですよ)、`SHOW data_directory`を実行します。
 
-```postgresql
+```
 postgres=# SHOW data_directory
 
     data_directory

@@ -16,7 +16,7 @@ keywords: ["PostgreSQL", "Database", "DB", "OSS-Silver"]
 
 こんなテーブルがあったとして、
 
-```dummy:title=console
+```
 postgres=# select * from sample2;
  name  | price | count 
 -------+-------+-------
@@ -30,7 +30,7 @@ postgres=# select * from sample2;
 
 `SELECT name, price * count as sales, price, count FROM sample`というコマンドでもOKですが、
 
-```dummy:title=console
+```
 postgres=# select name, price * count as sales, price, count from sample2;
  name  | sales | price | count 
 -------+-------+-------+-------
@@ -48,14 +48,14 @@ postgres=# select name, price * count as sales, price, count from sample2;
 
 `CREATE VIEW [ビュー名] AS 検索処理`でビューを作成します。
 
-```dummy:title=console
+```
 postgres=# CREATE VIEW sample_view AS SELECT * FROM sample;
 CREATE VIEW
 ```
 
 `pg_views`テーブルを参照することでビューを確認することができます。なお、`pg_views`テーブルにはクラスター作成時点から大量のレコードが存在しているので、`viewname`カラムで絞りましょう。
 
-```dummy:title=console
+```
 postgres=# SELECT * FROM pg_views WHERE viewname = 'sample_view';
 
  schemaname |  viewname   | viewowner |    definition     
@@ -65,7 +65,7 @@ postgres=# SELECT * FROM pg_views WHERE viewname = 'sample_view';
 (1 row)
 ```
 
-```dummy:title=console
+```
 postgres=# select * from sample_view;
  id 
 ----

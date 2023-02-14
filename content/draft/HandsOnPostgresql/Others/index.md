@@ -30,7 +30,7 @@ published: false
 
 例えば、全てののテーブルとビューの一覧は`information_schema.tables`ビューを参照することで確認できます。`SELECT table_name FROM information.schema.tables`とし、テーブル名一覧を取得してみます。
 
-```dummy
+```
 postgres=# SELECT table_name FROM information_schema.tables;
               table_name
 ---------------------------------------
@@ -63,7 +63,7 @@ postgres=# SELECT table_name FROM information_schema.tables;
 
 `LIKE`と`SIMILAR`演算子は文字列全体を対象に検索をかけます。つまり、`AAA`を**含む**パターンを検索したいなら、`%AAA%`とする必要があります。
 
-```dummy:title=console
+```
 postgres=# select * from sample where char like 'AAA';
  char      
 ------     
@@ -80,7 +80,7 @@ postgres=# select * from sample where char like '%AAA%';
 
 POSIX検索パターンなら`AAA`とすると2行ともにマッチします。
 
-```dummy:title=console
+```
 postgres=# select * From sample where char ~ 'AAA';
  char  
 -------

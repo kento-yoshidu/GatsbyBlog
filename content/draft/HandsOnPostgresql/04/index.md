@@ -15,7 +15,7 @@ PostgreSQLにおいて、複数のデータベースをまとめたものを**�
 
 参考 : [第18回　データベースクラスタ](https://oss-db.jp/dojo/dojo_18)
 
-```console
+```
 postgres=# show data_directory;
            data_directory
 -------------------------------------
@@ -134,5 +134,3 @@ $ pg_ctl stop -D ./data/
 ```
 
 後は`data`フォルダーを削除するだけです。簡単ですね。
-
-

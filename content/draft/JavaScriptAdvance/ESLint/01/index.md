@@ -87,7 +87,7 @@ $ touch .eslintrc.json
 
 次に、チェックしたいスクリプトを用意します。ルート直下に置いて構いません。中身は以下のように、1行だけ記述してみてください。
 
-```script.js
+```
 console.log("test");
 ```
 
@@ -159,5 +159,3 @@ Done in 0.53s.
 console.log('test')
 //=> warning
 ```
-
-

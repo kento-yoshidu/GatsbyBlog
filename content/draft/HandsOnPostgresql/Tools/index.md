@@ -26,13 +26,13 @@ published: false
 
 createdbコマンドを使って新しいデータベースを作成することができます。
 
-```dummy
+```
 # createdb -U myuser testdb
 ```
 
 特にメッセージは表示されません。`psql -l`でデータベース一覧を確認してみます。
 
-```dummy
+```
 # psql -l
                               List of databases
    Name    | Owner  | Encoding |  Collate   |   Ctype    | Access privileges 
@@ -48,7 +48,7 @@ createdbコマンドを使って新しいデータベースを作成すること
 
 `dropdb`コマンドでデータベースを削除することができます。書式は`dropdb [データベース名]`です。
 
-```dummy
+```
 # dropdb testdb
 ```
 
@@ -94,7 +94,7 @@ $ createuser -U postgres -P testuser
 
 特に何も表示されなければ作成に成功しています。さっそくログインしてみましょう。この時、`-d postgres`という風に、ログインするデータベースを指定してください。`-d`オプションを省略すると、ログインユーザーである`testuser`という名前のデータベースにログインしようとします。
 
-```dummy
+```
 $ psql -U testuser -d postgres
 ユーザ testuser のパスワード:
 psql (12.11)

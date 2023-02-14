@@ -57,7 +57,7 @@ drwxr-xr-x 1 c-yoshizuke 1049089     0  1月 27 09:50 pg_xact/
 
 `SHOW ALL`コマンドで設定内容を全て出力することができます。
 
-```dummy:title=console
+```
 postgres=# show all;
 
 name | setting |  description
@@ -70,7 +70,7 @@ archive_cleanup_command | | Sets the shell command that will be executed at ever
 
 さらに詳しい情報は、`pg_settings`ビューを参照することで得ることができます。
 
-```dummy:title=console
+```
 postgres=# SELECT name, setting, unit, context FROM pg_settings;
 ```
 ※見やすいように出力結果をテーブルにしました。

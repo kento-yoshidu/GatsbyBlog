@@ -82,7 +82,7 @@ $ npm install @apollo/client graphql
 
 ではReactプロジェクトの方に戻ります。プロジェクトルートに`.env`を作成します。そこに`REACT_APP_GITHUB_API=`と記入し、先ほどコピーしたアクセストークンを張りつけます（環境変数名は`REACT_APP`から始める必要があります）。
 
-```env:title=.env
+```shell:title=.env
 REACT_APP_GITHUB_API=ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
 

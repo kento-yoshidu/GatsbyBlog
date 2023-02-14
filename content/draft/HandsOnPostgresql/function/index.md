@@ -63,7 +63,7 @@ postgres=# \df
 - [OR REPLACE]オプションを付与し、既に同じ名前の関数があった場合に置き換えるように設定しています。
 - 関数名は`test_func`としました。また、引数のデータ型はTEXTとしました。
 
-```dummy:title=console
+```
 postgres=# CREATE OR REPLACE FUNCTION test_func2(TEXT)
       RETURNS SETOF VARCHAR AS
     $$

@@ -15,14 +15,14 @@ published: false
 
 `CREATE SEQUENCE [シーケンス名]`で作成できます。
 
-```dummy:title=console
+```
 postgres=# CREATE SEQUENCE sample_seq; 
 CREATE SEQUENCE
 ```
 
 `\ds`コマンドで簡易的にシーケンス一覧を確認することができます。
 
-```dummy:title=console
+```
 postgres=# \ds
                リレーション一覧
  スキーマ |    名前    |   タイプ   |  所有者
@@ -33,7 +33,7 @@ postgres=# \ds
 
 また、`pg_sequences`テーブルにはより詳細なシーケンスに関する情報が記載されています。
 
-```dummy:title=console
+```
 postgres=# SELECT * FROM pg_sequences;
  schemaname | sequencename | sequenceowner | data_type | start_value | min_value |      max_value      | increment_by | cycle | cache_size | last_value
 ------------+--------------+---------------+-----------+-------------+-----------+---------------------+--------------+-------+------------+------------
@@ -47,7 +47,7 @@ postgres=# SELECT * FROM pg_sequences;
 
 `nextval([シーメンス名])`とすることで、次のシーケンス値を取得することができます。`SELECT`文を使って表示させてみましょう。
 
-```dummy
+```
 postgres=# select nextval('sample_seq');
  nextval
 ---------
@@ -57,7 +57,7 @@ postgres=# select nextval('sample_seq');
 
 `last_value`カラムの値がNULLから`1`に変化していることがわかります。
 
-```dummy
+```
 postgres=# select * from pg_sequences;   
  schemaname | sequencename | sequenceowner | data_type | start_value | min_value |      max_value      | increment_by | cycle | cache_size | last_value
 ------------+--------------+---------------+-----------+-------------+-----------+---------------------+--------------+-------+------------+------------
@@ -67,7 +67,7 @@ postgres=# select * from pg_sequences;
 
 再度実行すれば`2`を取り出すことができます。
 
-```dummy:title=console
+```
 postgres=# select nextval('sample_seq');
  nextval
 ---------
@@ -77,7 +77,7 @@ postgres=# select nextval('sample_seq');
 
 試しにテーブルに挿入してみます。
 
-```dummy:title=console
+```
 postgres=# CREATE TABLE sample (id INT, name VARCHAR(10));
 CREATE TABLE
 
@@ -85,7 +85,7 @@ postgres=# INSERT INTO sample VALUES (nextval('sample_seq'), '高橋');
 INSERT 0 1 
 ```
 
-```dummy
+```
 postgres=# select * from sample;
  id | name
 ----+------
@@ -97,7 +97,7 @@ postgres=# select * from sample;
 
 ## `setval()`で任意の値をシーケンスにセットする
 
-```dummy:title=console
+```
 postgres=# select setval('sample_seq', 100); 
  setval
 --------
@@ -105,7 +105,7 @@ postgres=# select setval('sample_seq', 100);
 (1 行)
 ```
 
-```dummy
+```
 postgres=# select currval('sample_seq');
  currval
 ---------
@@ -113,7 +113,7 @@ postgres=# select currval('sample_seq');
 (1 行)
 ```
 
-```dummy
+```
 postgres=# insert into sample values (currval('sample_seq'), '荻野目');
 INSERT 0 1
 postgres=# select * from sample;
@@ -135,7 +135,7 @@ postgres=# select * from sample;
 
 上限値の3を超えた時にはエラーが発生します。
 
-```dummy:title=console
+```
 postgres=# insert into sample values (nextval('sample_seq'));
 ERROR:  nextval: reached maximum value of sequence "sample_seq" (3)
 ```
@@ -143,7 +143,7 @@ ERROR:  nextval: reached maximum value of sequence "sample_seq" (3)
 
 次に、初期値を設定してみます。
 
-```dummy:title=console
+```
 postgres=# create sequence sample_seq start 100;
 CREATE SEQUENCE
 postgres=# select nextval('sample_seq');
@@ -159,7 +159,7 @@ postgres=# select nextval('sample_seq');
 
 ## CYCLE
 
-```dummy:title=console
+```
 postgres=# insert into sample values(nextval('sample_seq'));
 INSERT 0 1
 postgres=# insert into sample values(nextval('sample_seq'));
@@ -183,9 +183,3 @@ postgres=# select * from sample;
 ## 参考
 
 https://qiita.com/jiyu58546526/items/3edf794cc29dc05f364e
-
-
-
-
-
-
