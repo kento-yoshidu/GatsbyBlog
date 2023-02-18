@@ -1,5 +1,4 @@
 .pagination {
-  composes: side-by-side from "./utils.module.css";
   position: relative;
   width: 50%;
   margin: 100px auto 80px;
@@ -25,6 +24,9 @@
 .prev,
 .next {
   display: inline-block;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
   padding: 5px 20px;
   border: 2px solid var(--main-color);
   border-radius: 50px;
