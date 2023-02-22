@@ -36,7 +36,7 @@
 }
 
 .dialog::backdrop {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: var(--backdrop-color);
 }
 
 .inner {
@@ -148,7 +148,8 @@
   }
 
   .dialog {
-    width: 95%;
+    width: 92%;
+    height: 70vh;
   }
 
   .result-area {
