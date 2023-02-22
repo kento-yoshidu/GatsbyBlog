@@ -4,6 +4,11 @@
   --main-color: #1675cc;
   --sub-color: #ff4c89;
   --body: clamp(0.95rem, 0.95rem + 0.2vw, 1.1rem);
+  --backdrop-color: rgba(0, 0, 0, 0.3);
+}
+
+::backdrop {
+  --backdrop-color: rgba(0, 0, 0, 0.3);
 }
 
 html {
@@ -27,8 +32,8 @@ body {
   --bg-color: #fff;
   --text-color: #444;
   --link-color: #444;
-  --post-link-color: #33d;
   --heading-bar-color: #33d;
+  --post-link-color: #33d;
 
   background-color: var(--bg-color);
   color: var(--text-color);
@@ -41,6 +46,10 @@ body.dark {
   --link-color: #ddd;
   --post-link-color: #cc3bcc;
   --heading-bar-color: #cc3bcc;
+}
+
+body.dark ::backdrop {
+  --backdrop-color: rgba(150, 150, 150, 0.4);
 }
 
 body[data-lock="lock"] {
