@@ -5,6 +5,11 @@ on:
     branches:
       - main
 
+env:
+  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+  SLACK_USERNAME: ✨ GatsbyBlog Bot
+  SLACK_CHANNEL: github-notifier
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -16,3 +21,18 @@ jobs:
 
       - run: yarn install --frozen-lockfile
       - run: yarn build
+
+      - name: Slack Notification on Success
+        if: ${{ success() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: ✅ Pull requests can be merged
+          SLACK_COLOR: good
+          SLACK_MESSAGE: 'Pull requests can be merged ✨: ${{ github.repository }}'
+
+      - name: Slack Notification on Failure
+        if: ${{ failure() }}
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_TITLE: ❌ Deploy Failure
+          SLACK_COLOR: danger
