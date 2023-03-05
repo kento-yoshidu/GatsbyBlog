@@ -9,6 +9,7 @@ env:
   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
   SLACK_USERNAME: ✨ GatsbyBlog Bot
   SLACK_CHANNEL: github-notifier
+  SLACK_ICON_EMOJI: 🎅
 
 jobs:
   build:
@@ -27,7 +28,7 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: ✅ Pull requests can be merged
-          SLACK_COLOR: good
+          SLACK_COLOR: ${{ job.status }}
           SLACK_MESSAGE: 'Pull requests can be merged ✨: ${{ github.repository }}'
 
       - name: Slack Notification on Failure
@@ -35,4 +36,4 @@ jobs:
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_TITLE: ❌ Deploy Failure
-          SLACK_COLOR: danger
+          SLACK_COLOR: ${{ job.status }}
