@@ -7,7 +7,7 @@ seriesSlug: "Diary"
 description: ""
 tags: ["日記", "放送大学"]
 keyword: ["日記", "放送大学"]
-published: true
+published: false
 ---
 
 # 放送大学に入学する
@@ -44,6 +44,8 @@ published: true
 
 では何を勉強するかと考えたとき、低レイヤーの技術、そしてコンピューターサイエンスだと考えました。高レイヤーも低レイヤーも学べればそれに越したことはありませんが、要領の悪い私には無理です。それなら、これからも変わらない基盤技術を勉強して土台を固めるべきでは？と考えました（ReactやRuby on Railsが20年後も通用するのか？）。
 
+もう、快適な職場で、自分にできる範囲の技術で日々の仕事をするのは嫌になりました。
+
 <aside>
 
 知識がないとはいいつつ、勉強したので応用情報技術者試験の内容くらいなら分かります。でもこれって情報工学を専攻している大学生なら学部2年で終わらせるような内容じゃ？と思うんですがどうなんですかね。それもわからない。
@@ -52,4 +54,12 @@ published: true
 
 </aside>
 
+## 申し込んだ科目
 
+### 情報学へのとびら（’２２）
+
+https://www.wakaba.ouj.ac.jp/kyoumu/syllabus/PU02060200211/initialize.do
+
+### ビートルズ de 英文法（’２１）
+
+https://www.wakaba.ouj.ac.jp/kyoumu/syllabus/PU02060200211/initialize.do
