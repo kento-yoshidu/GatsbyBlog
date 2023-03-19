@@ -34,6 +34,7 @@ Editors Draftはこちら。[CSS Nesting Module(Editor's Draft)](https://drafts.
 
 ### 英語で書かれている記事
 
+- 2023年2月 [Try out CSS Nesting today | WebKit](https://www.webkit.org/blog/13813/try-css-nesting-today-in-safari-technology-preview/)
 - 2023年1月　[🎨 W3C Decided On CSS Nested Syntax | by Tom Smykowski | Jan, 2023 | Medium](https://tomaszs2.medium.com/w3c-decided-on-css-nested-syntax-950bc13f3ce7)
 - 2022年12月　[Help choose the syntax for CSS Nesting | WebKit](https://webkit.org/blog/13607/help-choose-from-options-for-css-nesting-syntax/)
 
@@ -51,6 +52,8 @@ Google Chromeのバージョン109以降であれば、Experimental Web Platform
 
 [Can I use](https://caniuse.com/css-nesting)
 
+SafariのTechronogy Preview162でcss nestingが有効になったようです。
+
 ### Google Chrome
 
 [Chrome Platform Status](https://chromestatus.com/feature/5800613594529792)
@@ -58,6 +61,10 @@ Google Chromeのバージョン109以降であれば、Experimental Web Platform
 [Intent to Ship: CSS Nesting](https://groups.google.com/a/chromium.org/g/blink-dev/c/eFCrkiLynfU/m/JLsh3zQuAAAJ)
 
 👆 3月リリースのバージョン112から利用可能になる？
+
+### Safari
+
+[Release Notes for Safari Technology Preview 162 | WebKit](https://webkit.org/blog/13703/release-notes-for-safari-technology-preview-162/)
 
 ## シンタックス
 

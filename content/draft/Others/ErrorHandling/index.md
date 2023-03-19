@@ -1,16 +1,16 @@
 ---
-title: "RustのResult型何もわからん"
+title: "RustのResult型が分からない"
 postdate: "2023-01-20"
 update: "2023-01-20"
 seriesName: "その他"
 seriesSlug: "Others"
-description: "RustのOption型を学びました。"
+description: "RustのResult型を学びました。"
 tags: ["Rust"]
 keywords: ["Rust"]
 published: false
 ---
 
-# Result型のOption型
+# Result型
 
 最近、趣味でRustを勉強しています。エラーハンドリングがややこしくテンパってしまったので、Result型について学習メモを残しておきます。間違いが多くあるかもしれませんので参考程度にお願いします。
 
@@ -46,7 +46,7 @@ fn main() {
 本題の`Result`型です。Result型は列挙型の一種です。「エラーになるかも？」を扱える型で、`Ok(T)`と`Err(E)`という列挙子を持ちます。
 
 ```rust
-enum Result<T, E> {
+pub enum Result<T, E> {
     Ok(T),
     Err(E)
 }
@@ -57,7 +57,7 @@ enum Result<T, E> {
 例えば、与えられた数値で100を割る関数を定義します。引数に`0`が渡されるとpanicになります。
 
 ```rust
-fn division(num: i32) -> i32 {
+fn division(num: i8) -> i8 {
     100 / num
 }
 
@@ -73,9 +73,9 @@ fn main() {
 
 成功した場合には`Ok`、失敗した場合には`Err`を返すよう関数を定義します。
 
-```rust
-// 除算が成功したらi32、0除算になり失敗したならStringを返す
-fn division(num: i32) -> Result<i32, String> {
+```rs
+// 除算が成功したらi8、0除算になり失敗したならStringを返す
+fn division(num: i8) -> Result<i8, String> {
     if num != 0 {
         Ok(100 / num)
     } else {
@@ -94,7 +94,7 @@ fn main() {
 
 列挙型なので、`match`式で`Ok`の場合と`Err`の場合をすくうことができます。
 
-```rust
+```rs
 fn main() {
     let result = division(0);
 
@@ -108,7 +108,7 @@ fn main() {
 
 `Err`が返ってきた場合に`panic!`を使うこともできます。でも、後で紹介する`unwrap`を使う方法もあります。
 
-```rust
+```rs
 fn main() {
     let result = devision(0);
 
@@ -122,7 +122,7 @@ fn main() {
 
 `match`式で`Ok`しか処理しなかった場合（その逆もしかり）、「`Err(_)`をカバーしていないよ」ということでエラーが発生します。
 
-```rust
+```rs
 fn main() {
     let result = division(1);
 
@@ -137,7 +137,7 @@ fn main() {
 
 `Ok`の場合だけ、またその逆の場合だけ処理したいなら、`if let`式を使用します。
 
-```rust
+```rs
 fn main() {
     let result = division(1);
 
@@ -156,7 +156,7 @@ fn main() {
 
 値が`Ok`の場合は`T`を返し（今回の例であれば商）、`Err`の場合はパニックを起こします。
 
-```rust
+```rs
 fn main() {
     let result = division(1);
 
@@ -174,7 +174,7 @@ fn main() {
 
 `expect`メソッドは`unwrap`メソッドに似ていて、`Result`型から`Ok`もしくは`Err`を取り出します。値が`Ok`の場合は`T`を返すのは同じですが、`Err`の場合は`expect`に渡した引数のメッセージとともにパニックを起こします。`unwrap()`＋任意のメッセージ、という感じでしょうか。
 
-```rust
+```rs
 fn main() {
     let result = division(1);
 
@@ -192,7 +192,7 @@ fn main() {
 
 `Ok`の場合は`T`、`Err`の場合は引数に渡した値を返します。
 
-```rust
+```rs
 fn main() {
     let result = division(1);
 
@@ -209,7 +209,7 @@ fn main() {
 
 `unwrap_or`に渡す引数の型は`Result`型の`T`型と同じでなければいけません（要出典）。
 
-```rust
+```rs
 fn main() {
     let result = devision(0);
 
@@ -230,7 +230,7 @@ fn main() {
 
 `Ok`の場合は引数に渡した`&str`とともにパニック、`Err`の場合はエラーメッセージ（今回の例なら`String`）が返り、パニックは起こりません。
 
-```rust
+```rs
 fn main() {
     let result = division(1);
 
@@ -244,6 +244,16 @@ fn main() {
     //=> 0除算です。
 }
 ```
+
+## エラーの移譲
+
+エラーの扱いを、呼び出しもとに決めさせることができます。
+
+呼び出し時に`?`を付ける。`Result`を返す関数の中で使用する。
+
+> Ok(T)ならばTの値を返し、Err(E)ならばErr(E)をreturnしてくれるという機能です。
+
+https://zenn.dev/newgyu/articles/3b4677b4086768
 
 ## まとめ
 
@@ -268,3 +278,6 @@ https://blog.cardinaG1.red/2019/12/19/dont-fear-the-panic/
 
 [RustのOptionとResult - Qiita](https://qiita.com/take4s5i/items/c890fa66db3f71f41ce7)
 
+https://11takanori.medium.com/rust%E3%81%AE%E3%82%A8%E3%83%A9%E3%83%BC%E3%83%8F%E3%83%B3%E3%83%89%E3%83%AA%E3%83%B3%E3%82%B0-6660cd4d16c0
+
+https://qiita.com/fujitayy/items/cafe661415b6aa33d884
