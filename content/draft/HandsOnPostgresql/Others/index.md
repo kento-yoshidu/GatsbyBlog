@@ -65,24 +65,24 @@ postgres=# SELECT table_name FROM information_schema.tables;
 
 ```
 postgres=# select * from sample where char like 'AAA';
- char      
-------     
- AAA       
-(1 row)    
+ char
+------
+ AAA
+(1 row)
 
 postgres=# select * from sample where char like '%AAA%';
- char      
--------    
- .AAA.     
- AAA       
-(2 rows)   
+ char
+-------
+ .AAA.
+ AAA
+(2 rows)
 ```
 
 POSIX検索パターンなら`AAA`とすると2行ともにマッチします。
 
 ```
 postgres=# select * From sample where char ~ 'AAA';
- char  
+ char
 -------
  .AAA.
  AAA
@@ -92,6 +92,46 @@ postgres=# select * From sample where char ~ 'AAA';
 
 
 
+# fdw
+
+> FDWというのはForeign Data Wrapperのことで、PostgreSQLのテーブルじゃないものをテーブルとして扱える、PostgreSQLの素敵機能の一つ。
+
+https://qiita.com/nuko_yokohama/items/1044020576d3f5affb53
+
+## postgres_fdw
+
+|オプション|説明|
+|---|---|
+|fetch_size|1回のフェッチで取得する行数|
+|batch_Size|1回のINSERTで症乳する行数|
+
+https://qiita.com/mkyz08/items/c28fb1c28396cfc10e3a
+
+# file_fdw
+
+
+# レプリケーション
+
+## ホットスタンバイ
+
+スタンバイで読み取りが可能。データの書き換えは不可能。
+
+RTO = 目標復旧時間。
+
+## ストリーミングレプリケーション
+
+データベースクラスター全体がレプリケーションされるため、データベース単位、テーブル単位などはできない。
+
+## ロジカルレプリケーション
+
+データの変更情報をコピーする。
+
+## 設定
+
+synchronous_commit = レプリケーションが同期か非同期か
 
 
 
+## 遅延リカバリー
+
+スタンバイサーバーへのデータ反映を遅らせる。
