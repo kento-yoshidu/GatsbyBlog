@@ -3,7 +3,7 @@
 :root {
   --main-color: #1675cc;
   --sub-color: #ff4c89;
-  --body: clamp(0.95rem, 0.95rem + 0.2vw, 1.1rem);
+  --body: clamp(0.95rem, 0.95rem + 0.2vw, 1.04rem);
   --backdrop-color: rgba(0, 0, 0, 0.3);
 }
 
