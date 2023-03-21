@@ -90,12 +90,6 @@ const plugins: GatsbyConfig["plugins"] = [
   "gatsby-transformer-sharp",
   "gatsby-plugin-sharp",
   {
-    resolve: "gatsby-plugin-google-analytics",
-    options: {
-      trackingId: "UA-177277170-2"
-    }
-  },
-  {
     resolve: "gatsby-plugin-feed",
     options: {
       query: `
