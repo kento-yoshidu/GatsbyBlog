@@ -680,11 +680,11 @@ type Frontmatter = {
   readonly tags: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly keywords: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly published: Maybe<Scalars['Boolean']>;
+  readonly keyword: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
   readonly updatedate: Maybe<Scalars['Date']>;
   readonly categoryName: Maybe<Scalars['String']>;
   readonly categorySlug: Maybe<Scalars['String']>;
   readonly draft: Maybe<Scalars['Boolean']>;
-  readonly keyword: Maybe<ReadonlyArray<Maybe<Scalars['String']>>>;
 };
 
 
@@ -774,12 +774,6 @@ type SitePluginPluginOptions = {
   readonly stripMetadata: Maybe<Scalars['Boolean']>;
   readonly defaultQuality: Maybe<Scalars['Int']>;
   readonly failOnError: Maybe<Scalars['Boolean']>;
-  readonly trackingId: Maybe<Scalars['String']>;
-  readonly head: Maybe<Scalars['Boolean']>;
-  readonly anonymize: Maybe<Scalars['Boolean']>;
-  readonly respectDNT: Maybe<Scalars['Boolean']>;
-  readonly pageTransitionDelay: Maybe<Scalars['Int']>;
-  readonly enableWebVitalsTracking: Maybe<Scalars['Boolean']>;
   readonly query: Maybe<Scalars['String']>;
   readonly feeds: Maybe<ReadonlyArray<Maybe<SitePluginPluginOptionsFeeds>>>;
   readonly short_name: Maybe<Scalars['String']>;
@@ -1294,11 +1288,11 @@ type FrontmatterFilterInput = {
   readonly tags: Maybe<StringQueryOperatorInput>;
   readonly keywords: Maybe<StringQueryOperatorInput>;
   readonly published: Maybe<BooleanQueryOperatorInput>;
+  readonly keyword: Maybe<StringQueryOperatorInput>;
   readonly updatedate: Maybe<DateQueryOperatorInput>;
   readonly categoryName: Maybe<StringQueryOperatorInput>;
   readonly categorySlug: Maybe<StringQueryOperatorInput>;
   readonly draft: Maybe<BooleanQueryOperatorInput>;
-  readonly keyword: Maybe<StringQueryOperatorInput>;
 };
 
 type BooleanQueryOperatorInput = {
@@ -1534,11 +1528,11 @@ type FileFieldsEnum =
   | 'childrenMarkdownRemark.frontmatter.tags'
   | 'childrenMarkdownRemark.frontmatter.keywords'
   | 'childrenMarkdownRemark.frontmatter.published'
+  | 'childrenMarkdownRemark.frontmatter.keyword'
   | 'childrenMarkdownRemark.frontmatter.updatedate'
   | 'childrenMarkdownRemark.frontmatter.categoryName'
   | 'childrenMarkdownRemark.frontmatter.categorySlug'
   | 'childrenMarkdownRemark.frontmatter.draft'
-  | 'childrenMarkdownRemark.frontmatter.keyword'
   | 'childrenMarkdownRemark.fields.slug'
   | 'childrenMarkdownRemark.excerpt'
   | 'childrenMarkdownRemark.rawMarkdownBody'
@@ -1603,11 +1597,11 @@ type FileFieldsEnum =
   | 'childMarkdownRemark.frontmatter.tags'
   | 'childMarkdownRemark.frontmatter.keywords'
   | 'childMarkdownRemark.frontmatter.published'
+  | 'childMarkdownRemark.frontmatter.keyword'
   | 'childMarkdownRemark.frontmatter.updatedate'
   | 'childMarkdownRemark.frontmatter.categoryName'
   | 'childMarkdownRemark.frontmatter.categorySlug'
   | 'childMarkdownRemark.frontmatter.draft'
-  | 'childMarkdownRemark.frontmatter.keyword'
   | 'childMarkdownRemark.fields.slug'
   | 'childMarkdownRemark.excerpt'
   | 'childMarkdownRemark.rawMarkdownBody'
@@ -2668,12 +2662,6 @@ type SitePluginPluginOptionsFilterInput = {
   readonly stripMetadata: Maybe<BooleanQueryOperatorInput>;
   readonly defaultQuality: Maybe<IntQueryOperatorInput>;
   readonly failOnError: Maybe<BooleanQueryOperatorInput>;
-  readonly trackingId: Maybe<StringQueryOperatorInput>;
-  readonly head: Maybe<BooleanQueryOperatorInput>;
-  readonly anonymize: Maybe<BooleanQueryOperatorInput>;
-  readonly respectDNT: Maybe<BooleanQueryOperatorInput>;
-  readonly pageTransitionDelay: Maybe<IntQueryOperatorInput>;
-  readonly enableWebVitalsTracking: Maybe<BooleanQueryOperatorInput>;
   readonly query: Maybe<StringQueryOperatorInput>;
   readonly feeds: Maybe<SitePluginPluginOptionsFeedsFilterListInput>;
   readonly short_name: Maybe<StringQueryOperatorInput>;
@@ -2955,12 +2943,6 @@ type SitePageFieldsEnum =
   | 'pluginCreator.pluginOptions.stripMetadata'
   | 'pluginCreator.pluginOptions.defaultQuality'
   | 'pluginCreator.pluginOptions.failOnError'
-  | 'pluginCreator.pluginOptions.trackingId'
-  | 'pluginCreator.pluginOptions.head'
-  | 'pluginCreator.pluginOptions.anonymize'
-  | 'pluginCreator.pluginOptions.respectDNT'
-  | 'pluginCreator.pluginOptions.pageTransitionDelay'
-  | 'pluginCreator.pluginOptions.enableWebVitalsTracking'
   | 'pluginCreator.pluginOptions.query'
   | 'pluginCreator.pluginOptions.feeds'
   | 'pluginCreator.pluginOptions.feeds.query'
@@ -3185,11 +3167,11 @@ type MarkdownRemarkFieldsEnum =
   | 'frontmatter.tags'
   | 'frontmatter.keywords'
   | 'frontmatter.published'
+  | 'frontmatter.keyword'
   | 'frontmatter.updatedate'
   | 'frontmatter.categoryName'
   | 'frontmatter.categorySlug'
   | 'frontmatter.draft'
-  | 'frontmatter.keyword'
   | 'fields.slug'
   | 'excerpt'
   | 'rawMarkdownBody'
@@ -3689,12 +3671,6 @@ type SitePluginFieldsEnum =
   | 'pluginOptions.stripMetadata'
   | 'pluginOptions.defaultQuality'
   | 'pluginOptions.failOnError'
-  | 'pluginOptions.trackingId'
-  | 'pluginOptions.head'
-  | 'pluginOptions.anonymize'
-  | 'pluginOptions.respectDNT'
-  | 'pluginOptions.pageTransitionDelay'
-  | 'pluginOptions.enableWebVitalsTracking'
   | 'pluginOptions.query'
   | 'pluginOptions.feeds'
   | 'pluginOptions.feeds.query'
@@ -4089,11 +4065,6 @@ type TagQueryVariables = Exact<{
 
 type TagQuery = { readonly allMarkdownRemark: { readonly nodes: ReadonlyArray<{ readonly fields: Maybe<Pick<Fields, 'slug'>>, readonly frontmatter: Maybe<Pick<Frontmatter, 'postdate' | 'update' | 'seriesName' | 'seriesSlug' | 'title' | 'tags' | 'description'>> }> } };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
-
 type SeriesPagesQueryVariables = Exact<{
   series: Maybe<Scalars['String']>;
 }>;
@@ -4113,6 +4084,11 @@ type TagsPageQuery = { readonly allMarkdownRemark: { readonly group: ReadonlyArr
       Pick<MarkdownRemarkGroupConnection, 'fieldValue' | 'totalCount'>
       & { readonly nodes: ReadonlyArray<{ readonly frontmatter: Maybe<Pick<Frontmatter, 'tags'>> }> }
     )> } };
+
+type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
 
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
