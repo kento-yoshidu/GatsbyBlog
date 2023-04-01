@@ -16,8 +16,6 @@ published: false
 
 Gitは**3ウェイマージ**を行っている。
 
-
-
 https://qiita.com/te2u/items/c23f82ec84cf65564554
 
 https://note.crohaco.net/2016/git-conflict/
