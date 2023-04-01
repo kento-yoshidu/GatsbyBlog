@@ -7,7 +7,7 @@ seriesSlug: "GitAdvance"
 description: "git logの出力結果をカスタマイズするオプションを紹介します。"
 tags: ["git"]
 keywords: ["git", "git log"]
-published: true
+published: false
 ---
 
 # コンフリクト
@@ -15,8 +15,6 @@ published: true
 ## 3ウェイマージ
 
 Gitは**3ウェイマージ**を行っている。
-
-
 
 https://qiita.com/te2u/items/c23f82ec84cf65564554
 
