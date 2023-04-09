@@ -94,6 +94,7 @@ fn main() {
 
 ```rust
 fn main() {
+    // f64と推論される
     let f = 1.0;
     let f2 = 2.0;
 
