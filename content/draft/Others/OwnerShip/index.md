@@ -45,7 +45,7 @@ Rustはメモリーを以下のように大別し利用します。
 
 ## スタック領域
 
-繰り返しになりますが、スタック領域には**コンパイル時**に必要なメモリー領域のサイズが分かるデータを格納するのに対し、ヒープ領域には**実行時に**必要なサイズが分かる（裏を返せばコンパイル時にサイズが分からない）データを格納します。
+繰り返しになりますが、スタック領域には**コンパイル時**に必要なメモリー領域のサイズが分かるデータを格納するのに対し、ヒープ領域にはコンパイル時にデータサイズが分からない（言い方をかえれば**実行時に**必要なサイズが分かる）データを格納します。
 
 スタックは**積み上げ**などと訳されますが、以下の画像のような細い箱のイメージです。スタック領域にデータを保存するときは1番上に積み上げます。データを取り出す時は1番上から取り出します。
 
@@ -147,7 +147,7 @@ fn main() {
 
 ## ヒープ領域
 
-対するヒープ領域にはスタックの様な順番はありません。以下の図のように、その時々で空いている場所を探し保存し、使い終わったら解放するイメージです。
+対するヒープ領域にはスタックの様な順番はありません。以下の図のように、その時々で空いている場所を探しデータを保存し、使い終わったら解放するイメージです。
 
 ![](./images/image04.png)
 
@@ -198,7 +198,7 @@ Cのように、人間が明示的にメモリーを確保/解放するという
 
 ### Rust
 
-先述した通り、Rustは所有権という機構を使い、ヒープ領域にて必要なリソースの確保と解放を行います。プログラマーは所有権について意識する必要はありますが、ヒープ領域の確保と解放を明示的に行う必要はありません。
+先述した通り、Rustは所有権という機構を使い、メモリーリソースの確保と解放を行います。プログラマーは所有権について意識する必要はありますが、ヒープ領域の確保と解放を明示的に行う必要はありません。
 
 ## 所有権
 
@@ -236,7 +236,7 @@ fn main() {
 
 さて、この`s1`と`s2`という変数（String構造体）は、ヒープ領域にある実データそのものではなく、実データを指している参照のようなものであり、スタックに積まれています。これも検証して図解してみます。
 
-まずは、以下のようにして`s1`と`s2`のアドレスを確認します。
+まずは、以下のようにして`s1`と`s2`のスタック上のアドレスを確認します。
 
 ```rust
 fn main() {
@@ -299,7 +299,7 @@ fn main() {
     println!("s1の実データのデータ長 {}", s1.len());
     //=> s1の実データのデータ長 28
 
-    println!("s2の実データのデータ長{}", &s2.len());
+    println!("s2の実データのデータ長{}", s2.len());
     //=> s2の実データのデータ長10
 }
 ```
@@ -330,71 +330,152 @@ fn main() {
 
 文字列のバイト数を増やしたりして何度か試しましたが、いずれも`len()`と`capacity()`の値は同じでした。`String`は後から変更可能なので、少し大きめに`capacity()`を持っておくのかも？と素人的に考えていましたが、そうでもないようです。
 
+というわけで、String型は以下のようなデータ構造になっていると思われます。
 
+画像を挿入
 
+## 所有権は移動する
 
+記事の冒頭で「所有者はある一時点において必ず一人（つまり一つの変数）であり」と書きました。ここまでの知識を元に整理すると、「ある値が存在して、それに対応するたった一人の所有者が存在する。その所有者がスコープを抜けるなどしたら値も破棄される。値の破棄し忘れも起きないし、所有者が一人であるためメモリーの二重開放も起きない」という風に考えられ、所有者と値は一蓮托生の運命共同体のように捉えることができます。
 
+しかし、この所有権というものは**他の変数に移動する**ことがあります。この所有権の移動を**move**と呼ぶことにします。
 
-
-
-
-### 文字列スライス型
-
-文字列スライス型も文字列を表現するデータ型です。`&str`と表記されることもありますが、当記事では`&str`と呼ぶことにします。`&str`はダブルクオートで文字を囲うだけで表現することができます。
-
-```rust
-fn main() {
-    let str = "Hello";
-    let str2 = "Hello World";
-}
-```
-
-「String型と何が違うねん」という所ですが、文字列スライスは実データ（つまり、上記例でいう所の`Hello`と`Hello World`）を**静的領域**に格納します。そしてその先頭アドレスを指し示す参照8バイト、文字列のバイト数を示す8バイトがスタックに積まれることになります。
+moveはいくつかの場面で起こりますが、以下のようにString型の変数を他の変数に束縛する状況を考えてみます。
 
 ```rust
 fn main() {
-    let str = "Hello";
-    let str2 = "Hello World";
+    let s1 = String::from("Hello Rust");
 
-    println!("strのスタックアドレス {:p}", &str);
-    println!("str2のスタックアドレス {:p}", &str2);
-    //=> strのスタックアドレス 0x6d4cbcf6f8
-    //=> str2のスタックアドレス 0x6d4cbcf708
-    // 0x708 - 0x6f8 = 10進数で16
+    // moveが起きる
+    let s2 = s1;
 }
 ```
 
-`as_ptr()`で静的領域の先頭アドレスを得ることができます。また、`len()`でバイト数を得ることができます。
+所有権の移動、とは文字通りの「移動」であり、コピーされるわけではありません。上記コードはむろん問題なくコンパイルが通ります。ここで、所有権を失った`s1`にアクセスしようとするとコンパイルが失敗します。
 
 ```rust
 fn main() {
+    let s1 = String::from("Hello Rust");
 
-    let str = "Hello";
-    let str2 = "Hello World";
+    // moveが起きる
+    let s2 = s1;
 
-    println!("4: str2の静的領域の先頭アドレス {:p}", str2.as_ptr());
-    println!("4: str2の静的領域のバイト数 {}", str2.len());
-    //=> strの静的領域の先頭アドレス 0x7ff634dc3548
-    //=> strの静的領域のバイト数 5
-
-
-    println!("4: str3の静的領域の先頭アドレス {:p}", str3.as_ptr());
-    println!("4: str3の静的領域のバイト数 {}", str3.len());
-    //=> str2の静的領域の先頭アドレス 0x7ff634dc34b0
-    //=> str2の静的領域のバイト数 11
+    println!("🦀❓ s1の値を出力できる?{}", s1);
 }
 ```
 
-Rustにおいて文字はUTF-8で扱います。`Hello`でしたら1文字1バイトですから、`len`は`5`が出力されます。日本語でしたら1文字3バイトですから、`こんにちは`であれば`len`は`15`が出力されます。
+コンパイルエラーが起こると、エラーメッセージが出力されます。しかし、Rustのエラーメッセージは感動するほど丁寧です。この丁寧さがなければ、私はとっくにRustを諦めていました。
+
+```rust
+    //エラーメッセージ
+    error[E0382]: borrow of moved value: `s1`
+    --> src/main.rs:7:34
+    |
+    2 |     let s1 = String::from("Hello Rust");
+    |         -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait
+    ...
+    5 |     let s2 = s1;
+    |              -- value moved here
+    6 |
+    7 |     println!("🦀❓ s1の値を出力できる?{}", s1);
+    |                                            ^^ value borrowed here after move
+    |
+  = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
+    help: consider cloning the value if the performance cost is acceptable
+    |
+    5 |     let s2 = s1.clone();
+    |                ++++++++
+
+    For more information about this error, try `rustc --explain E0382`.
+```
+
+`borrow of moved values: s1`という文言がありますが、「`s1`でmoveが起こったからborrow（借用）できないよ」という意味です。borrowという言葉は難しいですが、「所有権を失った変数にはアクセスできない」と捉えることにします。
+
+今は`println!()`に`s1`を渡した所為でエラーが起きていますが、例えば他の変数に束縛するなどでも同様のエラーが発生します。所有権を失った後`s1`にはアクセスできない、と考えることができます。
 
 ```rust
 fn main() {
-    println!("5: こんにちはの静的領域のバイト数 {}", "こんにちは".len());
-    //=> 5: こんにちはの静的領域のバイト数 15
+    let s1 = String::from("Hello Rust");
+
+    // moveが起きる
+    let s2 = s1;
+    // これ以降、s1にはアクセスできない
+
+    let s3 = s1;
+    // 同様のエラー
 }
 ```
 
-## 所有権の移動
+さて、`Hello Rust`という実体の所有権は`s2`に移っています。ですので`s2`には問題なくアクセスできます。
+
+```rust
+fn main() {
+    let s1 = String::from("Hello Rust");
+
+    // moveが起きる
+    let s2 = s1;
+
+    println!("s2の値を出力できる {}", s2);
+}
+```
+
+このmoveの動作をより理解するため、メモリーアドレスを出力しながら再度動作確認してみます。`s1`に値を束縛した後、`s1.as_ptr`でヒープ領域の`Hello Rust`が保存されているアドレスを出力します。`s2`に所有権が移った後、`s2.as_ptr()`という風に再度実体のアドレスを出力してみます。ともに同じアドレスを吐き出すはずです。
+
+```rust
+fn main() {
+    let s1 = String::from("Hello Rust");
+
+    println!("s1のas_ptrの値 {:p}", s1.as_ptr());
+    //=> s1のas_ptrの値 0x7fff37d9be10
+
+    let s2 = s1;
+
+    println!("s2のas_ptrの値 {:p}", s2.as_ptr());
+    //=> s2のas_ptrの値 0x7fff37d9be10
+    // s1と同じ
+}
+```
+
+これは凡そ、以下のようにイメージできます。
+
+![](./images/image08.png)
+
+そして、`s2`がスコープから抜ける時、所有者が責任を持って`Hello Rust`を破棄します。
+
+---
+
+余談ですが、みんな大好きJavaScriptとRustで動作を比べてみたいと思います。
+
+```js
+const obj = {
+  id: 1,
+  name: "js"
+};
+
+const obj2 = obj;
+
+console.log(obj);
+//=> { id: 1, name: 'js' }
+
+console.log(obj2);
+//=> { id: 1, name: 'js' }
+```
+
+上記のRustのコード例と大体同じようなことをしていますが、`obj`も`obj2`もアクセスできますね。つまり、同じオブジェクトを2人が同時に指しているということです。Rust脳🧠で考えると「誰が片づけるの？」となってしまいますが、片づけるのはJavaScriptのGCです（少し上で触れましたね）。
+
+代入、束縛を行う`=`という演算子はとても単純なように見えますが、メモリーレベルまで考えると言語によって結構違いがあることがわかります。
+
+### Copyトレイト
+
+いわゆるスカラー型は、**Copyトレイト**が実装されているため、moveは起こらずデータのコピーが行われます。`i32`を例に挙げて考えると、は先述したとおりスタックに積まれますので以下のようにイメージできます。
+
+<aside>
+
+なお、スタックに積まれるデータにも所有者は設定されます。ただ、スタックのデータ操作は機械的に行われますから、私たち人間レベルからすれば所有権という仕組みを意識することはありません。
+
+</aside>
+
+### copy()
 
 この時、値`kento`の所有権は`func()`の変数`str`に移動します。
 
@@ -682,6 +763,120 @@ fn main() {
 }
 ```
 
+## 続く？
+
+所有権について勉強した内容をざっと書いてみましたが、やはりまだ分かっていない所があり、用語が正確でなかったりぼやかしてたり、推察を元に書いている部分があります。
+
+もうちょい書きたいこともあったのですが、もう少し勉強した後に続きとして記事にするかもしれないし、この記事を大幅に書き直すかもしれません。🦀
+
+## 参考
+
+[所有権とは？ - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch04-01-what-is-ownership.html)
+
+[Rust は何を解決しようとしたのか；メモリとリソースと所有権](https://zenn.dev/karno/articles/630a64fbc9c65e29b566)
+
+[わかる！？Rustの所有権システム](https://zenn.dev/j5ik2o/articles/918c54411d5a61)
+
+[「Rustは安全でも難しい」といわれる理由――メモリ安全を実現する「所有権」の仕組み：基本からしっかり学ぶRust入門（5） - ＠IT](https://atmarkit.itmedia.co.jp/ait/articles/2111/25/news008.html)
+
+[Rustのメモリ管理機能とその特徴 | 己の不学を恥じる](https://garasubo.github.io/hexo/2021/11/07/rust-memory.html)
+
+[Memory management - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
+
+[ヒープ割り当て | Writing an OS in Rust](https://os.phil-opp.com/ja/heap-allocation/)
+
+https://engineering.mercari.com/blog/entry/20220128-3a0922eaa4/
+
+[Rust のメモリ管理 | OKAZAKI Shogo&#x27;s Website](https://www.zakioka.net/blog/memory-management-for-rust)
+
+https://www.zakioka.net/memo/rust/type
+
+https://marycore.jp/coding/dangling-pointer/
+
+[スタックとヒープを知る](https://scrapbox.io/mrsekut-p/%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%A8%E3%83%92%E3%83%BC%E3%83%97%E3%82%92%E7%9F%A5%E3%82%8B)
+
+https://keens.github.io/blog/2017/04/30/memoritosutakkutohi_puto/
+
+https://blog.naoty.dev/423/
+
+https://doc.rust-lang.org/std/iter/index.html#for-loops-and-intoiterator
+
+https://igaguri.hatenablog.com/entry/2019/08/17/184205
+
+<!--
+つまり所有権という仕組みは、メモリーの中でも特に**ヒープ領域**を管理する時に活躍するものだと言えます。
+
+## 文字列スライスと文字列
+
+～これらは全てスタック領域に積まれ、その変数のスコープが終わるとスタックからポップされます。しかし、先述した通り、ヒープ領域にあるデータは「順番」と言った考え方はありませんから、何らかの方法でメモリーの確保と解放を表現する必要があります。
+
+文字列リテラルは**コンパイル時に中身（そしてサイズ）が判明している**ため、コンパイル後にはバイナリーファイルに直接記述される。
+
+これは、例えばJavaScriptにおいても同じことが言えます。いわゆるプリミティブ型データと言われる数値型や文字列型はスタックで管理され、オブジェクトの実体はヒープ領域に保存されると思われます。
+
+対してString型はコンパイル時に不明な文字列をヒープ領域を使って表現します。
+-->
+
+<!--
+### 文字列スライス型
+
+文字列スライス型も文字列を表現するデータ型です。`&str`と表記されることもありますが、当記事では`&str`と呼ぶことにします。`&str`はダブルクオートで文字を囲うだけで表現することができます。
+
+```rust
+fn main() {
+    let str = "Hello";
+    let str2 = "Hello World";
+}
+```
+
+「String型と何が違うねん」という所ですが、文字列スライスは実データ（つまり、上記例でいう所の`Hello`と`Hello World`）を**静的領域**に格納します。そしてその先頭アドレスを指し示す参照8バイト、文字列のバイト数を示す8バイトがスタックに積まれることになります。
+
+```rust
+fn main() {
+    let str = "Hello";
+    let str2 = "Hello World";
+
+    println!("strのスタックアドレス {:p}", &str);
+    println!("str2のスタックアドレス {:p}", &str2);
+    //=> strのスタックアドレス 0x6d4cbcf6f8
+    //=> str2のスタックアドレス 0x6d4cbcf708
+    // 0x708 - 0x6f8 = 10進数で16
+}
+```
+
+`as_ptr()`で静的領域の先頭アドレスを得ることができます。また、`len()`でバイト数を得ることができます。
+
+```rust
+fn main() {
+
+    let str = "Hello";
+    let str2 = "Hello World";
+
+    println!("4: str2の静的領域の先頭アドレス {:p}", str2.as_ptr());
+    println!("4: str2の静的領域のバイト数 {}", str2.len());
+    //=> strの静的領域の先頭アドレス 0x7ff634dc3548
+    //=> strの静的領域のバイト数 5
+
+
+    println!("4: str3の静的領域の先頭アドレス {:p}", str3.as_ptr());
+    println!("4: str3の静的領域のバイト数 {}", str3.len());
+    //=> str2の静的領域の先頭アドレス 0x7ff634dc34b0
+    //=> str2の静的領域のバイト数 11
+}
+```
+
+Rustにおいて文字はUTF-8で扱います。`Hello`でしたら1文字1バイトですから、`len`は`5`が出力されます。日本語でしたら1文字3バイトですから、`こんにちは`であれば`len`は`15`が出力されます。
+
+```rust
+fn main() {
+    println!("5: こんにちはの静的領域のバイト数 {}", "こんにちは".len());
+    //=> 5: こんにちはの静的領域のバイト数 15
+}
+```
+-->
+
+
+<!--
 ## その他
 
 ここからは復習の意味もこめて、様々な場面での所有権について考えたいと思います。私が実際にはまった場面が多いです。
@@ -731,56 +926,4 @@ fn main() {
 }
 ```
 
-## 続く？
-
-所有権について勉強した内容をざっと書いてみましたが、やはりまだ分かっていない所があり、用語が正確でなかったりぼやかしてたり、逆に推察を元に書いている部分があります。
-
-もうちょい書きたいこともあったのですが、もう少し勉強した後に続きとして記事にするかもしれないし、この記事を大幅に書き直すかもしれません。
-
-## 参考
-
-[所有権とは？ - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch04-01-what-is-ownership.html)
-
-[Rust は何を解決しようとしたのか；メモリとリソースと所有権](https://zenn.dev/karno/articles/630a64fbc9c65e29b566)
-
-[わかる！？Rustの所有権システム](https://zenn.dev/j5ik2o/articles/918c54411d5a61)
-
-[「Rustは安全でも難しい」といわれる理由――メモリ安全を実現する「所有権」の仕組み：基本からしっかり学ぶRust入門（5） - ＠IT](https://atmarkit.itmedia.co.jp/ait/articles/2111/25/news008.html)
-
-[Rustのメモリ管理機能とその特徴 | 己の不学を恥じる](https://garasubo.github.io/hexo/2021/11/07/rust-memory.html)
-
-[Memory management - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management)
-
-[ヒープ割り当て | Writing an OS in Rust](https://os.phil-opp.com/ja/heap-allocation/)
-
-https://engineering.mercari.com/blog/entry/20220128-3a0922eaa4/
-
-[Rust のメモリ管理 | OKAZAKI Shogo&#x27;s Website](https://www.zakioka.net/blog/memory-management-for-rust)
-
-https://www.zakioka.net/memo/rust/type
-
-https://marycore.jp/coding/dangling-pointer/
-
-[スタックとヒープを知る](https://scrapbox.io/mrsekut-p/%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%A8%E3%83%92%E3%83%BC%E3%83%97%E3%82%92%E7%9F%A5%E3%82%8B)
-
-https://keens.github.io/blog/2017/04/30/memoritosutakkutohi_puto/
-
-https://blog.naoty.dev/423/
-
-https://doc.rust-lang.org/std/iter/index.html#for-loops-and-intoiterator
-
-https://igaguri.hatenablog.com/entry/2019/08/17/184205
-
-<!--
-つまり所有権という仕組みは、メモリーの中でも特に**ヒープ領域**を管理する時に活躍するものだと言えます。
-
-## 文字列スライスと文字列
-
-～これらは全てスタック領域に積まれ、その変数のスコープが終わるとスタックからポップされます。しかし、先述した通り、ヒープ領域にあるデータは「順番」と言った考え方はありませんから、何らかの方法でメモリーの確保と解放を表現する必要があります。
-
-文字列リテラルは**コンパイル時に中身（そしてサイズ）が判明している**ため、コンパイル後にはバイナリーファイルに直接記述される。
-
-これは、例えばJavaScriptにおいても同じことが言えます。いわゆるプリミティブ型データと言われる数値型や文字列型はスタックで管理され、オブジェクトの実体はヒープ領域に保存されると思われます。
-
-対してString型はコンパイル時に不明な文字列をヒープ領域を使って表現します。
 -->
