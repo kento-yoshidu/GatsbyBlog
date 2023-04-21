@@ -16,7 +16,7 @@ published: false
 
 ## リポジトリーを作成する
 
-空の`text.txt`を作成します。そして`echo -n "Hello World!" > text.txt`を実行し、`git add text.txt`でステージングに上げます。この時、blobオブジェクト`c57eff~`が作成されます。
+新しくリポジトリーを作成しましょう。ルートディレクトリーに空の`text.txt`を作成します。そして`echo -n "Hello World!" > text.txt`を実行し、`git add text.txt`でステージングに上げます。この時、blobオブジェクト`c57eff~`が作成されます。
 
 ```bash
 $ find .git/objects/ -type f
@@ -49,8 +49,8 @@ $ git commit -m "first commit"
 ```bash
 $ find .git/objects/ -type f
 .git/objects/3f/8e66262c7fdcf2537e1adbe0d6d8d9015dcc4c # new
-.git/objects/74/7ebf7e12b73a8e2c9a6abed35a91b8287de16e # new
 .git/objects/c5/7eff55ebc0c54973903af5f72bac72762cf4f4
+.git/objects/fb/8ea63666bdd369989ebbc3c4d87fbe2d695b2d # new
 ```
 
 新しいGitオブジェクトが2つ出来ていることがわかります。
@@ -61,18 +61,21 @@ $ find .git/objects/ -type f
 $ git cat-file -t 3f8e66
 tree
 
-$ git cat-file -t 747ebf
-commit
-
 $ git cat-file -t c57eff
 blob
+
+$ git cat-file -t fb8ea6
+commit
+
 ```
 
 `c57eff~`はお馴染みのblobオブジェクトですね。新しく出来た`3f8e66~`は**treeオブジェクト**、`747ebf~`は**commitオブジェクト**であると示されています。この2つのオブジェクトが何なのかをこれから説明していきます。
 
+なお、treeオブジェクトである`3f8e66`は皆さんの環境でも同じだと思いますが、commitオブジェクトは違うハッシュIDになっているはずです（もっと言うと、再度実行しても違うハッシュIDになる）。その理由は後々判明します。
+
 ## treeオブジェクト
 
-treeオブジェクトは、ある種フォルダーを表す役割を持つものです。blobオブジェクトはファイルの内容でしたが、treeオブジェクトはフォルダーです。対比すると覚えやすいですね。
+treeオブジェクトは、ある種**フォルダー**を表す役割を持つものです。blobオブジェクトはファイルの内容でしたが、treeオブジェクトはフォルダーです。対比すると覚えやすいですね。
 
 さっそく`git cat-file -p`でtreeオブジェクトを解析してみましょう。
 
@@ -81,7 +84,7 @@ $ git cat-file -p 3f8e66
 100644 blob c57eff55ebc0c54973903af5f72bac72762cf4f4    text.txt
 ```
 
-すると、出力されたのはblobオブジェクトです。つまり、あるコミット時点で、あるフォルダーにどのようなファイルが存在していたかを保存しているのです。
+すると、出力されたのはblobオブジェクトです。あるフォルダーの中に、どのようなファイルが存在していたかを保存しているのです。
 
 ![](./images/image01.png)
 
@@ -97,6 +100,34 @@ $ git cat-file tree 3f8e66 | hexdump -C
 ```
 
 1行目を見ると`100644 text.txt`とあり、ファイルの種類やパーミッション、ファイル名を保存していることが見て取れます。さらに次の行では`c5e7ff~`があり、ファイルに対応するblobオブジェクトIDも記述されていることが分かります。
+
+ここまででtreeオブジェクトがファイル名、ファイルの中身（blobオブジェクト）を内包していることがわかりました。
+
+## commitオブジェクト
+
+では続いて、commitオブジェクトを確認します。先ほどと同じく`git cat-file -p [commitのハッシュID]`とします。
+
+```bash
+$ git cat-file -p [commitのハッシュID]
+tree 3f8e66262c7fdcf2537e1adbe0d6d8d9015dcc4c
+author xxx yyy <xxxyyy@exmaple.com> 1682044540 +0900
+committer xxx yyy <xxxyyy@example.com> 1682044540 +0900
+
+first commit
+```
+
+出力結果にtreeという項目があり、treeオブジェクトである`3f8e66`を指していますね。
+
+つまり、commitオブジェクトはtreeオブジェクトを指していて、treeオブジェクトはblobオブジェクトを指しているということです。commit、tree、blobが連結していて、commitオブジェクトを見れば芋づる式にフォルダー構成が分かり、ファイルの中身も再現できる、と言えそうです。
+
+---
+
+さて、ざっとtreeオブジェクトとcommitオブジェクトについて確認しました、、、が、こんな簡単な説明ではよくわからなかったと思います。ここからさらにコミットを重ね、挙動を確認していきます。
+
+## サブフォルダーを作成してみる
+
+
+どこかで一度は耳にしたセリフかもしれませんが、「Gitのコミットは差分ではなくスナップショットである」というのが理解できると思います。
 
 もう一つファイルを作成してコミットしてみましょう。`text2.txt`を作成し、`echo -n "I love Git." > text2.txt`で内容を記述し、commitします。
 
@@ -142,14 +173,17 @@ $ git cat-file -p dc5efa
 
 これでtreeオブジェクトがフォルダーの役割を持っている、というのはおわかりいただけたと思います。
 
-## commitオブジェクト
+さぁこれで各オブジェクトがどんな役割を持っているかが段々分かってきました。
 
-> このように最新のコミットは、ひとつ前の親コミットを参照し、そのコミットはまたひとつ前の親コミットを参照し、と言った具合に参照の列を作っています。
-
-
-
+|オブジェクト|役割|
+|---|---|
+|blob|ファイルの中身を表す|
+|tree|フォルダーの中身を表す（blobオブジェクトを内包する）|
+|commit|コミットの情報を表す（treeオブジェクトを内包する）|
 
 ## 参考
+
+[Gitのオブジェクトの中身](https://zenn.dev/kaityo256/articles/objects_of_git)
 
 https://koseki.hatenablog.com/entry/2014/04/22/inside-git-1
 
