@@ -1,14 +1,7 @@
 .blog-post {
-  width: 50%;
-  max-width: 780px;
+  width: max(52%, 324px);
   margin-left: 13vw;
   margin-right: 5vw;
-}
-
-@media (width < 768px) {
-  .blog-post {
-    width: 88%;
-  }
 }
 
 .blog-post a {
