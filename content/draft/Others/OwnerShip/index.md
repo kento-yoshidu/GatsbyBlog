@@ -24,7 +24,7 @@ fn main() {
 // 所有者であるstrがスコープを抜けることで、メモリーの「Hello Rust」が破棄される
 ```
 
-この所有権についてざっと調べてみましたので記事にします。所有権とは直接関係ない所へ話が逸れている箇所が点在しています。また、初学者の学習メモで微妙に分かっていない部分もありますがその辺は悪しからず。
+この所有権についてざっと調べてみましたので記事にします。所有権とは直接関係ない所へ話が逸れている箇所が点在しています。また、初学者の学習メモで微妙に分かっていない部分もありますがその辺は悪しからず 🦀💦 ｺﾞﾒﾝﾈ。
 
 ## メモリー
 
@@ -71,7 +71,7 @@ fn main() {
 
 ![""](./images/image02.png)
 
-これらの変数が積まれているスタックのアドレスは、以下のようにして出力します。変数名に`&`をつけることでそのデータのメモリー上のアドレスを得ることができます。
+これらの変数が積まれているスタックのアドレスは、以下のようにして出力します。変数名に`&`をつけることでそのデータの先頭アドレスを得ることができます。また、`println!`では`{:p}`とすることでポインターの形で整形し出力することができます。
 
 ```rust:title=main.rs
 fn main() {
@@ -86,7 +86,7 @@ fn main() {
 }
 ```
 
-実際に出力される値は、その時々によって変わることに注意します。さて、アドレスの末尾に注目すると、`i1`が`70`、`i2`が`74`となっていて、4バイトのずれがあることが読み取れます。このアドレスは正確にはデータの先頭アドレスを指しているため、これを図解すると以下のようになっていると考えられます。
+実際に出力される値は、その時々によって変わることに注意します。さて、アドレスの末尾に注目すると、`i1`が`70`、`i2`が`74`となっていて、4バイトのずれがあることが読み取れます。上記のコートで取得できるアドレスは、正確にはデータの先頭アドレスを指しているため、これを図解すると以下のようになっていると考えられます。
 
 ![](images/image03.png)
 
@@ -196,7 +196,7 @@ Cのように、プログラマーが明示的にヒープ領域を確保/解放
 
 <aside>
 
-何かとRustと対比されがちな**Go**もGCによってヒープ領域を管理しています。そういう意味ではGoはRustやCの代替になりえないことが分かります。
+（何故か）Rustと対比されがちな**Go**もGCによってヒープ領域を管理しています。そういう意味ではGoはRustやCの代替になりえないことが分かります。
 
 </aside>
 
@@ -281,17 +281,17 @@ fn main() {
     println!("s1のスタックアドレスの値 {:p}", &s1);
     //=> s1のスタックアドレスの値 0x7ffc6be6e488
 
-    println!("s1のヒープ領域の実データの先頭アドレス {:p}", &s1.as_ptr());
+    println!("s1のヒープ領域の実データの先頭アドレス {:p}", s1.as_ptr());
     //=> s1のスタックアドレスの値 0x7fff37d9be10
 
-    println!("s2のヒープ領域の実データの先頭アドレス {:p}", &s2.as_ptr());
+    println!("s2のヒープ領域の実データの先頭アドレス {:p}", s2.as_ptr());
     //=> s2のスタックアドレスの値 0x7fff37d9be60
 }
 ```
 
 これを図示するとこうなります（`s1`のみ図示します）。
 
-![""](./images/image08.png)
+!["8バイトのptrがヒープ領域上のアドレスを指している"](./images/image08.png)
 
 続いて、データ長を格納している8バイトは`len()`で取得できます。s1はスペースも入れて28文字、s2はスペースも入れて10文字なので、以下のような出力になります。
 
@@ -366,7 +366,7 @@ fn main() {
 }
 ```
 
-所有権の移動、とは文字通りの「移動」であり、コピーされるわけではありません。上記コードはむろん問題なくコンパイルが通ります。ここで、所有権を失った`s1`にアクセスしようとするとコンパイルが失敗します。
+所有権の移動、とは文字通りの「移動」であり、コピーされるわけではありません。上記コードは問題なくコンパイルが通ります。ここで、所有権を失った`s1`にアクセスしようとするとコンパイルが失敗します。
 
 ```rust
 fn main() {
@@ -431,6 +431,7 @@ fn main() {
     let s2 = s1;
 
     println!("s2の値を出力できる {}", s2);
+    // Hello Rust
 }
 ```
 
@@ -459,9 +460,9 @@ fn main() {
 
 ### 所有権の移動が発生するケース
 
-さて、所有権が移動するケースは様々ありますが、今回は**関数の値を渡す時**について、コードを書きながら見ていきます。
+さて、所有権が移動するケースは様々ありますが、続いて**関数の値を渡す時**について、コードを書きながら見ていきます。
 
-受け取った`String`を標準出力するだけの`echo`関数を作成します。
+受け取った`String`を出力するだけの`echo`関数を作成します。
 
 ```rust
 fn echo(s: String) {
@@ -469,16 +470,16 @@ fn echo(s: String) {
 }
 ```
 
-`main`関数の中で`String`型のデータ`s1`を作成し、`echo`関数に渡します。`echo`関数自体はちゃんと実行されますが、渡した後、`s1`にアクセスできるのでしょうか？
+`main`関数の中で`String`型のデータ`s1`を作成し、`echo`関数に渡します。`echo`関数自体はちゃんと実行されますが、渡した後、`main`関数で`s1`にアクセスできるでしょうか？
 
 ```rust
 fn echo(s: String) {
     println!("{}", s);
-    //=> Hello World
+    //=> Hello Rust
 }
 
 fn main() {
-    let s1 = String::from("Hello World");
+    let s1 = String::from("Hello Rust");
 
     // s1を渡す
     echo(s1);
@@ -494,7 +495,7 @@ Compiling playground v0.0.1 (/playground)
 error[E0382]: borrow of moved value: `s1`
   --> src/main.rs:11:35
    |
-7  |     let s1 = String::from("Hello World");
+7  |     let s1 = String::from("Hello Rust");
    |         -- move occurs because `s1` has type `String`, which does not implement the `Copy` trait
 8  |
 9  |     echo(s1);
@@ -518,6 +519,8 @@ help: consider cloning the value if the performance cost is acceptable
 ```
 
 `echo(s1);`の所で`-- value moved here`と記述されていますね。`echo`関数の仮引数`s`に所有権が移動してしまったため、`main`関数の中ではもう`s1`にアクセスすることは出来なくなってしまいました。`echo`関数の変数`s`がスタックから取り出されるとき、ヒープ領域のデータも削除されることになります。
+
+---
 
 他の変数への束縛、そして関数へ渡す、という2パターンの所有権の移動を見てきました。所有権が移動することはあっても、決して重複することはありません。つまり誰がデータを破棄するかが明確に決まっているので、データが残り続けるということは起こりえないことがわかります。
 
@@ -553,23 +556,135 @@ fn main() {
 
 Rustには**借用**という仕組みが用意されていて、これを上手に用いることで上記の窮屈さから解放されたコードを書くことができます。
 
-他の変数に値を束縛する時のことを考えてみます。束縛を行う時、`&s1`という風に記述すれば、moveは起こりません。
+他の変数に値を束縛する時のことを考えてみます。束縛を行う時、`&s1`という風に記述すれば、moveは起こりません。`s1`にも`s2`にも同時にアクセスできていることが分かります。
 
 ```rust
 fn main() {
-    let s1 = String::from("Hello World");
+    let s1 = String::from("Hello Rust");
     // &を付ける
     let s2 = &s1;
 
     println!("{}, {}", s1, s2);
-    //=> Hello World, Hello World
+    //=> Hello Rust, Hello Rust
 }
 ```
+
+この借用という仕組みはどのように捉えればいいのでしょうか？s1、s2は供にString構造体のインスタンスですので、`as_ptr()`で実体が格納されているアドレスを出力することができます。
+
+```rust
+fn main() {
+    let s1 = String::from("Hello Rust");
+    let s2 = &s1;
+
+    println!("s1の実体のアドレス{:p}", s1.as_ptr());
+    //=> s1の実体のアドレス0x562d7a5069d0
+    println!("s2の実体のアドレス{:p}", s2.as_ptr());
+    //=> s2の実体のアドレス0x562d7a5069d0
+}
+```
+
+上記の様に実行すれば、**同じアドレス**が出力されるはずです。2つの変数はヒープ領域上の同じ場所を参照しているということですね。
+
+もっと詳しく言うと、s2という変数はs1を指していてs1はヒープ領域を指しているということです。The bookでは、参照について、以下のように図示しています。
+
+![](./images/trpl04-05.svg)
+
+これを当ブログ風に示すとしたら、以下のようになります。
+
+!["s2はs1を参照していて、s1はヒープ領域の実体を参照している"](./images/image11.png)
+
+このように、`&`をつけて（所有権の移動を伴わず）値を参照することを**共有参照**と言います。
+
+---
+
+この共有参照の仕組みを使って、先述した`echo`関数を書き換えてみます。
+
+echo関数の仮引数は`&String`という風に`&`をつけて記述します。そして`echo`関数に渡す時も`echo(&s1)`という風に参照の形で渡します。これなら`echo`関数の変数`s`に所有権は移動せず、`main`関数の中で引き続き`s1`にアクセスできます。
+
+```rust
+// &を付けて型定義する
+fn echo(s: &String) {
+    println!("{}", s);
+    //=> Hello Rust
+}
+
+fn main() {
+    let s1 = String::from("Hello Rust");
+
+    // s1を共有参照の形で渡す
+    echo(&s1);
+
+    // 所有権は移動していないので、s1にアクセスできる
+    println!("{}", s1);
+    //=> Hello Rust
+}
+```
+
+### 共有参照は複数同時に存在できる
+
+共有参照は複数同時に存在できます。以下の例では`s1`の共有参照が3つ同時に存在しています。
+
+```rust
+fn main() {
+    let s1 = String::from("Hello World");
+
+    // 共有参照を3つ作る
+    let s2 = &s1;
+    let s3 = &s1;
+    let s4 = &s1;
+
+    // 4つの変数に同時にアクセスできる
+    println!("{}, {}, {}, {}", s1, s2, s3, s4);
+    //=> Hello World, Hello World, Hello World, Hello World
+}
+```
+
+また、共有参照の共有参照も作成できます。以下の例では`s3`が`s2`を参照し、`s2`が`s1`を参照、そして`s1`がヒープ領域の実データを参照している、という形になっています。
+
+```rust
+fn main() {
+    let s1 = String::from("Hello World");
+
+    let s2 = &s1;
+    let s3 = &s2;
+
+    println!("{}, {}, {}", s1, s2, s3);
+}
+```
+
+ここで注目すべきポイントは、ヒープ領域の実体を参照している変数がいくつできても、**所有者は一人だけ**というルールは守られている、という点です。
 
 `s1`にも`s2`にも同時にアクセスできていることがわかります。この時、スタック領域とヒープ領域はどうなっているのでしょうか？
 
 ---
 
+
+Copyトレイトを実装している型は所有権の移動ではなく、値のコピーが行われます。具体的には整数型や浮動小数点型、真偽値型、文字型、要素が全てCopyトレイトを実装しているタプル、など。
+
+
+`s2`は`s1`を指しているんだから、`s1`が先にドロップされると`s2`はどこを指していいのか分からなくなりますよね？
+
+画像を挿入
+
+これは**ライフタイム**と呼ばれる要素が絡んできます。
+
+```rust
+fn concat(a: String, b: String) -> String {
+    let c = format!("{}, {}", a, b);
+
+    c
+}
+
+pub fn main() {
+    let s1 = String::from("Hello");
+    let s2 = String::from("Rust");
+    // s1とs2の所有権は関数concatのaとbに移動する
+    let s = concat(s1, s2);
+
+    println!("{}", s1);
+    println!("{}", s2);
+}
+```
 
 Copyトレイトを実装している型は所有権の移動ではなく、値のコピーが行われます。具体的には整数型や浮動小数点型、真偽値型、文字型、要素が全てCopyトレイトを実装しているタプル、など。
 
@@ -589,165 +704,83 @@ Copyトレイトを実装している型は所有権の移動ではなく、値�
 
 代入、束縛を行う`=`という演算子はとても単純なように見えますが、メモリーレベルまで考えると言語によって結構違いがあることがわかります。
 
-## 共有参照
-
-`&`をつけることで、値に対する**共有参照**を表すことができます。
-
-今回の例のように、単純に読みだすだけ（値の変更がない）時には共有参照を使用します。
-
-```rust
-fn func(str: &String) {
-    println!("func関数のstr = {}", str);
-    //=> func関数のstr = kento
-}
-
-fn main() {
-    let s = String::from("kento");
-
-    func(&s);
-
-    println!("main関数のs = {}", s);
-    //=> main関数のs = kento
-}
-```
-
-`s`と`str`は同じヒープ領域上のデータを参照しています。
-
-```rust
-fn func(str: &String) {
-    println!("func関数のstrのスタック上のアドレス = {:p}", &str);
-    //=> func関数のstrのスタック上のアドレス = 0x7ffd04ab52c0
-
-    println!("func関数のstrの実体の先頭アドレス = {:p}", str.as_ptr());
-    //=> func関数のstrの実体の先頭アドレス = 0x5559fc9dc9d0
-}
-
-fn main() {
-    let s = String::from("kento");
-
-    func(&s);
-
-    println!("main関数のsのスタック上のアドレス = {:p}", &s);
-    //=> main関数のsのスタック上のアドレス = 0x7ffd04ab53a0
-
-    println!("main関数のsのアドレス = {:p}", s.as_ptr());
-    //=> main関数のsのアドレス = 0x5559fc9dc9d0
-}
-```
-
-複数作ることができる。
-
-```rust
-fn main() {
-    let s = String::from("hello");
-    let s1 = &s;
-    let s2 = &s;
-}
-```
-
-
-イミュータブルな参照が作られている状態でミュータブルな参照を利用することはできない。既にどこからか参照されている状態で、値を変更することはできない。
-
-```rust
-fn main() {
-    let mut s10 = String::from("Hello");
-    let r = &s10;
-    let m = &mut s10;
-
-    println!("{}, {}", r, m);
-    /*
-      error[E0502]: cannot borrow `s10` as mutable because it is also borrowed as immutable
-        |
-        |     let r = &s10;
-        |             ---- immutable borrow occurs here
-        |     let m = &mut s10;
-        |             ^^^^^^^^ mutable borrow occurs here
-        |
-        |     println!("{}, {}", r, m);
-        |                        - immutable borrow later used here
-      For more information about this error, try `rustc --explain E0502`.
-    */
-}
-```
-
 ## 可変参照
 
-可変参照は値を書き換えたいときに使用します。
+**可変参照**は、moveなしに参照元の値を書き換えることを言います。`&mut`をつけることで、値の書き換えが可能になります。
 
-`mut`をつけることで、値の書き換えが可能になります。
+例として、渡されたString型のデータの末尾に`!!!`を付与する、`add_exclamation`関数を考えます。
 
 ```rust
-fn func(mut str: String) {
-    str.push_str("!!!");
+fn add_exclamation(mut s: String) {
+    s.push_str("!!!");
 
-    println!("{}", str);
-    //=> kento!!!
+    println!("{}", s);
+    //=> Hello Rust!!!
 }
 
 fn main() {
-    // mutをつける
-    let mut s = String::from("kento");
+    let mut s = String::from("Hello Rust");
 
-    func(s);
+    add_exclamation(s);
 }
 ```
 
-ただ、これだとmoveが起こり、`s`は使えなくなります。
+ただ、これだと`add_exclamation`関数へのmoveが起こり、関数を呼び出した以降、`main`関数で`s`は使えなくなります。
 
 ```rust
-fn func(mut str: String) {
-    str.push_str("!!!");
+fn add_exclamation(mut s: String) {
+    s.push_str("!!!");
 
-    println!("{}", str);
+    println!("{}", s);
+    //=> Hello Rust!!!
 }
 
 fn main() {
-    let mut s = String::from("kento");
+    let mut s = String::from("Hello Rust");
 
-    func(s);
+    add_exclamation(s);
 
-    println!("{}", s);
+    println!("🦀❌ sにはアクセスできない {}", s);
     /*
-      error[E0382]: borrow of moved value: `s`
-        --> src/main.rs:12:20
+        error[E0382]: borrow of moved value: `s`
+        --> src/main.rs:13:35
         |
-        |     let mut s = String::from("kento");
+        9  |     let mut s = String::from("Hello Rust");
         |         ----- move occurs because `s` has type `String`, which does not implement the `Copy` trait
+        10 |
+        11 |     add_exclamation(s);
+        |                     - value moved here
+        12 |
+        13 |     println!("🦀❌ sにはアクセスできない {}", s);
+        |                                               ^ value borrowed here after move
         |
-        |     func(s);
-        |          - value moved here
-        |
-        |     println!("{}", s);
-        |                    ^ value borrowed here after move
-        |
-        = note: this error originates in the macro `$crate::format_args_nl` which comes from the expansion of the macro `println` (in Nightly builds, run with -Z macro-backtrace for more info)
-
-      For more information about this error, try `rustc --explain E0382`.
+        }
     */
 }
 ```
 
-所有権を移動させずに値を操作したい場合、可変参照を利用します。
+こんな時には可変参照を使います。仮引数の定義で`&mut String`とし、関数に渡すときにも`&mut s`とします。
 
 ```rust
-// &mutをつける
-fn func(str: &mut String) {
-    str.push_str("!!!");
+fn add_exclamation(s: &mut String) {
+    s.push_str("!!!");
 
-    println!("{}", str);
-    //=> kento!!!
+    println!("{}", s);
+    //=> Hello Rust!!!
 }
 
 fn main() {
-    let mut s = String::from("kento");
+    let mut s = String::from("Hello Rust");
 
-    // &mutをつける
-    func(&mut s);
+    add_exclamation(&mut s);
 
-    println!("{}", s);
-    //=> kento!!!
+    println!("sにアクセスできる {}", s);
+    //=> sにアクセスできる Hello Rust!!!
 }
 ```
+
+なお、可変参照を使わずとも、`add_exclamation`関数で加工した文字列を返して、`main関数`で受け取る、ということもできますが、可変参照を使った方がコードは見やすいと思います。
+
 
 以下は、可変参照されている状態で所有権者がアクセスしようとしてエラーになっている例。可変参照`m`が役割を終わる前に所有権者`s11`がアクセスしようとしているため。
 
@@ -968,4 +1001,86 @@ fn main() {
 }
 ```
 
+-->
+<!--
+## 共有参照
+
+`&`をつけることで、値に対する**共有参照**を表すことができます。
+
+今回の例のように、単純に読みだすだけ（値の変更がない）時には共有参照を使用します。
+
+```rust
+fn func(str: &String) {
+    println!("func関数のstr = {}", str);
+    //=> func関数のstr = kento
+}
+
+fn main() {
+    let s = String::from("kento");
+
+    func(&s);
+
+    println!("main関数のs = {}", s);
+    //=> main関数のs = kento
+}
+```
+
+`s`と`str`は同じヒープ領域上のデータを参照しています。
+
+```rust
+fn func(str: &String) {
+    println!("func関数のstrのスタック上のアドレス = {:p}", &str);
+    //=> func関数のstrのスタック上のアドレス = 0x7ffd04ab52c0
+
+    println!("func関数のstrの実体の先頭アドレス = {:p}", str.as_ptr());
+    //=> func関数のstrの実体の先頭アドレス = 0x5559fc9dc9d0
+}
+
+fn main() {
+    let s = String::from("kento");
+
+    func(&s);
+
+    println!("main関数のsのスタック上のアドレス = {:p}", &s);
+    //=> main関数のsのスタック上のアドレス = 0x7ffd04ab53a0
+
+    println!("main関数のsのアドレス = {:p}", s.as_ptr());
+    //=> main関数のsのアドレス = 0x5559fc9dc9d0
+}
+```
+
+複数作ることができる。
+
+```rust
+fn main() {
+    let s = String::from("hello");
+    let s1 = &s;
+    let s2 = &s;
+}
+```
+
+
+イミュータブルな参照が作られている状態でミュータブルな参照を利用することはできない。既にどこからか参照されている状態で、値を変更することはできない。
+
+```rust
+fn main() {
+    let mut s10 = String::from("Hello");
+    let r = &s10;
+    let m = &mut s10;
+
+    println!("{}, {}", r, m);
+    /*
+      error[E0502]: cannot borrow `s10` as mutable because it is also borrowed as immutable
+        |
+        |     let r = &s10;
+        |             ---- immutable borrow occurs here
+        |     let m = &mut s10;
+        |             ^^^^^^^^ mutable borrow occurs here
+        |
+        |     println!("{}, {}", r, m);
+        |                        - immutable borrow later used here
+      For more information about this error, try `rustc --explain E0502`.
+    */
+}
+```
 -->
