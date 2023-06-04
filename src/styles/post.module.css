@@ -1,5 +1,5 @@
 .blog-post {
-  width: max(52%, 324px);
+  width: max(52%, 348px);
   margin-left: 13vw;
   margin-right: 5vw;
 }
@@ -168,6 +168,10 @@
 
 .blog-post details[open] summary {
   margin-bottom: 15px;
+}
+
+.blog-post img {
+  max-width: 90%;
 }
 
 @media (max-width: 768px) {
