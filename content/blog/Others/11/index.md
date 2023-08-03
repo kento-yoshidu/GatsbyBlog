@@ -1,7 +1,7 @@
 ---
 title: "Rustの所有権が分からない"
 postdate: "2023-08-01"
-update: "2023-08-01"
+update: "2023-08-03"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "Rustの所有権について学びました。"
@@ -858,150 +858,22 @@ fn main() {
 
 [ヒープ割り当て | Writing an OS in Rust](https://os.phil-opp.com/ja/heap-allocation/)
 
-https://engineering.mercari.com/blog/entry/20220128-3a0922eaa4/
+[JavaScriptがブラウザでどのように動くのか | メルカリエンジニアリング](https://engineering.mercari.com/blog/entry/20220128-3a0922eaa4/)
 
 [Rust のメモリ管理 | OKAZAKI Shogo&#x27;s Website](https://www.zakioka.net/blog/memory-management-for-rust)
 
-https://www.zakioka.net/memo/rust/type
+[Rust の型 | OKAZAKI Shogo&#x27;s Website](https://www.zakioka.net/memo/rust/type)
 
-https://marycore.jp/coding/dangling-pointer/
+[ダングリングポインタとは｜dangling pointerの危険性と回避 | MaryCore](https://marycore.jp/coding/dangling-pointer/)
 
 [スタックとヒープを知る](https://scrapbox.io/mrsekut-p/%E3%82%B9%E3%82%BF%E3%83%83%E3%82%AF%E3%81%A8%E3%83%92%E3%83%BC%E3%83%97%E3%82%92%E7%9F%A5%E3%82%8B)
 
-https://keens.github.io/blog/2017/04/30/memoritosutakkutohi_puto/
+[メモリとスタックとヒープとプログラミング言語 | κeenのHappy Hacκing Blog](https://keens.github.io/blog/2017/04/30/memoritosutakkutohi_puto/)
 
-https://blog.naoty.dev/423/
+[Rustの所有権（ownership）を語義から理解する - igagurimk2の日記](https://igaguri.hatenablog.com/entry/2019/08/17/184205)
 
-https://doc.rust-lang.org/std/iter/index.html#for-loops-and-intoiterator
+[Rustの可変参照の挙動がわかりにくい - Qiita](https://qiita.com/reismannnr2/items/a7e4ed098bcf0c7ed8d2)
 
-https://igaguri.hatenablog.com/entry/2019/08/17/184205
-
-https://qiita.com/reismannnr2/items/a7e4ed098bcf0c7ed8d2
-
-<!--
-つまり所有権という仕組みは、メモリーの中でも特に**ヒープ領域**を管理する時に活躍するものだと言えます。
-
-## 文字列スライスと文字列
-
-～これらは全てスタック領域に積まれ、その変数のスコープが終わるとスタックからポップされます。しかし、先述した通り、ヒープ領域にあるデータは「順番」と言った考え方はありませんから、何らかの方法でメモリーの確保と解放を表現する必要があります。
-
-文字列リテラルは**コンパイル時に中身（そしてサイズ）が判明している**ため、コンパイル後にはバイナリーファイルに直接記述される。
-
-これは、例えばJavaScriptにおいても同じことが言えます。いわゆるプリミティブ型データと言われる数値型や文字列型はスタックで管理され、オブジェクトの実体はヒープ領域に保存されると思われます。
-
-対してString型はコンパイル時に不明な文字列をヒープ領域を使って表現します。
--->
-
-<!--
-### 文字列スライス型
-
-文字列スライス型も文字列を表現するデータ型です。`&str`と表記されることもありますが、当記事では`&str`と呼ぶことにします。`&str`はダブルクオートで文字を囲うだけで表現することができます。
-
-```rust
-fn main() {
-    let str = "Hello";
-    let str2 = "Hello World";
-}
-```
-
-「String型と何が違うねん」という所ですが、文字列スライスは実データ（つまり、上記例でいう所の`Hello`と`Hello World`）を**静的領域**に格納します。そしてその先頭アドレスを指し示す参照8バイト、文字列のバイト数を示す8バイトがスタックに積まれることになります。
-
-```rust
-fn main() {
-    let str = "Hello";
-    let str2 = "Hello World";
-
-    println!("strのスタックアドレス {:p}", &str);
-    println!("str2のスタックアドレス {:p}", &str2);
-    //=> strのスタックアドレス 0x6d4cbcf6f8
-    //=> str2のスタックアドレス 0x6d4cbcf708
-    // 0x708 - 0x6f8 = 10進数で16
-}
-```
-
-`as_ptr()`で静的領域の先頭アドレスを得ることができます。また、`len()`でバイト数を得ることができます。
-
-```rust
-fn main() {
-
-    let str = "Hello";
-    let str2 = "Hello World";
-
-    println!("4: str2の静的領域の先頭アドレス {:p}", str2.as_ptr());
-    println!("4: str2の静的領域のバイト数 {}", str2.len());
-    //=> strの静的領域の先頭アドレス 0x7ff634dc3548
-    //=> strの静的領域のバイト数 5
-
-
-    println!("4: str3の静的領域の先頭アドレス {:p}", str3.as_ptr());
-    println!("4: str3の静的領域のバイト数 {}", str3.len());
-    //=> str2の静的領域の先頭アドレス 0x7ff634dc34b0
-    //=> str2の静的領域のバイト数 11
-}
-```
-
-Rustにおいて文字はUTF-8で扱います。`Hello`でしたら1文字1バイトですから、`len`は`5`が出力されます。日本語でしたら1文字3バイトですから、`こんにちは`であれば`len`は`15`が出力されます。
-
-```rust
-fn main() {
-    println!("5: こんにちはの静的領域のバイト数 {}", "こんにちは".len());
-    //=> 5: こんにちはの静的領域のバイト数 15
-}
-```
--->
-
-
-<!--
-## その他
-
-ここからは復習の意味もこめて、様々な場面での所有権について考えたいと思います。私が実際にはまった場面が多いです。
-
-### イテレーター
-
-突然ですが、問題です。以下のコードは実行できるでしょうか？
-
-```rust
-fn main() {
-    let nums = vec![0, 1, 2, 3];
-
-    for num in nums {
-        println!("{}", num);
-    }
-
-    println!("{:?}", nums);
-}
-```
-
-一見すると実行できそうですが、、、残念！最後の`println!("{:?}", nums);`で所有権に関するエラーが出ます。
-
-> 公式ドキュメントにある通り、for式はコレクションに対してIntoIteratorトレイトのinto_iter()を呼びIteratorトレイトを実装するものを生成する。そして、それに対しnext()を呼ぶことで要素を取り出す。
-
-お手軽なのは`for-in`に`&nums`という風に参照を渡す方法です。
-
-```rust
-fn main() {
-    let nums = vec![0, 1, 2, 3];
-
-    for num in &nums {
-        println!("{}", num);
-    }
-
-    println!("{:?}", nums);
-}
-
-```rust
-fn main() {
-    let nums = vec![0, 1, 2, 3];
-
-    for num in nums.iter() {
-        println!("{}", num);
-    }
-
-    println!("{:?}", nums);
-}
-```
-
--->
 <!--
 ## 共有参照
 
