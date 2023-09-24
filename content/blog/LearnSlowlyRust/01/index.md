@@ -1,9 +1,9 @@
 ---
-title: "Rustの所有権が分からない"
+title: "#1 Rustの所有権が分からない"
 postdate: "2023-08-01"
 update: "2023-08-03"
-seriesName: "その他"
-seriesSlug: "Others"
+seriesName: "ゆっくり学ぶRust"
+seriesSlug: "LearnSlowlyRust"
 description: "Rustの所有権について学びました。"
 tags: ["Rust"]
 keywords: ["Rust"]

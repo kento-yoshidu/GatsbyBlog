@@ -23,7 +23,7 @@
 
 .post-link {
   color: var(--link-color);
-  font-size: clamp(1.2rem, 2vw, 2.2rem);
+  font-size: clamp(1.2rem, 2vw, 2rem);
   font-weight: 500;
   line-height: 1.5;
 }
