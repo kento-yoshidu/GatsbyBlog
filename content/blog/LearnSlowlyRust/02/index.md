@@ -279,9 +279,9 @@ fn check_directon(direction: &Direction) {
         Direction::North(distance) => {
             println!("北に{}メートル進む", distance);
         },
-		Direction::NorthEast { north: n, east: e } => {
-			println!("北に{}メートル、西に{}メートル進む", n, e);
-		}
+        Direction::NorthEast { north: n, east: e } => {
+          println!("北に{}メートル、西に{}メートル進む", n, e);
+        }
     }
 }
 
@@ -328,19 +328,103 @@ fn main() {
 fn main() {
 	let direction = Direction::West(10);
 
-	if let Direction::West(distance) = direction {
-		println!("東に{}メートル進む", distance);
-        // 東に10メートル進む
+	if let Direction::North(distance) = direction {
+      println!("北に{}メートル進む", distance);
+      // 北に10メートル進む
 	}
 }
 ```
 
-といっても初見だと何をしているか分かりにくいですね。
+変数`direction`が`Direction::North(usize)`だった場合、`distance`に`10`が束縛されます。それ以外は何も起こりません。
 
-### 論駁可能性
+変数`distance`のスコープは`if-let`構文の中にとどまります。`if-let`を抜けた先では利用することはできません（後述する`let-else`なら可能）。
 
-先ほどの構文、`if let xx = yy {}`の`let xx = yy`の部分に注目してみましょう。これはいわゆる変数に値を束縛している、お馴染みの構文ですね。
+```rust
+fn main() {
+    let direction = Direction::North(10);
 
-https://qiita.com/plotter/items/0d8dc2782f21178d64f1
+    if let Direction::North(distance) = direction {
+        // distanceが生きるのはここから
+        println!("北に{}メートル進む", distance);
+        // ここまで
+    }
 
-https://www.programiz.com/rust/enum
+    // 🦀❌ エラー
+    println!("{}メートル進みました", distance);
+    /*
+        error[E0425]: cannot find value `distance` in this scope
+        --> src/main.rs:17:29
+            |
+         17 |     println!("{}メートル進みました", distance);
+            |                                      ^^^^^^^^ not found in this scope
+            |
+    */
+}
+```
+
+といっても初見だと何をしているか分かりにくいですね。これから先、ちょっと長いですがこれがどういう理屈になっているか説明します。
+
+### パターンマッチ
+
+先ほどの構文、`if let xx = yy {}`の`let xx = yy`の部分に注目してみましょう。これはいわゆる変数に値を束縛している、（本当に）親の顔より見ているお馴染みの構文ですね。一般的（?）なプログラミング言語だと、「代入」と呼ばれることが多いと思いますが、Rustでは**パターンマッチ**を行っていると言えます。
+
+以下の単純なコードを例にとりますが、パターンマッチとは「式の値`10`がパターン`num`」に一致するかを判定する仕組みだと言えます。
+
+```rust
+fn main() {
+    let x = 10;
+}
+```
+
+「いや、そら一致するやろ」って思うかもしれませんが、まぁもうちょっと例を見てましょう。
+
+---
+
+
+
+ではマッチしない可能性があるというのはどのような場合でしょうか？ズバリ、今回勉強している列挙型が当てはまります。
+
+`let x = 5;`における`x`はあらゆるものに一致し値が束縛されるため、論駁できません（論駁不可能だといえる）。
+
+`let x = `
+
+つまり、パターンには論駁可能（束縛できない可能性がある）なものと論駁不可能（束縛できない可能性がない）なものがあると言えます。
+
+そして論駁可能なものに関しては、match式を用いて全てのパターンを網羅しているわけです。
+
+---
+
+で、やっと`if-let`構文に戻ってきます。
+
+列挙体の他に論駁可能なパターンに関しては、range型が挙げられます。以下の例でいうと、パターンは`1..=10`、つまり1から10までの数値ですが、当然その範囲外の数値が入ってくる可能性があるため論駁可能なパターンです。
+
+```rust
+fn main() {
+    let num = 10;
+
+    if let 1..=10 = num {
+        println!("1から10の間です");
+        /* 何らかの処理をする */
+    }
+}
+```
+
+## `let-else`
+
+うーんこれは脳汁でますね。
+
+## 参考
+
+[パターンが使用されることのある箇所全部 - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch18-01-all-the-places-for-patterns.html)
+
+[Rustの「if let」とは何なのか？ - Qiita](https://qiita.com/plotter/items/0d8dc2782f21178d64f1)
+
+[Rust Enum (With Examples)](https://www.programiz.com/rust/enum)
+
+[Idein Ideas &#8212; Rustにおけるirrefutable patternを使ったイディオム](https://blog.idein.jp/post/644161837029605376/rust%E3%81%AB%E3%81%8A%E3%81%91%E3%82%8Birrefutable-pattern%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%9F%E3%82%A4%E3%83%87%E3%82%A3%E3%82%AA%E3%83%A0)
+
+[全プログラマに捧ぐ！図解「パターンマッチ」 - Qiita](https://qiita.com/hinastory/items/87431aa48197cc4d7d84)
+
+[Rustのif let Someについて調べた話。 | ぬの部屋（仮）](https://suzulang.com/rust-if-let-some/)
+
+[Rust - 反駁可能性: パターンが一致しない可能性があるかどうか](https://runebook.dev/ja/docs/rust/book/ch18-02-refutability)

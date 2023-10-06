@@ -7,6 +7,6 @@ seriesSlug: "Others"
 description: "2022年に発売されたHTMLの書籍を紹介します。"
 tags: ["HTML", "書籍"]
 keywords: ["HTML", "書籍", "本"]
-published: true
+published: false
 ---
 
