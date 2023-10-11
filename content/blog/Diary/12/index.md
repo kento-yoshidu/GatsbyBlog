@@ -6,7 +6,7 @@ seriesName: "日記"
 seriesSlug: "Diary"
 description: "Goで簡単なアプリケーションを作成したので紹介します。"
 tags: ["Go", "Echo", "React"]
-keywords: ["Rust", "Echo", "React"]
+keywords: ["Go", "Echo", "React"]
 published: true
 ---
 
