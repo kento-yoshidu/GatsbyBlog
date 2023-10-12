@@ -373,7 +373,7 @@ fn main() {
 
 おさらいします。親の顔より見た、変数に値を束縛する構文を一般化し、`let PATTERN = EXPRESSION`と表現します。右オペランドの式が左オペランドのパターンにマッチするか？という構文ですね。この見方を元にマッチする場合、マッチしない場合を見ていきましょう。
 
-まずはマッチする場合からですが、大抵の場合がマッチします。上記で見たようにプリミティブ型を束縛する場合もそうですし、タプルや構造体を束縛させる場合も必ずマッチします。
+まずはマッチする場合からですが、単純に変数に束縛させるような形なら必ずマッチします。上記のようにプリミティブ型の値を束縛する場合もそうですし、タプルや構造体を束縛させる場合も必ずマッチします。
 
 ```rust
 struct User {
@@ -403,7 +403,8 @@ fn main() {
 }
 ```
 
-このパターンマッチが使える場所は様々あります。
+このように、必ずマッチするようなパターンを**論駁不可能**なパターンといいます。
+
 
 
 ## if-let構文
@@ -552,7 +553,17 @@ fn main() {
 
 ## 参考
 
+[Enumを定義する - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch06-01-defining-an-enum.html)
+
+[match制御フロー演算子 - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch06-02-match.html)
+
+[if letで簡潔な制御フロー - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch06-03-if-let.html)
+
 [パターンが使用されることのある箇所全部 - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch18-01-all-the-places-for-patterns.html)
+
+[論駁可能性：パターンが合致しないかどうか - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch18-02-refutability.html)
+
+[パターン記法 - The Rust Programming Language 日本語版](https://doc.rust-jp.rs/book-ja/ch18-03-pattern-syntax.html)
 
 [Rustの「if let」とは何なのか？ - Qiita](https://qiita.com/plotter/items/0d8dc2782f21178d64f1)
 
@@ -566,4 +577,8 @@ fn main() {
 
 [Rust - 反駁可能性: パターンが一致しない可能性があるかどうか](https://runebook.dev/ja/docs/rust/book/ch18-02-refutability)
 
-https://maku77.github.io/p/ffqyajs/
+[Rust で列挙型 (enum) を定義して match、if let で照合する - まくまく Rust ノート](https://maku77.github.io/p/ffqyajs/)
+
+[Pattern matching - Rust Community Wiki](https://runrust.miraheze.org/wiki/Pattern_matching)
+
+[Patterns and Matching - YouTube](https://www.youtube.com/watch?v=NzeQbiiqhgo)
