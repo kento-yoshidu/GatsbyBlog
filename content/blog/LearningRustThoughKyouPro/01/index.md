@@ -1,7 +1,7 @@
 ---
 title: "#1 Rustのイテレーター系メソッド雑まとめ"
 postdate: "2023-10-11"
-update: "2023-10-12"
+update: "2023-10-15"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "競技プログラミングの問題を解くことでRustを学びます。"
@@ -188,6 +188,32 @@ fn main() {
 }
 ```
 
+### position
+
+[fn position<P>(&mut self, predicate: P) -> Option<usize>](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.position)
+
+クロージャーとして`bool`を返す関数を設定し、最初に`true`が返ってきたときのインデックス番号を返します。該当する要素があれば`Some(usize)`が返ってきて、なければ`None`が返ってきます。
+
+```rust
+fn main() {
+    println!("Hello World");
+
+    let vec = vec![1, 3, 5, 7, 8];
+
+    // 偶数が見つかった時点でインデックス番号を返す
+    println!("{:?}", vec.iter().position(|i| i % 2 == 0));
+    //=> Some(4)
+}
+```
+
+<!--
+問題
+
+https://atcoder.jp/contests/abc277/tasks/abc277_a
+https://atcoder.jp/contests/abc275/tasks/abc275_a
+
+>
+
 <!--
 
 ### filter_map
@@ -248,6 +274,7 @@ fn main() {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2023年10月15日 : positionを追加。</li>
   <li>2023年10月12日 : count、counts、all_unique、all_equalを追加。</li>
 </details>
 
