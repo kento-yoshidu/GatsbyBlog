@@ -212,12 +212,18 @@ fn main() {
 https://atcoder.jp/contests/abc277/tasks/abc277_a
 https://atcoder.jp/contests/abc275/tasks/abc275_a
 
->
+-->
 
 <!--
 
-### filter_map
+## イテレーターを変化させたイレテーターを得る
 
+### rev
+
+https://atcoder.jp/contests/abc281/tasks/abc281_a
+
+
+### filter_map
 
 ## イテレーターから何か一つ取り出す
 
