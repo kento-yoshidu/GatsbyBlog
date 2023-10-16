@@ -1,7 +1,7 @@
 ---
 title: "#1 Rustのイテレーター系メソッド雑まとめ"
 postdate: "2023-10-11"
-update: "2023-10-15"
+update: "2023-10-16"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "競技プログラミングの問題を解くことでRustを学びます。"
@@ -190,9 +190,9 @@ fn main() {
 
 ### position
 
-[fn position<P>(&mut self, predicate: P) -> Option<usize>](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.position)
+[fn position&lt;P&gt;(&mut self, predicate: P) -> Option<usize>](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.position)
 
-クロージャーとして`bool`を返す関数を設定し、最初に`true`が返ってきたときのインデックス番号を返します。該当する要素があれば`Some(usize)`が返ってきて、なければ`None`が返ってきます。
+クロージャーとして`bool`を返す関数を設定し、最初に`true`が返ってきたときのインデックスを返します。該当する要素があれば`Some(usize)`が返ってきて、なければ`None`が返ってきます。
 
 ```rust
 fn main() {
@@ -200,58 +200,90 @@ fn main() {
 
     let vec = vec![1, 3, 5, 7, 8];
 
-    // 偶数が見つかった時点でインデックス番号を返す
+    // 偶数が見つかった時点でインデックスを返す
     println!("{:?}", vec.iter().position(|i| i % 2 == 0));
     //=> Some(4)
 }
 ```
 
 <!--
-問題
+positionの問題
 
 https://atcoder.jp/contests/abc277/tasks/abc277_a
 https://atcoder.jp/contests/abc275/tasks/abc275_a
 
 -->
 
-<!--
+### positions(Itertools)
+
+`position`は`true`が返ってきた時点でインデックスを返し終了しましたが、`positions`では`true`を返す全ての要素のインデックスを返します。
+
+```rust
+use itertools::Itertools;
+
+fn main() {
+    let vec = vec![1, 2, 1, 4, 6, 1, 9, 10];
+
+    let result: Vec<usize> = vec.iter().positions(|i| {
+        i % 2 == 0
+    }).collect();
+
+    println!("{:?}", result);
+    //=> [1, 3, 4, 7]
+}
+```
 
 ## イテレーターを変化させたイレテーターを得る
 
+要素を並び変えたりするメソッドです。
+
 ### rev
 
+イテレーターの各要素を逆から並び替えます。利用頻度は高いです。
+
+```rust
+fn main() {
+    let vec = vec![3, 1, 4, 1, 5];
+
+    let rev_vec = vec.iter().rev().collect::<Vec<&usize>>();
+
+    println!("{:?}", rev_vec);
+    //=> [5, 1, 4, 1, 3]
+
+    let str = "abcdef".to_string();
+
+    let rev_str = str.chars().rev().collect::<String>();
+
+    println!("{:?}", rev_str);
+    //=> "fedcba"
+}
+```
+
+<!-- revの問題
 https://atcoder.jp/contests/abc281/tasks/abc281_a
+-->
 
+<!--
 
-### filter_map
+### partition
 
-## イテレーターから何か一つ取り出す
+```rust
+fn main() {
+    let vec = vec![3, 1, 4, 1, 5];
 
-### max
+    let (even, odd): (Vec<&usize>, Vec<&usize>) = vec.iter().partition(|i| {
+        *i % 2 == 0
+    });
 
-### min
+    println!("even={:?}, odd={:?}", even, odd);
+}
+```
 
-https://atcoder.jp/contests/abc005/tasks/abc005_2
+<!--
+## 番外編
 
-### find_map
+イテレーターのメソッドではないですが、コレクションを並び変えたりするようなメソッドを紹介します。
 
-#### AtCoderの問題へのリンク
-
-- [ABC002 A - 正直者](https://atcoder.jp/contests/abc002/tasks/abc002_1)
-
-## イテレーターを並び変える
-
-### sort
-
-https://atcoder.jp/contests/abc009/tasks/abc009_2
-
-## イテレーターの要素を書き換える
-
-### dedup
-
-https://atcoder.jp/contests/abc009/tasks/abc009_2
-
-## その他（未分類）
 
 ### chunks
 
@@ -274,12 +306,45 @@ fn main() {
 
 ```
 
+### filter_map
+
+## イテレーターから何か一つ取り出す
+
+### max
+
+### min
+
+https://atcoder.jp/contests/abc005/tasks/abc005_2
+
+### find_map
+
+#### AtCoderの問題へのリンク
+
+- [ABC002 A - 正直者](https://atcoder.jp/contests/abc002/tasks/abc002_1)
+
+## イテレーターを並び変える
+
+### sort
+
+https://www.educative.io/answers/how-to-sort-a-vector-in-rust
+
+https://atcoder.jp/contests/abc009/tasks/abc009_2
+
+## イテレーターの要素を書き換える
+
+### dedup
+
+https://atcoder.jp/contests/abc009/tasks/abc009_2
+
+## その他（未分類）
+
 -->
 
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2023年10月16日 : revを追加。</li>
   <li>2023年10月15日 : positionを追加。</li>
   <li>2023年10月12日 : count、counts、all_unique、all_equalを追加。</li>
 </details>
@@ -291,3 +356,11 @@ fn main() {
 [Ruby脳のためのRust配列系メソッドまとめ](https://zenn.dev/megeton/articles/fb6266bcb6aa1b)
 
 [競プロで使えそうなRustのitertoolsのマクロとメソッドまとめ - Qiita](https://qiita.com/okaponta_/items/8d6032b8f2b664c24ad19)
+
+[Rustでイテレータを積極的に使っていくメモ (逐次更新) #Rust - Qiita](https://qiita.com/lo48576/items/ccef72649883af343f84)
+
+[rust - Are there equivalents to slice::chunks/windows for iterators to loop over pairs, triplets etc? - Stack Overflow](https://stackoverflow.com/questions/42134874/are-there-equivalents-to-slicechunks-windows-for-iterators-to-loop-over-pairs)
+
+[Why there is no windows for iterators? - The Rust Programming Language Forum](https://users.rust-lang.org/t/why-there-is-no-windows-for-iterators/65515)
+
+[vec型に対してiter関数からslice::Iterが返ってくるのはなぜか - やわらかテック](https://www.okb-shelf.work/entry/vec_iter)
