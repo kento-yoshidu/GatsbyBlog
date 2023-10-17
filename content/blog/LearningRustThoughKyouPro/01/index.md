@@ -263,27 +263,39 @@ fn main() {
 https://atcoder.jp/contests/abc281/tasks/abc281_a
 -->
 
-<!--
-
-### partition
-
-```rust
-fn main() {
-    let vec = vec![3, 1, 4, 1, 5];
-
-    let (even, odd): (Vec<&usize>, Vec<&usize>) = vec.iter().partition(|i| {
-        *i % 2 == 0
-    });
-
-    println!("even={:?}, odd={:?}", even, odd);
-}
-```
-
-<!--
 ## 番外編
 
 イテレーターのメソッドではないですが、コレクションを並び変えたりするようなメソッドを紹介します。
 
+### sort
+
+[pub fn sort(&mut self)](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.sort)
+
+その名の通り、Vectorなどの要素を昇順に並び替えます。`sort`した後に`reverse`を呼べば降順に並び変えることができます。
+
+[pub fn reverse(&mut self)](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.reverse)
+
+```rust
+fn main() {
+    let mut vec = vec![3, 1, 4, 1, 5, 9, 2];
+
+    vec.sort();
+
+    println!("{:?}", vec);
+    //=> [1, 1, 2, 3, 4, 5, 9]
+
+    vec.reverse();
+
+    println!("{:?}", vec);
+    //=> [9, 5, 4, 3, 2, 1, 1]
+}
+```
+
+<!--
+https://www.educative.io/answers/how-to-sort-a-vector-in-rust
+
+https://atcoder.jp/contests/abc009/tasks/abc009_2
+-->
 
 ### chunks
 
@@ -303,7 +315,21 @@ fn main() {
     println!("{:?}", new_vec);
     //=> [[1, 2, 3, 4], [5, 6, 7, 8], [9]]
 }
+```
 
+<!--
+### partition
+
+```rust
+fn main() {
+    let vec = vec![3, 1, 4, 1, 5];
+
+    let (even, odd): (Vec<&usize>, Vec<&usize>) = vec.iter().partition(|i| {
+        *i % 2 == 0
+    });
+
+    println!("even={:?}, odd={:?}", even, odd);
+}
 ```
 
 ### filter_map
@@ -324,12 +350,6 @@ https://atcoder.jp/contests/abc005/tasks/abc005_2
 
 ## イテレーターを並び変える
 
-### sort
-
-https://www.educative.io/answers/how-to-sort-a-vector-in-rust
-
-https://atcoder.jp/contests/abc009/tasks/abc009_2
-
 ## イテレーターの要素を書き換える
 
 ### dedup
@@ -344,6 +364,7 @@ https://atcoder.jp/contests/abc009/tasks/abc009_2
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2023年10月17日 : sort、chinksを追加。</li>
   <li>2023年10月16日 : revを追加。</li>
   <li>2023年10月15日 : positionを追加。</li>
   <li>2023年10月12日 : count、counts、all_unique、all_equalを追加。</li>
