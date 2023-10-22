@@ -1,7 +1,7 @@
 ---
 title: "#1 Rustのイテレーター系メソッド雑まとめ"
 postdate: "2023-10-11"
-update: "2023-10-16"
+update: "2023-10-22"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "競技プログラミングの問題を解くことでRustを学びます。"
@@ -297,6 +297,52 @@ https://www.educative.io/answers/how-to-sort-a-vector-in-rust
 https://atcoder.jp/contests/abc009/tasks/abc009_2
 -->
 
+### dedup
+
+[pub fn dedup(&mut self)](https://doc.rust-lang.org/std/vec/struct.Vec.html#method.dedup)
+
+Vectorにおいて、隣り合う要素が重複していれば一つにします。
+
+```rust
+fn main() {
+    let mut vec = vec![1, 1, 2, 2, 3, 3, 3, 3, 3];
+
+    vec.dedup();
+
+    println!("{:?}", vec);
+    //=> [1, 2, 3]
+}
+```
+
+「隣り合う」という条件があるため、以下の例では要素は重複したままです。
+
+```rust
+fn main() {
+    let mut vec = vec![1, 2, 3, 1, 2, 3];
+
+    vec.dedup();
+
+    println!("{:?}", vec);
+    //=> [1, 2, 3, 1, 2, 3]
+}
+```
+
+もし各要素をユニークにしたいなら、`sort()`でソートした後で`dedup`を呼びます。
+
+```rust
+fn main() {
+    let mut vec = vec![1, 2, 3, 1, 2, 3];
+
+    vec.sort();
+    vec.dedup();
+
+    println!("{:?}", vec);
+    //=> [1, 2, 3]
+}
+```
+
+<!--https://atcoder.jp/contests/abc009/tasks/abc009_2 -->
+
 ### chunks
 
 [pub fn chunks(&self, chunk_size: usize) -> Chunks<'_, T>](https://doc.rust-lang.org/std/primitive.slice.html#method.chunks)
@@ -352,9 +398,6 @@ https://atcoder.jp/contests/abc005/tasks/abc005_2
 
 ## イテレーターの要素を書き換える
 
-### dedup
-
-https://atcoder.jp/contests/abc009/tasks/abc009_2
 
 ## その他（未分類）
 
@@ -364,6 +407,7 @@ https://atcoder.jp/contests/abc009/tasks/abc009_2
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2023年10月22日 : dedupを追加。</li>
   <li>2023年10月17日 : sort、chinksを追加。</li>
   <li>2023年10月16日 : revを追加。</li>
   <li>2023年10月15日 : positionを追加。</li>
