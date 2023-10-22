@@ -1,7 +1,7 @@
 ---
 title: "#1 Rustのイテレーター系メソッド雑まとめ"
 postdate: "2023-10-11"
-update: "2023-10-16"
+update: "2023-10-22"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "競技プログラミングの問題を解くことでRustを学びます。"
