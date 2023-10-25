@@ -1,7 +1,7 @@
 ---
 title: "#1 Rustのイテレーター系メソッド雑まとめ"
 postdate: "2023-10-11"
-update: "2023-10-22"
+update: "2023-10-25"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "競技プログラミングの問題を解くことでRustを学びます。"
@@ -30,7 +30,7 @@ published: true
 
 ## 構成
 
-本シリーズではイテレーター系のメソッドに照準をあて説明します。一つ一つを事細かに説明するわけではありませんが、簡単な使用例を載せています。実際に触ってみて理解してください。
+本シリーズではイテレーター系メソッドに照準をあて説明します。一つ一つを事細かに説明するわけではありませんが、簡単な使用例を載せています。実際に触ってみて理解してください。
 
 また、別途記事を設け、そこで詳しい使い方やそのメソッドを使って解ける競プロ（ほとんどAtCoder）の問題を紹介します。同じ問題が複数の記事で登場することがありますがご了承ください。
 
@@ -64,13 +64,11 @@ fn main() {}
 
 ## 各要素に対して何らかの処理を行う
 
-`map`に代表されるメソッドたちです。メソッドを適用すると`Iterator<T>`が返ってくるので、`collect()`などを使用して`Vec`や`String`の形で好きな形に書き換えることができます。
-
 ### map
 
 [`fn map<B, F>(self, f: F) -> Map<Self, F>`](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.map)
 
-`map`は各要素に任意の関数を適用し、その値を集約します。
+`map`は各要素に任意の関数を適用し、その値を集約しイテレーターとして返します。
 
 `x`には`1`、`2`、`3`が入り、2倍した値がそれぞれイテレーターに格納されます。`collect()`や`sum()`を使えば、新しいコレクション（Vec<i32>）を作成したり合計値を得ることができます。
 
@@ -121,7 +119,7 @@ fn main() {
 
 [fn counts(self) -> HashMap<Self::Item, usize>](https://docs.rs/itertools/latest/itertools/trait.Itertools.html#method.counts)
 
-イテレータの要素がそれぞれいくつ存在するかの`HashMap`を返します。
+イテレーターの要素がそれぞれいくつ存在するかの`HashMap`を返します。
 
 ```rust
 use itertools::Itertools;
@@ -262,6 +260,61 @@ fn main() {
 <!-- revの問題
 https://atcoder.jp/contests/abc281/tasks/abc281_a
 -->
+
+## イテレーター2つを組み合わせたイテレーターを得る
+
+### zip
+
+2つのイテレーターを合体させます。各要素はタプルとしてクロージャーで受け取れます。
+
+```rust
+fn main() {
+    let vec1 = vec!['a', 'b', 'c'];
+    let vec2 = vec![1, 2, 3];
+
+    vec1.iter()
+        .zip(vec2.iter())
+        .for_each(|t| {
+            println!("{}, {}", t.0, t.1)
+        });
+        /*
+            a, 1
+            b, 2
+            c, 3
+        */
+}
+```
+
+### zip_lengest(Itertools)
+
+イテレーターの要素数が異なる時は、`zip_longest`を使用します。
+
+```rust
+use itertools::{Itertools, EitherOrBoth::*};
+
+fn main() {
+    let vec1 = vec!['a', 'b', 'c', 'd', 'e', 'f'];
+    let vec2 = vec![1, 2, 3];
+
+    vec1.iter()
+        .zip_longest(vec2.iter())
+        .for_each(|t| {
+            match t {
+                Both(v1, v2) => println!("vec1={}, vec2={}", v1, v2),
+                Left(v1) => println!("vec1={}, vec2は要素なし", v1),
+                Right(v2) => println!("vec1は要素なし, vec2={}", v2),
+            }
+        })
+        /*
+          vec1=a, vec2=1
+          vec1=b, vec2=2
+          vec1=c, vec2=3
+          vec1=d, vec2は要素なし
+          vec1=e, vec2は要素なし
+          vec1=f, vec2は要素なし
+        */
+}
+```
 
 ## 番外編
 
@@ -407,6 +460,7 @@ https://atcoder.jp/contests/abc005/tasks/abc005_2
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2023年10月25日 : zip、zip_longestを追加。</li>
   <li>2023年10月22日 : dedupを追加。</li>
   <li>2023年10月17日 : sort、chinksを追加。</li>
   <li>2023年10月16日 : revを追加。</li>
@@ -415,6 +469,8 @@ https://atcoder.jp/contests/abc005/tasks/abc005_2
 </details>
 
 ## 参考
+
+[Itertools in itertools - Rust](https://docs.rs/itertools/latest/itertools/trait.Itertools.html#provided-methods)
 
 [Rustのイテレータの網羅的かつ大雑把な紹介 - Qiita](https://qiita.com/lo48576/items/34887794c146042aebf1)
 
@@ -429,3 +485,5 @@ https://atcoder.jp/contests/abc005/tasks/abc005_2
 [Why there is no windows for iterators? - The Rust Programming Language Forum](https://users.rust-lang.org/t/why-there-is-no-windows-for-iterators/65515)
 
 [vec型に対してiter関数からslice::Iterが返ってくるのはなぜか - やわらかテック](https://www.okb-shelf.work/entry/vec_iter)
+
+https://blog.ryota-ka.me/posts/2015/05/18/generators-and-lazy-evaluation-in-rust
