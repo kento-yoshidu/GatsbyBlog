@@ -1,7 +1,7 @@
 ---
 title: "#1 Rustのイテレーター系メソッド雑まとめ"
 postdate: "2023-10-11"
-update: "2023-10-25"
+update: "2023-11-22"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "競技プログラミングの問題を解くことでRustを学びます。"
@@ -231,6 +231,44 @@ fn main() {
 }
 ```
 
+## イテレーターから1つ要素を得る
+
+### min
+
+[fn min(self) -> Option<Self::Item>](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.min)
+
+イテレーターの各要素の中で最小の値の要素を得ます。戻り値はOptions型であり、何らかの理由で最小の要素を得られなかった場合は`None`が返ってきます。要素の大小を比べるわけですから、イテレーターの要素の型は`Ord`トレイトを実装している必要があります。
+
+```rust
+fn main() {
+    let vec = vec![-5, 0, 10];
+
+    println!("{:?}", vec.iter().max());
+    //=> Some(-5)
+
+    let vec = 0..=100;
+
+    println!("{:?}", vec.min());
+    //=> Some(0)
+
+    let vec = vec!['a', 'b', 'c'];
+
+    println!("{:?}", vec.iter().min());
+    //=> Some('a')
+
+    let vec: Vec<usize> = Vec::new();
+
+    println!("{:?}", vec.iter().min());
+    //=> None
+}
+```
+
+### max
+
+[fn max(self) -> Option<Self::Item>](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.max)
+
+イテレーターの各要素の中で最大の値の要素を得ます。こちらも戻り値はOptions型であり、何らかの理由で最大の要素を得られなかった場合は`None`が返ってきます。
+
 ## イテレーターを変化させたイレテーターを得る
 
 要素を並び変えたりするメソッドです。
@@ -435,24 +473,11 @@ fn main() {
 
 ## イテレーターから何か一つ取り出す
 
-### max
-
-### min
-
-https://atcoder.jp/contests/abc005/tasks/abc005_2
-
 ### find_map
 
 #### AtCoderの問題へのリンク
 
 - [ABC002 A - 正直者](https://atcoder.jp/contests/abc002/tasks/abc002_1)
-
-## イテレーターを並び変える
-
-## イテレーターの要素を書き換える
-
-
-## その他（未分類）
 
 -->
 
@@ -460,6 +485,7 @@ https://atcoder.jp/contests/abc005/tasks/abc005_2
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2023年11月22日 : min、maxを追加。</li>
   <li>2023年10月25日 : zip、zip_longestを追加。</li>
   <li>2023年10月22日 : dedupを追加。</li>
   <li>2023年10月17日 : sort、chinksを追加。</li>
