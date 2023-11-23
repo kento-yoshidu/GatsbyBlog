@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-11-23"
+update: "2023-11-24"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -126,6 +126,51 @@ mod tests {
 
 [C - 一次元リバーシ ](https://atcoder.jp/contests/abc047/tasks/arc063_a)（<span style="color: brown">Difficulty : 755</span>）
 
+文字が切り替わる回数を数えます。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc047/tasks/arc063_a
+
+fn run_lengths(s: Vec<char>) -> Vec<(char, usize)> {
+    let mut run_lengths = vec![];
+    let mut current = (s[0], 1);
+
+    for i in 1..s.len() {
+        if s[i] == current.0 {
+            current.1 += 1;
+        } else {
+            run_lengths.push(current);
+            current = (s[i], 1);
+        }
+    }
+
+    run_lengths.push(current);
+
+    run_lengths
+}
+
+pub fn run(s: &str) -> usize {
+    run_lengths(s.chars().collect()).len() - 1
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(1, run("BBBWW"));
+        assert_eq!(0, run("WWWWWW"));
+        assert_eq!(9, run("WBWBWBWBWB"));
+    }
+}
+```
+
+</details>
+
 ### ABC127 D - Integer Cards
 
 [D - Integer Cards](https://atcoder.jp/contests/abc127/tasks/abc127_d)（<span style="color: green">Difficulty : 887</span>）
@@ -142,6 +187,7 @@ mod tests {
 
 これまでは「入力をランレングス圧縮して扱う」問題でしたが、この問題はランレングス圧縮された状態で入力が与えられると言えます。圧縮されたものを解凍するイメージです。
 
+<!--
 ## 累積和
 
 # データ構造
@@ -149,4 +195,5 @@ mod tests {
 ## スタック
 
 状態が変化するものはスタックで扱います。状態が変化するたびに最初から走査するのではなく、スタックを上手く利用して計算量を削減します。
+-->
 
