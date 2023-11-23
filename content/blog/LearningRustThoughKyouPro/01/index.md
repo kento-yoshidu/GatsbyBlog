@@ -1,7 +1,7 @@
 ---
 title: "#1 Rustのイテレーター系メソッド雑まとめ"
 postdate: "2023-10-11"
-update: "2023-11-22"
+update: "2023-11-24"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "競技プログラミングの問題を解くことでRustを学びます。"
@@ -237,7 +237,7 @@ fn main() {
 
 [fn min(self) -> Option<Self::Item>](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.min)
 
-イテレーターの各要素の中で最小の値の要素を得ます。戻り値はOptions型であり、何らかの理由で最小の要素を得られなかった場合は`None`が返ってきます。要素の大小を比べるわけですから、イテレーターの要素の型は`Ord`トレイトを実装している必要があります。
+イテレーターの各要素の中で最小の値の要素を得ます。戻り値はOption型であり、何らかの理由で最小の要素を得られなかった場合は`None`が返ってきます。要素の大小を比べるわけですから、イテレーターの要素の型は`Ord`トレイトを実装している必要があります。
 
 ```rust
 fn main() {
@@ -267,7 +267,43 @@ fn main() {
 
 [fn max(self) -> Option<Self::Item>](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.max)
 
-イテレーターの各要素の中で最大の値の要素を得ます。こちらも戻り値はOptions型であり、何らかの理由で最大の要素を得られなかった場合は`None`が返ってきます。
+イテレーターの各要素の中で最大の値の要素を得ます。こちらも戻り値はOption型であり、何らかの理由で最大の要素を得られなかった場合は`None`が返ってきます。
+
+### find
+
+[fn find&lt;P&gt;(&mut self, predicate: P) -> Option&lt;Self::Item&gt;](https://doc.rust-lang.org/std/iter/trait.Iterator.html#method.find)
+
+イテレーターの各要素の中で、クロージャーが`true`を返す最初の要素をSome(T)で返します。`true`を返す要素がなければ`None`が返ります。
+
+```rust
+fn main() {
+    let vec = vec![1, 2, 3, 4, 5];
+
+    println!("{:?}", vec.iter().find(|num| **num == 3));
+    //=> Some(3)
+
+    println!("{:?}", vec.iter().find(|num| **num == 10));
+    //=> None
+}
+```
+
+### find_position(itertools)
+
+`find`のインデックスもついてくる版です。`true`を返す最初の要素とそのインデックスを`Some((usize, T))`で返します。
+
+```rust
+use itertools::Itertools;
+
+fn main() {
+    let vec = vec!['a', 'b', 'c', 'd', 'e'];
+
+    println!("{:?}", vec.iter().find_position(|c| **c == 'c'));
+    //=> Some((2, 'c'))
+
+    println!("{:?}", vec.iter().find_position(|c| **c == 'z'));
+    //=> None
+}
+```
 
 ## イテレーターを変化させたイレテーターを得る
 
