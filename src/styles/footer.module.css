@@ -5,17 +5,17 @@
   background: #222;
   color: #ccc;
   line-height: 1.5;
-}
 
-.footer a {
-  color: #ccc;
-  transition-duration: 0.1s;
-}
+  & a {
+    color: #ccc;
+    transition-duration: 0.1s;
+  }
 
-.footer a:hover {
-  background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
-  background-clip: text;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  & a:hover {
+    background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
+    background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  }
 }
 
 .footer-title {

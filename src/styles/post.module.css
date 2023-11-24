@@ -2,107 +2,105 @@
   width: max(52%, 348px);
   margin-left: 13vw;
   margin-right: 5vw;
+
+  & a {
+    color: var(--post-link-color);
+  }
+
+  :is(h1, h2, h3) {
+    padding-top: 10px;
+    line-height: 1.5;
+  }
+
+  & h1 {
+    width: 95%;
+    margin-top: 50px;
+    margin-bottom: 30px;
+    padding-bottom: 8px;
+    border-bottom: 7px solid var(--heading-bar-color);
+    font-size: clamp(1.5rem, 4.5vw, 2rem);
+  }
+
+  & h2 {
+    margin: 50px 0 20px;
+    padding: 7px 0 7px 2rem;
+    border-left: 9px solid var(--heading-bar-color);
+    font-size: clamp(1.3rem, 4.1vw, 2rem);
+  }
+
+  & h3 {
+    margin: 30px 0 20px;
+    font-size: clamp(1.15rem, 4vw, 1.75rem);
+  }
+
+  & p {
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+    line-height: 1.75;
+    text-indent: 0.8rem;
+  }
+
+  & hr {
+    margin: 60px auto;
+    border-width: 0 0 8px;
+    border-style: solid;
+    border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 1"><circle fill="hsla(0, 0%, 65%, 1.0)" cx="1" cy="0.5" r="0.5"/></svg>') 0 0 100% repeat;
+    width: 432px;
+  }
+
+  & ol {
+    padding: 10px 20px;
+  }
+
+  & ol li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  & ul {
+    padding: 10px 20px;
+    list-style: none;
+  }
+
+  & ul li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  & blockquote {
+    position: relative;
+    width: 85%;
+    padding: 18px 30px 18px 60px;
+    margin-top: 12px;
+    margin-left: 1rem;
+    margin-bottom: 20px;
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 0 1.5px 1.5px #ddd;
+
+    & p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    &::before {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-40%);
+      content: "❝";
+      font-size: 4rem;
+      color: #999;
+      margin-left: -50px;
+    }
+  }
+
+  .blog-post table {
+    margin: 40px 0;
+  }
+
 }
 
-.blog-post a {
-  color: var(--post-link-color);
-}
 
-.blog-post a:hover {
-  text-decoration: underline;
-}
-
-.blog-post :is(h1, h2, h3) {
-  padding-top: 10px;
-  line-height: 1.5;
-}
-
-.blog-post h1 {
-  width: 95%;
-  margin-top: 50px;
-  margin-bottom: 30px;
-  padding-bottom: 8px;
-  border-bottom: 7px solid var(--heading-bar-color);
-  font-size: clamp(1.5rem, 4.5vw, 2rem);
-}
-
-.blog-post h2 {
-  margin: 50px 0 20px;
-  padding: 7px 0 7px 2rem;
-  border-left: 9px solid var(--heading-bar-color);
-  font-size: clamp(1.3rem, 4.1vw, 2rem);
-}
-
-.blog-post h3 {
-  margin: 30px 0 20px;
-  font-size: clamp(1.15rem, 4vw, 1.75rem);
-}
-
-.blog-post p {
-  margin-bottom: 15px;
-  letter-spacing: 0.5px;
-  line-height: 1.75;
-  text-indent: 0.8rem;
-}
-
-.blog-post hr {
-  margin: 60px auto;
-  border-width: 0 0 8px;
-  border-style: solid;
-  border-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 2 1"><circle fill="hsla(0, 0%, 65%, 1.0)" cx="1" cy="0.5" r="0.5"/></svg>') 0 0 100% repeat;
-  width: 432px;
-}
-
-.blog-post ol {
-  padding: 10px 20px;
-}
-
-.blog-post ol li {
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-
-.blog-post ul {
-  padding: 10px 20px;
-  list-style: none;
-}
-
-.blog-post ul li {
-  margin-bottom: 10px;
-  line-height: 1.5;
-}
-
-.blog-post blockquote {
-  position: relative;
-  width: 85%;
-  padding: 18px 30px 18px 60px;
-  margin-top: 12px;
-  margin-left: 1rem;
-  margin-bottom: 20px;
-  background-color: #eee;
-  border-radius: 3px;
-  box-shadow: 0 0 1.5px 1.5px #ddd;
-  color: #666;
-}
-
-.blog-post blockquote p {
-  margin: 0;
-  line-height: 1.6;
-}
-
-.blog-post blockquote::before {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-40%);
-  content: "❝";
-  font-size: 5rem;
-  color: #999;
-  margin-left: -50px;
-}
-
-.blog-post table {
-  margin: 40px 0;
-}
 
 .blog-post th {
   border: 1px solid #bbb;
