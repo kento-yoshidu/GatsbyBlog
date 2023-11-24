@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-11-24"
+update: "2023-11-25"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -25,6 +25,48 @@ published: true
 [B - 高橋くんと文字列圧縮](https://atcoder.jp/contests/abc019/tasks/abc019_2)（<span style="color: brown">Difficulty : 534</span>）
 
 そのものズバリの問題です。
+
+```rust
+fn run_length(s: Vec<char>) -> Vec<(char, usize)> {
+    let mut result = vec![];
+    let mut current = (s[0], 1);
+
+    for i in 1..s.len() {
+        if s[i] == current.0 {
+            current.1 += 1;
+        } else {
+            result.push(current);
+            current = (s[i], 1);
+        }
+    }
+
+    result.push(current);
+
+    result
+}
+
+pub fn run(s: &str) -> String {
+    let rle = run_length(s.chars().collect());
+
+    rle.iter()
+        .map(|(c, i)| {
+            format!("{}{}", c, i)
+        })
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(String::from("a2b3a2d1"), run("aabbbaad"));
+        assert_eq!(String::from("a2b12x1y1z1a1"), run("aabbbbbbbbbbbbxyza"));
+        assert_eq!(String::from("e1d1c1b1a1"), run("edcba"));
+    }
+}
+```
 
 ### ABC143 C - Slimes
 
@@ -187,6 +229,44 @@ mod tests {
 
 これまでは「入力をランレングス圧縮して扱う」問題でしたが、この問題はランレングス圧縮された状態で入力が与えられると言えます。圧縮されたものを解凍するイメージです。
 
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc061/tasks/abc061_c
+
+pub fn run(_n: usize, k: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut vec = ab.clone();
+
+    vec.sort_by(|a, b| a.0.cmp(&b.0));
+
+    let mut rest = k;
+
+    for i in vec {
+        if rest <= i.1 {
+            return i.0
+        } else {
+            rest -= i.1
+        }
+    }
+
+    unreachable!();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(3, run(3, 4, vec![(1, 1), (2, 2), (3, 3)]));
+        assert_eq!(1, run(10, 500000, vec![(1, 100000), (1, 100000), (1, 100000), (1, 100000), (1, 100000), (100000, 100000), (100000, 100000), (100000, 100000), (100000, 100000), (100000, 100000)]));
+    }
+}
+```
+
+</details>
+
 <!--
 ## 累積和
 
@@ -197,3 +277,155 @@ mod tests {
 状態が変化するものはスタックで扱います。状態が変化するたびに最初から走査するのではなく、スタックを上手く利用して計算量を削減します。
 -->
 
+# その他
+
+アルゴリズムやデータ構造ではないですが、様々なテーマで問題を分類しました。
+
+## 回文判定
+
+### 競技プログラミングの鉄則 B56 - Palindrome Queries
+
+[B56 - Palindrome Queries](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ec)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ec
+
+fn check(s: &str) -> bool {
+    s.chars().eq(s.chars().rev())
+}
+
+fn run(_n: usize, _q: usize, s: &str, vec: Vec<(usize, usize)>) -> Vec<String> {
+    vec.iter().map(|v| {
+        if check(&s[(v.0 - 1)..=(v.1 - 1)]) {
+            String::from("Yes")
+        } else {
+            String::from("No")
+        }
+    }).collect::<Vec<String>>()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(vec![String::from("Yes"), String::from("No"), String::from("Yes")], run(11, 3, "mississippi", vec![(5, 8), (6, 10), (2, 8)]));
+    }
+}
+```
+</details>
+
+### ABC066 B - ss
+
+[B - ss](https://atcoder.jp/contests/abc066/tasks/abc066_b)（<span style="color: gray">Difficulty : 384</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ec
+
+fn check(s: &str) -> bool {
+	s.chars().eq(s.chars().rev())
+}
+
+fn run(_n: usize, _q: usize, s: &str, vec: Vec<(usize, usize)>) -> Vec<String> {
+	vec.iter().map(|v| {
+		if check(&s[(v.0 - 1)..=(v.1 - 1)]) {
+			String::from("Yes")
+		} else {
+			String::from("No")
+		}
+	}).collect::<Vec<String>>()
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	#[test]
+	fn test() {
+        assert_eq!(vec![String::from("Yes"), String::from("No"), String::from("Yes")], run(11, 3, "mississippi", vec![(5, 8), (6, 10), (2, 8)]));
+	}
+}
+```
+
+</details>
+
+### ABC147 B - Palindrome-philia
+
+[B - Palindrome-philia](https://atcoder.jp/contests/abc147/tasks/abc147_b)（<span style="color: gray">Difficulty : 44</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+pub fn run(s: &str) -> usize {
+    let chars: Vec<char> = s.chars().collect();
+
+    (0..chars.len()/2).filter(|i| {
+        chars[*i] != chars[s.len() - *i - 1]
+    }).count()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(1, run("redcoder"));
+        assert_eq!(0, run("wwwww"));
+        assert_eq!(1, run("rng"));
+        assert_eq!(50, run("ndfzvmkpudjeocebkfpexoszwczmpbdmivjnfeqapwvmbiiiarpwrjyezwdgydqbldyfyslboertiilckvacvroxycczmpfmdymu"));
+        assert_eq!(10, run("aybmyzzankubfabovxfkoazziskrl"));
+        assert_eq!(1, run("ax"));
+        assert_eq!(0, run("xxx"));
+        assert_eq!(34, run("uqoppvgpiqmsiwhpyfqnilmqkokdzowhrkzlavboipnljjlljpjwqalvxfvwpuairhxqiioqflgcwxvjupvghpadng"));
+        assert_eq!(2, run("hjvqwycocvwqvth"));
+        assert_eq!(34, run("xzamzvhfwhndreischtcucykbfjqasqlbkoxjpglbppptrvfccnfvlzppgdlmmseoidlqschqwnkfvqptsriiorvfqdjhrumjfc"));
+    }
+}
+```
+</details>
+
+### ABC307 B - racecar
+
+[B - racecar](https://atcoder.jp/contests/abc307/tasks/abc307_b)（<span style="color: gray">Difficulty : 70</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn check(s: String) -> bool {
+    s.chars().eq(s.chars().rev())
+}
+
+pub fn run(_n: usize, s: Vec<&str>) -> String {
+    if s.iter()
+        .permutations(2)
+        .any(|v| check(format!("{}{}", v[0], v[1])))
+    {
+        String::from("Yes")
+    } else {
+        String::from("No")
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(String::from("Yes"), run(5, vec!["ab", "ccef", "da", "a", "fe"]));
+        assert_eq!(String::from("No"), run(3, vec!["a", "b", "aba"]));
+        assert_eq!(String::from("Yes"), run(2, vec!["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]));
+    }
+}
+```
+</details>
