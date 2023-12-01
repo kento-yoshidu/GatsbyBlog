@@ -7,18 +7,18 @@
 
 .prev {
   left: 0;
-}
 
-.prev svg {
-  margin-right: 8px;
+  & svg {
+    margin-right: 8px;
+  }
 }
 
 .next {
   right: 0;
-}
 
-.next svg {
-  margin-left: 8px;
+  & svg {
+    margin-left: 8px;
+  }
 }
 
 .prev,
@@ -34,11 +34,11 @@
   text-decoration: none;
   color: var(--heading-bar-color);
   font-weight: 500;
-}
 
-:is(.prev, .next):hover {
-  background: var(--heading-bar-color);
-  color: #fff;
+  &:hover {
+    background: var(--heading-bar-color);
+    color: #fff;
+  }
 }
 
 .nation-links {
@@ -53,24 +53,26 @@
 .items {
   list-style: none;
   margin: 0 10px;
-}
 
-.items .text {
-  padding: 0.7rem 1rem;
-  background-color: var(--heading-bar-color);
-  color: #fff;
-}
+  .text {
+    padding: 0.7rem 1rem;
+    background-color: var(--heading-bar-color);
+    color: #fff;
+  }
 
-.items .link a {
-  display: block;
-  padding: 0.7rem 1rem;
-  background-color: #888;
-  color: #fff;
-  text-decoration: none;
-}
+  .link {
+    & a {
+      display: block;
+      padding: 0.7rem 1rem;
+      background-color: #888;
+      color: #fff;
+      text-decoration: none;
+    }
 
-.items .link:hover a {
-  background-color: var(--heading-bar-color);
+    &:hover a {
+      background-color: var(--heading-bar-color);
+    }
+  }
 }
 
 @media (max-width: 768px) {

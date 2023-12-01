@@ -14,12 +14,12 @@
 
 .link {
   color: var(--link-color);
-}
 
-.link:hover {
-  background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
-  background-clip: text;
-  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  &:hover {
+    background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
+    background-clip: text;
+    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+  }
 }
 
 .page-title {
@@ -28,14 +28,12 @@
   background: linear-gradient(135deg, var(--main-color) 10%, var(--sub-color) 90%);
   background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
-  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-size: clamp(1.4rem, 3vw, 2.5rem);
   font-weight: 500;
   letter-spacing: 7px;
   line-height: 1.4;
-}
 
-@media (max-width: 768px) {
-  .page-title {
+  @media (max-width: 768px) {
     width: 80%;
     margin: 0 auto;
     letter-spacing: 2px;

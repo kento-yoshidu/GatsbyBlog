@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-11-25"
+update: "2023-12-01"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -25,6 +25,9 @@ published: true
 [B - 高橋くんと文字列圧縮](https://atcoder.jp/contests/abc019/tasks/abc019_2)（<span style="color: brown">Difficulty : 534</span>）
 
 そのものズバリの問題です。
+
+<details>
+<summary>コード例を見る</summary>
 
 ```rust
 fn run_length(s: Vec<char>) -> Vec<(char, usize)> {
@@ -68,15 +71,114 @@ mod tests {
 }
 ```
 
+</details>
+
 ### ABC143 C - Slimes
 
 [C - Slimes](https://atcoder.jp/contests/abc143/tasks/abc143_c)（<span style="color: gray">Difficulty : 66</span>）
 
 連続している部分をひとまとまりとして扱います。
 
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run_lengths(s: Vec<char>) -> Vec<(char, usize)> {
+    let mut run_lengths = vec![];
+    let mut current = (s[0], 1);
+
+    for i in 1..s.len() {
+        if s[i] == current.0 {
+            current.1 += 1;
+        } else {
+            run_lengths.push(current);
+            current = (s[i], 1);
+        }
+    }
+
+    run_lengths.push(current);
+
+    run_lengths
+}
+
+pub fn run(_n: usize, s: &str) -> usize {
+    run_lengths(s.chars().collect()).len()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(5, run(10, "aabbbbaaca"));
+        assert_eq!(1, run(5, "aaaaa"));
+        assert_eq!(10, run(20, "xxzaffeeeeddfkkkkllq"));
+    }
+
+    #[test]
+    fn test2() {
+        assert_eq!(5, run2(10, "aabbbbaaca"));
+        assert_eq!(1, run2(5, "aaaaa"));
+        assert_eq!(10, run2(20, "xxzaffeeeeddfkkkkllq"));
+    }
+}
+```
+
+</details>
+
 ### ABC329 C - Count xxx
 
 [C - Count xxx](https://atcoder.jp/contests/abc329/tasks/abc329_c)（<span style="color: gray">Difficulty : 205</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc329/tasks/abc329_c
+
+use std::collections::HashMap;
+
+pub fn run(n: usize, s: &str) -> usize {
+    let chars: Vec<char> = s.chars().collect();
+
+    let mut hashmap = HashMap::new();
+    let mut count = 1;
+
+    hashmap.insert(chars[0], 1);
+
+    for i in 1..n {
+        if chars[i] == chars[i-1] {
+            count += 1;
+
+            if count > *hashmap.get(&chars[i]).unwrap() {
+                *hashmap.get_mut(&chars[i]).unwrap() += 1;
+            }
+        } else {
+            count = 1;
+
+            hashmap.entry(chars[i]).or_insert(1);
+        }
+    }
+
+    hashmap.values().sum()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(4, run(6, "aaabaa"));
+        assert_eq!(1, run(1, "x"));
+        assert_eq!(8, run(12, "ssskkyskkkky"));
+    }
+}
+
+```
+
+</details>
 
 ### ABC259 C - XX to XXX
 
@@ -221,7 +323,63 @@ mod tests {
 
 [A - Shrinking](https://atcoder.jp/contests/agc016/tasks/agc016_a)（<span style="color: green">Difficulty : 951</span>）
 
-これはランレングス圧縮とは言えないですが、考え方は似てると思います。
+これはランレングス圧縮とは言えないですが、連続する文字数を数えるという意味では考え方は似てると思います。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/agc016/tasks/agc016_a
+
+use itertools::Itertools;
+
+// c以外の文字が最大何文字続くかをカウント
+fn max_streak(c: char, s: &str) -> usize {
+    s.chars()
+        .scan(0, |streak, char| {
+            if char == c {
+                *streak = 0;
+                Some(0)
+            } else {
+                *streak += 1;
+                Some(*streak)
+            }
+        })
+        .max()
+        .unwrap()
+}
+
+pub fn run(s: &str) -> usize {
+    if s.chars().all_equal() {
+        return 0;
+    }
+
+    ('a'..='z')
+        .map(|c| {
+            max_streak(c, s)
+        })
+        .min()
+        .unwrap()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(3, run("serval"));
+        assert_eq!(2, run("jackal"));
+        assert_eq!(0, run("zzz"));
+        assert_eq!(8, run("whbrjpjyhsrywlqjxdbrbaomnw"));
+        assert_eq!(50, run("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"));
+        assert_eq!(0, run("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"));
+        assert_eq!(4, run("dcddccddccdcddddddccdccdcddccdccccdddddddddccddccccdddddcdcdcccdcccddddddcdddddccdcccddcc"));
+    }
+}
+```
+
+</details>
 
 ### ABC061 C - Big Array
 
@@ -428,4 +586,56 @@ mod tests {
     }
 }
 ```
+</details>
+
+### ABC198 B - Palindrome with leading zeros
+
+[B - Palindrome with leading zeros](https://atcoder.jp/contests/abc198/tasks/abc198_b)（<span style="color: gray">Difficulty : 96</span>）
+
+先頭に好きなだけ`0`を付けれるという事は、末尾の`0`を全て削除できると同じと捉えられます。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc198/tasks/abc198_b
+
+fn check(s: &str) -> bool {
+	s.chars().eq(s.chars().rev())
+}
+
+fn run(n: usize) -> String {
+    if n == 0 {
+		return String::from("Yes");
+	}
+
+	let mut num = n;
+
+	// numの末尾0を取り除く
+	// (10で割り切れる限り割る)
+	while num % 10 == 0 {
+		num /= 10
+	}
+
+	if check(&num.to_string()) {
+		String::from("Yes")
+	} else {
+		String::from("No")
+	}
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	#[test]
+	fn test() {
+		assert_eq!(String::from("Yes"), run(1210));
+		assert_eq!(String::from("Yes"), run(12100000000));
+		assert_eq!(String::from("Yes"), run(777));
+		assert_eq!(String::from("No"), run(123456789));
+	}
+}
+```
+
 </details>
