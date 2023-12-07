@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-12-05"
+update: "2023-12-07"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -695,6 +695,121 @@ mod tests {
 </details>
 
 # データ構造
+
+## スタック
+
+[スタックとキューを極める！ 〜 考え方と使い所を特集 〜](https://qiita.com/drken/items/6a95b57d2e374a3d3292)
+
+### ABC286 B - Cat
+
+[B - Cat](https://atcoder.jp/contests/abc286/tasks/abc286_b)（<span style="color: gray">Difficulty : 32</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc286/tasks/abc286_b
+
+pub fn run(n: usize, s: &str) -> String {
+    let mut ans = Vec::new();
+    let chars: Vec<char> = s.chars().collect();
+
+    for i in 0..n {
+        ans.push(chars[i]);
+        let len = ans.len();
+
+        if len >= 2 {
+            if ans[len-2..] == ['n', 'a'] {
+                ans.truncate(len-2);
+                ans.append(&mut vec!['n', 'y', 'a']);
+            }
+        }
+    }
+
+    ans.iter().collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(String::from("nyaan"), run(4, "naan"));
+        assert_eq!(String::from("near"), run(4, "near"));
+        assert_eq!(String::from("nyationyal"), run(8, "national"));
+    }
+}
+```
+
+</details>
+
+### ABC328 D - Take ABC
+
+[D - Take ABC](https://atcoder.jp/contests/abc328/tasks/abc328_d)（<span style="color: brown">Difficulty : 555</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc328/tasks/abc328_d
+
+pub fn run(s: &str) -> String {
+    let chars: Vec<char> = s.chars().collect();
+    let mut ans: Vec<char> = Vec::new();
+
+    for c in chars {
+        ans.push(c);
+        let len = ans.len();
+
+        if len >= 3 && &ans[len-3..] == ['A', 'B', 'C'] {
+            ans.truncate(len-3);
+        }
+    }
+
+    ans.iter().collect()
+}
+
+/* foldを使った別解 */
+pub fn run2(s: &str) -> String {
+    let chars: Vec<char> = s.chars().collect();
+
+    chars.iter()
+        .fold(Vec::new(), |mut state, c: &char| {
+            state.push(*c);
+            let len = state.len();
+
+            if len >= 3 && &state[state.len()-3..] == ['A', 'B', 'C'] {
+                state.truncate(state.len()-3);
+            }
+
+            state
+        })
+        .iter()
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(String::from("BCAC"), run("BAABCBCCABCAC"));
+        assert_eq!(String::new(), run("ABCABC"));
+        assert_eq!(String::from("AAABBBCCC"), run("AAABCABCABCAABCABCBBBAABCBCCCAAABCBCBCC"));
+    }
+
+    #[test]
+    fn test2() {
+        assert_eq!(String::from("BCAC"), run2("BAABCBCCABCAC"));
+        assert_eq!(String::new(), run2("ABCABC"));
+        assert_eq!(String::from("AAABBBCCC"), run2("AAABCABCABCAABCABCBBBAABCBCCCAAABCBCBCC"));
+    }
+}
+```
+
+</details>
 
 ## HashMap
 
