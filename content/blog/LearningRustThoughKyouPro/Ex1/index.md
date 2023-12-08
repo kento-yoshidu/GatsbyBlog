@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-12-07"
+update: "2023-12-08"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -279,6 +279,49 @@ mod tests {
 }
 ```
 
+</details>
+
+## 再帰関数
+
+### ABC229 B - Hard Calculation
+
+[B - Hard Calculation](https://atcoder.jp/contests/abc229/tasks/abc229_b)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc229/tasks/abc229_b
+
+fn calc(a: usize, b: usize) -> bool {
+    if a == 0 || b == 0 {
+        true
+    } else if a%10 + b %10 >= 10 {
+        false
+    } else {
+        calc(a/10, b/10)
+    }
+}
+
+pub fn run(a: usize, b: usize) -> String {
+    if calc(a, b) == true {
+        String::from("Easy")
+    } else {
+        String::from("Hard")
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(String::from("Hard"), run(229, 390));
+        assert_eq!(String::from("Easy"), run(123456789, 9876543210));
+    }
+}
+```
 </details>
 
 ## ランレングス圧縮
@@ -812,6 +855,49 @@ mod tests {
 </details>
 
 ## HashMap
+
+### ABC230 B - Election
+
+[B - Election](https://atcoder.jp/contests/abc231/tasks/abc231_b)（<span style="color: gray">Difficulty : 39</span>）
+
+まさにHashMapを使ってくれと言わんばかりの問題です。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc231/tasks/abc231_b
+
+use std::collections::HashMap;
+
+pub fn run(_n: usize, s: Vec<&str>) -> String {
+    let mut map = HashMap::new();
+
+    for name in s {
+        let count = map.entry(name).or_insert(0);
+        *count += 1;
+    }
+
+    map.iter()
+        .max_by(|a, b| a.1.cmp(b.1))
+        .unwrap()
+        .0.to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(String::from("takahashi"), run(5, vec!["snuke", "snuke", "takahashi", "takahashi", "takahashi"]));
+        assert_eq!(String::from("takahashi"), run(5, vec!["takahashi", "takahashi", "aoki", "takahashi", "snuke"]));
+        assert_eq!(String::from("a"), run(1, vec!["a"]));
+    }
+}
+```
+
+</details>
 
 ### ABC241 B - Pasta
 
