@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-12-08"
+update: "2023-12-12"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -285,7 +285,8 @@ mod tests {
 
 ### ABC229 B - Hard Calculation
 
-[B - Hard Calculation](https://atcoder.jp/contests/abc229/tasks/abc229_b)
+[B - Hard Calculation](https://atcoder.jp/contests/abc229/tasks/abc229_b)（<span style="color: gray">Difficulty : 42</span>）
+
 
 <details>
 <summary>コード例を見る</summary>
@@ -322,6 +323,49 @@ mod tests {
     }
 }
 ```
+</details>
+
+### ABC248 B - Slimes
+
+[B - Slimes](https://atcoder.jp/contests/abc248/tasks/abc248_b)（<span style="color: gray">Difficulty : 41</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc248/tasks/abc248_b
+
+fn calc(count: usize, a: usize, b: usize, k: usize) -> usize {
+    if a >= b {
+        count
+    } else {
+        calc(count+1, a*k, b, k)
+    }
+}
+
+fn run(a: usize, b: usize, k: usize) -> usize {
+    calc(0, a, b, k)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(2, run(1, 4, 2));
+        assert_eq!(0, run(7, 7, 10));
+        assert_eq!(6, run(31, 415926, 5));
+        assert_eq!(1, run(158260522, 200224287, 10));
+        assert_eq!(30, run(1, 1000000000, 2));
+        assert_eq!(1, run(999999999, 1000000000, 500000000));
+        assert_eq!(29, run(1, 536870912, 2));
+    }
+}
+
+```
+
 </details>
 
 ## ランレングス圧縮
@@ -946,9 +990,56 @@ mod tests {
 
 </details>
 
-<!--
+## HashSet
 
-## スタック
+### ABC226 B - Counting Arrays
+
+[B - Counting Arrays](https://atcoder.jp/contests/abc226/tasks/abc226_b)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc232/tasks/abc232_b
+
+use std::collections::HashSet;
+
+fn next_char(c: char, n: u8) -> char {
+    let val = (c as u8 - 97 + n) % 26 + 97;
+    val as char
+}
+
+fn run(s: &str, t: &str) -> String {
+    if (0..26)
+        .any(|i| {
+            let str: String = s.chars().map(|c| next_char(c, i)).collect();
+
+            str == t
+        }) {
+            String::from("Yes")
+        } else {
+            String::from("No")
+        }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(String::from("Yes"), run("abc", "ijk"));
+        assert_eq!(String::from("Yes"), run("z", "a"));
+        assert_eq!(String::from("No"), run("ppq", "qqp"));
+        assert_eq!(String::from("Yes"), run("atcoder", "atcoder"));
+    }
+}
+
+```
+
+</details>
+
+<!--
 
 ## 累積和
 
@@ -1006,30 +1097,37 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ec
+// https://atcoder.jp/contests/abc066/tasks/abc066_b
 
 fn check(s: &str) -> bool {
-	s.chars().eq(s.chars().rev())
+    if s[0..s.len()/2] == s[s.len()/2..] {
+        true
+    } else {
+        false
+    }
 }
 
-fn run(_n: usize, _q: usize, s: &str, vec: Vec<(usize, usize)>) -> Vec<String> {
-	vec.iter().map(|v| {
-		if check(&s[(v.0 - 1)..=(v.1 - 1)]) {
-			String::from("Yes")
-		} else {
-			String::from("No")
-		}
-	}).collect::<Vec<String>>()
+pub fn run(s: String) -> usize {
+    (0..s.len())
+        .rev()
+        .skip(1)
+        .step_by(2)
+        .find(|i| {
+            check(&s[0..*i])
+        }).unwrap()
 }
 
 #[cfg(test)]
 mod tests {
-	use super::*;
+    use super::*;
 
-	#[test]
-	fn test() {
-        assert_eq!(vec![String::from("Yes"), String::from("No"), String::from("Yes")], run(11, 3, "mississippi", vec![(5, 8), (6, 10), (2, 8)]));
-	}
+    #[test]
+    fn test() {
+        assert_eq!(6, run(String::from("abaababaab")));
+        assert_eq!(2, run(String::from("xxxx")));
+        assert_eq!(6, run(String::from("abcabcabcabc")));
+        assert_eq!(14, run(String::from("akasakaakasakasakaakas")));
+    }
 }
 ```
 
