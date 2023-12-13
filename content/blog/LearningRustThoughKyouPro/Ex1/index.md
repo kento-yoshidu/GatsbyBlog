@@ -14,7 +14,7 @@ published: true
 
 タイトルのまんまです。アルゴリズムやデータ構造ごとに、そのアルゴリズムを使って解けそうな問題をリストアップします。基本的に私が解いた問題から載せていくので、最初の内は簡単なものばかりで数も少ないです。
 
-都合上、同じ問題が何度も登場することがありますがご了承ください🙇‍♂️。
+都合上、同じ問題が複数回登場することがありますがご了承ください🙇‍♂️。
 
 # アルゴリズム
 
@@ -60,10 +60,11 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ## bit全探索
+
+[bit 全探索 - けんちょんの競プロ精進記録](https://drken1215.hatenablog.com/entry/2019/12/14/171657)
 
 ### ARC105 A - Fourtune Cookies
 
@@ -116,9 +117,7 @@ mod tests {
         assert_eq!(String::from("No"), run(93407609, 30427494, 56229544, 81174201));
     }
 }
-
 ```
-
 </details>
 
 ### ARC025 A - ゴールドラッシュ
@@ -164,7 +163,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC182 C - To 3
@@ -226,7 +224,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC079 C - Train Ticket
@@ -287,7 +284,6 @@ mod tests {
 
 [B - Hard Calculation](https://atcoder.jp/contests/abc229/tasks/abc229_b)（<span style="color: gray">Difficulty : 42</span>）
 
-
 <details>
 <summary>コード例を見る</summary>
 
@@ -329,7 +325,6 @@ mod tests {
 
 [B - Slimes](https://atcoder.jp/contests/abc248/tasks/abc248_b)（<span style="color: gray">Difficulty : 41</span>）
 
-
 <details>
 <summary>コード例を見る</summary>
 
@@ -363,9 +358,195 @@ mod tests {
         assert_eq!(29, run(1, 536870912, 2));
     }
 }
-
 ```
+</details>
 
+### ABC083 C - Multiple Gift
+
+[C - Multiple Gift](https://atcoder.jp/contests/abc083/tasks/arc088_a)（<span style="color: gray">Difficulty : 392</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc083/tasks/arc088_a
+
+fn calc(n: usize, y: usize, count: usize) -> usize {
+    if n > y {
+        count
+    } else {
+        calc(n*2, y, count+1)
+    }
+}
+
+pub fn run(x: usize, y: usize) -> usize {
+    calc(x, y, 0)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(3, run(3, 20));
+        assert_eq!(3, run(25, 100));
+        assert_eq!(31, run(314159265, 358979323846264338));
+    }
+}
+```
+</details>
+
+## ユークリッドの互除法
+
+[AtCoder 版！マスター・オブ・整数 (最大公約数編)](https://qiita.com/drken/items/0c88a37eec520f82b788)
+
+### アルゴリズムと数学　演習問題集 015 - Calculate GCD
+
+[015 - Calculate GCD](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_o)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_o
+
+fn gcd(a: usize, b: usize) -> usize {
+    if b == 0 {
+        a
+    } else {
+        gcd(b, a % b)
+    }
+}
+
+pub fn run(a: usize, b: usize) -> usize {
+    gcd(a, b)
+}
+
+
+fn main() {
+    println!("{}", run(33, 88));
+    println!("{}", run(123, 777));
+}
+```
+</details>
+
+### ARC105 B - MAX-=min
+
+[B - MAX-=min](https://atcoder.jp/contests/arc105/tasks/arc105_b)（<span style="color: gray">Difficulty : 366</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/arc105/tasks/arc105_b
+
+fn gcd(a: usize, b: usize) -> usize {
+    if b == 0 {
+        a
+    } else {
+        gcd(b, a % b)
+    }
+}
+
+fn run(n: usize, a: Vec<usize>) -> usize {
+    let mut ans = a[0];
+
+    for b in 1..a.len() {
+        ans = ans.min(gcd(ans, a[b]));
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(2, run(3, vec![2, 6, 6]));
+        assert_eq!(42, run(15, vec![546, 3192, 1932, 630, 2100, 4116, 3906, 3234, 1302, 1806, 3528, 3780, 252, 1008, 588]));
+    }
+}
+```
+</details>
+
+### ABC109 C - Skip
+
+[C - Skip](https://atcoder.jp/contests/abc109/tasks/abc109_c)（<span style="color: brown">Difficulty : 542</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn gcd(a: isize, b: isize) -> isize {
+    if b == 0 {
+        a
+    } else {
+        gcd(b, a % b)
+    }
+}
+
+pub fn run(_n: usize, x: isize, v: Vec<isize>) -> isize {
+    v.iter()
+        .skip(1)
+        .fold((x - &v[0]).abs(), |state, num| {
+            gcd(state, (x - num).abs())
+        })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(2, run(3, 3, vec![1, 7, 11]));
+        assert_eq!(24, run(3, 81, vec![33, 105, 57]));
+        assert_eq!(999999999, run(1, 1, vec![1000000000]));;
+    }
+}
+```
+</details>
+
+### ABC118 C - Monsters Battle Royale
+
+[C - Monsters Battle Royale](https://atcoder.jp/contests/abc118/tasks/abc118_ck)（<span style="color: brown">Difficulty : 646</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc118/tasks/abc118_c
+
+fn gcd(a: usize, b: usize) -> usize {
+    if b == 0 {
+        a
+    } else {
+        gcd(b, a % b)
+    }
+}
+
+pub fn run(_n: usize, v: Vec<usize>) -> usize {
+    v.iter()
+        .fold(0, |state, num| {
+            gcd(state, *num)
+        })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(2, run(4, vec![2, 10, 8, 40]));
+        assert_eq!(1, run(4, vec![5, 13, 8, 1000000000]));
+        assert_eq!(1000000000, run(3, vec![1000000000, 1000000000, 1000000000]));
+    }
+}
+```
 </details>
 
 ## ランレングス圧縮
@@ -426,7 +607,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC143 C - Slimes
@@ -480,7 +660,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC329 C - Count xxx
@@ -533,7 +712,6 @@ mod tests {
 }
 
 ```
-
 </details>
 
 ### ABC259 C - XX to XXX
@@ -619,7 +797,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC047 C - 一次元リバーシ
@@ -668,7 +845,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC127 D - Integer Cards
@@ -734,7 +910,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC061 C - Big Array
@@ -778,7 +953,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 # データ構造
@@ -828,7 +1002,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC328 D - Take ABC
@@ -895,7 +1068,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ## HashMap
@@ -940,7 +1112,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC241 B - Pasta
@@ -987,7 +1158,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ## HashSet
@@ -1034,9 +1204,7 @@ mod tests {
         assert_eq!(String::from("Yes"), run("atcoder", "atcoder"));
     }
 }
-
 ```
-
 </details>
 
 <!--
@@ -1130,7 +1298,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC147 B - Palindrome-philia
@@ -1256,5 +1423,4 @@ mod tests {
 	}
 }
 ```
-
 </details>
