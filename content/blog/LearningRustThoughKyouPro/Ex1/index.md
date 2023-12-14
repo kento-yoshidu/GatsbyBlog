@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-12-12"
+update: "2023-12-14"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -392,6 +392,45 @@ mod tests {
         assert_eq!(3, run(3, 20));
         assert_eq!(3, run(25, 100));
         assert_eq!(31, run(314159265, 358979323846264338));
+    }
+}
+```
+</details>
+
+### ABC100 C - *3 or /2
+
+[C - *3 or /2](https://atcoder.jp/contests/abc100/tasks/abc100_c)（<span style="color: gray">Difficulty : 327</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn calc(num: usize, count: usize) -> usize {
+    if num % 2 != 0 {
+        count
+    } else {
+        calc(num/2, count+1)
+    }
+}
+
+pub fn run(_n: usize, a: Vec<usize>) -> usize {
+    a.iter()
+        .map(|num| {
+            // 各要素が2で何回割り切れるかを合計
+            calc(*num, 0)
+        })
+        .sum()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(3, run2(3, vec![5, 2, 4]));
+        assert_eq!(0, run2(4, vec![631, 577, 243, 199]));
+        assert_eq!(39, run2(10, vec![2184, 2126, 1721, 1800, 1024, 2528, 3360, 1945, 1280, 1776]));
     }
 }
 ```
@@ -955,6 +994,56 @@ mod tests {
 ```
 </details>
 
+## 動的計画法
+
+### ABC087 C - Candies
+
+[C - Candies](https://atcoder.jp/contests/abc087/tasks/arc090_a)（<span style="color: gray">Difficulty : 312</span>）
+
+`N`が100と小さいので全探索でもいけますがDPで。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc087/tasks/arc090_a
+
+pub fn run(n: usize, a: [Vec<usize>; 2]) -> usize {
+    let mut dp: Vec<Vec<usize>> = vec![vec![], vec![]];
+
+    dp[0].push(a[0][0]);
+
+    for i in 1..n {
+        let prev = dp[0][i-1];
+        dp[0].push(prev + a[0][i]);
+    }
+
+    dp[1].push(a[0][0] + a[1][0]);
+
+    for i in 1..n {
+        let prev = dp[1][i-1];
+        let next = dp[0][i];
+        dp[1].push(prev.max(next) + a[1][i]);
+    }
+
+    dp[1][n-1]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(14, run(5, [vec![3, 2, 2, 4, 1], vec![1, 2, 2, 2, 1]]));
+        assert_eq!(5, run(4, [vec![1, 1, 1, 1], vec![1, 1, 1, 1]]));
+        assert_eq!(29, run(7, [vec![3, 3, 4, 5, 4, 5, 3], vec![5, 3, 4, 4, 2, 3, 2]]));
+        assert_eq!(5, run(1, [vec![2], vec![3]]));
+    }
+}
+```
+</details>
+
 # データ構造
 
 ## スタック
@@ -1218,6 +1307,51 @@ mod tests {
 # その他
 
 アルゴリズムやデータ構造ではないですが、様々なテーマで問題を分類しました。
+
+## 文字列操作
+
+### ABC232 B - Caesar Cipher
+
+[B - Caesar Cipher](https://atcoder.jp/contests/abc232/tasks/abc232_b)（<span style="color: gray">Difficulty : 82</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc232/tasks/abc232_b
+
+fn next_char(c: char, n: u8) -> char {
+    let val = (c as u8 - 97 + n) % 26 + 97;
+    val as char
+}
+
+fn run(s: &str, t: &str) -> String {
+    if (0..26)
+        .any(|i| {
+            let str: String = s.chars().map(|c| next_char(c, i)).collect();
+
+            str == t
+        }) {
+            String::from("Yes")
+        } else {
+            String::from("No")
+        }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(String::from("Yes"), run("abc", "ijk"));
+        assert_eq!(String::from("Yes"), run("z", "a"));
+        assert_eq!(String::from("No"), run("ppq", "qqp"));
+        assert_eq!(String::from("Yes"), run("atcoder", "atcoder"));
+    }
+}
+```
+</details>
 
 ## 回文判定
 
