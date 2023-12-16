@@ -1099,22 +1099,21 @@ mod tests {
 // https://atcoder.jp/contests/abc286/tasks/abc286_b
 
 pub fn run(n: usize, s: &str) -> String {
-    let mut ans = Vec::new();
     let chars: Vec<char> = s.chars().collect();
 
-    for i in 0..n {
-        ans.push(chars[i]);
-        let len = ans.len();
+    chars.iter()
+        .fold(Vec::new(), |mut stack, c| {
+            stack.push(*c);
 
-        if len >= 2 {
-            if ans[len-2..] == ['n', 'a'] {
-                ans.truncate(len-2);
-                ans.append(&mut vec!['n', 'y', 'a']);
+            if stack.len() >= 2 && stack[stack.len()-2..] == ['n', 'a'] {
+                stack.truncate(stack.len()-2);
+                stack.append(&mut vec!['n', 'y', 'a']);
             }
-        }
-    }
 
-    ans.iter().collect()
+            stack
+        })
+        .iter()
+        .collect()
 }
 
 #[cfg(test)]
@@ -1192,6 +1191,46 @@ mod tests {
         assert_eq!(String::from("BCAC"), run2("BAABCBCCABCAC"));
         assert_eq!(String::new(), run2("ABCABC"));
         assert_eq!(String::from("AAABBBCCC"), run2("AAABCABCABCAABCABCBBBAABCBCCCAAABCBCBCC"));
+    }
+}
+```
+</details>
+
+### ARC108 B - Abbreviate Fox
+
+[B - Abbreviate Fox](https://atcoder.jp/contests/arc108/tasks/arc108_b)（<span style="color: green">Difficulty : 681</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/arc108/tasks/arc108_b
+
+pub fn run(_n: usize, s: &str) -> usize {
+    let chars: Vec<char> = s.chars().collect();
+
+    chars.iter()
+        .fold(Vec::new(), |mut stack, c| {
+            stack.push(*c);
+
+            if stack.len() >= 3 && stack[stack.len()-3..] == ['f', 'o', 'x'] {
+                stack.truncate(stack.len()-3);
+            }
+
+            stack
+        })
+        .len()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(3, run(6, "icefox"));
+        assert_eq!(7, run(7, "firebox"));
+        assert_eq!(27, run(48, "ffoxoxuvgjyzmehmopfohrupffoxoxfofofoxffoxoxejffo"));
     }
 }
 ```
