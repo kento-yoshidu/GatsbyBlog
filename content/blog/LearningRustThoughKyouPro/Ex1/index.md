@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-12-14"
+update: "2023-12-16"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -57,6 +57,45 @@ mod tests {
         assert_eq!(300, run(16, 120,  150, 200));
         assert_eq!(10, run(10, 100, 50, 10));
         assert_eq!(10000, run(99, 600, 800, 1200));
+    }
+}
+```
+</details>
+
+## 累積和
+
+### ABC099 B - Stone Monument
+
+[B - Stone Monument](https://atcoder.jp/contests/abc099/tasks/abc099_b)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc099/tasks/abc099_b
+
+pub fn run(a: usize, b: usize) -> usize {
+    let mut cum_sum = Vec::new();
+
+    for i in 0..=(b-a) {
+        if i == 0 {
+            cum_sum.push(i)
+        } else {
+            cum_sum.push(cum_sum[i-1] + i);
+        }
+    }
+
+    *cum_sum.iter().last().unwrap() - b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(2, run(8, 13));
+        assert_eq!(1, run(54, 65));
     }
 }
 ```
@@ -275,7 +314,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ## 再帰関数
@@ -1154,6 +1192,50 @@ mod tests {
         assert_eq!(String::from("BCAC"), run2("BAABCBCCABCAC"));
         assert_eq!(String::new(), run2("ABCABC"));
         assert_eq!(String::from("AAABBBCCC"), run2("AAABCABCABCAABCABCBBBAABCBCCCAAABCBCBCC"));
+    }
+}
+```
+</details>
+
+### AGC005 A - STring
+
+[A - STring](https://atcoder.jp/contests/agc005/tasks/agc005_a)（<span style="color: green">Difficulty : 1054</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/agc005/tasks/agc005_a
+
+pub fn run(s: &str) -> usize {
+    let chars: Vec<char> = s.chars().collect();
+
+    chars.iter()
+        .fold(Vec::new(), |mut stack, c| {
+            stack.push(*c);
+
+            let len = stack.len();
+
+            if len >= 2 && stack[len-2] == 'S' && stack[len-1] == 'T' {
+                stack.truncate(len-2);
+                stack
+            } else {
+                stack
+            }
+        })
+        .iter()
+        .count()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(4, run("TSTTSS"));
+        assert_eq!(0, run("SSTTST"));
+        assert_eq!(4, run("TSSTTTSS"));
     }
 }
 ```
