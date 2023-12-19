@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-12-16"
+update: "2023-12-19"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1473,6 +1473,51 @@ mod tests {
 }
 ```
 </details>
+
+
+## 最小公倍数
+
+### ABC148 C - Snack
+
+[C - Snack](https://atcoder.jp/contests/abc148/tasks/abc148_c)（<span style="color: gray">Difficulty : 82</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc148/tasks/abc148_c
+
+fn gcd(m: usize, n: usize) -> usize {
+    if n == 0 {
+        m
+    } else {
+        gcd(n, m % n)
+    }
+}
+
+pub fn run(a: usize, b: usize) -> usize {
+    a / gcd(a, b) * b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test () {
+        assert_eq!(6, run(2, 3));
+        assert_eq!(18696, run(123, 456));
+        assert_eq!(9999900000, run(100000, 99999));
+    }
+}
+```
+</details>
+
+<aside>
+
+最大公約数は[ユークリッドの互除法](http://localhost:8000/LearningRustThoughKyouPro/Ex1/#%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E3%81%AE%E4%BA%92%E9%99%A4%E6%B3%95)を参照ください。
+
+</aside>
 
 ## 回文判定
 
