@@ -1,10 +1,29 @@
 [
   {
-    "slug": "/LearningRustThoughKyouPro/01/",
-    "title": "[ABC148] B - Strings with the Same Length ",
+    "slug": "/LearningRustThoughKyouPro/Ex1/",
+    "title": "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる",
     "keywords": [
       "Rust",
+      "競技プログラミング",
       "AtCoder"
+    ]
+  },
+  {
+    "slug": "/LearningRustThoughKyouPro/01/",
+    "title": "#1 Rustのイテレーター系メソッド雑まとめ",
+    "keywords": [
+      "Rust",
+      "競技プログラミング",
+      "AtCoder"
+    ]
+  },
+  {
+    "slug": "/Diary/12/",
+    "title": "GoでWebアプリケーションを作りました",
+    "keywords": [
+      "Go",
+      "Echo",
+      "React"
     ]
   },
   {
