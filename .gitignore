@@ -69,3 +69,6 @@ yarn-error.log
 .yarn-integrity
 
 .node-version
+
+src/__generated__/*
+static/keyword*
