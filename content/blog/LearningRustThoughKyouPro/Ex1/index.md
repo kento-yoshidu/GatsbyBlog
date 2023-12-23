@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-12-22"
+update: "2023-12-23"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1418,6 +1418,48 @@ mod tests {
 </details>
 
 ## HashSet
+
+### ABC166 B - Trick or Treat
+
+[B - Trick or Treat](https://atcoder.jp/contests/abc166/tasks/abc166_b)（<span style="color: gray">Difficulty : 84</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc166/tasks/abc166_b
+
+use std::collections::HashSet;
+
+pub fn run(n: usize, _k: usize, vec: Vec<(usize, Vec<usize>)>) -> usize {
+    let mut hash_set = HashSet::new();
+
+    for v in vec {
+        for num in v.1 {
+            hash_set.insert(num);
+        }
+    }
+
+    (1..=n)
+        .filter(|num| {
+            !hash_set.contains(num)
+        })
+        .count()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(1, run(3, 2, vec![(2, vec![1, 3]), (1, vec![3])]));
+        assert_eq!(2, run(3, 3, vec![(1, vec![3]), (1, vec![3]), (1, vec![3])]));
+    }
+}
+```
+
+</details>
 
 ### ABC226 B - Counting Arrays
 
