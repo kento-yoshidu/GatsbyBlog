@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2023-12-23"
+update: "2023-12-24"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -101,13 +101,61 @@ mod tests {
 ```
 </details>
 
+
+## 約数列挙
+
+### ABC180 C - Cream puff
+
+[C - Cream puff](https://atcoder.jp/contests/abc180/tasks/abc180_c)（<span style="color: gray">Difficulty : 142</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc180/tasks/abc180_c
+
+pub fn run(n: usize) -> Vec<usize> {
+    let mut ans = Vec::new();
+
+    for i in 1..=(n as f64).sqrt() as usize {
+        if n % i == 0 {
+            let j = n / i;
+
+            ans.push(i);
+
+            if i != j {
+                ans.push(j);
+            }
+        }
+    }
+
+    ans.sort();
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(vec![1, 2, 3, 6], run(6));
+        assert_eq!(vec![1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 30, 36, 40, 45, 48, 60, 72, 80, 90, 120, 144, 180, 240, 360, 720], run(720));
+        assert_eq!(vec![1, 1000000007], run(1000000007));
+        assert_eq!(vec![1], run(1));
+    }
+}
+```
+</details>
+
 ## bit全探索
 
 [bit 全探索 - けんちょんの競プロ精進記録](https://drken1215.hatenablog.com/entry/2019/12/14/171657)
 
 ### ARC105 A - Fourtune Cookies
 
-[A - Fourtune Cookies](9https://atcoder.jp/contests/arc105/tasks/arc105_a)（<span style="color: gray">🧪 Difficulty : 34</span>）
+[A - Fourtune Cookies](9https://atcoder.jp/contests/arc105/tasks/arc105_a)（<span style="color: gray">Difficulty : 34</span>）
 
 bit全探索の練習にはぴったりだと思います。
 
