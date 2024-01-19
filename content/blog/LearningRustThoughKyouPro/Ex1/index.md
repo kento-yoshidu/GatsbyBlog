@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-01-01"
+update: "2024-01-19"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1465,6 +1465,63 @@ mod tests {
 
 </details>
 
+### ABC261 C - NewFolder(1)
+
+[C - NewFolder(1)](https://atcoder.jp/contests/abc261/tasks/abc261_c)（<span style="color: gray">Difficulty : 179</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc261/tasks/abc261_c
+
+use std::collections::HashMap;
+
+pub fn run(_n: usize, s: Vec<&str>) -> Vec<String> {
+    let mut hash_map = HashMap::new();
+
+    let mut ans = Vec::new();
+
+    for str in s {
+        match hash_map.get(str) {
+            Some(num) => {
+                let s = format!("{}({})", str, num);
+                ans.push(s);
+            },
+            None => {
+                ans.push(str.to_string());
+            }
+        }
+
+        *hash_map.entry(str.to_string()).or_insert(0) += 1;
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<&'static str>, Vec<&'static str>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(5, vec!["newfile", "newfile", "newfolder", "newfile", "newfolder"], vec!["newfile", "newfile(1)", "newfolder", "newfile(2)", "newfolder(1)"]),
+            TestCase(11, vec!["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"], vec!["a", "a(1)", "a(2)", "a(3)", "a(4)", "a(5)", "a(6)", "a(7)", "a(8)", "a(9)", "a(10)"]),
+        ];
+
+        for TestCase(n, s, expected) in tests {
+            assert_eq!(expected, run(n, s));
+        }
+    }
+}
+
+```
+
+</details>
+
 ## HashSet
 
 ### ABC166 B - Trick or Treat
@@ -1939,4 +1996,59 @@ mod tests {
     }
 }
 ```
+</details>
+
+## n進数
+
+### ABC336 C - Even Digits
+
+[C - Even Digits](https://atcoder.jp/contests/abc336/tasks/abc336_c)（<span style="color: gray">Difficulty : 343</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc336/tasks/abc336_c
+
+fn calc(num: usize, mut result: Vec<usize>) -> Vec<usize> {
+    if num == 0 {
+        result
+    } else {
+        result.push(num % 5);
+        calc(num / 5, result)
+    }
+}
+
+pub fn run(n: usize) -> usize {
+    let mut vec = calc(n-1, Vec::new());
+
+    vec.reverse();
+
+    vec.iter()
+        .fold(0, |state, num| {
+            state * 10 + num * 2
+        })
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(8, 24),
+            TestCase(133, 2024),
+            TestCase(31415926535, 2006628868244228),
+        ];
+
+        for TestCase(n, expected) in tests {
+            assert_eq!(expected, run(n));
+        }
+    }
+}
+```
+
 </details>
