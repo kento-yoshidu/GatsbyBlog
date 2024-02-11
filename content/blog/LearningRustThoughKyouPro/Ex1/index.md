@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-01-19"
+update: "2024-02-11"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1125,6 +1125,63 @@ mod tests {
         assert_eq!(5, run(4, [vec![1, 1, 1, 1], vec![1, 1, 1, 1]]));
         assert_eq!(29, run(7, [vec![3, 3, 4, 5, 4, 5, 3], vec![5, 3, 4, 4, 2, 3, 2]]));
         assert_eq!(5, run(1, [vec![2], vec![3]]));
+    }
+}
+```
+</details>
+
+### ABC245 C - Choose Elements
+
+[C - Choose Elements](https://atcoder.jp/contests/abc245/tasks/abc245_c)（<span style="color: brown">Difficulty : 403</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc245/tasks/abc245_c
+
+pub fn run(n: usize, k: isize, a: Vec<isize>, b: Vec<isize>) -> &'static str {
+    let mut dp_a = vec![false; n];
+    let mut dp_b = vec![false; n];
+
+    dp_a[0] = true;
+    dp_b[0] = true;
+
+    for i in 0..n-1 {
+        if dp_a[i] == true {
+            dp_a[i+1] |= (a[i] - a[i+1]).abs() <= k;
+            dp_b[i+1] |= (a[i] - b[i+1]).abs() <= k;
+        }
+        if dp_b[i] == true {
+            dp_a[i+1] |= (b[i] - a[i+1]).abs() <= k;
+            dp_b[i+1] |= (b[i] - b[i+1]).abs() <= k;
+        }
+    }
+
+    if dp_a[n-1] || dp_b[n-1] {
+        "Yes"
+    } else {
+        "No"
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, isize, Vec<isize>, Vec<isize>, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(5, 4, vec![9, 8, 3, 7, 2], vec![1, 6, 2, 9, 5], "Yes"),
+            TestCase(3, 2, vec![1, 3, 100, 101, 102], vec![1, 3, 100, 101, 102], "No"),
+            TestCase(4, 1000000000, vec![1, 1, 1000000000, 1000000000], vec![1, 1000000000, 1, 1000000000], "Yes"),
+        ];
+
+        for TestCase(n, k, a, b, expected) in tests {
+            assert_eq!(run(n, k, a, b), expected);
+        }
     }
 }
 ```
