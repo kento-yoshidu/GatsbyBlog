@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-02-11"
+update: "2024-02-24"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -499,7 +499,7 @@ fn calc(num: usize, count: usize) -> usize {
     }
 }
 
-pub fn run(_n: usize, a: Vec<usize>) -> usize {
+pub fn run(_n: usize, a: vec<usize>) -> usize {
     a.iter()
         .map(|num| {
             // 各要素が2で何回割り切れるかを合計
@@ -522,13 +522,88 @@ mod tests {
 ```
 </details>
 
+## メモ化再帰
+
+### ABC275 D - Yet Another Recursive Function
+
+[D - Yet Another Recursive Function](https://atcoder.jp/contests/abc275/tasks/abc275_d)（<span style="color: brown">difficulty : 606</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// すぐ書く
+```
+
+</details>
+
+### ABC340 C - Divide and Divide
+
+[C - Divide and Divide](https://atcoder.jp/contests/abc340/tasks/abc340_c)（<span style="color: brown">difficulty : 528</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc340/tasks/abc340_c
+
+use std::collections::HashMap;
+
+fn calc(n: usize, h: &mut HashMap<usize, usize>) -> usize {
+    if n < 2 {
+        return 0;
+    }
+
+    if let Some(x) = h.get(&n) {
+        return *x;
+    }
+
+    let a = n/2;
+    let b = if n % 2 == 0 { n / 2 } else { n / 2 + 1 };
+
+    let num = n + calc(a, h) + calc(b, h);
+    h.entry(n).or_insert(num);
+
+    return num;
+}
+
+pub fn run(n: usize) -> usize {
+    let mut hash_map: HashMap<usize, usize> = HashMap::new();
+
+    calc(n, &mut hash_map)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 5),
+            TestCase(340, 2888),
+            TestCase(100000000000000000, 5655884811924144128),
+        ];
+
+        for TestCase(n, expected) in tests {
+            assert_eq!(run(n), expected);
+        }
+    }
+}
+```
+
+</details>
+
+
 ## ユークリッドの互除法
 
-[AtCoder 版！マスター・オブ・整数 (最大公約数編)](https://qiita.com/drken/items/0c88a37eec520f82b788)
+[atcoder 版！マスター・オブ・整数 (最大公約数編)](https://qiita.com/drken/items/0c88a37eec520f82b788)
 
-### アルゴリズムと数学　演習問題集 015 - Calculate GCD
+### アルゴリズムと数学　演習問題集 015 - calculate gcd
 
-[015 - Calculate GCD](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_o)
+[015 - calculate gcd](https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_o)
 
 <details>
 <summary>コード例を見る</summary>
@@ -556,9 +631,9 @@ fn main() {
 ```
 </details>
 
-### ARC105 B - MAX-=min
+### arc105 b - max-=min
 
-[B - MAX-=min](https://atcoder.jp/contests/arc105/tasks/arc105_b)（<span style="color: gray">Difficulty : 366</span>）
+[b - max-=min](https://atcoder.jp/contests/arc105/tasks/arc105_b)（<span style="color: gray">difficulty : 366</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -574,7 +649,7 @@ fn gcd(a: usize, b: usize) -> usize {
     }
 }
 
-fn run(n: usize, a: Vec<usize>) -> usize {
+fn run(n: usize, a: vec<usize>) -> usize {
     let mut ans = a[0];
 
     for b in 1..a.len() {
@@ -597,9 +672,9 @@ mod tests {
 ```
 </details>
 
-### ABC109 C - Skip
+### abc109 c - skip
 
-[C - Skip](https://atcoder.jp/contests/abc109/tasks/abc109_c)（<span style="color: brown">Difficulty : 542</span>）
+[c - skip](https://atcoder.jp/contests/abc109/tasks/abc109_c)（<span style="color: brown">difficulty : 542</span>）
 
 <details>
 <summary>コード例を見る</summary>
