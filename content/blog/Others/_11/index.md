@@ -1,93 +1,95 @@
 ---
-title: "[メモ]Actix WebでAPIサーバーを立てる"
-postdate: "2023-06-10"
-update: "2023-06-10"
+title: "[下書き]今更のReact総復習"
+postdate: "2024-03-30"
+update: "2024-03-30"
 seriesName: "その他"
 seriesSlug: "Others"
-description: "RustのWebフレームワークであるActix Webに関するメモです。"
-tags: ["Rust", "Actix Web"]
-keywords: ["Rust", "Actix Web"]
-published: false
+description: "今更Reactを総復習します。"
+tags: ["React"]
+keywords: ["React"]
+published: true
 ---
 
-# Actix Web入門
+## コンポーネント
 
-以前から、メインではないにしろRustを書いているのですが、AtCoderの問題を解くとかローカルで動くものばかりなので、外に公開できるものを作ってみたいと思いました。
+propsとstateはコンポーネントで値（状態 ≒ state）を扱う。propsは引数、stateはコンポーネントのローカル変数。
 
-今回はRustのフレームワークの中でメジャーであると思われるActix Webを利用しAPIサーバーを立てる手順を残したいと思います。極力最小構成で行くつもりです。
 
-[Actix](https://actix.rs/)
+propsにはいろんな型の値を渡せる（プリミティブ & オブジェクト）。
 
-現在進行形で勉強中なので適宜記事は追記されます。
+```jsx
+const Child = (props) => {
+  console.log(props)
 
-現在はPostgreSQLからデータを取得、JSONで返すという所までは進んでいます。これをどうやってデプロイしようかと悩んでいるところです。
-
-## Rustプロジェクト作成
-
-まずは`cargo new <プロジェクト名>`でプロジェクトを作成します。
-
-```bash
-$ cargo new web-server
-     Created binary (application) `web-server` package
-```
-
-作成されたディレクトリに移動し、`cargo run`を実行し`Hello World`が返ってくればOKデス。
-
-```bash
-$ cargo run
-   Compiling web-server v0.1.0 (C:\github\LearningRust\web-server)
-    Finished dev [unoptimized + debuginfo] target(s) in 0.73s
-     Running `target\debug\web-server.exe`
-Hello, world!
-```
-
-## actx-webでサーバー起動
-
-次に、Cargo.tomlに`actix-web = "4"`を追記します。
-
-```toml
-[package]
-name = "web-server"
-version = "0.1.0"
-edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
-[dependencies]
-actix-web = "4"
-```
-
-次に、main.rsを以下の通りに書き換えます。
-
-```rust
-use actix_web::{get, App, HttpResponse, HttpServer, Responder};
-
-#[get("/")]
-async fn hello() -> impl Responder {
-    HttpResponse::Ok().body("Hello world!")
+  return (
+    <>
+      <p>id: {props.obj.id}</p>
+      <p>name: {props.obj.name}</p>
+    </>
+  )
 }
 
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| {
-        App::new()
-            .service(hello)
-    })
-    .bind(("127.0.0.1", 8080))?
-    .run()
-    .await
+const App = () => {
+  return (
+    <Child obj={{ id: 1, name: "kento" }} />
+  )
 }
 ```
 
-再度、`cargo run`を実行します。
+分割代入で受け取る。
 
-```bash
-$ cargo run
-   Compiling web-server v0.1.0 (C:\github\LearningRust\web-server)
-    Finished dev [unoptimized + debuginfo] target(s) in 5.91s
-     Running `target\debug\web-server.exe`
+```jsx
+const Child = ({ obj: { id, name }}) => {
+  return (
+    <>
+      <p>id: {id}</p>
+      <p>name: {name}</p>
+    </>
+  )
+}
+
+const App = () => {
+  return (
+    <Child obj={{ id: 1, name: "kento" }} />
+  )
+}
 ```
 
-この状態でブラウザーで`localhost:8080`にアクセスしすれば、`Hello World!`という文字列が表示されます。
+TypeScriptでの型定義。
 
-https://zenn.dev/aula/articles/64fa0bebb99109
+```tsx
+const Child = ({ obj: { id, name }}: { obj: { id: number, name: string }}) => {
+  return (
+    <>
+      <p>id: {id}</p>
+      <p>name: {name}</p>
+    </>
+  )
+}
+```
+
+## useState
+
+```jsx
+const App = () => {
+  const [count, setCount] = useState(0)
+
+  return (
+    <>
+      <p>count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </>
+  )
+}
+```
+
+
+## コンポーネントが再レンダリングされるタイミング（詳しく書く）
+
+- stateが変化した時
+- propsが変化した時
+- 親コンポーネントが再レンダリングされた時
+
+## 参考
+
+[>Vueユーザー「あれ、ReactでonClickが動かない。。」のワケ - Qiita](https://qiita.com/shiori_hoshimi/items/1179abac2e017ef20a03)
