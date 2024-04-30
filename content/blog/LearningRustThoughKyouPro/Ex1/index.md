@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-02-26"
+update: "2024-04-30"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1318,6 +1318,60 @@ mod tests {
         assert_eq!(String::from("nyaan"), run(4, "naan"));
         assert_eq!(String::from("near"), run(4, "near"));
         assert_eq!(String::from("nyationyal"), run(8, "national"));
+    }
+}
+```
+</details>
+
+
+### ABC351 C - Merge the balls
+
+[C - Merge the balls](https://atcoder.jp/contests/abc351/tasks/abc351_c)（<span style="color: gray">Difficulty : 228</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc351/tasks/abc351_c
+
+pub fn run(_n: usize, a: Vec<usize>) -> usize {
+    a.into_iter()
+        .fold(Vec::new(), |mut stack, num| {
+            stack.push(num);
+
+            loop {
+                let len = stack.len();
+
+                if len > 1 && stack[len-2] == stack[len-1] {
+                    let i = stack[len-1];
+
+                    stack.truncate(len-2);
+
+                    stack.push(i+1);
+                } else {
+                    break stack;
+                }
+            }
+        })
+        .len()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<usize>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(7 , vec![2, 1, 1, 3, 5, 3, 3], 3),
+            TestCase(5, vec![0, 0, 0, 1, 2], 4),
+        ];
+
+        for TestCase(n, a, expected) in tests {
+            assert_eq!(run(n, a), expected);
+        }
     }
 }
 ```
