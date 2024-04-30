@@ -10,6 +10,10 @@ keywords: ["React"]
 published: true
 ---
 
+# 復習のReact
+
+基本的にJavaScriptで書くが、必要があればTypeScript版のコードを掲載する。
+
 ## コンポーネント
 
 propsとstateはコンポーネントで値（状態 ≒ state）を扱う。propsは引数、stateはコンポーネントのローカル変数。
@@ -83,12 +87,57 @@ const App = () => {
 }
 ```
 
+```tsx
+type Book = {
+  id: number,
+  name: string
+}
+
+const books = [
+  { id: 1, name: "kento" },
+  { id: 2, name: "kouta" },
+  { id: 3, name: "nao" },
+  { id: 4, name: "miku" },
+]
+
+const Books = ({ books }: { books: Book[] }) => {
+  return (
+    <>
+      {books.map(({id, name}) => (
+        <Book id={id} name={name} key={id} />
+      ))}
+    </>
+  )
+}
+
+const Book = ({ id, name }: Book) => {
+  return (
+    <>
+      <p>id: {id}, name: {name}</p>
+    </>
+  )
+}
+
+const App = () => {
+  return (
+    <Books books={books} />
+  )
+}
+```
 
 ## コンポーネントが再レンダリングされるタイミング（詳しく書く）
 
 - stateが変化した時
 - propsが変化した時
 - 親コンポーネントが再レンダリングされた時
+
+## key属性
+
+## children
+
+ReactNodeで型定義?
+
+参考 : [Reactのchildrenの型で子コンポーネントを制御する（したかった）](https://zenn.dev/mya_ake/articles/5517a5001db48e)
 
 ## 参考
 
