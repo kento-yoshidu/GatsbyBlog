@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-04-30"
+update: "2024-05-11"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -23,7 +23,7 @@ published: true
 |[全探索](#全探索)|[スタック](#スタック)|[文字列操作](#文字列操作)|
 |[約数列挙](#約数列挙)|[HashMap](#hashmap)|[最小公倍数](#最小公倍数)|
 |[bit全探索](#bit全探索)|[HashSet](#hashset)|[回文判定](#回文判定)|
-|[再帰関数](#再帰関数)| |[n進数](#n進数)|
+|[再帰関数](#再帰関数)|[BTreeSet](#btreeset)|[n進数](#n進数)|
 |[メモ化再帰](#メモ化再帰)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
@@ -1817,6 +1817,71 @@ mod tests {
 
 状態が変化するものはスタックで扱います。状態が変化するたびに最初から走査するのではなく、スタックを上手く利用して計算量を削減します。
 -->
+
+## BTreeSet
+
+### ABC352 D - Permutation Subsequence
+
+[D - Permutation Subsequence](https://atcoder.jp/contests/abc352/tasks/abc352_d)（<span style="color: brown">Difficulty : 714</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc352/tasks/abc352_d
+
+use std::collections::BTreeSet;
+
+pub fn run(n: usize, k: usize, p: Vec<usize>) -> usize {
+    let mut vec = vec![0; n];
+
+    for (i, num) in p.iter().enumerate() {
+        vec[num-1] = i+1;
+    }
+
+    let mut btree_set = BTreeSet::new();
+
+    let mut ans = std::usize::MAX;
+
+    for num in vec.iter().take(k) {
+        btree_set.insert(num);
+    }
+
+    for i in 0..n {
+        if i >= k {
+            btree_set.remove(&vec[i-k]);
+        }
+
+        btree_set.insert(&vec[i]);
+
+        ans = ans.min(**btree_set.last().unwrap() - **btree_set.first().unwrap());
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<usize>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(4, 2, vec![2, 3, 1, 4], 1),
+            TestCase(4, 1, vec![2, 3, 1, 4], 0),
+            TestCase(10, 5, vec![10, 1, 6, 8, 7, 2, 5, 9, 3, 4], 5),
+        ];
+
+        for TestCase(n, k, p, expected) in tests {
+            assert_eq!(run(n, k, p), expected);
+        }
+    }
+}
+```
+
+</details>
 
 # その他
 
