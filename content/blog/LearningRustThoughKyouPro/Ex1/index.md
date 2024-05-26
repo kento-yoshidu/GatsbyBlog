@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-05-11"
+update: "2024-05-26"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -20,11 +20,12 @@ published: true
 
 |アルゴリズム|データ構造|その他|
 |---|---|---|
-|[全探索](#全探索)|[スタック](#スタック)|[文字列操作](#文字列操作)|
-|[約数列挙](#約数列挙)|[HashMap](#hashmap)|[最小公倍数](#最小公倍数)|
-|[bit全探索](#bit全探索)|[HashSet](#hashset)|[回文判定](#回文判定)|
-|[再帰関数](#再帰関数)|[BTreeSet](#btreeset)|[n進数](#n進数)|
-|[メモ化再帰](#メモ化再帰)|
+|[全探索](#全探索)|[累積和](#累積和)|[文字列操作](#文字列操作)|
+|[バブルソート](#バブルソート)|[スタック](#スタック)|[最小公倍数](#最小公倍数)|
+|[約数列挙](#約数列挙)|[HashSet](#hashset)|[回文判定](#回文判定)|
+|[bit全探索](#bit全探索)|[HashMap](#hashmap)|[n進数](#n進数)|
+|[再帰関数](#再帰関数)|[BTreeSet](#btreeset)|
+|[メモ化再帰](#メモ化再帰)|[BTreeMap](#btreemap)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -75,45 +76,77 @@ mod tests {
 ```
 </details>
 
-## 累積和
+## バブルソート
 
-### ABC099 B - Stone Monument
+### ABC264 D - "redocta".swap(i,i+1)
 
-[B - Stone Monument](https://atcoder.jp/contests/abc099/tasks/abc099_b)
+[D - "redocta".swap(i,i+1)](https://atcoder.jp/contests/abc264/tasks/abc264_d)（<span style="color: brown">Difficulty : 414</span>）
 
 <details>
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc099/tasks/abc099_b
+// https://atcoder.jp/contests/abc264/tasks/abc264_d
 
-pub fn run(a: usize, b: usize) -> usize {
-    let mut cum_sum = Vec::new();
+pub fn run(s: &str) -> usize {
+    let mut ans = 0;
 
-    for i in 0..=(b-a) {
-        if i == 0 {
-            cum_sum.push(i)
-        } else {
-            cum_sum.push(cum_sum[i-1] + i);
+    let mut vec: Vec<usize> = s.chars()
+        .map(|c| {
+            match c {
+                'a' => 0,
+                't' => 1,
+                'c' => 2,
+                'o' => 3,
+                'd' => 4,
+                'e' => 5,
+                'r' => 6,
+                _ => unreachable!(),
+            }
+        })
+        .collect();
+
+    for i in 0..7 {
+        let mut flag = true;
+
+        for j in 0..7-i-1 {
+            if vec[j] > vec[j+1] {
+                vec.swap(j, j+1);
+                ans += 1;
+                flag = false;
+            }
+        }
+
+        if flag == true {
+            return ans;
         }
     }
 
-    *cum_sum.iter().last().unwrap() - b
+    ans
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
+    struct TestCase(&'static str, usize);
+
     #[test]
     fn test() {
-        assert_eq!(2, run(8, 13));
-        assert_eq!(1, run(54, 65));
+        let tests = [
+            TestCase("catredo", 8),
+            TestCase("atcoder", 0),
+            TestCase("redocta", 21),
+        ];
+
+        for TestCase(s, expected) in tests {
+            assert_eq!(run(s), expected);
+        }
     }
 }
 ```
-</details>
 
+</details>
 
 ## 約数列挙
 
@@ -1277,6 +1310,98 @@ mod tests {
 
 # データ構造
 
+## 累積和
+
+### ABC099 B - Stone Monument
+
+[B - Stone Monument](https://atcoder.jp/contests/abc099/tasks/abc099_b)（<span style="color: gray">Difficulty : 131</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc099/tasks/abc099_b
+
+pub fn run(a: usize, b: usize) -> usize {
+    let mut cum_sum = Vec::new();
+
+    for i in 0..=(b-a) {
+        if i == 0 {
+            cum_sum.push(i)
+        } else {
+            cum_sum.push(cum_sum[i-1] + i);
+        }
+    }
+
+    *cum_sum.iter().last().unwrap() - b
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test() {
+        assert_eq!(2, run(8, 13));
+        assert_eq!(1, run(54, 65));
+    }
+}
+```
+</details>
+
+### ABC122 C - GeT AC
+
+[C - GeT AC](https://atcoder.jp/contests/abc122/tasks/abc122_c) （<span style="color: brown">Difficulty : 700</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc122/tasks/abc122_c
+
+pub fn run(n: usize, _q: usize, s: &str, lr: Vec<(usize, usize)>) -> Vec<usize> {
+    let mut ans = Vec::new();
+
+    let mut cum_sum = vec![0; n];
+
+    let chars = s.chars().collect::<Vec<char>>();
+
+    for (i, lr) in chars.windows(2).enumerate() {
+        if lr[0] == 'A' && lr[1] == 'C' {
+            cum_sum[i+1] = cum_sum[i]+1;
+        } else {
+            cum_sum[i+1] = cum_sum[i];
+        }
+    }
+
+    for (l, r) in lr.iter() {
+        ans.push(cum_sum[r-1] - cum_sum[l-1]);
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, &'static str, Vec<(usize, usize)>, Vec<usize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(8, 3, "ACACTACG", vec![(3, 7), (2, 3), (1, 8)], vec![2, 0, 3]),
+        ];
+
+        for TestCase(n, q, s, lr, expected) in tests {
+            assert_eq!(run(n, q, s, lr), expected);
+        }
+    }
+}
+```
+</details>
+
 ## スタック
 
 [スタックとキューを極める！ 〜 考え方と使い所を特集 〜](https://qiita.com/drken/items/6a95b57d2e374a3d3292)
@@ -1879,6 +2004,74 @@ mod tests {
         }
     }
 }
+```
+
+</details>
+
+## BTreeMap
+
+### ABC253 C - Max - Min Query
+
+[C - Max - Min Query](https://atcoder.jp/contests/abc253/tasks/abc253_c)（<span style="color: gray">Difficulty : 518</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc253/tasks/abc253_c
+
+use std::collections::BTreeMap;
+use std::cmp::min;
+
+pub fn run(_q: usize, query: Vec<(usize, Option<usize>, Option<usize>)>) -> Vec<usize> {
+    let mut bt = BTreeMap::new();
+
+    let mut ans = Vec::new();
+
+    for tup in query.iter() {
+        match tup {
+            (1, Some(b), None) => {
+                *bt.entry(b).or_insert(0) += 1;
+            },
+            (2, Some(b), Some(c)) => {
+                if let Some(value) = bt.get_mut(b) {
+                    let subtract_amount = min(*value, *c);
+                    *value -= subtract_amount;
+
+                    if *value == 0 {
+                        bt.remove(b);
+                    }
+                }
+            },
+            (3, None, None) => {
+                ans.push(*bt.iter().next_back().unwrap().0 - *bt.iter().next().unwrap().0);
+            },
+            _ => unreachable!(),
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<(usize, Option<usize>, Option<usize>)>, Vec<usize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(8, vec![(1, Some(3), None), (1, Some(2), None), (3, None, None), (1, Some(2), None), (1, Some(7), None), (3, None, None), (2, Some(2), Some(3)), (3, None, None)], vec![1, 5, 4]),
+            TestCase(4, vec![(1, Some(10000), None), (1, Some(1000), None), (2, Some(100), Some(3)), (1, Some(10), None)], vec![]),
+        ];
+
+        for TestCase(q, query, expected) in tests {
+            assert_eq!(run(q, query), expected);
+        }
+    }
+}
+
 ```
 
 </details>
