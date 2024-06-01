@@ -844,7 +844,44 @@ fn main() {
 ```
 -->
 
-## 続く？
+## 文字列のデータ構造
+
+Rustにおいて、文字列を表すデータ型は、先述した`String`型と、文字列スライス型があります（嘘です。本当はもっとあります）。
+
+文字列スライス型は、以下のコード例のように、文字列をダブルクオテーションで囲って記述すると生成されます。
+
+```rust
+fn main() {
+    let s1 = "hello world";
+}
+```
+
+この文字列スライス型とString型は明確に区別されます。例えば、&str型の引数を持つ関数にString型の値を渡してもコンパイルできません。`&`を付けて参照することで渡すことができます。
+
+```rust
+fn func(str: &str) {
+    println!("{}", str);
+}
+
+fn main() {
+    let s1 = "hello world";
+
+    // OK
+    func(s1);
+
+    // 🦀❌ String型は渡せない
+    // func(String::from("hello world"));
+    //=> expected &str, found String
+
+    // OK。参照することで文字列スライスとして渡せる
+    func(&String::from("hello world"));
+}
+```
+
+文字列スライスはしばしば`&str`と表記されます。`&`がついている通り参照型で、それゆえデータ変更はできません。
+
+文字列リテラルで生成された文字列スライスのデータは、コンパイル時に静的領域に置かれ、プログラムの実行時にメモリーにロードされます。
+---
 
 所有権について勉強した内容をざっと書いてみましたが、やはりまだ分かっていない所があり、用語が正確でなかったりぼやかしてたり、推察を元に書いている部分があります。
 
@@ -881,6 +918,8 @@ fn main() {
 [Rustの所有権（ownership）を語義から理解する - igagurimk2の日記](https://igaguri.hatenablog.com/entry/2019/08/17/184205)
 
 [Rustの可変参照の挙動がわかりにくい - Qiita](https://qiita.com/reismannnr2/items/a7e4ed098bcf0c7ed8d2)
+
+[What are the differences between Rust&#39;s `String` and `str`? - Stack Overflow](https://stackoverflow.com/questions/24158114/what-are-the-differences-between-rusts-string-and-str)
 
 <!--
 ## 共有参照

@@ -1,3 +1,30 @@
+const wait = (time) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      console.log(`time: ${time}`);
+      resolve();
+    }, time) // 受け取ったtimeミリ秒待って出力する
+  })
+}
+
+const main = async () => {
+  const times = [
+    1000,
+    2000,
+    3000,
+    1500
+  ];
+
+  for (const time of times) {
+    await wait(time)
+  }
+
+  console.log("処理が終了しました");
+}
+
+main();
+
+/*
 const square = (arg) => {
   return new Promise((resolve, reject) => {
     if (typeof arg !== "number") {
@@ -59,3 +86,4 @@ const main2 = () => {
 }
 
 console.log(Promise.resolve(4 * 4).state);
+*/
