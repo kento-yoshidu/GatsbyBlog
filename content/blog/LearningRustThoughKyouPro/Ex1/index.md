@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-06-01"
+update: "2024-06-15"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -30,6 +30,7 @@ published: true
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
+|[貪欲法](#貪欲法)|||
 
 # アルゴリズム
 
@@ -1377,6 +1378,68 @@ mod tests {
 ```
 </details>
 
+## 貪欲法
+
+### ABC011 C - 123引き算
+
+[C - 123引き算](https://atcoder.jp/contests/abc011/tasks/abc011_3)（<span style="color: green">🧪 Difficulty : 810</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc011/tasks/abc011_3
+
+pub fn run(n: isize, ng: [isize; 3]) -> &'static str {
+    if ng.contains(&n) {
+        return "NO";
+    }
+
+    let mut cur = n;
+
+    for _ in 0..100 {
+        // 3引いた数がNGじゃないなら3引く
+        // 2, 1も同様
+
+        for j in (1..=3).rev() {
+            if ng.contains(&(cur - j)) {
+                continue;
+            }
+
+            cur -= j;
+            break;
+        }
+
+        if cur <= 0 {
+            return "YES";
+        }
+    }
+
+    "NO"
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(isize, [isize; 3], &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(2, [1, 7, 15], "YES"),
+            TestCase(5, [1, 4, 2], "YES"),
+            TestCase(300, [57, 121, 244], "NO"),
+        ];
+
+        for TestCase(n, ng, expected) in tests {
+            assert_eq!(run(n, ng), expected);
+        }
+    }
+}
+```
+</details>
+
 # データ構造
 
 ## 累積和
@@ -1384,7 +1447,6 @@ mod tests {
 ### ABC099 B - Stone Monument
 
 [B - Stone Monument](https://atcoder.jp/contests/abc099/tasks/abc099_b)（<span style="color: gray">Difficulty : 131</span>）
-
 
 <details>
 <summary>コード例を見る</summary>
