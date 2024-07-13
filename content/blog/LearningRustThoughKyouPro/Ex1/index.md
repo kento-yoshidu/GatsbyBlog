@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-06-15"
+update: "2024-07-13"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -2299,6 +2299,56 @@ mod tests {
 最大公約数は[ユークリッドの互除法](#%E3%83%A6%E3%83%BC%E3%82%AF%E3%83%AA%E3%83%83%E3%83%89%E3%81%AE%E4%BA%92%E9%99%A4%E6%B3%95)を参照ください。
 
 </aside>
+
+### ARC110 A - Redundant Redundancy
+
+[A - Redundant Redundancy](https://atcoder.jp/contests/arc110/tasks/arc110_a)（<span style="color: gray">Difficulty : 120</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/arc110/tasks/arc110_a
+
+fn gcd(m: usize, n: usize) -> usize {
+    if n == 0 {
+        m
+    } else {
+        gcd(n, m % n)
+    }
+}
+
+pub fn run(n: usize) -> usize {
+    let mut num = 1;
+
+    for i in 2..=n {
+        num = num / gcd(num, i) * i;
+    }
+
+    num + 1
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 7),
+            TestCase(10, 2521),
+        ];
+
+        for TestCase(n, expected) in tests {
+            assert_eq!(run(n), expected);
+        }
+    }
+}
+```
+
+</details>
 
 ## 回文判定
 
