@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-07-13"
+update: "2024-07-22"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -2634,6 +2634,74 @@ mod tests {
     }
 }
 ```
+</details>
+
+### ABC363 C - Avoid K Palindrome 2
+
+[C - Avoid K Palindrome 2 ](https://atcoder.jp/contests/abc363/tasks/abc363_c)（<span style="color: brown">Difficulty : 602</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc363/tasks/abc363_c
+
+use itertools::Itertools;
+use std::collections::HashSet;
+
+fn check(chars: &[char]) -> bool {
+    chars.iter().eq(chars.iter().rev())
+}
+
+fn run(n: usize, k: usize, s: &str) -> usize {
+    let chars: Vec<char> = s.chars().collect();
+
+    // 文字列の重複を防ぐ
+    let mut hash_set: HashSet<Vec<char>> = HashSet::new();
+
+    for str in chars.into_iter().permutations(n) {
+        hash_set.insert(str);
+    }
+
+    let mut ans = 0;
+
+    'outer: for str in hash_set.into_iter() {
+        // k文字の部分文字列生成
+        for arr in str.windows(k) {
+            // 部分文字列に一つでも回文があったら次の文字に進む
+            if check(arr) == true {
+                continue 'outer;
+            }
+        }
+
+        ans += 1;
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, &'static str, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 2, "aab", 1),
+            TestCase(5, 3, "zzyyx", 16),
+            TestCase(10, 5, "abcwxyzyxw", 440640),
+        ];
+
+        for TestCase(n, k, s, expected) in tests {
+            assert_eq!(run(n, k, s), expected);
+        }
+    }
+}
+
+```
+
 </details>
 
 ## n進数
