@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-07-22"
+update: "2024-08-04"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -23,10 +23,11 @@ published: true
 |[全探索](#全探索)|[累積和](#累積和)|[文字列操作](#文字列操作)|
 |[バブルソート](#バブルソート)|[スタック](#スタック)|[最小公倍数](#最小公倍数)|
 |[約数列挙](#約数列挙)|[HashSet](#hashset)|[回文判定](#回文判定)|
-|[bit全探索](#bit全探索)|[HashMap](#hashmap)|[n進数](#n進数)|
-|[再帰関数](#再帰関数)|[BTreeSet](#btreeset)|
-|[メモ化再帰](#メモ化再帰)|[BTreeMap](#btreemap)|
-|[深さ優先探索](#深さ優先探索)|||
+|[二分探索](#二分探索)|[HashMap](#hashmap)|[n進数](#n進数)|
+|[bit全探索](#bit全探索)|[BTreeSet](#btreeset)|
+|[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
+|[メモ化再帰](#メモ化再帰)|
+|[深さ優先探索](#深さ優先探索)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -143,6 +144,76 @@ mod tests {
 
         for TestCase(s, expected) in tests {
             assert_eq!(run(s), expected);
+        }
+    }
+}
+```
+
+</details>
+
+## 二分探索
+
+### ABC365 C - Transportation Expenses
+
+[C - Transportation Expenses](https://atcoder.jp/contests/abc365/tasks/abc365_c)（<span style="color: gray">Difficulty : 269</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc365/tasks/abc365_c
+
+use std::cmp::min;
+
+fn check(a: &Vec<usize>, x: usize, m: usize) -> bool {
+    let mut total = 0;
+
+    for n in a.iter() {
+        total += min(n, &x);
+    }
+
+    total <= m
+}
+
+pub fn run(_n: usize, m: usize, a: Vec<usize>) -> String {
+    let sum: usize = a.iter().sum();
+
+    if sum <= m {
+        return "infinite".to_string();
+    }
+
+    let mut l = 0;
+    let mut r = std::usize::MAX;
+
+    while l+1 < r {
+        let tmp = (l+r)/2;
+
+        if check(&a, tmp, m) == true {
+            l = tmp;
+        } else {
+            r = tmp;
+        }
+    }
+
+    l.to_string()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<usize>, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(4, 8, vec![1, 3, 2, 4], "2"),
+            TestCase(3, 20, vec![5, 3, 2], "infinite"),
+            TestCase(10, 23, vec![2, 5, 6, 5, 2, 1, 7, 9, 7, 2], "2"),
+        ];
+
+        for TestCase(n, m, a, expected) in tests {
+            assert_eq!(run(n, m, a), expected);
         }
     }
 }
