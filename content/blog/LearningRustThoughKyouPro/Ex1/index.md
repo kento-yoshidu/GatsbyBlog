@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-08-12"
+update: "2024-09-07"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -2098,6 +2098,118 @@ mod tests {
 
 </details>
 
+### ABC235 C - The Kth Time Query
+
+[C - The Kth Time Query](https://atcoder.jp/contests/abc235/tasks/abc235_c)（<span style="color: gray">Difficulty : 249</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc235/tasks/abc235_c
+
+use std::collections::HashMap;
+
+pub fn run(_n: usize, _q: usize, a: Vec<usize>, xk: Vec<(usize, usize)>) -> Vec<isize> {
+    let mut hash_map = HashMap::new();
+
+    for (i, n) in a.iter().enumerate() {
+        hash_map.entry(n).or_insert(Vec::new()).push(i+1);
+    }
+
+    xk.into_iter()
+        .map(|(x, k)| {
+            if let Some(arr) = hash_map.get(&x) {
+                if let Some(i) = arr.get(k-1) {
+                    *i as isize
+                } else {
+                    -1
+                }
+            } else {
+                -1
+            }
+        })
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<usize>, Vec<(usize, usize)>, Vec<isize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(6, 8, vec![1, 1, 2, 3, 1, 2], vec![(1, 1), (1, 2), (1, 3), (1, 4), (2, 1), (2, 2), (2, 3), (4, 1)], vec![1, 2, 5, -1, 3, 6, -1, -1]),
+            TestCase(3, 2, vec![0, 1000000000, 999999999], vec![(1000000000, 1), (123456789, 1)], vec![2, -1]),
+        ];
+
+        for TestCase(n, q, a, xk, expected) in tests {
+            assert_eq!(run(n, q, a, xk), expected);
+        }
+    }
+}
+
+```
+
+</details>
+
+### ABC194 C - Squared Error
+
+[C - Squared Error](https://atcoder.jp/contests/abc194/tasks/abc194_c)（<span style="color: gray">Difficulty : 386</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc194/tasks/abc194_c
+
+use std::collections::HashMap;
+
+pub fn run(_n: usize, a: Vec<isize>) -> isize {
+    let mut hash_map = HashMap::new();
+
+    for i in a {
+        *hash_map.entry(i).or_insert(0) += 1;
+    }
+
+    let vec: Vec<(isize, usize)> = hash_map.into_iter().collect();
+
+    let mut ans = 0;
+
+    for i in 0..vec.len() {
+        for j in i+1..vec.len() {
+            ans += (vec[i].0 - vec[j].0).pow(2) * vec[i].1 as isize * vec[j].1 as isize;
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<isize>, isize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, vec![2, 8, 4], 56),
+            TestCase(5, vec![-5, 8, 9, -4, -3], 950),
+        ];
+
+        for TestCase(n, a, expected) in tests {
+            assert_eq!(run(n, a), expected);
+        }
+    }
+}
+
+```
+
+</details>
+
 ## HashSet
 
 ### ABC166 B - Trick or Treat
@@ -2184,6 +2296,69 @@ mod tests {
         assert_eq!(String::from("Yes"), run("atcoder", "atcoder"));
     }
 }
+```
+</details>
+
+### ABC278 C - FF 
+
+[C - FF](https://atcoder.jp/contests/abc278/tasks/abc278_c)（<span style="color: gray">Difficulty : 327</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc278/tasks/abc278_c
+
+use std::collections::HashSet;
+
+fn run(_n: usize, _q: usize, tab: Vec<(usize, usize, usize)>) -> Vec<&'static str> {
+    let mut hash_set = HashSet::new();
+
+    tab.into_iter()
+        .filter_map(|(t, a, b)| {
+            match t {
+                1 => {
+                    hash_set.insert((a, b));
+                    None
+                },
+                2 => {
+                    hash_set.remove(&(a, b));
+                    None
+                },
+                3 => {
+                    if hash_set.contains(&(a, b)) && hash_set.contains(&(b, a)) {
+                        Some("Yes")
+                    } else {
+                        Some("No")
+                    }
+                },
+                _ => unreachable!(),
+            }
+        })
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<(usize, usize, usize)>, Vec<&'static str>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 9, vec![(1, 1, 2), (3, 1, 2), (1, 2, 1), (3, 1, 2), (1, 2, 3), (1, 3, 2), (3, 1, 3), (2, 1, 2), (3, 1, 2)], vec!["No", "Yes", "No", "No"]),
+            TestCase(2, 8, vec![(1, 1, 2), (1, 2, 1), (3, 1, 2), (1, 1, 2), (1, 1, 2), (1, 1, 2), (2, 1, 2), (3, 1, 2)], vec!["Yes", "No"]),
+            TestCase(10, 30, vec![(3, 1, 6), (3, 5, 4), (1, 6, 1), (3, 1, 7), (3, 8, 4), (1, 1, 6), (2, 4, 3), (1, 6, 5), (1, 5, 6), (1, 1, 8), (1, 8, 1), (2, 3, 10), (1, 7, 6), (3, 5, 6), (1, 6, 7), (3, 6, 7), (1, 9, 5), (3, 8, 6), (3, 3, 8), (2, 6, 9), (1, 7, 1), (3, 10, 8), (2, 9, 2), (1, 10, 9), (2, 6, 10), (2, 6, 8), (3, 1, 6), (3, 1, 8), (2, 8, 5), (1, 9, 10)], vec!["No", "No", "No", "No", "Yes", "Yes", "No", "No", "No", "Yes", "Yes"]),
+        ];
+
+        for TestCase(n, q, tab, expected) in tests {
+            assert_eq!(run(n, q, tab), expected);
+        }
+    }
+}
+
 ```
 </details>
 
