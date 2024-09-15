@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-09-07"
+update: "2024-09-15"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -32,6 +32,7 @@ published: true
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
 |[貪欲法](#貪欲法)|||
+|[尺取り法](#尺取り法)|
 
 # アルゴリズム
 
@@ -1511,7 +1512,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc011/tasks/abc011_3
 
-pub fn run(n: isize, ng: [isize; 3]) -> &'static str {
+fn run(n: isize, ng: [isize; 3]) -> &'static str {
     if ng.contains(&n) {
         return "NO";
     }
@@ -1561,6 +1562,61 @@ mod tests {
 ```
 </details>
 
+## 尺取り法
+
+### ABC038 C - 単調増加
+
+[C - 単調増加](https://atcoder.jp/contests/abc038/tasks/abc038_c)（<span style="color: green">Difficulty : 894</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc038/tasks/abc038_c
+
+fn run(n: usize, a: Vec<usize>) -> usize {
+    let mut ans = 0;
+    let mut r = 0;
+
+    for l in 0..n {
+        while r < n && (r <= l || a[r] > a[r-1]) {
+            r += 1;
+        }
+
+        ans += r - l;
+
+        if l == r {
+            r += 1;
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<usize>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(5, vec![1, 2, 3, 2, 1], 8),
+            TestCase(4, vec![1, 2, 3, 4], 10),
+            TestCase(6, vec![3, 3, 4, 1, 2, 2], 8),
+            TestCase(6, vec![1, 5, 2, 3, 4, 2], 10),
+        ];
+
+        for TestCase(n, a, expected) in tests {
+            assert_eq!(run(n, a), expected);
+        }
+    }
+}
+```
+
+</details>
+
 # データ構造
 
 ## 累積和
@@ -1599,6 +1655,55 @@ mod tests {
         assert_eq!(1, run(54, 65));
     }
 }
+```
+</details>
+
+### ABC371 D - 1D Country
+
+[D - 1D Country](https://atcoder.jp/contests/abc371/tasks/abc371_d)（<span style="color: brown">Difficulty : 408</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc371/tasks/abc371_d
+
+fn run(n: usize, x: Vec<isize>, p: Vec<isize>, q: usize, lr: Vec<(isize, isize)>) -> Vec<isize> {
+    let mut cum = vec![0];
+
+    for i in 1..=n {
+        cum.push(cum[i-1] + p[i-1])
+    }
+
+    (0..q)
+        .map(|i| {
+            let l = x.partition_point(|x| *x < lr[i].0);
+            let r = x.partition_point(|x| *x < lr[i].1 + 1);
+            cum[r] - cum[l]
+        })
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<isize>, Vec<isize>, usize, Vec<(isize, isize)>, Vec<isize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(4, vec![1, 3, 5, 7], vec![1, 2, 3, 4], 4, vec![(1, 1), (2, 6), (0, 10), (2, 2)], vec![1, 5, 10, 0]),
+            TestCase(7, vec![-10, -5, -3, -1, 0, 1, 4], vec![2, 5, 6, 5, 2, 1, 7], 8, vec![(-7, 7), (-1, 5), (-10, -4), (-8, 10), (-5, 0), (-10, 5), (-8, 7), (-8, -3)], vec![26, 15, 7, 26, 18, 28, 26, 11]),
+        ];
+
+        for TestCase(n, x, p, q, lr, expected) in tests {
+            assert_eq!(run(n, x, p, q, lr), expected);
+        }
+    }
+}
+
 ```
 </details>
 
@@ -2210,6 +2315,75 @@ mod tests {
 
 </details>
 
+### ABC278 D - All Assign Point Add
+
+[D - All Assign Point Add](https://atcoder.jp/contests/abc278/tasks/abc278_d)（<span style="color: brown">Difficulty : 559</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc278/tasks/abc278_d
+
+use std::collections::HashMap;
+
+fn run(n: usize, a: Vec<usize>, _q: usize, q_vec: Vec<(usize, Option<usize>, Option<usize>)>) -> Vec<usize> {
+    let mut hash_map = HashMap::new();
+
+    for i in 1..=n {
+        hash_map.insert(i, a[i-1]);
+    }
+
+    let mut base = 0;
+
+    let mut ans: Vec<usize> = Vec::new();
+
+    for (a, b, c) in q_vec.iter() {
+        match a {
+            1 => {
+                base = b.unwrap();
+                hash_map.clear()
+            },
+            2 => {
+                hash_map.entry(b.unwrap())
+                    .and_modify(|n| {
+                        *n += c.unwrap();
+                    })
+                    .or_insert(c.unwrap());
+            },
+            3 => {
+                ans.push(base + hash_map.get(&(b.unwrap())).unwrap_or(&0));
+            },
+            _ => unreachable!(),
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<usize>, usize, Vec<(usize, Option<usize>, Option<usize>)>, Vec<usize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(5, vec![3, 1, 4, 1, 5], 6, vec![(3, Some(2), None), (2, Some(3), Some(4)), (3, Some(3), None), (1, Some(1), None), (2, Some(3), Some(4)), (3, Some(3), None)], vec![1, 8, 5]),
+            TestCase(1, vec![1000000000], 8, vec![(2, Some(1),Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (3, Some(1), None)], vec![8000000000]),
+            TestCase(10, vec![1, 8, 4, 15, 7, 5, 7, 5, 8, 0], 20, vec![(2, Some(7), Some(0)), (3, Some(7), None), (3, Some(8), None), (1, Some(7), None), (3, Some(3), None), (2, Some(4), Some(4)), (2, Some(4), Some(9)), (2, Some(10), Some(5)), (1, Some(10), None), (2, Some(4), Some(2)), (1, Some(10), None), (2, Some(3), Some(1)), (2, Some(8), Some(11)), (2, Some(3), Some(14)), (2, Some(1), Some(9)), (3, Some(8), None), (3, Some(8), None), (3, Some(1), None), (2, Some(6), Some(5)), (3, Some(7), None)], vec![7, 5, 7, 21, 21, 19, 10]),
+        ];
+
+        for TestCase(n, a, q, q_vec, expected) in tests {
+            assert_eq!(run(n, a, q, q_vec), expected);
+        }
+    }
+}
+```
+
+</details>
+
 ## HashSet
 
 ### ABC166 B - Trick or Treat
@@ -2297,6 +2471,61 @@ mod tests {
     }
 }
 ```
+</details>
+
+### ABC251 C - Poem Online Judge
+
+[C - Poem Online Judge](https://atcoder.jp/contests/abc251/tasks/abc251_c)（<span style="color: gray">Difficulty : 246</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc251/tasks/abc251_c
+
+use std::collections::HashSet;
+
+fn run(_n: usize, st: Vec<(&str, usize)>) -> usize {
+    let mut hash_set = HashSet::new();
+
+    let mut pos = 0;
+    let mut score = 0;
+
+    for (i, (s, t)) in st.into_iter().enumerate() {
+        if hash_set.contains(&s) {
+            continue;
+        }
+
+        hash_set.insert(s);
+
+        if t > score {
+            pos = i+1;
+            score = t;
+        }
+    }
+
+    pos
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<(&'static str, usize)>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, vec![("aaa", 10), ("bbb", 20), ("aaa", 30)], 2),
+        ];
+
+        for TestCase(n, st, expected) in tests {
+            assert_eq!(run(n, st), expected);
+        }
+    }
+}
+```
+
 </details>
 
 ### ABC278 C - FF 
