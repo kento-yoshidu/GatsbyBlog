@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-09-18"
+update: "2024-10-11"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -21,11 +21,12 @@ published: true
 |アルゴリズム|データ構造|その他|
 |---|---|---|
 |[全探索](#全探索)|[累積和](#累積和)|[文字列操作](#文字列操作)|
-|[バブルソート](#バブルソート)|[スタック](#スタック)|[最小公倍数](#最小公倍数)|
-|[約数列挙](#約数列挙)|[HashSet](#hashset)|[回文判定](#回文判定)|
-|[二分探索](#二分探索)|[HashMap](#hashmap)|[n進数](#n進数)|
-|[bit全探索](#bit全探索)|[BTreeSet](#btreeset)|
-|[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
+|[工夫のいる全探索](#バブルソート)|[スタック](#スタック)|[最小公倍数](#最小公倍数)|
+|[バブルソート](#バブルソート)|[HashSet](#hashset)|[回文判定](#回文判定)|
+|[約数列挙](#約数列挙)|[HashMap](#hashmap)|[n進数](#n進数)|
+|[二分探索](#二分探索)|[BTreeSet](#btreeset)|
+|[bit全探索](#bit全探索)|[BTreeMap](#btreemap)|
+|[再帰関数](#再帰関数)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索](#深さ優先探索)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
@@ -79,6 +80,62 @@ mod tests {
 }
 ```
 </details>
+
+## 工夫のいる全探索
+
+とりえるパターンを全て試すとTLEになるので、何らかの工夫を凝らして計算量を減らすタイプの全探索です。
+
+### JOI 2023/2024 二次予選 A - カードゲーム 2 (Card Game 2)
+
+[A - カードゲーム 2 (Card Game 2)](https://atcoder.jp/contests/joi2024yo2/tasks/joi2024_yo2_a)（<span style="color: gray">Difficultyなし</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/joi2024yo2/tasks/joi2024_yo2_a
+
+fn run(_n: usize, a: Vec<usize>) -> &'static str {
+    let mut vec = vec![false; 200_000];
+
+    for i in a {
+        vec[i-1] = true;
+    }
+
+    for i in 0..200_000-3 {
+        if vec[i] == true && vec[i+3] == true && vec[i+6] == true {
+            return "Yes";
+        }
+    }
+
+    "No"
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<usize>, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, vec![2, 5, 8], "Yes"),
+            TestCase(4, vec![1, 4, 6, 4], "No"),
+            TestCase(8, vec![9, 8, 11, 1, 1, 6, 10, 4], "No"),
+            TestCase(20, vec![2, 15, 4, 30, 6, 8, 11, 27, 14, 3, 16, 26, 19, 2, 23, 21, 18, 13, 28, 6], "Yes"),
+        ];
+
+        for TestCase(n, a, expected) in tests {
+            assert_eq!(run(n, a), expected);
+        }
+    }
+}
+```
+
+</details>
+
+
 
 ## バブルソート
 
@@ -371,6 +428,62 @@ mod tests {
 }
 ```
 </details>
+
+### ABC374 C - Separated Lunch
+
+[C - Separated Lunch](https://atcoder.jp/contests/abc374/tasks/abc374_c)
+
+<details>
+<summary>
+
+```rust
+// https://atcoder.jp/contests/abc374/tasks/abc374_c
+
+use std::cmp::{min, max};
+
+fn run(n: usize, k: Vec<usize>) -> usize {
+    let mut ans = std::usize::MAX;
+
+    for bit in 0..(1 << n) {
+        let mut left = 0;
+        let mut right = 0;
+
+        for i in 0..n {
+            if bit & 1 << i != 0 {
+                left += k[i];
+            } else {
+                right += k[i];
+            }
+        }
+
+        ans = min(ans, max(left ,right));
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<usize>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(5, vec![2, 3, 5, 10, 12], 17),
+            TestCase(2, vec![1, 1], 1),
+            TestCase(6, vec![22, 25, 26, 45, 22, 31], 89),
+        ];
+
+        for TestCase(n, k, expected) in tests {
+            assert_eq!(run(n, k), expected);
+        }
+    }
+}
+```
+
+</summary>
 
 ### ABC182 C - To 3
 
