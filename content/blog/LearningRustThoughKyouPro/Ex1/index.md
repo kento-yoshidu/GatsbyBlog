@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-10-11"
+update: "2024-10-25"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -21,7 +21,7 @@ published: true
 |アルゴリズム|データ構造|その他|
 |---|---|---|
 |[全探索](#全探索)|[累積和](#累積和)|[文字列操作](#文字列操作)|
-|[工夫のいる全探索](#バブルソート)|[スタック](#スタック)|[最小公倍数](#最小公倍数)|
+|[工夫のいる全探索](#工夫のいる全探索)|[スタック](#スタック)|[最小公倍数](#最小公倍数)|
 |[バブルソート](#バブルソート)|[HashSet](#hashset)|[回文判定](#回文判定)|
 |[約数列挙](#約数列挙)|[HashMap](#hashmap)|[n進数](#n進数)|
 |[二分探索](#二分探索)|[BTreeSet](#btreeset)|
@@ -81,6 +81,54 @@ mod tests {
 ```
 </details>
 
+### ABC224 C - Triangle?
+
+[C - Triangle?](https://atcoder.jp/contests/abc224/tasks/abc224_c)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc224/tasks/abc224_c
+
+fn run(n: usize, xy: Vec<(isize, isize)>) -> usize {
+    let mut ans = 0;
+
+    for i in 0..n {
+        for j in i+1..n {
+            for k in j+1..n {
+                if (xy[j].0 - xy[i].0)*(xy[k].1 - xy[i].1) - (xy[k].0 - xy[i].0)*(xy[j].1 - xy[i].1) != 0 {
+                    ans += 1;
+                }
+            }
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<(isize, isize)>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(4, vec![(0, 1), (1, 3), (1, 1), (-1, -1)], 3),
+            TestCase(20, vec![(224, 433), (987654321, 987654321), (2, 0), (6, 4), (314159265, 358979323), (0, 0), (-123456789, 123456789), (-1000000000, 1000000000), (124, 233), (9, -6), (-4, 0), (9, 5), (-7, 3), (333333333, -333333333), (-9, -1), (7, -10), (-1, 5), (324, 633), (1000000000, -1000000000), (20, 0)], 1124),
+        ];
+
+        for TestCase(n, xy, expected) in tests {
+            assert_eq!(run(n, xy), expected);
+        }
+    }
+}
+
+```
+</details>
+
 ## 工夫のいる全探索
 
 とりえるパターンを全て試すとTLEになるので、何らかの工夫を凝らして計算量を減らすタイプの全探索です。
@@ -135,7 +183,53 @@ mod tests {
 
 </details>
 
+### JOI 2022/2023 二次予選 A - 年齢の差 (Age Difference)
 
+[A - 年齢の差 (Age Difference)](https://atcoder.jp/contests/joi2023yo2/tasks/joi2023_yo2_a)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/joi2023yo2/tasks/joi2023_yo2_a
+
+use itertools::Itertools;
+
+fn run(_n: usize, a: Vec<isize>) -> Vec<usize> {
+    let vec: Vec<isize> = a.clone().into_iter().sorted().collect();
+
+    let min = vec.iter().min().unwrap();
+    let max = vec.iter().max().unwrap();
+
+    a.into_iter()
+        .map(|i| {
+            std::cmp::max((i - *min).abs(), (*max - i).abs()) as usize
+        })
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<isize>, Vec<usize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, vec![13, 15, 20], vec![7, 5, 7]),
+            TestCase(2, vec![100, 100], vec![0, 0]),
+            TestCase(10, vec![440894064, 101089692, 556439322, 34369336, 98417847, 216265879, 623843484, 554560874, 247445405, 718003331], vec![406524728, 616913639, 522069986, 683633995, 619585484, 501737452, 589474148, 520191538, 470557926, 683633995]),
+        ];
+
+        for TestCase(n, a, expected) in tests {
+            assert_eq!(run(n, a), expected);
+        }
+    }
+}
+```
+
+</details>
 
 ## バブルソート
 
