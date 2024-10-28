@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-10-25"
+update: "2024-10-27"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -689,6 +689,64 @@ mod tests {
     }
 }
 ```
+</details>
+
+### ARC061 C - たくさんの数式
+
+[C - たくさんの数式](https://atcoder.jp/contests/arc061/tasks/arc061_a)（<span style="color: green">Difficulty : 1089</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc045/tasks/arc061_a
+
+pub fn run(s: &str) -> usize {
+    let len = s.len();
+    let chars: Vec<char> = s.chars().collect();
+
+    let mut ans = 0;
+
+    for bit in 0..(1 << len-1) {
+        let mut current = chars[0].to_string();
+        let mut sum = 0;
+
+        for i in 0..(len-1) {
+            if bit & (1 << i) != 0 {
+                current.push(chars[i+1]);
+            } else {
+                sum += current.parse::<usize>().unwrap();
+                current = chars[i+1].to_string();
+            }
+        }
+
+        sum += current.parse::<usize>().unwrap();
+        ans+= sum;
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(&'static str, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase("125", 176),
+            TestCase("9999999999", 12656242944),
+        ];
+
+        for TestCase(s, expected) in tests {
+            assert_eq!(run(s), expected);
+        }
+    }
+}
+```
+
 </details>
 
 ## 再帰関数
