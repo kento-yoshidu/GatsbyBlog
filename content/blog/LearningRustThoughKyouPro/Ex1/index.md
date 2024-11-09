@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-10-27"
+update: "2024-11-09"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -24,7 +24,7 @@ published: true
 |[工夫のいる全探索](#工夫のいる全探索)|[スタック](#スタック)|[最小公倍数](#最小公倍数)|
 |[バブルソート](#バブルソート)|[HashSet](#hashset)|[回文判定](#回文判定)|
 |[約数列挙](#約数列挙)|[HashMap](#hashmap)|[n進数](#n進数)|
-|[二分探索](#二分探索)|[BTreeSet](#btreeset)|
+|[二分探索](#二分探索)|[BTreeSet](#btreeset)|[周期性](#周期性)|
 |[bit全探索](#bit全探索)|[BTreeMap](#btreemap)|
 |[再帰関数](#再帰関数)|
 |[メモ化再帰](#メモ化再帰)|
@@ -528,7 +528,7 @@ mod tests {
 [C - Separated Lunch](https://atcoder.jp/contests/abc374/tasks/abc374_c)
 
 <details>
-<summary>
+<summary>コード例を見る</summary>
 
 ```rust
 // https://atcoder.jp/contests/abc374/tasks/abc374_c
@@ -577,7 +577,7 @@ mod tests {
 }
 ```
 
-</summary>
+</details>
 
 ### ABC182 C - To 3
 
@@ -3604,6 +3604,49 @@ mod tests {
 
         for TestCase(n, expected) in tests {
             assert_eq!(expected, run(n));
+        }
+    }
+}
+```
+
+</details>
+
+## 周期性
+
+### ABC165 D - Floor Function
+
+[D - Floor Function](https://atcoder.jp/contests/abc165/tasks/abc165_d)（<span style="color: brown">Difficulty : 600</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc165/tasks/abc165_d
+
+use std::cmp::min;
+
+fn run(a: f64, b: f64, n: f64) -> usize {
+    let x = f64::min(b - 1.0, n) as f64;
+
+    ((a*x/b).floor() - a * (x/b).floor()) as usize
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(f64, f64, f64, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(5.0, 7.0, 4.0, 2),
+            TestCase(11.0, 10.0, 9.0, 9),
+        ];
+
+        for TestCase(a, b, n, expected) in tests {
+            assert_eq!(run(a, b, n), expected);
         }
     }
 }
