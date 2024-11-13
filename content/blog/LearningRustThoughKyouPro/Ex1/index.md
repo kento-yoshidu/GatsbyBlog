@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-11-09"
+update: "2024-11-13"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -21,12 +21,12 @@ published: true
 |アルゴリズム|データ構造|その他|
 |---|---|---|
 |[全探索](#全探索)|[累積和](#累積和)|[文字列操作](#文字列操作)|
-|[工夫のいる全探索](#工夫のいる全探索)|[スタック](#スタック)|[最小公倍数](#最小公倍数)|
-|[バブルソート](#バブルソート)|[HashSet](#hashset)|[回文判定](#回文判定)|
-|[約数列挙](#約数列挙)|[HashMap](#hashmap)|[n進数](#n進数)|
-|[二分探索](#二分探索)|[BTreeSet](#btreeset)|[周期性](#周期性)|
-|[bit全探索](#bit全探索)|[BTreeMap](#btreemap)|
-|[再帰関数](#再帰関数)|
+|[工夫のいる全探索](#工夫のいる全探索)|[いもす法](#いもす法)|[最小公倍数](#最小公倍数)|
+|[バブルソート](#バブルソート)|[スタック](#スタック)|[回文判定](#回文判定)|
+|[約数列挙](#約数列挙)|[HashSet](#hashset)|[n進数](#n進数)|
+|[二分探索](#二分探索)|[HashMap](#hashmap)|[周期性](#周期性)|
+|[bit全探索](#bit全探索)|[BTreeSet](#btreeset)|
+|[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索](#深さ優先探索)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
@@ -2018,6 +2018,58 @@ mod tests {
 
         for TestCase(n, q, s, lr, expected) in tests {
             assert_eq!(run(n, q, s, lr), expected);
+        }
+    }
+}
+```
+</details>
+
+## いもす法
+
+### ABC014 C - AtColor
+
+[C - AtColor](https://atcoder.jp/contests/abc014/tasks/abc014_3)（<span style="color: skyblue">Difficulty : 1276</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc014/tasks/abc014_3
+
+fn run(_n: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut vec: Vec<isize> = vec![0; 1_000_000+2];
+
+    for (a, b) in ab {
+        vec[a] += 1;
+        vec[b+1] -= 1;
+    }
+
+    let mut ans = vec![vec[0]];
+
+    for i in 1..vec.len() {
+        ans.push(ans[i-1] + vec[i]);
+    }
+
+    ans.into_iter()
+        .max()
+        .unwrap() as usize
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<(usize, usize)>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(4, vec![(0, 2), (2, 3), (2, 4), (5, 6)], 3),
+            TestCase(4, vec![(1000000, 1000000), (1000000, 1000000), (0, 1000000), (1, 1000000)], 4),
+        ];
+
+        for TestCase(n, ab, expected) in tests {
+            assert_eq!(run(n, ab), expected);
         }
     }
 }
