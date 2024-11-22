@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-11-17"
+update: "2024-11-22"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -25,7 +25,7 @@ published: true
 |[バブルソート](#バブルソート)|[スタック](#スタック)|[回文判定](#回文判定)|
 |[約数列挙](#約数列挙)|[HashSet](#hashset)|[n進数](#n進数)|
 |[二分探索](#二分探索)|[HashMap](#hashmap)|[周期性](#周期性)|
-|[bit全探索](#bit全探索)|[BTreeSet](#btreeset)|
+|[bit全探索](#bit全探索)|[BTreeSet](#btreeset)|[後から帳尻合わせる系](#後から帳尻合わせる系)|
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索](#深さ優先探索)|
@@ -3739,7 +3739,6 @@ mod tests {
 
 [D - Floor Function](https://atcoder.jp/contests/abc165/tasks/abc165_d)（<span style="color: brown">Difficulty : 600</span>）
 
-
 <details>
 <summary>コード例を見る</summary>
 
@@ -3769,6 +3768,86 @@ mod tests {
 
         for TestCase(a, b, n, expected) in tests {
             assert_eq!(run(a, b, n), expected);
+        }
+    }
+}
+```
+
+</details>
+
+## 後から帳尻合わせる系
+
+### ABC158 D - String Formation
+
+[D - String Formation](https://atcoder.jp/contests/abc158/tasks/abc158_d)（<span style="color: brown">Difficulty : 610</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc158/tasks/abc158_d
+
+use std::collections::VecDeque;
+
+fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> String {
+    let mut ans = VecDeque::new();
+
+    for c in s.chars() {
+        ans.push_back(c);
+    }
+
+    let mut flag = true;
+
+    for q in query.iter() {
+        match q.0 {
+            1 => {
+                flag = !flag;
+            },
+            2 => {
+                let p = q.1.unwrap();
+                let c = q.2.unwrap();
+
+                if p == 1 {
+                    if flag {
+                        ans.push_front(c);
+                    } else {
+                        ans.push_back(c);
+                    }
+                } else {
+                    if flag {
+                        ans.push_back(c);
+                    } else {
+                        ans.push_front(c);
+                    }
+                }
+            },
+            _ => unreachable!(),
+        }
+    }
+
+    if flag {
+        ans.into_iter().collect::<String>()
+    } else {
+        ans.into_iter().rev().collect::<String>()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(&'static str, usize, Vec<(usize, Option<usize>, Option<char>)>, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase("a", 4, vec![(2, Some(1), Some('p')), (1, None, None), (2, Some(2), Some('c')), (1, None, None)], "cpa"),
+            TestCase("a", 6, vec![(2, Some(2), Some('a')), (2, Some(1), Some('b')), (1, None, None), (2, Some(2), Some('c')), (1, None, None), (1, None, None)], "aabc"),
+            TestCase("y", 1, vec![(2, Some(1),  Some('x'))], "xy"),
+        ];
+
+        for TestCase(s, n, query, expected) in tests {
+            assert_eq!(run(s, n, query), expected);
         }
     }
 }
