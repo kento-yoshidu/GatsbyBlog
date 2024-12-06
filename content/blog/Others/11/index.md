@@ -1,7 +1,7 @@
 ---
 title: "[下書き]今更のReact総復習"
 postdate: "2024-03-30"
-update: "2024-03-30"
+update: "2024-12-05"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "今更Reactを総復習します。"
@@ -13,6 +13,12 @@ published: true
 # 復習のReact
 
 基本的にJavaScriptで書くが、必要があればTypeScript版のコードを掲載する。
+
+React18を対象にする
+
+Next.jsなどのフレームワークは扱わない
+
+Viteで環境構築する
 
 ## コンポーネント
 
@@ -139,6 +145,15 @@ ReactNodeで型定義?
 
 参考 : [Reactのchildrenの型で子コンポーネントを制御する（したかった）](https://zenn.dev/mya_ake/articles/5517a5001db48e)
 
+## 自動バッチング
+
+複数のステート更新を一回にまとめる機能。
+
 ## 参考
 
 [>Vueユーザー「あれ、ReactでonClickが動かない。。」のワケ - Qiita](https://qiita.com/shiori_hoshimi/items/1179abac2e017ef20a03)
+
+### 自動バッチング
+
+[新機能：自動バッチング](https://ja.react.dev/blog/2022/03/29/react-v18#new-feature-automatic-batching)
+[React 18の新機能Automatic Batchingを理解する｜デザミス株式会社 U-motion 開発チーム](https://note.com/umotion/n/nadda0d47801c)
