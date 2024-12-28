@@ -39,3 +39,16 @@ SortedList = lists:sort(fun(X, Y) -> X > Y end, List),
 io:format("~p~n", [SortedList]),
 %=> [3, 2, 1]
 ```
+
+## 文字列
+
+文字列を連結するには`++`を使用する。
+
+```erlang
+Str = "dog",
+NewStr = Str ++ "s",
+
+io:format("~s~n", [NewStr]).
+%=> dogs
+```
+
