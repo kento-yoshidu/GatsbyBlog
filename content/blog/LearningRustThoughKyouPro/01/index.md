@@ -1,7 +1,7 @@
 ---
 title: "#1 Rustのイテレーター系メソッド雑まとめ"
 postdate: "2023-10-11"
-update: "2023-11-24"
+update: "2024-12-29"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "競技プログラミングの問題を解くことでRustを学びます。"
@@ -211,6 +211,26 @@ https://atcoder.jp/contests/abc277/tasks/abc277_a
 https://atcoder.jp/contests/abc275/tasks/abc275_a
 
 -->
+
+### dedup_with_count(Itertools)
+
+各文字と連続する個数をカウントします。そのままランレングス圧縮に使えそうです。
+
+```rust
+use itertools::Itertools;
+
+fn main() {
+    let vec = ['a', 'a', 'a', 'b', 'a', 'a', 'c', 'c'];
+
+    for (len, c) in vec.into_iter().dedup_with_count() {
+        println!("len={len}, char={c}");
+        //=> len=3, char=a
+        //=> len=1, char=b
+        //=> len=2, char=a
+        //=> len=2, char=c
+    }     
+}
+```
 
 ### positions(Itertools)
 

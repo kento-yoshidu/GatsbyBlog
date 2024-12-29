@@ -1,7 +1,7 @@
 ---
 title: "Erlangメモ"
 postdate: "2024-12-06"
-update: "2024-12-06"
+update: "2024-12-29"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "Erlangのメモ"
@@ -22,6 +22,8 @@ Erlangに関してメモする。他人が読んでも役に絶たない。閲�
 
 `lists:sort/1`
 
+昇順ソート
+
 ```erlang
 List = [2, 3, 1],
 SortedList = lists:sort(List),
@@ -38,6 +40,18 @@ SortedList = lists:sort(fun(X, Y) -> X > Y end, List),
 
 io:format("~p~n", [SortedList]),
 %=> [3, 2, 1]
+```
+
+`lists:usort/1`
+
+ソートして重複を除く
+
+```erlang
+List = [3, 1, 3],
+UniquedSort = lists:usort(List),
+
+io:format("~p~n", [UniqedSort]).
+%=> [1,3]
 ```
 
 ## 文字列
