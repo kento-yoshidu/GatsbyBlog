@@ -261,6 +261,10 @@ ReactNodeで型定義?
 
 [【React】Strictモードの挙動【バージョン18による】 #JavaScript - Qiita](https://qiita.com/tsubasa_k0814/items/ce95b6b92e7994d4fdac)
 
+### useState
+
+https://zenn.dev/counterworks/articles/putting-props-to-use-state
+
 ### 自動バッチング
 
 [新機能：自動バッチング](https://ja.react.dev/blog/2022/03/29/react-v18#new-feature-automatic-batching)

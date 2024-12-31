@@ -1,7 +1,7 @@
 ---
 title: "Erlangメモ"
 postdate: "2024-12-06"
-update: "2024-12-29"
+update: "2024-12-31"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "Erlangのメモ"
@@ -12,7 +12,7 @@ published: true
 
 # Erlangメモ
 
-Erlangに関してメモする。他人が読んでも役に絶たない。閲覧注意。
+Erlangに関してメモする。他人が読んでも役に立たない。閲覧注意。
 
 ## リスト
 
@@ -52,6 +52,18 @@ UniquedSort = lists:usort(List),
 
 io:format("~p~n", [UniqedSort]).
 %=> [1,3]
+```
+
+`lists:member/2`
+
+多分containsみたいなやつ
+
+```erlang
+case lists:member("A", ["A", "B", "C"]) of
+  true -> io:format("true\n");
+  false -> io:format("false\n")
+  %=> true
+end.
 ```
 
 ## 文字列

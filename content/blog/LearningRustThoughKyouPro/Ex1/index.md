@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2024-11-22"
+update: "2024-12-30"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1258,7 +1258,23 @@ mod tests {
 
 全要素を回していると間に合わないのでランレングス圧縮で要素数を減らし計算量を削減する、という問題が多いです。また、同じ文字で固めて、文字が切り替わるタイミングで何かする、という問題もあります。
 
-アルゴリズムの考え方自体は簡単ですが、実装したり圧縮したものを扱うのは難しいと思います。
+なお、`itertools`の`dedup_with_count`を使えば簡単にランレングス圧縮できます。
+
+```rust
+use itertools::Itertools;
+
+fn main() {
+    let vec = vec!['a', 'a', 'a', 'b', 'a', 'c', 'c'];
+
+    for (count, char) in vec.into_iter().dedup_with_count() {
+        println!("count={}, char={}", count, char);
+        // count=3, char=a
+        // count=1, char=b
+        // count=1, char=a
+        // count=2, char=c
+    }
+}
+```
 
 ### ABC019 B - 高橋くんと文字列圧縮
 
@@ -1340,7 +1356,7 @@ fn run_lengths(s: Vec<char>) -> Vec<(char, usize)> {
     run_lengths
 }
 
-pub fn run(_n: usize, s: &str) -> usize {
+fn run(_n: usize, s: &str) -> usize {
     run_lengths(s.chars().collect()).len()
 }
 
@@ -1365,6 +1381,62 @@ mod tests {
 ```
 </details>
 
+### ABC299 C - Dango
+
+[C - Dango](https://atcoder.jp/contests/abc299/tasks/abc299_c)（<span style="color: gray">Difficulty : 191</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc299/tasks/abc299_c
+
+use itertools::Itertools;
+
+fn run(_n: usize, s: &str) -> isize {
+    let run_length: Vec<(usize, char)> = s.chars().dedup_with_count().collect();
+
+    run_length
+        .iter()
+        .enumerate()
+        .filter_map(|(i, (count, c))| {
+            if *c == 'o' {
+                let left = i > 0 && run_length[i-1].1 == '-';
+                let right = i+1 < run_length.len() && run_length[i+1].1 == '-';
+
+                if left || right {
+                    return Some(count);
+                }
+            }
+            None
+        })
+        .max()
+        .map(|x| *x as isize)
+        .unwrap_or(-1)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, &'static str, isize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(10, "o-oooo---o", 4),
+            TestCase(1, "-", -1),
+            TestCase(30, "-o-o-oooo-oo-o-ooooooo--oooo-o", 7),
+        ];
+
+        for TestCase(n, s, expected) in tests {
+            assert_eq!(run(n, s), expected);
+        }
+    }
+}
+```
+</details>
+
 ### ABC329 C - Count xxx
 
 [C - Count xxx](https://atcoder.jp/contests/abc329/tasks/abc329_c)（<span style="color: gray">Difficulty : 205</span>）
@@ -1377,7 +1449,7 @@ mod tests {
 
 use std::collections::HashMap;
 
-pub fn run(n: usize, s: &str) -> usize {
+fn run(n: usize, s: &str) -> usize {
     let chars: Vec<char> = s.chars().collect();
 
     let mut hashmap = HashMap::new();
