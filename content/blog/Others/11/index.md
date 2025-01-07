@@ -241,6 +241,22 @@ ReactNodeで型定義?
 
 参考 : [Reactのchildrenの型で子コンポーネントを制御する（したかった）](https://zenn.dev/mya_ake/articles/5517a5001db48e)
 
+## useEffect
+
+https://www.cxr-inc.com/blog/cc98228bc2ba48d3853d077f25fb831c
+
+https://tech.enechange.co.jp/entry/2024/06/28/100239
+
+https://designare.jp/blog/tokuyasu/useeffect%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%99%E3%82%8B%E3%81%B9%E3%81%8D%E5%A0%B4%E6%89%80%E3%81%AA%E3%81%AE%E3%81%8B.html
+
+https://developer.mamezou-tech.com/blogs/2024/08/13/react_useeffect/
+
+https://zenn.dev/ippe/articles/a53386986ff236
+
+https://zenn.dev/yumemi_inc/articles/react-effect-simply-explained
+
+https://tech.iimon.co.jp/entry/2024/07/02/152657
+
 ## Transition
 
 ## Suspense
