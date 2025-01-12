@@ -306,6 +306,59 @@ mod tests {
 
 ## 二分探索
 
+### ABC388 C - Various Kagamimochi
+
+[C - Various Kagamimochi](https://atcoder.jp/contests/abc388/tasks/abc388_c)（<span style="color: gray">Difficulty : 211</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+use std::cmp::Ordering;
+
+fn upper_bound<T: Ord>(vec: &[T], value: T) -> usize {
+    vec.binary_search_by(|x| {
+        if *x <= value {
+            Ordering::Less
+        } else {
+            Ordering::Greater
+        }
+    })
+    .err()
+    .unwrap()
+}
+
+fn run(_n: usize, a: Vec<usize>) -> usize {
+    a.iter()
+        .map(|x| {
+            upper_bound(&a, x/2)
+        })
+        .sum()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, Vec<usize>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(6, vec![2, 3, 4, 4, 7, 10], 8),
+            TestCase(3, vec![387, 388, 389], 0),
+            TestCase(32, vec![1, 2, 4, 5, 8, 10, 12, 16, 19, 25, 33, 40, 50, 64, 87, 101, 149, 175, 202, 211, 278, 314, 355, 405, 412, 420, 442, 481, 512, 582, 600, 641], 388),
+        ];
+
+        for TestCase(n, a, expected) in tests {
+            assert_eq!(run(n, a), expected);
+        }
+    }
+}
+```
+</details>
+
 ### ABC365 C - Transportation Expenses
 
 [C - Transportation Expenses](https://atcoder.jp/contests/abc365/tasks/abc365_c)（<span style="color: gray">Difficulty : 269</span>）
@@ -4172,4 +4225,11 @@ mod tests {
 }
 ```
 
+</details>
+
+<details style="margin-top: 60px" class="history">
+<summary>更新履歴</summary>
+
+<ul class="history-list">
+  <li>2025年1月12日 : <span style="color: gray">C - Various Kagamimochi</span>を追加</li>
 </details>
