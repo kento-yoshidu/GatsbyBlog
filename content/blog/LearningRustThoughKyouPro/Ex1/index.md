@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-01-25"
+update: "2025-01-28"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1225,11 +1225,92 @@ mod tests {
 ```
 </details>
 
+### ABC325 C - Sensors
+
+[C - Sensors](https://atcoder.jp/contests/abc325/tasks/abc325_c)（<span style="color: brown">Difficulty : 400</span>）
+
+連結成分を数える。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc325/tasks/abc325_c
+
+use std::collections::VecDeque;
+
+fn check(r: isize, c: isize, h: isize, w: isize) -> bool {
+    r < 0 || c < 0 || r >= h || c >= w
+}
+
+fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
+    let mut vec: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut ans = 0;
+
+    let dx = vec![0, 0, -1, 1, -1, -1, 1, 1];
+    let dy = vec![-1, 1, 0, 0, -1, 1, -1, 1];
+
+    for i in 0..h {
+        for j in 0..w {
+            if vec[i][j] == '.' {
+                continue;
+            }
+
+            ans += 1;
+
+            let mut queue = VecDeque::new();
+            queue.push_back((i, j));
+
+            while let Some((cur_i, cur_j)) = queue.pop_front() {
+                for i in 0..8 {
+                    if check(cur_i as isize + dx[i], cur_j as isize + dy[i], h as isize, w as isize) {
+                        continue;
+                    }
+
+                    let new_i = (cur_i as isize + dx[i]) as usize;
+                    let new_j = (cur_j as isize + dy[i]) as usize;
+
+                    if vec[new_i][new_j] == '#' {
+                        vec[new_i][new_j] = '.';
+                        queue.push_front((new_i, new_j));
+                    }
+                }
+            }
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<&'static str>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(5, 6, vec![".##...", "...#..", "....##", "#.#...", "..#..."], 3),
+            TestCase(3, 3, vec!["#.#", ".#.", "#.#"], 1),
+            TestCase(4 , 2, vec!["..", "..", "..", ".."], 0),
+            TestCase(5, 47, vec![".#..#..#####..#...#..#####..#...#...###...#####", ".#.#...#.......#.#...#......##..#..#...#..#....", ".##....#####....#....#####..#.#.#..#......#####", ".#.#...#........#....#......#..##..#...#..#....", ".#..#..#####....#....#####..#...#...###...#####"], 7),
+        ];
+
+        for TestCase(h, w, s, expected) in tests {
+            assert_eq!(run(h, w, s), expected);
+        }
+    }
+}
+```
+</details>
+
 ### ABC269 D - Do use hexagon grid
 
 [D - Do use hexagon grid](https://atcoder.jp/contests/abc269/tasks/abc269_d)（<span style="color: brown">Difficulty : 629</span>）
 
-連結成分を数える。
+これも連結成分を数える問題です。
 
 <details>
 <summary>コード例を見る</summary>
@@ -4560,6 +4641,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年1月28日 : ABC325 <span style="color: brown">C - Sensors</span>を追加</li>
   <li>2025年1月25日 : ABC269 <span style="color: brown">D - Do use hexagon grid</span>を追加</li>
   <li>2025年1月16日 : ABC211 <span style="color: brown">D - Number of Shortest paths</span>を追加</li>
   <li>2025年1月14日 : ABC088 <span style="color: green">D - Grid Repainting</span>を追加</li>
