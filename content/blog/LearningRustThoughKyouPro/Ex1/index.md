@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-01-28"
+update: "2025-01-29"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -52,7 +52,7 @@ published: true
 ```rust
 // https://atcoder.jp/contests/abc331/tasks/abc331_b
 
-pub fn run(n: usize, s: usize, m: usize, l: usize) -> usize {
+fn run(n: usize, s: usize, m: usize, l: usize) -> usize {
     let mut ans = std::usize::MAX;
 
     for i in 0..=100 {
@@ -244,7 +244,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc264/tasks/abc264_d
 
-pub fn run(s: &str) -> usize {
+fn run(s: &str) -> usize {
     let mut ans = 0;
 
     let mut vec: Vec<usize> = s.chars()
@@ -381,7 +381,7 @@ fn check(a: &Vec<usize>, x: usize, m: usize) -> bool {
     total <= m
 }
 
-pub fn run(_n: usize, m: usize, a: Vec<usize>) -> String {
+fn run(_n: usize, m: usize, a: Vec<usize>) -> String {
     let sum: usize = a.iter().sum();
 
     if sum <= m {
@@ -439,7 +439,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc180/tasks/abc180_c
 
-pub fn run(n: usize) -> Vec<usize> {
+fn run(n: usize) -> Vec<usize> {
     let mut ans = Vec::new();
 
     for i in 1..=(n as f64).sqrt() as usize {
@@ -755,7 +755,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc045/tasks/arc061_a
 
-pub fn run(s: &str) -> usize {
+fn run(s: &str) -> usize {
     let len = s.len();
     let chars: Vec<char> = s.chars().collect();
 
@@ -825,7 +825,7 @@ fn calc(a: usize, b: usize) -> bool {
     }
 }
 
-pub fn run(a: usize, b: usize) -> String {
+fn run(a: usize, b: usize) -> String {
     if calc(a, b) == true {
         String::from("Easy")
     } else {
@@ -904,7 +904,7 @@ fn calc(n: usize, y: usize, count: usize) -> usize {
     }
 }
 
-pub fn run(x: usize, y: usize) -> usize {
+fn run(x: usize, y: usize) -> usize {
     calc(x, y, 0)
 }
 
@@ -938,7 +938,7 @@ fn calc(num: usize, count: usize) -> usize {
     }
 }
 
-pub fn run(_n: usize, a: vec<usize>) -> usize {
+fn run(_n: usize, a: vec<usize>) -> usize {
     a.iter()
         .map(|num| {
             // 各要素が2で何回割り切れるかを合計
@@ -1056,7 +1056,7 @@ fn calc(n: usize, h: &mut HashMap<usize, usize>) -> usize {
     return num;
 }
 
-pub fn run(n: usize) -> usize {
+fn run(n: usize) -> usize {
     let mut hash_map: HashMap<usize, usize> = HashMap::new();
 
     calc(n, &mut hash_map)
@@ -1114,7 +1114,7 @@ fn dfs(current: usize, seen: &mut HashSet<usize>, graph: &HashMap<usize, Vec<usi
     ans
 }
 
-pub fn run(_n: usize, ab: Vec<(usize, usize)>) -> usize {
+fn run(_n: usize, ab: Vec<(usize, usize)>) -> usize {
     let mut hash_map: HashMap<usize, Vec<usize>> = HashMap::new();
 
     for &(a, b) in ab.iter() {
@@ -1553,6 +1553,88 @@ mod tests {
 ```
 </details>
 
+### ABC151 D - Maze Master
+
+[D - Maze Master](https://atcoder.jp/contests/abc151/tasks/abc151_d)（<span style="color: green">Difficulty : 959</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc151/tasks/abc151_d
+
+use std::collections::VecDeque;
+
+fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
+    i < 0 || j < 0 || i >= h || j >= w
+}
+
+fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
+    let vec: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut ans = 0;
+
+    let dx = [0, -1, 0, 1];
+    let dy = [-1, 0, 1, 0];
+
+    // '.'である全ての座標をスタートに設定し、最も大きい距離とansを比べる
+    for i in 0..h {
+        for j in 0..w {
+            if vec[i][j] == '#' {
+                continue;
+            }
+
+            let mut graph = vec![vec![-1; w]; h];
+            graph[i][j] = 0;
+
+            let mut queue = VecDeque::new();
+            queue.push_back((i, j));
+
+            while let Some((cur_i, cur_j)) = queue.pop_front() {
+                for k in 0..4 {
+                    if check(cur_i as isize + dx[k], cur_j as isize + dy[k], h as isize, w as isize) {
+                        continue;
+                    }
+
+                    let new_i = (cur_i as isize + dx[k]) as usize;
+                    let new_j = (cur_j as isize + dy[k]) as usize;
+
+                    if vec[new_i][new_j] == '#' || graph[new_i][new_j] != -1 {
+                        continue;
+                    }
+
+                    graph[new_i][new_j] = graph[cur_i][cur_j] + 1;
+                    ans = ans.max(graph[new_i][new_j] as usize);
+                    queue.push_back((new_i, new_j));
+                }
+            }
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<&'static str>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 3, vec!["...", "...", "..."], 4),
+            TestCase(3, 5, vec!["...#.", ".#.#.", ".#..."], 10),
+        ];
+
+        for TestCase(h, w, s, expected) in tests {
+            assert_eq!(run(h, w, s), expected);
+        }
+    }
+}
+```
+<details>
+
 ### ABC088 D - Grid Repainting
 
 [D - Grid Repainting](https://atcoder.jp/contests/abc088/tasks/abc088_d)（<span style="color: green">Difficulty : 999</span>）
@@ -1832,7 +1914,7 @@ fn gcd(a: usize, b: usize) -> usize {
     }
 }
 
-pub fn run(a: usize, b: usize) -> usize {
+fn run(a: usize, b: usize) -> usize {
     gcd(a, b)
 }
 
@@ -1901,7 +1983,7 @@ fn gcd(a: isize, b: isize) -> isize {
     }
 }
 
-pub fn run(_n: usize, x: isize, v: Vec<isize>) -> isize {
+fn run(_n: usize, x: isize, v: Vec<isize>) -> isize {
     v.iter()
         .skip(1)
         .fold((x - &v[0]).abs(), |state, num| {
@@ -1941,7 +2023,7 @@ fn gcd(a: usize, b: usize) -> usize {
     }
 }
 
-pub fn run(_n: usize, v: Vec<usize>) -> usize {
+fn run(_n: usize, v: Vec<usize>) -> usize {
     v.iter()
         .fold(0, |state, num| {
             gcd(state, *num)
@@ -2014,7 +2096,7 @@ fn run_length(s: Vec<char>) -> Vec<(char, usize)> {
     result
 }
 
-pub fn run(s: &str) -> String {
+fn run(s: &str) -> String {
     let rle = run_length(s.chars().collect());
 
     rle.iter()
@@ -2310,7 +2392,7 @@ fn run_length(s: &str) -> Vec<(char, usize)> {
     }
 }
 
-pub fn run(s: &str, k: usize) -> usize {
+fn run(s: &str, k: usize) -> usize {
     // 全て同じ文字だった場合
     if s.chars().all_equal() {
         return s.len() * k / 2
@@ -2384,7 +2466,7 @@ fn run_lengths(s: Vec<char>) -> Vec<(char, usize)> {
     run_lengths
 }
 
-pub fn run(s: &str) -> usize {
+fn run(s: &str) -> usize {
     run_lengths(s.chars().collect()).len() - 1
 }
 
@@ -2436,7 +2518,7 @@ fn max_streak(c: char, s: &str) -> usize {
         .unwrap()
 }
 
-pub fn run(s: &str) -> usize {
+fn run(s: &str) -> usize {
     if s.chars().all_equal() {
         return 0;
     }
@@ -2479,7 +2561,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc061/tasks/abc061_c
 
-pub fn run(_n: usize, k: usize, ab: Vec<(usize, usize)>) -> usize {
+fn run(_n: usize, k: usize, ab: Vec<(usize, usize)>) -> usize {
     let mut vec = ab.clone();
 
     vec.sort_by(|a, b| a.0.cmp(&b.0));
@@ -2524,7 +2606,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc087/tasks/arc090_a
 
-pub fn run(n: usize, a: [Vec<usize>; 2]) -> usize {
+fn run(n: usize, a: [Vec<usize>; 2]) -> usize {
     let mut dp: Vec<Vec<usize>> = vec![vec![], vec![]];
 
     dp[0].push(a[0][0]);
@@ -2570,7 +2652,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc245/tasks/abc245_c
 
-pub fn run(n: usize, k: isize, a: Vec<isize>, b: Vec<isize>) -> &'static str {
+fn run(n: usize, k: isize, a: Vec<isize>, b: Vec<isize>) -> &'static str {
     let mut dp_a = vec![false; n];
     let mut dp_b = vec![false; n];
 
@@ -2748,7 +2830,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc099/tasks/abc099_b
 
-pub fn run(a: usize, b: usize) -> usize {
+fn run(a: usize, b: usize) -> usize {
     let mut cum_sum = Vec::new();
 
     for i in 0..=(b-a) {
@@ -2834,7 +2916,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc122/tasks/abc122_c
 
-pub fn run(n: usize, _q: usize, s: &str, lr: Vec<(usize, usize)>) -> Vec<usize> {
+fn run(n: usize, _q: usize, s: &str, lr: Vec<(usize, usize)>) -> Vec<usize> {
     let mut ans = Vec::new();
 
     let mut cum_sum = vec![0; n];
@@ -2942,7 +3024,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc286/tasks/abc286_b
 
-pub fn run(n: usize, s: &str) -> String {
+fn run(n: usize, s: &str) -> String {
     let chars: Vec<char> = s.chars().collect();
 
     chars.iter()
@@ -2985,7 +3067,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc351/tasks/abc351_c
 
-pub fn run(_n: usize, a: Vec<usize>) -> usize {
+fn run(_n: usize, a: Vec<usize>) -> usize {
     a.into_iter()
         .fold(Vec::new(), |mut stack, num| {
             stack.push(num);
@@ -3038,7 +3120,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/abc328/tasks/abc328_d
 
-pub fn run(s: &str) -> String {
+fn run(s: &str) -> String {
     let chars: Vec<char> = s.chars().collect();
     let mut ans: Vec<char> = Vec::new();
 
@@ -3055,7 +3137,7 @@ pub fn run(s: &str) -> String {
 }
 
 /* foldを使った別解 */
-pub fn run2(s: &str) -> String {
+fn run2(s: &str) -> String {
     let chars: Vec<char> = s.chars().collect();
 
     chars.iter()
@@ -3104,7 +3186,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/arc108/tasks/arc108_b
 
-pub fn run(_n: usize, s: &str) -> usize {
+fn run(_n: usize, s: &str) -> usize {
     let chars: Vec<char> = s.chars().collect();
 
     chars.iter()
@@ -3144,7 +3226,7 @@ mod tests {
 ```rust
 // https://atcoder.jp/contests/agc005/tasks/agc005_a
 
-pub fn run(s: &str) -> usize {
+fn run(s: &str) -> usize {
     let chars: Vec<char> = s.chars().collect();
 
     chars.iter()
@@ -3194,7 +3276,7 @@ mod tests {
 
 use std::collections::HashMap;
 
-pub fn run(_n: usize, s: Vec<&str>) -> String {
+fn run(_n: usize, s: Vec<&str>) -> String {
     let mut map = HashMap::new();
 
     for name in s {
@@ -3234,7 +3316,7 @@ mod tests {
 
 use std::collections::HashMap;
 
-pub fn run(n: usize, m: usize, a: Vec<usize>, b: Vec<usize>) -> String {
+fn run(n: usize, m: usize, a: Vec<usize>, b: Vec<usize>) -> String {
     // 各長さのパスタが何本あるかのHashMap
     let mut hash_map_a = HashMap::new();
 
@@ -3280,7 +3362,7 @@ mod tests {
 
 use std::collections::HashMap;
 
-pub fn run(_n: usize, h: Vec<&str>) -> Vec<String> {
+fn run(_n: usize, h: Vec<&str>) -> Vec<String> {
     let mut hash_map = HashMap::new();
 
     for s in h {
@@ -3327,7 +3409,7 @@ mod tests {
 
 use std::collections::HashMap;
 
-pub fn run(_n: usize, s: Vec<&str>) -> Vec<String> {
+fn run(_n: usize, s: Vec<&str>) -> Vec<String> {
     let mut hash_map = HashMap::new();
 
     let mut ans = Vec::new();
@@ -3384,7 +3466,7 @@ mod tests {
 
 use std::collections::HashMap;
 
-pub fn run(_n: usize, _q: usize, a: Vec<usize>, xk: Vec<(usize, usize)>) -> Vec<isize> {
+fn run(_n: usize, _q: usize, a: Vec<usize>, xk: Vec<(usize, usize)>) -> Vec<isize> {
     let mut hash_map = HashMap::new();
 
     for (i, n) in a.iter().enumerate() {
@@ -3503,7 +3585,7 @@ mod tests {
 
 use std::collections::HashMap;
 
-pub fn run(_n: usize, a: Vec<isize>) -> isize {
+fn run(_n: usize, a: Vec<isize>) -> isize {
     let mut hash_map = HashMap::new();
 
     for i in a {
@@ -3629,7 +3711,7 @@ mod tests {
 
 use std::collections::HashSet;
 
-pub fn run(n: usize, _k: usize, vec: Vec<(usize, Vec<usize>)>) -> usize {
+fn run(n: usize, _k: usize, vec: Vec<(usize, Vec<usize>)>) -> usize {
     let mut hash_set = HashSet::new();
 
     for v in vec {
@@ -3844,7 +3926,7 @@ mod tests {
 
 use std::collections::BTreeSet;
 
-pub fn run(n: usize, k: usize, p: Vec<usize>) -> usize {
+fn run(n: usize, k: usize, p: Vec<usize>) -> usize {
     let mut vec = vec![0; n];
 
     for (i, num) in p.iter().enumerate() {
@@ -3910,7 +3992,7 @@ mod tests {
 use std::collections::BTreeMap;
 use std::cmp::min;
 
-pub fn run(_q: usize, query: Vec<(usize, Option<usize>, Option<usize>)>) -> Vec<usize> {
+fn run(_q: usize, query: Vec<(usize, Option<usize>, Option<usize>)>) -> Vec<usize> {
     let mut bt = BTreeMap::new();
 
     let mut ans = Vec::new();
@@ -4032,7 +4114,7 @@ fn gcd(m: usize, n: usize) -> usize {
     }
 }
 
-pub fn run(a: usize, b: usize) -> usize {
+fn run(a: usize, b: usize) -> usize {
     a / gcd(a, b) * b
 }
 
@@ -4074,7 +4156,7 @@ fn gcd(m: usize, n: usize) -> usize {
     }
 }
 
-pub fn run(n: usize) -> usize {
+fn run(n: usize) -> usize {
     let mut num = 1;
 
     for i in 2..=n {
@@ -4162,7 +4244,7 @@ fn check(s: &str) -> bool {
     }
 }
 
-pub fn run(s: String) -> usize {
+fn run(s: String) -> usize {
     (0..s.len())
         .rev()
         .skip(1)
@@ -4195,7 +4277,7 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-pub fn run(s: &str) -> usize {
+fn run(s: &str) -> usize {
     let chars: Vec<char> = s.chars().collect();
 
     (0..chars.len()/2).filter(|i| {
@@ -4236,7 +4318,7 @@ fn check(s: String) -> bool {
     s.chars().eq(s.chars().rev())
 }
 
-pub fn run(_n: usize, s: Vec<&str>) -> String {
+fn run(_n: usize, s: Vec<&str>) -> String {
     if s.iter()
         .permutations(2)
         .any(|v| check(format!("{}{}", v[0], v[1])))
@@ -4328,7 +4410,7 @@ fn check(s: String) -> bool {
 }
 
 // Refactoring
-pub fn run(s: String) -> &'static str {
+fn run(s: String) -> &'static str {
     // 先頭、末尾から連続して何文字aが続くかをカウント
     let mut head = 0;
     let mut tail = 0;
@@ -4481,7 +4563,7 @@ fn calc(num: usize, mut result: Vec<usize>) -> Vec<usize> {
     }
 }
 
-pub fn run(n: usize) -> usize {
+fn run(n: usize) -> usize {
     let mut vec = calc(n-1, Vec::new());
 
     vec.reverse();
@@ -4641,6 +4723,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年1月29日 : ABC151 <span style="color: green">D - Maze Master</span>を追加</li>
   <li>2025年1月28日 : ABC325 <span style="color: brown">C - Sensors</span>を追加</li>
   <li>2025年1月25日 : ABC269 <span style="color: brown">D - Do use hexagon grid</span>を追加</li>
   <li>2025年1月16日 : ABC211 <span style="color: brown">D - Number of Shortest paths</span>を追加</li>
