@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-01-30"
+update: "2025-02-01"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -21,7 +21,7 @@ published: true
 |アルゴリズム|データ構造|その他|
 |---|---|---|
 |[全探索](#全探索)|[累積和](#累積和)|[文字列操作](#文字列操作)|
-|[工夫のいる全探索](#工夫のいる全探索)|[いもす法](#いもす法)|[最小公倍数](#最小公倍数)|
+|[工夫のいる全探索-3問](#工夫のいる全探索-3問)|[いもす法](#いもす法)|[最小公倍数](#最小公倍数)|
 |[バブルソート](#バブルソート)|[スタック](#スタック)|[回文判定](#回文判定)|
 |[約数列挙](#約数列挙)|[HashSet](#hashset)|[n進数](#n進数)|
 |[二分探索](#二分探索)|[HashMap](#hashmap)|[周期性](#周期性)|
@@ -29,7 +29,7 @@ published: true
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索](#深さ優先探索)|
-|[幅優先探索](#幅優先探索)|
+|[幅優先探索-11問](#幅優先探索-11問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -130,9 +130,60 @@ mod tests {
 ```
 </details>
 
-## 工夫のいる全探索
+## 工夫のいる全探索-3問
 
 とりえるパターンを全て試すとTLEになるので、何らかの工夫を凝らして計算量を減らすタイプの全探索です。
+
+### ABC085 C - Otoshidama
+
+[C - Otoshidama](https://atcoder.jp/contests/abc085/tasks/abc085_c)（<span style="color: brown">Difficulty : 584</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc085/tasks/abc085_c
+
+fn run(n: isize, y: isize) -> Vec<isize> {
+    for i in 0..=n {
+        for j in 0..=n {
+            let k = n - i - j;
+
+            if k < 0 || n < k {
+                continue;
+            }
+
+            if i * 10000 + j * 5000 + k * 1000 == y {
+                return vec![i, j, k];
+            }
+        }
+    }
+
+    vec![-1, -1, -1]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(isize, isize, Vec<isize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(9, 45000, vec![4, 0, 5]),
+            TestCase(20, 196000, vec![-1, -1, -1]),
+            TestCase(1000, 1234000, vec![2, 54, 944]),
+            TestCase(2000, 20000000, vec![2000, 0, 0]),
+        ];
+
+        for TestCase(n, y, expected) in tests {
+            assert_eq!(run(n, y), expected);
+        }
+    }
+}
+```
+</details>
 
 ### JOI 2023/2024 二次予選 A - カードゲーム 2 (Card Game 2)
 
@@ -186,7 +237,7 @@ mod tests {
 
 ### JOI 2022/2023 二次予選 A - 年齢の差 (Age Difference)
 
-[A - 年齢の差 (Age Difference)](https://atcoder.jp/contests/joi2023yo2/tasks/joi2023_yo2_a)
+[A - 年齢の差 (Age Difference)](https://atcoder.jp/contests/joi2023yo2/tasks/joi2023_yo2_a)（<span style="color: gray">Difficultyなし</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -1153,7 +1204,7 @@ mod tests {
 
 </details>
 
-## 幅優先探索 
+## 幅優先探索-11問
 
 [BFS (幅優先探索) 超入門！ 〜 キューを鮮やかに使いこなす 〜](https://qiita.com/drken/items/996d80bcae64649a6580)
 
@@ -1219,6 +1270,71 @@ mod tests {
 
         for TestCase(r, c, s, g, v, expected) in tests {
             assert_eq!(run(r, c, s, g, v), expected);
+        }
+    }
+}
+```
+</details>
+
+### 競技プログラミングの鉄則 A63 - Shortest Path 1
+
+[Shortest Path 1](https://atcoder.jp/contests/tessoku-book/tasks/math_and_algorithm_an)（<span style="color: gray">Difficultyなし</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/tessoku-book/tasks/math_and_algorithm_an
+
+use std::collections::{HashMap, VecDeque};
+
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<isize> {
+    let mut hash_map = HashMap::new();
+
+    for (a, b) in ab {
+        hash_map.entry(a-1).or_insert_with(Vec::new).push(b-1);
+        hash_map.entry(b-1).or_insert_with(Vec::new).push(a-1);
+    }
+
+    let mut graph = vec![-1; n];
+    graph[0] = 0;
+
+    let mut queue = VecDeque::new();
+    queue.push_back(0);
+
+    while let Some(cur) = queue.pop_front() {
+        let Some(next) = hash_map.get(&cur) else {
+            continue;
+        };
+
+        for next in next.iter() {
+            if graph[*next] != -1 {
+                continue;
+            }
+
+            graph[*next] = graph[cur] + 1;
+            queue.push_back(*next);
+        }
+    }
+
+    graph
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<(usize, usize)>, Vec<isize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 2, vec![(1, 3), (2, 3)], vec![0, 2, 1]),
+            TestCase(6 , 6, vec![(1, 4), (2, 3), (3, 4), (5, 6), (1, 2), (2, 4)], vec![0, 1, 2, 1, -1, -1]),
+        ];
+
+        for TestCase(n, m, ab, expected) in tests {
+            assert_eq!(run(n, m, ab), expected);
         }
     }
 }
@@ -4789,12 +4905,13 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
-  <li>2025年1月30日 : ABC168 <span style="color: green">D - .. (Double Dots)</span>を追加</li>
-  <li>2025年1月29日 : ABC151 <span style="color: green">D - Maze Master</span>を追加</li>
-  <li>2025年1月28日 : ABC325 <span style="color: brown">C - Sensors</span>を追加</li>
-  <li>2025年1月25日 : ABC269 <span style="color: brown">D - Do use hexagon grid</span>を追加</li>
-  <li>2025年1月16日 : ABC211 <span style="color: brown">D - Number of Shortest paths</span>を追加</li>
-  <li>2025年1月14日 : ABC088 <span style="color: green">D - Grid Repainting</span>を追加</li>
-  <li>2025年1月13日 : ABC016 <span style="color: green">C - 友達の友達</span>を追加</li>
-  <li>2025年1月12日 : ABC388 <span style="color: gray">C - Various Kagamimochi</span>を追加</li>
+  <li>2025年02月01日 : 競技プログラミングの鉄則 <span style="color: gray">A63 - Shortest Path 1</span>を追加</li>
+  <li>2025年01月30日 : ABC168 <span style="color: green">D - .. (Double Dots)</span>を追加</li>
+  <li>2025年01月29日 : ABC151 <span style="color: green">D - Maze Master</span>を追加</li>
+  <li>2025年01月28日 : ABC325 <span style="color: brown">C - Sensors</span>を追加</li>
+  <li>2025年01月25日 : ABC269 <span style="color: brown">D - Do use hexagon grid</span>を追加</li>
+  <li>2025年01月16日 : ABC211 <span style="color: brown">D - Number of Shortest paths</span>を追加</li>
+  <li>2025年01月14日 : ABC088 <span style="color: green">D - Grid Repainting</span>を追加</li>
+  <li>2025年01月13日 : ABC016 <span style="color: green">C - 友達の友達</span>を追加</li>
+  <li>2025年01月12日 : ABC388 <span style="color: gray">C - Various Kagamimochi</span>を追加</li>
 </details>
