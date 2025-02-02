@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-02-01"
+update: "2025-02-02"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -14,13 +14,11 @@ published: true
 
 タイトルのまんまです。アルゴリズムやデータ構造ごとに、そのアルゴリズムを使って解けそうな問題をリストアップします。基本的に私が解いた問題から載せていくので、最初の内は簡単なものばかりで数も少ないです。
 
-都合上、同じ問題が複数回登場することがありますがご了承ください🙇‍♂️。
-
 # 目次
 
 |アルゴリズム|データ構造|その他|
 |---|---|---|
-|[全探索](#全探索)|[累積和](#累積和)|[文字列操作](#文字列操作)|
+|[全探索-4問](#全探索-4問)|[累積和](#累積和)|[文字列操作](#文字列操作)|
 |[工夫のいる全探索-3問](#工夫のいる全探索-3問)|[いもす法](#いもす法)|[最小公倍数](#最小公倍数)|
 |[バブルソート](#バブルソート)|[スタック](#スタック)|[回文判定](#回文判定)|
 |[約数列挙](#約数列挙)|[HashSet](#hashset)|[n進数](#n進数)|
@@ -38,7 +36,7 @@ published: true
 
 # アルゴリズム
 
-## 全探索
+## 全探索-4問
 
 アルゴリズムの基本というか、考え得るパターンを全て試していく方法です。B問題までであれば全探索で間に合うことが多いです。
 
@@ -84,7 +82,7 @@ mod tests {
 
 ### ABC224 C - Triangle?
 
-[C - Triangle?](https://atcoder.jp/contests/abc224/tasks/abc224_c)
+[C - Triangle?](https://atcoder.jp/contests/abc224/tasks/abc224_c)（<span style="color: gray">Difficulty : 301</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -130,60 +128,67 @@ mod tests {
 ```
 </details>
 
-## 工夫のいる全探索-3問
+### ABC391 B - Seek Grid
 
-とりえるパターンを全て試すとTLEになるので、何らかの工夫を凝らして計算量を減らすタイプの全探索です。
+[B - Seek Grid](https://atcoder.jp/contests/abc391/tasks/abc391_b)（<span style="color: gray">Difficulty : -</span>）
 
-### ABC085 C - Otoshidama
-
-[C - Otoshidama](https://atcoder.jp/contests/abc085/tasks/abc085_c)（<span style="color: brown">Difficulty : 584</span>）
+4重forループですが、M ≦ N ≦ 50なので間に合います。
 
 <details>
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc085/tasks/abc085_c
+// https://atcoder.jp/contests/abc391/tasks/abc391_b
 
-fn run(n: isize, y: isize) -> Vec<isize> {
-    for i in 0..=n {
-        for j in 0..=n {
-            let k = n - i - j;
+fn run(n: usize, m: usize, s: Vec<&str>, t: Vec<&str>) -> (usize, usize) {
+    let vec_s: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
+    let vec_t: Vec<Vec<char>> = t.into_iter().map(|s| s.chars().collect()).collect();
 
-            if k < 0 || n < k {
-                continue;
+    for i in 0..=n-m {
+        for j in 0..=n-m {
+            let mut flag = true;
+
+            for k in 0..m {
+                for l in 0..m {
+                    if vec_s[i+k][j+l] != vec_t[k][l] {
+                        flag = false;
+                    }
+                }
             }
 
-            if i * 10000 + j * 5000 + k * 1000 == y {
-                return vec![i, j, k];
+            if flag {
+                return (i+1, j+1);
             }
         }
     }
 
-    vec![-1, -1, -1]
+    unreachable!();
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
 
-    struct TestCase(isize, isize, Vec<isize>);
+    struct TestCase(usize, usize, Vec<&'static str>, Vec<&'static str>, (usize, usize));
 
     #[test]
     fn test() {
         let tests = [
-            TestCase(9, 45000, vec![4, 0, 5]),
-            TestCase(20, 196000, vec![-1, -1, -1]),
-            TestCase(1000, 1234000, vec![2, 54, 944]),
-            TestCase(2000, 20000000, vec![2000, 0, 0]),
+            TestCase(3, 2, vec!["#.#", "..#", "##."], vec![".#", "#."], (2, 2)),
+            TestCase(2, 1, vec!["#.", "##"], vec!["."], (1, 2)),
         ];
 
-        for TestCase(n, y, expected) in tests {
-            assert_eq!(run(n, y), expected);
+        for TestCase(n, m, s, t, expected) in tests {
+            assert_eq!(run(n, m, s, t), expected);
         }
     }
 }
 ```
 </details>
+
+## 工夫のいる全探索-3問
+
+とりえるパターンを全て試すとTLEになるので、何らかの工夫を凝らして計算量を減らすタイプの全探索です。
 
 ### JOI 2023/2024 二次予選 A - カードゲーム 2 (Card Game 2)
 
@@ -280,7 +285,57 @@ mod tests {
     }
 }
 ```
+</details>
 
+### ABC085 C - Otoshidama
+
+[C - Otoshidama](https://atcoder.jp/contests/abc085/tasks/abc085_c)（<span style="color: brown">Difficulty : 584</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc085/tasks/abc085_c
+
+fn run(n: isize, y: isize) -> Vec<isize> {
+    for i in 0..=n {
+        for j in 0..=n {
+            let k = n - i - j;
+
+            if k < 0 || n < k {
+                continue;
+            }
+
+            if i * 10000 + j * 5000 + k * 1000 == y {
+                return vec![i, j, k];
+            }
+        }
+    }
+
+    vec![-1, -1, -1]
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(isize, isize, Vec<isize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(9, 45000, vec![4, 0, 5]),
+            TestCase(20, 196000, vec![-1, -1, -1]),
+            TestCase(1000, 1234000, vec![2, 54, 944]),
+            TestCase(2000, 20000000, vec![2000, 0, 0]),
+        ];
+
+        for TestCase(n, y, expected) in tests {
+            assert_eq!(run(n, y), expected);
+        }
+    }
+}
+```
 </details>
 
 ## バブルソート
@@ -2536,6 +2591,82 @@ mod tests {
 ### ABC259 C - XX to XXX
 
 [C - XX to XXX](https://atcoder.jp/contests/abc259/tasks/abc259_c)（<span style="color: brown">Difficulty : 451</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc259/tasks/abc259_c
+
+use std::iter::zip;
+
+fn run_lengths(s: Vec<char>) -> Vec<(char, usize)> {
+    let mut i = 0;
+    let mut run_lengths = vec![];
+    let mut current = (s[0], 0);
+
+    loop {
+        while i < s.len() && s[i] == current.0 {
+            current.1 += 1;
+            i += 1;
+        }
+
+        run_lengths.push(current);
+
+        if i == s.len() {
+            break;
+        } else {
+            current = (s[i], 0);
+        }
+    }
+
+    run_lengths
+}
+
+fn run(s: &str, t: &str) -> &'static str {
+    let s_length = run_lengths(s.chars().collect());
+    let t_length = run_lengths(t.chars().collect());
+
+    if s_length.len() != t_length.len() {
+        return "No";
+    }
+
+    if s_length.into_iter()
+        .zip(t_length.into_iter())
+        .any(|(s, t)| {
+            // 文字が違う場合
+            // tが長さ2以上なのにsが長さ1しかない場合
+            // sの方が長い場合（tを増やすことはできないので）
+            s.0 != t.0 || (t.1 > 1 && s.1 == 1) || s.1 > t.1
+        }) {
+            "No"
+        } else {
+            "Yes"
+        }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(&'static str, &'static str, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase("abbaac", "abbbbaaac", "Yes"),
+            TestCase("xyzz", "xyyzz", "No"),
+            TestCase("aa", "aa", "Yes"),
+            TestCase("aa", "aabb", "No"),
+        ];
+
+        for TestCase(s, t, expected) in tests {
+            assert_eq!(run(s, t), expected);
+        }
+    }
+}
+```
+</details>
 
 ### ABC247 D - Cylinder
 
