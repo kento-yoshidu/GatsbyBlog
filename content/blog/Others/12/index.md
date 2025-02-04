@@ -1,7 +1,7 @@
 ---
 title: "Erlangメモ"
 postdate: "2024-12-06"
-update: "2024-12-31"
+update: "2025-02-04"
 seriesName: "その他"
 seriesSlug: "Others"
 description: "Erlangのメモ"
@@ -18,7 +18,7 @@ Erlangに関してメモする。他人が読んでも役に立たない。閲�
 
 多分配列みたいなもの。要素の追加/削除ができる。O(n)。
 
-### ソート
+### ソート系
 
 `lists:sort/1`
 
@@ -64,6 +64,18 @@ case lists:member("A", ["A", "B", "C"]) of
   false -> io:format("false\n")
   %=> true
 end.
+```
+
+### フィルター
+
+`lists:filter/2`
+
+```erlang
+Str = "oooxxxooo",
+Count = length(lists:filter(fun(Char) -> Char =:= $o end, Str)),
+
+io:format("~p~n", [Count]).
+%=> 6
 ```
 
 ## 文字列
