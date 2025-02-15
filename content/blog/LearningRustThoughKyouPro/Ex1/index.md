@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-02-09"
+update: "2025-02-15"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -27,7 +27,7 @@ published: true
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索](#深さ優先探索)|
-|[幅優先探索-11問](#幅優先探索-11問)|
+|[幅優先探索-14問](#幅優先探索-14問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -1259,7 +1259,7 @@ mod tests {
 
 </details>
 
-## 幅優先探索-11問
+## 幅優先探索-14問
 
 [BFS (幅優先探索) 超入門！ 〜 キューを鮮やかに使いこなす 〜](https://qiita.com/drken/items/996d80bcae64649a6580)
 
@@ -1639,6 +1639,101 @@ mod tests {
 }
 ```
 </details>
+
+### ABC383 C - Humidifier 3
+
+[C - Humidifier 3](https://atcoder.jp/contests/abc383/tasks/abc383_c)（<span style="color: brown">Difficulty : 750</span>）
+
+多始点BFS
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc383/tasks/abc383_c
+
+use std::collections::VecDeque;
+
+fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
+    i < 0 || j < 0 || i == h || j == w
+}
+
+fn run(h: usize, w: usize, d: usize, s: Vec<&str>) -> usize {
+    let vec: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut graph = vec![vec![-1; w]; h];
+    let mut queue = VecDeque::new();
+
+    for i in 0..h {
+        for j in 0..w {
+            if vec[i][j] == 'H' {
+                queue.push_back((i, j));
+                graph[i][j] = 0;
+            }
+        }
+    }
+
+    let dx = [0, 1, 0, -1];
+    let dy = [1, 0, -1, 0];
+
+    while let Some((cur_i, cur_j)) = queue.pop_front() {
+        if d == 0 {
+            continue;
+        }
+
+        for i in 0..4 {
+            let new_i = cur_i as isize + dx[i];
+            let new_j = cur_j as isize + dy[i];
+
+            if check(new_i, new_j, h as isize, w as isize) {
+                continue;
+            }
+
+            let new_i = new_i as usize;
+            let new_j = new_j as usize;
+
+            if vec[new_i][new_j] == '#' || graph[new_i][new_j] != -1 {
+                continue;
+            }
+
+            graph[new_i][new_j] = graph[cur_i][cur_j] + 1;
+
+            queue.push_back((new_i, new_j));
+        }
+    }
+
+    graph.into_iter()
+        .map(|g| {
+            g.into_iter()
+                .filter(|i| {
+                    *i >= 0 && *i <= d as isize
+                })
+                .count()
+        })
+        .sum()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, usize, Vec<&'static str>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 4, 1, vec!["H...", "#..H", ".#.#"], 5),
+            TestCase(5, 6, 2, vec!["##...H", "H.....", "..H.#.", ".HH...", ".###.."], 21),
+        ];
+
+        for TestCase(h, w, d, s, expected) in tests {
+            assert_eq!(run(h, w, d, s), expected);
+        }
+    }
+}
+```
+</details>
+
 
 ### ABC211 D - Number of Shortest paths
 
@@ -5205,6 +5300,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年02月15日 : ABC383 <span style="color: brown">C - Humidifier 3</span>を追加</li>
   <li>2025年02月09日 : ABC293 <span style="color: green">C - Make Takahashi Happy</span>を追加</li>
   <li>2025年02月08日 : ABC387 <span style="color: green">D - Snaky Walk</span>を追加</li>
   <li>2025年02月01日 : 競技プログラミングの鉄則 <span style="color: gray">A63 - Shortest Path 1</span>を追加</li>
