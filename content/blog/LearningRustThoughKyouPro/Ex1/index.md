@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-02-18"
+update: "2025-02-21"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -18,7 +18,7 @@ published: true
 
 |アルゴリズム|データ構造|その他|
 |---|---|---|
-|[全探索-4問](#全探索-4問)|[累積和](#累積和)|[文字列操作](#文字列操作)|
+|[全探索-5問](#全探索-5問)|[累積和](#累積和)|[文字列操作](#文字列操作)|
 |[工夫のいる全探索-3問](#工夫のいる全探索-3問)|[いもす法](#いもす法)|[最小公倍数](#最小公倍数)|
 |[バブルソート](#バブルソート)|[スタック](#スタック)|[回文判定](#回文判定)|
 |[約数列挙](#約数列挙)|[HashSet](#hashset)|[n進数](#n進数)|
@@ -27,7 +27,7 @@ published: true
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索](#深さ優先探索)|
-|[幅優先探索-15問](#幅優先探索-15問)|
+|[幅優先探索-16問](#幅優先探索-16問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -36,7 +36,7 @@ published: true
 
 # アルゴリズム
 
-## 全探索-4問
+## 全探索-5問
 
 アルゴリズムの基本というか、考え得るパターンを全て試していく方法です。B問題までであれば全探索で間に合うことが多いです。
 
@@ -231,6 +231,76 @@ mod tests {
 
         for TestCase(n, m, s, t, expected) in tests {
             assert_eq!(run(n, m, s, t), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC201 C - Secret Number
+
+[C - Secret Number](https://atcoder.jp/contests/abc201/tasks/abc201_c)（<span style="color: brown">Difficulty : 439</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc201/tasks/abc201_c
+
+fn run(s: &str) -> usize {
+    let chars: Vec<char> = s.chars().collect();
+
+    let mut ans = 0;
+
+    for i in 0..10000 {
+        let str = format!("{:04}", i);
+
+        let mut flags = vec![false; 10];
+
+        for c in str.chars() {
+            let i = c.to_digit(10).unwrap();
+
+            flags[i as usize] = true;
+        }
+
+        let mut flag = true;
+
+        for j in 0..10 {
+            if chars[j] == 'o' && flags[j] == false {
+                flag = false;
+                break;
+            }
+
+            if chars[j] == 'x' && flags[j] {
+                flag = false;
+                break;
+            }
+        }
+
+        if flag {
+            ans += 1;
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(&'static str, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase("ooo???xxxx", 108),
+            TestCase("o?oo?oxoxo", 0),
+            TestCase("xxxxx?xxxo", 15),
+        ];
+
+        for TestCase(s, expected) in tests {
+            assert_eq!(run(s), expected);
         }
     }
 }
@@ -1310,7 +1380,7 @@ mod tests {
 
 </details>
 
-## 幅優先探索-15問
+## 幅優先探索-16問
 
 [BFS (幅優先探索) 超入門！ 〜 キューを鮮やかに使いこなす 〜](https://qiita.com/drken/items/996d80bcae64649a6580)
 
@@ -1923,6 +1993,82 @@ mod tests {
 ```
 </details>
 
+### ABC373 D - Hidden Weights
+
+[D - Hidden Weights](https://atcoder.jp/contests/abc373/tasks/abc373_d)（<span style="color: brown">Difficulty : 765</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc373/tasks/abc373_d
+
+use std::collections::{HashMap, VecDeque};
+
+fn run(n: usize, _m: usize, uvw: Vec<(usize, usize, isize)>) -> Vec<isize> {
+    let mut hash_map = HashMap::new();
+
+    for (u, v, w) in uvw {
+        hash_map.entry(u).or_insert_with(|| Vec::new()).push((v, w));
+        hash_map.entry(v).or_insert_with(|| Vec::new()).push((u, -w));
+    }
+
+    let mut visited = vec![false; n+1];
+    let mut graph = vec![0; n+1];
+
+    for i in 1..=n {
+        if visited[i] {
+            continue;
+        }
+
+        let mut queue = VecDeque::new();
+        queue.push_back(i);
+
+        while let Some(cur) = queue.pop_front() {
+            if visited[cur] {
+                continue;
+            }
+
+            visited[cur] = true;
+
+            if let Some(next) = hash_map.get(&cur) {
+                for &(next_v, w) in next {
+                    if visited[next_v] {
+                        continue;
+                    }
+
+                    graph[next_v] = graph[cur] + w;
+                    queue.push_back(next_v);
+                }
+            }
+        }
+    }
+
+    graph.into_iter().skip(1).collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<(usize, usize, isize)>, Vec<isize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 3, vec![(1, 2, 2), (3, 2, 3), (1, 3, -1)], vec![0, 2, -1]),
+            TestCase(4, 2, vec![(2, 1, 5), (3, 4, -3)], vec![0, -5, 0, -3]),
+            TestCase(5, 7, vec![(2, 1, 18169343), (3, 1, 307110901), (4, 1, 130955934), (2, 3, -288941558), (2, 5, 96267410), (5, 3, -385208968), (4, 3, -176154967)], vec![0, -18169343, -307110901, -130955934, 78098067]),
+        ];
+
+        for TestCase(n, m, uvw, expected) in tests {
+            assert_eq!(run(n, m, uvw), expected);
+        }
+    }
+}
+```
+</details>
+
 ### ABC168 D - .. (Double Dots)
 
 [D - .. (Double Dots)](https://atcoder.jp/contests/abc168/tasks/abc168_d)（<span style="color: green">Difficulty : 804</span>）
@@ -2159,6 +2305,66 @@ mod tests {
 
         for TestCase(n, m, ab, expected) in tests {
             assert_eq!(run(n, m, ab), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC015 C - 高橋くんのバグ探し
+
+[C - 高橋くんのバグ探し](https://atcoder.jp/contests/abc015/tasks/abc015_3)（<span style="color: green">🧪 Difficulty : 912</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc015/tasks/abc015_3
+
+use std::collections::VecDeque;
+
+fn run(n: usize, _k: usize, t: Vec<Vec<usize>>) -> &'static str {
+    let mut queue = VecDeque::new();
+
+    for &n in &t[0] {
+        queue.push_back((0, vec![n]));
+    }
+
+    while let Some((i,  vec, )) = queue.pop_front() {
+        if i + 1 == n {
+            if vec.iter().fold(0, |acc, &x| acc ^ x) == 0 {
+                return "Found";
+            }
+            continue;
+        }
+
+        let next_values = t[i + 1].clone();
+
+        for next in next_values {
+            let mut new_vec = vec.clone();
+            new_vec.push(next);
+            queue.push_back((i + 1, new_vec));
+        }
+    }
+
+    "Nothing"
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<Vec<usize>>, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 4, vec![vec![1, 3, 5, 17], vec![2, 4, 2, 3], vec![1, 3, 2, 9]], "Found"),
+            TestCase(5, 3, vec![vec![89, 62, 15], vec![44, 36, 17], vec![4, 24, 24], vec![25, 98, 99], vec![66, 33, 57]], "Nothing"),
+        ];
+
+        for TestCase(n, k, t, expected) in tests {
+            assert_eq!(run(n, k, t), expected);
         }
     }
 }
@@ -5404,13 +5610,14 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年02月21日 : ABC015 <span style="color: green">🧪 C - 高橋くんのバグ探し</span>を追加</li>
+  <li>2025年02月19日 : ABC373 <span style="color: brown">D - Hidden Weights</span>を追加</li>
   <li>2025年02月18日 : ABC376 <span style="color: brown">D - Cycle</span>を追加</li>
   <li>2025年02月15日 : ABC383 <span style="color: brown">C - Humidifier 3</span>を追加</li>
   <li>2025年02月09日 : ABC293 <span style="color: green">C - Make Takahashi Happy</span>を追加</li>
