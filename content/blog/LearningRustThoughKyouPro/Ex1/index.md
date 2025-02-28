@@ -40,7 +40,7 @@ published: true
 
 アルゴリズムの基本というか、考え得るパターンを全て試していく方法です。B問題までであれば全探索で間に合うことが多いです。
 
-### ABC393 B B - A..B..C
+### ABC393 B - A..B..C
 
 [B - A..B..C](https://atcoder.jp/contests/abc393/tasks/abc393_b)（<span style="color: gray">Difficulty : 44</span>）
 
@@ -93,7 +93,7 @@ mod tests {
 
 ### ABC331 B - Buy One Carton of Milk
 
-[B - Buy One Carton of Milk](https://atcoder.jp/contests/abc331/tasks/abc331_b)（<span style="color: gray">🧪 Difficulty : 182</span>）
+[B - Buy One Carton of Milk](https://atcoder.jp/contests/abc331/tasks/abc331_b)（<span style="color: gray">Difficulty : 182</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -806,7 +806,7 @@ mod tests {
 
 ### ABC374 C - Separated Lunch
 
-[C - Separated Lunch](https://atcoder.jp/contests/abc374/tasks/abc374_c)
+[C - Separated Lunch](https://atcoder.jp/contests/abc374/tasks/abc374_c)（<span style="color: gray">Difficulty : 226</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -3998,6 +3998,63 @@ mod tests {
 
         for TestCase(n, a, expected) in tests {
             assert_eq!(run(n, a), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC394 D - Colorful Bracket Sequence
+
+[D - Colorful Bracket Sequence](https://atcoder.jp/contests/abc394/tasks/abc394_d)（<span style="color: gray">Difficulty : 253</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc394/tasks/abc394_d
+
+fn run(s: &str) -> &'static str {
+    let mut stack = Vec::new();
+
+    for c in s.chars() {
+        stack.push(c);
+
+        if stack.len() > 1 {
+            let len = stack.len();
+
+            if stack.ends_with(&['(', ')']) ||
+                stack.ends_with(&['[', ']']) ||
+                stack.ends_with(&['<', '>'])
+            {
+                stack.truncate(len-2);
+            }
+        }
+    }
+
+    if stack.is_empty() {
+        "Yes"
+    } else {
+        "No"
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(&'static str, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase("([])<>()", "Yes"),
+            TestCase("([<)]>", "No"),
+            TestCase("())", "No"),
+        ];
+
+        for TestCase(s, expected) in tests {
+            assert_eq!(run(s), expected);
         }
     }
 }

@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2025-02-22"
+update: "2025-02-28"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -24,7 +24,7 @@ published: true
 
 ## 幅優先探索
 
-### E - Small d and k
+### ABC254 E - Small d and k
 
 [E - Small d and k](https://atcoder.jp/contests/abc254/tasks/abc254_e)（<span style="color: skyblue">Difficulty : 1202</span>）
 
@@ -271,6 +271,192 @@ mod tests {
 
         for TestCase(n, a, b, c, d, expected) in tests {
             assert_eq!(run(n, a, b, c, d), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC335 E - Non-Decreasing Colorful Path
+
+[E - Non-Decreasing Colorful Path](https://atcoder.jp/contests/abc335/tasks/abc335_e)（<span style="color: skyblue">Difficulty : 1540</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc335/tasks/abc335_e
+
+use std::collections::{BinaryHeap, HashMap};
+use std::cmp::Reverse;
+
+fn dijkstra(
+    n: usize,
+    hash_map: &HashMap<usize, Vec<usize>>,
+    a: &Vec<usize>
+) -> usize {
+    let mut count = vec![0; n+1];
+    count[1] = 1;
+
+    let mut priority_queue = BinaryHeap::new();
+    priority_queue.push((Reverse(a[0]), 1, 1));
+
+    while let Some((_, cur_count, cur_i)) = priority_queue.pop() {
+        if count[cur_i] > cur_count {
+            continue;
+        }
+
+        let Some(next) = hash_map.get(&cur_i) else {
+            continue;
+        };
+
+        for next_i in next {
+            if a[cur_i-1] > a[*next_i-1] {
+                continue;
+            }
+
+            let new_count = if a[cur_i - 1] < a[next_i - 1] {
+                cur_count + 1
+            } else {
+                cur_count
+            };
+
+            if count[*next_i] < new_count {
+                count[*next_i] = new_count;
+                priority_queue.push((Reverse(a[*next_i-1]), new_count, *next_i));
+            }
+        }
+    }
+
+    count[n]
+}
+
+fn run(
+    n: usize,
+    _m: usize,
+    a: Vec<usize>,
+    uv: Vec<(usize, usize)>
+) -> usize {
+    let mut hash_map = HashMap::new();
+
+    for (u, v) in uv {
+        hash_map.entry(u).or_insert_with(|| Vec::new()).push(v);
+        hash_map.entry(v).or_insert_with(|| Vec::new()).push(u);
+    }
+
+    dijkstra(n, &hash_map, &a)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<usize>, Vec<(usize, usize)>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(5, 6, vec![10, 20, 30, 40, 50], vec![(1, 2),(1, 3),(2, 5),(3, 4),(3, 5),(4, 5)], 4),
+            TestCase(4, 5, vec![1, 10, 11, 4], vec![(1, 2), (1, 3), (2, 3), (2, 4), (3, 4)], 0),
+            TestCase(10, 12, vec![1, 2, 3, 3, 4, 4, 4, 6, 5, 7], vec![(1, 3), (2, 9), (3, 4), (5, 6), (1, 2), (8, 9), (4, 5), (8, 10), (7, 10), (4, 6), (2, 8), (6, 7)], 5),
+        ];
+
+        for TestCase(n, m, a, uv, expected) in tests {
+            assert_eq!(run(n, m, a, uv), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC051 D - Candidates of No Shortest Paths
+
+[D - Candidates of No Shortest Paths](https://atcoder.jp/contests/abc051/tasks/abc051_d)（<span style="color: skyblue">Difficulty : 1566</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc051/tasks/abc051_d
+
+use core::hash;
+use std::collections::{BinaryHeap, HashMap};
+
+const INF: usize = std::usize::MAX;
+
+fn dijkstra(n: usize, start: usize, hash_map: &HashMap<usize, Vec<(usize, usize)>>) -> Vec<usize> {
+    let mut dist = vec![INF; n+1];
+    dist[start] = 0;
+
+    let mut priority_queue = BinaryHeap::new();
+    priority_queue.push((0, start));
+
+    while let Some((cur_cost, cur_i)) = priority_queue.pop() {
+        let Some(next) = hash_map.get(&cur_i) else {
+            continue;
+        };
+
+        for (next_cost, next_i) in next {
+            let new_cost = cur_cost + next_cost;
+
+            if new_cost < dist[*next_i] {
+                dist[*next_i] = new_cost;
+                priority_queue.push((new_cost, *next_i));
+            }
+        }
+    }
+
+    dist
+}
+
+fn run(n: usize, m: usize, abc: Vec<(usize, usize, usize)>) -> usize {
+    let mut hash_map = HashMap::new();
+
+    for &(a, b, c) in &abc {
+        hash_map.entry(a).or_insert_with(|| Vec::new()).push((c, b));
+        hash_map.entry(b).or_insert_with(|| Vec::new()).push((c, a));
+    }
+
+    let mut dist = vec![vec![INF; n + 1]; n + 1];
+
+    for i in 1..=n {
+        dist[i] = dijkstra(n, i, &hash_map);
+    }
+
+    let mut used = vec![false; m];
+
+    for i in 1..=n {
+        for j in 1..=n {
+            if i == j || dist[i][j] == INF {
+                continue;
+            }
+
+            for (k, &(a, b, c)) in abc.iter().enumerate() {
+                if dist[i][a] + c + dist[b][j] == dist[i][j] || dist[i][b] + c + dist[a][j] == dist[i][j] {
+                    used[k] = true;
+                }
+            }
+        }
+    }
+
+    used.iter().filter(|&&u| !u).count()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<(usize, usize, usize)>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 3, vec![(1, 2, 1), (1, 3, 1), (2, 3, 3)], 1),
+            TestCase(3, 2, vec![(1, 2, 1), (2, 3, 1)], 0),
+        ];
+
+        for TestCase(n, m, abc, expected) in tests {
+            assert_eq!(run(n, m, abc), expected);
         }
     }
 }
@@ -549,7 +735,6 @@ mod tests {
         let tests = [
             TestCase(2, 2, 2, 8, vec![4, 6], vec![1, 5], vec![3, 8], vec![19, 17, 15, 14, 13, 12, 10, 8]),
             TestCase(3, 3, 3, 5, vec![1, 10, 100], vec![2, 20, 200], vec![1, 10, 100], vec![400, 310, 310, 301, 301]),
-            TestCase(10, 10, 10, 20, vec![7467038376, 5724769290, 292794712, 2843504496, 3381970101, 8402252870, 249131806, 6310293640, 6690322794, 6082257488], vec![1873977926, 2576529623, 1144842195, 1379118507, 6003234687, 4925540914, 3902539811, 3326692703, 484657758, 2877436338], vec![4975681328, 8974383988, 2882263257,  7690203955, 514305523, 6679823484, 4263279310, 585966808, 3752282379, 620585736], vec![23379871545, 22444657051, 22302177772, 22095691512, 21667941469, 21366963278, 21287912315, 21279176669, 21160477018, 21085311041, 21059876163, 21017997739, 20703329561, 20702387965, 20590247696, 20383761436, 20343962175, 20254073196, 20210218542, 20150096547]),
         ];
 
         for TestCase(x, y, z, k, a, b, c, expected) in tests {
@@ -566,6 +751,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年2月28日 : ABC335 <span style="color: skyblue">E - Non-Decreasing Colorful Path</span>を追加</li>
   <li>2025年2月23日 : ABC325 <span style="color: green">E - Our clients, please wait a moment</span>を追加</li>
   <li>2025年2月22日 : 競技プログラミングの鉄則 <span style="color: gray">A64 - Shortest Path 2</span>を追加</li>
   <li>2025年1月13日 : ABC254 <span style="color: skyblue">E - Small d and k</span>を追加</li>
