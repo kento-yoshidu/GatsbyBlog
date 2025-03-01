@@ -5,7 +5,7 @@ update: "2025-03-01"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
-tags: ["Rust",　"アルゴリズム", "競技プログラミング", "AtCoder"]
+tags: ["Rust", "アルゴリズム", "競技プログラミング", "AtCoder"]
 keywords: ["Rust", "アルゴリズム", "競技プログラミング", "AtCoder", "algorithm"]
 published: true
 ---
