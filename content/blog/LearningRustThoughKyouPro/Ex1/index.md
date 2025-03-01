@@ -5,8 +5,8 @@ update: "2025-02-21"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
-tags: ["Rust", "競技プログラミング", "AtCoder"]
-keywords: ["Rust", "競技プログラミング", "AtCoder"]
+tags: ["Rust", "アルゴリズム", "競技プログラミング", "AtCoder"]
+keywords: ["Rust", "アルゴリズム", "競技プログラミング", "AtCoder", "algorithm"]
 published: true
 ---
 
@@ -2137,7 +2137,7 @@ mod tests {
 
 ### ABC387 D - Snaky Walk
 
-[D - Snaky Walk](https://atcoder.jp/contests/abc387/tasks/abc387_d)（<span style="color: green">🧪 Difficulty : 817</span>）
+[D - Snaky Walk](https://atcoder.jp/contests/abc387/tasks/abc387_d)（<span style="color: green">Difficulty : 817</span>）
 
 縦移動と横移動を1回ずつ交互に行うところが難しいです。
 
