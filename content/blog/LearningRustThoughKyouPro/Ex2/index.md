@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2025-03-01"
+update: "2025-03-03"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -98,6 +98,206 @@ mod tests {
 
         for TestCase(n, m, ab, q, xk, expected) in tests {
             assert_eq!(run(n, m, ab, q, xk), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC176 D - Wizard in Maze
+
+[D - Wizard in Maze](https://atcoder.jp/contests/abc176/tasks/abc176_d)（<span style="color: skyblue">Difficulty : 1276</span>）
+
+01-BFS。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc176/tasks/abc176_d
+
+use std::collections::VecDeque;
+
+fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
+    i < 0 || j < 0 || i >= h || j >= w
+}
+
+const INF: isize = std::isize::MAX;
+
+fn run(h: usize, w: usize, c: (usize, usize), d: (usize, usize), s: Vec<&str>) -> isize {
+    let vec: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut dist = vec![vec![INF; w]; h];
+    dist[c.0 - 1][c.1 - 1] = 0;
+
+    let mut queue = VecDeque::new();
+    queue.push_back((c.0-1, c.1-1));
+
+    let dx = [0, 1, 0, -1];
+    let dy = [1, 0, -1, 0];
+
+    while let Some((cur_i, cur_j)) = queue.pop_front() {
+        for i in 0..4 {
+            if check(cur_i as isize + dx[i], cur_j as isize + dy[i], h as isize, w as isize) {
+                continue;
+            }
+
+            let next_i = (cur_i as isize + dx[i]) as usize;
+            let next_j = (cur_j as isize + dy[i]) as usize;
+
+            if vec[next_i][next_j] == '#' || dist[next_i][next_j] <= dist[cur_i][cur_j] {
+                continue;
+            }
+
+            dist[next_i][next_j] = dist[cur_i][cur_j];
+            queue.push_front((next_i, next_j));
+        }
+
+        for i in -2..=2 {
+            for j in -2..=2 {
+                let new_i = cur_i as isize + i;
+                let new_j = cur_j as isize + j;
+
+                if check(cur_i as isize + i, cur_j as isize + j, h as isize, w as isize) {
+                    continue;
+                }
+
+                let jump_i = new_i as usize;
+                let jump_j = new_j as usize;
+
+                if vec[jump_i][jump_j] == '#' || dist[jump_i][jump_j] <= dist[cur_i][cur_j] + 1 {
+                    continue;
+                }
+
+                dist[jump_i][jump_j] = dist[cur_i][cur_j] + 1;
+                queue.push_back((jump_i, jump_j));
+            }
+        }
+    }
+
+    if dist[d.0-1][d.1-1] == INF {
+        -1
+    } else {
+        dist[d.0-1][d.1-1]
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, (usize, usize), (usize, usize), Vec<&'static str>, isize);
+
+    #[test]
+    fn abc176_d() {
+        let tests = [
+            TestCase(4, 4, (1, 1), (4, 4), vec!["..#.", "..#.", ".#..", ".#.."], 1),
+            TestCase(4, 4, (1, 4), (4, 1), vec![".##.", "####", "####", ".##."], -1),
+            TestCase(4, 4, (2, 2), (3, 3), vec!["....", "....", "....", "...."], 0),
+            TestCase(4, 5, (1, 2), (2, 5), vec!["#.###", "####.", "#..##", "#..##"], 2),
+        ];
+
+        for TestCase(h, w, c, d, s, expected) in tests {
+            assert_eq!(run(h, w, c, d, s), expected);
+        }
+    }
+}
+```
+</details>
+
+### ARC005 C - 器物損壊！高橋君
+
+[C - 器物損壊！高橋君](https://atcoder.jp/contests/arc005/tasks/arc005_3)（<span style="color: skyblue">🧪 Difficulty : 1503</span>）
+
+これも01-BFS。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/arc005/tasks/arc005_3
+
+use std::collections::VecDeque;
+
+fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
+    i < 0 || j < 0 || i >= h || j >= w
+}
+
+fn run(h: usize, w: usize, c: Vec<&str>) -> &'static str {
+    let vec: Vec<Vec<char>> = c.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut s = (0, 0);
+    let mut g = (0, 0);
+
+    for i in 0..h {
+        for j in 0..w {
+            if vec[i][j] == 's' {
+                s = (i, j);
+            }
+
+            if vec[i][j] == 'g' {
+                g = (i, j);
+            }
+
+        }
+    }
+
+    let mut dist = vec![vec![-1; w]; h];
+    dist[s.0][s.1] = 0;
+
+    let mut queue = VecDeque::new();
+    queue.push_back((s.0, s.1));
+
+    let dx = [0, 1, 0, -1];
+    let dy = [1, 0, -1, 0];
+
+    while let Some((cur_i, cur_j)) = queue.pop_front() {
+        for i in 0..4 {
+            if check(cur_i as isize + dx[i],cur_j as isize + dy[i], h as isize, w as isize) {
+                continue;
+            }
+
+            let next_i = (cur_i as isize + dx[i]) as usize;
+            let next_j = (cur_j as isize + dy[i]) as usize;
+
+            if dist[next_i][next_j] != -1 {
+                continue;
+            }
+
+            if vec[next_i][next_j] != '#' {
+                dist[next_i][next_j] = dist[cur_i][cur_j];
+                queue.push_front((next_i, next_j));
+            } else {
+                dist[next_i][next_j] = dist[cur_i][cur_j] + 1;
+                queue.push_back((next_i, next_j));
+            }
+        }
+    }
+
+    if dist[g.0][g.1] <= 2 {
+        "YES"
+    } else {
+        "NO"
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<&'static str>, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(4, 5, vec!["s####", "....#", "#####", "#...g"], "YES"),
+            TestCase(4, 4, vec!["...s", "....", "....", ".g.."], "YES"),
+            TestCase(6, 6, vec![".....s", "###...", "###...", "######", "...###", "g.####"], "YES"),
+            TestCase(1, 10, vec!["s..####..g"], "NO"),
+        ];
+
+        for TestCase(h, w, c, expected) in tests {
+            assert_eq!(run(h, w, c), expected);
         }
     }
 }
@@ -603,7 +803,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC143 D - Triangles
@@ -670,9 +869,7 @@ mod tests {
         }
     }
 }
-
 ```
-
 </details>
 
 ### ABC184 F - Programming Contest
@@ -764,7 +961,6 @@ mod tests {
     }
 }
 ```
-
 </details>
 
 ### ABC123 D - Cake 123
@@ -834,18 +1030,22 @@ mod tests {
         }
     }
 }
-
 ```
-
 </details>
 
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年3月03日 : ABC176 <span style="color: skyblue">D - Wizard in Maze</span>を追加</li>
+  <li>2025年3月02日 : ARC005 <span style="color: skyblue">🧪 C - 器物損壊！高橋君</span>を追加</li>
   <li>2025年3月01日 : ABC035 <span style="color: skyblue">🧪 D - トレジャーハント</span>を追加</li>
   <li>2025年2月28日 : ABC335 <span style="color: skyblue">E - Non-Decreasing Colorful Path</span>を追加</li>
   <li>2025年2月23日 : ABC325 <span style="color: green">E - Our clients, please wait a moment</span>を追加</li>
   <li>2025年2月22日 : 競技プログラミングの鉄則 <span style="color: gray">A64 - Shortest Path 2</span>を追加</li>
   <li>2025年1月13日 : ABC254 <span style="color: skyblue">E - Small d and k</span>を追加</li>
 </details>
+
+## 参考
+
+- [01-BFSのちょっと丁寧な解説 - ARMERIA](https://betrue12.hateblo.jp/entry/2018/12/08/000020)
