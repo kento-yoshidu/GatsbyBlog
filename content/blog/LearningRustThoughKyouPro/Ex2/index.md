@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2025-03-03"
+update: "2025-03-09"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -17,7 +17,7 @@ published: true
 |アルゴリズム|
 |---|
 |[幅優先探索](#幅優先探索)|
-|[ダイクストラ法-5問](#ダイクストラ法-5問)|
+|[ダイクストラ法-6問](#ダイクストラ法-6問)|
 |[半分全列挙](#半分全列挙)|
 
 # アルゴリズム
@@ -304,7 +304,7 @@ mod tests {
 ```
 </details>
 
-## ダイクストラ法-5問
+## ダイクストラ法-6問
 
 ### 競技プログラミングの鉄則 A64 - Shortest Path 2
 
@@ -381,6 +381,80 @@ mod tests {
 
         for TestCase(n, m, abc, expected) in tests {
             assert_eq!(run(n, m, abc), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC012 D バスと避けられない運命
+
+[D - バスと避けられない運命](https://atcoder.jp/contests/abc012/tasks/abc012_4)（<span style="color: green">🧪 Difficulty : 1166</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc012/tasks/abc012_4
+
+use std::cmp::Reverse;
+use std::collections::{BinaryHeap, HashMap};
+use std::cmp::min;
+
+fn dijkstra(n: usize, start: usize, hash_map: &HashMap<usize, Vec<(usize, usize)>>) -> usize {
+    let mut dist = vec![std::usize::MAX; n+1];
+    dist[start] = 0;
+
+    let mut priority_queue = BinaryHeap::new();
+    priority_queue.push(Reverse((0, start)));
+
+    while let Some(Reverse((cur_cost, cur_i))) = priority_queue.pop() {
+        for (next_cost, next_i) in hash_map.get(&cur_i).unwrap() {
+            let new_cost = cur_cost + next_cost;
+
+            if new_cost < dist[*next_i] {
+                dist[*next_i] = new_cost;
+                priority_queue.push(Reverse((new_cost, *next_i)));
+            }
+        }
+    }
+
+    dist.into_iter().filter(|n| *n != std::usize::MAX).max().unwrap()
+}
+
+fn run(n: usize, _m: usize, abt: Vec<(usize, usize, usize)>) -> usize {
+    let mut ans = std::usize::MAX;
+
+    let mut hash_map = HashMap::new();
+
+    for (a, b, t) in abt {
+        hash_map.entry(a).or_insert_with(|| Vec::new()).push((t, b));
+        hash_map.entry(b).or_insert_with(|| Vec::new()).push((t, a));
+    }
+
+    for i in 1..=n {
+        ans = min(ans, dijkstra(n, i, &hash_map));
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<(usize, usize, usize)>, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 2, vec![(1, 2, 10), (2, 3, 10)], 10),
+            TestCase(5, 5, vec![(1, 2, 12), (2, 3, 14), (3, 4, 7), (4, 5, 9), (5, 1, 18)], 26),
+            TestCase(4, 6, vec![(1, 2, 1), (2, 3, 1), (3, 4, 1), (4, 1, 1), (1, 3, 1), (4, 2, 1)], 1),
+        ];
+
+        for TestCase(n, m, abt, expected) in tests {
+            assert_eq!(run(n, m, abt), expected);
         }
     }
 }
@@ -1037,6 +1111,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年3月09日 : ABC012 <span style="color: green">🧪 D - バスと避けられない運命</span>を追加</li>
   <li>2025年3月03日 : ABC176 <span style="color: skyblue">D - Wizard in Maze</span>を追加</li>
   <li>2025年3月02日 : ARC005 <span style="color: skyblue">🧪 C - 器物損壊！高橋君</span>を追加</li>
   <li>2025年3月01日 : ABC035 <span style="color: skyblue">🧪 D - トレジャーハント</span>を追加</li>
