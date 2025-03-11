@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-03-08"
+update: "2025-03-11"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -5707,6 +5707,65 @@ mod tests {
 
 ## 後から帳尻合わせる系
 
+その都度リスト操作してると間に合わないので、操作状況を記録しておいて出力時に帳尻合わせるというか。C問題に多いイメージ。
+
+### ABC258 C - Rotation
+
+[C - Rotation](https://atcoder.jp/contests/abc258/tasks/abc258_c)（<span style="color: brown">Difficulty : 419</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc258/tasks/abc258_c
+
+fn run(n: usize, _q: usize, s: &str, query: Vec<(usize, usize)>) -> Vec<char> {
+    let vec: Vec<char> = s.chars().collect();
+
+    let mut count = 0;
+
+    let mut ans = Vec::new();
+
+    for (t, x) in query {
+        match t {
+            1 => {
+                count += x;
+            },
+            2 => {
+                if x < count {
+                    count %= n;
+                }
+
+                ans.push(vec[(x + n - count - 1) % n]);
+            },
+            _ => unreachable!(),
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, &'static str, Vec<(usize, usize)>, Vec<char>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 3, "abc", vec![(2, 2), (1, 1), (2, 2)], vec!['b', 'a']),
+            TestCase(10, 8, "dsuccxulnl", vec![(2, 4), (2, 7), (1, 2), (2, 7), (1, 1), (1, 2), (1, 3), (2, 5)], vec!['c', 'u', 'c', 'u']),
+        ];
+
+        for TestCase(n, q, s, query, expected) in tests {
+            assert_eq!(run(n, q, s, query), expected);
+        }
+    }
+}
+```
+</details>
+
 ### ABC158 D - String Formation
 
 [D - String Formation](https://atcoder.jp/contests/abc158/tasks/abc158_d)（<span style="color: brown">Difficulty : 610</span>）
@@ -5788,6 +5847,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年03月11日 : ABC258 <span style="color: brown">C - Rotation</span>を追加</li>
   <li>2025年03月08日 : ABC276 <span style="color: green">E - Round Trip</span>を追加</li>
   <li>2025年02月21日 : ABC015 <span style="color: green">🧪 C - 高橋くんのバグ探し</span>を追加</li>
   <li>2025年02月19日 : ABC373 <span style="color: brown">D - Hidden Weights</span>を追加</li>
