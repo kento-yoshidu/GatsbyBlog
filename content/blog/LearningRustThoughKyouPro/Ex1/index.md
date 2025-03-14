@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-03-11"
+update: "2025-03-14"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -20,7 +20,7 @@ published: true
 |---|---|---|
 |[全探索-5問](#全探索-5問)|[累積和](#累積和)|[文字列操作](#文字列操作)|
 |[工夫のいる全探索-3問](#工夫のいる全探索-3問)|[いもす法](#いもす法)|[最小公倍数](#最小公倍数)|
-|[バブルソート](#バブルソート)|[スタック](#スタック)|[回文判定](#回文判定)|
+|[バブルソート](#バブルソート)|[スタック-8問](#スタック-8問)|[回文判定](#回文判定)|
 |[約数列挙](#約数列挙)|[HashSet](#hashset)|[n進数](#n進数)|
 |[二分探索](#二分探索)|[HashMap](#hashmap)|[周期性](#周期性)|
 |[bit全探索](#bit全探索)|[BTreeSet](#btreeset)|[後から帳尻合わせる系](#後から帳尻合わせる系)|
@@ -4019,7 +4019,7 @@ mod tests {
 ```
 </details>
 
-## スタック
+## スタック-8問
 
 [スタックとキューを極める！ 〜 考え方と使い所を特集 〜](https://qiita.com/drken/items/6a95b57d2e374a3d3292)
 
@@ -4166,6 +4166,71 @@ mod tests {
             TestCase("([])<>()", "Yes"),
             TestCase("([<)]>", "No"),
             TestCase("())", "No"),
+        ];
+
+        for TestCase(s, expected) in tests {
+            assert_eq!(run(s), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC283 D - Scope
+
+[D - Scope](https://atcoder.jp/contests/abc283/tasks/abc283_d)（<span style="color: brown">Difficulty : 453</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(s: &str) -> &'static str {
+    let s: Vec<char> = s.chars().collect();
+
+    let mut is_stacked = vec![false; 26];
+
+    let mut stack = Vec::new();
+
+    for c in s {
+        match c {
+            '(' => {
+                stack.push(c);
+            },
+            ')' => {
+                while let Some(popped) = stack.pop() {
+                    if popped == '(' {
+                        break;
+                    }
+                    is_stacked[(popped as u8 - b'a') as usize] = false;
+                }
+            },
+            _ => {
+                if is_stacked[(c as u8 - b'a') as usize] {
+                    return "No";
+                }
+
+                is_stacked[(c as u8 - b'a') as usize] = true;
+                stack.push(c);
+            }
+        }
+    }
+
+    "Yes"
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(&'static str, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase("((a)ba)", "Yes"),
+            TestCase("(a(ba))", "No"),
+            TestCase("(((())))", "Yes"),
+            TestCase("abca", "No"),
         ];
 
         for TestCase(s, expected) in tests {
@@ -5847,6 +5912,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年03月14日 : ABC283 <span style="color: brown">D - Scope</span>を追加</li>
   <li>2025年03月11日 : ABC258 <span style="color: brown">C - Rotation</span>を追加</li>
   <li>2025年03月08日 : ABC276 <span style="color: green">E - Round Trip</span>を追加</li>
   <li>2025年02月21日 : ABC015 <span style="color: green">🧪 C - 高橋くんのバグ探し</span>を追加</li>
