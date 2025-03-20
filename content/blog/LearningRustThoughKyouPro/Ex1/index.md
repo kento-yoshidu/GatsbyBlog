@@ -1190,7 +1190,7 @@ mod tests {
 
 ### ABC029 C - Brute-force Attack
 
-[C - Brute-force Attack](https://atcoder.jp/contests/abc029/tasks/abc029_c)（<span style="color: brown">difficulty : 584</span>）
+[C - Brute-force Attack](https://atcoder.jp/contests/abc029/tasks/abc029_c)（<span style="color: brown">Difficulty : 584</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -1242,7 +1242,7 @@ mod tests {
 
 ### ABC275 D - Yet Another Recursive Function
 
-[D - Yet Another Recursive Function](https://atcoder.jp/contests/abc275/tasks/abc275_d)（<span style="color: brown">difficulty : 606</span>）
+[D - Yet Another Recursive Function](https://atcoder.jp/contests/abc275/tasks/abc275_d)（<span style="color: brown">Difficulty : 606</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -1255,7 +1255,7 @@ mod tests {
 
 ### ABC340 C - Divide and Divide
 
-[C - Divide and Divide](https://atcoder.jp/contests/abc340/tasks/abc340_c)（<span style="color: brown">difficulty : 528</span>）
+[C - Divide and Divide](https://atcoder.jp/contests/abc340/tasks/abc340_c)（<span style="color: brown">Difficulty : 528</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -1314,9 +1314,94 @@ mod tests {
 
 ## 深さ優先探索 
 
+### ATC001 A - 深さ優先探索
+
+[A - 深さ優先探索](https://atcoder.jp/contests/atc001/tasks/dfs_a)（<span style="color: gray">Difficultyなし</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/atc001/tasks/dfs_a
+
+fn check(h: isize, w: isize, i: isize, j: isize) -> bool {
+    i < 0 || j < 0 || i >= h || j >= w
+}
+
+fn dfs(vec: &Vec<Vec<char>>, seen: &mut Vec<Vec<bool>>, cur_i: usize, cur_j: usize) {
+    seen[cur_i][cur_j] = true;
+
+    let dx = [0, 1, 0, -1];
+    let dy = [1, 0, -1, 0];
+
+    for i in 0..4 {
+        if check(vec.len() as isize, vec[0].len() as isize, cur_i as isize + dx[i], cur_j as isize + dy[i]) {
+            continue;
+        }
+
+        let next_i = (cur_i as isize + dx[i]) as usize;
+        let next_j = (cur_j as isize + dy[i]) as usize;
+
+        if vec[next_i][next_j] == '#' || seen[next_i][next_j] {
+            continue;
+        }
+
+        dfs(&vec, seen, next_i, next_j)
+    }
+}
+
+fn run(h: usize, w: usize, c: Vec<&str>) -> &'static str {
+    let vec: Vec<Vec<char>> = c.into_iter().map(|str| str.chars().collect()).collect();
+
+    let mut start = (0, 0);
+    let mut end = (0, 0);
+
+    for i in 0..h {
+        for j in 0..w {
+            if vec[i][j] == 's' {
+                start = (i, j);
+            }
+            if vec[i][j] == 'g' {
+                end = (i, j);
+            }
+        }
+    }
+
+    let mut seen = vec![vec![false; w]; h];
+
+    dfs(&vec, &mut seen, start.0, start.1);
+
+    if seen[end.0][end.1] {
+        "Yes"
+    } else {
+        "No"
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<&'static str>, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(4, 5, vec!["s####", "....#", "#####", "#...g"], "No"),
+            TestCase(4, 4, vec!["...s", "....", "....", ".g.."], "Yes"),
+        ];
+
+        for TestCase(h, w, c, expected) in tests {
+            assert_eq!(run(h, w, c), expected);
+        }
+    }
+}
+```
+</details>
+
 ### ABC277 C - Ladder Takahashi
 
-[C - Ladder Takahashi](https://atcoder.jp/contests/abc277/tasks/abc277_c)（<span style="color: brown">difficulty : 540</span>）
+[C - Ladder Takahashi](https://atcoder.jp/contests/abc277/tasks/abc277_c)（<span style="color: brown">Difficulty : 540</span>）
 
 <details>
 <summary>コード例を見る</summary>
