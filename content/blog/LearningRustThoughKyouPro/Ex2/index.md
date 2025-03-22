@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2025-03-09"
+update: "2025-03-22"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -298,6 +298,103 @@ mod tests {
 
         for TestCase(h, w, c, expected) in tests {
             assert_eq!(run(h, w, c), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC218 F - Blocked Roads
+
+[F - Blocked Roads](https://atcoder.jp/contests/abc218/tasks/abc218_f)（<span style="color: rgb(136, 136, 255)">Difficulty : 1753</span>）
+
+最初にBFSで最短経路を求めておく。後は各エッジについて最短経路に含まれないなら`dist[n]`を出力、最短経路に含まれるなら再度BFSを回すだけで解ける。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc218/tasks/abc218_f
+
+use std::collections::{HashMap, VecDeque};
+
+fn bfs(n: usize, start: usize, hash_map: &HashMap<usize, Vec<usize>>) -> Vec<usize> {
+    let mut dist = vec![std::usize::MAX; n+1];
+    dist[start] = 0;
+
+    let mut queue = VecDeque::new();
+    queue.push_front(start);
+
+    while let Some(cur) = queue.pop_front() {
+        let Some(next) = hash_map.get(&cur) else {
+            continue;
+        };
+
+        for next in next {
+            if dist[*next] != std::usize::MAX {
+                continue;
+            }
+
+            dist[*next] = dist[cur] + 1;
+
+            queue.push_back(*next);
+        }
+    }
+
+    dist
+}
+
+fn run(n: usize, _m: usize, st: Vec<(usize, usize)>) -> Vec<isize> {
+    let mut graph = HashMap::new();
+
+    for &(s, t) in &st {
+        graph.entry(s).or_insert_with(Vec::new).push(t);
+    }
+
+    let dist = bfs(n, 1, &graph);
+
+    let mut ans = Vec::new();
+
+    for &(s, t) in &st {
+        if dist[s] + 1 != dist[t] {
+            ans.push(dist[n] as isize);
+            continue;
+        }
+
+        let mut graph_clone = graph.clone();
+        graph_clone.get_mut(&s).map(|v| v.retain(|&x| x != t));
+
+        let dist_after_removal = bfs(n, 1, &graph_clone);
+
+        let dist: isize = if dist_after_removal[n] == std::usize::MAX {
+            -1
+        } else {
+            dist_after_removal[n] as isize
+        };
+
+        ans.push(dist);
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<(usize, usize)>, Vec<isize>);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(3, 3, vec![(1, 2), (1, 3), (2, 3)], vec![1, 2, 1]),
+            TestCase(4, 4, vec![(1, 2), (2, 3), (2, 4), (3, 4)], vec![-1, 2, 3, 2]),
+            TestCase(5, 10, vec![(1, 2), (1, 4), (1, 5), (2, 1), (2, 3), (3, 1), (3, 2), (3, 5), (4, 2), (4, 3)], vec![ 1, 1, 3, 1, 1, 1, 1, 1, 1, 1]),
+            TestCase(4, 1, vec![(1, 2)], vec![-1]),
+        ];
+
+        for TestCase(n, m, st, expected) in tests {
+            assert_eq!(run(n, m, st), expected);
         }
     }
 }
@@ -1111,6 +1208,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年3月22日 : ABC218 <span style="color: rgb(137, 137, 255)">F - Blocked Roads</span>を追加</li>
   <li>2025年3月09日 : ABC012 <span style="color: green">🧪 D - バスと避けられない運命</span>を追加</li>
   <li>2025年3月03日 : ABC176 <span style="color: skyblue">D - Wizard in Maze</span>を追加</li>
   <li>2025年3月02日 : ARC005 <span style="color: skyblue">🧪 C - 器物損壊！高橋君</span>を追加</li>
