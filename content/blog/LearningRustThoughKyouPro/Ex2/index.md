@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2025-03-22"
+update: "2025-04-12"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -16,13 +16,13 @@ published: true
 
 |アルゴリズム|
 |---|
-|[幅優先探索](#幅優先探索)|
+|[幅優先探索-5問](#幅優先探索-5問)|
 |[ダイクストラ法-6問](#ダイクストラ法-6問)|
 |[半分全列挙](#半分全列挙)|
 
 # アルゴリズム
 
-## 幅優先探索
+## 幅優先探索-5問
 
 ### ABC254 E - Small d and k
 
@@ -98,6 +98,105 @@ mod tests {
 
         for TestCase(n, m, ab, q, xk, expected) in tests {
             assert_eq!(run(n, m, ab, q, xk), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC400 D - Takahashi the Wall Breaker
+
+[D - Takahashi the Wall Breaker](https://atcoder.jp/contests/abc400/tasks/abc400_d)（<span>Difficulty : 不明</span>）
+
+典型的な01-BFS。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc400/tasks/abc400_d
+
+use std::collections::VecDeque;
+
+fn out_of_bounds(h: usize, w: usize, i: isize, j: isize) -> bool {
+    i < 0 || j < 0 || i == h as isize || j == w as isize
+}
+
+fn run(h: usize, w: usize, s: Vec<&str>, a: usize, b: usize, c: usize, d: usize) -> usize {
+    let vec: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut dist = vec![vec![-1; w]; h];
+    dist[a - 1][b - 1] = 0;
+
+    let mut queue = VecDeque::new();
+    queue.push_back((a - 1, b - 1));
+
+    let dx = [0, 1, 0, -1];
+    let dy = [1, 0, -1, 0];
+
+    while let Some((cur_i, cur_j)) = queue.pop_front() {
+        for i in 0..4 {
+            let new_i = cur_i as isize + dx[i];
+            let new_j = cur_j as isize + dy[i];
+
+            if out_of_bounds(h, w, new_i, new_j) {
+                continue;
+            }
+
+            let new_i = new_i as usize;
+            let new_j = new_j as usize;
+
+            if vec[new_i][new_j] != '#' {
+                if dist[new_i][new_j] == -1 || dist[new_i][new_j] > dist[cur_i][cur_j] {
+                    dist[new_i][new_j] = dist[cur_i][cur_j];
+                    queue.push_front((new_i, new_j));
+                }
+            } else {
+                // 1マス先
+                if dist[new_i][new_j] == -1 {
+                    dist[new_i][new_j] = dist[cur_i][cur_j] + 1;
+                    queue.push_back((new_i, new_j));
+                }
+
+                // 2マス先の座標
+                let new_i2 = cur_i as isize + dx[i] * 2;
+                let new_j2 = cur_j as isize + dy[i] * 2;
+
+                if out_of_bounds(h, w, new_i2, new_j2) {
+                    continue;
+                }
+
+                let new_i2 = new_i2 as usize;
+                let new_j2 = new_j2 as usize;
+
+                if dist[new_i2][new_j2] != -1 {
+                    continue;
+                }
+
+                dist[new_i2][new_j2] = dist[cur_i][cur_j] + 1;
+                queue.push_back((new_i2, new_j2));
+            }
+        }
+    }
+
+    dist[c - 1][d - 1] as usize
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<&'static str>, usize, usize, usize, usize, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(2, 2, vec![".#", "#."], 1, 1, 2, 2, 1),
+            TestCase(1, 3, vec![".#."], 1, 1, 1, 3, 1),
+        ];
+
+        for TestCase(h, w, s, a, b, c, d, expected) in tests {
+            assert_eq!(run(h, w, s, a, b, c, d), expected);
         }
     }
 }
@@ -1208,6 +1307,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年4月12日 : ABC400 D - Takahashi the Wall Breakerを追加</li>
   <li>2025年3月22日 : ABC218 <span style="color: rgb(137, 137, 255)">F - Blocked Roads</span>を追加</li>
   <li>2025年3月09日 : ABC012 <span style="color: green">🧪 D - バスと避けられない運命</span>を追加</li>
   <li>2025年3月03日 : ABC176 <span style="color: skyblue">D - Wizard in Maze</span>を追加</li>
