@@ -233,6 +233,84 @@ setCount((prevCount) => prevCount + 1);
 - propsが変化した時
 - 親コンポーネントが再レンダリングされた時
 
+### useStateの更新
+
+`setCount`を呼び出すとstateである`count`が更新され、`App`コンポーネントが再レンダリングされる。
+
+```tsx
+import { useState } from "react";
+
+function App() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <p>{count}</p>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </>
+  );
+}
+```
+
+### propsが変化した時
+
+propsが変化した時にもレンダリングされる。stateが更新されることでAppコンポーネントが再レンダリングされ、propsが更新されることでChildコンポーネントが再レンダリングされる。
+
+```tsx
+import { useState } from "react";
+
+const Child = ({ count }: { count: number }) => {
+  console.log("Child Rendering");
+
+  return (
+    <p>{count}</p>
+  )
+}
+
+function App() {
+  console.log("App Rendering");
+
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      <Child count={count} />
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </>
+  );
+}
+```
+
+### 親コンポーネントが再レンダリングされた時
+
+子コンポーネントのpropsは変化していないが、Appが混信されたのでChildも更新される
+
+```tsx
+import { useState } from "react";
+
+const Child = ({ count }: { count: number }) => {
+  console.log("Child Rendering");
+
+  return (
+    <p>{count}</p>
+  )
+}
+
+function App() {
+  console.log("App Rendering");
+
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      {/* propsは更新しない */}
+      <Child count={1} />
+      <button onClick={() => setCount(count + 1)}>+1</button>
+    </>
+  );
+}
+```
+
 ## key属性
 
 ## children
@@ -240,6 +318,40 @@ setCount((prevCount) => prevCount + 1);
 ReactNodeで型定義?
 
 参考 : [Reactのchildrenの型で子コンポーネントを制御する（したかった）](https://zenn.dev/mya_ake/articles/5517a5001db48e)
+
+## レンダリング
+
+レンダリングとは何でしょうか。恐らく「画面へのDOMの描画」という答えが一番多いと思いますが。Reactのドキュメントからもう一度おさらいしたいと思います。
+
+ドキュメントでは、描画されるまでのステップが以下のように紹介されています。
+
+<blockquote>
+
+1. Triggering a render (delivering the guest’s order to the kitchen)
+2. Rendering the component (preparing the order in the kitchen)
+3. Committing to the DOM (placing the order on the table)
+
+</blockquote>
+
+つまりトリガー、レンダリング、コミットという流れです。
+
+`“Rendering” is React calling your components.`とある通り、ReactにおいてレンダリングとはReactがコンポーネントを呼び出すことです。
+
+そしてCommittingが実際にDOMを描画するという事になります。
+
+[](https://zenn.dev/1129_tametame/articles/bf4fc2005bea4d)
+
+このように、Reactにおいてはレンダリングとコミットという工程に明確に分かれていることがわかります
+
+[](https://ja.react.dev/learn/render-and-commit)
+
+[React のレンダリングとオブジェクト参照を理解する](https://zenn.dev/farstep/articles/react-rendering-object-reference)
+
+## useState
+
+### 更新用関数
+
+[useStateの更新用関数は、なぜ最新の状態を参照できるのか。](https://zenn.dev/medicalforce/articles/d7fc654a4dbd3b)
 
 ## useEffect
 

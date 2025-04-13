@@ -7,7 +7,7 @@ seriesSlug: "HelloWeb"
 description: "画像を表示させるimg要素を学習します。"
 tags: ["HTML"]
 keywords: ["HTML", "img", "画像"]
-published: true
+published: false
 ---
 
 # 画像を表示させよう

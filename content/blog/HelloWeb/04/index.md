@@ -7,7 +7,7 @@ seriesSlug: "HelloWeb"
 description: "HTMLの基本的な書き方や記述ルールを学習します。"
 tags: ["HTML"]
 keywords: ["HTML", "CSS", "コメント"]
-published: true
+published: false
 ---
 
 # HTMLの文法を覚えよう

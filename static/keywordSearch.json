@@ -1,11 +1,46 @@
 [
   {
+    "slug": "/Others/12/",
+    "title": "Erlangメモ",
+    "keywords": [
+      "Erlang"
+    ]
+  },
+  {
+    "slug": "/LearningRustThoughKyouPro/Ex2/",
+    "title": "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2",
+    "keywords": [
+      "Rust",
+      "アルゴリズム",
+      "競技プログラミング",
+      "AtCoder",
+      "algorithm"
+    ]
+  },
+  {
+    "slug": "/Others/11/",
+    "title": "[下書き]今更のReact総復習",
+    "keywords": [
+      "React"
+    ]
+  },
+  {
+    "slug": "/Diary/13/",
+    "title": "2023年、自分は一体何をしていたのか",
+    "keywords": [
+      "2023年",
+      "日記"
+    ]
+  },
+  {
     "slug": "/LearningRustThoughKyouPro/Ex1/",
     "title": "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる",
     "keywords": [
       "Rust",
+      "アルゴリズム",
       "競技プログラミング",
-      "AtCoder"
+      "AtCoder",
+      "algorithm"
     ]
   },
   {
