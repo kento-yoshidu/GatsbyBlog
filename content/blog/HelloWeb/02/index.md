@@ -7,7 +7,7 @@ seriesSlug: "HelloWeb"
 description: "HTMLファイルを作成してマークアップを行い、Webページを表示するところまでを説明します。"
 tags: ["HTML", "CSS"]
 keywords: ["HTML", "CSS", "タグ", "要素"]
-published: true
+published: false
 ---
 
 # 最初の一歩
@@ -21,7 +21,6 @@ published: true
 上記3つを行います。
 
 当ブログのモットーは**最小構成 & スモールステップ**です。やることは**極限までシンプル**に、そして**目標は小さく設定**し、一つずつクリアしていけばHTMLとCSSの学習は難しくありません。
-
 
 ## HTMLとCSS
 

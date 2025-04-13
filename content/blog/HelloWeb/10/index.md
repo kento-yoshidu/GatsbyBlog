@@ -7,7 +7,7 @@ seriesSlug: "HelloWeb"
 description: "CSSの子孫セレクターとIDセレクターについて学習します。"
 tags: ["CSS"]
 keywords: ["CSS", "セレクター"]
-published: true
+published: false
 ---
 
 # 子孫セレクターとidセレクター

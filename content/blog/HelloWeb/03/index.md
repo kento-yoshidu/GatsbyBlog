@@ -7,7 +7,7 @@ seriesSlug: "HelloWeb"
 description: "CSSを使って、背景色を変えたり文字の色を変えたりします。"
 tags: ["HTML", "CSS"]
 keywords: ["HTML", "CSS", "セレクター", "プロパティ"]
-published: true
+published: false
 ---
 
 # CSSでスタイリングする

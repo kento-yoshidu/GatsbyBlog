@@ -7,7 +7,7 @@ seriesSlug: "HelloWeb"
 description: "CSSの継承の概念について学習します。"
 tags: ["CSS"]
 keywords: ["CSS"]
-published: true
+published: false
 ---
 
 # プロパティの値は子孫要素に「継承」される
