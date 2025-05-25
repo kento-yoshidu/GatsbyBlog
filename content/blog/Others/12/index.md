@@ -7,7 +7,7 @@ seriesSlug: "Others"
 description: "Erlangのメモ"
 tags: ["Erlang"]
 keywords: ["Erlang"]
-published: true
+published: false
 ---
 
 # Erlangメモ

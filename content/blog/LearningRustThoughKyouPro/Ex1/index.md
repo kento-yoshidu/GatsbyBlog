@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-03-14"
+update: "2025-05-25"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -179,9 +179,61 @@ mod tests {
 ```
 </details>
 
+### ABC407 B - P(X or Y)
+
+[B - P(X or Y)](https://atcoder.jp/contests/abc407/tasks/abc407_b)（<span style="color: gray">Difficulty : -</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc407/tasks/abc407_b
+
+use std::cmp::{min, max};
+
+fn run(x: usize, y: usize) -> f64 {
+    let mut count = 0;
+
+    for i in 1..=6 {
+        for j in 1..=6 {
+            let l = max(i, j);
+            let s = min(i, j);
+
+            if i + j >= x || l - s >= y {
+                count += 1;
+            }
+        }
+    }
+
+    count as f64 / 36.0
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, f64);
+
+    #[test]
+    fn abc407_b() {
+        let tests = [
+            TestCase(9, 3, 0.5555555555555556),
+            TestCase(13, 6, 0.0),
+            TestCase(10, 3, 0.5),
+        ];
+
+        for TestCase(x, y, expected) in tests {
+            assert_eq!(run(x, y), expected);
+        }
+    }
+}
+```
+</details>
+
+
 ### ABC391 B - Seek Grid
 
-[B - Seek Grid](https://atcoder.jp/contests/abc391/tasks/abc391_b)（<span style="color: gray">Difficulty : -</span>）
+[B - Seek Grid](https://atcoder.jp/contests/abc391/tasks/abc391_b)（<span style="color: gray">Difficulty : 110</span>）
 
 4重forループですが、M ≦ N ≦ 50なので間に合います。
 
@@ -301,6 +353,59 @@ mod tests {
 
         for TestCase(s, expected) in tests {
             assert_eq!(run(s), expected);
+        }
+    }
+}
+```
+</details>
+
+### LeetCode 1534. Count Good Triplets
+
+[1534. Count Good Triplets](https://leetcode.com/problems/count-good-triplets/description/)（<span style="color:  #1cb8b8">Difficulty : Easy</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://leetcode.com/problems/count-good-triplets/description/
+
+fn run(arr: Vec<isize>, a: isize, b: isize, c: isize) -> usize {
+    let mut ans = 0;
+
+    let len = arr.len();
+
+    for i in 0..len {
+        for j in i+1..len {
+            if (arr[i] - arr[j]).abs() > a {
+                continue;
+            }
+
+            for k in j+1..len {
+                if (arr[j] - arr[k]).abs() <= b && (arr[i] - arr[k]).abs() <= c {
+                    ans += 1;
+                }
+            }
+        }
+    }
+
+    ans
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(Vec<isize>, isize, isize, isize, usize);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(vec![3, 0, 1, 1, 9, 7], 7, 2, 3, 4),
+            TestCase(vec![1, 1, 2, 2, 3], 0, 0, 1, 0),
+        ];
+
+        for TestCase(arr, a, b, c, expected) in tests {
+            assert_eq!(run(arr, a, b, c), expected);
         }
     }
 }
@@ -1823,11 +1928,86 @@ mod tests {
     fn test() {
         let tests = [
             TestCase(3, 3, vec![vec![3, 2, 2], vec![2, 1, 3], vec![1, 5, 4]], 3),
-            TestCase(10, 10, vec![vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10], vec![11, 12, 13, 14, 15, 16, 17, 18, 19, 20], vec![21, 22, 23, 24, 25, 26, 27, 28, 29, 30], vec![31, 32, 33, 34, 35, 36, 37, 38, 39, 40], vec![41, 42, 43, 44, 45, 46, 47, 48, 49, 50], vec![51, 52, 53, 54, 55, 56, 57, 58, 59, 60], vec![61, 62, 63, 64, 65, 66, 67, 68, 69, 70], vec![71, 72, 73, 74, 75, 76, 77, 78, 79, 80], vec![81, 82, 83, 84, 85, 86, 87, 88, 89, 90], vec![91, 92, 93, 94, 95, 96, 97, 98, 99, 100]], 48620),
         ];
 
         for TestCase(h, w, a, expected) in tests {
             assert_eq!(run(h, w, a), expected);
+        }
+    }
+}
+```
+</details>
+
+### ABC308 D - Snuke Maze
+
+[D - Snuke Maze](https://atcoder.jp/contests/abc308/tasks/abc308_d)（<span style="color: brown">Difficulty : 619</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc308/tasks/abc308_d
+
+use std::collections::VecDeque;
+
+fn check(h: usize, w: usize, i: isize, j: isize) -> bool {
+    i < 0 || j < 0 || i == h as isize || j == w as isize
+}
+
+fn run(h: usize, w: usize, s: Vec<&str>) -> &'static str {
+    let str = ['s', 'n', 'u', 'k', 'e'];
+    let chars: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut dist = vec![vec![false; w]; h];
+
+    let mut queue = VecDeque::new();
+    queue.push_back(((0, 0), 0));
+
+    let dx = [0, 1, 0, -1];
+    let dy = [1, 0, -1, 0];
+
+    while let Some(((cur_i, cur_j), count)) = queue.pop_front() {
+        if &str[count % 5] != &chars[cur_i][cur_j] || dist[cur_i][cur_j] {
+            continue;
+        }
+
+        if cur_i == h-1 && cur_j == w-1 {
+            return "Yes";
+        }
+
+        dist[cur_i][cur_j] = true;
+
+        for i in 0..4 {
+            let new_i = cur_i as isize +  dx[i];
+            let new_j = cur_j as isize +  dy[i];
+
+            if check(h, w, new_i, new_j) {
+                continue;
+            }
+
+            queue.push_back(((new_i as usize, new_j as usize), count+1));
+        }
+    }
+
+    "No"
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<&'static str>, &'static str);
+
+    #[test]
+    fn test() {
+        let tests = [
+            TestCase(2, 3, vec!["sns", "euk"], "Yes"),
+            TestCase(2, 2, vec!["ab", "cd"], "No"),
+            TestCase(5, 7, vec!["skunsek", "nukesnu", "ukeseku", "nsnnesn", "uekukku"], "Yes"),
+        ];
+
+        for TestCase(h, w, s, expected) in tests {
+            assert_eq!(run(h, w, s), expected);
         }
     }
 }
@@ -6078,6 +6258,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年05月25日 : ABC308 <span style="color: brown">D - Snuke Maze</span>を追加</li>
   <li>2025年03月23日 : ABC396 <span style="color: brown">D - Minimum XOR Path</span>を追加</li>
   <li>2025年03月14日 : ABC283 <span style="color: brown">D - Scope</span>を追加</li>
   <li>2025年03月11日 : ABC258 <span style="color: brown">C - Rotation</span>を追加</li>
