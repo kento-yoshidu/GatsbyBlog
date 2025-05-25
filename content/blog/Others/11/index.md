@@ -7,7 +7,7 @@ seriesSlug: "Others"
 description: "今更Reactを総復習します。"
 tags: ["React"]
 keywords: ["React"]
-published: true
+published: false
 ---
 
 # 復習のReact
