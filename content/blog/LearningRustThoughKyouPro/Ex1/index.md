@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-05-25"
+update: "2025-05-28"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -27,7 +27,7 @@ published: true
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索](#深さ優先探索)|
-|[幅優先探索-18問](#幅優先探索-18問)|
+|[幅優先探索-20問](#幅優先探索-20問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -1651,7 +1651,7 @@ mod tests {
 ```
 </details>
 
-## 幅優先探索-18問
+## 幅優先探索-20問
 
 [BFS (幅優先探索) 超入門！ 〜 キューを鮮やかに使いこなす 〜](https://qiita.com/drken/items/996d80bcae64649a6580)
 
@@ -1932,6 +1932,90 @@ mod tests {
 
         for TestCase(h, w, a, expected) in tests {
             assert_eq!(run(h, w, a), expected);
+        }
+    }
+}
+```
+</details>
+
+
+### ABC405 D - Escape Route
+
+[D - Escape Route](https://atcoder.jp/contests/abc405/tasks/abc405_d)（<span style="color: brown">Difficulty : 471</span>）
+
+多始点BFS。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+// https://atcoder.jp/contests/abc405/tasks/abc405_d
+
+use std::collections::VecDeque;
+
+fn out_of_bounds(h: usize, w: usize, i: isize, j: isize) -> bool {
+    i < 0 || j < 0 || h as isize == i || w as isize == j
+}
+
+fn run(h: usize, w: usize, s: Vec<&str>) -> Vec<String> {
+    let mut vec: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut queue = VecDeque::new();
+
+    for i in 0..h {
+        for j in 0..w {
+            if vec[i][j] == 'E' {
+                queue.push_back((i, j));
+            }
+        }
+    }
+
+    let di = [0, 1, 0, -1];
+    let dj = [1, 0, -1, 0];
+    let dis = ['<', '^', '>', 'v'];
+
+    while let Some((cur_i, cur_j)) = queue.pop_front() {
+        for i in 0..4 {
+            let new_i = cur_i as isize + di[i];
+            let new_j = cur_j as isize + dj[i];
+
+            if out_of_bounds(h, w, new_i, new_j) {
+                continue;
+            }
+
+            let new_i = new_i as usize;
+            let new_j = new_j as usize;
+
+            if vec[new_i][new_j] != '.' {
+                continue;
+            }
+
+            vec[new_i][new_j] = dis[i];
+
+            queue.push_back((new_i, new_j));
+        }
+    }
+
+    vec.into_iter()
+        .map(|v| v.into_iter().collect())
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Vec<&'static str>, Vec<&'static str>);
+
+    #[test]
+    fn abc405_d() {
+        let tests = [
+            TestCase(3, 4, vec!["...E", ".#..", "...."], vec![">>>E", "^#>^", ">>>^"]),
+            TestCase(3, 2, vec!["##", "##", "##"], vec!["##", "##", "##"]),
+        ];
+
+        for TestCase(h, w, s, expected) in tests {
+            assert_eq!(run(h, w, s), expected);
         }
     }
 }
@@ -6258,6 +6342,7 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年05月28日 : ABC405 <span style="color: brown">D - Escape Route</span>を追加</li>
   <li>2025年05月25日 : ABC308 <span style="color: brown">D - Snuke Maze</span>を追加</li>
   <li>2025年03月23日 : ABC396 <span style="color: brown">D - Minimum XOR Path</span>を追加</li>
   <li>2025年03月14日 : ABC283 <span style="color: brown">D - Scope</span>を追加</li>
