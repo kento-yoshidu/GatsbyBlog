@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-05-28"
+update: "2025-05-31"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -26,7 +26,7 @@ published: true
 |[bit全探索](#bit全探索)|[BTreeSet](#btreeset)|[後から帳尻合わせる系](#後から帳尻合わせる系)|
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
-|[深さ優先探索](#深さ優先探索)|
+|[深さ優先探索-4問](#深さ優先探索-4問)|
 |[幅優先探索-20問](#幅優先探索-20問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
@@ -48,8 +48,6 @@ published: true
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc393/tasks/abc393_b
-
 fn run(s: &str) -> usize {
     let chars: Vec<char> = s.chars().collect();
     let mut ans = 0;
@@ -68,26 +66,6 @@ fn run(s: &str) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(&'static str, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase("AABCC", 2),
-            TestCase("ARC", 0),
-            TestCase("AABAAABBAEDCCCD", 4),
-        ];
-
-        for TestCase(s, expected) in tests {
-            assert_eq!(run(s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -99,8 +77,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc331/tasks/abc331_b
-
 fn run(n: usize, s: usize, m: usize, l: usize) -> usize {
     let mut ans = std::usize::MAX;
 
@@ -116,18 +92,6 @@ fn run(n: usize, s: usize, m: usize, l: usize) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(300, run(16, 120,  150, 200));
-        assert_eq!(10, run(10, 100, 50, 10));
-        assert_eq!(10000, run(99, 600, 800, 1200));
-    }
-}
 ```
 </details>
 
@@ -139,8 +103,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc224/tasks/abc224_c
-
 fn run(n: usize, xy: Vec<(isize, isize)>) -> usize {
     let mut ans = 0;
 
@@ -156,26 +118,6 @@ fn run(n: usize, xy: Vec<(isize, isize)>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<(isize, isize)>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, vec![(0, 1), (1, 3), (1, 1), (-1, -1)], 3),
-            TestCase(20, vec![(224, 433), (987654321, 987654321), (2, 0), (6, 4), (314159265, 358979323), (0, 0), (-123456789, 123456789), (-1000000000, 1000000000), (124, 233), (9, -6), (-4, 0), (9, 5), (-7, 3), (333333333, -333333333), (-9, -1), (7, -10), (-1, 5), (324, 633), (1000000000, -1000000000), (20, 0)], 1124),
-        ];
-
-        for TestCase(n, xy, expected) in tests {
-            assert_eq!(run(n, xy), expected);
-        }
-    }
-}
-
 ```
 </details>
 
@@ -187,8 +129,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc407/tasks/abc407_b
-
 use std::cmp::{min, max};
 
 fn run(x: usize, y: usize) -> f64 {
@@ -207,29 +147,8 @@ fn run(x: usize, y: usize) -> f64 {
 
     count as f64 / 36.0
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, f64);
-
-    #[test]
-    fn abc407_b() {
-        let tests = [
-            TestCase(9, 3, 0.5555555555555556),
-            TestCase(13, 6, 0.0),
-            TestCase(10, 3, 0.5),
-        ];
-
-        for TestCase(x, y, expected) in tests {
-            assert_eq!(run(x, y), expected);
-        }
-    }
-}
 ```
 </details>
-
 
 ### ABC391 B - Seek Grid
 
@@ -241,8 +160,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc391/tasks/abc391_b
-
 fn run(n: usize, m: usize, s: Vec<&str>, t: Vec<&str>) -> (usize, usize) {
     let vec_s: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
     let vec_t: Vec<Vec<char>> = t.into_iter().map(|s| s.chars().collect()).collect();
@@ -267,25 +184,6 @@ fn run(n: usize, m: usize, s: Vec<&str>, t: Vec<&str>) -> (usize, usize) {
 
     unreachable!();
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, Vec<&'static str>, (usize, usize));
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 2, vec!["#.#", "..#", "##."], vec![".#", "#."], (2, 2)),
-            TestCase(2, 1, vec!["#.", "##"], vec!["."], (1, 2)),
-        ];
-
-        for TestCase(n, m, s, t, expected) in tests {
-            assert_eq!(run(n, m, s, t), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -297,8 +195,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc201/tasks/abc201_c
-
 fn run(s: &str) -> usize {
     let chars: Vec<char> = s.chars().collect();
 
@@ -336,26 +232,6 @@ fn run(s: &str) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(&'static str, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase("ooo???xxxx", 108),
-            TestCase("o?oo?oxoxo", 0),
-            TestCase("xxxxx?xxxo", 15),
-        ];
-
-        for TestCase(s, expected) in tests {
-            assert_eq!(run(s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -367,8 +243,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://leetcode.com/problems/count-good-triplets/description/
-
 fn run(arr: Vec<isize>, a: isize, b: isize, c: isize) -> usize {
     let mut ans = 0;
 
@@ -390,25 +264,6 @@ fn run(arr: Vec<isize>, a: isize, b: isize, c: isize) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(Vec<isize>, isize, isize, isize, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(vec![3, 0, 1, 1, 9, 7], 7, 2, 3, 4),
-            TestCase(vec![1, 1, 2, 2, 3], 0, 0, 1, 0),
-        ];
-
-        for TestCase(arr, a, b, c, expected) in tests {
-            assert_eq!(run(arr, a, b, c), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -424,8 +279,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/joi2024yo2/tasks/joi2024_yo2_a
-
 fn run(_n: usize, a: Vec<usize>) -> &'static str {
     let mut vec = vec![false; 200_000];
 
@@ -441,27 +294,6 @@ fn run(_n: usize, a: Vec<usize>) -> &'static str {
 
     "No"
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<usize>, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, vec![2, 5, 8], "Yes"),
-            TestCase(4, vec![1, 4, 6, 4], "No"),
-            TestCase(8, vec![9, 8, 11, 1, 1, 6, 10, 4], "No"),
-            TestCase(20, vec![2, 15, 4, 30, 6, 8, 11, 27, 14, 3, 16, 26, 19, 2, 23, 21, 18, 13, 28, 6], "Yes"),
-        ];
-
-        for TestCase(n, a, expected) in tests {
-            assert_eq!(run(n, a), expected);
-        }
-    }
-}
 ```
 
 </details>
@@ -474,8 +306,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/joi2023yo2/tasks/joi2023_yo2_a
-
 use itertools::Itertools;
 
 fn run(_n: usize, a: Vec<isize>) -> Vec<usize> {
@@ -490,26 +320,6 @@ fn run(_n: usize, a: Vec<isize>) -> Vec<usize> {
         })
         .collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<isize>, Vec<usize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, vec![13, 15, 20], vec![7, 5, 7]),
-            TestCase(2, vec![100, 100], vec![0, 0]),
-            TestCase(10, vec![440894064, 101089692, 556439322, 34369336, 98417847, 216265879, 623843484, 554560874, 247445405, 718003331], vec![406524728, 616913639, 522069986, 683633995, 619585484, 501737452, 589474148, 520191538, 470557926, 683633995]),
-        ];
-
-        for TestCase(n, a, expected) in tests {
-            assert_eq!(run(n, a), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -521,8 +331,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc085/tasks/abc085_c
-
 fn run(n: isize, y: isize) -> Vec<isize> {
     for i in 0..=n {
         for j in 0..=n {
@@ -540,27 +348,6 @@ fn run(n: isize, y: isize) -> Vec<isize> {
 
     vec![-1, -1, -1]
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(isize, isize, Vec<isize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(9, 45000, vec![4, 0, 5]),
-            TestCase(20, 196000, vec![-1, -1, -1]),
-            TestCase(1000, 1234000, vec![2, 54, 944]),
-            TestCase(2000, 20000000, vec![2000, 0, 0]),
-        ];
-
-        for TestCase(n, y, expected) in tests {
-            assert_eq!(run(n, y), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -574,8 +361,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc264/tasks/abc264_d
-
 fn run(s: &str) -> usize {
     let mut ans = 0;
 
@@ -611,26 +396,6 @@ fn run(s: &str) -> usize {
     }
 
     ans
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(&'static str, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase("catredo", 8),
-            TestCase("atcoder", 0),
-            TestCase("redocta", 21),
-        ];
-
-        for TestCase(s, expected) in tests {
-            assert_eq!(run(s), expected);
-        }
-    }
 }
 ```
 
@@ -668,26 +433,6 @@ fn run(_n: usize, a: Vec<usize>) -> usize {
         })
         .sum()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<usize>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(6, vec![2, 3, 4, 4, 7, 10], 8),
-            TestCase(3, vec![387, 388, 389], 0),
-            TestCase(32, vec![1, 2, 4, 5, 8, 10, 12, 16, 19, 25, 33, 40, 50, 64, 87, 101, 149, 175, 202, 211, 278, 314, 355, 405, 412, 420, 442, 481, 512, 582, 600, 641], 388),
-        ];
-
-        for TestCase(n, a, expected) in tests {
-            assert_eq!(run(n, a), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -699,8 +444,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc365/tasks/abc365_c
-
 use std::cmp::min;
 
 fn check(a: &Vec<usize>, x: usize, m: usize) -> bool {
@@ -735,28 +478,7 @@ fn run(_n: usize, m: usize, a: Vec<usize>) -> String {
 
     l.to_string()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<usize>, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, 8, vec![1, 3, 2, 4], "2"),
-            TestCase(3, 20, vec![5, 3, 2], "infinite"),
-            TestCase(10, 23, vec![2, 5, 6, 5, 2, 1, 7, 9, 7, 2], "2"),
-        ];
-
-        for TestCase(n, m, a, expected) in tests {
-            assert_eq!(run(n, m, a), expected);
-        }
-    }
-}
 ```
-
 </details>
 
 ## 約数列挙
@@ -769,8 +491,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc180/tasks/abc180_c
-
 fn run(n: usize) -> Vec<usize> {
     let mut ans = Vec::new();
 
@@ -790,19 +510,6 @@ fn run(n: usize) -> Vec<usize> {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(vec![1, 2, 3, 6], run(6));
-        assert_eq!(vec![1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 16, 18, 20, 24, 30, 36, 40, 45, 48, 60, 72, 80, 90, 120, 144, 180, 240, 360, 720], run(720));
-        assert_eq!(vec![1, 1000000007], run(1000000007));
-        assert_eq!(vec![1], run(1));
-    }
-}
 ```
 </details>
 
@@ -820,8 +527,6 @@ bit全探索の練習にはぴったりだと思います。
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/arc105/tasks/arc105_a
-
 fn run(a: usize, b: usize, c: usize, d: usize) -> String {
     let vec = vec![a, b, c, d];
 
@@ -844,23 +549,6 @@ fn run(a: usize, b: usize, c: usize, d: usize) -> String {
 
     String::from("No")
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("Yes"), run(1, 3, 2, 4));
-        assert_eq!(String::from("No"), run(1, 2, 4, 8));
-        assert_eq!(String::from("Yes"), run(1, 1, 1, 1));
-        assert_eq!(String::from("Yes"), run(1, 100, 50, 51));
-        assert_eq!(String::from("Yes"), run(2, 100, 48, 50));
-        assert_eq!(String::from("Yes"), run(63214004, 4741111, 4654151, 63300964));
-        assert_eq!(String::from("No"), run(4630987, 9157337, 18793476, 5005153));
-        assert_eq!(String::from("No"), run(93407609, 30427494, 56229544, 81174201));
-    }
-}
 ```
 </details>
 
@@ -872,8 +560,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/arc025/tasks/arc025_1
-
 fn run(dd: Vec<usize>, jj: Vec<usize>) -> usize {
     let mut ans = 0;
 
@@ -893,19 +579,6 @@ fn run(dd: Vec<usize>, jj: Vec<usize>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(33, run(vec![4, 2, 0, 5, 6, 2, 5], vec![6, 1, 4, 3, 6, 4, 6]));
-        assert_eq!(35, run(vec![1, 2, 3, 4, 5, 6, 7], vec![2, 3, 4, 5, 6, 7, 8]));
-        assert_eq!(0, run(vec![0, 0, 0, 0, 0, 0, 0], vec![0, 0, 0, 0, 0, 0, 0]));
-        assert_eq!(793, run(vec![8, 3, 0, 2, 5, 25, 252], vec![252, 252, 2, 5, 2, 5, 2]));
-    }
-}
 ```
 </details>
 
@@ -917,8 +590,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc374/tasks/abc374_c
-
 use std::cmp::{min, max};
 
 fn run(n: usize, k: Vec<usize>) -> usize {
@@ -941,28 +612,7 @@ fn run(n: usize, k: Vec<usize>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<usize>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(5, vec![2, 3, 5, 10, 12], 17),
-            TestCase(2, vec![1, 1], 1),
-            TestCase(6, vec![22, 25, 26, 45, 22, 31], 89),
-        ];
-
-        for TestCase(n, k, expected) in tests {
-            assert_eq!(run(n, k), expected);
-        }
-    }
-}
 ```
-
 </details>
 
 ### ABC182 C - To 3
@@ -973,8 +623,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc182/tasks/abc182_c
-
 fn run(n: usize) -> i32 {
     // 1個も消さずに3で割り切れる場合
     if n % 3 == 0 {
@@ -1010,19 +658,6 @@ fn run(n: usize) -> i32 {
         ans
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(1, run(35));
-        assert_eq!(0, run(369));
-        assert_eq!(1, run(6227384));
-        assert_eq!(-1, run(11));
-    }
-}
 ```
 </details>
 
@@ -1034,8 +669,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc079/tasks/abc079_c
-
 fn run(s: &str) -> String {
     let nums: Vec<i32> = s.chars().map(|c| c.to_digit(10).unwrap() as i32).collect();
 
@@ -1062,18 +695,6 @@ fn run(s: &str) -> String {
 
     unreachable!();
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("1+2+2+2=7"), run("1222"));
-        assert_eq!(String::from("0-2+9-0=7"), run("0290"));
-        assert_eq!(String::from("3+2+4-2=7"), run("3242"));
-    }
-}
 ```
 </details>
 
@@ -1085,8 +706,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc045/tasks/arc061_a
-
 fn run(s: &str) -> usize {
     let len = s.len();
     let chars: Vec<char> = s.chars().collect();
@@ -1112,27 +731,7 @@ fn run(s: &str) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(&'static str, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase("125", 176),
-            TestCase("9999999999", 12656242944),
-        ];
-
-        for TestCase(s, expected) in tests {
-            assert_eq!(run(s), expected);
-        }
-    }
-}
 ```
-
 </details>
 
 ## 再帰関数
@@ -1145,8 +744,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc229/tasks/abc229_b
-
 fn calc(a: usize, b: usize) -> bool {
     if a == 0 || b == 0 {
         true
@@ -1164,17 +761,6 @@ fn run(a: usize, b: usize) -> String {
         String::from("Hard")
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("Hard"), run(229, 390));
-        assert_eq!(String::from("Easy"), run(123456789, 9876543210));
-    }
-}
 ```
 </details>
 
@@ -1186,8 +772,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc248/tasks/abc248_b
-
 fn calc(count: usize, a: usize, b: usize, k: usize) -> usize {
     if a >= b {
         count
@@ -1198,22 +782,6 @@ fn calc(count: usize, a: usize, b: usize, k: usize) -> usize {
 
 fn run(a: usize, b: usize, k: usize) -> usize {
     calc(0, a, b, k)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(2, run(1, 4, 2));
-        assert_eq!(0, run(7, 7, 10));
-        assert_eq!(6, run(31, 415926, 5));
-        assert_eq!(1, run(158260522, 200224287, 10));
-        assert_eq!(30, run(1, 1000000000, 2));
-        assert_eq!(1, run(999999999, 1000000000, 500000000));
-        assert_eq!(29, run(1, 536870912, 2));
-    }
 }
 ```
 </details>
@@ -1226,8 +794,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc083/tasks/arc088_a
-
 fn calc(n: usize, y: usize, count: usize) -> usize {
     if n > y {
         count
@@ -1238,18 +804,6 @@ fn calc(n: usize, y: usize, count: usize) -> usize {
 
 fn run(x: usize, y: usize) -> usize {
     calc(x, y, 0)
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(3, run(3, 20));
-        assert_eq!(3, run(25, 100));
-        assert_eq!(31, run(314159265, 358979323846264338));
-    }
 }
 ```
 </details>
@@ -1278,18 +832,6 @@ fn run(_n: usize, a: vec<usize>) -> usize {
         })
         .sum()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(3, run2(3, vec![5, 2, 4]));
-        assert_eq!(0, run2(4, vec![631, 577, 243, 199]));
-        assert_eq!(39, run2(10, vec![2184, 2126, 1721, 1800, 1024, 2528, 3360, 1945, 1280, 1776]));
-    }
-}
 ```
 </details>
 
@@ -1301,8 +843,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc029/tasks/abc029_c
-
 fn func(n: usize, s: String, vec: &mut Vec<String>) -> Vec<String> {
     if n == 0 {
         vec.push(s);
@@ -1318,32 +858,10 @@ fn func(n: usize, s: String, vec: &mut Vec<String>) -> Vec<String> {
 fn run(n: usize) -> Vec<String> {
     func(n, "".to_string(), &mut Vec::new())
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<&'static str>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(1, vec!["a", "b", "c"]),
-            TestCase(2, vec!["aa", "ab", "ac", "ba", "bb", "bc", "ca", "cb", "cc"]),
-        ];
-
-        for TestCase(n, expected) in tests {
-            assert_eq!(run(n), expected);
-        }
-    }
-}
 ```
-
 </details>
 
 ## メモ化再帰
-
-
 
 ### ABC275 D - Yet Another Recursive Function
 
@@ -1366,8 +884,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc340/tasks/abc340_c
-
 use std::collections::HashMap;
 
 fn calc(n: usize, h: &mut HashMap<usize, usize>) -> usize {
@@ -1393,31 +909,10 @@ fn run(n: usize) -> usize {
 
     calc(n, &mut hash_map)
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 5),
-            TestCase(340, 2888),
-            TestCase(100000000000000000, 5655884811924144128),
-        ];
-
-        for TestCase(n, expected) in tests {
-            assert_eq!(run(n), expected);
-        }
-    }
-}
 ```
-
 </details>
 
-## 深さ優先探索 
+## 深さ優先探索-4問
 
 ### ATC001 A - 深さ優先探索
 
@@ -1427,9 +922,7 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/atc001/tasks/dfs_a
-
-fn check(h: isize, w: isize, i: isize, j: isize) -> bool {
+fn out_of_bounds(h: isize, w: isize, i: isize, j: isize) -> bool {
     i < 0 || j < 0 || i >= h || j >= w
 }
 
@@ -1440,7 +933,7 @@ fn dfs(vec: &Vec<Vec<char>>, seen: &mut Vec<Vec<bool>>, cur_i: usize, cur_j: usi
     let dy = [1, 0, -1, 0];
 
     for i in 0..4 {
-        if check(vec.len() as isize, vec[0].len() as isize, cur_i as isize + dx[i], cur_j as isize + dy[i]) {
+        if out_of_bounds(vec.len() as isize, vec[0].len() as isize, cur_i as isize + dx[i], cur_j as isize + dy[i]) {
             continue;
         }
 
@@ -1482,25 +975,6 @@ fn run(h: usize, w: usize, c: Vec<&str>) -> &'static str {
         "No"
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, 5, vec!["s####", "....#", "#####", "#...g"], "No"),
-            TestCase(4, 4, vec!["...s", "....", "....", ".g.."], "Yes"),
-        ];
-
-        for TestCase(h, w, c, expected) in tests {
-            assert_eq!(run(h, w, c), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -1512,8 +986,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc277/tasks/abc277_c
-
 use std::collections::{HashMap, HashSet};
 
 fn dfs(current: usize, seen: &mut HashSet<usize>, graph: &HashMap<usize, Vec<usize>>) -> usize {
@@ -1546,28 +1018,85 @@ fn run(_n: usize, ab: Vec<(usize, usize)>) -> usize {
 
     dfs(1, &mut HashSet::new(), &hash_map)
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<(usize, usize)>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, vec![(1, 4), (4, 3), (4, 10), (8, 3), (1, 2)], 10),
-            TestCase(6, vec![(1, 3), (1, 5), (1, 12), (3, 5), (3, 12), (5, 12)], 12),
-            TestCase(3, vec![(500000000, 600000000), (600000000, 700000000), (700000000, 800000000)], 1),
-        ];
-
-        for TestCase(n, ab, expected) in tests {
-            assert_eq!(run(n, ab), expected);
-        }
-    }
-}
 ```
 
+</details>
+
+### ABC378 D - Count Simple Paths
+
+[D - Count Simple Paths](https://atcoder.jp/contests/abc378/tasks/abc378_d)（<span style="color: brown">Difficulty : 587</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn out_of_bounds(h: usize, w: usize, i: isize, j: isize) -> bool {
+    i < 0 || j < 0 || h as isize == i || w as isize == j
+}
+
+fn dfs(
+    h: usize,
+    w: usize,
+    i: usize,
+    j: usize,
+    k: usize,
+    step: usize,
+    grid: &Vec<Vec<char>>,
+    visited: &mut Vec<Vec<bool>>,
+    count: &mut usize
+) {
+    if step == k {
+        *count += 1;
+        return;
+    }
+
+    let di = [0, 1, 0, -1];
+    let dj = [1, 0, -1, 0];
+
+    for dir_i in 0..4 {
+        let new_i = i as isize + di[dir_i];
+        let new_j = j as isize + dj[dir_i];
+
+        if out_of_bounds(h, w, new_i, new_j) {
+            continue;
+        }
+
+        let new_i = new_i as usize;
+        let new_j = new_j as usize;
+
+        if visited[new_i][new_j] || grid[new_i][new_j] == '#' {
+            continue;
+        }
+
+        visited[new_i][new_j] = true;
+        dfs(h, w, new_i, new_j, k, step+1, &grid, visited, count);
+        visited[new_i][new_j] = false;
+
+    }
+}
+
+fn run(h: usize, w: usize, k: usize, s: Vec<&str>) -> usize {
+    let vec: Vec<Vec<char>> = s.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut visited = vec![vec![false; w]; h];
+
+    let mut ans = 0;
+
+    for i in 0..h {
+        for j in 0..w {
+            if vec[i][j] == '#' {
+                continue;
+            }
+
+            visited[i][j] = true;
+            dfs(h, w, i, j, k, 0, &vec, &mut visited, &mut ans);
+            visited[i][j] = false;
+        }
+    }
+
+    ans
+}
+```
 </details>
 
 ### ABC396 D - Minimum XOR Path
@@ -1578,8 +1107,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc396/tasks/abc396_d
-
 use std::collections::HashMap;
 
 fn dfs(
@@ -1628,26 +1155,6 @@ fn run(n: usize, _m: usize, uvw: Vec<(usize, usize, usize)>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<(usize, usize, usize)>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, 4, vec![(1, 2, 3), (2, 4, 5), (1, 3, 4), (3, 4, 7)], 3),
-            TestCase(4, 3, vec![(1, 2, 1), (2, 3, 2), (3, 4, 4)], 7),
-            TestCase(7, 10, vec![(1, 2, 726259430069220777), (1, 4, 988687862609183408), (1, 5, 298079271598409137), (1, 6, 920499328385871537), (1, 7, 763940148194103497), (2, 4, 382710956291350101), (3, 4, 770341659133285654), (3, 5, 422036395078103425), (3, 6, 472678770470637382), (5, 7, 938201660808593198)], 186751192333709144),
-        ];
-
-        for TestCase(n, m, uvw, expected) in tests {
-            assert_eq!(run(n, m, uvw), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -1665,8 +1172,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/atc002/tasks/abc007_3
-
 use std::collections::VecDeque;
 
 fn run(r: usize, c: usize, s: (usize, usize), g: (usize, usize), v: Vec<&str>) -> usize {
@@ -1700,25 +1205,6 @@ fn run(r: usize, c: usize, s: (usize, usize), g: (usize, usize), v: Vec<&str>) -
 
     graph[g.0-1][g.1-1] as usize
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, (usize, usize), (usize, usize), Vec<&'static str>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(7, 8, (2, 2), (4, 5), vec!["########", "#......#", "#.######", "#..#...#", "#..##..#", "##.....#", "########"], 11),
-            TestCase(5, 8, (2, 2), (2, 4), vec!["########", "#.#....#", "#.###..#", "#......#", "########"], 10),
-        ];
-
-        for TestCase(r, c, s, g, v, expected) in tests {
-            assert_eq!(run(r, c, s, g, v), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -1730,8 +1216,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/tessoku-book/tasks/math_and_algorithm_an
-
 use std::collections::{HashMap, VecDeque};
 
 fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<isize> {
@@ -1765,25 +1249,6 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<isize> {
 
     graph
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<(usize, usize)>, Vec<isize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 2, vec![(1, 3), (2, 3)], vec![0, 2, 1]),
-            TestCase(6 , 6, vec![(1, 4), (2, 3), (3, 4), (5, 6), (1, 2), (2, 4)], vec![0, 1, 2, 1, -1, -1]),
-        ];
-
-        for TestCase(n, m, ab, expected) in tests {
-            assert_eq!(run(n, m, ab), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -1797,8 +1262,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc325/tasks/abc325_c
-
 use std::collections::VecDeque;
 
 fn check(r: isize, c: isize, h: isize, w: isize) -> bool {
@@ -1844,31 +1307,10 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(5, 6, vec![".##...", "...#..", "....##", "#.#...", "..#..."], 3),
-            TestCase(3, 3, vec!["#.#", ".#.", "#.#"], 1),
-            TestCase(4 , 2, vec!["..", "..", "..", ".."], 0),
-            TestCase(5, 47, vec![".#..#..#####..#...#..#####..#...#...###...#####", ".#.#...#.......#.#...#......##..#..#...#..#....", ".##....#####....#....#####..#.#.#..#......#####", ".#.#...#........#....#......#..##..#...#..#....", ".#..#..#####....#....#####..#...#...###...#####"], 7),
-        ];
-
-        for TestCase(h, w, s, expected) in tests {
-            assert_eq!(run(h, w, s), expected);
-        }
-    }
-}
 ```
 </details>
 
-### ABC293 C - Make Takahashi Happy 
+### ABC293 C - Make Takahashi Happy
 
 [C - Make Takahashi Happy](https://atcoder.jp/contests/abc293/tasks/abc293_c)（<span style="color: brown">Difficulty : 431</span>）
 
@@ -1876,8 +1318,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc293/tasks/abc293_c
-
 use std::collections::VecDeque;
 
 fn run(h: usize, w: usize, a: Vec<Vec<usize>>) -> usize {
@@ -1917,27 +1357,8 @@ fn run(h: usize, w: usize, a: Vec<Vec<usize>>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<Vec<usize>>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 3, vec![vec![3, 2, 2], vec![2, 1, 3], vec![1, 5, 4]], 3),
-        ];
-
-        for TestCase(h, w, a, expected) in tests {
-            assert_eq!(run(h, w, a), expected);
-        }
-    }
-}
 ```
 </details>
-
 
 ### ABC405 D - Escape Route
 
@@ -1949,8 +1370,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc405/tasks/abc405_d
-
 use std::collections::VecDeque;
 
 fn out_of_bounds(h: usize, w: usize, i: isize, j: isize) -> bool {
@@ -2000,25 +1419,6 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> Vec<String> {
         .map(|v| v.into_iter().collect())
         .collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, Vec<&'static str>);
-
-    #[test]
-    fn abc405_d() {
-        let tests = [
-            TestCase(3, 4, vec!["...E", ".#..", "...."], vec![">>>E", "^#>^", ">>>^"]),
-            TestCase(3, 2, vec!["##", "##", "##"], vec!["##", "##", "##"]),
-        ];
-
-        for TestCase(h, w, s, expected) in tests {
-            assert_eq!(run(h, w, s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2030,8 +1430,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc308/tasks/abc308_d
-
 use std::collections::VecDeque;
 
 fn check(h: usize, w: usize, i: isize, j: isize) -> bool {
@@ -2075,26 +1473,6 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> &'static str {
 
     "No"
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(2, 3, vec!["sns", "euk"], "Yes"),
-            TestCase(2, 2, vec!["ab", "cd"], "No"),
-            TestCase(5, 7, vec!["skunsek", "nukesnu", "ukeseku", "nsnnesn", "uekukku"], "Yes"),
-        ];
-
-        for TestCase(h, w, s, expected) in tests {
-            assert_eq!(run(h, w, s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2108,8 +1486,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc269/tasks/abc269_d
-
 use std::collections::VecDeque;
 
 fn check(r: isize, c: isize) -> bool {
@@ -2167,26 +1543,6 @@ fn run(_n: usize, xy: Vec<(isize, isize)>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<(isize, isize)>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(6, vec![(-1, -1), (0, 1), (0, 2), (1, 0), (1, 2), (2, 0)], 3),
-            TestCase(4, vec![(5, 0), (4, 1), (-3, 4), (-2, -5)], 4),
-            TestCase(5, vec![(2, 1), (2, -1), (1, 0), (3, 1), (1, -1)], 1),
-        ];
-
-        for TestCase(n, xy, expected) in tests {
-            assert_eq!(run(n, xy), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2198,8 +1554,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc376/tasks/abc376_d
-
 use std::collections::{HashMap, VecDeque};
 
 fn run(_n: usize, _m: usize, ab: Vec<(usize, usize)>) -> isize {
@@ -2228,26 +1582,6 @@ fn run(_n: usize, _m: usize, ab: Vec<(usize, usize)>) -> isize {
 
     -1
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<(usize, usize)>, isize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 3, vec![(1, 2), (2, 3), (3, 1)], 3),
-            TestCase(3, 2, vec![(1, 2), (2, 3)], -1),
-            TestCase(6, 9, vec![(6, 1), (1, 5), (2, 6), (2, 1), (3, 6), (4, 2), (6, 4), (3, 5), (5, 4)], 4),
-        ];
-
-        for TestCase(n, m, ab, expected) in tests {
-            assert_eq!(run(n, m, ab), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2261,8 +1595,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc383/tasks/abc383_c
-
 use std::collections::VecDeque;
 
 fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
@@ -2323,28 +1655,8 @@ fn run(h: usize, w: usize, d: usize, s: Vec<&str>) -> usize {
         })
         .sum()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, usize, Vec<&'static str>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 4, 1, vec!["H...", "#..H", ".#.#"], 5),
-            TestCase(5, 6, 2, vec!["##...H", "H.....", "..H.#.", ".HH...", ".###.."], 21),
-        ];
-
-        for TestCase(h, w, d, s, expected) in tests {
-            assert_eq!(run(h, w, d, s), expected);
-        }
-    }
-}
 ```
 </details>
-
 
 ### ABC211 D - Number of Shortest paths
 
@@ -2356,8 +1668,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc211/tasks/abc211_d
-
 use std::collections::{HashMap, VecDeque};
 
 fn run(n: usize, _m: usize, ab: Option<Vec<(usize, usize)>>) -> usize {
@@ -2399,27 +1709,6 @@ fn run(n: usize, _m: usize, ab: Option<Vec<(usize, usize)>>) -> usize {
 
     count[n-1] as usize
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Option<Vec<(usize, usize)>>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, 5, Some(vec![(2, 4), (1, 2), (2, 3), (1, 3), (3, 4)]), 2),
-            TestCase(4, 3, Some(vec![(1, 3), (2, 3), (2, 4)]), 1),
-            TestCase(2, 0, None, 0),
-            TestCase(7, 8, Some(vec![(1, 3), (1, 4), (2, 3), (2, 4), (2, 5), (2, 6), (5, 7), (6, 7)]), 4),
-        ];
-
-        for TestCase(n, m, ab, expected) in tests {
-            assert_eq!(run(n, m, ab), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2431,8 +1720,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc373/tasks/abc373_d
-
 use std::collections::{HashMap, VecDeque};
 
 fn run(n: usize, _m: usize, uvw: Vec<(usize, usize, isize)>) -> Vec<isize> {
@@ -2476,26 +1763,6 @@ fn run(n: usize, _m: usize, uvw: Vec<(usize, usize, isize)>) -> Vec<isize> {
 
     graph.into_iter().skip(1).collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<(usize, usize, isize)>, Vec<isize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 3, vec![(1, 2, 2), (3, 2, 3), (1, 3, -1)], vec![0, 2, -1]),
-            TestCase(4, 2, vec![(2, 1, 5), (3, 4, -3)], vec![0, -5, 0, -3]),
-            TestCase(5, 7, vec![(2, 1, 18169343), (3, 1, 307110901), (4, 1, 130955934), (2, 3, -288941558), (2, 5, 96267410), (5, 3, -385208968), (4, 3, -176154967)], vec![0, -18169343, -307110901, -130955934, 78098067]),
-        ];
-
-        for TestCase(n, m, uvw, expected) in tests {
-            assert_eq!(run(n, m, uvw), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2507,8 +1774,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc168/tasks/abc168_d
-
 use std::collections::{HashMap, VecDeque};
 
 fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
@@ -2543,25 +1808,6 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<(usize, usize)>, Vec<usize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, 4, vec![(1, 2), (2, 3), (3, 4), (4, 2)], vec![1, 2, 2]),
-            TestCase(6, 9, vec![(3, 4), (6, 1), (2, 4), (5, 3), (4, 6), (1, 5), (6, 2), (4, 5), (5, 6)], vec![6, 5, 6, 1, 1]),
-        ];
-
-        for TestCase(n, m, ab, expected) in tests {
-            assert_eq!(run(n, m, ab), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2575,8 +1821,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc387/tasks/abc387_d
-
 use std::collections::VecDeque;
 
 fn check(r: isize, c: isize, h: isize, w: isize) -> bool {
@@ -2640,26 +1884,6 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> isize {
         .min()
         .unwrap_or(-1)
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, isize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 5, vec![".S#.G", ".....", ".#..."], 7),
-            TestCase(3, 5, vec!["..#.G", ".....", "S#..."], -1),
-            TestCase(8, 63, vec!["...............................................................","..S...#............................#####..#####..#####..####G..","..#...#................................#..#...#......#..#......","..#####..####...####..####..#..#...#####..#...#..#####..#####..","..#...#..#..#...#..#..#..#..#..#...#......#...#..#..........#..","..#...#..#####..####..####..####...#####..#####..#####..#####..", "................#.....#........#...............................", "................#.....#........#..............................."], 148),
-        ];
-
-        for TestCase(h, w, s, expected) in tests {
-            assert_eq!(run(h, w, s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2671,8 +1895,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc016/tasks/abc016_3
-
 use std::collections::{HashMap, VecDeque};
 
 fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
@@ -2718,26 +1940,6 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<(usize, usize)>, Vec<usize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 2, vec![(1, 2), (2, 3)], vec![1, 0, 1]),
-            TestCase(3, 3, vec![(1, 2), (1, 3), (2, 3)], vec![0, 0, 0]),
-            TestCase(8, 12, vec![(1, 6),(1, 7),(1, 8),(2, 5),(2, 6),(3, 5),(3, 6),(4, 5),(4, 8),(5, 6),(5, 7),(7, 8)], vec![4, 4, 4, 5, 2, 3, 4, 2]),
-        ];
-
-        for TestCase(n, m, ab, expected) in tests {
-            assert_eq!(run(n, m, ab), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2749,8 +1951,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc015/tasks/abc015_3
-
 use std::collections::VecDeque;
 
 fn run(n: usize, _k: usize, t: Vec<Vec<usize>>) -> &'static str {
@@ -2779,25 +1979,6 @@ fn run(n: usize, _k: usize, t: Vec<Vec<usize>>) -> &'static str {
 
     "Nothing"
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<Vec<usize>>, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 4, vec![vec![1, 3, 5, 17], vec![2, 4, 2, 3], vec![1, 3, 2, 9]], "Found"),
-            TestCase(5, 3, vec![vec![89, 62, 15], vec![44, 36, 17], vec![4, 24, 24], vec![25, 98, 99], vec![66, 33, 57]], "Nothing"),
-        ];
-
-        for TestCase(n, k, t, expected) in tests {
-            assert_eq!(run(n, k, t), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2809,8 +1990,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc151/tasks/abc151_d
-
 use std::collections::VecDeque;
 
 fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
@@ -2861,25 +2040,6 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 3, vec!["...", "...", "..."], 4),
-            TestCase(3, 5, vec!["...#.", ".#.#.", ".#..."], 10),
-        ];
-
-        for TestCase(h, w, s, expected) in tests {
-            assert_eq!(run(h, w, s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2891,12 +2051,10 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc088/tasks/abc088_d
-
 use std::collections::VecDeque;
 
 // 境界チェック
-fn check(r: isize, c: isize, h: usize, w: usize) -> bool {
+fn out_of_bounds(r: isize, c: isize, h: usize, w: usize) -> bool {
     r < 0 || c < 0 || r >= h as isize || c >= w as isize
 }
 
@@ -2917,7 +2075,7 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> isize {
             let new_i = cur_i as isize + dx[i];
             let new_j = cur_j as isize + dy[i];
 
-            if check(new_i, new_j, h, w) {
+            if out_of_bounds(new_i, new_j, h, w) {
                 continue;
             }
 
@@ -2943,25 +2101,6 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> isize {
     // 全体のマス数 - 既存の#の数 - 最短経路のマス数
     (h * w - count - 1) as isize - graph[h-1][w-1]
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, isize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 3, vec!["..#", "#..", "..."], 2),
-            TestCase(10, 37, vec![".....................................", "...#...####...####..###...###...###..", "..#.#..#...#.##....#...#.#...#.#...#.", "..#.#..#...#.#.....#...#.#...#.#...#.", ".#...#.#..##.#.....#...#.#.###.#.###.", ".#####.####..#.....#...#..##....##...", ".#...#.#...#.#.....#...#.#...#.#...#.", ".#...#.#...#.##....#...#.#...#.#...#.", ".#...#.####...####..###...###...###..", "....................................."], 209),
-        ];
-
-        for TestCase(h, w, s, expected) in tests {
-            assert_eq!(run(h, w, s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -2973,8 +2112,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc276/tasks/abc276_e
-
 use std::collections::VecDeque;
 
 fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
@@ -3056,27 +2193,6 @@ fn run(h: usize, w: usize, c: Vec<&str>) -> &'static str {
 
     "No"
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, 4, vec!["....", "#.#.", ".S..", ".##."], "Yes"),
-            TestCase(2, 2, vec!["S.", ".#"], "No"),
-            TestCase(5, 7, vec![".#...#.", "..#.#..", "...S...", "..#.#..", ".#...#."], "No"),
-            TestCase(4, 4, vec!["...S", "....", "....", "...."], "Yes"),
-        ];
-
-        for TestCase(h, w, c, expected) in tests {
-            assert_eq!(run(h, w, c), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -3088,12 +2204,10 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/arc031/tasks/arc031_2
-
 use std::collections::VecDeque;
 
 // 境界チェック
-fn check(r: isize, c: isize, h: usize, w: usize) -> bool {
+fn out_of_bounds(r: isize, c: isize, h: usize, w: usize) -> bool {
     r < 0 || c < 0 || r == h as isize || c == w as isize
 }
 
@@ -3116,7 +2230,7 @@ fn run(a: Vec<&str>) -> &'static str {
                     let new_i = cur_i as isize + dx[i];
                     let new_j = cur_j as isize + dy[i];
 
-                    if check(new_i, new_j, 10, 10) {
+                    if out_of_bounds(new_i, new_j, 10, 10) {
                         continue;
                     }
 
@@ -3147,26 +2261,6 @@ fn run(a: Vec<&str>) -> &'static str {
 
     "NO"
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(Vec<&'static str>, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(vec!["xxxxxxxxxx", "xoooooooxx", "xxoooooxxx", "xxxoooxxxx", "xxxxoxxxxx", "xxxxxxxxxx", "xxxxoxxxxx", "xxxoooxxxx", "xxoooooxxx", "xxxxxxxxxx"], "YES"),
-            TestCase(vec!["xxxxxxxxxx", "xoooooooxx", "xxoooooxxx", "xxxoooxxxx", "xxxxxxxxxx", "xxxxxxxxxx", "xxxxxxxxxx", "xxxoooxxxx", "xxoooooxxx", "xxxxxxxxxx"], "NO"),
-            TestCase(vec!["xxxxoxxxxx", "xxxxoxxxxx", "xxxxoxxxxx", "xxxxoxxxxx", "ooooxooooo", "xxxxoxxxxx", "xxxxoxxxxx", "xxxxoxxxxx", "xxxxoxxxxx", "xxxxoxxxxx"], "YES"),
-        ];
-
-        for TestCase(a, expected) in tests {
-            assert_eq!(run(a), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -3174,17 +2268,14 @@ mod tests {
 
 [A - Darker and Darker](https://atcoder.jp/contests/agc033/tasks/agc033_a)（<span style="color: green">Difficulty : 1159</span>）
 
-
 <details>
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/agc033/tasks/agc033_a
-
 use std::collections::VecDeque;
 
 // 境界チェック
-fn check(r: isize, c: isize, h: usize, w: usize) -> bool {
+fn out_of_bounds(r: isize, c: isize, h: usize, w: usize) -> bool {
     r < 0 || c < 0 || r >= h as isize || c >= w as isize
 }
 
@@ -3211,7 +2302,7 @@ fn run(h: usize, w: usize, a: Vec<&str>) -> usize {
             let new_r = cur_r as isize + dx[i];
             let new_c = cur_c as isize + dy[i];
 
-            if check(new_r, new_c, h, w) {
+            if out_of_bounds(new_r, new_c, h, w) {
                 continue;
             }
 
@@ -3232,26 +2323,6 @@ fn run(h: usize, w: usize, a: Vec<&str>) -> usize {
         .max()
         .unwrap() as usize
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<&'static str>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 3, vec!["...", ".#.", "..."], 2),
-            TestCase(6, 6, vec!["..#..#", "......", "#..#..", "......", ".#....", "....#."], 3),
-        ];
-
-        for TestCase(h, w, a, expected) in tests {
-            assert_eq!(run(h, w, a), expected);
-        }
-    }
-}
-
 ```
 </details>
 
@@ -3267,8 +2338,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/math-and-algorithm/tasks/math_and_algorithm_o
-
 fn gcd(a: usize, b: usize) -> usize {
     if b == 0 {
         a
@@ -3279,12 +2348,6 @@ fn gcd(a: usize, b: usize) -> usize {
 
 fn run(a: usize, b: usize) -> usize {
     gcd(a, b)
-}
-
-
-fn main() {
-    println!("{}", run(33, 88));
-    println!("{}", run(123, 777));
 }
 ```
 </details>
@@ -3297,8 +2360,6 @@ fn main() {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/arc105/tasks/arc105_b
-
 fn gcd(a: usize, b: usize) -> usize {
     if b == 0 {
         a
@@ -3315,17 +2376,6 @@ fn run(n: usize, a: vec<usize>) -> usize {
     }
 
     ans
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(2, run(3, vec![2, 6, 6]));
-        assert_eq!(42, run(15, vec![546, 3192, 1932, 630, 2100, 4116, 3906, 3234, 1302, 1806, 3528, 3780, 252, 1008, 588]));
-    }
 }
 ```
 </details>
@@ -3353,18 +2403,6 @@ fn run(_n: usize, x: isize, v: Vec<isize>) -> isize {
             gcd(state, (x - num).abs())
         })
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(2, run(3, 3, vec![1, 7, 11]));
-        assert_eq!(24, run(3, 81, vec![33, 105, 57]));
-        assert_eq!(999999999, run(1, 1, vec![1000000000]));;
-    }
-}
 ```
 </details>
 
@@ -3376,8 +2414,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc118/tasks/abc118_c
-
 fn gcd(a: usize, b: usize) -> usize {
     if b == 0 {
         a
@@ -3391,18 +2427,6 @@ fn run(_n: usize, v: Vec<usize>) -> usize {
         .fold(0, |state, num| {
             gcd(state, *num)
         })
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(2, run(4, vec![2, 10, 8, 40]));
-        assert_eq!(1, run(4, vec![5, 13, 8, 1000000000]));
-        assert_eq!(1000000000, run(3, vec![1000000000, 1000000000, 1000000000]));
-    }
 }
 ```
 </details>
@@ -3468,18 +2492,6 @@ fn run(s: &str) -> String {
         })
         .collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("a2b3a2d1"), run("aabbbaad"));
-        assert_eq!(String::from("a2b12x1y1z1a1"), run("aabbbbbbbbbbbbxyza"));
-        assert_eq!(String::from("e1d1c1b1a1"), run("edcba"));
-    }
-}
 ```
 </details>
 
@@ -3514,25 +2526,6 @@ fn run_lengths(s: Vec<char>) -> Vec<(char, usize)> {
 fn run(_n: usize, s: &str) -> usize {
     run_lengths(s.chars().collect()).len()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(5, run(10, "aabbbbaaca"));
-        assert_eq!(1, run(5, "aaaaa"));
-        assert_eq!(10, run(20, "xxzaffeeeeddfkkkkllq"));
-    }
-
-    #[test]
-    fn test2() {
-        assert_eq!(5, run2(10, "aabbbbaaca"));
-        assert_eq!(1, run2(5, "aaaaa"));
-        assert_eq!(10, run2(20, "xxzaffeeeeddfkkkkllq"));
-    }
-}
 ```
 </details>
 
@@ -3544,8 +2537,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc299/tasks/abc299_c
-
 use itertools::Itertools;
 
 fn run(_n: usize, s: &str) -> isize {
@@ -3569,26 +2560,6 @@ fn run(_n: usize, s: &str) -> isize {
         .map(|x| *x as isize)
         .unwrap_or(-1)
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, &'static str, isize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(10, "o-oooo---o", 4),
-            TestCase(1, "-", -1),
-            TestCase(30, "-o-o-oooo-oo-o-ooooooo--oooo-o", 7),
-        ];
-
-        for TestCase(n, s, expected) in tests {
-            assert_eq!(run(n, s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -3600,8 +2571,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc329/tasks/abc329_c
-
 use std::collections::HashMap;
 
 fn run(n: usize, s: &str) -> usize {
@@ -3628,19 +2597,6 @@ fn run(n: usize, s: &str) -> usize {
 
     hashmap.values().sum()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(4, run(6, "aaabaa"));
-        assert_eq!(1, run(1, "x"));
-        assert_eq!(8, run(12, "ssskkyskkkky"));
-    }
-}
-
 ```
 </details>
 
@@ -3652,8 +2608,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc380/tasks/abc380_c
-
 fn run_length(s: Vec<char>) -> Vec<(char, usize)> {
     let mut result = vec![];
     let mut current = (s[0], 1);
@@ -3692,25 +2646,6 @@ fn run(_n: usize, k: usize, s: &str) -> String {
         .flat_map(|&(ch, len)| std::iter::repeat(ch).take(len))
         .collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, &'static str, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(15, 3, "010011100011001", "010011111000001"),
-            TestCase(10, 2, "1011111111", "1111111110"),
-        ];
-
-        for TestCase(n, k, s, expected) in tests {
-            assert_eq!(run(n, k, s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -3722,8 +2657,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc259/tasks/abc259_c
-
 use std::iter::zip;
 
 fn run_lengths(s: Vec<char>) -> Vec<(char, usize)> {
@@ -3770,27 +2703,6 @@ fn run(s: &str, t: &str) -> &'static str {
             "Yes"
         }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(&'static str, &'static str, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase("abbaac", "abbbbaaac", "Yes"),
-            TestCase("xyzz", "xyyzz", "No"),
-            TestCase("aa", "aa", "Yes"),
-            TestCase("aa", "aabb", "No"),
-        ];
-
-        for TestCase(s, t, expected) in tests {
-            assert_eq!(run(s, t), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -3806,8 +2718,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/agc039/tasks/agc039_a
-
 use itertools::Itertools;
 
 fn run_length(s: &str) -> Vec<(char, usize)> {
@@ -3858,20 +2768,6 @@ fn run(s: &str, k: usize) -> usize {
         ans * k + (left + right) / 2 * (k - 1) + left/2 + right/2
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(4, run("issii", 2));
-        assert_eq!(81, run("qq", 81));
-        assert_eq!(8999939997, run("cooooooooonteeeeeeeeeest", 999993333));
-        assert_eq!(50000000000, run("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 1000000000));
-        assert_eq!(49499999950, run("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", 999999999));
-    }
-}
 ```
 </details>
 
@@ -3885,8 +2781,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc047/tasks/arc063_a
-
 fn run_lengths(s: Vec<char>) -> Vec<(char, usize)> {
     let mut run_lengths = vec![];
     let mut current = (s[0], 1);
@@ -3908,18 +2802,6 @@ fn run_lengths(s: Vec<char>) -> Vec<(char, usize)> {
 fn run(s: &str) -> usize {
     run_lengths(s.chars().collect()).len() - 1
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(1, run("BBBWW"));
-        assert_eq!(0, run("WWWWWW"));
-        assert_eq!(9, run("WBWBWBWBWB"));
-    }
-}
 ```
 </details>
 
@@ -3937,8 +2819,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/agc016/tasks/agc016_a
-
 use itertools::Itertools;
 
 // c以外の文字が最大何文字続くかをカウント
@@ -3969,22 +2849,6 @@ fn run(s: &str) -> usize {
         .min()
         .unwrap()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(3, run("serval"));
-        assert_eq!(2, run("jackal"));
-        assert_eq!(0, run("zzz"));
-        assert_eq!(8, run("whbrjpjyhsrywlqjxdbrbaomnw"));
-        assert_eq!(50, run("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"));
-        assert_eq!(0, run("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"));
-        assert_eq!(4, run("dcddccddccdcddddddccdccdcddccdccccdddddddddccddccccdddddcdcdcccdcccddddddcdddddccdcccddcc"));
-    }
-}
 ```
 </details>
 
@@ -3998,8 +2862,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc061/tasks/abc061_c
-
 fn run(_n: usize, k: usize, ab: Vec<(usize, usize)>) -> usize {
     let mut vec = ab.clone();
 
@@ -4017,17 +2879,6 @@ fn run(_n: usize, k: usize, ab: Vec<(usize, usize)>) -> usize {
 
     unreachable!();
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(3, run(3, 4, vec![(1, 1), (2, 2), (3, 3)]));
-        assert_eq!(1, run(10, 500000, vec![(1, 100000), (1, 100000), (1, 100000), (1, 100000), (1, 100000), (100000, 100000), (100000, 100000), (100000, 100000), (100000, 100000), (100000, 100000)]));
-    }
-}
 ```
 </details>
 
@@ -4043,8 +2894,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc087/tasks/arc090_a
-
 fn run(n: usize, a: [Vec<usize>; 2]) -> usize {
     let mut dp: Vec<Vec<usize>> = vec![vec![], vec![]];
 
@@ -4065,19 +2914,6 @@ fn run(n: usize, a: [Vec<usize>; 2]) -> usize {
 
     dp[1][n-1]
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(14, run(5, [vec![3, 2, 2, 4, 1], vec![1, 2, 2, 2, 1]]));
-        assert_eq!(5, run(4, [vec![1, 1, 1, 1], vec![1, 1, 1, 1]]));
-        assert_eq!(29, run(7, [vec![3, 3, 4, 5, 4, 5, 3], vec![5, 3, 4, 4, 2, 3, 2]]));
-        assert_eq!(5, run(1, [vec![2], vec![3]]));
-    }
-}
 ```
 </details>
 
@@ -4089,8 +2925,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc245/tasks/abc245_c
-
 fn run(n: usize, k: isize, a: Vec<isize>, b: Vec<isize>) -> &'static str {
     let mut dp_a = vec![false; n];
     let mut dp_b = vec![false; n];
@@ -4115,26 +2949,6 @@ fn run(n: usize, k: isize, a: Vec<isize>, b: Vec<isize>) -> &'static str {
         "No"
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, isize, Vec<isize>, Vec<isize>, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(5, 4, vec![9, 8, 3, 7, 2], vec![1, 6, 2, 9, 5], "Yes"),
-            TestCase(3, 2, vec![1, 3, 100, 101, 102], vec![1, 3, 100, 101, 102], "No"),
-            TestCase(4, 1000000000, vec![1, 1, 1000000000, 1000000000], vec![1, 1000000000, 1, 1000000000], "Yes"),
-        ];
-
-        for TestCase(n, k, a, b, expected) in tests {
-            assert_eq!(run(n, k, a, b), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -4148,8 +2962,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc011/tasks/abc011_3
-
 fn run(n: isize, ng: [isize; 3]) -> &'static str {
     if ng.contains(&n) {
         return "NO";
@@ -4177,26 +2989,6 @@ fn run(n: isize, ng: [isize; 3]) -> &'static str {
 
     "NO"
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(isize, [isize; 3], &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(2, [1, 7, 15], "YES"),
-            TestCase(5, [1, 4, 2], "YES"),
-            TestCase(300, [57, 121, 244], "NO"),
-        ];
-
-        for TestCase(n, ng, expected) in tests {
-            assert_eq!(run(n, ng), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -4210,8 +3002,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc038/tasks/abc038_c
-
 fn run(n: usize, a: Vec<usize>) -> usize {
     let mut ans = 0;
     let mut r = 0;
@@ -4230,29 +3020,7 @@ fn run(n: usize, a: Vec<usize>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<usize>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(5, vec![1, 2, 3, 2, 1], 8),
-            TestCase(4, vec![1, 2, 3, 4], 10),
-            TestCase(6, vec![3, 3, 4, 1, 2, 2], 8),
-            TestCase(6, vec![1, 5, 2, 3, 4, 2], 10),
-        ];
-
-        for TestCase(n, a, expected) in tests {
-            assert_eq!(run(n, a), expected);
-        }
-    }
-}
 ```
-
 </details>
 
 # データ構造
@@ -4267,8 +3035,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc099/tasks/abc099_b
-
 fn run(a: usize, b: usize) -> usize {
     let mut cum_sum = Vec::new();
 
@@ -4282,17 +3048,6 @@ fn run(a: usize, b: usize) -> usize {
 
     *cum_sum.iter().last().unwrap() - b
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(2, run(8, 13));
-        assert_eq!(1, run(54, 65));
-    }
-}
 ```
 </details>
 
@@ -4305,8 +3060,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc371/tasks/abc371_d
-
 fn run(n: usize, x: Vec<isize>, p: Vec<isize>, q: usize, lr: Vec<(isize, isize)>) -> Vec<isize> {
     let mut cum = vec![0];
 
@@ -4322,26 +3075,6 @@ fn run(n: usize, x: Vec<isize>, p: Vec<isize>, q: usize, lr: Vec<(isize, isize)>
         })
         .collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<isize>, Vec<isize>, usize, Vec<(isize, isize)>, Vec<isize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, vec![1, 3, 5, 7], vec![1, 2, 3, 4], 4, vec![(1, 1), (2, 6), (0, 10), (2, 2)], vec![1, 5, 10, 0]),
-            TestCase(7, vec![-10, -5, -3, -1, 0, 1, 4], vec![2, 5, 6, 5, 2, 1, 7], 8, vec![(-7, 7), (-1, 5), (-10, -4), (-8, 10), (-5, 0), (-10, 5), (-8, 7), (-8, -3)], vec![26, 15, 7, 26, 18, 28, 26, 11]),
-        ];
-
-        for TestCase(n, x, p, q, lr, expected) in tests {
-            assert_eq!(run(n, x, p, q, lr), expected);
-        }
-    }
-}
-
 ```
 </details>
 
@@ -4353,8 +3086,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc122/tasks/abc122_c
-
 fn run(n: usize, _q: usize, s: &str, lr: Vec<(usize, usize)>) -> Vec<usize> {
     let mut ans = Vec::new();
 
@@ -4376,24 +3107,6 @@ fn run(n: usize, _q: usize, s: &str, lr: Vec<(usize, usize)>) -> Vec<usize> {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, &'static str, Vec<(usize, usize)>, Vec<usize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(8, 3, "ACACTACG", vec![(3, 7), (2, 3), (1, 8)], vec![2, 0, 3]),
-        ];
-
-        for TestCase(n, q, s, lr, expected) in tests {
-            assert_eq!(run(n, q, s, lr), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -4407,8 +3120,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc014/tasks/abc014_3
-
 fn run(_n: usize, ab: Vec<(usize, usize)>) -> usize {
     let mut vec: Vec<isize> = vec![0; 1_000_000+2];
 
@@ -4427,25 +3138,6 @@ fn run(_n: usize, ab: Vec<(usize, usize)>) -> usize {
         .max()
         .unwrap() as usize
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<(usize, usize)>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, vec![(0, 2), (2, 3), (2, 4), (5, 6)], 3),
-            TestCase(4, vec![(1000000, 1000000), (1000000, 1000000), (0, 1000000), (1, 1000000)], 4),
-        ];
-
-        for TestCase(n, ab, expected) in tests {
-            assert_eq!(run(n, ab), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -4461,8 +3153,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc286/tasks/abc286_b
-
 fn run(n: usize, s: &str) -> String {
     let chars: Vec<char> = s.chars().collect();
 
@@ -4480,21 +3170,8 @@ fn run(n: usize, s: &str) -> String {
         .iter()
         .collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("nyaan"), run(4, "naan"));
-        assert_eq!(String::from("near"), run(4, "near"));
-        assert_eq!(String::from("nyationyal"), run(8, "national"));
-    }
-}
 ```
 </details>
-
 
 ### ABC351 C - Merge the balls
 
@@ -4504,8 +3181,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc351/tasks/abc351_c
-
 fn run(_n: usize, a: Vec<usize>) -> usize {
     a.into_iter()
         .fold(Vec::new(), |mut stack, num| {
@@ -4527,25 +3202,6 @@ fn run(_n: usize, a: Vec<usize>) -> usize {
         })
         .len()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<usize>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(7 , vec![2, 1, 1, 3, 5, 3, 3], 3),
-            TestCase(5, vec![0, 0, 0, 1, 2], 4),
-        ];
-
-        for TestCase(n, a, expected) in tests {
-            assert_eq!(run(n, a), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -4557,8 +3213,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc394/tasks/abc394_d
-
 fn run(s: &str) -> &'static str {
     let mut stack = Vec::new();
 
@@ -4581,26 +3235,6 @@ fn run(s: &str) -> &'static str {
         "Yes"
     } else {
         "No"
-    }
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(&'static str, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase("([])<>()", "Yes"),
-            TestCase("([<)]>", "No"),
-            TestCase("())", "No"),
-        ];
-
-        for TestCase(s, expected) in tests {
-            assert_eq!(run(s), expected);
-        }
     }
 }
 ```
@@ -4647,27 +3281,6 @@ fn run(s: &str) -> &'static str {
 
     "Yes"
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(&'static str, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase("((a)ba)", "Yes"),
-            TestCase("(a(ba))", "No"),
-            TestCase("(((())))", "Yes"),
-            TestCase("abca", "No"),
-        ];
-
-        for TestCase(s, expected) in tests {
-            assert_eq!(run(s), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -4679,8 +3292,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc328/tasks/abc328_d
-
 fn run(s: &str) -> String {
     let chars: Vec<char> = s.chars().collect();
     let mut ans: Vec<char> = Vec::new();
@@ -4715,25 +3326,6 @@ fn run2(s: &str) -> String {
         .iter()
         .collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("BCAC"), run("BAABCBCCABCAC"));
-        assert_eq!(String::new(), run("ABCABC"));
-        assert_eq!(String::from("AAABBBCCC"), run("AAABCABCABCAABCABCBBBAABCBCCCAAABCBCBCC"));
-    }
-
-    #[test]
-    fn test2() {
-        assert_eq!(String::from("BCAC"), run2("BAABCBCCABCAC"));
-        assert_eq!(String::new(), run2("ABCABC"));
-        assert_eq!(String::from("AAABBBCCC"), run2("AAABCABCABCAABCABCBBBAABCBCCCAAABCBCBCC"));
-    }
-}
 ```
 </details>
 
@@ -4745,8 +3337,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/arc108/tasks/arc108_b
-
 fn run(_n: usize, s: &str) -> usize {
     let chars: Vec<char> = s.chars().collect();
 
@@ -4762,18 +3352,6 @@ fn run(_n: usize, s: &str) -> usize {
         })
         .len()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(3, run(6, "icefox"));
-        assert_eq!(7, run(7, "firebox"));
-        assert_eq!(27, run(48, "ffoxoxuvgjyzmehmopfohrupffoxoxfofofoxffoxoxejffo"));
-    }
-}
 ```
 </details>
 
@@ -4785,8 +3363,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/agc005/tasks/agc005_a
-
 fn run(s: &str) -> usize {
     let chars: Vec<char> = s.chars().collect();
 
@@ -4806,18 +3382,6 @@ fn run(s: &str) -> usize {
         .iter()
         .count()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(4, run("TSTTSS"));
-        assert_eq!(0, run("SSTTST"));
-        assert_eq!(4, run("TSSTTTSS"));
-    }
-}
 ```
 </details>
 
@@ -4833,8 +3397,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc231/tasks/abc231_b
-
 use std::collections::HashMap;
 
 fn run(_n: usize, s: Vec<&str>) -> String {
@@ -4850,18 +3412,6 @@ fn run(_n: usize, s: Vec<&str>) -> String {
         .unwrap()
         .0.to_string()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("takahashi"), run(5, vec!["snuke", "snuke", "takahashi", "takahashi", "takahashi"]));
-        assert_eq!(String::from("takahashi"), run(5, vec!["takahashi", "takahashi", "aoki", "takahashi", "snuke"]));
-        assert_eq!(String::from("a"), run(1, vec!["a"]));
-    }
-}
 ```
 </details>
 
@@ -4873,8 +3423,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc241/tasks/abc241_b
-
 use std::collections::HashMap;
 
 fn run(n: usize, m: usize, a: Vec<usize>, b: Vec<usize>) -> String {
@@ -4896,18 +3444,6 @@ fn run(n: usize, m: usize, a: Vec<usize>, b: Vec<usize>) -> String {
 
     String::from("Yes")
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("Yes"), run(3, 2, vec![1, 1, 3], vec![3, 1]));
-        assert_eq!(String::from("No"), run(1, 1, vec![1000000000], vec![1]));
-        assert_eq!(String::from("No"), run(5, 2, vec![1, 2, 3, 4, 5], vec![5, 5]));
-    }
-}
 ```
 </details>
 
@@ -4919,8 +3455,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc155/tasks/abc155_c
-
 use std::collections::HashMap;
 
 fn run(_n: usize, h: Vec<&str>) -> Vec<String> {
@@ -4941,19 +3475,6 @@ fn run(_n: usize, h: Vec<&str>) -> Vec<String> {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(vec!["beet", "vet"], run(7, vec!["beat", "vet", "beet", "bed", "vet", "bet", "beet"]));
-        assert_eq!(vec!["buffalo"], run(8, vec!["buffalo", "buffalo", "buffalo", "buffalo", "buffalo", "buffalo", "buffalo", "buffalo"]));
-        assert_eq!(vec!["kick"], run(7, vec!["bass", "bass", "kick", "kick", "bass", "kick", "kick"]));
-        assert_eq!(vec!["kun", "nichia", "tapu", "ushi"], run(4, vec!["ushi", "tapu", "nichia", "kun"]));
-    }
-}
 ```
 
 </details>
@@ -4966,8 +3487,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc261/tasks/abc261_c
-
 use std::collections::HashMap;
 
 fn run(_n: usize, s: Vec<&str>) -> Vec<String> {
@@ -4991,26 +3510,6 @@ fn run(_n: usize, s: Vec<&str>) -> Vec<String> {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<&'static str>, Vec<&'static str>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(5, vec!["newfile", "newfile", "newfolder", "newfile", "newfolder"], vec!["newfile", "newfile(1)", "newfolder", "newfile(2)", "newfolder(1)"]),
-            TestCase(11, vec!["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"], vec!["a", "a(1)", "a(2)", "a(3)", "a(4)", "a(5)", "a(6)", "a(7)", "a(8)", "a(9)", "a(10)"]),
-        ];
-
-        for TestCase(n, s, expected) in tests {
-            assert_eq!(expected, run(n, s));
-        }
-    }
-}
-
 ```
 
 </details>
@@ -5023,8 +3522,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc235/tasks/abc235_c
-
 use std::collections::HashMap;
 
 fn run(_n: usize, _q: usize, a: Vec<usize>, xk: Vec<(usize, usize)>) -> Vec<isize> {
@@ -5048,28 +3545,7 @@ fn run(_n: usize, _q: usize, a: Vec<usize>, xk: Vec<(usize, usize)>) -> Vec<isiz
         })
         .collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<usize>, Vec<(usize, usize)>, Vec<isize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(6, 8, vec![1, 1, 2, 3, 1, 2], vec![(1, 1), (1, 2), (1, 3), (1, 4), (2, 1), (2, 2), (2, 3), (4, 1)], vec![1, 2, 5, -1, 3, 6, -1, -1]),
-            TestCase(3, 2, vec![0, 1000000000, 999999999], vec![(1000000000, 1), (123456789, 1)], vec![2, -1]),
-        ];
-
-        for TestCase(n, q, a, xk, expected) in tests {
-            assert_eq!(run(n, q, a, xk), expected);
-        }
-    }
-}
-
 ```
-
 </details>
 
 ### ABC210 C - Colorful Candies
@@ -5080,8 +3556,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc210/tasks/abc210_c
-
 use std::collections::HashMap;
 
 fn run(n: usize, k: usize, c: Vec<usize>) -> usize {
@@ -5109,30 +3583,8 @@ fn run(n: usize, k: usize, c: Vec<usize>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<usize>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(7, 3, vec![1, 2, 1, 2, 3, 3, 1], 3),
-            TestCase(5, 5, vec![4, 4, 4, 4, 4], 1),
-            TestCase(10, 6, vec![304621362, 506696497, 304621362, 506696497, 834022578, 304621362, 414720753, 304621362, 304621362, 414720753], 4),
-        ];
-
-        for TestCase(n, k, c, expected) in tests {
-            assert_eq!(run(n, k, c), expected);
-        }
-    }
-}
-
 ```
 </details>
-
 
 ### ABC194 C - Squared Error
 
@@ -5142,8 +3594,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc194/tasks/abc194_c
-
 use std::collections::HashMap;
 
 fn run(_n: usize, a: Vec<isize>) -> isize {
@@ -5165,28 +3615,7 @@ fn run(_n: usize, a: Vec<isize>) -> isize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<isize>, isize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, vec![2, 8, 4], 56),
-            TestCase(5, vec![-5, 8, 9, -4, -3], 950),
-        ];
-
-        for TestCase(n, a, expected) in tests {
-            assert_eq!(run(n, a), expected);
-        }
-    }
-}
-
 ```
-
 </details>
 
 ### ABC278 D - All Assign Point Add
@@ -5197,8 +3626,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc278/tasks/abc278_d
-
 use std::collections::HashMap;
 
 fn run(n: usize, a: Vec<usize>, _q: usize, q_vec: Vec<(usize, Option<usize>, Option<usize>)>) -> Vec<usize> {
@@ -5234,28 +3661,7 @@ fn run(n: usize, a: Vec<usize>, _q: usize, q_vec: Vec<(usize, Option<usize>, Opt
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<usize>, usize, Vec<(usize, Option<usize>, Option<usize>)>, Vec<usize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(5, vec![3, 1, 4, 1, 5], 6, vec![(3, Some(2), None), (2, Some(3), Some(4)), (3, Some(3), None), (1, Some(1), None), (2, Some(3), Some(4)), (3, Some(3), None)], vec![1, 8, 5]),
-            TestCase(1, vec![1000000000], 8, vec![(2, Some(1),Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (2, Some(1), Some(1000000000)), (3, Some(1), None)], vec![8000000000]),
-            TestCase(10, vec![1, 8, 4, 15, 7, 5, 7, 5, 8, 0], 20, vec![(2, Some(7), Some(0)), (3, Some(7), None), (3, Some(8), None), (1, Some(7), None), (3, Some(3), None), (2, Some(4), Some(4)), (2, Some(4), Some(9)), (2, Some(10), Some(5)), (1, Some(10), None), (2, Some(4), Some(2)), (1, Some(10), None), (2, Some(3), Some(1)), (2, Some(8), Some(11)), (2, Some(3), Some(14)), (2, Some(1), Some(9)), (3, Some(8), None), (3, Some(8), None), (3, Some(1), None), (2, Some(6), Some(5)), (3, Some(7), None)], vec![7, 5, 7, 21, 21, 19, 10]),
-        ];
-
-        for TestCase(n, a, q, q_vec, expected) in tests {
-            assert_eq!(run(n, a, q, q_vec), expected);
-        }
-    }
-}
 ```
-
 </details>
 
 ## HashSet
@@ -5268,8 +3674,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc166/tasks/abc166_b
-
 use std::collections::HashSet;
 
 fn run(n: usize, _k: usize, vec: Vec<(usize, Vec<usize>)>) -> usize {
@@ -5287,19 +3691,7 @@ fn run(n: usize, _k: usize, vec: Vec<(usize, Vec<usize>)>) -> usize {
         })
         .count()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(1, run(3, 2, vec![(2, vec![1, 3]), (1, vec![3])]));
-        assert_eq!(2, run(3, 3, vec![(1, vec![3]), (1, vec![3]), (1, vec![3])]));
-    }
-}
 ```
-
 </details>
 
 ### ABC226 B - Counting Arrays
@@ -5310,8 +3702,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc232/tasks/abc232_b
-
 use std::collections::HashSet;
 
 fn next_char(c: char, n: u8) -> char {
@@ -5331,19 +3721,6 @@ fn run(s: &str, t: &str) -> String {
             String::from("No")
         }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("Yes"), run("abc", "ijk"));
-        assert_eq!(String::from("Yes"), run("z", "a"));
-        assert_eq!(String::from("No"), run("ppq", "qqp"));
-        assert_eq!(String::from("Yes"), run("atcoder", "atcoder"));
-    }
-}
 ```
 </details>
 
@@ -5355,8 +3732,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc251/tasks/abc251_c
-
 use std::collections::HashSet;
 
 fn run(_n: usize, st: Vec<(&str, usize)>) -> usize {
@@ -5380,39 +3755,17 @@ fn run(_n: usize, st: Vec<(&str, usize)>) -> usize {
 
     pos
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<(&'static str, usize)>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, vec![("aaa", 10), ("bbb", 20), ("aaa", 30)], 2),
-        ];
-
-        for TestCase(n, st, expected) in tests {
-            assert_eq!(run(n, st), expected);
-        }
-    }
-}
 ```
-
 </details>
 
-### ABC278 C - FF 
+### ABC278 C - FF
 
 [C - FF](https://atcoder.jp/contests/abc278/tasks/abc278_c)（<span style="color: gray">Difficulty : 327</span>）
-
 
 <details>
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc278/tasks/abc278_c
-
 use std::collections::HashSet;
 
 fn run(_n: usize, _q: usize, tab: Vec<(usize, usize, usize)>) -> Vec<&'static str> {
@@ -5441,27 +3794,6 @@ fn run(_n: usize, _q: usize, tab: Vec<(usize, usize, usize)>) -> Vec<&'static st
         })
         .collect()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<(usize, usize, usize)>, Vec<&'static str>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 9, vec![(1, 1, 2), (3, 1, 2), (1, 2, 1), (3, 1, 2), (1, 2, 3), (1, 3, 2), (3, 1, 3), (2, 1, 2), (3, 1, 2)], vec!["No", "Yes", "No", "No"]),
-            TestCase(2, 8, vec![(1, 1, 2), (1, 2, 1), (3, 1, 2), (1, 1, 2), (1, 1, 2), (1, 1, 2), (2, 1, 2), (3, 1, 2)], vec!["Yes", "No"]),
-            TestCase(10, 30, vec![(3, 1, 6), (3, 5, 4), (1, 6, 1), (3, 1, 7), (3, 8, 4), (1, 1, 6), (2, 4, 3), (1, 6, 5), (1, 5, 6), (1, 1, 8), (1, 8, 1), (2, 3, 10), (1, 7, 6), (3, 5, 6), (1, 6, 7), (3, 6, 7), (1, 9, 5), (3, 8, 6), (3, 3, 8), (2, 6, 9), (1, 7, 1), (3, 10, 8), (2, 9, 2), (1, 10, 9), (2, 6, 10), (2, 6, 8), (3, 1, 6), (3, 1, 8), (2, 8, 5), (1, 9, 10)], vec!["No", "No", "No", "No", "Yes", "Yes", "No", "No", "No", "Yes", "Yes"]),
-        ];
-
-        for TestCase(n, q, tab, expected) in tests {
-            assert_eq!(run(n, q, tab), expected);
-        }
-    }
-}
-
 ```
 </details>
 
@@ -5483,8 +3815,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc352/tasks/abc352_d
-
 use std::collections::BTreeSet;
 
 fn run(n: usize, k: usize, p: Vec<usize>) -> usize {
@@ -5514,28 +3844,7 @@ fn run(n: usize, k: usize, p: Vec<usize>) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, Vec<usize>, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(4, 2, vec![2, 3, 1, 4], 1),
-            TestCase(4, 1, vec![2, 3, 1, 4], 0),
-            TestCase(10, 5, vec![10, 1, 6, 8, 7, 2, 5, 9, 3, 4], 5),
-        ];
-
-        for TestCase(n, k, p, expected) in tests {
-            assert_eq!(run(n, k, p), expected);
-        }
-    }
-}
 ```
-
 </details>
 
 ## BTreeMap
@@ -5548,8 +3857,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc253/tasks/abc253_c
-
 use std::collections::BTreeMap;
 use std::cmp::min;
 
@@ -5582,28 +3889,7 @@ fn run(_q: usize, query: Vec<(usize, Option<usize>, Option<usize>)>) -> Vec<usiz
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, Vec<(usize, Option<usize>, Option<usize>)>, Vec<usize>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(8, vec![(1, Some(3), None), (1, Some(2), None), (3, None, None), (1, Some(2), None), (1, Some(7), None), (3, None, None), (2, Some(2), Some(3)), (3, None, None)], vec![1, 5, 4]),
-            TestCase(4, vec![(1, Some(10000), None), (1, Some(1000), None), (2, Some(100), Some(3)), (1, Some(10), None)], vec![]),
-        ];
-
-        for TestCase(q, query, expected) in tests {
-            assert_eq!(run(q, query), expected);
-        }
-    }
-}
-
 ```
-
 </details>
 
 # その他
@@ -5620,8 +3906,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc232/tasks/abc232_b
-
 fn next_char(c: char, n: u8) -> char {
     let val = (c as u8 - 97 + n) % 26 + 97;
     val as char
@@ -5639,19 +3923,6 @@ fn run(s: &str, t: &str) -> String {
             String::from("No")
         }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("Yes"), run("abc", "ijk"));
-        assert_eq!(String::from("Yes"), run("z", "a"));
-        assert_eq!(String::from("No"), run("ppq", "qqp"));
-        assert_eq!(String::from("Yes"), run("atcoder", "atcoder"));
-    }
-}
 ```
 </details>
 
@@ -5665,8 +3936,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc148/tasks/abc148_c
-
 fn gcd(m: usize, n: usize) -> usize {
     if n == 0 {
         m
@@ -5677,18 +3946,6 @@ fn gcd(m: usize, n: usize) -> usize {
 
 fn run(a: usize, b: usize) -> usize {
     a / gcd(a, b) * b
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test () {
-        assert_eq!(6, run(2, 3));
-        assert_eq!(18696, run(123, 456));
-        assert_eq!(9999900000, run(100000, 99999));
-    }
 }
 ```
 </details>
@@ -5707,8 +3964,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/arc110/tasks/arc110_a
-
 fn gcd(m: usize, n: usize) -> usize {
     if n == 0 {
         m
@@ -5726,27 +3981,7 @@ fn run(n: usize) -> usize {
 
     num + 1
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 7),
-            TestCase(10, 2521),
-        ];
-
-        for TestCase(n, expected) in tests {
-            assert_eq!(run(n), expected);
-        }
-    }
-}
 ```
-
 </details>
 
 ## 回文判定
@@ -5759,8 +3994,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_ec
-
 fn check(s: &str) -> bool {
     s.chars().eq(s.chars().rev())
 }
@@ -5774,16 +4007,6 @@ fn run(_n: usize, _q: usize, s: &str, vec: Vec<(usize, usize)>) -> Vec<String> {
         }
     }).collect::<Vec<String>>()
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(vec![String::from("Yes"), String::from("No"), String::from("Yes")], run(11, 3, "mississippi", vec![(5, 8), (6, 10), (2, 8)]));
-    }
-}
 ```
 </details>
 
@@ -5795,8 +4018,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc066/tasks/abc066_b
-
 fn check(s: &str) -> bool {
     if s[0..s.len()/2] == s[s.len()/2..] {
         true
@@ -5813,19 +4034,6 @@ fn run(s: String) -> usize {
         .find(|i| {
             check(&s[0..*i])
         }).unwrap()
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(6, run(String::from("abaababaab")));
-        assert_eq!(2, run(String::from("xxxx")));
-        assert_eq!(6, run(String::from("abcabcabcabc")));
-        assert_eq!(14, run(String::from("akasakaakasakasakaakas")));
-    }
 }
 ```
 </details>
@@ -5844,25 +4052,6 @@ fn run(s: &str) -> usize {
     (0..chars.len()/2).filter(|i| {
         chars[*i] != chars[s.len() - *i - 1]
     }).count()
-}
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(1, run("redcoder"));
-        assert_eq!(0, run("wwwww"));
-        assert_eq!(1, run("rng"));
-        assert_eq!(50, run("ndfzvmkpudjeocebkfpexoszwczmpbdmivjnfeqapwvmbiiiarpwrjyezwdgydqbldyfyslboertiilckvacvroxycczmpfmdymu"));
-        assert_eq!(10, run("aybmyzzankubfabovxfkoazziskrl"));
-        assert_eq!(1, run("ax"));
-        assert_eq!(0, run("xxx"));
-        assert_eq!(34, run("uqoppvgpiqmsiwhpyfqnilmqkokdzowhrkzlavboipnljjlljpjwqalvxfvwpuairhxqiioqflgcwxvjupvghpadng"));
-        assert_eq!(2, run("hjvqwycocvwqvth"));
-        assert_eq!(34, run("xzamzvhfwhndreischtcucykbfjqasqlbkoxjpglbppptrvfccnfvlzppgdlmmseoidlqschqwnkfvqptsriiorvfqdjhrumjfc"));
-    }
 }
 ```
 </details>
@@ -5889,18 +4078,6 @@ fn run(_n: usize, s: Vec<&str>) -> String {
         String::from("No")
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("Yes"), run(5, vec!["ab", "ccef", "da", "a", "fe"]));
-        assert_eq!(String::from("No"), run(3, vec!["a", "b", "aba"]));
-        assert_eq!(String::from("Yes"), run(2, vec!["aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"]));
-    }
-}
 ```
 </details>
 
@@ -5914,8 +4091,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc198/tasks/abc198_b
-
 fn check(s: &str) -> bool {
 	s.chars().eq(s.chars().rev())
 }
@@ -5939,19 +4114,6 @@ fn run(n: usize) -> String {
 		String::from("No")
 	}
 }
-
-#[cfg(test)]
-mod tests {
-	use super::*;
-
-	#[test]
-	fn test() {
-		assert_eq!(String::from("Yes"), run(1210));
-		assert_eq!(String::from("Yes"), run(12100000000));
-		assert_eq!(String::from("Yes"), run(777));
-		assert_eq!(String::from("No"), run(123456789));
-	}
-}
 ```
 </details>
 
@@ -5964,8 +4126,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc237/tasks/abc237_c
-
 fn check(s: String) -> bool {
     s.chars().eq(s.chars().rev())
 }
@@ -6016,22 +4176,6 @@ fn run(s: String) -> &'static str {
         "No"
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn test() {
-        assert_eq!(String::from("Yes"), run(String::from("kasaka")));
-        assert_eq!(String::from("No"), run(String::from("atcoder")));
-        assert_eq!(String::from("Yes"), run(String::from("php")));
-        assert_eq!(String::from("Yes"), run(String::from("aaaaaaaa")));
-        assert_eq!(String::from("Yes"), run(String::from("aaabaaa")));
-        assert_eq!(String::from("No"), run(String::from("aaaabaaa")));
-        assert_eq!(String::from("Yes"), run(String::from("aaabaaaa")));
-    }
-}
 ```
 </details>
 
@@ -6043,8 +4187,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc363/tasks/abc363_c
-
 use itertools::Itertools;
 use std::collections::HashSet;
 
@@ -6078,29 +4220,7 @@ fn run(n: usize, k: usize, s: &str) -> usize {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, &'static str, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 2, "aab", 1),
-            TestCase(5, 3, "zzyyx", 16),
-            TestCase(10, 5, "abcwxyzyxw", 440640),
-        ];
-
-        for TestCase(n, k, s, expected) in tests {
-            assert_eq!(run(n, k, s), expected);
-        }
-    }
-}
-
 ```
-
 </details>
 
 ## n進数
@@ -6113,8 +4233,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc336/tasks/abc336_c
-
 fn calc(num: usize, mut result: Vec<usize>) -> Vec<usize> {
     if num == 0 {
         result
@@ -6134,28 +4252,7 @@ fn run(n: usize) -> usize {
             state * 10 + num * 2
         })
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(8, 24),
-            TestCase(133, 2024),
-            TestCase(31415926535, 2006628868244228),
-        ];
-
-        for TestCase(n, expected) in tests {
-            assert_eq!(expected, run(n));
-        }
-    }
-}
 ```
-
 </details>
 
 ## 周期性
@@ -6168,8 +4265,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc165/tasks/abc165_d
-
 use std::cmp::min;
 
 fn run(a: f64, b: f64, n: f64) -> usize {
@@ -6177,27 +4272,7 @@ fn run(a: f64, b: f64, n: f64) -> usize {
 
     ((a*x/b).floor() - a * (x/b).floor()) as usize
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(f64, f64, f64, usize);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(5.0, 7.0, 4.0, 2),
-            TestCase(11.0, 10.0, 9.0, 9),
-        ];
-
-        for TestCase(a, b, n, expected) in tests {
-            assert_eq!(run(a, b, n), expected);
-        }
-    }
-}
 ```
-
 </details>
 
 ## 後から帳尻合わせる系
@@ -6212,8 +4287,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc258/tasks/abc258_c
-
 fn run(n: usize, _q: usize, s: &str, query: Vec<(usize, usize)>) -> Vec<char> {
     let vec: Vec<char> = s.chars().collect();
 
@@ -6239,25 +4312,6 @@ fn run(n: usize, _q: usize, s: &str, query: Vec<(usize, usize)>) -> Vec<char> {
 
     ans
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(usize, usize, &'static str, Vec<(usize, usize)>, Vec<char>);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase(3, 3, "abc", vec![(2, 2), (1, 1), (2, 2)], vec!['b', 'a']),
-            TestCase(10, 8, "dsuccxulnl", vec![(2, 4), (2, 7), (1, 2), (2, 7), (1, 1), (1, 2), (1, 3), (2, 5)], vec!['c', 'u', 'c', 'u']),
-        ];
-
-        for TestCase(n, q, s, query, expected) in tests {
-            assert_eq!(run(n, q, s, query), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -6269,8 +4323,6 @@ mod tests {
 <summary>コード例を見る</summary>
 
 ```rust
-// https://atcoder.jp/contests/abc158/tasks/abc158_d
-
 use std::collections::VecDeque;
 
 fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> String {
@@ -6315,26 +4367,6 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
         ans.into_iter().rev().collect::<String>()
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    struct TestCase(&'static str, usize, Vec<(usize, Option<usize>, Option<char>)>, &'static str);
-
-    #[test]
-    fn test() {
-        let tests = [
-            TestCase("a", 4, vec![(2, Some(1), Some('p')), (1, None, None), (2, Some(2), Some('c')), (1, None, None)], "cpa"),
-            TestCase("a", 6, vec![(2, Some(2), Some('a')), (2, Some(1), Some('b')), (1, None, None), (2, Some(2), Some('c')), (1, None, None), (1, None, None)], "aabc"),
-            TestCase("y", 1, vec![(2, Some(1),  Some('x'))], "xy"),
-        ];
-
-        for TestCase(s, n, query, expected) in tests {
-            assert_eq!(run(s, n, query), expected);
-        }
-    }
-}
 ```
 </details>
 
@@ -6342,6 +4374,8 @@ mod tests {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年05月31日 : コード例からテストコードを削除</li>
+  <li>2025年05月31日 : ABC378 <span style="color: brown">D - Count Simple Paths</span>を追加</li>
   <li>2025年05月28日 : ABC405 <span style="color: brown">D - Escape Route</span>を追加</li>
   <li>2025年05月25日 : ABC308 <span style="color: brown">D - Snuke Maze</span>を追加</li>
   <li>2025年03月23日 : ABC396 <span style="color: brown">D - Minimum XOR Path</span>を追加</li>
