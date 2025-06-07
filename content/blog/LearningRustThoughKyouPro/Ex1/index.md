@@ -3138,7 +3138,7 @@ fn run(n: usize, _q: usize, s: &str, lr: Vec<(usize, usize)>) -> Vec<usize> {
 
 ### ABC408 C - Not All Covered
 
-[C - Not All Covered](https://atcoder.jp/contests/abc408/tasks/abc408_c)（<span style="color: gray">Difficulty : 不明</span>）
+[C - Not All Covered](https://atcoder.jp/contests/abc408/tasks/abc408_c)（<span style="color: gray">Difficulty : 223</span>）
 
 <details>
 <summary>コード例を見る</summary>
