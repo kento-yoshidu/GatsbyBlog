@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-05-31"
+update: "2025-06-07"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -407,7 +407,6 @@ fn run(s: &str) -> usize {
 
 [C - Various Kagamimochi](https://atcoder.jp/contests/abc388/tasks/abc388_c)（<span style="color: gray">Difficulty : 211</span>）
 
-
 <details>
 <summary>コード例を見る</summary>
 
@@ -477,6 +476,31 @@ fn run(_n: usize, m: usize, a: Vec<usize>) -> String {
     }
 
     l.to_string()
+}
+```
+</details>
+
+### ABC326 C - Peak
+
+[C - Peak](https://atcoder.jp/contests/abc326/tasks/abc326_c)（<span style="color: gray">Difficulty : 292</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+use itertools::Itertools;
+
+fn run(n: usize, m: usize, a: Vec<usize>) -> usize {
+    let a: Vec<usize> = a.into_iter().sorted().collect();
+
+    let mut ans = 0;
+
+    for i in 0..n {
+        let upper = a.partition_point(|&x| x < a[i] + m);
+        ans = ans.max(upper - i);
+    }
+
+    ans
 }
 ```
 </details>
@@ -3111,6 +3135,38 @@ fn run(n: usize, _q: usize, s: &str, lr: Vec<(usize, usize)>) -> Vec<usize> {
 </details>
 
 ## いもす法
+
+### ABC408 C - Not All Covered
+
+[C - Not All Covered](https://atcoder.jp/contests/abc408/tasks/abc408_c)（<span style="color: gray">Difficulty : 不明</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, lr: Vec<(usize, usize)>) -> usize {
+    let mut imos: Vec<isize> = vec![0; n];
+
+    for (l, r) in lr {
+        imos[l-1] += 1;
+
+        if n != r {
+            imos[r] -= 1;
+        }
+    }
+
+    let mut acc = vec![imos[0]];
+
+    for i in 1..imos.len() {
+        acc.push(imos[i] + acc[i-1]);
+    }
+
+    acc.into_iter()
+        .min()
+        .unwrap() as usize
+}
+```
+</details>
 
 ### ABC014 C - AtColor
 
