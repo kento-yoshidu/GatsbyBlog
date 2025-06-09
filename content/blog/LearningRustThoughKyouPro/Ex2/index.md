@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2025-06-07"
+update: "2025-06-08"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -16,13 +16,13 @@ published: true
 
 |アルゴリズム|
 |---|
-|[幅優先探索-6問](#幅優先探索-6問)|
+|[幅優先探索-7問](#幅優先探索-7問)|
 |[ダイクストラ法-6問](#ダイクストラ法-6問)|
 |[半分全列挙](#半分全列挙)|
 
 # アルゴリズム
 
-## 幅優先探索-6問
+## 幅優先探索-7問
 
 ### ABC400 D - Takahashi the Wall Breaker
 
@@ -164,6 +164,86 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>, _q: usize, xk: Vec<(usize, 
 ```
 </details>
 
+
+### ABC213 E - Stronger Takahashi
+
+[E - Stronger Takahashi](https://atcoder.jp/contests/abc213/tasks/abc213_e)（<span style="color: skyblue">Difficulty : 1423</span>）
+
+これも01-BFS。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+use std::collections::VecDeque;
+
+fn out_of_bounds(h: usize, w: usize, i: isize, j: isize) -> bool {
+    i < 0 || j < 0 || h as isize <= i || w as isize <= j
+}
+
+fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
+    let vec: Vec<Vec<char>> = s.into_iter().map(|str| str.chars().collect()).collect();
+
+    let mut dist = vec![vec![std::usize::MAX; w]; h];
+    dist[0][0] = 0;
+
+    let mut queue = VecDeque::new();
+    queue.push_back((0, 0));
+
+    let di = [0, 1, 0, -1];
+    let dj = [1, 0, -1, 0];
+
+    while let Some((cur_i, cur_j)) = queue.pop_front() {
+        for i in 0..4 {
+            let new_i = cur_i as isize + di[i];
+            let new_j = cur_j as isize + dj[i];
+
+            if out_of_bounds(h, w, new_i, new_j) {
+                continue;
+            }
+
+            let new_i = new_i as usize;
+            let new_j = new_j as usize;
+
+            if vec[new_i][new_j] == '#' {
+                continue;
+            }
+
+            if dist[new_i][new_j] > dist[cur_i][cur_j] {
+                dist[new_i][new_j] = dist[cur_i][cur_j];
+                queue.push_front((new_i, new_j));
+            }
+        }
+
+        for di in -2..=2 {
+            for dj in -2..=2 {
+                let new_i = cur_i as isize + di;
+                let new_j = cur_j as isize + dj;
+
+                if di.abs() + dj.abs() == 4 {
+                    continue;
+                }
+
+                if out_of_bounds(h, w, new_i, new_j) {
+                    continue;
+                }
+
+                let new_i = new_i as usize;
+                let new_j = new_j as usize;
+
+                if dist[new_i][new_j] > dist[cur_i][cur_j] + 1 {
+                    dist[new_i][new_j] = dist[cur_i][cur_j] + 1;
+                    queue.push_back((new_i, new_j));
+                }
+            }
+        }
+    }
+
+    dist[h-1][w-1]
+}
+```
+</details>
+
 ### ABC020 C - 壁抜け
 
 [C - 壁抜け](https://atcoder.jp/contests/abc020/tasks/abc020_c)（<span style="color: skyblue">🧪 Difficulty : 1477</span>）
@@ -261,7 +341,7 @@ fn run(h: usize, w: usize, t: usize, s: Vec<&str>) -> usize {
 
 [D - Wizard in Maze](https://atcoder.jp/contests/abc176/tasks/abc176_d)（<span style="color: skyblue">Difficulty : 1276</span>）
 
-01-BFS。
+01-BFSその3。
 
 <details>
 <summary>コード例を見る</summary>
@@ -339,7 +419,7 @@ fn run(h: usize, w: usize, c: (usize, usize), d: (usize, usize), s: Vec<&str>) -
 
 [C - 器物損壊！高橋君](https://atcoder.jp/contests/arc005/tasks/arc005_3)（<span style="color: skyblue">🧪 Difficulty : 1503</span>）
 
-これも01-BFS。
+01-BFSその4。
 
 <details>
 <summary>コード例を見る</summary>
@@ -1073,6 +1153,7 @@ fn run(_x: usize, _y: usize, _z: usize, k: usize, a: Vec<usize>, b: Vec<usize>, 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年06月08日 : ABC213 <span style="color: skyblue">E - Stronger Takahashi</span>を追加</li>
   <li>2025年06月07日 : ABC020 <span style="color: skyblue">🧪 C - 壁抜け</span>を追加</li>
   <li>2025年04月12日 : ABC400 <span style="color: green">D - Takahashi the Wall Breaker</span>を追加</li>
   <li>2025年03月22日 : ABC218 <span style="color: rgb(137, 137, 255)">F - Blocked Roads</span>を追加</li>

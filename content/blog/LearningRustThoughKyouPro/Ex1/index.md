@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-06-07"
+update: "2025-06-08"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -65,6 +65,34 @@ fn run(s: &str) -> usize {
     }
 
     ans
+}
+```
+</details>
+
+### ABC409 B - Citation
+
+[B - Citation](https://atcoder.jp/contests/abc409/tasks/abc409_b)（<span style="color: gray">Difficulty : 126</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(_n: usize, a: Vec<usize>) -> usize {
+    for i in (0..=100).rev() {
+        let mut count = 0;
+
+        for num in a.iter() {
+            if *num >= i {
+                count += 1;
+            }
+        }
+
+        if count >= i {
+            return i;
+        }
+    }
+
+    unreachable!();
 }
 ```
 </details>
