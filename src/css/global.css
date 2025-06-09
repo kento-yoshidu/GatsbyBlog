@@ -41,11 +41,11 @@ body {
 }
 
 body.dark {
-  --bg-color: #15141a;
+  --bg-color: rgb(15, 24, 42);
   --text-color: #fbfbfe;
   --link-color: #ddd;
-  --post-link-color: #cc3bcc;
-  --heading-bar-color: #cc3bcc;
+  --post-link-color: rgb(75, 161, 202);
+  --heading-bar-color: rgb(75, 161, 202);
 }
 
 body.dark ::backdrop {
