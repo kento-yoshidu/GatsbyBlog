@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-06-08"
+update: "2025-06-28"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -26,7 +26,7 @@ published: true
 |[bit全探索](#bit全探索)|[BTreeSet](#btreeset)|[後から帳尻合わせる系](#後から帳尻合わせる系)|
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
-|[深さ優先探索-4問](#深さ優先探索-4問)|
+|[深さ優先探索-5問](#深さ優先探索-5問)|
 |[幅優先探索-20問](#幅優先探索-20問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
@@ -964,7 +964,7 @@ fn run(n: usize) -> usize {
 ```
 </details>
 
-## 深さ優先探索-4問
+## 深さ優先探索-5問
 
 ### ATC001 A - 深さ優先探索
 
@@ -1204,6 +1204,65 @@ fn run(n: usize, _m: usize, uvw: Vec<(usize, usize, usize)>) -> usize {
     let mut ans = std::usize::MAX;
 
     dfs(n, &hash_map, &mut seen, 1, 0, &mut ans);
+
+    ans
+}
+```
+</details>
+
+### ABC270 C - Simple path
+
+[C - Simple path](https://atcoder.jp/contests/abc270/tasks/abc270_c)（<span style="color: brown">Difficulty : 625</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+use std::collections::HashMap;
+
+fn dfs(
+    map: &HashMap<&usize, Vec<&usize>>,
+    ans: &mut Vec<usize>,
+    seen: &mut Vec<bool>,
+    current: usize,
+    y: usize,
+) -> bool {
+    if current == y {
+        return true;
+    }
+
+    for &next in map.get(&current).unwrap_or(&vec![]) {
+        if seen[*next] {
+            continue;
+        }
+
+        seen[*next] = true;
+        ans.push(*next);
+
+        if dfs(map, ans, seen, *next, y) {
+            return true;
+        }
+
+        ans.pop();
+    }
+
+    false
+}
+
+fn run(n: usize, x: usize, y: usize, uv: Vec<(usize, usize)>) -> Vec<usize> {
+    let mut hash_map = HashMap::new();
+
+    for (u, v) in uv.iter() {
+        hash_map.entry(u).or_insert_with(|| Vec::new()).push(v);
+        hash_map.entry(v).or_insert_with(|| Vec::new()).push(u);
+    }
+
+    let mut seen = vec![false; n+1];
+    seen[x] = true;
+
+    let mut ans = vec![x];
+
+    dfs(&hash_map, &mut ans, &mut seen, x, y);
 
     ans
 }
@@ -3004,6 +3063,44 @@ fn run(n: usize, k: isize, a: Vec<isize>, b: Vec<isize>) -> &'static str {
 ```
 </details>
 
+### ABC240 C - Jumping Takahashi
+
+[C - Jumping Takahashi](https://atcoder.jp/contests/abc240/tasks/abc240_c)（<span style="color: brown">Difficulty : 464</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, x: usize, ab: Vec<(usize, usize)>) -> &'static str {
+    let mut dp = vec![vec![false; x+1]; n+1];
+
+    dp[0][0] = true;
+
+    for i in 0..n {
+        for j in 0..=x {
+            if dp[i][j] {
+                let (a, b) = ab[i];
+
+                if j + a <= x {
+                    dp[i + 1][j + a] = true;
+                }
+
+                if j + b <= x {
+                    dp[i + 1][j + b] = true;
+                }
+            }
+        }
+    }
+
+    if dp[n][x] {
+        "Yes"
+    } else {
+        "No"
+    }
+}
+```
+</details>
+
 ## 貪欲法
 
 ### ABC011 C - 123引き算
@@ -3891,6 +3988,44 @@ fn run(_n: usize, _q: usize, tab: Vec<(usize, usize, usize)>) -> Vec<&'static st
 
 ## BTreeSet
 
+### ABC385 D - Bank
+
+[D - Bank](https://atcoder.jp/contests/abc294/tasks/abc294_d)（<span style="color: gray">Difficulty : 385</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(_n: usize, _q: usize, event: Vec<(usize, Option<usize>)>) -> Vec<usize> {
+    let mut ans = Vec::new();
+
+    let mut bt_set = BTreeSet::new();
+
+    let mut current = 0;
+
+    for (e, x) in event {
+        match e {
+            1 => {
+                bt_set.insert(current + 1);
+                current += 1;
+            },
+            2 => {
+                bt_set.remove(&x.unwrap());
+            },
+            3 => {
+                let min = bt_set.iter().min().unwrap();
+                ans.push(*min);
+            },
+            _ => unreachable!(),
+        }
+    }
+
+    ans
+}
+```
+</details>
+
+
 ### ABC352 D - Permutation Subsequence
 
 [D - Permutation Subsequence](https://atcoder.jp/contests/abc352/tasks/abc352_d)（<span style="color: brown">Difficulty : 714</span>）
@@ -3933,9 +4068,41 @@ fn run(n: usize, k: usize, p: Vec<usize>) -> usize {
 
 ## BTreeMap
 
+### ABC331 C - Sum of Numbers Greater Than Me
+
+[C - Sum of Numbers Greater Than Me](https://atcoder.jp/contests/abc331/tasks/abc331_c)（<span style="color: gray">Difficulty : 288</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, a: Vec<usize>) -> Vec<usize> {
+    let mut btree_map = BTreeMap::new();
+
+    for (i, n) in a.into_iter().enumerate() {
+        btree_map.entry(n).or_insert_with(|| Vec::new()).push(i);
+    }
+
+    let mut ans = vec![0; n];
+
+    let mut sum = 0;
+
+    for (num, vec) in btree_map.into_iter().rev() {
+        for i in vec.iter() {
+            ans[*i] = sum;
+        }
+
+        sum += num * vec.len();
+    }
+
+    ans
+}
+```
+</details>
+
 ### ABC253 C - Max - Min Query
 
-[C - Max - Min Query](https://atcoder.jp/contests/abc253/tasks/abc253_c)（<span style="color: gray">Difficulty : 518</span>）
+[C - Max - Min Query](https://atcoder.jp/contests/abc253/tasks/abc253_c)（<span style="color: brown">Difficulty : 518</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -4363,6 +4530,43 @@ fn run(a: f64, b: f64, n: f64) -> usize {
 
 その都度リスト操作してると間に合わないので、操作状況を記録しておいて出力時に帳尻合わせるというか。C問題に多いイメージ。
 
+### ABC410 C - Rotatable Array
+
+[C - Rotatable Array](https://atcoder.jp/contests/abc410/tasks/abc410_c)（<span style="color: gray">Difficulty : 230</span>）
+
+「A の先頭の要素を末尾にする」を毎回やってると間に合わないので、どれだけずれているかを記憶しておく。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _q: usize, query: Vec<(usize, usize, Option<usize>)>) -> Vec<usize> {
+    let mut ans = Vec::new();
+
+    let mut vec: Vec<usize> = (1..=n).collect();
+
+    let mut pos = 0;
+
+    for (p, x, k) in query {
+        match p {
+            1 => {
+                vec[(pos + x - 1) % n] = k.unwrap();
+            },
+            2 => {
+                ans.push(vec[(pos + x - 1) % n]);
+            },
+            3 => {
+                pos += x;
+            },
+            _ => unreachable!(),
+        }
+    }
+
+    ans
+}
+```
+</details>
+
 ### ABC258 C - Rotation
 
 [C - Rotation](https://atcoder.jp/contests/abc258/tasks/abc258_c)（<span style="color: brown">Difficulty : 419</span>）
@@ -4458,6 +4662,8 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年06月28日 : ABC240 <span style="color: brown">C - Jumping Takahashi</span>を追加</li>
+  <li>2025年06月09日 : ABC270 <span style="color: brown">C - Simple path</span>を追加</li>
   <li>2025年05月31日 : コード例からテストコードを削除</li>
   <li>2025年05月31日 : ABC378 <span style="color: brown">D - Count Simple Paths</span>を追加</li>
   <li>2025年05月28日 : ABC405 <span style="color: brown">D - Escape Route</span>を追加</li>
