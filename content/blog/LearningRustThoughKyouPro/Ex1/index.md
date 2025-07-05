@@ -1294,21 +1294,19 @@ fn run(r: usize, c: usize, s: (usize, usize), g: (usize, usize), v: Vec<&str>) -
     graph[s.0-1][s.1-1] = 0;
     queue.push_back((s.0-1, s.1-1));
 
-    let dx = [0, -1, 0, 1];
-    let dy = [-1, 0, 1, 0];
+    let di = [0, -1, 0, 1];
+    let dj = [-1, 0, 1, 0];
 
-    while queue.len() > 0 {
-        let cur = queue.pop_front().unwrap();
-
+    while let Some((cur_i, cur_j)) = queue.pop_front() {
         for i in 0..4 {
-            let h = (cur.0 as isize + dx[i]) as usize;
-            let w = (cur.1 as isize + dy[i]) as usize;
+            let h = (cur_i as isize + di[i]) as usize;
+            let w = (cur_j as isize + dj[i]) as usize;
 
             if vec[h][w] == '#' || graph[h][w] != -1 {
                 continue;
             }
 
-            graph[h][w] = graph[cur.0][cur.1] + 1;
+            graph[h][w] = graph[cur_i][cur_j] + 1;
 
             queue.push_back((h, w));
         }
@@ -1375,8 +1373,8 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<isize> {
 ```rust
 use std::collections::VecDeque;
 
-fn check(r: isize, c: isize, h: isize, w: isize) -> bool {
-    r < 0 || c < 0 || r >= h || c >= w
+fn out_of_bounds(i: isize, j: isize, h: isize, w: isize) -> bool {
+    i < 0 || j < 0 || i >= h || j >= w
 }
 
 fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
@@ -1384,8 +1382,8 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
 
     let mut ans = 0;
 
-    let dx = vec![0, 0, -1, 1, -1, -1, 1, 1];
-    let dy = vec![-1, 1, 0, 0, -1, 1, -1, 1];
+    let di = vec![0, 0, -1, 1, -1, -1, 1, 1];
+    let dj = vec![-1, 1, 0, 0, -1, 1, -1, 1];
 
     for i in 0..h {
         for j in 0..w {
@@ -1400,12 +1398,12 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
 
             while let Some((cur_i, cur_j)) = queue.pop_front() {
                 for i in 0..8 {
-                    if check(cur_i as isize + dx[i], cur_j as isize + dy[i], h as isize, w as isize) {
+                    if out_of_bounds(cur_i as isize + di[i], cur_j as isize + dj[i], h as isize, w as isize) {
                         continue;
                     }
 
-                    let new_i = (cur_i as isize + dx[i]) as usize;
-                    let new_j = (cur_j as isize + dy[i]) as usize;
+                    let new_i = (cur_i as isize + di[i]) as usize;
+                    let new_j = (cur_j as isize + dj[i]) as usize;
 
                     if vec[new_i][new_j] == '#' {
                         vec[new_i][new_j] = '.';
@@ -1435,15 +1433,15 @@ fn run(h: usize, w: usize, a: Vec<Vec<usize>>) -> usize {
     let mut queue = VecDeque::new();
     queue.push_back((0, 0, vec![a[0][0]]));
 
-    let dx = [0, 1];
-    let dy = [1, 0];
+    let di = [0, 1];
+    let dj = [1, 0];
 
     let mut ans = 0;
 
     while let Some((cur_i, cur_j, visited)) = queue.pop_front() {
         for i in 0..2 {
-            let new_i = cur_i + dx[i];
-            let new_j = cur_j + dy[i];
+            let new_i = cur_i + di[i];
+            let new_j = cur_j + dj[i];
 
             if new_i == h || new_j == w {
                 continue;
@@ -1506,15 +1504,12 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> Vec<String> {
 
     while let Some((cur_i, cur_j)) = queue.pop_front() {
         for i in 0..4 {
-            let new_i = cur_i as isize + di[i];
-            let new_j = cur_j as isize + dj[i];
-
-            if out_of_bounds(h, w, new_i, new_j) {
+            if out_of_bounds(h, w, cur_i as isize + di[i], cur_j as isize + dj[i]) {
                 continue;
             }
 
-            let new_i = new_i as usize;
-            let new_j = new_j as usize;
+            let new_i = (cur_i as isize + di[i]) as usize;
+            let new_j = (cur_j as isize + dj[i]) as usize;
 
             if vec[new_i][new_j] != '.' {
                 continue;
@@ -1543,7 +1538,7 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> Vec<String> {
 ```rust
 use std::collections::VecDeque;
 
-fn check(h: usize, w: usize, i: isize, j: isize) -> bool {
+fn out_of_bounds(h: usize, w: usize, i: isize, j: isize) -> bool {
     i < 0 || j < 0 || i == h as isize || j == w as isize
 }
 
@@ -1574,7 +1569,7 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> &'static str {
             let new_i = cur_i as isize +  dx[i];
             let new_j = cur_j as isize +  dy[i];
 
-            if check(h, w, new_i, new_j) {
+            if out_of_bounds(h, w, new_i, new_j) {
                 continue;
             }
 
@@ -1599,8 +1594,8 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> &'static str {
 ```rust
 use std::collections::VecDeque;
 
-fn check(r: isize, c: isize) -> bool {
-    r < 0 || c < 0 || r >= 2001 || c >= 2001
+fn out_of_bounds(i: isize, j: isize) -> bool {
+    i < 0 || j < 0 || i >= 2001 || j >= 2001
 }
 
 fn run(_n: usize, xy: Vec<(isize, isize)>) -> usize {
@@ -1614,8 +1609,8 @@ fn run(_n: usize, xy: Vec<(isize, isize)>) -> usize {
         vec[*x as usize][*y as usize] = true;
     }
 
-    let dx = [0, 1, 1, 0, -1, -1];
-    let dy = [1, 1, 0, -1, -1, 0];
+    let di = [0, 1, 1, 0, -1, -1];
+    let dj = [1, 1, 0, -1, -1, 0];
 
     let mut ans = 0;
 
@@ -1638,12 +1633,12 @@ fn run(_n: usize, xy: Vec<(isize, isize)>) -> usize {
             vec[cur_i as usize][cur_j as usize] = false;
 
             for i in 0..6 {
-                if check(cur_i as isize + dx[i], cur_j as isize + dy[i]) {
+                if out_of_bounds(cur_i as isize + di[i], cur_j as isize + dj[i]) {
                     continue;
                 }
 
-                let new_i = (cur_i as isize + dx[i]) as usize;
-                let new_j = (cur_j as isize + dy[i]) as usize;
+                let new_i = (cur_i as isize + di[i]) as usize;
+                let new_j = (cur_j as isize + dj[i]) as usize;
 
                 if vec[new_i][new_j] {
                     queue.push_back((new_i as isize, new_j as isize));
@@ -1708,7 +1703,7 @@ fn run(_n: usize, _m: usize, ab: Vec<(usize, usize)>) -> isize {
 ```rust
 use std::collections::VecDeque;
 
-fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
+fn out_of_bounds(i: isize, j: isize, h: isize, w: isize) -> bool {
     i < 0 || j < 0 || i == h || j == w
 }
 
@@ -1727,8 +1722,8 @@ fn run(h: usize, w: usize, d: usize, s: Vec<&str>) -> usize {
         }
     }
 
-    let dx = [0, 1, 0, -1];
-    let dy = [1, 0, -1, 0];
+    let di = [0, 1, 0, -1];
+    let dj = [1, 0, -1, 0];
 
     while let Some((cur_i, cur_j)) = queue.pop_front() {
         if d == 0 {
@@ -1736,15 +1731,12 @@ fn run(h: usize, w: usize, d: usize, s: Vec<&str>) -> usize {
         }
 
         for i in 0..4 {
-            let new_i = cur_i as isize + dx[i];
-            let new_j = cur_j as isize + dy[i];
-
-            if check(new_i, new_j, h as isize, w as isize) {
+            if out_of_bounds(cur_i as isize + di[i], cur_j as isize + dj[i], h as isize, w as isize) {
                 continue;
             }
 
-            let new_i = new_i as usize;
-            let new_j = new_j as usize;
+            let new_i = (cur_i as isize + di[i]) as usize;
+            let new_j = (cur_j as isize + dj[i]) as usize;
 
             if vec[new_i][new_j] == '#' || graph[new_i][new_j] != -1 {
                 continue;
@@ -1804,18 +1796,20 @@ fn run(n: usize, _m: usize, ab: Option<Vec<(usize, usize)>>) -> usize {
     queue.push_back(1);
 
     while let Some(current) = queue.pop_front() {
-        if let Some(next) = vec.get(&current) {
-            for &next in next.iter() {
-                if graph[next-1] == -1 {
-                    queue.push_front(next);
-                    graph[next-1] = graph[current-1] + 1;
-                    count[next-1] = count[current-1];
-                } else if graph[next-1] == graph[current-1] + 1 {
-                    count[next-1] += count[current-1];
-                    count[next-1] %= md;
-                }
-            }
+        let Some(next) = vec.get(&current) else {
+            continue;
         };
+
+        for &next in next.iter() {
+            if graph[next-1] == -1 {
+                queue.push_back(next);
+                graph[next-1] = graph[current-1] + 1;
+                count[next-1] = count[current-1];
+            } else if graph[next-1] == graph[current-1] + 1 {
+                count[next-1] += count[current-1];
+                count[next-1] %= md;
+            }
+        }
     }
 
     count[n-1] as usize
@@ -1859,15 +1853,17 @@ fn run(n: usize, _m: usize, uvw: Vec<(usize, usize, isize)>) -> Vec<isize> {
 
             visited[cur] = true;
 
-            if let Some(next) = hash_map.get(&cur) {
-                for &(next_v, w) in next {
-                    if visited[next_v] {
-                        continue;
-                    }
+            let Some(next) = hash_map.get(&cur) else {
+                continue;
+            };
 
-                    graph[next_v] = graph[cur] + w;
-                    queue.push_back(next_v);
+            for &(next_v, w) in next {
+                if visited[next_v] {
+                    continue;
                 }
+
+                graph[next_v] = graph[cur] + w;
+                queue.push_back(next_v);
             }
         }
     }
@@ -1934,8 +1930,8 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
 ```rust
 use std::collections::VecDeque;
 
-fn check(r: isize, c: isize, h: isize, w: isize) -> bool {
-    r < 0 || c < 0 || r >= h || c >= w
+fn out_of_bounds(i: isize, j: isize, h: isize, w: isize) -> bool {
+    i < 0 || j < 0 || i >= h || j >= w
 }
 
 fn run(h: usize, w: usize, s: Vec<&str>) -> isize {
@@ -1958,6 +1954,7 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> isize {
 
     let d = [1, -1];
 
+    // 縦移動始まりと横移動始まりをそれぞれ試す
     (0..2)
         .filter_map(|i| {
             let mut graph = vec![vec![-1; w]; h];
@@ -1974,7 +1971,7 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> isize {
                         (cur_i as isize, cur_j as isize + d[j])
                     };
 
-                    if check(new_i, new_j, h as isize, w as isize) {
+                    if out_of_bounds(new_i, new_j, h as isize, w as isize) {
                         continue;
                     }
 
@@ -2033,17 +2030,19 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
                 continue;
             }
 
-            if let Some(next) = hash_map.get(&x) {
-                for &n in next {
-                    if !graph[n] {
-                        graph[n] = true;
-                        if k == 1 {
-                            count += 1;
-                        }
-                        queue.push_back((n, k-1));
-                    }
-                }
+            let Some(next) = hash_map.get(&x) else {
+                continue;
             };
+
+            for &n in next {
+                if !graph[n] {
+                    graph[n] = true;
+                    if k == 1 {
+                        count += 1;
+                    }
+                    queue.push_back((n, k-1));
+                }
+            }
         }
 
         ans.push(count);
@@ -2071,7 +2070,7 @@ fn run(n: usize, _k: usize, t: Vec<Vec<usize>>) -> &'static str {
         queue.push_back((0, vec![n]));
     }
 
-    while let Some((i,  vec, )) = queue.pop_front() {
+    while let Some((i,  vec)) = queue.pop_front() {
         if i + 1 == n {
             if vec.iter().fold(0, |acc, &x| acc ^ x) == 0 {
                 return "Found";
@@ -2103,7 +2102,7 @@ fn run(n: usize, _k: usize, t: Vec<Vec<usize>>) -> &'static str {
 ```rust
 use std::collections::VecDeque;
 
-fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
+fn out_of_bounds(i: isize, j: isize, h: isize, w: isize) -> bool {
     i < 0 || j < 0 || i >= h || j >= w
 }
 
@@ -2112,8 +2111,8 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
 
     let mut ans = 0;
 
-    let dx = [0, -1, 0, 1];
-    let dy = [-1, 0, 1, 0];
+    let di = [0, -1, 0, 1];
+    let dj = [-1, 0, 1, 0];
 
     // '.'である全ての座標をスタートに設定し、最も大きい距離とansを比べる
     for i in 0..h {
@@ -2130,12 +2129,12 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
 
             while let Some((cur_i, cur_j)) = queue.pop_front() {
                 for k in 0..4 {
-                    if check(cur_i as isize + dx[k], cur_j as isize + dy[k], h as isize, w as isize) {
+                    if out_of_bounds(cur_i as isize + di[k], cur_j as isize + dj[k], h as isize, w as isize) {
                         continue;
                     }
 
-                    let new_i = (cur_i as isize + dx[k]) as usize;
-                    let new_j = (cur_j as isize + dy[k]) as usize;
+                    let new_i = (cur_i as isize + di[k]) as usize;
+                    let new_j = (cur_j as isize + dj[k]) as usize;
 
                     if vec[new_i][new_j] == '#' || graph[new_i][new_j] != -1 {
                         continue;
@@ -2164,7 +2163,6 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> usize {
 ```rust
 use std::collections::VecDeque;
 
-// 境界チェック
 fn out_of_bounds(r: isize, c: isize, h: usize, w: usize) -> bool {
     r < 0 || c < 0 || r >= h as isize || c >= w as isize
 }
@@ -2178,13 +2176,13 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> isize {
     graph[0][0] = 0;
     queue.push_back((0, 0));
 
-    let dx = [0, -1, 0, 1];
-    let dy = [-1, 0, 1, 0];
+    let di = [0, -1, 0, 1];
+    let dj = [-1, 0, 1, 0];
 
     while let Some((cur_i, cur_j)) =  queue.pop_front() {
         for i in 0..4 {
-            let new_i = cur_i as isize + dx[i];
-            let new_j = cur_j as isize + dy[i];
+            let new_i = cur_i as isize + di[i];
+            let new_j = cur_j as isize + dj[i];
 
             if out_of_bounds(new_i, new_j, h, w) {
                 continue;
@@ -2223,9 +2221,7 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> isize {
 <summary>コード例を見る</summary>
 
 ```rust
-use std::collections::VecDeque;
-
-fn check(i: isize, j: isize, h: isize, w: isize) -> bool {
+fn out_of_bounds(i: isize, j: isize, h: isize, w: isize) -> bool {
     i < 0 || j < 0 || i >= h || j >= w
 }
 
@@ -2244,16 +2240,16 @@ fn run(h: usize, w: usize, c: Vec<&str>) -> &'static str {
 
     // スタートとゴールの組み合わせ
     let pair = [
-        ((-1, 0), (1, 0)), // 下上
-        ((-1, 0), (0, 1)), // 下右
-        ((-1, 0), (0, -1)), // 下左
-        ((0, 1), (0, -1)), // 右左
-        ((1, 0), (0, 1)), // 下右
-        ((1, 0), (0, -1)), // 下左
-        ];
+        ((-1, 0), (1, 0)),
+        ((-1, 0), (0, 1)),
+        ((-1, 0), (0, -1)),
+        ((0, 1), (0, -1)),
+        ((1, 0), (0, 1)),
+        ((1, 0), (0, -1)),
+    ];
 
-    let dx = [0, 1, 0, -1];
-    let dy = [1, 0, -1, 0];
+    let di = [0, 1, 0, -1];
+    let dj = [1, 0, -1, 0];
 
     for i in 0..6 {
         let start_i = s_pos.0 + pair[i].0.0;
@@ -2262,7 +2258,7 @@ fn run(h: usize, w: usize, c: Vec<&str>) -> &'static str {
         let end_i = s_pos.0 + pair[i].1.0;
         let end_j = s_pos.1 + pair[i].1.1;
 
-        if check(start_i, start_j, h as isize, w as isize) || check(end_i, end_j, h as isize, w as isize) {
+        if out_of_bounds(start_i, start_j, h as isize, w as isize) || out_of_bounds(end_i, end_j, h as isize, w as isize) {
             continue;
         }
 
@@ -2281,12 +2277,12 @@ fn run(h: usize, w: usize, c: Vec<&str>) -> &'static str {
 
         while let Some((cur_i, cur_j)) = queue.pop_front() {
             for i in 0..4 {
-                if check(cur_i as isize + dx[i], cur_j as isize + dy[i], h as isize, w as isize) {
+                if out_of_bounds(cur_i as isize + di[i], cur_j as isize + dj[i], h as isize, w as isize) {
                     continue;
                 }
 
-                let next_i = (cur_i as isize + dx[i]) as usize;
-                let next_j = (cur_j as isize + dy[i]) as usize;
+                let next_i = (cur_i as isize + di[i]) as usize;
+                let next_j = (cur_j as isize + dj[i]) as usize;
 
                 if vec[next_i][next_j] == '#' || dist[next_i][next_j] != -1 {
                     continue;
