@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-06-28"
+update: "2025-07-19"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -263,9 +263,45 @@ fn run(s: &str) -> usize {
 ```
 </details>
 
+### ABC227 C - ABC conjecture
+
+[C - ABC conjecture](https://atcoder.jp/contests/abc227/tasks/abc227_c)（<span style="color: brown">Difficulty : 692</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize) -> usize {
+    let mut ans = 0;
+
+    for a in 1..=n {
+        if a * a * a > n {
+            break;
+        }
+
+        for b in a..=n {
+            if a * b * b > n {
+                break;
+            }
+
+            let c_count = n / a / b;
+
+            if c_count >= b {
+                ans += c_count - b + 1;
+            } else {
+                break;
+            }
+        }
+    }
+
+    ans
+}
+```
+</details>
+
 ### LeetCode 1534. Count Good Triplets
 
-[1534. Count Good Triplets](https://leetcode.com/problems/count-good-triplets/description/)（<span style="color:  #1cb8b8">Difficulty : Easy</span>）
+[1534. Count Good Triplets](https://leetcode.com/problems/count-good-triplets/description/)（<span style="color: #1cb8b8">Difficulty : Easy</span>）
 
 <details>
 <summary>コード例を見る</summary>
@@ -4658,6 +4694,7 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年07月19日 : ABC227 <span style="color: brown">C - ABC conjecture</span>を追加</li>
   <li>2025年06月28日 : ABC240 <span style="color: brown">C - Jumping Takahashi</span>を追加</li>
   <li>2025年06月09日 : ABC270 <span style="color: brown">C - Simple path</span>を追加</li>
   <li>2025年05月31日 : コード例からテストコードを削除</li>
