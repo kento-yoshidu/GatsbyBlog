@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-07-19"
+update: "2025-07-30"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -3325,6 +3325,44 @@ fn run(n: usize, _m: usize, lr: Vec<(usize, usize)>) -> usize {
 ```
 </details>
 
+### ABC035 C - オセロ
+
+[C - オセロ](https://atcoder.jp/contests/abc035/tasks/abc035_c)（<span style="color: green">🧪 Difficulty : 1096</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _q: usize, lr: Vec<(usize, usize)>) -> String {
+    let mut imos = vec![0; n];
+
+    for (l, r) in lr {
+        imos[l-1] += 1;
+
+        if n != r {
+            imos[r] -= 1;
+        }
+    }
+
+    let mut acc = vec![imos[0]];
+
+    for i in 1..n {
+        acc.push(imos[i] + acc[i-1]);
+    }
+
+    acc.into_iter()
+        .map(|n| {
+            match n % 2 {
+                0 => '0',
+                1 => '1',
+                _ => unreachable!(),
+            }
+        })
+        .collect()
+}
+```
+</details>
+
 ### ABC014 C - AtColor
 
 [C - AtColor](https://atcoder.jp/contests/abc014/tasks/abc014_3)（<span style="color: skyblue">🧪 Difficulty : 1276</span>）
@@ -4694,6 +4732,7 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年07月30日 : ABC035 <span style="color: green">🧪 C - オセロ</span>を追加</li>
   <li>2025年07月19日 : ABC227 <span style="color: brown">C - ABC conjecture</span>を追加</li>
   <li>2025年06月28日 : ABC240 <span style="color: brown">C - Jumping Takahashi</span>を追加</li>
   <li>2025年06月09日 : ABC270 <span style="color: brown">C - Simple path</span>を追加</li>
