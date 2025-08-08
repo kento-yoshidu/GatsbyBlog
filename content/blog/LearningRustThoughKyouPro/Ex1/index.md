@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-07-30"
+update: "2025-08-08"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -3133,6 +3133,47 @@ fn run(n: usize, x: usize, ab: Vec<(usize, usize)>) -> &'static str {
 ```
 </details>
 
+### ABC289 D - Step Up Robot
+
+[D - Step Up Robot](https://atcoder.jp/contests/abc289/tasks/abc289_d)（<span style="color: brown">Difficulty : 551</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(_n: usize, a: Vec<usize>, _m: usize, b: Vec<usize>, x: usize) -> &'static str {
+    let mut dp = vec![false; x+1];
+    let mut mochi = vec![false; x+1];
+
+    for m in b {
+        mochi[m] = true;
+    }
+
+    dp[0] = true;
+
+    for i in 1..=x {
+        if mochi[i] {
+            continue;
+        }
+
+        for &j in a.iter() {
+            if i >= j && dp[i - j] {
+                dp[i] = true;
+                break;
+            }
+        }
+    }
+
+    if dp[x] {
+        "Yes"
+    } else {
+        "No"
+    }
+}
+```
+</details>
+
 ## 貪欲法
 
 ### ABC011 C - 123引き算
@@ -4732,6 +4773,7 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年08月08日 : ABC289 <span style="color: brown">D - Step Up Robot</span>を追加</li>
   <li>2025年07月30日 : ABC035 <span style="color: green">🧪 C - オセロ</span>を追加</li>
   <li>2025年07月19日 : ABC227 <span style="color: brown">C - ABC conjecture</span>を追加</li>
   <li>2025年06月28日 : ABC240 <span style="color: brown">C - Jumping Takahashi</span>を追加</li>
