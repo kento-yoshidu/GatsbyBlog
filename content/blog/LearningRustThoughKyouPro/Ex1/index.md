@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-08-09"
+update: "2025-08-10"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -18,7 +18,7 @@ published: true
 
 |アルゴリズム|データ構造|その他|
 |---|---|---|
-|[全探索-5問](#全探索-5問)|[累積和](#累積和)|[文字列操作](#文字列操作)|
+|[全探索-10問](#全探索-10問)|[累積和](#累積和)|[文字列操作](#文字列操作)|
 |[工夫のいる全探索-3問](#工夫のいる全探索-3問)|[いもす法](#いもす法)|[最小公倍数](#最小公倍数)|
 |[バブルソート](#バブルソート)|[スタック-8問](#スタック-8問)|[回文判定](#回文判定)|
 |[約数列挙](#約数列挙)|[HashSet](#hashset)|[n進数](#n進数)|
@@ -36,7 +36,7 @@ published: true
 
 # アルゴリズム
 
-## 全探索-5問
+## 全探索-10問
 
 アルゴリズムの基本というか、考え得るパターンを全て試していく方法です。B問題までであれば全探索で間に合うことが多いです。
 
@@ -61,6 +61,46 @@ fn run(s: &str) -> usize {
                     }
                 }
             }
+        }
+    }
+
+    ans
+}
+```
+</details>
+
+### ABC418 B - You're a teapot
+
+[B - You're a teapot](https://atcoder.jp/contests/abc418/tasks/abc418_b)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(s: &str) -> f64 {
+    let mut ans: f64= 0.0;
+
+    let s: Vec<char> = s.chars().collect();
+
+    for i in 0..s.len() {
+        if s[i] != 't' {
+            continue;
+        }
+
+        for j in i+1..s.len() {
+            if s[j] != 't' {
+                continue;
+            }
+
+            let str = &s[i..=j];
+
+            if str.len() < 3 {
+                continue;
+            }
+
+            let not_t = &s[i..=j].iter().filter(|c| **c != 't').count();
+
+            ans = ans.max((str.len() as f64 - *not_t as f64 - 2.0) / (str.len() as f64 - 2.0));
         }
     }
 
