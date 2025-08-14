@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-08-10"
+update: "2025-08-14"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -3367,6 +3367,50 @@ fn run(n: usize, x: Vec<isize>, p: Vec<isize>, q: usize, lr: Vec<(isize, isize)>
 ```
 </details>
 
+### ABC098 C - Attention
+
+[C - Attention](https://atcoder.jp/contests/abc098/tasks/arc098_a)（<span style="color: brown">Difficulty : 635</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, s: &str) -> usize {
+    let mut ans = std::usize::MAX;
+
+    let mut w = vec![0; n+1];
+    let mut e = vec![0; n+1];
+
+    for (i, c) in s.chars().enumerate() {
+        if c == 'W' {
+            w[i] += 1;
+        } else {
+            e[i] += 1;
+        }
+    }
+
+    for i in 1..=n {
+        w[i] += w[i-1];
+        e[i] += e[i-1];
+    }
+
+    for i in 0..n {
+        let mut sum = 0;
+
+        if i != 0 {
+            sum += w[i-1];
+        }
+
+        sum += e[n-1] - e[i];
+
+        ans = ans.min(sum);
+    }
+
+    ans
+}
+```
+</details>
+
 ### ABC122 C - GeT AC
 
 [C - GeT AC](https://atcoder.jp/contests/abc122/tasks/abc122_c) （<span style="color: brown">Difficulty : 700</span>）
@@ -4840,6 +4884,7 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年08月14日 : ABC098 <span style="color: brown">C - Attention</span>を追加</li>
   <li>2025年08月09日 : ABC260 <span style="color: brown">C - Changing Jewels</span>を追加</li>
   <li>2025年08月08日 : ABC289 <span style="color: brown">D - Step Up Robot</span>を追加</li>
   <li>2025年07月30日 : ABC035 <span style="color: green">🧪 C - オセロ</span>を追加</li>
