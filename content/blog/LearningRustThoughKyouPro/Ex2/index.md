@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2025-06-08"
+update: "2025-08-16"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -16,11 +16,60 @@ published: true
 
 |アルゴリズム|
 |---|
+|[深さ優先探索]()|
 |[幅優先探索-7問](#幅優先探索-7問)|
 |[ダイクストラ法-6問](#ダイクストラ法-6問)|
 |[半分全列挙](#半分全列挙)|
 
 # アルゴリズム
+
+## 深さ優先探索
+
+### ABC054 C - One-stroke Path
+
+[C - One-stroke Path](https://atcoder.jp/contests/abc054/tasks/abc054_c)（<span style="color: skyblue">Difficulty : 1244</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+use std::collections::HashMap;
+
+fn dfs(n: usize, current: usize, seen: &mut Vec<bool>, graph: &HashMap<usize, Vec<usize>>) -> usize {
+    seen[current] = true;
+
+    if (1..=n).all(|i| seen[i]) {
+        seen[current] = false;
+        return 1;
+    }
+
+    let mut count = 0;
+
+    for next in graph.get(&current).unwrap() {
+        if seen[*next] {
+            continue;
+        }
+
+        count += dfs(n, *next, seen, graph);
+    }
+
+    seen[current] = false;
+
+    count
+}
+
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut hash_map = HashMap::new();
+
+    for (a, b) in ab {
+        hash_map.entry(a).or_insert_with(|| Vec::new()).push(b);
+        hash_map.entry(b).or_insert_with(|| Vec::new()).push(a);
+    }
+
+    dfs(n, 1, &mut vec![false; n+1], &mut hash_map)
+}
+```
+</details>
 
 ## 幅優先探索-7問
 
@@ -163,7 +212,6 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>, _q: usize, xk: Vec<(usize, 
 }
 ```
 </details>
-
 
 ### ABC213 E - Stronger Takahashi
 
@@ -1153,6 +1201,7 @@ fn run(_x: usize, _y: usize, _z: usize, k: usize, a: Vec<usize>, b: Vec<usize>, 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年08月16日 : ABC054 <span style="color: skyblue">C - One-stroke Path</span>を追加</li>
   <li>2025年06月08日 : ABC213 <span style="color: skyblue">E - Stronger Takahashi</span>を追加</li>
   <li>2025年06月07日 : ABC020 <span style="color: skyblue">🧪 C - 壁抜け</span>を追加</li>
   <li>2025年04月12日 : ABC400 <span style="color: green">D - Takahashi the Wall Breaker</span>を追加</li>
