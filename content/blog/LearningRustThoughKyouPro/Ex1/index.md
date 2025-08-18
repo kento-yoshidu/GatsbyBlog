@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-08-14"
+update: "2025-08-18"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -18,7 +18,7 @@ published: true
 
 |アルゴリズム|データ構造|その他|
 |---|---|---|
-|[全探索-10問](#全探索-10問)|[累積和](#累積和)|[文字列操作](#文字列操作)|
+|[全探索-11問](#全探索-11問)|[累積和](#累積和)|[文字列操作](#文字列操作)|
 |[工夫のいる全探索-3問](#工夫のいる全探索-3問)|[いもす法](#いもす法)|[最小公倍数](#最小公倍数)|
 |[バブルソート](#バブルソート)|[スタック-8問](#スタック-8問)|[回文判定](#回文判定)|
 |[約数列挙](#約数列挙)|[HashSet](#hashset)|[n進数](#n進数)|
@@ -36,9 +36,45 @@ published: true
 
 # アルゴリズム
 
-## 全探索-10問
+## 全探索-11問
 
 アルゴリズムの基本というか、考え得るパターンを全て試していく方法です。B問題までであれば全探索で間に合うことが多いです。
+
+### ABC419 B - Get Min
+
+[B - Get Min](https://atcoder.jp/contests/abc419/tasks/abc419_b)（<span style="color: gray">Difficulty : 31</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(_q: usize, query: Vec<(usize, Option<usize>)>) -> Vec<usize> {
+    let mut arr = vec![0; 101];
+
+    let mut ans = Vec::new();
+
+    for (q, x)in query {
+        match q {
+            1 => {
+                arr[x.unwrap()] += 1;
+            },
+            2 => {
+                for i in 0..100 {
+                    if arr[i] > 0 {
+                        ans.push(i);
+                        arr[i] -= 1;
+                        break;
+                    }
+                }
+            },
+            _ => unreachable!(),
+        }
+    }
+
+    ans
+}
+```
+</details>
 
 ### ABC393 B - A..B..C
 
@@ -3473,6 +3509,46 @@ fn run(n: usize, _m: usize, lr: Vec<(usize, usize)>) -> usize {
     acc.into_iter()
         .min()
         .unwrap() as usize
+}
+```
+</details>
+
+### ABC419 D - Substr Swap
+
+[D - Substr Swap](https://atcoder.jp/contests/abc419/tasks/abc419_d)（<span style="color: gray">Difficulty : 251</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, s: &str, t: &str, lr: Vec<(usize, usize)>) -> String {
+    let mut imos = vec![0; n+2];
+
+    for (l, r) in lr {
+        imos[l] += 1;
+        imos[r+1] -= 1;
+    }
+
+    let mut acc = vec![imos[0]];
+
+    for i in 1..imos.len() {
+        acc.push(imos[i] + acc[i-1]);
+    }
+
+    let s: Vec<char> = s.chars().collect();
+    let t: Vec<char> = t.chars().collect();
+
+    let mut ans = Vec::new();
+
+    for i in 1..=n {
+        if acc[i] % 2 == 0 {
+            ans.push(s[i-1]);
+        } else {
+            ans.push(t[i-1]);
+        }
+    }
+
+    ans.into_iter().collect()
 }
 ```
 </details>
