@@ -70,3 +70,5 @@ yarn-error.log
 
 .node-version
 .nvmrc
+
+content/draft/
