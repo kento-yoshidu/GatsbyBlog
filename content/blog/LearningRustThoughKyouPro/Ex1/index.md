@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-08-18"
+update: "2025-08-30"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -27,7 +27,7 @@ published: true
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索-5問](#深さ優先探索-5問)|
-|[幅優先探索-20問](#幅優先探索-20問)|
+|[幅優先探索-21問](#幅優先探索-21問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -1381,7 +1381,7 @@ fn run(n: usize, x: usize, y: usize, uv: Vec<(usize, usize)>) -> Vec<usize> {
 ```
 </details>
 
-## 幅優先探索-20問
+## 幅優先探索-21問
 
 [BFS (幅優先探索) 超入門！ 〜 キューを鮮やかに使いこなす 〜](https://qiita.com/drken/items/996d80bcae64649a6580)
 
@@ -1636,6 +1636,66 @@ fn run(h: usize, w: usize, s: Vec<&str>) -> Vec<String> {
     vec.into_iter()
         .map(|v| v.into_iter().collect())
         .collect()
+}
+```
+</details>
+
+### ABC292 D - Unicyclic Components
+
+[D - Unicyclic Components](https://atcoder.jp/contests/abc292/tasks/abc292_d)（<span style="color: brown">Difficulty : 579</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, uv: Vec<(usize, usize)>) -> &'static str {
+    let mut graph: HashMap<usize, Vec<usize>> = HashMap::new();
+
+    for (u, v) in uv {
+        graph.entry(u).or_default().push(v);
+        graph.entry(v).or_default().push(u);
+    }
+
+    let mut seen = vec![false; n+1];
+
+    for i in 1..=n {
+        if seen[i] {
+            continue;
+        }
+
+        let mut dequeue = VecDeque::new();
+        dequeue.push_back(i);
+        seen[i] = true;
+
+        let mut v_count = 0;
+        let mut e_count = 0;
+
+        while let Some(cur) = dequeue.pop_front() {
+            v_count += 1;
+
+            let Some(next) = graph.get(&cur) else {
+                continue;
+            };
+
+            for next in next {
+                e_count += 1;
+
+                if !seen[*next] {
+                    seen[*next] = true;
+                    dequeue.push_back(*next);
+
+                }
+            }
+        }
+
+        e_count /= 2;
+
+        if v_count != e_count {
+            return "No";
+        }
+    }
+
+    "Yes"
 }
 ```
 </details>
@@ -3380,7 +3440,6 @@ fn run(a: usize, b: usize) -> usize {
 
 [D - 1D Country](https://atcoder.jp/contests/abc371/tasks/abc371_d)（<span style="color: brown">Difficulty : 408</span>）
 
-
 <details>
 <summary>コード例を見る</summary>
 
@@ -4828,6 +4887,47 @@ fn run(a: f64, b: f64, n: f64) -> usize {
 
 その都度リスト操作してると間に合わないので、操作状況を記録しておいて出力時に帳尻合わせるというか。C問題に多いイメージ。
 
+### ABC420 C - Sum of Min Query
+
+[C - Sum of Min Query](https://atcoder.jp/contests/abc420/tasks/abc420_c)（<span style="color: gray">Difficulty : 169</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _q: usize, a: Vec<usize>, b: Vec<usize>, cxv: Vec<(char, usize, usize)>) -> Vec<usize> {
+    let mut a = a.clone();
+    let mut b = b.clone();
+
+    let mut min_vec = Vec::new();
+
+    for i in 0..n {
+        min_vec.push(min(a[i], b[i]));
+    }
+
+    let mut total: usize = min_vec.iter().sum();
+
+    let mut ans = Vec::new();
+
+    for (c, x, v) in cxv {
+        total -= min(a[x-1], b[x-1]);
+
+        match c {
+            'A' => a[x-1] = v,
+            'B' => b[x-1] = v,
+            _ => unreachable!(),
+        }
+
+        total += min(a[x-1], b[x-1]);
+
+        ans.push(total);
+    }
+
+    ans
+}
+```
+</details>
+
 ### ABC410 C - Rotatable Array
 
 [C - Rotatable Array](https://atcoder.jp/contests/abc410/tasks/abc410_c)（<span style="color: gray">Difficulty : 230</span>）
@@ -4960,6 +5060,7 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2025年08月30日 : ABC292 <span style="color: brown">D - Unicyclic Components</span>を追加</li>
   <li>2025年08月14日 : ABC098 <span style="color: brown">C - Attention</span>を追加</li>
   <li>2025年08月09日 : ABC260 <span style="color: brown">C - Changing Jewels</span>を追加</li>
   <li>2025年08月08日 : ABC289 <span style="color: brown">D - Step Up Robot</span>を追加</li>
