@@ -72,3 +72,4 @@ yarn-error.log
 .nvmrc
 
 content/draft/
+src/__generated__/
