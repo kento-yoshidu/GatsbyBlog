@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-08-30"
+update: "2025-09-21"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -27,7 +27,7 @@ published: true
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索-5問](#深さ優先探索-5問)|
-|[幅優先探索-21問](#幅優先探索-21問)|
+|[幅優先探索-22問](#幅優先探索-22問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -1381,7 +1381,7 @@ fn run(n: usize, x: usize, y: usize, uv: Vec<(usize, usize)>) -> Vec<usize> {
 ```
 </details>
 
-## 幅優先探索-21問
+## 幅優先探索-22問
 
 [BFS (幅優先探索) 超入門！ 〜 キューを鮮やかに使いこなす 〜](https://qiita.com/drken/items/996d80bcae64649a6580)
 
@@ -2601,6 +2601,54 @@ fn run(h: usize, w: usize, a: Vec<&str>) -> usize {
         .copied()
         .max()
         .unwrap() as usize
+}
+```
+</details>
+
+### ABC424 C - New Skill Acquired
+
+[C - New Skill Acquired](https://atcoder.jp/contests/abc424/tasks/abc424_c)（<span style="color: gray">difficulty : 不明</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+use std::collections::{HashMap, VecDeque};
+
+fn run(n: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut map = HashMap::new();
+    let mut seen = vec![false; n];
+
+    let mut queue = VecDeque::new();
+
+    for (i, (a, b)) in ab.into_iter().enumerate() {
+        if a == 0 && b == 0 {
+            queue.push_back(i);
+            seen[i] = true;
+        } else {
+            map.entry(a-1).or_insert_with(|| Vec::new()).push(i);
+            map.entry(b-1).or_insert_with(|| Vec::new()).push(i);
+        }
+    }
+
+    let mut ans = 0;
+
+    while let Some(cur) = queue.pop_front() {
+        ans += 1;
+
+        let Some(next) = map.get(&cur) else {
+            continue;
+        };
+
+        for n in next {
+            if !seen[*n] {
+                seen[*n] = true;
+                queue.push_back(*n);
+            }
+        }
+    }
+
+    ans
 }
 ```
 </details>
