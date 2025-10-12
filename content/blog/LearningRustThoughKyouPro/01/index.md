@@ -1,7 +1,7 @@
 ---
 title: "#1 Rustのイテレーター系メソッド雑まとめ"
 postdate: "2023-10-11"
-update: "2024-12-29"
+update: "2025-10-12"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "競技プログラミングの問題を解くことでRustを学びます。"
@@ -325,13 +325,11 @@ fn main() {
 }
 ```
 
-## イテレーターを変化させたイレテーターを得る
-
-要素を並び変えたりするメソッドです。
+## イテレーターを変換して新しいイレテーターを得る
 
 ### rev
 
-イテレーターの各要素を逆から並び替えます。利用頻度は高いです。
+イテレーターの各要素を逆から並び替えます。
 
 ```rust
 fn main() {
@@ -354,6 +352,26 @@ fn main() {
 <!-- revの問題
 https://atcoder.jp/contests/abc281/tasks/abc281_a
 -->
+
+### tuple_windows(Itertools)
+
+隣り合う要素をタプルとして順に取り出すイテレーターを生成します。
+
+`windows`はスライス(&[T]) 専用で要素をスライス参照(&[T])として返しますが、tuple_windowsは任意のイテレーターに使えます。
+
+```rust
+fn main() {
+    let s: String = String::from("abcde");
+
+    s.chars()
+        .tuple_windows::<(char, char)>()
+        .for_each(|a| println!("{:?}", a));
+        //=> ('a', 'b')
+        //=> ('b', 'c')
+        //=> ('c', 'd')
+        //=> ('d', 'e')
+}
+```
 
 ## イテレーター2つを組み合わせたイテレーターを得る
 
