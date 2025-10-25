@@ -1,92 +1,47 @@
 ---
-title: "Erlangメモ"
-postdate: "2024-12-06"
-update: "2025-02-04"
+title: "えっ 今年は全員GW休んでいいのか！！"
+postdate: "2025-10-25"
+update: "2025-10-25"
 seriesName: "その他"
 seriesSlug: "Others"
-description: "Erlangのメモ"
-tags: ["Erlang"]
-keywords: ["Erlang"]
-published: false
+description: "ああ…しっかり休め"
+tags: ["undefined"]
+keywords: ["狂四郎2030"]
+published: true
 ---
 
-# Erlangメモ
+## 4月某日
 
-Erlangに関してメモする。他人が読んでも役に立たない。閲覧注意。
+社員「えっ 今年は全員GW休んでいいのか！！」
 
-## リスト
+上司「ああ…しっかり休め」
 
-多分配列みたいなもの。要素の追加/削除ができる。O(n)。
+上司「続けて有休もいいぞ！」
 
-### ソート系
+上司「遠慮するな 今までの分休め…」
 
-`lists:sort/1`
+## 5月某日
 
-昇順ソート
+Slack「ただいまよりGW特別訓練を開始する！」
 
-```erlang
-List = [2, 3, 1],
-SortedList = lists:sort(List),
+Slack「社内DBをいくつか消し飛ばした！GW最終日までに復旧させろ！」
 
-io:format("~p~n", [SortedList]).
-%=> [1, 2, 3]
-```
+Slack「2週間前に発覚して温めておいた不具合対応案件だ！GW最終日までに対応しろ！」
 
-降順ソート
+Slack「会長肝いりの必達PJだ！GW最終日までに対応しろ！」
 
-```erlang
-List = [2, 3, 1],
-SortedList = lists:sort(fun(X, Y) -> X > Y end, List),
+Slack「VPNを無効化しておいた！必ず出社して対応しろ！」
 
-io:format("~p~n", [SortedList]),
-%=> [3, 2, 1]
-```
+Slack「この感覚を体で覚えろ！今配布しているのは99％の残業案件だ 心配するな計算上死ぬ事はない！！」
 
-`lists:usort/1`
+Slack「ただし…Slackの通知を切っていやしくしっかり休んだ奴ほど苦痛は続く！！」
 
-ソートして重複を除く
+---
 
-```erlang
-List = [3, 1, 3],
-UniquedSort = lists:usort(List),
+上司「まさか死ぬとはな…」
 
-io:format("~p~n", [UniqedSort]).
-%=> [1,3]
-```
+上司「計算以下の体力の落ちこぼれだ いずれ消えていく運命だ…」
 
-`lists:member/2`
+## 参考
 
-多分containsみたいなやつ
-
-```erlang
-case lists:member("A", ["A", "B", "C"]) of
-  true -> io:format("true\n");
-  false -> io:format("false\n")
-  %=> true
-end.
-```
-
-### フィルター
-
-`lists:filter/2`
-
-```erlang
-Str = "oooxxxooo",
-Count = length(lists:filter(fun(Char) -> Char =:= $o end, Str)),
-
-io:format("~p~n", [Count]).
-%=> 6
-```
-
-## 文字列
-
-文字列を連結するには`++`を使用する。
-
-```erlang
-Str = "dog",
-NewStr = Str ++ "s",
-
-io:format("~s~n", [NewStr]).
-%=> dogs
-```
-
+[おかわりもいいぞ! (おかわりもいいぞ)とは【ピクシブ百科事典】](https://dic.pixiv.net/a/%E3%81%8A%E3%81%8B%E3%82%8F%E3%82%8A%E3%82%82%E3%81%84%E3%81%84%E3%81%9E%21)

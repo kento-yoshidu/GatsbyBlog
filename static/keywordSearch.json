@@ -1,9 +1,17 @@
 [
   {
     "slug": "/Others/12/",
-    "title": "Erlangメモ",
+    "title": "えっ 今年は全員GW休んでいいのか！！",
     "keywords": [
-      "Erlang"
+      "狂四郎2030"
+    ]
+  },
+  {
+    "slug": "/Others/11/",
+    "title": "熱に浮かれたように荒れ狂う波が引いても",
+    "keywords": [
+      "生成AI",
+      "ChatGPT"
     ]
   },
   {
@@ -18,14 +26,7 @@
     ]
   },
   {
-    "slug": "/Others/11/",
-    "title": "[下書き]今更のReact総復習",
-    "keywords": [
-      "React"
-    ]
-  },
-  {
-    "slug": "/Diary/13/",
+    "slug": "/Diary/08/",
     "title": "2023年、自分は一体何をしていたのか",
     "keywords": [
       "2023年",
@@ -53,33 +54,7 @@
     ]
   },
   {
-    "slug": "/Diary/12/",
-    "title": "GoでWebアプリケーションを作りました",
-    "keywords": [
-      "Go",
-      "Echo",
-      "React"
-    ]
-  },
-  {
-    "slug": "/LearnSlowlyRust/01/",
-    "title": "#1 Rustの所有権が分からない",
-    "keywords": [
-      "Rust"
-    ]
-  },
-  {
-    "slug": "/Diary/11/",
-    "title": "Tennis Chart(仮)というサイトを作成しました",
-    "keywords": [
-      "日記",
-      "Next.js",
-      "Rust",
-      "Actix Web"
-    ]
-  },
-  {
-    "slug": "/Diary/10/",
+    "slug": "/Diary/07/",
     "title": "My Formsというサイトを作成しました",
     "keywords": [
       "日記",
@@ -101,7 +76,7 @@
     ]
   },
   {
-    "slug": "/Diary/09/",
+    "slug": "/Diary/06/",
     "title": "放送大学で勉強することにした",
     "keywords": null
   },
@@ -122,7 +97,7 @@
     ]
   },
   {
-    "slug": "/Diary/08/",
+    "slug": "/Diary/05/",
     "title": "自分は今年、一体何をしていたのか",
     "keywords": [
       "2022年",
@@ -203,65 +178,25 @@
     ]
   },
   {
-    "slug": "/Diary/07/",
+    "slug": "/Diary/04/",
     "title": "2022年度の目標",
     "keywords": [
       "2022年"
     ]
   },
   {
-    "slug": "/HelloWeb/11/",
-    "title": "#11 CSSの基本③（継承）",
-    "keywords": [
-      "CSS"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/10/",
-    "title": "#10 CSSの基本②（セレクターの基礎②）",
-    "keywords": [
-      "CSS",
-      "セレクター"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/09/",
-    "title": "#9 CSSの基本①（セレクターの基礎①）",
-    "keywords": [
-      "CSS",
-      "セレクター"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/08/",
-    "title": "#8 HTMLの基本⑤（img要素）",
-    "keywords": [
-      "HTML",
-      "img",
-      "画像"
-    ]
-  },
-  {
-    "slug": "/Diary/06/",
+    "slug": "/Diary/03/",
     "title": "油断していたらNetlifyから請求が来た",
     "keywords": [
       "Netlify"
     ]
   },
   {
-    "slug": "/Diary/05/",
+    "slug": "/Diary/02/",
     "title": "2021年は本の取り寄せをしてもらった",
     "keywords": [
       "書籍",
       "本"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/07/",
-    "title": "#7 HTMLの基本④（a要素）",
-    "keywords": [
-      "HTML",
-      "a要素"
     ]
   },
   {
@@ -272,19 +207,6 @@
       "Blog",
       "ブログ",
       "React Hooks"
-    ]
-  },
-  {
-    "slug": "/Others/01/",
-    "title": "プロキシ環境でKali Linuxを使う",
-    "keywords": [
-      "Kali Linux",
-      "WSL2",
-      "Proxy",
-      "プロキシー",
-      "apt",
-      "wget",
-      "curl"
     ]
   },
   {
@@ -325,29 +247,6 @@
     ]
   },
   {
-    "slug": "/Diary/03/",
-    "title": "中小企業診断士試験1次試験に合格した",
-    "keywords": [
-      "資格",
-      "中小企業診断士試験",
-      "日記",
-      "Diary",
-      "2021"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/06/",
-    "title": "#6 HTMLの基本③（h要素、p要素）",
-    "keywords": [
-      "HTML",
-      "CSS",
-      "body要素",
-      "h要素",
-      "p要素言",
-      "br要素"
-    ]
-  },
-  {
     "slug": "/GitAdvance/02/",
     "title": "#2 git logでコミット履歴を見る(前編)",
     "keywords": [
@@ -362,101 +261,6 @@
     "title": "#1 Git中級者を目指そう",
     "keywords": [
       "Git"
-    ]
-  },
-  {
-    "slug": "/jamstack/02/",
-    "title": "JamstackなWebサイトを構築してみた② Jamstackについて",
-    "keywords": [
-      "Jamstack",
-      "SSG",
-      "静的サイトジェネレーター",
-      "HeadlessCMS",
-      "CDN",
-      "ホスティングサービス"
-    ]
-  },
-  {
-    "slug": "/shindanshi/legal/chizai/",
-    "title": "【5科目目】経営法務 知的財産権",
-    "keywords": [
-      "中小企業診断士試験",
-      "経営法務"
-    ]
-  },
-  {
-    "slug": "/Diary/02/",
-    "title": "中小企業診断士試験を受けてきた",
-    "keywords": [
-      "資格",
-      "中小企業診断士試験",
-      "日記",
-      "Diary",
-      "2021"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/05/",
-    "title": "#5 HTMLの基本② (head要素)",
-    "keywords": [
-      "HTML",
-      "CSS",
-      "コメント",
-      "DOCTYPE宣言",
-      "head要素",
-      "meta要素",
-      "title要素"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/04/",
-    "title": "#4 HTMLの基本① (基本的な書き方)",
-    "keywords": [
-      "HTML",
-      "CSS",
-      "コメント"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/03/",
-    "title": "#3 CSSでスタイリングする",
-    "keywords": [
-      "HTML",
-      "CSS",
-      "セレクター",
-      "プロパティ"
-    ]
-  },
-  {
-    "slug": "/jamstack/01/",
-    "title": "JamstackなWebサイトを構築してみた①",
-    "keywords": [
-      "Jamstack",
-      "HeadlessCMS",
-      "SSG",
-      "静的サイトジェネレーター",
-      "Gatsby",
-      "microCMS",
-      "ホスティングサービス",
-      "Netlify"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/02/",
-    "title": "#2 HTMLでページを作ってみる",
-    "keywords": [
-      "HTML",
-      "CSS",
-      "タグ",
-      "要素"
-    ]
-  },
-  {
-    "slug": "/HelloWeb/01/",
-    "title": "#1 初めてのHTML & CSS",
-    "keywords": [
-      "HTML",
-      "CSS"
     ]
   },
   {
