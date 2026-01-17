@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2025-09-21"
+update: "2026-01-17"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -27,7 +27,7 @@ published: true
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索-5問](#深さ優先探索-5問)|
-|[幅優先探索-22問](#幅優先探索-22問)|
+|[幅優先探索-23問](#幅優先探索-23問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -1381,7 +1381,7 @@ fn run(n: usize, x: usize, y: usize, uv: Vec<(usize, usize)>) -> Vec<usize> {
 ```
 </details>
 
-## 幅優先探索-22問
+## 幅優先探索-23問
 
 [BFS (幅優先探索) 超入門！ 〜 キューを鮮やかに使いこなす 〜](https://qiita.com/drken/items/996d80bcae64649a6580)
 
@@ -1473,11 +1473,90 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<isize> {
 ```
 </details>
 
+### ABC399 C - Make it Forest
+
+[C - Make it Forest](https://atcoder.jp/contests/abc399/tasks/abc399_c)（<span style="color: gray">Difficulty : 321</span>）
+
+連結成分を数えれば解ける。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+use std::collections::{HashMap, VecDeque};
+
+fn run(n: usize, m: usize, vu: Option<Vec<(usize, usize)>>) -> usize {
+    if vu.is_none() {
+        return 0;
+    }
+
+    let mut map = HashMap::new();
+
+    for (v, u) in vu.unwrap() {
+        map.entry(v).or_insert_with(|| Vec::new()).push(u);
+        map.entry(u).or_insert_with(|| Vec::new()).push(v);
+    }
+
+    let mut visited = vec![false; n+1];
+    let mut count = 0;
+
+    for i in 1..=n {
+        if visited[i] {
+            continue;
+        }
+
+        count += 1;
+
+        let mut queue = VecDeque::new();
+        visited[i] = true;
+        queue.push_back(i);
+
+        while let Some(v) = queue.pop_front() {
+            let Some(next) = map.get(&v) else {
+                continue;
+            };
+
+            for n in next {
+                if visited[*n] {
+                    continue;
+                }
+
+                visited[*n] = true;
+                queue.push_back(*n);
+            }
+        }
+    }
+
+    m - (n - count)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    struct TestCase(usize, usize, Option<Vec<(usize, usize)>>, usize);
+
+    #[test]
+    fn abc399_c() {
+        let tests = [
+            TestCase(4, 4, Some(vec![(1, 2), (1, 3), (2, 4), (3, 4)]), 1),
+            TestCase(5, 0, None, 0),
+            TestCase(10, 10, Some(vec![ (7, 9), (4, 6), (6, 10), (2, 5), (5, 6), (5, 9), (6, 8), (4, 8), (1, 5), (1, 4)]), 2),
+        ];
+
+        for TestCase(n, m, vu, expected) in tests {
+            assert_eq!(run(n, m, vu), expected);
+        }
+    }
+}
+```
+</details>
+
 ### ABC325 C - Sensors
 
 [C - Sensors](https://atcoder.jp/contests/abc325/tasks/abc325_c)（<span style="color: brown">Difficulty : 400</span>）
 
-連結成分を数える。
+これも連結成分を数える。
 
 <details>
 <summary>コード例を見る</summary>
