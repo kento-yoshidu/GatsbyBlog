@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2025-08-16"
+update: "2026-03-29"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -14,12 +14,12 @@ published: true
 
 # 目次
 
-|アルゴリズム|
-|---|
-|[深さ優先探索]()|
-|[幅優先探索-7問](#幅優先探索-7問)|
-|[ダイクストラ法-6問](#ダイクストラ法-6問)|
-|[半分全列挙](#半分全列挙)|
+|アルゴリズム|データ構造|
+|---|---|
+|[深さ優先探索]()|[UnionFind](#UnionFind)|
+|[幅優先探索-7問](#幅優先探索-7問)||
+|[ダイクストラ法-6問](#ダイクストラ法-6問)||
+|[半分全列挙](#半分全列挙)||
 
 # アルゴリズム
 
@@ -1197,10 +1197,112 @@ fn run(_x: usize, _y: usize, _z: usize, k: usize, a: Vec<usize>, b: Vec<usize>, 
 ```
 </details>
 
+# データ構造
+
+## UnionFind
+
+<details>
+<summary>Union Find実装を見る</summary>
+
+どこかから拾ってきたものだと思うが覚えていない。
+
+```rust
+#[derive(Debug)]
+pub struct UnionFind {
+    parent: Vec<usize>,
+    size: Vec<usize>,
+}
+
+impl UnionFind {
+    pub fn new(n: usize) -> Self {
+        Self {
+            parent: (0..n).collect(),
+            size: vec![1; n],
+        }
+    }
+
+    pub fn find(&mut self, x: usize) -> usize {
+        if self.parent[x] != x {
+            let root = self.find(self.parent[x]);
+
+            self.parent[x] = root;
+        }
+
+        self.parent[x]
+    }
+
+    pub fn unite(&mut self, x: usize, y: usize) -> bool {
+        let mut x = self.find(x);
+        let mut y = self.find(y);
+
+        if x == y {
+            return false;
+        }
+
+        if self.size[x] < self.size[y] {
+            std::mem::swap(&mut x, &mut y);
+        }
+
+        self.parent[y] = x;
+        self.size[x] += self.size[y];
+
+        true
+    }
+
+    pub fn same(&mut self, x: usize, y: usize) -> bool {
+        self.find(x) == self.find(y)
+    }
+
+    pub fn size(&mut self, x: usize) -> usize {
+        let root = self.find(x);
+
+        self.size[root]
+    }
+}
+```
+</details>
+
+### ABC206 D - KAIBUNsyo
+
+[D - KAIBUNsyo](https://atcoder.jp/contests/abc206/tasks/abc206_d)（<span style="color: green">Difficulty : 879</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, a: Vec<usize>) -> usize {
+    let mut uf = UnionFind::new(200_001);
+
+    for i in 0..n/2 {
+        if a[i] != a[n - 1 - i] {
+            uf.unite(a[i], a[n - 1 - i]);
+        }
+    }
+
+
+    let mut map = HashMap::new();
+
+    for &v in &a {
+        let root = uf.find(v);
+        map.entry(root).or_insert(HashSet::new()).insert(v);
+    }
+
+    let mut ans = 0;
+
+    for (_, set) in map {
+        ans += set.len() - 1;
+    }
+
+    ans
+}
+```
+</details>
+
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年03月29日 : ABC206 <span style="color: green">D - KAIBUNsyo</span>を追加</li>
   <li>2025年08月16日 : ABC054 <span style="color: skyblue">C - One-stroke Path</span>を追加</li>
   <li>2025年06月08日 : ABC213 <span style="color: skyblue">E - Stronger Takahashi</span>を追加</li>
   <li>2025年06月07日 : ABC020 <span style="color: skyblue">🧪 C - 壁抜け</span>を追加</li>
