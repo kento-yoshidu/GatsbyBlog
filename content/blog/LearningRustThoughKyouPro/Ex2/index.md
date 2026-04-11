@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-03-29"
+update: "2026-04-11"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -16,7 +16,7 @@ published: true
 
 |アルゴリズム|データ構造|
 |---|---|
-|[深さ優先探索]()|[UnionFind](#UnionFind)|
+|[深さ優先探索]()|[UnionFind](#unionfind)|
 |[幅優先探索-7問](#幅優先探索-7問)||
 |[ダイクストラ法-6問](#ダイクストラ法-6問)||
 |[半分全列挙](#半分全列挙)||
@@ -1258,6 +1258,40 @@ impl UnionFind {
 
         self.size[root]
     }
+}
+```
+</details>
+
+### ATC001 B Union Find
+
+[B - Union Find](https://atcoder.jp/contests/atc001/tasks/unionfind_a)（<span style="color: gray">Difficulty : なし</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _q: usize, pab: Vec<(usize, usize, usize)>) -> Vec<&'static str> {
+    let mut uf = UnionFind::new(n + 1);
+
+    pab
+        .into_iter()
+        .filter_map(|(p, a, b)| {
+            match p {
+                0 => {
+                    uf.unite(a, b);
+                    None
+                },
+                1 => {
+                    if uf.same(a, b) {
+                        Some("Yes")
+                    } else {
+                        Some("No")
+                    }
+                },
+                _ => unreachable!(),
+            }
+        })
+        .collect()
 }
 ```
 </details>
