@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-04-11"
+update: "2026-04-12"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1258,6 +1258,13 @@ impl UnionFind {
 
         self.size[root]
     }
+
+    pub fn count_roots(&mut self, n: usize) -> usize {
+        (1..=n)
+            .map(|i| self.find(i))
+            .collect::<HashSet<_>>()
+            .len()
+    }
 }
 ```
 </details>
@@ -1292,6 +1299,29 @@ fn run(n: usize, _q: usize, pab: Vec<(usize, usize, usize)>) -> Vec<&'static str
             }
         })
         .collect()
+}
+```
+</details>
+
+### ABC177 D - Friends
+
+[D - Friends](https://atcoder.jp/contests/abc177/tasks/abc177_d)（<span style="color: brown">Difficulty : 732</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut uf = UnionFind::new(n + 1);
+
+    for (a, b) in ab {
+        uf.unite(a, b);
+    }
+
+    (1..=n)
+        .map(|n| uf.size(n))
+        .max()
+        .unwrap()
 }
 ```
 </details>
@@ -1332,10 +1362,33 @@ fn run(n: usize, a: Vec<usize>) -> usize {
 ```
 </details>
 
+### ARC032 B - 道路工事
+
+[B - 道路工事](https://atcoder.jp/contests/arc032/tasks/arc032_2)（<span style="color: green">Difficulty : 1106</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut uf = UnionFind::new(n + 1);
+
+    for (a, b) in ab {
+        uf.unite(a, b);
+    }
+
+    uf.count_roots(n) - 1
+}
+```
+</details>
+
+
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年04月12日 : ABC177 <span style="color: brown">D - Friends</span>を追加</li>
+  <li>2026年04月12日 : ARC032 <span style="color: green">B - 道路工事</span>を追加</li>
   <li>2026年03月29日 : ABC206 <span style="color: green">D - KAIBUNsyo</span>を追加</li>
   <li>2025年08月16日 : ABC054 <span style="color: skyblue">C - One-stroke Path</span>を追加</li>
   <li>2025年06月08日 : ABC213 <span style="color: skyblue">E - Stronger Takahashi</span>を追加</li>
