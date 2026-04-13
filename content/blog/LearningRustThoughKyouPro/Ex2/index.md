@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-04-12"
+update: "2026-04-13"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1362,6 +1362,38 @@ fn run(n: usize, a: Vec<usize>) -> usize {
 ```
 </details>
 
+### ABC075 C - Bridge
+
+[C - Bridge](https://atcoder.jp/contests/abc075/tasks/abc075_c)（<span style="color: green">Difficulty : 1067</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, m: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut ans = 0;
+
+    for i in 0..m {
+        let mut uf = UnionFind::new(n + 1);
+
+        for j in 0..m {
+            if i == j {
+                continue;
+            }
+
+            uf.unite(ab[j].0, ab[j].1);
+        }
+
+        if uf.count_roots(n) > 1 {
+            ans += 1;
+        }
+    }
+
+    ans
+}
+```
+</details>
+
 ### ARC032 B - 道路工事
 
 [B - 道路工事](https://atcoder.jp/contests/arc032/tasks/arc032_2)（<span style="color: green">Difficulty : 1106</span>）
@@ -1382,11 +1414,61 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> usize {
 ```
 </details>
 
+### ARC037 B - バウムテスト
+
+[B - バウムテスト](https://atcoder.jp/contests/arc037/tasks/arc037_b)（<span style="color: green">🧪 Difficulty : 1109</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, uv: Vec<(usize, usize)>) -> usize {
+    let mut uf = UnionFind::new(n + 1);
+
+    for &(u, v) in &uv {
+        uf.unite(u, v);
+    }
+
+    // 頂点数
+    let mut v_count = HashMap::new();
+
+    for i in 1..=n {
+        let root = uf.find(i);
+
+        *v_count.entry(root).or_insert(0) += 1;
+    }
+
+    // 辺数
+    let mut e_count = HashMap::new();
+
+    for &(u, _) in &uv {
+        let root = uf.find(u);
+
+        *e_count.entry(root).or_insert(0) += 1;
+    }
+
+    let mut ans = 0;
+
+    for (root, &v) in &v_count {
+        let e = e_count.get(root).unwrap_or(&0);
+
+        if *e == v - 1 {
+            ans += 1;
+        }
+    }
+
+    ans
+}
+```
+</details>
 
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年04月13日 : ARC037 <span style="color: green">🧪 B - バウムテスト</span>を追加</li>
+  <li>2026年04月13日 : ABC075 <span style="color: green">C - Bridge</span>を追加</li>
   <li>2026年04月12日 : ABC177 <span style="color: brown">D - Friends</span>を追加</li>
   <li>2026年04月12日 : ARC032 <span style="color: green">B - 道路工事</span>を追加</li>
   <li>2026年03月29日 : ABC206 <span style="color: green">D - KAIBUNsyo</span>を追加</li>
