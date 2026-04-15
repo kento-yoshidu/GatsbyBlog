@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-04-13"
+update: "2026-04-15"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1204,7 +1204,7 @@ fn run(_x: usize, _y: usize, _z: usize, k: usize, a: Vec<usize>, b: Vec<usize>, 
 <details>
 <summary>Union Find実装を見る</summary>
 
-どこかから拾ってきたものだと思うが覚えていない。
+どこかから拾ってきたものにいくつか生やしている。
 
 ```rust
 #[derive(Debug)]
@@ -1362,6 +1362,55 @@ fn run(n: usize, a: Vec<usize>) -> usize {
 ```
 </details>
 
+### ABC304 E - Good Graph
+
+[E - Good Graph](https://atcoder.jp/contests/abc304/tasks/abc304_e)（<span style="color: green">Difficulty : 971</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(
+    n: usize,
+    _m: usize,
+    uv: Vec<(usize, usize)>,
+    _k: usize,
+    xy: Vec<(usize, usize)>,
+    _q: usize,
+    pq: Vec<(usize, usize)>
+) -> Vec<&'static str> {
+    let mut uf = UnionFind::new(n + 1);
+
+    for (u, v) in uv {
+        uf.unite(u, v);
+    }
+
+    let mut ng_pair = HashSet::new();
+
+    for (x, y) in xy {
+        let x = uf.find(x);
+        let y = uf.find(y);
+
+        ng_pair.insert((min(x, y), max(x, y)));
+    }
+
+    pq
+        .into_iter()
+        .map(|(p, q)| {
+            let p = uf.find(p);
+            let q = uf.find(q);
+
+            if ng_pair.contains(&(min(p, q), max(p, q))) {
+                "No"
+            } else {
+                "Yes"
+            }
+        })
+        .collect()
+}
+```
+</details>
+
 ### ABC075 C - Bridge
 
 [C - Bridge](https://atcoder.jp/contests/abc075/tasks/abc075_c)（<span style="color: green">Difficulty : 1067</span>）
@@ -1467,6 +1516,7 @@ fn run(n: usize, _m: usize, uv: Vec<(usize, usize)>) -> usize {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年04月15日 : ABC304 <span style="color: green">E - Good Graph</span>を追加</li>
   <li>2026年04月13日 : ARC037 <span style="color: green">🧪 B - バウムテスト</span>を追加</li>
   <li>2026年04月13日 : ABC075 <span style="color: green">C - Bridge</span>を追加</li>
   <li>2026年04月12日 : ABC177 <span style="color: brown">D - Friends</span>を追加</li>
