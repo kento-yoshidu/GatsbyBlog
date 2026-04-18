@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2026-01-17"
+update: "2026-04-18"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -858,6 +858,51 @@ fn run(s: &str) -> String {
     }
 
     unreachable!();
+}
+```
+</details>
+
+### ABC473 C - Sneaking Glances
+
+[C - Sneaking Glances](https://atcoder.jp/contests/abc453/tasks/abc453_c)（<span style="color: gray">Difficulty : 338</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, l: Vec<isize>) -> usize {
+    let mut ans = 0;
+
+    for bit in 0..(1 << n) {
+        let mut pos = 0.5;
+        let mut count = 0;
+
+        for i in 0..n {
+            let new_pos;
+
+            if bit & (1 << i) != 0 {
+                // +の方向に移動
+                new_pos = pos + l[i] as f64;
+
+                if pos < 0.0 && 0.0 < new_pos {
+                    count += 1;
+                }
+            } else {
+                // -の方向に移動
+                new_pos = pos - l[i] as f64;
+
+                if pos > 0.0 && new_pos < 0.0 {
+                    count += 1;
+                }
+            }
+
+            pos = new_pos;
+        }
+
+        ans = ans.max(count);
+    }
+
+    ans
 }
 ```
 </details>
@@ -5187,6 +5232,7 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年04月18日 : ABC473 <span style="color: gray">C - Sneaking Glances</span>を追加</li>
   <li>2025年08月30日 : ABC292 <span style="color: brown">D - Unicyclic Components</span>を追加</li>
   <li>2025年08月14日 : ABC098 <span style="color: brown">C - Attention</span>を追加</li>
   <li>2025年08月09日 : ABC260 <span style="color: brown">C - Changing Jewels</span>を追加</li>

@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-04-15"
+update: "2026-04-18"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1411,6 +1411,71 @@ fn run(
 ```
 </details>
 
+### ABC372 E - K-th Largest Connected Components
+
+[E - K-th Largest Connected Components](https://atcoder.jp/contests/abc372/tasks/abc372_e)（<span style="color: green">Difficulty : 1042</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _q: usize, qux: Vec<(usize, usize, usize)>) -> Vec<isize> {
+    let mut ans = Vec::new();
+
+    let mut sets = vec![BTreeSet::new(); n+1];
+
+    for i in 1..=n {
+        sets[i].insert(i);
+    }
+
+    let mut uf = UnionFind::new(n + 1);
+
+    for (q, u, x) in qux {
+        match q {
+            1 => {
+                let mut ru = uf.find(u);
+                let mut rx = uf.find(x);
+
+                if ru == rx {
+                    continue;
+                }
+
+                if sets[ru].len() < sets[rx].len() {
+                    std::mem::swap(&mut ru, &mut rx);
+                }
+
+                uf.unite(ru, rx);
+
+                let small = sets[rx].clone();
+
+                for v in small {
+                    sets[ru].insert(v);
+                }
+            },
+            2 => {
+                let root = uf.find(u);
+
+                if sets[root].len() < x {
+                    ans.push(-1);
+                } else {
+                    let val = sets[root]
+                        .iter()
+                        .rev()
+                        .nth(x - 1)
+                        .unwrap();
+
+                    ans.push(*val as isize);
+                }
+            },
+            _ => unreachable!(),
+        }
+    }
+
+    ans
+}
+```
+</details>
+
 ### ABC075 C - Bridge
 
 [C - Bridge](https://atcoder.jp/contests/abc075/tasks/abc075_c)（<span style="color: green">Difficulty : 1067</span>）
@@ -1516,6 +1581,7 @@ fn run(n: usize, _m: usize, uv: Vec<(usize, usize)>) -> usize {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年04月18日 : ABC372 <span style="color: green">E - K-th Largest Connected Components</span>を追加</li>
   <li>2026年04月15日 : ABC304 <span style="color: green">E - Good Graph</span>を追加</li>
   <li>2026年04月13日 : ARC037 <span style="color: green">🧪 B - バウムテスト</span>を追加</li>
   <li>2026年04月13日 : ABC075 <span style="color: green">C - Bridge</span>を追加</li>
