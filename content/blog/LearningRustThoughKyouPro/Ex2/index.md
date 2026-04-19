@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-04-18"
+update: "2026-04-19"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -17,7 +17,7 @@ published: true
 |アルゴリズム|データ構造|
 |---|---|
 |[深さ優先探索]()|[UnionFind](#unionfind)|
-|[幅優先探索-7問](#幅優先探索-7問)||
+|[幅優先探索-7問](#幅優先探索-7問)|[重み付きUnionFind](#重み付きunionfind)|
 |[ダイクストラ法-6問](#ダイクストラ法-6問)||
 |[半分全列挙](#半分全列挙)||
 
@@ -1532,7 +1532,6 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> usize {
 
 [B - バウムテスト](https://atcoder.jp/contests/arc037/tasks/arc037_b)（<span style="color: green">🧪 Difficulty : 1109</span>）
 
-
 <details>
 <summary>コード例を見る</summary>
 
@@ -1577,10 +1576,126 @@ fn run(n: usize, _m: usize, uv: Vec<(usize, usize)>) -> usize {
 ```
 </details>
 
+## 重み付きUnionFind
+
+<details>
+<summary>Union Find実装を見る</summary>
+
+```rust
+#[derive(Debug)]
+pub struct WeightedUnionFind {
+    parent: Vec<usize>,
+    size: Vec<usize>,
+    // 親との差分
+    diff_weight: Vec<isize>,
+}
+
+impl WeightedUnionFind {
+    pub fn new(n: usize) -> Self {
+        Self {
+            parent: (0..n).collect(),
+            size: vec![1; n],
+            diff_weight: vec![0; n],
+        }
+    }
+
+    // rootを返す + 経路圧縮
+    pub fn find(&mut self, x: usize) -> usize {
+        if self.parent[x] != x {
+            let p = self.parent[x];
+            let root = self.find(p);
+
+            // 親の重みを足す
+            self.diff_weight[x] += self.diff_weight[p];
+
+            self.parent[x] = root;
+        }
+
+        self.parent[x]
+    }
+
+    // xのrootからの重み
+    pub fn weight(&mut self, x: usize) -> isize {
+        self.find(x);
+        self.diff_weight[x]
+    }
+
+    // weight[y] - weight[x]
+    pub fn diff(&mut self, x: usize, y: usize) -> isize {
+        self.weight(y) - self.weight(x)
+    }
+
+    // 「yはxよりwだけ重い」を追加
+    pub fn unite(&mut self, x: usize, y: usize, w: isize) -> bool {
+        let mut w = w + self.weight(x) - self.weight(y);
+
+        let mut x = self.find(x);
+        let mut y = self.find(y);
+
+        if x == y {
+            return false;
+        }
+
+        if self.size[x] < self.size[y] {
+            std::mem::swap(&mut x, &mut y);
+            w = -w;
+        }
+
+        self.parent[y] = x;
+        self.diff_weight[y] = w;
+        self.size[x] += self.size[y];
+
+        true
+    }
+
+    pub fn same(&mut self, x: usize, y: usize) -> bool {
+        self.find(x) == self.find(y)
+    }
+
+    pub fn is_valid(&mut self, x: usize, y: usize, w: isize) -> bool {
+        if self.same(x, y) {
+            self.diff(x, y) == w
+        } else {
+            true
+        }
+    }
+}
+```
+</details>
+
+### ABC087 D - People on a Line
+
+[D - People on a Line](https://atcoder.jp/contests/abc087/tasks/arc090_b)（<span style="color: skyblue">Difficulty : 1452</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, lrd: Option<Vec<(usize, usize, isize)>>) -> &'static str {
+    if lrd.is_none() {
+        return "Yes";
+    }
+
+    let mut wuf = WeightedUnionFind::new(n + 1);
+
+    for (l, r, d) in lrd.unwrap() {
+        if !wuf.is_valid(l, r, d) {
+            return "No";
+        }
+
+        wuf.unite(l, r, d);
+    }
+
+    "Yes"
+}
+```
+</details>
+
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年04月19日 : ABC087 <span style="color: skyblue">D - People on a Line</span>を追加</li>
   <li>2026年04月18日 : ABC372 <span style="color: green">E - K-th Largest Connected Components</span>を追加</li>
   <li>2026年04月15日 : ABC304 <span style="color: green">E - Good Graph</span>を追加</li>
   <li>2026年04月13日 : ARC037 <span style="color: green">🧪 B - バウムテスト</span>を追加</li>
