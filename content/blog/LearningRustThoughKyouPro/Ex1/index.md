@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2026-04-18"
+update: "2026-04-19"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -27,7 +27,7 @@ published: true
 |[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索-5問](#深さ優先探索-5問)|
-|[幅優先探索-23問](#幅優先探索-23問)|
+|[幅優先探索-24問](#幅優先探索-24問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
@@ -1426,7 +1426,7 @@ fn run(n: usize, x: usize, y: usize, uv: Vec<(usize, usize)>) -> Vec<usize> {
 ```
 </details>
 
-## 幅優先探索-23問
+## 幅優先探索-24問
 
 [BFS (幅優先探索) 超入門！ 〜 キューを鮮やかに使いこなす 〜](https://qiita.com/drken/items/996d80bcae64649a6580)
 
@@ -1514,6 +1514,50 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<isize> {
     }
 
     graph
+}
+```
+</details>
+
+### ABC454 C - Straw Millionaire
+
+[C - Straw Millionaire](https://atcoder.jp/contests/abc454/tasks/abc454_c)（<span style="color: gray">Difficulty : 274</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut map = HashMap::new();
+
+    for (a, b) in ab {
+        map.entry(a).or_insert_with(Vec::new).push(b);
+    }
+
+    let mut dequeue = VecDeque::new();
+    dequeue.push_front(1);
+
+    let mut visited = vec![false; n + 1];
+
+    while let Some(cur) = dequeue.pop_front() {
+        if visited[cur] {
+            continue;
+        }
+
+        visited[cur] = true;
+
+        let Some(next) = map.get(&cur) else {
+            continue;
+        };
+
+        for n in next {
+            dequeue.push_front(*n);
+        }
+    }
+
+    visited
+        .into_iter()
+        .filter(|b| *b)
+        .count()
 }
 ```
 </details>
@@ -5232,6 +5276,7 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年04月19日 : ABC474 <span style="color: gray">C - Straw Millionaire</span>を追加</li>
   <li>2026年04月18日 : ABC473 <span style="color: gray">C - Sneaking Glances</span>を追加</li>
   <li>2025年08月30日 : ABC292 <span style="color: brown">D - Unicyclic Components</span>を追加</li>
   <li>2025年08月14日 : ABC098 <span style="color: brown">C - Attention</span>を追加</li>
