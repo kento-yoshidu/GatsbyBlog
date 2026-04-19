@@ -1579,7 +1579,7 @@ fn run(n: usize, _m: usize, uv: Vec<(usize, usize)>) -> usize {
 ## 重み付きUnionFind
 
 <details>
-<summary>Union Find実装を見る</summary>
+<summary>重み付きUnion Find実装を見る</summary>
 
 ```rust
 #[derive(Debug)]
@@ -1691,10 +1691,38 @@ fn run(n: usize, _m: usize, lrd: Option<Vec<(usize, usize, isize)>>) -> &'static
 ```
 </details>
 
+### ABC328 F - Good Set Query
+
+[F - Good Set Query](https://atcoder.jp/contests/abc328/tasks/abc328_f)（<span style="color: skyblue">Difficulty : 1477</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _q: usize, abd: Vec<(usize, usize, isize)>) -> Vec<usize> {
+    let mut wuf = WeightedUnionFind::new(n + 1);
+
+    abd.into_iter()
+        .enumerate()
+        .filter_map(|(i, (a, b, d))| {
+            if !wuf.is_valid(a, b, d) {
+                None
+            } else {
+                wuf.unite(a, b, d);
+                Some(i + 1)
+            }
+        })
+        .collect()
+}
+```
+</details>
+
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年04月19日 : ABC328 <span style="color: skyblue">F - Good Set Query</span>を追加</li>
   <li>2026年04月19日 : ABC087 <span style="color: skyblue">D - People on a Line</span>を追加</li>
   <li>2026年04月18日 : ABC372 <span style="color: green">E - K-th Largest Connected Components</span>を追加</li>
   <li>2026年04月15日 : ABC304 <span style="color: green">E - Good Graph</span>を追加</li>
