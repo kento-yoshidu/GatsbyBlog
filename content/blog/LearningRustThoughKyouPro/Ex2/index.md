@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-04-19"
+update: "2026-04-21"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1299,6 +1299,26 @@ fn run(n: usize, _q: usize, pab: Vec<(usize, usize, usize)>) -> Vec<&'static str
             }
         })
         .collect()
+}
+```
+</details>
+
+### ABC288 C - Don’t be cycle
+
+[C - Don’t be cycle](https://atcoder.jp/contests/abc288/tasks/abc288_c)（<span style="color: brown">Difficulty : 400</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut uf = UnionFind::new(n + 1);
+
+    ab.into_iter()
+        .filter(|(a, b)| {
+            !uf.unite(*a, *b)
+        })
+        .count()
 }
 ```
 </details>
