@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-04-21"
+update: "2026-04-23"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1319,6 +1319,68 @@ fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> usize {
             !uf.unite(*a, *b)
         })
         .count()
+}
+```
+</details>
+
+### ABC285 D - Change Usernames
+
+[D - Change Usernames](https://atcoder.jp/contests/abc285/tasks/abc285_d)（<span style="color: brown">Difficulty : 663</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(_n: usize, st: Vec<(&str, &str)>) -> &'static str {
+    let mut id_map = HashMap::new();
+    let mut id = 0;
+
+    for (s, t) in st.iter() {
+        for x in [s, t] {
+            if !id_map.contains_key(x) {
+                id_map.insert(*x, id);
+                id += 1;
+            }
+        }
+    }
+
+    let mut uf = UnionFind::new(id);
+
+    for (s, t) in st {
+        let s = id_map[&s];
+        let t = id_map[&t];
+
+        if !uf.unite(s, t) {
+            return "No";
+        }
+    }
+
+    "Yes"
+}
+```
+</details>
+
+### ABC333 D - Erase Leaves
+
+[D - Erase Leaves](https://atcoder.jp/contests/abc333/tasks/abc333_d)（<span style="color: brown">Difficulty : 704</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, uv: Vec<(usize, usize)>) -> usize {
+    let mut uf = UnionFind::new(n + 1);
+    let mut max_size = 0;
+
+    for (u, v) in uv {
+        if u != 1 {
+            uf.unite(u, v);
+        }
+
+        max_size = max_size.max(uf.size(u));
+    }
+
+    n - max_size
 }
 ```
 </details>
