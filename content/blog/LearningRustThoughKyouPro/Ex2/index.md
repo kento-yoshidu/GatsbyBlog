@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-04-23"
+update: "2026-04-29"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1385,6 +1385,36 @@ fn run(n: usize, uv: Vec<(usize, usize)>) -> usize {
 ```
 </details>
 
+### ABC231 D - Neighbors
+
+[D - Neighbors](https://atcoder.jp/contests/abc231/tasks/abc231_d)（<span style="color: brown">Difficulty : 726</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> &'static str {
+    let mut count = vec![0; n + 1];
+    let mut uf = UnionFind::new(n + 1);
+
+    for (a, b) in ab {
+        count[a] += 1;
+        count[b] += 1;
+
+        if count[a] > 2 || count[b] > 2 {
+            return "No";
+        }
+
+        if !uf.unite(a, b) {
+            return "No";
+        }
+    }
+
+    "Yes"
+}
+```
+</details>
+
 ### ABC177 D - Friends
 
 [D - Friends](https://atcoder.jp/contests/abc177/tasks/abc177_d)（<span style="color: brown">Difficulty : 732</span>）
@@ -1489,6 +1519,48 @@ fn run(
             }
         })
         .collect()
+}
+```
+</details>
+
+### ABC229 E - Graph Destruction
+
+[E - Graph Destruction](https://atcoder.jp/contests/abc229/tasks/abc229_e)（<span style="color: green">Difficulty : 1015</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
+    let mut graph = vec![vec![]; n + 1];
+
+    for (a, b) in ab.iter() {
+        graph[*a].push(b);
+        graph[*b].push(a);
+    }
+
+    let mut ans = vec![0; n + 2];
+
+    let mut uf = UnionFind::new(n + 1);
+    let mut used = vec![false ; n + 1];
+    let mut count = 0;
+
+    for i in (1..=n).rev() {
+        count += 1;
+        used[i] = true;
+
+        for &to in &graph[i] {
+            if used[*to] {
+                if uf.unite(i, *to) {
+                    count -= 1;
+                }
+            }
+        }
+
+        ans[i] = count;
+    }
+
+    (1..=n).map(|i| ans[i+1]).collect()
 }
 ```
 </details>
@@ -1658,6 +1730,50 @@ fn run(n: usize, _m: usize, uv: Vec<(usize, usize)>) -> usize {
 ```
 </details>
 
+### ABC040 D - 道路の老朽化対策について
+
+[D - 道路の老朽化対策について](https://atcoder.jp/contests/abc040/tasks/abc040_d)（<span style="color: rgb(136, 136, 255)">🧪 Difficulty : 1656</span>）
+
+クエリ条件`w`で降順に並べ、条件を満たす辺（`y` > `w`）を追加していく形に変換する。その状態をUnion-Findで管理し、各`v`の連結成分サイズが答え。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, aby: Vec<(usize, usize, usize)>, q: usize, vw: Vec<(usize, usize)>) -> Vec<usize> {
+    let mut wvi = BinaryHeap::new();
+
+    for (i, (v, w)) in vw.into_iter().enumerate() {
+        wvi.push((w, v, i));
+    }
+
+    let mut yab = BinaryHeap::new();
+
+    for (a, b, y) in aby {
+        yab.push((y, a, b));
+    }
+
+    let mut uf = UnionFind::new(n + 1);
+    let mut ans = vec![0; q];
+
+    while let Some((w, v, i)) = wvi.pop() {
+        while let Some(&(y, _, _)) = yab.peek() {
+            if y > w {
+                let (_, a, b) = yab.pop().unwrap();
+                uf.unite(a, b);
+            } else {
+                break;
+            }
+        }
+
+        ans[i] = uf.size(v);
+    }
+
+    ans
+}
+```
+</details>
+
 ## 重み付きUnionFind
 
 <details>
@@ -1804,6 +1920,9 @@ fn run(n: usize, _q: usize, abd: Vec<(usize, usize, isize)>) -> Vec<usize> {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年04月29日 : ABC040 <span style="color: rgb(137, 137, 255)">🧪 D - 道路の老朽化対策について</span>を追加</li>
+  <li>2026年04月26日 : ABC229 <span style="color: green">E - Graph Destruction</span>を追加</li>
+  <li>2026年04月24日 : ABC231 <span style="color: brown">D - Neighbors</span>を追加</li>
   <li>2026年04月19日 : ABC328 <span style="color: skyblue">F - Good Set Query</span>を追加</li>
   <li>2026年04月19日 : ABC087 <span style="color: skyblue">D - People on a Line</span>を追加</li>
   <li>2026年04月18日 : ABC372 <span style="color: green">E - K-th Largest Connected Components</span>を追加</li>
