@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-04-29"
+update: "2026-05-02"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1730,6 +1730,76 @@ fn run(n: usize, _m: usize, uv: Vec<(usize, usize)>) -> usize {
 ```
 </details>
 
+### ABC157 D - Friend Suggestions
+
+[D - Friend Suggestions](https://atcoder.jp/contests/abc157/tasks/abc157_d)（<span style="color: skyblue">Difficulty : 1208</span>）
+
+abを回してUnion Find木を構築しながら、隣接する友達をNGリストに入れていく。次にcdを回して同じグループに属する場合は同様にNGに入れる。
+
+自身が属するグループの人数 - 1(自分自身) - ngリストの人数 が答え。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, _k: usize, ab: Vec<(usize, usize)>, cd: Vec<(usize, usize)>) -> Vec<usize> {
+    let mut uf = UnionFind::new(n + 1);
+
+    let mut ng = vec![HashSet::new(); n + 1];
+
+    for (a, b) in ab {
+        ng[a].insert(b);
+        ng[b].insert(a);
+
+        uf.unite(a, b);
+    }
+
+    for (c, d) in cd {
+        if uf.same(c, d) {
+            ng[c].insert(d);
+            ng[d].insert(c);
+        }
+    }
+
+    (1..=n)
+        .map(|i| {
+            let s = uf.size(i);
+            s - 1 - ng[i].len()
+        })
+        .collect()
+}
+```
+</details>
+
+### ABC120 D - Decayed Bridges
+
+[D - Decayed Bridges](https://atcoder.jp/contests/abc120/tasks/abc120_d)（<span style="color: skyblue">Difficulty : 1355</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
+    let mut uf = UnionFind::new(n + 1);
+    let mut cur = n * (n - 1) / 2;
+
+    let mut ans = Vec::new();
+
+    for (a, b) in ab.into_iter().rev() {
+        ans.push(cur);
+
+        if !uf.same(a, b) {
+            cur -= uf.size(a) * uf.size(b);
+
+            uf.unite(a, b);
+        }
+    }
+
+    ans.into_iter().rev().collect()
+}
+```
+</details>
+
 ### ABC040 D - 道路の老朽化対策について
 
 [D - 道路の老朽化対策について](https://atcoder.jp/contests/abc040/tasks/abc040_d)（<span style="color: rgb(136, 136, 255)">🧪 Difficulty : 1656</span>）
@@ -1920,6 +1990,8 @@ fn run(n: usize, _q: usize, abd: Vec<(usize, usize, isize)>) -> Vec<usize> {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年05月02日 : ABC157 <span style="color: skyblue">D - Friend Suggestions</span>を追加</li>
+  <li>2026年05月01日 : ABC120 <span style="color: skyblue">D - Decayed Bridges</span>を追加</li>
   <li>2026年04月29日 : ABC040 <span style="color: rgb(137, 137, 255)">🧪 D - 道路の老朽化対策について</span>を追加</li>
   <li>2026年04月26日 : ABC229 <span style="color: green">E - Graph Destruction</span>を追加</li>
   <li>2026年04月24日 : ABC231 <span style="color: brown">D - Neighbors</span>を追加</li>
