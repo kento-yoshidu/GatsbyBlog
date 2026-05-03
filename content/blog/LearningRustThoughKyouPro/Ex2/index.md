@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-05-02"
+update: "2026-05-03"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -18,7 +18,7 @@ published: true
 |---|---|
 |[深さ優先探索]()|[UnionFind](#unionfind)|
 |[幅優先探索-7問](#幅優先探索-7問)|[重み付きUnionFind](#重み付きunionfind)|
-|[ダイクストラ法-6問](#ダイクストラ法-6問)||
+|[ダイクストラ法-6問](#ダイクストラ法-6問)|[UnionFind-クラスカル法](#unionfind-クラスカル法)|
 |[半分全列挙](#半分全列挙)||
 
 # アルゴリズム
@@ -1771,6 +1771,117 @@ fn run(n: usize, _m: usize, _k: usize, ab: Vec<(usize, usize)>, cd: Vec<(usize, 
 ```
 </details>
 
+### ABC264 E - Blackout 2
+
+[E - Blackout 2](https://atcoder.jp/contests/abc264/tasks/abc264_e)（<span style="color: skyblue">Difficulty : 1229</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+#[derive(Debug)]
+pub struct UnionFind {
+    parent: Vec<usize>,
+    size: Vec<usize>,
+    has_power: Vec<bool>,
+    city_count: Vec<usize>,
+}
+
+impl UnionFind {
+    fn new(n: usize, city_n: usize) -> Self {
+        let mut has_power = vec![false; n + 1];
+        let mut city_count = vec![0; n + 1];
+
+        for i in 1..=n {
+            if i <= city_n {
+                city_count[i] = 1;
+            } else {
+                has_power[i] = true;
+            }
+        }
+
+        Self {
+            parent: (0..=n).collect(),
+            size: vec![1; n + 1],
+            has_power,
+            city_count,
+        }
+    }
+
+    fn find(&mut self, x: usize) -> usize {
+        if self.parent[x] != x {
+            let root = self.find(self.parent[x]);
+
+            self.parent[x] = root;
+        }
+
+        self.parent[x]
+    }
+
+    fn unite(&mut self, x: usize, y: usize) -> usize {
+        let mut x = self.find(x);
+        let mut y = self.find(y);
+
+        if x == y {
+            return 0;
+        }
+
+        if self.size[x] < self.size[y] {
+            std::mem::swap(&mut x, &mut y);
+        }
+
+        let add: usize = if self.has_power[x] && !self.has_power[y] {
+            self.city_count[y]
+        } else if !self.has_power[x] && self.has_power[y] {
+            self.city_count[x]
+        } else {
+            0
+        };
+
+        self.parent[y] = x;
+        self.size[x] += self.size[y];
+
+        self.has_power[x] |= self.has_power[y];
+        self.city_count[x] += self.city_count[y];
+
+        add
+    }
+}
+
+fn run(n: usize, m: usize, e: usize, uv: Vec<(usize, usize)>, q: usize, x: Vec<usize>) -> Vec<usize> {
+    let mut removed = vec![false; e + 1];
+
+    for i in x.iter() {
+        removed[*i] = true;
+    }
+
+    let mut uf = UnionFind::new(n + m, n);
+
+    let mut powered = 0;
+
+    for i in 1..=e {
+        if !removed[i] {
+            let (u, v) = uv[i - 1];
+            powered += uf.unite(u, v);
+        }
+    }
+
+    let mut ans = vec![0; q];
+
+    for i in (0..q).rev() {
+        ans[i] = powered;
+
+        let idx = x[i];
+        let (u, v) = uv[idx - 1];
+
+        powered += uf.unite(u, v);
+    }
+
+    ans
+}
+```
+</details>
+
 ### ABC120 D - Decayed Bridges
 
 [D - Decayed Bridges](https://atcoder.jp/contests/abc120/tasks/abc120_d)（<span style="color: skyblue">Difficulty : 1355</span>）
@@ -1843,6 +1954,18 @@ fn run(n: usize, _m: usize, aby: Vec<(usize, usize, usize)>, q: usize, vw: Vec<(
 }
 ```
 </details>
+
+## UnionFind-クラスカル法
+
+### 競技プログラミングの鉄則 A67 - MST (Minimum Spanning Tree)
+
+<details>
+<summary>重み付きUnion Find実装を見る</summary>
+
+```rust
+```
+</details>
+
 
 ## 重み付きUnionFind
 
@@ -1990,6 +2113,7 @@ fn run(n: usize, _q: usize, abd: Vec<(usize, usize, isize)>) -> Vec<usize> {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年05月03日 : ABC264 <span style="color: skyblue">E - Blackout 2</span>を追加</li>
   <li>2026年05月02日 : ABC157 <span style="color: skyblue">D - Friend Suggestions</span>を追加</li>
   <li>2026年05月01日 : ABC120 <span style="color: skyblue">D - Decayed Bridges</span>を追加</li>
   <li>2026年04月29日 : ABC040 <span style="color: rgb(137, 137, 255)">🧪 D - 道路の老朽化対策について</span>を追加</li>
