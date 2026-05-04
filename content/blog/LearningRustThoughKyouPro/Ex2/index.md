@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-05-03"
+update: "2026-05-04"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -17,9 +17,9 @@ published: true
 |アルゴリズム|データ構造|
 |---|---|
 |[深さ優先探索]()|[UnionFind](#unionfind)|
-|[幅優先探索-7問](#幅優先探索-7問)|[重み付きUnionFind](#重み付きunionfind)|
+|[幅優先探索-7問](#幅優先探索-7問)|[UnionFind-逆順処理](#unionfind-逆順処理)|
 |[ダイクストラ法-6問](#ダイクストラ法-6問)|[UnionFind-クラスカル法](#unionfind-クラスカル法)|
-|[半分全列挙](#半分全列挙)||
+|[半分全列挙](#半分全列挙)|[重み付きUnionFind](#重み付きunionfind)|
 
 # アルゴリズム
 
@@ -1523,48 +1523,6 @@ fn run(
 ```
 </details>
 
-### ABC229 E - Graph Destruction
-
-[E - Graph Destruction](https://atcoder.jp/contests/abc229/tasks/abc229_e)（<span style="color: green">Difficulty : 1015</span>）
-
-<details>
-<summary>コード例を見る</summary>
-
-```rust
-fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
-    let mut graph = vec![vec![]; n + 1];
-
-    for (a, b) in ab.iter() {
-        graph[*a].push(b);
-        graph[*b].push(a);
-    }
-
-    let mut ans = vec![0; n + 2];
-
-    let mut uf = UnionFind::new(n + 1);
-    let mut used = vec![false ; n + 1];
-    let mut count = 0;
-
-    for i in (1..=n).rev() {
-        count += 1;
-        used[i] = true;
-
-        for &to in &graph[i] {
-            if used[*to] {
-                if uf.unite(i, *to) {
-                    count -= 1;
-                }
-            }
-        }
-
-        ans[i] = count;
-    }
-
-    (1..=n).map(|i| ans[i+1]).collect()
-}
-```
-</details>
-
 ### ABC372 E - K-th Largest Connected Components
 
 [E - K-th Largest Connected Components](https://atcoder.jp/contests/abc372/tasks/abc372_e)（<span style="color: green">Difficulty : 1042</span>）
@@ -1771,6 +1729,52 @@ fn run(n: usize, _m: usize, _k: usize, ab: Vec<(usize, usize)>, cd: Vec<(usize, 
 ```
 </details>
 
+## UnionFind-逆順処理
+
+Union-Findは要素・辺の削除をサポートしない。削除クエリを含む問題は**クエリを逆順に処理し、削除を追加に変換する**ことで解ける。全クエリを先読みするオフライン処理が前提になる。
+
+### ABC229 E - Graph Destruction
+
+[E - Graph Destruction](https://atcoder.jp/contests/abc229/tasks/abc229_e)（<span style="color: green">Difficulty : 1015</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, ab: Vec<(usize, usize)>) -> Vec<usize> {
+    let mut graph = vec![vec![]; n + 1];
+
+    for (a, b) in ab.iter() {
+        graph[*a].push(b);
+        graph[*b].push(a);
+    }
+
+    let mut ans = vec![0; n + 2];
+
+    let mut uf = UnionFind::new(n + 1);
+    let mut used = vec![false ; n + 1];
+    let mut count = 0;
+
+    for i in (1..=n).rev() {
+        count += 1;
+        used[i] = true;
+
+        for &to in &graph[i] {
+            if used[*to] {
+                if uf.unite(i, *to) {
+                    count -= 1;
+                }
+            }
+        }
+
+        ans[i] = count;
+    }
+
+    (1..=n).map(|i| ans[i+1]).collect()
+}
+```
+</details>
+
 ### ABC264 E - Blackout 2
 
 [E - Blackout 2](https://atcoder.jp/contests/abc264/tasks/abc264_e)（<span style="color: skyblue">Difficulty : 1229</span>）
@@ -1955,6 +1959,48 @@ fn run(n: usize, _m: usize, aby: Vec<(usize, usize, usize)>, q: usize, vw: Vec<(
 ```
 </details>
 
+### ARC056 B - 駐車場
+
+[B - 駐車場](https://atcoder.jp/contests/arc056/tasks/arc056_b)（<span style="color: rgb(136, 136, 255)">🧪 Difficulty : 1726</span>）
+
+<details>
+<summary>重み付きUnion Find実装を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, s: usize, uv: Vec<(usize, usize)>) -> Vec<usize> {
+    let mut map = HashMap::new();
+
+    for (u, v) in uv {
+        map.entry(u).or_insert_with(|| Vec::new()).push(v);
+        map.entry(v).or_insert_with(|| Vec::new()).push(u);
+    }
+
+    let mut used = vec![false; n + 1];
+
+    let mut uf = UnionFind::new(n + 1);
+    let mut ans = Vec::new();
+
+    for i in (1..=n).rev() {
+        used[i] = true;
+
+        if let Some(next) = map.get(&i) {
+            for n in next {
+                if used[*n] {
+                    uf.unite(i, *n);
+                }
+            }
+
+            if uf.same(i, s) {
+                ans.push(i);
+            }
+        }
+    }
+
+    ans.into_iter().rev().collect()
+}
+```
+</details>
+
 ## UnionFind-クラスカル法
 
 ### 競技プログラミングの鉄則 A67 - MST (Minimum Spanning Tree)
@@ -2113,6 +2159,7 @@ fn run(n: usize, _q: usize, abd: Vec<(usize, usize, isize)>) -> Vec<usize> {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年05月04日 : ARC056 <span style="color: rgb(137, 137, 255)">🧪 B - 駐車場</span>を追加</li>
   <li>2026年05月03日 : ABC264 <span style="color: skyblue">E - Blackout 2</span>を追加</li>
   <li>2026年05月02日 : ABC157 <span style="color: skyblue">D - Friend Suggestions</span>を追加</li>
   <li>2026年05月01日 : ABC120 <span style="color: skyblue">D - Decayed Bridges</span>を追加</li>
