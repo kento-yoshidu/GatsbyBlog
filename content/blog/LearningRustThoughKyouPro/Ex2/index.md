@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-05-04"
+update: "2026-05-05"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -1964,7 +1964,7 @@ fn run(n: usize, _m: usize, aby: Vec<(usize, usize, usize)>, q: usize, vw: Vec<(
 [B - 駐車場](https://atcoder.jp/contests/arc056/tasks/arc056_b)（<span style="color: rgb(136, 136, 255)">🧪 Difficulty : 1726</span>）
 
 <details>
-<summary>重み付きUnion Find実装を見る</summary>
+<summary>コード例を見る</summary>
 
 ```rust
 fn run(n: usize, _m: usize, s: usize, uv: Vec<(usize, usize)>) -> Vec<usize> {
@@ -2006,12 +2006,80 @@ fn run(n: usize, _m: usize, s: usize, uv: Vec<(usize, usize)>) -> Vec<usize> {
 ### 競技プログラミングの鉄則 A67 - MST (Minimum Spanning Tree)
 
 <details>
-<summary>重み付きUnion Find実装を見る</summary>
+<summary>コード例を見る</summary>
 
 ```rust
+fn run(n: usize, _m: usize, abc: Vec<(usize, usize, usize)>) -> usize {
+    let abc: Vec<(usize, usize, usize)> = abc.into_iter().sorted_by(|a, b| a.2.cmp(&b.2)).collect();
+
+    let mut uf = UnionFind::new(n + 1);
+
+    abc.into_iter()
+        .filter_map(|(a, b, c)| {
+            if uf.unite(a, b) {
+                Some(c)
+            } else {
+                None
+            }
+        })
+        .sum()
+}
 ```
 </details>
 
+### ABC065 D - Built?
+
+[D - Built?](https://atcoder.jp/contests/abc065/tasks/arc076_b)（<span style="color: rgb(136, 136, 255)">Difficulty : 1615</span>）
+
+2点間のコストが`min(|xi - xj|, |yi - yj|)`で定義されるMST問題。
+
+`x`でソートした3点A, B, C（`xA ≤ xB ≤ xC`）を考えると、`cost(A, C) = xC - xA = (xB - xA) + (xC - xB) = cost(A, B) + cost(B, C)`となる。つまりA-C間の直接の辺を使うより隣接辺を組み合わせた方が絶対に有利なので、**隣接する点への辺だけ考えれば十分**。`y`軸についても同様。
+
+1. `x`, `y`それぞれでソートする
+2. `x`, `y`ごとに隣接する点への辺のみを`edges`に追加する
+3. `edges`をコストの昇順にソートする
+4. `edges`を小さい順に見て、Union-Findで同じ連結成分でなければ辺を採用してコストを加算する（クラスカル法）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, xy: Vec<(usize, usize)>) -> usize {
+    let mut xi: Vec<(usize, usize)> = xy.iter().enumerate().map(|(i, &(x, _))| (x, i)).collect();
+    let mut yi: Vec<(usize, usize)> = xy.iter().enumerate().map(|(i, &(_, y))| (y, i)).collect();
+
+    xi.sort();
+    yi.sort();
+
+    let mut edges = Vec::new();
+
+    for i in 0..n - 1 {
+        let (x1, i1) = xi[i];
+        let (x2, i2) = xi[i + 1];
+        edges.push((x2 - x1, i1, i2));
+    }
+
+    for i in 0..n - 1 {
+        let (y1, i1) = yi[i];
+        let (y2, i2) = yi[i + 1];
+        edges.push((y2 - y1, i1, i2));
+    }
+
+    edges.sort_by(|a, b| a.0.cmp(&b.0));
+
+    let mut uf = UnionFind::new(n + 1);
+    let mut ans = 0;
+
+    for (c, u, v) in edges {
+        if uf.unite(u, v) {
+            ans += c;
+        }
+    }
+
+    ans
+}
+```
+</details>
 
 ## 重み付きUnionFind
 
@@ -2159,6 +2227,7 @@ fn run(n: usize, _q: usize, abd: Vec<(usize, usize, isize)>) -> Vec<usize> {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年05月05日 : ABC065 <span style="color: rgb(137, 137, 255)">D - Built?</span>を追加</li>
   <li>2026年05月04日 : ARC056 <span style="color: rgb(137, 137, 255)">🧪 B - 駐車場</span>を追加</li>
   <li>2026年05月03日 : ABC264 <span style="color: skyblue">E - Blackout 2</span>を追加</li>
   <li>2026年05月02日 : ABC157 <span style="color: skyblue">D - Friend Suggestions</span>を追加</li>
