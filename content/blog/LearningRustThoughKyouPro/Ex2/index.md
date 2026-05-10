@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-05-05"
+update: "2026-05-06"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -2027,6 +2027,72 @@ fn run(n: usize, _m: usize, abc: Vec<(usize, usize, usize)>) -> usize {
 ```
 </details>
 
+### 典型90問 F - 最小全域木問題
+
+[F - 最小全域木問題](https://atcoder.jp/contests/typical-algorithm/tasks/typical_algorithm_f)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, uvc: Vec<(usize, usize, usize)>) -> usize {
+    let mut uvc = uvc.clone();
+
+    uvc.sort_by(|a, b| a.2.cmp(&b.2));
+
+    let mut uf = UnionFind::new(n + 1);
+
+    uvc.into_iter()
+        .filter_map(|(u, v, c)| {
+            if uf.unite(u, v) {
+                Some(c)
+            } else {
+                None
+            }
+        })
+        .sum()
+}
+```
+</details>
+
+### ABC218 E - Destruction
+
+[E - Destruction](https://atcoder.jp/contests/abc218/tasks/abc218_e)（<span style="color: green">Difficulty : 1004</span>）
+
+罰金を払う辺は取り除く必要がないので先に`unite`だけしておく。後はコスト順にソートしてクラスカル法を適用するだけ。
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, abc: Vec<(usize, usize, isize)>) -> isize {
+    // cが0未満とそうでないものに分割する
+    let (neg, mut non_neg): (Vec<_>, Vec<_>) =
+        abc.into_iter()
+            .partition(|&(_, _, c)| c < 0);
+
+    let mut uf = UnionFind::new(n + 1);
+
+    // cが0未満(取り除くと罰金を払う)辺
+    for (a, b, _) in neg {
+        uf.unite(a, b);
+    }
+
+    non_neg.sort_by(|a, b| a.2.cmp(&b.2));
+
+    let mut ans = 0;
+
+    for (a, b, c) in non_neg {
+        if !uf.unite(a, b) {
+            ans += c;
+        }
+    }
+
+    ans
+}
+```
+</details>
+
 ### ABC065 D - Built?
 
 [D - Built?](https://atcoder.jp/contests/abc065/tasks/arc076_b)（<span style="color: rgb(136, 136, 255)">Difficulty : 1615</span>）
@@ -2227,6 +2293,7 @@ fn run(n: usize, _q: usize, abd: Vec<(usize, usize, isize)>) -> Vec<usize> {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年05月06日 : ABC218 <span style="color: green">E - Destruction<span>を追加</li>
   <li>2026年05月05日 : ABC065 <span style="color: rgb(137, 137, 255)">D - Built?</span>を追加</li>
   <li>2026年05月04日 : ARC056 <span style="color: rgb(137, 137, 255)">🧪 B - 駐車場</span>を追加</li>
   <li>2026年05月03日 : ABC264 <span style="color: skyblue">E - Blackout 2</span>を追加</li>
