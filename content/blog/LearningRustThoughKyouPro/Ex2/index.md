@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる その2"
 postdate: "2024-10-27"
-update: "2026-05-06"
+update: "2026-05-10"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -20,6 +20,7 @@ published: true
 |[幅優先探索-7問](#幅優先探索-7問)|[UnionFind-逆順処理](#unionfind-逆順処理)|
 |[ダイクストラ法-6問](#ダイクストラ法-6問)|[UnionFind-クラスカル法](#unionfind-クラスカル法)|
 |[半分全列挙](#半分全列挙)|[重み付きUnionFind](#重み付きunionfind)|
+|[半分全列挙](#半分全列挙)|[セグメント木](#セグメント木)|
 
 # アルゴリズム
 
@@ -2289,10 +2290,99 @@ fn run(n: usize, _q: usize, abd: Vec<(usize, usize, isize)>) -> Vec<usize> {
 ```
 </details>
 
+## セグメント木
+
+### 競技プログラミングの鉄則 A58 - RMQ (Range Maximum Queries)
+
+[A58 - RMQ (Range Maximum Queries)](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bf)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _q: usize, query: Vec<(usize, usize, usize)>) -> Vec<i64> {
+    let mut st = SegTree::new(n, 0_i64, |l, r| l.max(r));
+
+    query.into_iter()
+        .filter_map(|(q, a, b)| {
+            match q {
+                1 => {
+                    st.set(a-1, b as i64);
+                    None
+                },
+                2 => {
+                    Some(st.prod(a-1, b-1))
+                },
+                _ => unreachable!(),
+
+            }
+        })
+        .collect()
+}
+```
+</details>
+
+### 競技プログラミングの鉄則 A59 - RSQ (Range Sum Queries)
+
+[A59 - RSQ (Range Sum Queries)](https://atcoder.jp/contests/tessoku-book/tasks/tessoku_book_bg)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _q: usize, query: Vec<(usize, usize, usize)>) -> Vec<isize> {
+    let mut st = SegTree::new(n, 0_isize, |l, r| l + r);
+
+    query.into_iter()
+        .filter_map(|(q, a, b)| {
+            match q {
+                1 => {
+                    st.set(a-1, b as isize);
+                    None
+                },
+                2 => {
+                    Some(st.prod(a-1, b-1))
+                },
+                _ => unreachable!(),
+            }
+        })
+        .collect()
+}
+```
+</details>
+
+### ABC339 E - Smooth Subsequence
+
+[E - Smooth Subsequence](https://atcoder.jp/contests/abc339/tasks/abc339_e)（<span style="color: green">Difficulty : 1109</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(_n: usize, d: usize, a: Vec<usize>) -> usize {
+    const V: usize = 5 * 100000 + 1;
+
+    let mut st = SegTree::new(V, 0, |l, r| l.max(r));
+
+    for n in a {
+        let l = n.saturating_sub(d);
+        let r = (n + d + 1).min(V);
+
+        let max = st.prod(l, r);
+
+        st.set(n, max + 1);
+    }
+
+    st.all_prod()
+}
+```
+</details>
+
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年05月10日 : ABC339 <span style="color: green">E - Smooth Subsequence<span>を追加</li>
   <li>2026年05月06日 : ABC218 <span style="color: green">E - Destruction<span>を追加</li>
   <li>2026年05月05日 : ABC065 <span style="color: rgb(137, 137, 255)">D - Built?</span>を追加</li>
   <li>2026年05月04日 : ARC056 <span style="color: rgb(137, 137, 255)">🧪 B - 駐車場</span>を追加</li>
