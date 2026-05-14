@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2026-04-19"
+update: "2026-05-14"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -3512,10 +3512,88 @@ fn run(n: usize, x: usize, ab: Vec<(usize, usize)>) -> &'static str {
 ```
 </details>
 
+### ABC242 C - 1111gal password
+
+[C - 1111gal password](https://atcoder.jp/contests/abc242/tasks/abc242_c)（<span style="color: brown">Difficulty : 512</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize) -> usize {
+    const MOD: usize = 998244353;
+
+    let mut dp = vec![vec![0; 10]; n + 1];
+
+    for i in 1..=9 {
+        dp[1][i] = 1;
+    }
+
+    for i in 2..=n {
+        for j in 1..=9 {
+            if j > 1 {
+                dp[i][j] += dp[i-1][j-1] % MOD;
+            }
+
+            dp[i][j] += dp[i-1][j] % MOD;
+
+            if j < 9 {
+                dp[i][j] += dp[i-1][j+1] % MOD;
+            }
+
+        }
+    }
+
+    dp[n].iter().sum::<usize>() % MOD
+}
+```
+</details>
+
+### ABC232 D - Weak Takahashi
+
+[D - Weak Takahashi](https://atcoder.jp/contests/abc232/tasks/abc232_d)（<span style="color: brown">Difficulty : 539</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(h: usize, w: usize, c: Vec<&str>) -> usize {
+    let c: Vec<Vec<char>> = c.into_iter().map(|s| s.chars().collect()).collect();
+
+    let mut dp = vec![vec![0; w]; h];
+
+     if c[0][0] == '.' {
+        dp[0][0] = 1;
+    }
+
+    let mut ans = 0;
+
+    for i in 0..h {
+        for j in 0..w {
+            if c[i][j] == '#' {
+                continue;
+            }
+
+            if i > 0 && dp[i-1][j] > 0 {
+                dp[i][j] = max(dp[i][j], dp[i-1][j] + 1);
+            }
+
+            if j > 0 && dp[i][j-1] > 0 {
+                dp[i][j] = max(dp[i][j], dp[i][j-1] + 1);
+            }
+
+            ans = ans.max(dp[i][j]);
+        }
+    }
+
+    dp.into_iter().map(|v| v.into_iter().max().unwrap()).max().unwrap()
+}
+```
+</details>
+
 ### ABC289 D - Step Up Robot
 
 [D - Step Up Robot](https://atcoder.jp/contests/abc289/tasks/abc289_d)（<span style="color: brown">Difficulty : 551</span>）
-
 
 <details>
 <summary>コード例を見る</summary>
@@ -5276,6 +5354,7 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年05月14日 : ABC242 <span style="color: brown">C - 1111gal password</span>を追加</li>
   <li>2026年04月19日 : ABC474 <span style="color: gray">C - Straw Millionaire</span>を追加</li>
   <li>2026年04月18日 : ABC473 <span style="color: gray">C - Sneaking Glances</span>を追加</li>
   <li>2025年08月30日 : ABC292 <span style="color: brown">D - Unicyclic Components</span>を追加</li>
