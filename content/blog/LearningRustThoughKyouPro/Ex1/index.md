@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2026-05-14"
+update: "2026-05-28"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -24,13 +24,14 @@ published: true
 |[約数列挙](#約数列挙)|[HashSet](#hashset)|[n進数](#n進数)|
 |[二分探索](#二分探索)|[HashMap](#hashmap)|[周期性](#周期性)|
 |[bit全探索](#bit全探索)|[BTreeSet](#btreeset)|[後から帳尻合わせる系](#後から帳尻合わせる系)|
-|[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|
+|[再帰関数](#再帰関数)|[BTreeMap](#btreemap)|[偶奇を考える系](#偶奇を考える系)|
 |[メモ化再帰](#メモ化再帰)|
 |[深さ優先探索-5問](#深さ優先探索-5問)|
 |[幅優先探索-24問](#幅優先探索-24問)|
 |[ユークリッドの互除法](#ユークリッドの互除法)|
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
+|[動的計画法-部分和問題](#動的計画法-部分和問題)|
 |[貪欲法](#貪欲法)|||
 |[尺取り法](#尺取り法)|
 
@@ -3631,6 +3632,47 @@ fn run(_n: usize, a: Vec<usize>, _m: usize, b: Vec<usize>, x: usize) -> &'static
 ```
 </details>
 
+## 動的計画法-部分和問題
+
+### ABC204 D - Cooking
+
+[D - Cooking](https://atcoder.jp/contests/abc204/tasks/abc204_d)（<span style="color: green">Difficulty : 832</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, t: Vec<usize>) -> usize {
+    let total = t.iter().sum();
+
+    let mut dp = vec![vec![false; total+1]; n+1];
+    dp[0][0] = true;
+
+    for i in 1..=n {
+        for j in 0..=total {
+            if dp[i-1][j] {
+                dp[i][j] = true;
+
+                if t[i-i] + j <= total {
+                    dp[i][t[i-1] + j] = true;
+                }
+            }
+        }
+    }
+
+    let mut ans = std::usize::MAX;
+
+    for j in 1..=total {
+        if dp[n][j] {
+            ans = min(ans, max(j, total - j));
+        }
+    }
+
+    ans
+}
+```
+</details>
+
 ## 貪欲法
 
 ### ABC011 C - 123引き算
@@ -5350,10 +5392,39 @@ fn run(s: &str, _n: usize, query: Vec<(usize, Option<usize>, Option<char>)>) -> 
 ```
 </details>
 
+## 偶奇を考える系
+
+### AGC017 A - Biscuits
+
+[A - Biscuits](https://atcoder.jp/contests/agc017/tasks/agc017_a)（<span style="color: green">Difficulty : 815</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, p: usize, a: Vec<usize>) -> usize {
+    let even_count = a.into_iter().filter(|n| *n % 2 == 0).count();
+    let odd_count = n - even_count;
+
+    if odd_count == 0 {
+        match p {
+            0 => 2usize.pow(n as u32),
+            1 => 0,
+            _ => unreachable!(),
+        }
+    } else {
+        2usize.pow(even_count as u32) * 2usize.pow((odd_count - 1) as u32)
+    }
+}
+```
+</details>
+
 <details style="margin-top: 60px" class="history">
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年05月28日 : AGC017 <span style="color: green">A - Biscuits</span>を追加</li>
+  <li>2026年05月25日 : ABC204 <span style="color: green">D - Cooking</span>を追加</li>
   <li>2026年05月14日 : ABC242 <span style="color: brown">C - 1111gal password</span>を追加</li>
   <li>2026年04月19日 : ABC474 <span style="color: gray">C - Straw Millionaire</span>を追加</li>
   <li>2026年04月18日 : ABC473 <span style="color: gray">C - Sneaking Glances</span>を追加</li>
