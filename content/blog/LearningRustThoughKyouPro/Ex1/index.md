@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2026-05-28"
+update: "2026-06-09"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -3632,7 +3632,82 @@ fn run(_n: usize, a: Vec<usize>, _m: usize, b: Vec<usize>, x: usize) -> &'static
 ```
 </details>
 
+### ABC129 C - Typical Stairs
+
+[C - Typical Stairs](https://atcoder.jp/contests/abc129/tasks/abc129_c)（<span style="color: brown">Difficulty : 796</span>）
+
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, _m: usize, a: Vec<usize>) -> usize {
+    const M: usize = 1_000_000_007;
+
+    let mut broken = vec![false; n+1];
+
+    for a in a {
+        broken[a] = true;
+    }
+
+    let mut dp = vec![0; n+1];
+    dp[0] = 1;
+
+    if !broken[1] {
+        dp[1] = 1;
+    }
+
+    for i in 2..=n {
+        if !broken[i-1] {
+            dp[i] += dp[i-1];
+        }
+
+        if !broken[i-2] {
+            dp[i] += dp[i-2];
+        }
+
+        dp[i] %= M;
+    }
+
+    dp[n]
+}
+```
+</details>
+
 ## 動的計画法-部分和問題
+
+### Typical DP Contest A - コンテスト
+
+[A - コンテスト](https://atcoder.jp/contests/tdpc/tasks/tdpc_contest)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, p: Vec<usize>) -> usize {
+    let len: usize = p.iter().sum();
+
+    let mut dp = vec![vec![false; len+1]; n+1];
+    dp[0][0] = true;
+
+    for i in 1..=n {
+        let p = p[i - 1];
+
+        for j in 0..=len {
+            dp[i][j] = dp[i-1][j];
+
+            if p <= j {
+                if dp[i-1][j - p] {
+                    dp[i][j] = true;
+                }
+            }
+        }
+    }
+
+    dp[n].iter().filter(|b| **b).count()
+}
+```
+</details>
 
 ### ABC204 D - Cooking
 
@@ -5423,6 +5498,7 @@ fn run(n: usize, p: usize, a: Vec<usize>) -> usize {
 <summary>更新履歴</summary>
 
 <ul class="history-list">
+  <li>2026年06月09日 : ABC129 <span style="color: brown">C - Typical Stairs</span>を追加</li>
   <li>2026年05月28日 : AGC017 <span style="color: green">A - Biscuits</span>を追加</li>
   <li>2026年05月25日 : ABC204 <span style="color: green">D - Cooking</span>を追加</li>
   <li>2026年05月14日 : ABC242 <span style="color: brown">C - 1111gal password</span>を追加</li>
