@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2026-06-09"
+update: "2026-07-25"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -3789,6 +3789,47 @@ fn run(n: isize, ng: [isize; 3]) -> &'static str {
 </details>
 
 ## 尺取り法
+
+### ABC449 C - Comfortable Distance
+
+[C - Comfortable Distance](https://atcoder.jp/contests/abc449/tasks/abc449_c)（<span style="color: gray">Difficulty : 330</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(_n: usize, l: usize, r: usize, s: &str) -> usize {
+    let mut map = HashMap::new();
+
+    for (i, c) in s.chars().enumerate() {
+        map.entry(c).or_insert_with(Vec::new).push(i);
+    }
+
+    let mut ans = 0;
+
+    for (_, v) in map {
+        let mut left = 0;
+        let mut right = 0;
+
+        for j in 0..v.len() {
+            while left < v.len() && v[left] + r < v[j] {
+                left += 1;
+            }
+
+            while right < v.len() && v[right] + l <= v[j] {
+                right += 1;
+            }
+
+            if right > left {
+                ans += right - left;
+            }
+        }
+    }
+
+    ans
+}
+```
+</details>
 
 ### ABC038 C - 単調増加
 
