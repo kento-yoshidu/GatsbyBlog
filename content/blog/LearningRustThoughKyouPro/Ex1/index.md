@@ -1,7 +1,7 @@
 ---
 title: "[番外編] アルゴリズム・データ構造ごとに問題を分類してみる"
 postdate: "2023-11-23"
-update: "2026-07-25"
+update: "2026-09-11"
 seriesName: "競プロで学ぶRust"
 seriesSlug: "LearningRustThoughKyouPro"
 description: "アルゴリズムやデータ構造ごとに解ける問題を分類しました。"
@@ -32,6 +32,7 @@ published: true
 |[ランレングス圧縮](#ランレングス圧縮)|
 |[動的計画法](#動的計画法)|
 |[動的計画法-部分和問題](#動的計画法-部分和問題)|
+|[動的計画法-ナップサック](#動的計画法-ナップサック)|
 |[貪欲法](#貪欲法)|||
 |[尺取り法](#尺取り法)|
 
@@ -3748,6 +3749,44 @@ fn run(n: usize, t: Vec<usize>) -> usize {
 ```
 </details>
 
+## 動的計画法-ナップサック
+
+### AWC0001 D - 街道の商人
+
+[D - 街道の商人](https://atcoder.jp/contests/awc0001/tasks/awc0001_d)
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, m: usize, k: usize, ab: Vec<(usize, usize)>) -> usize {
+    let mut dp = vec![vec![0; m+1]; n+1];
+
+    for i in 1..=n {
+        let (a, b) = ab[i-1];
+
+        dp[i][b] = dp[i][b].max(a);
+
+        let lo = i.saturating_sub(k).max(1);
+
+        for prev in lo..=i-1 {
+            for c in b..=m {
+                if dp[prev][c-b] > 0 {
+                    dp[i][c] = max(dp[i][c], dp[prev][c-b] + a);
+                }
+            }
+        }
+    }
+
+    *dp.iter()
+        .map(|v| v.iter().max().unwrap())
+        .max()
+        .unwrap()
+}
+```
+</details>
+
+
 ## 貪欲法
 
 ### ABC011 C - 123引き算
@@ -4131,7 +4170,7 @@ fn run(_n: usize, ab: Vec<(usize, usize)>) -> usize {
 ```
 </details>
 
-## スタック-8問
+## スタック
 
 [スタックとキューを極める！ 〜 考え方と使い所を特集 〜](https://qiita.com/drken/items/6a95b57d2e374a3d3292)
 
@@ -4226,6 +4265,41 @@ fn run(s: &str) -> &'static str {
     } else {
         "No"
     }
+}
+```
+</details>
+
+### ABC438 C - 1D puyopuyo
+
+[C - 1D puyopuyo](https://atcoder.jp/contests/abc438/tasks/abc438_c)（<span style="color: gray">Difficulty : 368</span>）
+
+<details>
+<summary>コード例を見る</summary>
+
+```rust
+fn run(n: usize, a: Vec<usize>) -> usize {
+    let mut stack = Vec::new();
+
+    for i in 0..n {
+        stack.push(a[i]);
+
+        let len = stack.len();
+
+        if len < 4 {
+            continue;
+        }
+
+        if stack[len - 1] == stack[len - 2] &&
+           stack[len - 2] == stack[len - 3] &&
+           stack[len - 3] == stack[len - 4]
+        {
+            for _ in 0..4 {
+                stack.pop();
+            }
+        }
+    }
+
+    stack.len()
 }
 ```
 </details>
