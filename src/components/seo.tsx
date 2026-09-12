@@ -41,6 +41,8 @@ const Seo: React.VFC<Props> = (props) => {
       <title>{title}</title>
       <meta name="description" content={description} />
 
+      <meta name="robots" content="noindex, nofollow" />
+
       <link rel="canonical" href={url} />
 
       <meta property="og:site_name" content={site.siteMetadata.title} />
