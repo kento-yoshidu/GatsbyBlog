@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls \"\\\\\\\\wsl.localhost\\\\Ubuntu-22.04\\\\home\\\\kento\\\\github\\\\gatsby_blog\\\\content\\\\blog\\\\LearningRustThoughKyouPro\")",
+      "Bash(ls \"\\\\\\\\wsl.localhost\\\\Ubuntu-22.04\\\\home\\\\kento\\\\github\\\\gatsby_blog\\\\content\\\\blog\\\\LearningRustThoughKyouPro\\\\01\")",
+      "Bash(ls \"\\\\\\\\wsl.localhost\\\\Ubuntu-22.04\\\\home\\\\kento\\\\github\\\\gatsby_blog\\\\content\\\\blog\\\\LearningRustThoughKyouPro\\\\02\")",
+      "Bash(grep -n \"動的計画\\\\|DP\\\\|dp\\\\|部分和\\\\|ナップサック\\\\|knapsack\" \"\\\\\\\\wsl.localhost\\\\Ubuntu-22.04\\\\home\\\\kento\\\\github\\\\gatsby_blog\\\\content\\\\blog\\\\LearningRustThoughKyouPro\\\\Ex1\\\\index.md\")",
+      "Bash(grep -n \"^###\\\\|^##\" \"\\\\\\\\wsl.localhost\\\\Ubuntu-22.04\\\\home\\\\kento\\\\github\\\\gatsby_blog\\\\content\\\\blog\\\\LearningRustThoughKyouPro\\\\Ex1\\\\index.md\")"
+    ]
+  }
+}
